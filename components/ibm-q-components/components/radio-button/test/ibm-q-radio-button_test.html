@@ -1,0 +1,112 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-radio-button test</title>
+
+    <script src="../../../../iron-test-helpers/mock-interactions.js"></script>
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ibm-q-radio-button.html">
+  </head>
+  <body>
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <ibm-q-radio-button>Radio test</ibm-q-radio-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="RadioValueTestFixture">
+      <template>
+        <ibm-q-radio-button value="test">Radio test</ibm-q-radio-button>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('Radio Button', function() {
+        let radioButton;
+
+        setup(() => {
+          radioButton = fixture('BasicTestFixture');
+        });
+
+        test('host should have the `radio` role', () => {
+          assert.equal(radioButton.getAttribute('role'), 'radio');
+        });
+
+        test('can be disabled imperatively', () => {
+          const nativeRadioButton = radioButton.shadowRoot.querySelector('input');
+
+          radioButton.disabled = true;
+
+          assert.isTrue(nativeRadioButton.hasAttribute('disabled'));
+        });
+
+        test('radio-button should have aria-disabled when is disabled', () => {
+          radioButton.disabled = true;
+
+          assert.isTrue(radioButton.hasAttribute('aria-disabled'));
+        });
+
+        test('radio-button should have aria-checked when is checked', () => {
+          radioButton.checked = true;
+
+          assert.isTrue(radioButton.hasAttribute('aria-checked'));
+        });
+
+        test('radio-button should have value \'on\' when is checked and value wasn\'t defined', () => {
+          radioButton.checked = true;
+
+          assert.equal(radioButton.value, 'on');
+        });
+
+        test('radio-button should have value indicated on it when is checked', () => {
+          radioButton = fixture('RadioValueTestFixture');
+
+          radioButton.checked = true;
+
+          assert.equal(radioButton.value, 'test');
+        });
+      });
+
+      suite('Radio Button events', function() {
+        let radioButton;
+
+        setup(() => {
+          radioButton = fixture('BasicTestFixture');
+        });
+
+        test('radio-button event \'down\' active it', function() {
+          MockInteractions.down(radioButton);
+
+          assert.isTrue(radioButton.hasAttribute('active'));
+        });
+
+        ['keydown', 'keyup'].forEach((event) => {
+          test('radio-button event \'' + event + ' \' on space key, active it', function() {
+            MockInteractions.keyDownOn(radioButton, 32);
+
+            assert.isTrue(radioButton.hasAttribute('active'));
+          });
+
+          test('radio-button event \'' + event + ' \' on enter key, doesn\'t active it', function() {
+            MockInteractions.keyDownOn(radioButton, 13);
+
+            assert.isFalse(radioButton.hasAttribute('active'));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

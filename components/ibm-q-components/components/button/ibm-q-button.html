@@ -1,0 +1,282 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../../../vaadin-button/vaadin-button.html">
+<link rel="import" href="../styles/default-theme.html">
+<link rel="import" href="../styles/typography.html">
+
+<!-- Reset vaadin default theme -->
+<dom-module id="vaadin-button-default-theme" theme-for="vaadin-button"></dom-module>
+
+<dom-module id="ibm-q-button-default-theme">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+
+        --ibm-q-button-focus-border-color: #f5f7fa;
+        --ibm-q-button-focus-color: #ffffff;
+      }
+
+      [part~="button"] {
+        display: inline-block;
+      }
+
+      [part~="button"]::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+
+      [part~="button"] {
+        font-family: var(--ibm-q-font-family-base);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        letter-spacing: .5px;
+        cursor: pointer;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        font-size: 0.875rem;
+        font-weight: 700;
+        height: 2.5rem;
+        padding: 0 1rem;
+        border-radius: 0;
+        text-align: center;
+        text-decoration: none;
+        transition-duration: 250ms;
+        transition-timing-function: ease-in;
+        white-space: nowrap;
+        line-height: 16px;
+      }
+
+      :host([disabled]) [part~="button"] {
+        cursor: not-allowed;
+        opacity: .5;
+      }
+
+      /*
+       * Selector for applying primary button styles.
+       */
+
+      :host([primary]) [part~="button"] {
+        background-color: var(--ibm-q-button-primary-background-color, var(--primary-color));
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        color: var(--ibm-q-button-primary-color, var(--ibm-q-button-focus-color));
+      }
+
+      :host([primary][focused]) [part~="button"],
+      :host([primary]) [part~="button"]:hover {
+        background-color: var(--ibm-q-button-primary-focus-background-color, var(--light-primary-color));
+      }
+
+      :host([primary][focused]) [part~="button"] {
+        border: 2px solid var(--ibm-q-button-primary-focus-border-color, var(--ibm-q-button-focus-border-color));
+        outline: 2px solid var(--ibm-q-button-primary-focus-background-color, var(--light-primary-color));
+      }
+
+      :host([primary][disabled][focused]) [part~="button"],
+      :host([primary][disabled]) [part~="button"]:hover {
+        background-color: var(--ibm-q-button-primary-background-color, var(--primary-color));
+      }
+
+      :host([primary][active]) [part~="button"] {
+        background-color: var(--ibm-q-button-primary-active-background-color, var(--dark-primary-color));
+      }
+
+      /*
+       * Selector for applying secondary button styles.
+       */
+
+      :host([secondary]) [part~="button"] {
+        background-color: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-color: var(--ibm-q-button-secondary-color, var(--primary-color));
+        color: var(--ibm-q-button-secondary-color, var(--primary-color));
+      }
+
+      :host([secondary][focused]) [part~="button"],
+      :host([secondary]) [part~="button"]:hover {
+        background-color: var(--ibm-q-button-secondary-color, var(--primary-color));
+        color: var(--ibm-q-button-secondary-focus-color, var(--ibm-q-button-focus-color));
+      }
+
+      :host([secondary][focused]) [part~="button"] {
+        border: 2px solid var(--ibm-q-button-secondary-focus-border-color, var(--ibm-q-button-focus-border-color));
+        outline: 2px solid var(--ibm-q-button-secondary-color, var(--primary-color));
+      }
+
+      :host([secondary][disabled][focused]) [part~="button"],
+      :host([secondary][disabled]) [part~="button"]:hover {
+        background-color: transparent;
+        color: var(--ibm-q-button-secondary-color, var(--primary-color));
+      }
+
+      :host([secondary][active]) [part~="button"] {
+        background-color: transparent;
+        color: var(--ibm-q-button-secondary-color, var(--primary-color));
+      }
+
+      /*
+       * Selector for applying ghost button styles.
+       */
+
+      :host([ghost]) [part~="button"] {
+        background-color: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        color: var(--ibm-q-button-ghost-color, var(--primary-color));
+      }
+
+      :host([ghost][focused]) [part~="button"],
+      :host([ghost]) [part~="button"]:hover {
+        background-color: var(--ibm-q-button-ghost-color, var(--primary-color));
+        color: var(--ibm-q-button-ghost-focus-color, var(--ibm-q-button-focus-color));
+      }
+
+      :host([ghost][focused]) [part~="button"] {
+        border: 2px solid var(--ibm-q-button-ghost-focus-border-color, var(--ibm-q-button-focus-border-color));
+        outline: 2px solid var(--ibm-q-button-ghost-color, var(--primary-color));
+      }
+
+      :host([ghost][disabled][focused]) [part~="button"],
+      :host([ghost][disabled]) [part~="button"]:hover {
+        background-color: transparent;
+        color: var(--ibm-q-button-ghost-color, var(--primary-color));
+      }
+
+      :host([ghost][active]) [part~="button"] {
+        background-color: transparent;
+      }
+
+      /*
+       * Selector for applying danger button styles.
+       */
+
+      :host([danger]) [part~="button"] {
+        background-color: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-color: currentColor;
+        color: var(--ibm-q-button-danger-color, var(--disabled-text-color));
+      }
+
+      :host([danger][focused]) [part~="button"],
+      :host([danger]) [part~="button"]:hover {
+        background-color: var(--error-color);
+        color: var(--ibm-q-button-danger-focus-color, var(--ibm-q-button-focus-color));
+      }
+
+      :host([danger][focused]) [part~="button"] {
+        border: 2px solid var(--ibm-q-button-danger-focus-border-color, var(--ibm-q-button-focus-border-color));
+        outline: 2px solid var(--error-color);
+      }
+
+      :host([danger]) [part~="button"]:hover {
+        border: 2px solid transparent;
+      }
+
+      :host([danger][disabled][focused]) [part~="button"],
+      :host([danger][disabled]) [part~="button"]:hover {
+        background-color: transparent;
+        color: var(--ibm-q-button-danger-color, var(--disabled-text-color));
+        border: 2px solid currentColor;
+      }
+
+      :host([danger][active]) [part~="button"] {
+        background-color: transparent;
+      }
+
+      /*
+       * Selector for applying small button styles.
+       */
+
+      :host([small]) [part~="button"] {
+        height: 2rem;
+        padding: 0 0.5rem;
+        letter-spacing: 0;
+      }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="ibm-q-button">
+  <script>
+    (function() {
+      /* eslint max-len: ["error", { "ignoreComments": true }] */
+
+      /**
+       * `<ibm-q-button>` is a Web Component providing a button that follows the
+       * IBM Q design language.
+       *
+       * ```html
+       * <ibm-q-button>Button</ibm-q-button>
+       * ```
+       *
+       * ### Styling
+       *
+       * The following custom properties are exposed for styling:
+       *
+       * | Custom property | Description | Default |
+       * | :-------------- | :---------- | :------ |
+       * | `--ibm-q-button-primary-background-color` | Primary button background color | `var(--primary-color)` |
+       * | `--ibm-q-button-primary-color` | Primary button text color | `var(--ibm-q-button-focus-color)` |
+       * | `--ibm-q-button-primary-focus-background-color` | Primary button background color on focus | `var(--light-primary-color)` |
+       * | `--ibm-q-button-primary-focus-border-color` | Primary button border color on focus | `var(--ibm-q-button-focus-border-color)` |
+       * | `--ibm-q-button-primary-active-background-color` | Primary button background color while active | `var(--dark-primary-color)` |
+       * | `--ibm-q-button-secondary-color` | Secondary Button color | `var(--primary-color)` |
+       * | `--ibm-q-button-secondary-focus-color` | Secondary Button color on focus | `var(--ibm-q-button-focus-color)` |
+       * | `--ibm-q-button-secondary-focus-border-color` | Secondary Button border color on focus | `var(--ibm-q-button-focus-border-color)` |
+       * | `--ibm-q-button-ghost-color` | Ghost button color | `var(--primary-color)` |
+       * | `--ibm-q-button-ghost-focus-color` | Ghost button color on focus | `var(--ibm-q-button-focus-color)` |
+       * | `--ibm-q-button-ghost-focus-border-color` | Ghost button border color on focus | `var(--ibm-q-button-focus-border-color)` |
+       * | `--ibm-q-button-danger-color` | Danger button color | `var(--disabled-text-color)` |
+       * | `--ibm-q-button-danger-focus-color` | Danger button color on focus | `var(--ibm-q-button-focus-color)` |
+       * | `--ibm-q-button-danger-focus-border-color` | Danger button border color on focus | `var(--ibm-q-button-focus-border-color)` |
+       *
+       * The following attributes are exposed for styling:
+       *
+       * | Attribute | Description |
+       * | :-------- | :---------- |
+       * | `active` | Set when the button is pressed down, either with mouse, touch or the keyboard. |
+       * | `disabled` | Set when the button is disabled. |
+       * | `focus-ring` | Set when the button is focused using the keyboard. |
+       * | `focused` | Set when the button is focused. |
+       *
+       * @memberof IBMQ
+       * @extends Vaadin.ButtonElement
+       * @demo components/button/demo/index.html
+       */
+      class ButtonElement extends Vaadin.ButtonElement {
+        static get is() {
+          return 'ibm-q-button';
+        }
+      }
+
+      customElements.define(ButtonElement.is, ButtonElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.ButtonElement = ButtonElement;
+    })();
+  </script>
+</dom-module>

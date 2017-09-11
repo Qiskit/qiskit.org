@@ -1,0 +1,47 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>ibm-q-modal demo</title>
+
+  <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../../../iron-demo-helpers/demo-snippet.html">
+
+  <link rel="import" href="../../button/ibm-q-button.html">
+  <link rel="import" href="../ibm-q-modal.html">
+
+</head>
+<body>
+
+  <div class="vertical-section-container centered">
+    <h3>Modal</h3>
+    <demo-snippet>
+      <template>
+        <button onclick="modal.open()">Show modal</button>
+
+        <ibm-q-modal id="modal" label="Label (Optional)">
+          <h1 slot="title">Modal Title</h1>
+          <p>Modal text description.</p>
+          <div slot="footer">
+            <ibm-q-button secondary onclick="modal.close()">Cancel</ibm-q-button>
+            <ibm-q-button primary autofocus onclick="alert('yuhu!')">Save</ibm-q-button>
+          </div>
+        </ibm-q-modal>
+      </template>
+    </demo-snippet>
+  </div>
+
+</body>
+</html>

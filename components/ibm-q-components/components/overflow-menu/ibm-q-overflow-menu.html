@@ -1,0 +1,241 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../../../iron-menu-behavior/iron-menu-behavior.html">
+<link rel="import" href="../styles/default-theme.html">
+
+<link rel="import" href="ibm-q-overflow-menu-item.html">
+
+<dom-module id="ibm-q-overflow-menu">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        position: relative;
+        width: 1.25rem;
+        height: 2.375rem;
+        cursor: pointer;
+      }
+
+      :host(:focus:not([open])) {
+        outline: 1px solid var(--primary-color);
+      }
+
+      :host(:focus) {
+        outline: 1px solid transparent;
+      }
+
+      [part="icon"] {
+        padding: 0.5rem;
+        fill: var(--ibm-q-overflow-menu-icon-fill-color, var(--light-theme-disabled-color));
+      }
+
+      [part="icon"]:hover, [part="icon"]:focus {
+        fill: var(--ibm-q-overflow-menu-icon-hover-color, var(--primary-color));
+      }
+
+      [part="menu"] {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+        display: none;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        position: absolute;
+        z-index: 1;
+        background-color: var(--ibm-q-overflow-menu-background-color, var(--inverse-01));
+        border: 1px solid var(--light-theme-divider-color);
+        width: 11.25rem;
+        list-style: none;
+        margin-top: .25rem;
+        padding: .285rem 0 .5rem;
+        left: -20px;
+      }
+
+      :host([open]) [part="menu"] {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+      }
+
+      :host([open]) [part="menu"]:before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        z-index: -1;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        background-color: var(--ibm-q-overflow-menu-background-color, var(--inverse-01));
+        border-top: 1px solid var(--light-theme-divider-color);
+        border-left: 1px solid var(--light-theme-divider-color);
+        top: -5px;
+        left: 24px;
+      }
+
+      :host([flip]) [part="menu"] {
+        left: -140px;
+      }
+
+      :host([flip]) [part="menu"]:before {
+        left: 145px;
+      }
+
+      [part="menu"] ::slotted(a) {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        background-color: transparent;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+      }
+
+    </style>
+
+    <svg id="icon" part="icon" width="4" height="20" viewBox="0 0 4 20" fill-rule="evenodd">
+      <circle cx="2" cy="2" r="2"></circle>
+      <circle cx="2" cy="10" r="2"></circle>
+      <circle cx="2" cy="18" r="2"></circle>
+    </svg>
+    <div id="menu" part="menu">
+      <slot></slot>
+    </div>
+
+  </template>
+
+  <script>
+    (function() {
+      /**
+       * `<ibm-q-overflow-menu>` is a Web Component providing a overflow-menu that follows the IBM
+       * Q design language.
+       *
+       * ```html
+       * <ibm-q-overflow-menu>
+       *   <ibm-q-overflow-menu-item>Stop app</ibm-q-overflow-menu-item>
+       *   <ibm-q-overflow-menu-item>Restart app</ibm-q-overflow-menu-item>
+       *   <ibm-q-overflow-menu-item>Rename app</ibm-q-overflow-menu-item>
+       *   <ibm-q-overflow-menu-item danger>Delete app</ibm-q-overflow-menu-item>
+       * </ibm-q-overflow-menu>
+       * ```
+       *
+       * ### Styling
+       *
+       * The following custom properties are exposed for styling:
+       *
+       * | Custom property | Description | Default |
+       * | :-------------- | :---------- | :------ |
+       * | `--ibm-q-overflow-menu-icon-fill-color` | Icon color | `var(--light-theme-disabled-color)` |
+       * | `--ibm-q-overflow-menu-icon-hover-color` | Icon hover color | `var(--primary-color)` |
+       * | `--ibm-q-overflow-menu-background-color` | Background color | `var(--inverse-01)` |
+       *
+       * @memberof IBMQ
+       * @extends Polymer.Element
+       * @behaviors Polymer.IronMenuBehavior
+       * @demo components/overflow-menu/demo/index.html
+       */
+      class OverflowMenuElement extends Polymer.mixinBehaviors(
+        [Polymer.IronMenuBehavior],
+        Polymer.Element
+      ) {
+        static get is() {
+          return 'ibm-q-overflow-menu';
+        }
+
+        static get properties() {
+          return {
+            /**
+             * Handle if overflow-menu is closed or open.
+             */
+            open: {
+              type: Boolean,
+              reflectToAttribute: true,
+              value: false
+            },
+            /**
+             * Allows flip the overflow-menu.
+             */
+            flip: {
+              type: Boolean,
+              reflectToAttribute: true,
+              value: false
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+
+          this.selectable = 'ibm-q-overflow-menu-item';
+          this.selectedClass = 'selected';
+
+          this.setAttribute('role', 'menu');
+
+          this._boundDocumentClick = this._handleDocumentClick.bind(this);
+          this._boundKeyPress = this._handleKeyPress.bind(this);
+        }
+
+        _handleDocumentClick(event) {
+          if (this.contains(event.target)) {
+            this.toggle();
+          } else {
+            this.open = false;
+          }
+        }
+
+        _handleKeyPress(event) {
+          if (event.keyCode === 13) {
+            if (this.contains(event.target)) {
+              this.toggle();
+            } else {
+              this.open = false;
+            }
+          }
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+          document.addEventListener('click', this._boundDocumentClick);
+          document.addEventListener('keypress', this._boundKeyPress);
+        }
+
+        disconnectedCallback() {
+          document.removeEventListener('click', this._boundDocumentClick);
+          document.removeEventListener('keypress', this._boundKeyPress);
+          super.disconnectedCallback();
+        }
+
+        toggle() {
+          this.open = !this.open;
+        }
+
+        // TODO: Waiting for PolymerElements/iron-menu-behavior/issues/81
+        _updateItems() {
+          var nodes = Polymer.dom(this).querySelectorAll(this.selectable || '*');
+          nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+          this._setItems(nodes);
+        }
+      }
+
+      customElements.define(OverflowMenuElement.is, OverflowMenuElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.TabsElement = OverflowMenuElement;
+    })();
+  </script>
+</dom-module>

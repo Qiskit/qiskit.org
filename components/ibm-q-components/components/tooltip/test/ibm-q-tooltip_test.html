@@ -1,0 +1,214 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-tooltip test</title>
+
+    <script src="../../../../iron-test-helpers/mock-interactions.js"></script>
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../../../iron-icons/iron-icons.html">
+
+    <link rel="import" href="../ibm-q-tooltip.html">
+  </head>
+  <body>
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <div>
+          Lorem ipsum dolor sit amet <iron-icon icon="icons:info" id="infoF"></iron-icon>
+          <ibm-q-tooltip for="infoF">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat.
+          </ibm-q-tooltip>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="LabelTestFixture">
+      <template>
+        <div>
+          <ibm-q-tooltip>
+            <h1 slot="label">Lorem ipsum</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.</p>
+          </ibm-q-tooltip>
+        </div>
+      </template>
+    </test-fixture>
+
+    <script>
+      function isHidden(element) {
+        const rect = element.getBoundingClientRect();
+        return rect.width === 0 && rect.height === 0;
+      }
+
+      function isTooltipInCorrectPosition(icon, tooltip, position) {
+        const {
+          left: iconLeft,
+          top: iconTop
+        } = icon.getBoundingClientRect();
+
+        const {
+          left: tooltipLeft,
+          top: tooltipTop
+        } = tooltip.getBoundingClientRect();
+
+        switch (position) {
+          case 'top':
+            return iconLeft > tooltipLeft && iconTop > tooltipTop;
+            // eslint-disable-next-line no-unreachable
+            break;
+          case 'bottom':
+            return iconLeft > tooltipLeft && iconTop < tooltipTop;
+            // eslint-disable-next-line no-unreachable
+            break;
+          case 'left':
+            return iconLeft > tooltipLeft && iconTop > tooltipTop;
+            // eslint-disable-next-line no-unreachable
+            break;
+          case 'right':
+            return iconLeft < tooltipLeft && iconTop > tooltipTop;
+            // eslint-disable-next-line no-unreachable
+            break;
+        }
+      }
+
+      suite('Simple tooltip', function() {
+        let testDom;
+        let elementTooltip;
+        let elementShadowRoot;
+
+        setup(() => {
+          testDom = fixture('BasicTestFixture');
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+          elementShadowRoot = elementTooltip.shadowRoot;
+        });
+
+        test('host should have the `tooltip` role', () => {
+          testDom = fixture('BasicTestFixture');
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+
+          assert.equal(elementTooltip.getAttribute('role'), 'tooltip');
+        });
+
+        test('simple tooltip shouldn\'t have label', () => {
+          assert.equal(elementShadowRoot.querySelector('slot[name=label]').assignedNodes().length, 0);
+        });
+      });
+
+      suite('Tooltip with label', function() {
+        let testDom;
+        let elementTooltip;
+        let elementShadowRoot;
+
+        setup(() => {
+          testDom = fixture('LabelTestFixture');
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+          elementShadowRoot = elementTooltip.shadowRoot;
+        });
+
+        test('host should have the `tooltip` role', () => {
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+
+          assert.equal(elementTooltip.getAttribute('role'), 'tooltip');
+        });
+
+        test('simple tooltip shouldn\'t have label', () => {
+          assert.equal(elementShadowRoot.querySelector('slot[name=label]').assignedNodes().length, 1);
+        });
+      });
+
+      suite('Show/Hide functions works', function() {
+        let testDom;
+        let elementTooltip;
+
+        setup(() => {
+          testDom = fixture('BasicTestFixture');
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+        });
+
+        test('tooltip should show when show() is executed', () => {
+          assert.isTrue(isHidden(elementTooltip));
+
+          elementTooltip.show();
+
+          assert.isFalse(isHidden(elementTooltip));
+        });
+
+        test('tooltip should hide when hide() is executed', () => {
+          elementTooltip.show();
+          assert.isFalse(isHidden(elementTooltip));
+
+          elementTooltip.hide();
+
+          assert.isTrue(isHidden(elementTooltip));
+        });
+      });
+
+      suite('Events works to show tooltip', function() {
+        let testDom;
+        let elementIcon;
+        let elementTooltip;
+
+        setup(() => {
+          testDom = fixture('BasicTestFixture');
+          elementIcon = testDom.querySelector('#infoF');
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+        });
+
+        test('tooltip should show when icon is focus', () => {
+          assert.isTrue(isHidden(elementTooltip));
+
+          MockInteractions.focus(elementIcon);
+
+          assert.isFalse(isHidden(elementTooltip));
+        });
+
+        test('tooltip should show when icon is blur', () => {
+          assert.isTrue(isHidden(elementTooltip));
+
+          MockInteractions.focus(elementIcon);
+          assert.isFalse(isHidden(elementTooltip));
+        });
+      });
+
+      suite('Tooltip positions', function() {
+        let testDom;
+        let elementIcon;
+        let elementTooltip;
+
+        setup(() => {
+          testDom = fixture('BasicTestFixture');
+          elementIcon = testDom.querySelector('#infoF');
+          elementTooltip = testDom.querySelector('ibm-q-tooltip');
+        });
+
+        const positions = ['left', 'top', 'right', 'bottom'];
+
+        positions.forEach(function(position) {
+          test('tooltip should show on ' + position, function() {
+            elementTooltip.position = position;
+            elementTooltip.show();
+
+            // eslint-disable-next-line max-len
+            assert.isTrue(isTooltipInCorrectPosition(elementIcon, elementTooltip, position));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-tag test</title>
+
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ibm-q-tag.html">
+  </head>
+  <body>
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <ibm-q-tag>IBM Q</ibm-q-tag>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('Test ibm-q-tag', function() {
+        let element;
+        let elementShadowRoot;
+
+        setup(() => {
+          element = fixture('BasicTestFixture');
+          elementShadowRoot = element.shadowRoot;
+        });
+
+        test('Tag has the correct content', () => {
+          const slotContent = elementShadowRoot.querySelector('slot').assignedNodes();
+
+          assert.equal(slotContent.length, 1);
+          expect(slotContent[0]).instanceof(Text);
+          assert.equal(slotContent[0].textContent, 'IBM Q');
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,217 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../styles/default-theme.html">
+
+<dom-module id="ibm-q-accordion-item">
+  <template>
+    <style>
+      :host {
+        --ibm-q-accordion-border-color: #dfe3e6;
+        --ibm-q-accordion-arrow-color: var(--disabled-text-color);
+        --ibm-q-accordion-arrow-active-color: var(--primary-color);
+      }
+
+      :host {
+        transition: all 250ms cubic-bezier(0.5, 0, 0.1, 1);
+        border-top: 1px solid var(--ibm-q-accordion-border-color);
+        overflow: hidden;
+        display: block;
+      }
+
+      :host(:last-child) {
+        border-bottom: 1px solid var(--ibm-q-accordion-border-color);
+      }
+
+      #header:focus {
+        outline: none;
+      }
+
+      #header:focus .arrow {
+        outline: 1px solid var(--ibm-q-accordion-arrow-active-color);
+        overflow: visible;
+        outline-offset: -.5px;
+      }
+
+      :host([active]) {
+        overflow: visible;
+      }
+
+      :host([active]) #content {
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+        height: auto;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      :host([active]) #header .arrow {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        fill: var(--ibm-q-accordion-arrow-active-color);
+      }
+
+      #header {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        cursor: pointer;
+        padding: .5rem 0;
+      }
+
+      #header .arrow {
+        transition: all 250ms cubic-bezier(0.5, 0, 0.1, 1);
+        height: 1.25rem;
+        width: 1.25rem;
+        padding: .25rem .125rem .25rem .25rem;
+        margin: 0 0 0 0.25rem;
+        fill: var(--ibm-q-accordion-arrow-color);
+        box-sizing: border-box;
+      }
+
+      #header ::slotted([slot=title]) {
+        margin: 0 0 0 1rem;
+      }
+
+      #content {
+        transition: all 250ms cubic-bezier(0.5, 0, 0.1, 1);
+        padding: 0 1rem 0 1.75rem;
+        height: 0;
+        visibility: hidden;
+        opacity: 0;
+        font-size: 0.875rem;
+      }
+    </style>
+
+    <div id="header" tabindex="0">
+      <!--<iron-icon icon="ibm-menu-drawer-icons:expand"></iron-icon>-->
+      <svg class="arrow" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+        <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
+      </svg>
+      <slot name="title"></slot>
+    </div>
+    <div id="content">
+      <slot name="content"></slot>
+    </div>
+
+  </template>
+
+  <script>
+    (function() {
+      /* eslint max-len: ["error", { "ignoreComments": true }] */
+
+      /**
+       * `<ibm-q-accordion-item>` is a Web Component providing an item for the
+       * ibm-q-accordion component that follows the IBM Q design language.
+       *
+       * ```html
+       * <ibm-q-accordion-item>
+       *   <div slot="title">Item title</div>
+       *   <div slot="content">Content item</div>
+       * </ibm-q-accordion-item>
+       * ```
+       *
+       * ### Styling
+       *
+       * The following custom properties are exposed for styling:
+       *
+       * | Custom property | Description | Default |
+       * | :-------------- | :---------- | :------ |
+       * | `--ibm-q-accordion-border-color` | The color of the border | #dfe3e6 |
+       * | `--ibm-q-accordion-arrow-color` | The color of the arrow title | `var(--disabled-text-color)` |
+       * | `--ibm-q-accordion-arrow-active-color` | The color of the arrow title when is active | `var(--primary-color)` |
+       *
+       * @memberof IBMQ
+       */
+      class AccordionItemElement extends Polymer.Element {
+        static get is() {
+          return 'ibm-q-accordion-item';
+        }
+
+        static get properties() {
+          return {
+            /**
+             * If item is active is displayed.
+             */
+            active: {
+              type: Boolean,
+              value: false,
+              reflectToAttribute: true,
+              notify: true
+            }
+          };
+        }
+
+        constructor() {
+          super();
+
+          this._boundClickListener = this._handleClick.bind(this);
+          this._boundKeypressListener = this._handleKeypress.bind(this);
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+
+          this.$.header.addEventListener('click', this._boundClickListener);
+          this.$.header.addEventListener('keydown', this._boundKeypressListener);
+        }
+
+        disconnectedCallback() {
+          this.$.header.removeEventListener('click', this._boundClickListener);
+          this.$.header.removeEventListener('keydown', this._boundKeypressListener);
+
+          super.disconnectedCallback();
+        }
+
+        /**
+         * Handles click events.
+         * @param {Event} event The event.
+         * @private
+         */
+        _handleClick(event) {
+          const item = event.target;
+          if (item) {
+            this.active = !this.active;
+            this.$.header.focus();
+          }
+        }
+
+        /**
+         * Handles keypress events.
+         * @param {Event} event The event.
+         * @private
+         */
+        _handleKeypress(event) {
+          const item = event.target;
+          if (item && (event.keyCode === 13 || event.keyCode === 32)) {
+            this.active = !this.active;
+          }
+        }
+      }
+
+      customElements.define(AccordionItemElement.is, AccordionItemElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.AccordionItemElement = AccordionItemElement;
+    })();
+  </script>
+</dom-module>

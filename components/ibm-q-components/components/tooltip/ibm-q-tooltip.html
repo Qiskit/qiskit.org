@@ -1,0 +1,311 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../styles/default-theme.html">
+
+<dom-module id="ibm-q-tooltip">
+  <template>
+    <style>
+      :host {
+        --ibm-q-tooltip-opacity: 1;
+        --ibm-q-tooltip-title-color: #00000;
+        --ibm-q-tooltip-text-color: #00000;
+        --ibm-q-tooltip-border-color: #dfe3e6;
+        --ibm-q-tooltip-background-color: #FFFFFF;
+      }
+
+      :host {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+        position: absolute;
+        max-width: 15rem;
+        display: none;
+        background: var(--ibm-q-tooltip-background-color);
+        padding: 1.5rem;
+        border: 1px solid var(--ibm-q-tooltip-border-color);
+        z-index: 999;
+        opacity: var(--ibm-q-tooltip-opacity);
+      }
+
+      #tooltip p {
+        font-family: var(--ibm-q-font-family-base);
+        font-size: 0.875rem;
+        color: var(--ibm-q-tooltip-text-color);
+      }
+
+      #tooltip ::slotted([slot=label]) {
+        color: var(--ibm-q-tooltip-title-color);
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: .5rem;
+      }
+
+      :host:before {
+        position: absolute;
+        background: var(--ibm-q-tooltip-background-color);
+        left: 0;
+        top: -0.375rem;
+        right: 0;
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+        width: .6rem;
+        height: .6rem;
+        border-right: 1px solid var(--ibm-q-tooltip-border-color);
+        border-bottom: 1px solid var(--ibm-q-tooltip-border-color);
+        margin: 0 auto;
+        content: '';
+      }
+
+      :host([position='left']) {
+        margin-left: -.6rem;
+      }
+
+      :host([position='left']):before {
+        left: auto;
+        top: 44.7%;
+        right: -0.375rem;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+
+      :host([position='top']):before {
+        top: auto;
+        bottom: -0.375rem;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      :host([position='right']) {
+        margin-left: .6rem;
+      }
+
+      :host([position='right']):before {
+        left: -0.375rem;
+        top: 44.7%;
+        right: auto;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+      }
+    </style>
+
+    <div id="tooltip">
+      <slot name="label"></slot>
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      /* eslint max-len: ["error", { "ignoreComments": true }] */
+
+      /**
+       * `<ibm-q-tooltip>` is a Web Component providing a tooltip that follows
+       * the IBM Q design language.
+       *
+       * ```html
+       * <ibm-q-tooltip>
+       *   Text inside tooltip
+       * </ibm-q-tooltip>
+       * ```
+       *
+       * ### Styling
+       *
+       * The following custom properties are exposed for styling:
+       *
+       * | Custom property | Description | Default |
+       * | :-------------- | :---------- | :------ |
+       * | `--ibm-q-tooltip-opacity` | The tooltip opacity | 1 |
+       * | `--ibm-q-tooltip-title-color` | The color of the tooltip title | #00000 |
+       * | `--ibm-q-tooltip-text-color` | The color of the tooltip text | #00000 |
+       * | `--ibm-q-tooltip-border-color` | The color of the tooltip border | #dfe3e6 |
+       * | `--ibm-q-tooltip-background-color` | The tooltip background color | #FFFFFF |
+       *
+       * @memberof IBMQ
+       * @demo components/tooltip/demo/index.html
+       */
+      class TooltipElement extends Polymer.Element {
+        static get is() {
+          return 'ibm-q-tooltip';
+        }
+
+        static get properties() {
+          return {
+            /**
+             * Id of the element which will fire the tooltip.
+             */
+            for: {
+              type: String,
+              observer: '_findTrigger'
+            },
+
+            /**
+             * Position to display the tooltip (top, right, bottom or left).
+             */
+            position: {
+              type: String,
+              value: 'bottom'
+            },
+
+            /**
+             * HTMLElement which make the tooltip appears.
+             */
+            _trigger: {
+              type: Object,
+              value: function() {
+                return null;
+              }
+            }
+          };
+        }
+
+        constructor() {
+          super();
+
+          this._boundListener = (event) => {
+            this._handleHover(event);
+          };
+        }
+
+        ready() {
+          super.ready();
+
+          this.setAttribute('role', 'tooltip');
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+
+          this._findTrigger();
+        }
+
+        disconnectedCallback() {
+          if (this._trigger) {
+            this._removeEvents();
+          }
+
+          super.disconnectedCallback();
+        }
+
+        /**
+         * Add events to trigger element to show the tooltip.
+         * @private
+         */
+        _addEvents() {
+          ['mouseover', 'mouseout', 'focus', 'blur'].forEach((name) => {
+            this._trigger.addEventListener(name, this._boundListener);
+          });
+        }
+
+        /**
+         * Remove vents defined by the component
+         * @private
+         */
+        _removeEvents() {
+          ['mouseover', 'mouseout', 'focus', 'blur'].forEach((name) => {
+            this._trigger.removeEventListener(name, this._boundListener);
+          });
+        }
+
+        /**
+         * Handles hover/focus events.
+         * @param {Event} event The event.
+         * @private
+         */
+        _handleHover(event) {
+          const state = {
+            mouseover: 'show',
+            mouseout: 'hide',
+            focus: 'show',
+            blur: 'hide'
+          }[event.type];
+          this[state]();
+        }
+
+        /**
+         * Show the tooltip.
+         */
+        show() {
+          this.style.display = 'block';
+          const { left, top } = this._getPosition();
+          this.style.left = `${left}px`;
+          this.style.top = `${top}px`;
+        }
+
+        /**
+         * Hide the tooltip
+         */
+        hide() {
+          this.style.display = 'none';
+        }
+
+        /**
+         * Get the element which make the tooltip appears.
+         * @private
+         */
+        _findTrigger() {
+          const parentNode = this.getRootNode();
+          if (!this._trigger && this.for) {
+            this._trigger = parentNode.querySelector(`#${this.for}`);
+            this._addEvents();
+          }
+        }
+
+        /**
+         * @private
+         * @returns {Object} The tooltip position, with `top` and `left` properties.
+         */
+        _getPosition() {
+          const scroll = this._trigger.ownerDocument.defaultView.pageYOffset;
+          const offset = { top: 10, left: 0 };
+
+          const {
+            left: refLeft,
+            top: refTop,
+            right: refRight,
+            bottom: refBottom
+          } = this._trigger.getBoundingClientRect();
+
+          const {
+            width: menuWidth,
+            height: menuHeight
+          } = this.getBoundingClientRect();
+
+          const refCenterHorizontal = (refLeft + refRight) / 2;
+          const refCenterVertical = (refTop + refBottom) / 2;
+
+          return {
+            left: () => ({
+              left: refLeft - menuWidth - offset.left,
+              top: (refCenterVertical - (menuHeight / 2)) + scroll + offset.top
+            }),
+            top: () => ({
+              left: (refCenterHorizontal - (menuWidth / 2)) + offset.left,
+              top: ((refTop - menuHeight) + scroll) - offset.top
+            }),
+            right: () => ({
+              left: refRight + offset.left,
+              top: (refCenterVertical - (menuHeight / 2)) + scroll + offset.top
+            }),
+            bottom: () => ({
+              left: (refCenterHorizontal - (menuWidth / 2)) + offset.left,
+              top: refBottom + scroll + offset.top
+            })
+          }[this.position]();
+        }
+      }
+
+      customElements.define(TooltipElement.is, TooltipElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.TooltipElement = TooltipElement;
+    })();
+  </script>
+</dom-module>

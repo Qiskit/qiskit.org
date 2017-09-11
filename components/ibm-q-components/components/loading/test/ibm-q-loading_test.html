@@ -1,0 +1,67 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>ibm-q-loading test</title>
+
+  <script src="../../../../iron-test-helpers/mock-interactions.js"></script>
+  <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../ibm-q-loading.html">
+</head>
+<body>
+
+<test-fixture id="BasicTestFixture">
+  <template>
+    <ibm-q-loading></ibm-q-loading>
+  </template>
+</test-fixture>
+
+<test-fixture id="SmallTestFixture">
+  <template>
+    <ibm-q-loading class="small"></ibm-q-loading>
+  </template>
+</test-fixture>
+
+<script>
+  suite('Loading', function() {
+    test('Notification has to be removed when user click on close button', (done) => {
+      const loading = fixture('BasicTestFixture');
+
+      assert.isNotNull(loading.parentNode.querySelector('ibm-q-loading'));
+
+      loading.end();
+
+      loading.parentNode.addEventListener('DOMNodeRemoved', function(event) {
+        assert.equal(event.target, loading);
+        done();
+      });
+    });
+
+    test('Notification small has to be removed when user click on close button', (done) => {
+      const loading = fixture('SmallTestFixture');
+
+      assert.isNotNull(loading.parentNode.querySelector('ibm-q-loading'));
+
+      loading.end();
+
+      loading.parentNode.addEventListener('DOMNodeRemoved', function(event) {
+        assert.equal(event.target, loading);
+        done();
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>ibm-q-overflow-menu test</title>
+
+  <script src="../../../../iron-test-helpers/mock-interactions.js"></script>
+  <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../../web-component-tester/browser.js"></script>
+
+
+  <link rel="import" href="../ibm-q-overflow-menu.html">
+  <link rel="import" href="../ibm-q-overflow-menu-item.html">
+</head>
+<body>
+<test-fixture id="BasicTestFixture">
+  <template>
+    <ibm-q-overflow-menu>
+      <ibm-q-overflow-menu-item>Stop app</ibm-q-overflow-menu-item>
+      <ibm-q-overflow-menu-item>Restart app</ibm-q-overflow-menu-item>
+      <ibm-q-overflow-menu-item>Rename app</ibm-q-overflow-menu-item>
+      <ibm-q-overflow-menu-item danger>Delete app</ibm-q-overflow-menu-item>
+    </ibm-q-overflow-menu>
+  </template>
+</test-fixture>
+
+<script>
+  function isHidden(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.width === 0 && rect.height === 0;
+  }
+
+  suite('Overflow-menu', function() {
+    let overflowMenu;
+    let shadowMenu;
+
+    setup(() => {
+      overflowMenu = fixture('BasicTestFixture');
+      shadowMenu = overflowMenu.shadowRoot.querySelector('[part=menu]');
+    });
+
+    test('host should have the `tooltip` role', () => {
+      assert.equal(overflowMenu.getAttribute('role'), 'menu');
+      assert.equal(overflowMenu.querySelector('ibm-q-overflow-menu-item').getAttribute('role'), 'menuitem');
+    });
+
+    test('Overflow is opened when open attribute is added', () => {
+      assert.isTrue(isHidden(shadowMenu));
+
+      overflowMenu.setAttribute('open', true);
+
+      assert.isFalse(isHidden(shadowMenu));
+    });
+
+    test('Overflow is closed when open attribute is removed', () => {
+      overflowMenu.setAttribute('open', true);
+      assert.isFalse(isHidden(shadowMenu));
+
+      overflowMenu.removeAttribute('open');
+
+      assert.isTrue(isHidden(shadowMenu));
+    });
+
+    test('Overflow is opened when clicks on it', () => {
+      MockInteractions.tap(overflowMenu);
+
+      assert.isFalse(isHidden(shadowMenu));
+    });
+
+    test('Overflow is closed when clicks on it and it is opened', () => {
+      overflowMenu.open = true;
+
+      MockInteractions.tap(overflowMenu);
+
+      assert.isTrue(isHidden(shadowMenu));
+    });
+
+    test('Overflow is closed when clicks on any part of document and it is opened', () => {
+      overflowMenu.open = true;
+
+      MockInteractions.tap(document.body);
+
+      assert.isTrue(isHidden(shadowMenu));
+    });
+
+    test('Overflow is opened when press enter', (done) => {
+      MockInteractions.keyEventOn(overflowMenu, 'keypress', 13);
+
+      Polymer.Base.async(() => {
+        assert.isFalse(isHidden(shadowMenu));
+        done();
+      });
+    });
+
+    test('Overflow is closed when press enter and it is opened', (done) => {
+      overflowMenu.open = true;
+
+      MockInteractions.keyEventOn(overflowMenu, 'keypress', 13);
+
+      Polymer.Base.async(() => {
+        assert.isTrue(isHidden(shadowMenu));
+        done();
+      });
+    });
+  });
+</script>
+</body>
+</html>

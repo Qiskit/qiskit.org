@@ -1,0 +1,142 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../text-field/ibm-q-text-field.html">
+<link rel="import" href="../styles/default-theme.html">
+<link rel="import" href="../styles/typography.html">
+
+<dom-module id="ibm-q-search-field-default-theme">
+  <template>
+    <style>
+      [part="input-field"] {
+        padding: 0 0.5rem;
+      }
+
+      [part="search-icon"],
+      [part="clear-icon"] {
+        height: 1rem;
+        width: 1rem;
+        vertical-align: middle;
+      }
+
+      [part="search-icon"] {
+        fill: var(--disabled-text-color);
+        padding-right: 0.5rem;
+      }
+
+      [part="clear-icon"] {
+        padding-left: 0.5rem;
+      }
+
+      [part="clear-icon"] svg {
+        -webkit-transition: 250ms;
+        transition: 250ms;
+        fill: var(--disabled-text-color);
+        cursor: pointer;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      [part="clear-icon"].hidden svg {
+        visibility: hidden;
+        opacity: 0;
+      }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="ibm-q-search-field-template">
+  <template>
+    <div part="search-icon">
+      <svg id="icon" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
+        <path d="M6 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm0-2C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zM16 13.8L13.8 16l-3.6-3.6 2.2-2.2z"></path>
+        <path d="M16 13.8L13.8 16l-3.6-3.6 2.2-2.2z"></path>
+      </svg>
+    </div>
+    <div part="clear-icon" class="hidden">
+      <svg id="clear" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
+        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z"></path>
+      </svg>
+    </div>
+  </template>
+  <script>
+    (function() {
+      let memoizedTemplate;
+
+      /**
+       * `<ibm-q-search-field>` is a Web Component providing a search field that
+       * follows the IBM Q design language.
+       *
+       * ```html
+       * <ibm-q-search-field placeholder="Search"></ibm-q-search-field>
+       * ```
+       *
+       * ### Styling
+       *
+       * See `IBMQ.TextFieldElement` for a list of custom properties used to style this element.
+       *
+       * @memberof IBMQ
+       * @extends IBMQ.TextFieldElement
+       * @demo components/search-field/demo/index.html
+       */
+      class SearchFieldElement extends IBMQ.TextFieldElement {
+        static get is() {
+          return 'ibm-q-search-field';
+        }
+
+        ready() {
+          super.ready();
+
+          this.$.clear.addEventListener('click', () => {
+            this.value = '';
+            this.focusElement.focus();
+
+            this._showClearIcon();
+          });
+          this.$.input.addEventListener('input', () => {
+            this._showClearIcon();
+          });
+        }
+
+        static get template() {
+          if (!memoizedTemplate) {
+            // Clone the superclass template
+            memoizedTemplate = super.template.cloneNode(true);
+
+            // Retrieve this element's dom-module template
+            const thisTemplate = Polymer.DomModule.import(this.is + '-template', 'template');
+            const searchIcon = thisTemplate.content.querySelector('[part="search-icon"]');
+            const clearIcon = thisTemplate.content.querySelector('[part="clear-icon"]');
+
+            // Add the search icon and clear icon to the text-field template
+            const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
+            const prefixSlot = memoizedTemplate.content.querySelector('[name="prefix"]');
+
+            inputField.insertBefore(searchIcon, prefixSlot);
+            inputField.appendChild(clearIcon);
+          }
+
+          return memoizedTemplate;
+        }
+
+        _showClearIcon() {
+          this.$.clear.parentElement.classList.toggle('hidden', this.value.length === 0);
+        }
+      }
+
+      customElements.define(SearchFieldElement.is, SearchFieldElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.SearchFieldElement = SearchFieldElement;
+    })();
+  </script>
+</dom-module>

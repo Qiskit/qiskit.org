@@ -1,0 +1,82 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../../../iron-menu-behavior/iron-menubar-behavior.html">
+<link rel="import" href="../styles/typography.html">
+
+<link rel="import" href="ibm-q-content-switcher-option.html">
+
+<dom-module id="ibm-q-content-switcher">
+  <template>
+    <style>
+      :host {
+        font-family: var(--ibm-q-font-family-base);
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        height: 2.5rem;
+        outline: none;
+      }
+    </style>
+
+    <slot id="content"></slot>
+  </template>
+
+  <script>
+    (function() {
+      /**
+       * `<ibm-q-content-switcher>` is a Web Component providing a content-switcher
+       *
+       * ```html
+       * <ibm-q-content-switcher selected="0">
+       *   <ibm-q-content-switcher-option>Content 1</ibm-q-content-switcher-option>
+       *   <ibm-q-content-switcher-option>Content 2</ibm-q-content-switcher-option>
+       *   <ibm-q-content-switcher-option>Content 3</ibm-q-content-switcher-option>
+       * </ibm-q-content-switcher>
+       * ```
+       *
+       * @memberof IBMQ
+       * @extends Polymer.Element
+       * @demo components/content-switcher/demo/index.html
+       */
+      class ContentSwitcherElement extends Polymer.mixinBehaviors(
+        [Polymer.IronMenubarBehavior],
+        Polymer.Element
+      ) {
+        static get is() {
+          return 'ibm-q-content-switcher';
+        }
+
+        ready() {
+          super.ready();
+
+          this.selectable = 'ibm-q-content-switcher-option';
+          this.selectedClass = 'selected';
+
+          this.setAttribute('role', 'navigation');
+        }
+
+        // TODO: Waiting for PolymerElements/iron-menu-behavior/issues/81
+        _updateItems() {
+          var nodes = Polymer.dom(this).querySelectorAll(this.selectable || '*');
+          nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+          this._setItems(nodes);
+        }
+      }
+
+      customElements.define(ContentSwitcherElement.is, ContentSwitcherElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.ContentSwitcherElement = ContentSwitcherElement;
+    })();
+  </script>
+</dom-module>

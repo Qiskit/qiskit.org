@@ -1,0 +1,202 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../../../vaadin-checkbox/vaadin-checkbox.html">
+<link rel="import" href="../styles/default-theme.html">
+<link rel="import" href="../styles/typography.html">
+
+<!-- Reset vaadin default theme -->
+<dom-module id="vaadin-checkbox-default-theme" theme-for="vaadin-checkbox"></dom-module>
+
+<dom-module id="ibm-q-checkbox-default-theme">
+  <template>
+    <style>
+      :host {
+        display: -ms-inline-flexbox;
+        display: -webkit-inline-flex;
+        display: inline-flex;
+        margin-bottom: 1rem;
+      }
+
+      :host(:first-of-type) {
+        margin-top: 0.375rem;
+      }
+
+      :host(:last-of-type) {
+        margin-bottom: 0;
+      }
+
+      [part~="wrapper"] {
+        font-family: var(--ibm-q-font-family-base);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 0.875rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        cursor: pointer;
+
+        outline: none;
+      }
+
+      [part~="native-checkbox"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        visibility: visible;
+        white-space: nowrap;
+      }
+
+      [part~="checkbox"] {
+        display: inline-block;
+        height: 1.125rem;
+        width: 1.125rem;
+        margin-right: .5rem;
+        background-color: var(--ibm-q-checkbox-checkmark-color, #ffffff);
+        border: 2px solid var(--ibm-q-checkbox-border-color, var(--light-theme-disabled-color));
+
+        box-sizing: border-box;
+      }
+
+      :host([checked]) [part~="checkbox"] {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+        background-color: var(--ibm-q-checkbox-color, var(--primary-color));
+        border-color: var(--ibm-q-checkbox-color, var(--primary-color));
+      }
+
+      :host([disabled]) [part~="wrapper"] {
+        opacity: .5;
+        cursor: not-allowed;
+      }
+
+      :host([focused]) [part~="checkbox"] {
+        box-shadow: 0 0 0 3px var(--ibm-q-checkbox-focus-outline-color, #7cc7ff);
+        outline: 1px solid transparent;
+      }
+
+      [part~="checkmark"] {
+        display: none;
+        fill: var(--ibm-q-checkbox-checkmark-color, #ffffff);
+        width: 100%;
+        height: 100%;
+      }
+
+      :host([checked]) [part~="checkmark"] {
+        display: block;
+      }
+
+      @-moz-document url-prefix() {
+        [part~="checkmark"] {
+          stroke: var(--ibm-q-checkbox-color, var(--primary-color));
+        }
+      }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="ibm-q-checkbox">
+  <template>
+    <label part="wrapper" id="label" for="nativeCheckbox" on-click="_handleClick">
+      <input
+          id="nativeCheckbox"
+          type="checkbox"
+          part="native-checkbox"
+          checked="{{checked::change}}"
+          disabled$="[[disabled]]"
+          indeterminate="{{indeterminate::change}}"
+          role="presentation"
+          tabindex="-1">
+
+      <span part="checkbox">
+        <svg part="checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+          <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
+        </svg>
+      </span>
+
+      <span part="label">
+        <slot></slot>
+      </span>
+    </label>
+  </template>
+
+  <script>
+    (function() {
+      /* eslint max-len: ["error", { "ignoreComments": true }] */
+
+      /**
+       * `<ibm-q-checkbox>` is a Web Component providing a checkbox that follows
+       * the IBM Q design language.
+       *
+       * ```html
+       * <ibm-q-checkbox>Send me notifications</ibm-q-checkbox>
+       * ```
+       *
+       * ### Styling
+       *
+       * The following custom properties are exposed for styling:
+       *
+       * | Custom property | Description | Default |
+       * | :-------------- | :---------- | :------ |
+       * | `--ibm-q-checkbox-color` | The checkbox color | `var(--primary-color)` |
+       * | `--ibm-q-checkbox-border-color` | The checkbox border color | `var(--light-theme-disabled-color)` |
+       * | `--ibm-q-checkbox-checkmark-color` | The checkmark color | `#ffffff` |
+       * | `--ibm-q-checkbox-focus-outline-color` | The checbox outline color on focus | `#7cc7ff` |
+       *
+       * The following attributes are exposed for styling:
+       *
+       * | Attribute | Description |
+       * | :-------- | :---------- |
+       * | `active` | Set when the checkbox is pressed down, either with mouse, touch or the keyboard. |
+       * | `disabled` | Set when the checkbox is disabled. |
+       * | `focus-ring` | Set when the checkbox is focused using the keyboard. |
+       * | `focused` | Set when the checkbox is focused. |
+       *
+       * @memberof IBMQ
+       * @extends Vaadin.CheckboxElement
+       * @demo components/checkbox/demo/index.html
+       */
+      class CheckboxElement extends Vaadin.CheckboxElement {
+        static get is() {
+          return 'ibm-q-checkbox';
+        }
+
+        _checkedChanged(checked) {
+          super._checkedChanged(checked);
+
+          if (checked && !this.value) {
+            this.value = 'on';
+          } else if (!checked && this.value == 'on') {
+            this.value = undefined;
+          }
+        }
+      }
+
+      customElements.define(CheckboxElement.is, CheckboxElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.CheckboxElement = CheckboxElement;
+    })();
+  </script>
+</dom-module>

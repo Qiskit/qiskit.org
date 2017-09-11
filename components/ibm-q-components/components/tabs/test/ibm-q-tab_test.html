@@ -1,0 +1,44 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-tab test</title>
+
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ibm-q-tabs.html">
+    <link rel="import" href="../ibm-q-tab.html">
+  </head>
+  <body>
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <ibm-q-tab>Tab 1</ibm-q-tab>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('ibm-q-tab', function() {
+        let tab;
+
+        setup(() => {
+          tab = fixture('BasicTestFixture');
+        });
+
+        test('host should have the `tab` role', () => {
+          expect(tab.getAttribute('role')).to.be.eql('tab');
+        });
+      });
+    </script>
+  </body>
+</html>

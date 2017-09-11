@@ -1,0 +1,93 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-loading demo</title>
+
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../../../iron-demo-helpers/demo-snippet.html">
+
+    <link rel="import" href="../ibm-q-loading.html">
+
+  </head>
+  <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Loading</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-loading></ibm-q-loading>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Loading small</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-loading class="small"></ibm-q-loading>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Loading end</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-loading id="loading"></ibm-q-loading>
+          <button id="stop">Stop/Start action...</button>
+          <button id="end">End action and remove loader...</button>
+          <script type="application/javascript">
+            const loading = document.getElementById('loading');
+            document.getElementById('stop').addEventListener('click', function() {
+              if (loading) {
+                loading.toggle();
+              }
+            });
+            document.getElementById('end').addEventListener('click', function() {
+              loading.end();
+            });
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Loading overlay</h3>
+      <demo-snippet>
+        <template>
+          <button id="button">Loading...</button>
+          <p>Press <i>esc</i> key to remove loading.</p>
+          <script type="application/javascript">
+            document.getElementById('button').addEventListener('click', function() {
+              const loading = document.createElement('ibm-q-loading');
+              loading.overlay = true;
+              document.body.append(loading);
+            });
+            document.addEventListener('keydown', (event) => {
+              if (event.keyCode === 27) {
+                const loading = document.querySelector('ibm-q-loading[overlay]');
+                if (loading) {
+                  loading.end();
+                }
+              }
+            });
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>ibm-q-modal test</title>
+
+  <script src="../../../../iron-test-helpers/mock-interactions.js"></script>
+  <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../ibm-q-modal.html">
+</head>
+<body>
+
+<test-fixture id="BasicTestFixture">
+  <template>
+    <ibm-q-modal label="Label (Optional)">
+      <h1 slot="title">Modal Title</h1>
+      <p>Modal text description.</p>
+    </ibm-q-modal>
+  </template>
+</test-fixture>
+
+<script>
+  suite('Modal', function() {
+    let modal;
+
+    setup(() => {
+      modal = fixture('BasicTestFixture');
+    });
+
+    test('Modal has correct role', () => {
+      expect(modal.getAttribute('role')).to.be.eql('dialog');
+    });
+
+    test('modal open/close events', function(done) {
+      let nevents = 0;
+
+      modal.addEventListener('iron-overlay-opened', function() {
+        nevents += 1;
+        modal.close();
+      });
+
+      modal.addEventListener('iron-overlay-closed', function() {
+        nevents += 1;
+        assert.equal(nevents, 2, 'opened and closed events fired');
+        done();
+      });
+
+      modal.open();
+    });
+
+    test('modal close when click outside', function(done) {
+      modal.addEventListener('iron-overlay-canceled', function() {
+        assert.isTrue(true);
+        done();
+      });
+      modal.addEventListener('iron-overlay-opened', function() {
+        MockInteractions.tap(document.body.querySelector('iron-overlay-backdrop'));
+      });
+
+      modal.open();
+    });
+  });
+</script>
+</body>
+</html>

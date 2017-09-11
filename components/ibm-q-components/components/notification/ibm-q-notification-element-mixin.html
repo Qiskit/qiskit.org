@@ -1,0 +1,38 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+<script>
+  (function() {
+    /**
+     * Mixin to share JS functionality between IBMQ.InlineNotificationElement and
+     * IBMQ.ToastNotificationElement
+     * @polymerMixin
+     */
+    const NotificationElementMixin = superClass => class extends superClass {
+      static get properties() {
+        return {
+          /**
+           * Title property for notifications
+           */
+          title: {
+            type: String
+          }
+        };
+      }
+
+      close() {
+        this.parentNode.removeChild(this);
+      }
+    };
+
+    /**
+     * @namespace IBMQ
+     */
+    window.IBMQ = window.IBMQ || {};
+    IBMQ.NotificationElementMixin = NotificationElementMixin;
+  })();
+</script>

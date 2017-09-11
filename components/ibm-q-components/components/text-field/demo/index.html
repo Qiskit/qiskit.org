@@ -1,0 +1,99 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-text-field demo</title>
+
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../font-ibm-plex-local/ibm-plex.html">
+    <link rel="import" href="../../styles/typography.html">
+    <link rel="import" href="../ibm-q-text-field.html">
+
+    <custom-style>
+      <style include="demo-pages-shared-styles">
+        body {
+          font-family: var(--ibm-q-font-family-base);
+        }
+
+        ibm-q-text-field {
+          margin-right: 0;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Text input</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-text-field value="IBM Q"></ibm-q-text-field>
+          <ibm-q-text-field value="IBM Q" disabled></ibm-q-text-field>
+        </template>
+      </demo-snippet>
+
+      <h3>Text input with label</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-text-field label="Project" value="IBM Q"></ibm-q-text-field>
+          <ibm-q-text-field label="Project" value="IBM Q" disabled></ibm-q-text-field>
+        </template>
+      </demo-snippet>
+
+      <h3>Text input with placeholder</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-text-field placeholder="Write the project's name"></ibm-q-text-field>
+        </template>
+      </demo-snippet>
+
+      <h3>Prefix and Suffix</h3>
+      <demo-snippet>
+        <template>
+          <ibm-q-text-field label="Sum" value="1000">
+            <div slot="prefix">$</div>
+          </ibm-q-text-field>
+          <ibm-q-text-field label="Email">
+            <div slot="suffix">@ibm.com</div>
+          </ibm-q-text-field>
+        </template>
+      </demo-snippet>
+
+      <h3>Required text input</h3>
+      <demo-snippet>
+        <template>
+          <p>
+            <ibm-q-text-field required value="IBM Q"></ibm-q-text-field> is valid
+          </p>
+          <p>
+            <ibm-q-text-field required></ibm-q-text-field> is invalid
+          </p>
+        </template>
+      </demo-snippet>
+
+      <h3>Text input with error message</h3>
+      <p>The <code>errorMessage</code> property defines a message that gets shown when the input value is invalid.</p>
+      <p>NOTE: The message is not visible initially or when the field is valid</p>
+      <demo-snippet>
+        <template>
+          <ibm-q-text-field
+              required
+              error-message="You must write something in this input">
+          </ibm-q-text-field> required content
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

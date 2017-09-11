@@ -1,0 +1,272 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../../../polymer/polymer-element.html">
+<link rel="import" href="../../../iron-menu-behavior/iron-menubar-behavior.html">
+<link rel="import" href="../styles/default-theme.html">
+<link rel="import" href="../styles/typography.html">
+
+<link rel="import" href="ibm-q-tab.html">
+
+<dom-module id="ibm-q-tabs">
+  <template>
+    <style>
+      :host {
+        font-size: 0.875rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: var(--ibm-q-font-family-base);
+        color: var(--ibm-q-tabs-color, #152935);
+        font-weight: 700;
+        height: auto;
+        width: 100%;
+        position: relative;
+
+        display: block;
+      }
+
+      @media screen and (min-width: 768px) {
+        :host {
+          background: none;
+          min-height: 3.0625rem;
+        }
+      }
+
+      [part~="trigger"] {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 0.8125rem 1rem;
+        cursor: pointer;
+        background-color: var(--ibm-q-tabs-trigger-background-color, rgba(61, 112, 178, 0.1));
+      }
+
+      [part~="trigger"] svg {
+        width: 0.75rem;
+        height: 0.75rem;
+        fill: var(--ibm-q-tabs-trigger-color, var(--primary-color));
+      }
+
+      [part~="trigger"]:focus {
+        outline: 1px solid var(--ibm-q-tabs-trigger-color, var(--primary-color));
+      }
+
+      @media screen and (min-width: 768px) {
+        [part~="trigger"] {
+          display: none;
+        }
+      }
+
+      [part~="trigger-text"] {
+        text-decoration: none;
+        font-weight: 700;
+        color: var(--ibm-q-tabs-color, #152935);
+      }
+
+      [part~="trigger-text"]:focus {
+        outline: 1px solid var(--ibm-q-tabs-trigger-color, var(--primary-color));
+      }
+
+      [part~="tab-list"] {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        width: 100%;
+        list-style: none;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        z-index: 1;
+      }
+
+      @media screen and (min-width: 768px) {
+        [part~="tab-list"] {
+          font-size: 1rem;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+          flex-direction: row;
+          padding-right: 1rem;
+          padding-left: 1rem;
+          background: none;
+          box-shadow: none;
+
+          box-sizing: border-box;
+        }
+      }
+
+      @media screen and (min-width: 1200px) {
+        [part~="tab-list"] {
+          margin-left: 0;
+        }
+      }
+
+      [part~="tab-list"][hidden] {
+        display: none;
+      }
+
+      @media screen and (min-width: 768px) {
+        [part~="tab-list"][hidden] {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+        }
+      }
+
+      ::slotted(a) {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+
+      @media screen and (min-width: 768px) {
+        ::slotted(ibm-q-tab),
+        ::slotted(a) {
+          margin-left: 3rem;
+        }
+
+        ::slotted(ibm-q-tab:first-child),
+        ::slotted(a:first-child) {
+          margin-left: 0;
+        }
+      }
+    </style>
+
+    <div id="trigger" part="trigger" tabindex="0" on-click="_toggleDropdown">
+      <div part="trigger-text" tabindex="-1">[[_triggerText]]</div>
+      <svg width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+        <path d="M10 0L5 5 0 0z"></path>
+      </svg>
+    </div>
+
+    <div id="tabList" part="tab-list" role="tablist" hidden="[[_hiddenTabList]]">
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      /* eslint max-len: ["error", { "ignoreComments": true }] */
+
+      /**
+       * `<ibm-q-tabs>` is a Web Component providing a tabs that follows the IBM
+       * Q design language.
+       *
+       * ```html
+       * <ibm-q-tabs selected="0">
+       *   <ibm-q-tab>Tab 1</ibm-q-tab>
+       *   <ibm-q-tab>Tab 2</ibm-q-tab>
+       *   <ibm-q-tab>Tab 3</ibm-q-tab>
+       * </ibm-q-tabs>
+       * ```
+       *
+       * ### Styling
+       *
+       * The following custom properties are exposed for styling:
+       *
+       * | Custom property | Description | Default |
+       * | :-------------- | :---------- | :------ |
+       * | `--ibm-q-tabs-color` | Tabs color | `#152935` |
+       * | `--ibm-q-tabs-trigger-color` | Trigger color | `var(--primary-color)` |
+       * | `--ibm-q-tabs-trigger-background-color` | Trigger background color | `rgba(61, 112, 178, 0.1)` |
+       *
+       * @memberof IBMQ
+       * @extends Polymer.Element
+       * @mixes Vaadin.ControlStateMixin
+       * @demo components/tabs/demo/index.html
+       */
+      class TabsElement extends Polymer.mixinBehaviors(
+        [Polymer.IronMenubarBehavior],
+        Vaadin.ControlStateMixin(Polymer.Element)
+      ) {
+        static get is() {
+          return 'ibm-q-tabs';
+        }
+
+        static get properties() {
+          return {
+            _triggerText: {
+              type: String,
+              computed: '_computeTriggerText(selectedItem)'
+            },
+
+            _hiddenTabList: {
+              type: Boolean,
+              value: true
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+
+          this.selectable = 'ibm-q-tab';
+          this.selectedClass = 'selected';
+
+          this.setAttribute('role', 'navigation');
+
+          this._addActiveListeners();
+        }
+
+        _addActiveListeners() {
+          this.$.trigger.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13) {
+              this._toggleDropdown();
+            }
+          });
+        }
+
+        _toggleDropdown() {
+          this._hiddenTabList = !this._hiddenTabList;
+        }
+
+        _computeTriggerText(selectedItem) {
+          if (selectedItem) {
+            this._hiddenTabList = true;
+            return selectedItem.textContent.trim();
+          }
+        }
+
+        get focusElement() {
+          return this.$.trigger;
+        }
+
+        // TODO: Waiting for PolymerElements/iron-menu-behavior/issues/81
+        _updateItems() {
+          var nodes = Polymer.dom(this).querySelectorAll(this.selectable || '*');
+          nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+          this._setItems(nodes);
+        }
+      }
+
+      customElements.define(TabsElement.is, TabsElement);
+
+      /**
+       * @namespace IBMQ
+       */
+      window.IBMQ = window.IBMQ || {};
+      IBMQ.TabsElement = TabsElement;
+    })();
+  </script>
+</dom-module>

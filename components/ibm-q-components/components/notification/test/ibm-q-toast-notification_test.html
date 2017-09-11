@@ -1,0 +1,46 @@
+<!--
+@license
+Copyright (c) 2017 The IBM Research authors. All rights reserved.
+This code may only be used under the MIT style license found at https://ibmresearch.github.io/LICENSE.txt
+The complete set of authors may be found at https://ibmresearch.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://ibmresearch.github.io/CONTRIBUTORS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ibm-q-inline-notification test</title>
+
+    <script src="../../../../iron-test-helpers/mock-interactions.js"></script>
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ibm-q-toast-notification.html">
+  </head>
+  <body>
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <ibm-q-toast-notification title="Notification" info>
+          Here is a clear explaination of the notification.
+        </ibm-q-toast-notification>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('Toast notification', function() {
+        test('Notification has to be removed when user click on close button', () => {
+          const notification = fixture('BasicTestFixture');
+
+          assert.isNotNull(notification.parentNode);
+
+          MockInteractions.tap(notification.shadowRoot.querySelector('button'));
+
+          assert.isNull(notification.parentNode);
+        });
+      });
+    </script>
+  </body>
+</html>
