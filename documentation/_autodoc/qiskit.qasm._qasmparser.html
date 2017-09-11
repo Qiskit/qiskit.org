@@ -1,0 +1,798 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.qasm._qasmparser module &#8212; QISKit SDK 0.3.5 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.simulators package" href="qiskit.simulators.html" />
+    <link rel="prev" title="qiskit.qasm._qasmlexer module" href="qiskit.qasm._qasmlexer.html" />
+
+<div id="head" class="head">
+    <a href="../"> QISKit </a>
+</div>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators.html" title="qiskit.simulators package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.qasm._qasmlexer.html" title="qiskit.qasm._qasmlexer module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >qiskit</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.qasm.html" accesskey="U">qiskit.qasm package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo.gif" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qiskit.qasm._qasmlexer.html"
+                        title="previous chapter">qiskit.qasm._qasmlexer module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.simulators.html"
+                        title="next chapter">qiskit.simulators package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.qasm._qasmparser.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qiskit.qasm._qasmparser">
+<span id="qiskit-qasm-qasmparser-module"></span><h1>qiskit.qasm._qasmparser module<a class="headerlink" href="#module-qiskit.qasm._qasmparser" title="Permalink to this headline">¶</a></h1>
+<p>OPENQASM parser.</p>
+<dl class="class">
+<dt id="qiskit.qasm._qasmparser.QasmParser">
+<em class="property">class </em><code class="descclassname">qiskit.qasm._qasmparser.</code><code class="descname">QasmParser</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>OPENQASM Parser.</p>
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the parser.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.find_column">
+<code class="descname">find_column</code><span class="sig-paren">(</span><em>input</em>, <em>token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.find_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.find_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the column.</p>
+<p>Input is the input text string.
+token is a token instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.id_tuple_list">
+<code class="descname">id_tuple_list</code><span class="sig-paren">(</span><em>id_node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.id_tuple_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.id_tuple_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of (name, index) tuples for this id node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_additive_expression_0">
+<code class="descname">p_additive_expression_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_additive_expression_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_additive_expression_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>additive_expression : prefix_expression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_additive_expression_1">
+<code class="descname">p_additive_expression_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_additive_expression_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_additive_expression_1" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>additive_expression <span class="classifier-delimiter">:</span> <span class="classifier">additive_expression ‘+’ prefix_expression</span></dt>
+<dd><div class="first last line-block">
+<div class="line">additive_expression ‘-‘ prefix_expression</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_barrier">
+<code class="descname">p_barrier</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_barrier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_barrier" title="Permalink to this definition">¶</a></dt>
+<dd><p>barrier : BARRIER primary_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_bit_list_0">
+<code class="descname">p_bit_list_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_bit_list_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_bit_list_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>bit_list : id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_bit_list_1">
+<code class="descname">p_bit_list_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_bit_list_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_bit_list_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>bit_list : bit_list ‘,’ id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_creg_decl">
+<code class="descname">p_creg_decl</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_creg_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_creg_decl" title="Permalink to this definition">¶</a></dt>
+<dd><p>creg_decl : CREG indexed_id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_creg_decl_e">
+<code class="descname">p_creg_decl_e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_creg_decl_e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_creg_decl_e" title="Permalink to this definition">¶</a></dt>
+<dd><p>creg_decl : CREG error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_decl">
+<code class="descname">p_decl</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_decl" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>decl <span class="classifier-delimiter">:</span> <span class="classifier">qreg_decl ‘;’</span></dt>
+<dd><div class="first last line-block">
+<div class="line">creg_decl ‘;’</div>
+<div class="line">qreg_decl error</div>
+<div class="line">creg_decl error</div>
+<div class="line">gate_decl</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_error">
+<code class="descname">p_error</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_exp_list_0">
+<code class="descname">p_exp_list_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_exp_list_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_exp_list_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>exp_list : expression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_exp_list_1">
+<code class="descname">p_exp_list_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_exp_list_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_exp_list_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>exp_list : exp_list ‘,’ expression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_expression_0">
+<code class="descname">p_expression_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_expression_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_expression_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>expression : multiplicative_expression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_expression_1">
+<code class="descname">p_expression_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_expression_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_expression_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>expression : expression ‘^’ multiplicative_expression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_body_0">
+<code class="descname">p_gate_body_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_body_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_body_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_body : ‘{‘ ‘}’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_body_1">
+<code class="descname">p_gate_body_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_body_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_body_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_body : ‘{‘ gate_op_list ‘}’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_decl_0">
+<code class="descname">p_gate_decl_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_decl_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_decl_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_decl : GATE id gate_scope bit_list gate_body</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_decl_1">
+<code class="descname">p_gate_decl_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_decl_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_decl_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_decl : GATE id gate_scope ‘(‘ ‘)’ bit_list gate_body</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_decl_2">
+<code class="descname">p_gate_decl_2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_decl_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_decl_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_decl : GATE id gate_scope ‘(‘ gate_id_list ‘)’ bit_list gate_body</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_id_list_0">
+<code class="descname">p_gate_id_list_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_id_list_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_id_list_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_id_list : id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_id_list_1">
+<code class="descname">p_gate_id_list_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_id_list_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_id_list_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_id_list : gate_id_list ‘,’ id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_0">
+<code class="descname">p_gate_op_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : U ‘(‘ exp_list ‘)’ id ‘;’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_0e1">
+<code class="descname">p_gate_op_0e1</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_0e1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_0e1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : U ‘(‘ exp_list ‘)’ error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_0e2">
+<code class="descname">p_gate_op_0e2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_0e2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_0e2" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : U ‘(‘ exp_list error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_1">
+<code class="descname">p_gate_op_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : CX id ‘,’ id ‘;’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_1e1">
+<code class="descname">p_gate_op_1e1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_1e1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_1e1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : CX error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_1e2">
+<code class="descname">p_gate_op_1e2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_1e2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_1e2" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : CX id ‘,’ error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_2">
+<code class="descname">p_gate_op_2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : id id_list ‘;’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_2e">
+<code class="descname">p_gate_op_2e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_2e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_2e" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : id  id_list error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_3">
+<code class="descname">p_gate_op_3</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : id ‘(‘ ‘)’ id_list ‘;’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_4">
+<code class="descname">p_gate_op_4</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : id ‘(‘ exp_list ‘)’ id_list ‘;’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_4e0">
+<code class="descname">p_gate_op_4e0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_4e0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_4e0" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : id ‘(‘ ‘)’  error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_4e1">
+<code class="descname">p_gate_op_4e1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_4e1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_4e1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : id ‘(‘   error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_5">
+<code class="descname">p_gate_op_5</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_5" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : BARRIER id_list ‘;’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_5e">
+<code class="descname">p_gate_op_5e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_5e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_5e" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op : BARRIER error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_list_0">
+<code class="descname">p_gate_op_list_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_list_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_list_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op_list : gate_op</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_op_list_1">
+<code class="descname">p_gate_op_list_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_op_list_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_op_list_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_op_list : gate_op_list gate_op</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_gate_scope">
+<code class="descname">p_gate_scope</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_gate_scope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_gate_scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>gate_scope :</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_id">
+<code class="descname">p_id</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>id : ID</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_id_e">
+<code class="descname">p_id_e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_id_e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_id_e" title="Permalink to this definition">¶</a></dt>
+<dd><p>id : error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_id_list_0">
+<code class="descname">p_id_list_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_id_list_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_id_list_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>id_list : id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_id_list_1">
+<code class="descname">p_id_list_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_id_list_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_id_list_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>id_list : id_list ‘,’ id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_if">
+<code class="descname">p_if</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_if"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_if" title="Permalink to this definition">¶</a></dt>
+<dd><p>if : IF ‘(‘ id MATCHES NNINTEGER ‘)’ quantum_op
+if : IF ‘(‘ id error
+if : IF ‘(‘ id MATCHES error
+if : IF ‘(‘ id MATCHES NNINTEGER error
+if : IF error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_ignore">
+<code class="descname">p_ignore</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_ignore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_ignore" title="Permalink to this definition">¶</a></dt>
+<dd><p>ignore : STRING</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_indexed_id">
+<code class="descname">p_indexed_id</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_indexed_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_indexed_id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>indexed_id <span class="classifier-delimiter">:</span> <span class="classifier">id ‘[‘ NNINTEGER ‘]’</span></dt>
+<dd><div class="first last line-block">
+<div class="line">id ‘[‘ NNINTEGER error</div>
+<div class="line">id ‘[‘ error</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_magic">
+<code class="descname">p_magic</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_magic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_magic" title="Permalink to this definition">¶</a></dt>
+<dd><p>magic : MAGIC REAL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_magic_0">
+<code class="descname">p_magic_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_magic_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_magic_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>magic : MAGIC error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_main">
+<code class="descname">p_main</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>main : program</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_measure">
+<code class="descname">p_measure</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_measure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>measure : MEASURE primary ASSIGN primary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_measure_e">
+<code class="descname">p_measure_e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_measure_e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_measure_e" title="Permalink to this definition">¶</a></dt>
+<dd><p>measure : MEASURE primary error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_multiplicative_expression_0">
+<code class="descname">p_multiplicative_expression_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_multiplicative_expression_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_multiplicative_expression_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>multiplicative_expression : additive_expression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_multiplicative_expression_1">
+<code class="descname">p_multiplicative_expression_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_multiplicative_expression_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_multiplicative_expression_1" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>multiplicative_expression <span class="classifier-delimiter">:</span> <span class="classifier">multiplicative_expression ‘*’ additive_expression</span></dt>
+<dd><div class="first last line-block">
+<div class="line">multiplicative_expression ‘/’ additive_expression</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_opaque_0">
+<code class="descname">p_opaque_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_opaque_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_opaque_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>opaque : OPAQUE id gate_scope bit_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_opaque_1">
+<code class="descname">p_opaque_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_opaque_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_opaque_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>opaque : OPAQUE id gate_scope ‘(‘ ‘)’ bit_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_opaque_1e">
+<code class="descname">p_opaque_1e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_opaque_1e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_opaque_1e" title="Permalink to this definition">¶</a></dt>
+<dd><p>opaque : OPAQUE id gate_scope ‘(‘ error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_opaque_2">
+<code class="descname">p_opaque_2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_opaque_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_opaque_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>opaque : OPAQUE id gate_scope ‘(‘ gate_id_list ‘)’ bit_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_prefix_expression_0">
+<code class="descname">p_prefix_expression_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_prefix_expression_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_prefix_expression_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>prefix_expression : unary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_prefix_expression_1">
+<code class="descname">p_prefix_expression_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_prefix_expression_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_prefix_expression_1" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>prefix_expression <span class="classifier-delimiter">:</span> <span class="classifier">‘+’ prefix_expression</span></dt>
+<dd><div class="first last line-block">
+<div class="line">‘-‘ prefix_expression</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_primary">
+<code class="descname">p_primary</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_primary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_primary" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>primary <span class="classifier-delimiter">:</span> <span class="classifier">id</span></dt>
+<dd><div class="first last line-block">
+<div class="line">indexed_id</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_primary_list_0">
+<code class="descname">p_primary_list_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_primary_list_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_primary_list_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>primary_list : primary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_primary_list_1">
+<code class="descname">p_primary_list_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_primary_list_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_primary_list_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>primary_list : primary_list ‘,’ primary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_program_0">
+<code class="descname">p_program_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_program_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_program_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>program : statement</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_program_1">
+<code class="descname">p_program_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_program_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_program_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>program : program statement</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_qreg_decl">
+<code class="descname">p_qreg_decl</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_qreg_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_qreg_decl" title="Permalink to this definition">¶</a></dt>
+<dd><p>qreg_decl : QREG indexed_id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_qreg_decl_e">
+<code class="descname">p_qreg_decl_e</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_qreg_decl_e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_qreg_decl_e" title="Permalink to this definition">¶</a></dt>
+<dd><p>qreg_decl : QREG error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_quantum_op">
+<code class="descname">p_quantum_op</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_quantum_op"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_quantum_op" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>quantum_op <span class="classifier-delimiter">:</span> <span class="classifier">unitary_op</span></dt>
+<dd><div class="first last line-block">
+<div class="line">opaque</div>
+<div class="line">measure</div>
+<div class="line">barrier</div>
+<div class="line">reset</div>
+<div class="line">if</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_reset">
+<code class="descname">p_reset</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset : RESET primary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_statement">
+<code class="descname">p_statement</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_statement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_statement" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>statement <span class="classifier-delimiter">:</span> <span class="classifier">decl</span></dt>
+<dd><div class="first last line-block">
+<div class="line">quantum_op ‘;’</div>
+<div class="line">magic ‘;’</div>
+<div class="line">ignore</div>
+<div class="line">quantum_op error</div>
+<div class="line">magic error</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unary_0">
+<code class="descname">p_unary_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unary_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unary_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>unary : NNINTEGER</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unary_1">
+<code class="descname">p_unary_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unary_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unary_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>unary : REAL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unary_2">
+<code class="descname">p_unary_2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unary_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unary_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>unary : PI</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unary_3">
+<code class="descname">p_unary_3</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unary_3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unary_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>unary : id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unary_4">
+<code class="descname">p_unary_4</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unary_4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unary_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>unary : ‘(‘ expression ‘)’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unary_6">
+<code class="descname">p_unary_6</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unary_6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unary_6" title="Permalink to this definition">¶</a></dt>
+<dd><p>unary : id ‘(‘ expression ‘)’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unitary_op_0">
+<code class="descname">p_unitary_op_0</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unitary_op_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unitary_op_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitary_op : U ‘(‘ exp_list ‘)’ primary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unitary_op_1">
+<code class="descname">p_unitary_op_1</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unitary_op_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unitary_op_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitary_op : CX primary ‘,’ primary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unitary_op_2">
+<code class="descname">p_unitary_op_2</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unitary_op_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unitary_op_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitary_op : id primary_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unitary_op_3">
+<code class="descname">p_unitary_op_3</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unitary_op_3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unitary_op_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitary_op : id ‘(‘ ‘)’ primary_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.p_unitary_op_4">
+<code class="descname">p_unitary_op_4</code><span class="sig-paren">(</span><em>program</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.p_unitary_op_4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.p_unitary_op_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitary_op : id ‘(‘ exp_list ‘)’ primary_list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse some data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.parse_debug">
+<code class="descname">parse_debug</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.parse_debug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.parse_debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parseDeb field.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.pop_scope">
+<code class="descname">pop_scope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.pop_scope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.pop_scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return to the previous scope.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.print_tokens">
+<code class="descname">print_tokens</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.print_tokens"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.print_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test method to verify tokenizer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.print_tree">
+<code class="descname">print_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.print_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.print_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print parsed OPENQASM.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.push_scope">
+<code class="descname">push_scope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.push_scope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.push_scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enter a new scope.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser runner.</p>
+<p>To use this module stand-alone.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.qasm._qasmparser.QasmParser.start">
+<code class="descname">start</code><em class="property"> = 'main'</em><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.update_symtab">
+<code class="descname">update_symtab</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.update_symtab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.update_symtab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a node in the symbol table.</p>
+<p>Everything in the symtab must be a node with these attributes:
+name - the string name of the object
+type - the string type of the object
+line - the source line where the type was first found
+file - the source file where the type was first found</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_as_gate">
+<code class="descname">verify_as_gate</code><span class="sig-paren">(</span><em>obj</em>, <em>bitlist</em>, <em>arglist=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_as_gate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_as_gate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify a user defined gate call.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_bit_list">
+<code class="descname">verify_bit_list</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_bit_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_bit_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify each qubit in a list of ids.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_declared_bit">
+<code class="descname">verify_declared_bit</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_declared_bit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_declared_bit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify a qubit id against the gate prototype.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_distinct">
+<code class="descname">verify_distinct</code><span class="sig-paren">(</span><em>list_of_nodes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_distinct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_distinct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that objects in list_of_nodes represent distinct (qu)bits.</p>
+<p>list_of_nodes is a list containing nodes of type id, indexed_id,
+primary_list, or id_list. We assume these are all the same type
+‘qreg’ or ‘creg’.
+This method raises an exception if list_of_nodes refers to the
+same object more than once.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_exp_list">
+<code class="descname">verify_exp_list</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_exp_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_exp_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify each expression in a list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_reg">
+<code class="descname">verify_reg</code><span class="sig-paren">(</span><em>obj</em>, <em>object_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify a register.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.qasm._qasmparser.QasmParser.verify_reg_list">
+<code class="descname">verify_reg_list</code><span class="sig-paren">(</span><em>obj</em>, <em>object_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/qasm/_qasmparser.html#QasmParser.verify_reg_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.qasm._qasmparser.QasmParser.verify_reg_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify a list of registers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators.html" title="qiskit.simulators package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.qasm._qasmlexer.html" title="qiskit.qasm._qasmlexer module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >qiskit</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.qasm.html" >qiskit.qasm package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

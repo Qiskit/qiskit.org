@@ -1,0 +1,225 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.simulators._localsimulator &#8212; QISKit SDK 0.3.5 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+<div id="head" class="head">
+    <a href="../"> QISKit </a>
+</div>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo.gif" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit.simulators._localsimulator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Interface to local simulators.</span>
+
+<span class="sd">This module is the interface to all the local simulators in this directory.</span>
+<span class="sd">It handles automatically discovering and interfacing with those modules. Once</span>
+<span class="sd">instantiated like::</span>
+
+<span class="sd">&gt;&gt;&gt; import _localsimulator</span>
+<span class="sd">&gt;&gt;&gt; simulator_list = _localsimulator.local_backends()</span>
+<span class="sd">&gt;&gt;&gt; sim = _localsimulator.LocalSimulator(simulator_list[0], job)</span>
+<span class="sd">&gt;&gt;&gt; sim.run()</span>
+<span class="sd">&gt;&gt;&gt; results = sim.results()</span>
+
+<span class="sd">`simulator_list` is the list of names of known simulators and `job` is</span>
+<span class="sd">a dictionary of the form {&#39;compiled_circuit&#39;: circuit, &#39;shots&#39;: shots,</span>
+<span class="sd">&#39;seed&#39;: seed}.</span>
+
+<span class="sd">The import does discovery of the simulator modules in this directory. The</span>
+<span class="sd">second command attempts to determine which modules are functional, in</span>
+<span class="sd">particular for modules which require making calls to compiled binaries.</span>
+
+<span class="sd">In order for a module to be registered it needs to define a module-scope</span>
+<span class="sd">dictionary of the form::</span>
+
+<span class="sd">    __configuration = {&#39;name&#39;: &#39;local_qasm_simulator&#39;,</span>
+<span class="sd">                       &#39;url&#39;: &#39;https://github.com/IBM/qiskit-sdk-py&#39;,</span>
+<span class="sd">                       &#39;simulator&#39;: True,</span>
+<span class="sd">                       &#39;description&#39;: &#39;A python simulator for qasm files&#39;,</span>
+<span class="sd">                       &#39;coupling_map&#39;: &#39;all-to-all&#39;,</span>
+<span class="sd">                       &#39;basis_gates&#39;: &#39;u1,u2,u3,cx,id&#39;}</span>
+
+<span class="sd">and it needs a class with a &quot;run&quot; method. The identifier for the backend</span>
+<span class="sd">simulator comes from the &quot;name&quot; key in this dictionary. The class&#39;</span>
+<span class="sd">__init__ method is called with a single `job` argument. The __init__</span>
+<span class="sd">method is also responsible for determining whether an associated</span>
+<span class="sd">binary is available. If it is not, the FileNotFoundError exception</span>
+<span class="sd">should be raised.</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    local_configuration : list of dict()</span>
+<span class="sd">        This list gets populated with the __configuration records from each</span>
+<span class="sd">        of the discovered modules.</span>
+
+<span class="sd">    _simulator_classes : dict {&quot;&lt;simulator name&gt;&quot; : &lt;simulator class&gt;}</span>
+<span class="sd">        This dictionary associates a simulator name with the class which</span>
+<span class="sd">        generates its objects.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pkgutil</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">local_configuration</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">_simulator_classes</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">mod_info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ispkg</span> <span class="ow">in</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">iter_modules</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)]):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="vm">__name__</span><span class="p">:</span>  <span class="c1"># skip this module</span>
+        <span class="n">fullname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">modspec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
+        <span class="n">mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">modspec</span><span class="p">)</span>
+        <span class="n">modspec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__configuration&#39;</span><span class="p">):</span>
+            <span class="n">local_configuration</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">__configuration</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">class_obj</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span>
+                                                            <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">class_obj</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">):</span>
+                    <span class="n">class_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span>
+                    <span class="n">_simulator_classes</span><span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">__configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">class_obj</span>
+
+
+<div class="viewcode-block" id="local_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.simulators._localsimulator.html#qiskit.simulators._localsimulator.local_backends">[docs]</a><span class="k">def</span> <span class="nf">local_backends</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempt to determine the local simulator backends which are available.</span>
+
+<span class="sd">    Mostly we are concerned about checking for whether the simulator executable</span>
+<span class="sd">    associated with the discovered backend module exists. Discovery is done</span>
+<span class="sd">    by instantiating the simulator object which should raise a</span>
+<span class="sd">    FileNotFoundError if the program has not been compiled and placed in</span>
+<span class="sd">    the executable path.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of backend names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">backend_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;clbit_labels&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;cr&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+                          <span class="s1">&#39;number_of_clbits&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="s1">&#39;number_of_qubits&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="s1">&#39;qubit_labels&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;qr&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]},</span>
+               <span class="s1">&#39;operations&#39;</span><span class="p">:</span>
+                   <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[],</span>
+                     <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+                    <span class="p">{</span><span class="s1">&#39;clbits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;measure&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]}</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;compiled_circuit&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+           <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+           <span class="p">}</span>
+    <span class="k">for</span> <span class="n">backend_id</span><span class="p">,</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">_simulator_classes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sim</span> <span class="o">=</span> <span class="n">backend</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">fnferr</span><span class="p">:</span>
+            <span class="c1"># this is for discovery so just don&#39;t had to discovered list</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">backend_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">backend_list</span></div>
+
+
+<div class="viewcode-block" id="LocalSimulator"><a class="viewcode-back" href="../../../_autodoc/qiskit.simulators._localsimulator.html#qiskit.simulators._localsimulator.LocalSimulator">[docs]</a><span class="k">class</span> <span class="nc">LocalSimulator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface to simulators</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">job</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_job</span> <span class="o">=</span> <span class="n">job</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span> <span class="o">=</span> <span class="n">_simulator_classes</span><span class="p">[</span><span class="n">backend</span><span class="p">](</span><span class="n">job</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LocalSimulator.run"><a class="viewcode-back" href="../../../_autodoc/qiskit.simulators._localsimulator.html#qiskit.simulators._localsimulator.LocalSimulator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">simOutput</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">silent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">simOutput</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">simOutput</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LocalSimulator.result"><a class="viewcode-back" href="../../../_autodoc/qiskit.simulators._localsimulator.html#qiskit.simulators._localsimulator.LocalSimulator.result">[docs]</a>    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

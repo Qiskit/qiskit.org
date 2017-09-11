@@ -1,0 +1,219 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.simulators._unitarysimulator module &#8212; QISKit SDK 0.3.5 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.unroll package" href="qiskit.unroll.html" />
+    <link rel="prev" title="qiskit.simulators._simulatortools module" href="qiskit.simulators._simulatortools.html" />
+
+<div id="head" class="head">
+    <a href="../"> QISKit </a>
+</div>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll.html" title="qiskit.unroll package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators._simulatortools.html" title="qiskit.simulators._simulatortools module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >qiskit</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.simulators.html" accesskey="U">qiskit.simulators package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo.gif" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qiskit.simulators._simulatortools.html"
+                        title="previous chapter">qiskit.simulators._simulatortools module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.unroll.html"
+                        title="next chapter">qiskit.unroll package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.simulators._unitarysimulator.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qiskit.simulators._unitarysimulator">
+<span id="qiskit-simulators-unitarysimulator-module"></span><h1>qiskit.simulators._unitarysimulator module<a class="headerlink" href="#module-qiskit.simulators._unitarysimulator" title="Permalink to this headline">¶</a></h1>
+<p>Contains a (slow) Python simulator that returns the unitary of the circuit.</p>
+<p>It simulates a unitary of a quantum circuit that has been compiled to run on
+the simulator. It is exponential in the number of qubits.</p>
+<p>The input is the circuit object and the output is the same circuit object with
+a result field added results[‘data’][‘unitary’] where the unitary is
+a 2**n x 2**n complex numpy array representing the unitary matrix.</p>
+<p>The input is</p>
+<blockquote>
+<div>compiled_circuit object</div></blockquote>
+<p>and the output is the results object</p>
+<p>The simulator is run using</p>
+<blockquote>
+<div>UnitarySimulator(compiled_circuit).run().</div></blockquote>
+<p>In the qasm, key operations with type ‘measure’ and ‘reset’ are dropped.</p>
+<p>Internal circuit_object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">compiled_circuit</span> <span class="o">=</span>
+<span class="p">{</span>
+ <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span>
+ <span class="s2">&quot;number_of_qubits&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="o">//</span> <span class="nb">int</span>
+ <span class="s2">&quot;number_of_clbits&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="o">//</span> <span class="nb">int</span>
+ <span class="s2">&quot;qubit_labels&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="o">//</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">string</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+ <span class="s2">&quot;clbit_labels&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="o">//</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">string</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+ <span class="p">}</span>
+ <span class="s2">&quot;operations&quot;</span><span class="p">:</span> <span class="o">//</span> <span class="nb">list</span><span class="p">[</span><span class="nb">map</span><span class="p">]</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">,</span> <span class="o">//</span> <span class="n">required</span> <span class="o">--</span> <span class="n">string</span>
+            <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">,</span> <span class="o">//</span> <span class="n">optional</span> <span class="o">--</span> <span class="nb">list</span><span class="p">[</span><span class="n">double</span><span class="p">]</span>
+            <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="p">,</span> <span class="o">//</span> <span class="n">required</span> <span class="o">--</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+            <span class="s2">&quot;clbits&quot;</span><span class="p">:</span> <span class="p">,</span> <span class="o">//</span><span class="n">optional</span> <span class="o">--</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+            <span class="s2">&quot;conditional&quot;</span><span class="p">:</span>  <span class="o">//</span> <span class="n">optional</span> <span class="o">--</span> <span class="nb">map</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="p">,</span> <span class="o">//</span> <span class="n">string</span>
+                    <span class="s2">&quot;mask&quot;</span><span class="p">:</span> <span class="p">,</span> <span class="o">//</span> <span class="nb">hex</span> <span class="n">string</span>
+                    <span class="s2">&quot;val&quot;</span><span class="p">:</span>  <span class="p">,</span> <span class="o">//</span> <span class="n">bhex</span> <span class="n">string</span>
+                <span class="p">}</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>returned results object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span>
+        <span class="p">{</span>
+        <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+            <span class="p">{</span>
+            <span class="s1">&#39;unitary&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.70710678</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.70710678</span> <span class="o">-</span><span class="mf">8.65956056e-17</span><span class="n">j</span>
+                                 <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span><span class="p">]</span>
+                               <span class="p">[</span> <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.70710678</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="o">-</span><span class="mf">0.70710678</span> <span class="o">+</span><span class="mf">8.65956056e-17</span><span class="n">j</span><span class="p">]</span>
+                               <span class="p">[</span> <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.70710678</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.70710678</span> <span class="o">-</span><span class="mf">8.65956056e-17</span><span class="n">j</span><span class="p">]</span>
+                               <span class="p">[</span> <span class="mf">0.70710678</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                <span class="o">-</span><span class="mf">0.70710678</span> <span class="o">+</span><span class="mf">8.65956056e-17</span><span class="n">j</span>
+                                 <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span>
+                                 <span class="mf">0.00000000</span> <span class="o">+</span><span class="mf">0.00000000e+00</span><span class="n">j</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;DONE&#39;</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="qiskit.simulators._unitarysimulator.UnitarySimulator">
+<em class="property">class </em><code class="descclassname">qiskit.simulators._unitarysimulator.</code><code class="descname">UnitarySimulator</code><span class="sig-paren">(</span><em>job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_unitarysimulator.html#UnitarySimulator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.simulators._unitarysimulator.UnitarySimulator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Python implementation of a unitary simulator.</p>
+<dl class="method">
+<dt id="qiskit.simulators._unitarysimulator.UnitarySimulator.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_unitarysimulator.html#UnitarySimulator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.simulators._unitarysimulator.UnitarySimulator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial the UnitarySimulator object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.simulators._unitarysimulator.UnitarySimulator.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>silent=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_unitarysimulator.html#UnitarySimulator.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.simulators._unitarysimulator.UnitarySimulator.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the single-qubit gate.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll.html" title="qiskit.unroll package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators._simulatortools.html" title="qiskit.simulators._simulatortools module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >qiskit</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.simulators.html" >qiskit.simulators package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

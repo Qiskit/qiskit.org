@@ -1,0 +1,270 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.unroll._circuitbackend module &#8212; QISKit SDK 0.3.5 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.unroll._dagbackend module" href="qiskit.unroll._dagbackend.html" />
+    <link rel="prev" title="qiskit.unroll._backenderror module" href="qiskit.unroll._backenderror.html" />
+
+<div id="head" class="head">
+    <a href="../"> QISKit </a>
+</div>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll._dagbackend.html" title="qiskit.unroll._dagbackend module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll._backenderror.html" title="qiskit.unroll._backenderror module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >qiskit</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.unroll.html" accesskey="U">qiskit.unroll package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo.gif" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qiskit.unroll._backenderror.html"
+                        title="previous chapter">qiskit.unroll._backenderror module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.unroll._dagbackend.html"
+                        title="next chapter">qiskit.unroll._dagbackend module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.unroll._circuitbackend.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qiskit.unroll._circuitbackend">
+<span id="qiskit-unroll-circuitbackend-module"></span><h1>qiskit.unroll._circuitbackend module<a class="headerlink" href="#module-qiskit.unroll._circuitbackend" title="Permalink to this headline">¶</a></h1>
+<p>Backend for the unroller that produces a QuantumCircuit.</p>
+<dl class="class">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend">
+<em class="property">class </em><code class="descclassname">qiskit.unroll._circuitbackend.</code><code class="descname">CircuitBackend</code><span class="sig-paren">(</span><em>basis=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.unroll._unrollerbackend.html#qiskit.unroll._unrollerbackend.UnrollerBackend" title="qiskit.unroll._unrollerbackend.UnrollerBackend"><code class="xref py py-class docutils literal"><span class="pre">qiskit.unroll._unrollerbackend.UnrollerBackend</span></code></a></p>
+<p>Backend for the unroller that produces a QuantumCircuit.</p>
+<p>By default, basis gates are the QX gates.</p>
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>basis=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup this backend.</p>
+<p>basis is a list of operation name strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.barrier">
+<code class="descname">barrier</code><span class="sig-paren">(</span><em>qubitlists</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.barrier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.barrier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Barrier instruction.</p>
+<p>qubitlists is a list of lists of (regname, idx) tuples.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.cx">
+<code class="descname">cx</code><span class="sig-paren">(</span><em>qubit0</em>, <em>qubit1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.cx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.cx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fundamental two qubit gate.</p>
+<p>qubit0 is (regname,idx) tuple for the control qubit.
+qubit1 is (regname,idx) tuple for the target qubit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.define_gate">
+<code class="descname">define_gate</code><span class="sig-paren">(</span><em>name</em>, <em>gatedata</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.define_gate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.define_gate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a new quantum gate.</p>
+<p>We don’t check that the definition and name agree.</p>
+<p>name is a string.
+gatedata is the AST node for the gate.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.drop_condition">
+<code class="descname">drop_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.drop_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.drop_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop the current condition.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.end_gate">
+<code class="descname">end_gate</code><span class="sig-paren">(</span><em>name</em>, <em>args</em>, <em>qubits</em>, <em>nested_scope=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.end_gate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.end_gate" title="Permalink to this definition">¶</a></dt>
+<dd><p>End a custom gate.</p>
+<p>name is name string.
+args is list of Node expression objects.
+qubits is list of (regname, idx) tuples.
+nested_scope is a list of dictionaries mapping expression variables
+to Node expression objects in order of increasing nesting depth.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.get_output">
+<code class="descname">get_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.get_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.get_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the QuantumCircuit object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.measure">
+<code class="descname">measure</code><span class="sig-paren">(</span><em>qubit</em>, <em>bit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.measure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measurement operation.</p>
+<p>qubit is (regname, idx) tuple for the input qubit.
+bit is (regname, idx) tuple for the output bit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.new_creg">
+<code class="descname">new_creg</code><span class="sig-paren">(</span><em>name</em>, <em>size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.new_creg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.new_creg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new classical register.</p>
+<p>name = name of the register
+sz = size of the register</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.new_qreg">
+<code class="descname">new_qreg</code><span class="sig-paren">(</span><em>name</em>, <em>size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.new_qreg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.new_qreg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new quantum register.</p>
+<p>name = name of the register
+sz = size of the register</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><em>qubit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset instruction.</p>
+<p>qubit is a (regname, idx) tuple.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.set_basis">
+<code class="descname">set_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.set_basis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.set_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declare the set of user-defined gates to emit.</p>
+<p>basis is a list of operation name strings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.set_condition">
+<code class="descname">set_condition</code><span class="sig-paren">(</span><em>creg</em>, <em>cval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.set_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.set_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach a current condition.</p>
+<p>creg is a name string.
+cval is the integer value for the test.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.start_gate">
+<code class="descname">start_gate</code><span class="sig-paren">(</span><em>name</em>, <em>args</em>, <em>qubits</em>, <em>nested_scope=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.start_gate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.start_gate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin a custom gate.</p>
+<p>name is name string.
+args is list of Node expression objects.
+qubits is list of (regname, idx) tuples.
+nested_scope is a list of dictionaries mapping expression variables
+to Node expression objects in order of increasing nesting depth.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.u">
+<code class="descname">u</code><span class="sig-paren">(</span><em>arg</em>, <em>qubit</em>, <em>nested_scope=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.u"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fundamental single qubit gate.</p>
+<p>arg is 3-tuple of Node expression objects.
+qubit is (regname,idx) tuple.
+nested_scope is a list of dictionaries mapping expression variables
+to Node expression objects in order of increasing nesting depth.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll._circuitbackend.CircuitBackend.version">
+<code class="descname">version</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_circuitbackend.html#CircuitBackend.version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll._circuitbackend.CircuitBackend.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ignore the version string.</p>
+<p>v is a version number.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll._dagbackend.html" title="qiskit.unroll._dagbackend module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll._backenderror.html" title="qiskit.unroll._backenderror module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >qiskit</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.unroll.html" >qiskit.unroll package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

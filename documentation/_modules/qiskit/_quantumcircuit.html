@@ -1,0 +1,299 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit._quantumcircuit &#8212; QISKit SDK 0.3.5 documentation</title>
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+<div id="head" class="head">
+    <a href="../"> QISKit </a>
+</div>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/qiskit-logo.gif" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit._quantumcircuit</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Quantum circuit object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">._qiskiterror</span> <span class="k">import</span> <span class="n">QISKitError</span>
+<span class="kn">from</span> <span class="nn">._register</span> <span class="k">import</span> <span class="n">Register</span>
+<span class="kn">from</span> <span class="nn">._quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">._classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">._measure</span> <span class="k">import</span> <span class="n">Measure</span>
+<span class="kn">from</span> <span class="nn">._reset</span> <span class="k">import</span> <span class="n">Reset</span>
+<span class="kn">from</span> <span class="nn">._instructionset</span> <span class="k">import</span> <span class="n">InstructionSet</span>
+
+
+<div class="viewcode-block" id="QuantumCircuit"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit">[docs]</a><span class="k">class</span> <span class="nc">QuantumCircuit</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Quantum circuit.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Class variable OPENQASM header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;OPENQASM 2.0;&quot;</span>
+
+<div class="viewcode-block" id="QuantumCircuit.__init__"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new circuit.&quot;&quot;&quot;</span>
+        <span class="c1"># Data contains a list of instructions in the order they were applied.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># This is a map of registers bound to this circuit, by name.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="n">regs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.has_register"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.has_register">[docs]</a>    <span class="k">def</span> <span class="nf">has_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if this circuit has the register r.</span>
+
+<span class="sd">        Return True or False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">:</span>
+            <span class="n">registers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">[</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">registers</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">register</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">)</span> <span class="ow">and</span>
+                     <span class="nb">isinstance</span><span class="p">(</span><span class="n">registers</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">))</span> <span class="ow">or</span>
+                        <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="ow">and</span>
+                         <span class="nb">isinstance</span><span class="p">(</span><span class="n">registers</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">))):</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.get_qregs"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.get_qregs">[docs]</a>    <span class="k">def</span> <span class="nf">get_qregs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the qregs from the registers.&quot;&quot;&quot;</span>
+        <span class="n">qregs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+                <span class="n">qregs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">register</span>
+        <span class="k">return</span> <span class="n">qregs</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.get_cregs"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.get_cregs">[docs]</a>    <span class="k">def</span> <span class="nf">get_cregs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the cregs from the registers.&quot;&quot;&quot;</span>
+        <span class="n">cregs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+                <span class="n">cregs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">register</span>
+        <span class="k">return</span> <span class="n">cregs</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.combine"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append rhs to self if self contains rhs&#39;s registers.</span>
+
+<span class="sd">        Return self + rhs as a new object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;circuits are not compatible&quot;</span><span class="p">)</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">[</span><span class="n">register</span> <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+            <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">circuit</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.extend"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append rhs to self if self contains rhs&#39;s registers.</span>
+
+<span class="sd">        Modify and return self.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;circuits are not compatible&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overload + to implement self.concatenate.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overload += to implement self.extend.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return number of operations in circuit.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return indexed operation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attach a gate.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gate</span>
+
+<div class="viewcode-block" id="QuantumCircuit.add"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add registers.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">regs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">Register</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;expected a register&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">[</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">register</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;register name </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> already exists&quot;</span>
+                                  <span class="o">%</span> <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_check_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if r is not in this circuit or not qreg.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;expected quantum register&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span>
+                <span class="s2">&quot;register &#39;</span><span class="si">%s</span><span class="s2">&#39; not in this circuit&quot;</span> <span class="o">%</span>
+                <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if qubit is not in this circuit or bad format.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qreg</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_check_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if r is not in this circuit or not creg.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;expected classical register&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span>
+                <span class="s2">&quot;register &#39;</span><span class="si">%s</span><span class="s2">&#39; not in this circuit&quot;</span> <span class="o">%</span>
+                <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_dups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if list of qubits contains duplicates.&quot;&quot;&quot;</span>
+        <span class="n">squbits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">squbits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;duplicate qubit arguments&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QuantumCircuit.qasm"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.qasm">[docs]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return OPENQASM string.&quot;&quot;&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="n">register</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">string</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.measure"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.measure">[docs]</a>    <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Measure quantum bit into classical bit (tuples).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">)</span> <span class="ow">and</span> \
+           <span class="nb">isinstance</span><span class="p">(</span><span class="n">cbit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">cbit</span><span class="p">):</span>
+            <span class="n">instructions</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qubit</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">measure</span><span class="p">((</span><span class="n">qubit</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">cbit</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">instructions</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_creg</span><span class="p">(</span><span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">cbit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Measure</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.reset"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quantum_register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset q.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+            <span class="n">instructions</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">sizes</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">quantum_register</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">((</span><span class="n">quantum_register</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">instructions</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Reset</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
