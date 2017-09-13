@@ -102,34 +102,34 @@
 with <a class="reference external" href="https://github.com/QISKit/openqasm">OpenQASM</a> and the IBM Q experience (QX).</p>
 <div class="section" id="philosophy">
 <h2>Philosophy<a class="headerlink" href="#philosophy" title="Permalink to this headline">¶</a></h2>
-<p>QISKit is a collection of software for working with short depth quantum
-circuits and building near term applications and experiments on quantum
-computers. In QISKit, a quantum program is an array of quantum circuits.
-The program workflow consists of three stages: Build, Compile,
-and Run. Build allows you to make different quantum circuits that
-represent the problem you are solving; Compile allows you to rewrite
-them to run on different backends (simulators/real chips of different
-quantum volumes, sizes, fidelity, etc); and Run launches the jobs. After
-the jobs have been run, the data is collected. There are methods for
-putting this data together, depending on the program. This either gives
-you the answer you wanted or allows you to make a better program for the
-next instance.</p>
+<p>QISKit is a collection of software for working with short depth
+quantum circuits and building near term applications and experiments
+on quantum computers. In QISKit, a quantum program is an array of
+quantum circuits.  The program workflow consists of three stages:
+Build, Compile, and Run. Build allows you to make different quantum
+circuits that represent the problem you are solving. Compile allows
+you to rewrite them to run on different backends (simulators/real
+chips of different quantum volumes, sizes, fidelity, etc). Run
+launches the jobs. After the jobs have been run, the data is
+collected. There are methods for putting this data together, depending
+on the program. This either gives you the answer you wanted or allows
+you to make a better program for the next instance.</p>
 </div>
 <div class="section" id="project-overview">
 <h2>Project Overview<a class="headerlink" href="#project-overview" title="Permalink to this headline">¶</a></h2>
 <p>The QISKit project comprises:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/IBM/qiskit-sdk-py">QISKit SDK</a>: Provides
-support for the Quantum Experience circuit generation phase and lets
-you use the QISKit API to access the Quantum Experience hardware and
-simulators. The SDK also includes example scripts written for
-Jupyter Notebooks.</li>
+<li><a class="reference external" href="https://github.com/IBM/qiskit-sdk-py">QISKit SDK</a>: Python software
+development kit for writing quantum computing experiments, programs, and
+applications.</li>
 <li><a class="reference external" href="https://github.com/IBM/qiskit-api-py">QISKit API</a>: A thin Python
 wrapper around the Quantum Experience HTTP API that enables you to
-connect and and execute OpenQASM code.</li>
+connect and and execute quantum programs.</li>
 <li><a class="reference external" href="https://github.com/IBM/qiskit-openqasm">QISKit OpenQASM</a>: Contains
 specifications, examples, documentation, and tools for the OpenQASM
 intermediate representation.</li>
+<li><a class="reference external" href="https://github.com/IBM/qiskit-tutorial">QISKit Tutorial</a>: A
+collection of Jupyter notebooks using QISKit.</li>
 </ul>
 </div>
 <div class="section" id="getting-started">
@@ -159,23 +159,15 @@ this project, one can do,</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">531</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">493</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>The basic concept of our quantum program is an array of quantum
-circuits. The program workflow consists of three stages: Build, Compile,
-and Run. Build allows you to make different quantum circuits that represent
-the problem you are solving; Compile allows you to rewrite them to run on different
-backends (simulators/real chips of different quantum volumes, sizes, fidelity, etc);
-and Run launches the jobs. After the jobs have been run, the data is collected.
-There are methods for putting this data together, depending on the program.
-This either gives you the answer you wanted or allows you to make a better program for the
-next instance.</p>
 <div class="section" id="quantum-chips">
 <h3>Quantum Chips<a class="headerlink" href="#quantum-chips" title="Permalink to this headline">¶</a></h3>
-<p>you can execute your QASM circuits in a real Chip, you can use the IBM Quantum Experience (QX) cloud platform. Currently through QX you can use the following chips:</p>
+<p>You can execute your QASM circuits on a real chip by using the IBM Q experience (QX) cloud platform.
+Currently through QX you can use the following chips:</p>
 <ul class="simple">
 <li>ibmqx2: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx2">5-qubit backend</a></li>
 <li>ibmqx3: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx3">16-qubit backend</a></li>
 </ul>
-<p>more information about the <a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q experience backend information</a></p>
+<p>For chip details visit the <a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q experience backend information</a></p>
 <p><a class="reference external" href="example_real_backend.html">Example code</a></p>
 </div>
 <div class="section" id="project-organization">
@@ -189,8 +181,7 @@ located in <em>test</em>. The <em>qiskit</em> directory is the main module of th
 <div class="section" id="programming-interface">
 <h3>Programming interface<a class="headerlink" href="#programming-interface" title="Permalink to this headline">¶</a></h3>
 <p>The <em>qiskit</em> directory is the main Python module and contains the
-programming interface objects <a class="reference external" href="quantum_program.rst">QuantumProgram</a>, <em>QuantumRegister</em>,
-<em>ClassicalRegister</em>, and <em>QuantumCircuit</em>.</p>
+programming interface objects <code class="xref py py-mod docutils literal"><span class="pre">QuantumProgram</span></code>, <a class="reference internal" href="_autodoc/qiskit._quantumregister.html#module-qiskit._quantumregister" title="qiskit._quantumregister"><code class="xref py py-mod docutils literal"><span class="pre">QuantumRegister</span></code></a>, <a class="reference internal" href="_autodoc/qiskit._classicalregister.html#module-qiskit._classicalregister" title="qiskit._classicalregister"><code class="xref py py-mod docutils literal"><span class="pre">ClassicalRegister</span></code></a>, and <a class="reference internal" href="_autodoc/qiskit._quantumcircuit.html#module-qiskit._quantumcircuit" title="qiskit._quantumcircuit"><code class="xref py py-mod docutils literal"><span class="pre">QuantumCircuit</span></code></a>.</p>
 <p>At the highest level, users construct a <em>QuantumProgram</em> to create,
 modify, compile, and execute a collection of quantum circuits. Each
 <em>QuantumCircuit</em> has a set of data registers, each of type
