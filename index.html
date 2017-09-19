@@ -24,7 +24,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
@@ -32,7 +32,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="img/qiskit-logo-a-favico.gif.gif" type="image/gif" >
+    <link rel="icon" href="img/qiskit-logo-a-favico.gif.gif" type="image/gif">
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                 <div class="qiskit-title text-center text-md-left text-lg-left">
                     <h1 class="">QISKit</h1>
                     <p>Quantum Information Software Kit</p>
-                    <p><pre style='color:#ffffff;'>[python3] $ pip install qiskit</pre></p>
+
                 </div>
 
             </div>
@@ -62,11 +62,12 @@
         <!-- Example row of columns -->
         <div class="row qiskit-areas">
             <div class="col-md-4">
-                <h3>Last version v0.3.5</h3>
-                <p>The Quantum Information Software Kit (QISKit for short) is a software development kit (SDK) for working with OpenQASM and the IBM Q experience (QX).
+                <h3>Last version v0.3.6</h3>
+                <p class="description">The Quantum Information Software Kit (QISKit for short) is a software development kit (SDK) for working with OpenQASM and the IBM Q experience (QX).
                 </p>
-            </div>
-            <div class="col-md-4 order-md-1">
+                <div>
+
+                </div>
                 <p>
                     <a target="_blank" href="https://github.com/QISKit/qiskit-sdk-py">
                         <ibm-q-button secondary>GitHub</ibm-q-button>
@@ -78,31 +79,41 @@
                     </a>
                 </p>
             </div>
+
             <div class="col-md-4">
-                <h3>Tutorials</h3>
-                <p> What to learn how develop your own quantum programs. Check out the tutorials </p>
-            </div>
-            <div class="col-md-4 order-md-2">
+                <h3>Learn</h3>
+                <p class="description"> Use QISKit to create quantum computing programs, compile them, and execute them on one of several backends (online Real quantum processors, online simulators, and local simulators). Check out the tutorials</p>
+
                 <p>
                     <a target="_blank" href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb">
-                        <ibm-q-button secondary>Try</ibm-q-button>
+                        <ibm-q-button secondary>Tutorials</ibm-q-button>
                     </a>
                 </p>
-            </div>
-            <div class="col-md-4">
-                <h3>Documentation</h3>
-                <p>Use QISKit to create quantum computing programs, compile them, and execute them on one of several backends (online Real quantum processors, online simulators, and local simulators)</p>
-            </div>
-            <div class="col-md-4 order-md-3">
                 <p>
-                    <a href="documentation/">
-                        <ibm-q-button secondary>Learn</ibm-q-button>
+                    <a target="_blank" href="documentation/">
+                        <ibm-q-button secondary>Documentation</ibm-q-button>
                     </a>
-
                 </p>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Run a quantum program</h3>
+                <p><pre style='color:#ffffff;'>[python3] $ pip install qiskit</pre></p>
+                <pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>
+  from</span> qiskit <span style='color:#800000; font-weight:bold; '>import</span> QuantumProgram
+  qp <span style='color:#808030; '>=</span> QuantumProgram<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+  qr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_quantum_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'qr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+  cr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_classical_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'cr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+  qc <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_circuit<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>qr<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>cr<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>h<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>cx<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>execute<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span>result<span style='color:#808030; '>.</span>get_counts<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+                      </pre>
             </div>
         </div>
-
         <hr>
     </div>
     <!-- /container -->
@@ -127,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col">
                             <h4>
                                 Run a quantum program
@@ -150,7 +161,7 @@ result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.<
 <span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span>result<span style='color:#808030; '>.</span>get_counts<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
                             </pre>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="col-md-6">
