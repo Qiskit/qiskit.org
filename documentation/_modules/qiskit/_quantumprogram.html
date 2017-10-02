@@ -1,17 +1,17 @@
 
-
-<!doctype html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.3.5 documentation</title>
-    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 2.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.3.5',
+        VERSION:     '2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -22,49 +22,17 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-<div id="head" class="head">
-    <a href="../"> QISKit </a>
-</div>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<!--[if lt IE 9]>
-    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-    <![endif]-->
   </head>
   <body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
-      </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../index.html">
-              <img class="logo" src="../../_static/qiskit-logo.gif" alt="Logo"/>
-            </a></p>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -98,8 +66,7 @@
 <span class="kn">import</span> <span class="nn">copy</span>
 
 <span class="c1"># use the external IBMQuantumExperience Library</span>
-<span class="kn">from</span> <span class="nn">IBMQuantumExperience</span> <span class="k">import</span> <span class="n">IBMQuantumExperience</span>
-<span class="kn">from</span> <span class="nn">IBMQuantumExperience</span> <span class="k">import</span> <span class="n">RegisterSizeError</span>
+<span class="kn">from</span> <span class="nn">IBMQuantumExperience.IBMQuantumExperience</span> <span class="k">import</span> <span class="n">IBMQuantumExperience</span>
 
 <span class="c1"># Stable Modules</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
@@ -511,15 +478,10 @@
 <span class="sd">                as the quantum experience.</span>
 <span class="sd">            URL (str): The url used for online backend such as the quantum</span>
 <span class="sd">                experience.</span>
-<span class="sd">            Verify (Boolean): If False, ignores SSL certificates errors.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            Nothing but fills the __ONLINE_BACKENDS, __api, and __api_config</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">},</span> <span class="n">verify</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t connect to IBMQuantumExperience server: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">},</span> <span class="n">verify</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">online_backends</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div>
@@ -623,15 +585,10 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List of online backends if the online api has been set or an empty</span>
-<span class="sd">            list if it has not been set.</span>
+<span class="sd">            list of it has not been set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span></div>
 
@@ -643,12 +600,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">simulators</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">backend</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
                     <span class="n">simulators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">simulators</span></div>
@@ -661,12 +613,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">():</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">backend</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
                     <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">devices</span></div>
@@ -682,15 +629,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_status</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get backend status: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_status</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LOCAL_BACKENDS</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;available&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;the backend &quot;</span><span class="si">{0}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">))</span></div>
+            <span class="n">err_str</span> <span class="o">=</span> <span class="s1">&#39;the backend &quot;</span><span class="si">{0}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.get_backend_configuration"><a class="viewcode-back" href="../../_autodoc/qiskit._quantumprogram.html#qiskit._quantumprogram.QuantumProgram.get_backend_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">get_backend_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">list_format</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the configuration of the backend.</span>
@@ -709,12 +653,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
             <span class="n">configuration_edit</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">configuration</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">configuration</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">backend</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">configuration</span><span class="p">:</span>
                         <span class="n">new_key</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
@@ -756,11 +695,7 @@
 <span class="sd">            raise a LookupError.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">calibrations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_calibration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get backend calibration: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="n">calibrations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_calibration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
             <span class="n">calibrations_edit</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">calibrations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">new_key</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
@@ -788,11 +723,7 @@
 <span class="sd">            raise a LookupError.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_parameters</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get backend paramters: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_parameters</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
             <span class="n">parameters_edit</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">new_key</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
@@ -1098,19 +1029,10 @@
             <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">]:</span>
                 <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;qasm&#39;</span><span class="p">:</span> <span class="n">job</span><span class="p">[</span><span class="s2">&quot;compiled_circuit_qasm&quot;</span><span class="p">]})</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">run_job</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
-                                            <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-            <span class="k">except</span> <span class="n">RegisterSizeError</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Error trying to run the jobs online: </span><span class="si">{}</span><span class="s2">&quot;</span>
-                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">run_job</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
+                                        <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ResultError</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span>
-            <span class="k">if</span> <span class="s1">&#39;id&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">ResultError</span><span class="p">(</span><span class="s1">&#39;unexpected job results: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
-
             <span class="n">qobj_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_job</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
                                              <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1151,11 +1073,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">timer</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">timeout_over</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">job_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">jobid</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;get_job couldn&#39;t return a result: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-
+        <span class="n">job_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">jobid</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;status&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">job_result</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pformat</span>
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;get_job didn&#39;t return status: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pformat</span><span class="p">(</span><span class="n">job</span><span class="p">)))</span>
@@ -1166,10 +1084,7 @@
             <span class="n">timer</span> <span class="o">+=</span> <span class="n">wait</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;status = </span><span class="si">%s</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> seconds)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">job_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span> <span class="n">timer</span><span class="p">))</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">job_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">jobid</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get a remote job: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+            <span class="n">job_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">jobid</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="s1">&#39;status&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">job_result</span><span class="p">:</span>
                 <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pformat</span>
@@ -1474,24 +1389,44 @@
           </div>
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/QISKit-c.gif" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.5 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
-      </ul>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
     </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright .
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
-    </div>
+
+    
+
+    
   </body>
 </html>
