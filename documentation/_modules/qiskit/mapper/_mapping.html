@@ -1,17 +1,17 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!doctype html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.mapper._mapping &#8212; QISKit SDK 2.0 documentation</title>
-    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.3.6 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.0',
+        VERSION:     '0.3.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -22,17 +22,70 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-   
-  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body>
-  
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK reference</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -79,7 +132,7 @@
 <span class="c1"># because the initial state is zero. We don&#39;t do this.</span>
 
 
-<div class="viewcode-block" id="layer_permutation"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.layer_permutation">[docs]</a><span class="k">def</span> <span class="nf">layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find a swap circuit that implements a permutation for this layer.</span>
 
 <span class="sd">    The goal is to swap qubits such that qubits in the same two-qubit gates</span>
@@ -248,10 +301,10 @@
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: done&quot;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circ</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circ</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="kc">False</span>
 
 
-<div class="viewcode-block" id="direction_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.direction_mapper">[docs]</a><span class="k">def</span> <span class="nf">direction_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="direction_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.direction_mapper.html#qiskit.mapper.direction_mapper">[docs]</a><span class="k">def</span> <span class="nf">direction_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Change the direction of CNOT gates to conform to CouplingGraph.</span>
 
 <span class="sd">    circuit_graph = input DAGCircuit</span>
@@ -303,7 +356,7 @@
     <span class="k">return</span> <span class="n">circuit_graph</span></div>
 
 
-<div class="viewcode-block" id="update_qasm"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.update_qasm">[docs]</a><span class="k">def</span> <span class="nf">update_qasm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">update_qasm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
                 <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">,</span>
                 <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Update the QASM string for an iteration of swap_mapper.</span>
@@ -352,10 +405,10 @@
         <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
             <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">openqasm_output</span></div>
+    <span class="k">return</span> <span class="n">openqasm_output</span>
 
 
-<div class="viewcode-block" id="swap_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.swap_mapper">[docs]</a><span class="k">def</span> <span class="nf">swap_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
+<div class="viewcode-block" id="swap_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.swap_mapper.html#qiskit.mapper.swap_mapper">[docs]</a><span class="k">def</span> <span class="nf">swap_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">basis</span><span class="o">=</span><span class="s2">&quot;cx,u1,u2,u3,id&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Map a DAGCircuit onto a CouplingGraph using swap gates.</span>
@@ -520,7 +573,7 @@
     <span class="k">return</span> <span class="n">u</span><span class="o">.</span><span class="n">execute</span><span class="p">(),</span> <span class="n">initial_layout</span></div>
 
 
-<div class="viewcode-block" id="test_trig_solution"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.test_trig_solution">[docs]</a><span class="k">def</span> <span class="nf">test_trig_solution</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">test_trig_solution</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Test if arguments are a solution to a system of equations.</span>
 
 <span class="sd">    .. math::</span>
@@ -542,10 +595,10 @@
         <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
     <span class="n">delta4</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
         <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span> <span class="p">[</span><span class="n">delta1</span><span class="p">,</span> <span class="n">delta2</span><span class="p">,</span> <span class="n">delta3</span><span class="p">,</span> <span class="n">delta4</span><span class="p">]))</span></div>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span> <span class="p">[</span><span class="n">delta1</span><span class="p">,</span> <span class="n">delta2</span><span class="p">,</span> <span class="n">delta3</span><span class="p">,</span> <span class="n">delta4</span><span class="p">]))</span>
 
 
-<div class="viewcode-block" id="yzy_to_zyz"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.yzy_to_zyz">[docs]</a><span class="k">def</span> <span class="nf">yzy_to_zyz</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">yzy_to_zyz</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Express a Y.Z.Y single qubit gate as a Z.Y.Z gate.</span>
 
 <span class="sd">    Solve the equation</span>
@@ -636,10 +689,10 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;theta2=&quot;</span><span class="p">,</span> <span class="n">theta2</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solutions=&quot;</span><span class="p">,</span> <span class="n">solutions</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;deltas=&quot;</span><span class="p">,</span> <span class="n">deltas</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Error! No solution found. This should not happen.&quot;</span></div>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Error! No solution found. This should not happen.&quot;</span>
 
 
-<div class="viewcode-block" id="compose_u3"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.compose_u3">[docs]</a><span class="k">def</span> <span class="nf">compose_u3</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span> <span class="n">phi1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">phi2</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">compose_u3</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span> <span class="n">phi1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">phi2</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a triple theta, phi, lambda for the product.</span>
 
 <span class="sd">    u3(theta, phi, lambda)</span>
@@ -653,10 +706,10 @@
     <span class="c1"># Careful with the factor of two in yzy_to_zyz</span>
     <span class="n">thetap</span><span class="p">,</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambdap</span> <span class="o">=</span> <span class="n">yzy_to_zyz</span><span class="p">((</span><span class="n">lambda1</span> <span class="o">+</span> <span class="n">phi2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span>
                                        <span class="n">theta1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">thetap</span><span class="p">,</span> <span class="n">phi1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lambdap</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">thetap</span><span class="p">,</span> <span class="n">phi1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lambdap</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="cx_cancellation"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.cx_cancellation">[docs]</a><span class="k">def</span> <span class="nf">cx_cancellation</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
+<div class="viewcode-block" id="cx_cancellation"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.cx_cancellation.html#qiskit.mapper.cx_cancellation">[docs]</a><span class="k">def</span> <span class="nf">cx_cancellation</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Cancel back-to-back &quot;cx&quot; gates in circuit.&quot;&quot;&quot;</span>
     <span class="n">runs</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">collect_runs</span><span class="p">([</span><span class="s2">&quot;cx&quot;</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
@@ -682,7 +735,7 @@
                     <span class="n">circuit</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="optimize_1q_gates"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._mapping.html#qiskit.mapper._mapping.optimize_1q_gates">[docs]</a><span class="k">def</span> <span class="nf">optimize_1q_gates</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
+<div class="viewcode-block" id="optimize_1q_gates"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.optimize_1q_gates.html#qiskit.mapper.optimize_1q_gates">[docs]</a><span class="k">def</span> <span class="nf">optimize_1q_gates</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simplify runs of single qubit gates in the QX basis.</span>
 
 <span class="sd">    Return a new circuit that has been optimized.</span>
@@ -816,44 +869,32 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../../index.html">
-              <img class="logo" src="../../../_static/QISKit-c.gif" alt="Logo"/>
-            </a></p><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
-  <li><a href="../../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
-      
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.6 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017 IBM Research.
+      Last updated on 2017/10/02.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+    </div>
   </body>
 </html>

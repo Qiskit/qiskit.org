@@ -1,0 +1,296 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started &#8212; QISKit SDK 0.3.6 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QISKit overview" href="qiskit.html" />
+    <link rel="prev" title="Installation and setup" href="install.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.html" title="QISKit overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation and setup"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.3.6 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quantum-chips">Quantum Chips</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-real-chip-backend">Example Real Chip Backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#project-organization">Project Organization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autodoc/qiskit.html">SDK reference</a></li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation and setup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.html"
+                        title="next chapter">QISKit overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quickstart.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The starting point for writing code is the
+<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a> object. The
+QuantumProgram is a collection of circuits, or scores if you are
+coming from the Quantum Experience, quantum register objects, and
+classical register objects. The QuantumProgram methods can send these
+circuits to quantum hardware or simulator backends and collect the
+results for further analysis.</p>
+<p>To compose and run a circuit on a simulator, which is distributed with
+this project, one can do,</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
+<span class="n">qp</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+
+<span class="n">qr</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s1">&#39;qr&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span><span class="s1">&#39;cr&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">],</span> <span class="p">[</span><span class="n">cr</span><span class="p">])</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="code docutils literal"><span class="pre">get_counts</span></code> method outputs a dictionary of state:counts pairs;</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">531</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">493</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="quantum-chips">
+<h2>Quantum Chips<a class="headerlink" href="#quantum-chips" title="Permalink to this headline">¶</a></h2>
+<p>You can execute your QASM circuits on a real chip by using the IBM Q experience (QX) cloud platform.
+Currently through QX you can use the following chips:</p>
+<ul class="simple">
+<li>ibmqx2: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx2">5-qubit backend</a></li>
+<li>ibmqx3: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx3">16-qubit backend</a></li>
+</ul>
+<p>For chip details visit the <a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q experience backend information</a></p>
+<div class="section" id="example-real-chip-backend">
+<h3>Example Real Chip Backend<a class="headerlink" href="#example-real-chip-backend" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
+
+<span class="c1"># Creating Programs create your first QuantumProgram object instance.</span>
+<span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+
+<span class="c1"># Set your API Token</span>
+<span class="c1"># You can get it from https://quantumexperience.ng.bluemix.net/qx/account,</span>
+<span class="c1"># looking for &quot;Personal Access Token&quot; section.</span>
+<span class="n">QX_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;API_TOKEN&quot;</span>
+<span class="n">QX_URL</span> <span class="o">=</span> <span class="s2">&quot;https://quantumexperience.ng.bluemix.net/api&quot;</span>
+
+<span class="c1"># Set up the API and execute the program.</span>
+<span class="c1"># You need the API Token and the QX URL.</span>
+<span class="n">Q_program</span><span class="o">.</span><span class="n">set_api</span><span class="p">(</span><span class="n">QX_TOKEN</span><span class="p">,</span> <span class="n">QX_URL</span><span class="p">)</span>
+
+<span class="c1"># Creating Registers create your first Quantum Register called &quot;qr&quot; with 2 qubits</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># create your first Classical Register called &quot;cr&quot; with 2 bits</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span><span class="s2">&quot;cr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Creating Circuits create your first Quantum Circuit called &quot;qc&quot; involving your Quantum Register &quot;qr&quot;</span>
+<span class="c1"># and your Classical Register &quot;cr&quot;</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">],</span> <span class="p">[</span><span class="n">cr</span><span class="p">])</span>
+
+<span class="c1"># add the H gate in the Qubit 0, we put this Qubit in superposition</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># add measure to see the state</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+<span class="c1"># Compiled  and execute in the local_qasm_simulator</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">execute</span><span class="p">([</span><span class="s2">&quot;superposition&quot;</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;ibmqx2&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+
+<span class="c1"># Show the results</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="project-organization">
+<h2>Project Organization<a class="headerlink" href="#project-organization" title="Permalink to this headline">¶</a></h2>
+<p>Python example programs can be found in the <em>examples</em> directory, and test scripts are
+located in <em>test</em>. The <em>qiskit</em> directory is the main module of the SDK.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.html" title="QISKit overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation and setup"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.3.6 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017 IBM Research.
+      Last updated on 2017/10/02.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.4.
+    </div>
+  </body>
+</html>
