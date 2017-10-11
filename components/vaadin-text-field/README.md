@@ -1,28 +1,31 @@
 ![Bower version](https://img.shields.io/bower/v/vaadin-text-field.svg)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/vaadin/vaadin-text-field)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/vaadin/vaadin-text-field)
 [![Build Status](https://travis-ci.org/vaadin/vaadin-text-field.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-text-field)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # &lt;vaadin-text-field&gt;
 
-[Live Demo ↗](https://cdn.vaadin.com/vaadin-text-field/1.0.0-alpha5/demo/)
+[Live Demo ↗](https://vaadin.com/elements/vaadin-text-field/html-examples)
+|
+[API documentation ↗](https://vaadin.com/elements/vaadin-text-field/html-api)
 
-[&lt;vaadin-text-field&gt;](https://vaadin.com/elements/-/element/vaadin-text-field) is a themable [Polymer 2](http://polymer-project.org) element providing input controls in forms, part of the [Vaadin Core Elements](https://vaadin.com/elements).
+[&lt;vaadin-text-field&gt;](https://vaadin.com/elements/vaadin-text-field) is a themable [Polymer 2](http://polymer-project.org) element providing input controls in forms, part of the [Vaadin Core Elements](https://vaadin.com/elements).
 
 <!--
 ```
 <custom-element-demo>
   <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="vaadin-text-field.html">
+    <link rel="import" href="vaadin-password-field.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
 ```
 -->
 ```html
-<vaadin-text-field>
-  ...
-</vaadin-text-field>
+<vaadin-text-field label="Username"></vaadin-text-field>
+<vaadin-password-field label="Password"></vaadin-password-field>
 ```
 
 [<img src="https://raw.githubusercontent.com/vaadin/vaadin-text-field/master/screenshot.png" width="200" alt="Screenshot of vaadin-text-field">](https://vaadin.com/elements/-/element/vaadin-text-field)

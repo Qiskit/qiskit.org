@@ -64,7 +64,7 @@ This program is available under Apache License Version 2.0, available at https:/
         outline: none;
       }
 
-      .container {
+      .vaadin-text-field-container {
         display: flex;
         flex-direction: column;
         position: relative;
@@ -92,7 +92,7 @@ This program is available under Apache License Version 2.0, available at https:/
 
     </style>
 
-    <div class="container">
+    <div class="vaadin-text-field-container">
 
       <label part="label" on-click="focus" id="[[_labelId]]">[[label]]</label>
 
@@ -100,7 +100,7 @@ This program is available under Apache License Version 2.0, available at https:/
 
         <slot name="prefix"></slot>
 
-        <input id="input" part="value"
+        <input part="value"
           autocomplete$="[[autocomplete]]"
           autocorrect$="[[autocorrect]]"
           autofocus$="[[autofocus]]"
@@ -149,6 +149,8 @@ This program is available under Apache License Version 2.0, available at https:/
        *
        * ### Styling
        *
+       * [Generic styling/theming documentation](https://cdn.vaadin.com/vaadin-valo-theme/0.3.1/demo/customization.html)
+       *
        * The following shadow DOM parts are available for styling:
        *
        * Part name | Description
@@ -157,6 +159,16 @@ This program is available under Apache License Version 2.0, available at https:/
        * `value` | The input element
        * `error-message` | The error message element
        * `input-field` | The element that wraps prefix, value and suffix
+       *
+       * The following state attributes are available for styling:
+       *
+       * Attribute    | Description | Part name
+       * -------------|-------------|------------
+       * `disabled` | Set to a disabled text field | :host
+       * `has-value` | Set when the element has a value | :host
+       * `invalid` | Set when the element is invalid | :host
+       * `focused` | Set when the element is focused | :host
+       * `focus-ring` | Set when the element is keyboard focused | :host
        *
        * @memberof Vaadin
        * @mixes Vaadin.ControlStateMixin
@@ -324,12 +336,12 @@ This program is available under Apache License Version 2.0, available at https:/
         }
 
         get focusElement() {
-          return this.$.input;
+          return this.root.querySelector('[part=value]');
         }
 
         _onInput(e) {
           if (this.preventInvalidInput) {
-            const input = this.$.input;
+            const input = this.focusElement;
             if (input.value.length > 0 && !this.checkValidity()) {
               input.value = this.value || '';
             }
@@ -369,7 +381,11 @@ This program is available under Apache License Version 2.0, available at https:/
          * Returns true if the current input value satisfies all constraints (if any)
          */
         checkValidity() {
-          return this.$.input.checkValidity();
+          if (this.required || this.pattern || this.maxlength || this.minlength) {
+            return this.focusElement.checkValidity();
+          } else {
+            return !this.invalid;
+          }
         }
 
         ready() {

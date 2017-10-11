@@ -1,0 +1,269 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.mapper._mapping module &#8212; QISKit SDK 0.3.6 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.6 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.html">SDK reference</a></li>
+</ul>
+
+<p class="spacer"/>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.mapper._mapping.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qiskit.mapper._mapping">
+<span id="qiskit-mapper-mapping-module"></span><h1>qiskit.mapper._mapping module<a class="headerlink" href="#module-qiskit.mapper._mapping" title="Permalink to this headline">¶</a></h1>
+<p>Layout module to assist with mapping circuit qubits onto physical qubits.</p>
+<dl class="function">
+<dt id="qiskit.mapper._mapping.compose_u3">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">compose_u3</code><span class="sig-paren">(</span><em>theta1</em>, <em>phi1</em>, <em>lambda1</em>, <em>theta2</em>, <em>phi2</em>, <em>lambda2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#compose_u3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.compose_u3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a triple theta, phi, lambda for the product.</p>
+<dl class="docutils">
+<dt>u3(theta, phi, lambda)</dt>
+<dd>= u3(theta1, phi1, lambda1).u3(theta2, phi2, lambda2)
+= Rz(phi1).Ry(theta1).Rz(lambda1+phi2).Ry(theta2).Rz(lambda2)
+= Rz(phi1).Rz(phi’).Ry(theta’).Rz(lambda’).Rz(lambda2)
+= u3(theta’, phi1 + phi’, lambda2 + lambda’)</dd>
+</dl>
+<p>Return theta, phi, lambda.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.cx_cancellation">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">cx_cancellation</code><span class="sig-paren">(</span><em>circuit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#cx_cancellation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.cx_cancellation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel back-to-back “cx” gates in circuit.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.direction_mapper">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">direction_mapper</code><span class="sig-paren">(</span><em>circuit_graph</em>, <em>coupling_graph</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#direction_mapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.direction_mapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the direction of CNOT gates to conform to CouplingGraph.</p>
+<p>circuit_graph = input DAGCircuit
+coupling_graph = corresponding CouplingGraph
+verbose = optional flag to print more information</p>
+<p>Adds “h” to the circuit basis.</p>
+<p>Returns a DAGCircuit object containing a circuit equivalent to
+circuit_graph but with CNOT gate directions matching the edges
+of coupling_graph. Raises an exception if the circuit_graph
+does not conform to the coupling_graph.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.layer_permutation">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">layer_permutation</code><span class="sig-paren">(</span><em>layer_partition</em>, <em>layout</em>, <em>qubit_subset</em>, <em>coupling</em>, <em>trials</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#layer_permutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.layer_permutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a swap circuit that implements a permutation for this layer.</p>
+<p>The goal is to swap qubits such that qubits in the same two-qubit gates
+are adjacent.</p>
+<p>Based on Sergey Bravyi’s algorithm.</p>
+<p>The layer_partition is a list of (qu)bit lists and each qubit is a
+tuple (qreg, index).
+The layout is a dict mapping qubits in the circuit to qubits in the
+coupling graph and represents the current positions of the data.
+The qubit_subset is the subset of qubits in the coupling graph that
+we have chosen to map into.
+The coupling is a CouplingGraph.
+TRIALS is the number of attempts the randomized algorithm makes.</p>
+<p>Returns: success_flag, best_circ, best_d, best_layout, trivial_flag</p>
+<p>If success_flag is True, then best_circ contains an OPENQASM string with
+the swap circuit, best_d contains the depth of the swap circuit, and
+best_layout contains the new positions of the data qubits after the
+swap circuit has been applied. The trivial_flag is set if the layer
+has no multi-qubit gates.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.optimize_1q_gates">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">optimize_1q_gates</code><span class="sig-paren">(</span><em>circuit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#optimize_1q_gates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.optimize_1q_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplify runs of single qubit gates in the QX basis.</p>
+<p>Return a new circuit that has been optimized.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.swap_mapper">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">swap_mapper</code><span class="sig-paren">(</span><em>circuit_graph</em>, <em>coupling_graph</em>, <em>initial_layout=None</em>, <em>basis='cx</em>, <em>u1</em>, <em>u2</em>, <em>u3</em>, <em>id'</em>, <em>verbose=False</em>, <em>trials=20</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#swap_mapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.swap_mapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map a DAGCircuit onto a CouplingGraph using swap gates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>circuit_graph</strong> (<a class="reference internal" href="qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – input DAG circuit</li>
+<li><strong>coupling_graph</strong> (<em>CouplingGraph</em>) – coupling graph to map onto</li>
+<li><strong>initial_layout</strong> (<em>dict</em>) – dict from qubits of circuit_graph to qubits
+of coupling_graph (optional)</li>
+<li><strong>basis</strong> (<em>str</em><em>, </em><em>optional</em>) – basis string specifying basis of output
+DAGCircuit</li>
+<li><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – print more information</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Returns a DAGCircuit object containing a circuit equivalent to
+circuit_graph that respects couplings in coupling_graph, and
+a layout dict mapping qubits of circuit_graph into qubits
+of coupling_graph. The layout may differ from the initial_layout
+if the first layer of gates cannot be executed on the
+initial_layout.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.test_trig_solution">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">test_trig_solution</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lamb</em>, <em>xi</em>, <em>theta1</em>, <em>theta2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#test_trig_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.test_trig_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if arguments are a solution to a system of equations.</p>
+<div class="math">
+\[ \begin{align}\begin{aligned}\cos(\phi+\lambda) \cos(\theta) = \cos(xi) * \cos(\theta1+\theta2)\\\sin(\phi+\lambda) \cos(\theta) = \sin(xi) * \cos(\theta1-\theta2)\\\cos(\phi-\lambda) \sin(\theta) = \cos(xi) * \sin(\theta1+\theta2)\\\sin(\phi-\lambda) \sin(\theta) = \sin(xi) * \sin(-\theta1+\theta2)\end{aligned}\end{align} \]</div>
+<p>Returns the maximum absolute difference between right and left hand sides.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.update_qasm">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">update_qasm</code><span class="sig-paren">(</span><em>i</em>, <em>first_layer</em>, <em>best_layout</em>, <em>best_d</em>, <em>best_circ</em>, <em>circuit_graph</em>, <em>layer_list</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#update_qasm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.update_qasm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the QASM string for an iteration of swap_mapper.</p>
+<p>i = layer number
+first_layer = True if this is the first layer with multi-qubit gates
+best_layout = layout returned from swap algorithm
+best_d = depth returns from swap algorithm
+best_circ = swap circuit returned from swap algorithm
+circuit_graph = original input circuit
+layer_list = list of circuit objects for each layer
+verbose = set True for more print output</p>
+<p>Return openqasm_output, the QASM string to append.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.mapper._mapping.yzy_to_zyz">
+<code class="descclassname">qiskit.mapper._mapping.</code><code class="descname">yzy_to_zyz</code><span class="sig-paren">(</span><em>xi</em>, <em>theta1</em>, <em>theta2</em>, <em>eps=1e-09</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#yzy_to_zyz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper._mapping.yzy_to_zyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Express a Y.Z.Y single qubit gate as a Z.Y.Z gate.</p>
+<p>Solve the equation</p>
+<div class="math">
+\[\]</div>
+<p>Ry(2*theta1).Rz(2*xi).Ry(2*theta2) = Rz(2*phi).Ry(2*theta).Rz(2*lambda)</p>
+<p>for theta, phi, and lambda. This is equivalent to solving the system
+given in the comment for test_solution. Use eps for comparisons with zero.</p>
+<p>Return a solution theta, phi, and lambda.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.6 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017 IBM Research.
+      Last updated on 2017/10/11.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

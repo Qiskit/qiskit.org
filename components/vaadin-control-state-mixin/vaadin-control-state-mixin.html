@@ -57,6 +57,7 @@ This program is available under Apache License Version 2.0, available at https:/
          */
         focused: {
           type: Boolean,
+          value: false,
           notify: true,
           readOnly: true,
           observer: '_focusedChanged',
@@ -84,31 +85,36 @@ This program is available under Apache License Version 2.0, available at https:/
     }
 
     ready() {
-      super.ready();
-
-      this.addEventListener('focus', e => {
-        if (this._tabPressed) {
+      this.addEventListener('focusin', e => {
+        if (e.composedPath()[0] === this) {
           this._focus(e);
+        } else if (e.composedPath().indexOf(this.focusElement) !== -1 && !this.disabled) {
+          this._setFocused(true);
         }
       });
+      this.addEventListener('focusout', e => this._setFocused(false));
 
-      this.addEventListener('blur', () => this._setFocused(false));
-
-      this.addEventListener('mousedown', e => !e.defaultPrevented && this._focus(e));
+      // In super.ready() other 'focusin' and 'focusout' listeners might be
+      // added, so we call it after our own ones to ensure they execute first.
+      // Issue to watch out: when incorrect, <vaadin-combo-box> refocuses the
+      // input field on iOS after “Done” is pressed.
+      super.ready();
 
       this.addEventListener('keydown', e => {
         if (e.shiftKey && e.keyCode === 9) {
           // Flag is checked in _focus event handler.
           this._isShiftTabbing = true;
           HTMLElement.prototype.focus.apply(this);
+          this._setFocused(false);
           // Event handling in IE is asynchronous and the flag is removed asynchronously as well
           setTimeout(() => this._isShiftTabbing = false, 0);
         }
       });
 
-      if (this.autofocus && !this.focused) {
+      if (this.autofocus && !this.focused && !this.disabled) {
         window.requestAnimationFrame(() => {
           this._focus();
+          this._setFocused(true);
           this.setAttribute('focus-ring', '');
         });
       }
@@ -163,8 +169,8 @@ This program is available under Apache License Version 2.0, available at https:/
         return;
       }
 
-      this._setFocused(!this.disabled);
       this.focusElement.focus();
+      this._setFocused(true);
     }
 
     /**
@@ -172,7 +178,12 @@ This program is available under Apache License Version 2.0, available at https:/
      * @private
      */
     focus() {
+      if (this.disabled) {
+        return;
+      }
+
       this.focusElement.focus();
+      this._setFocused(true);
     }
 
     /**
@@ -182,12 +193,12 @@ This program is available under Apache License Version 2.0, available at https:/
      */
     blur() {
       this.focusElement.blur();
+      this._setFocused(false);
     }
 
     _disabledChanged(disabled) {
       this.focusElement.disabled = disabled;
       if (disabled) {
-        this._setFocused(false);
         this.blur();
         this._previousTabIndex = this.tabindex;
         this.tabindex = -1;

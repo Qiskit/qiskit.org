@@ -1,18 +1,21 @@
 ![Bower version](https://img.shields.io/bower/v/vaadin-checkbox.svg)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/vaadin/vaadin-checkbox)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/vaadin/vaadin-checkbox)
 [![Build Status](https://travis-ci.org/vaadin/vaadin-checkbox.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-checkbox)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # &lt;vaadin-checkbox&gt;
 
-[Live Demo ↗](https://cdn.vaadin.com/vaadin-checkbox/1.0.0-alpha1/demo/)
+[Live Demo ↗](https://vaadin.com/elements/vaadin-checkbox/html-examples)
+|
+[API documentation ↗](https://vaadin.com/elements/vaadin-checkbox/html-api)
 
-[&lt;vaadin-checkbox&gt;](https://vaadin.com/elements/-/element/vaadin-checkbox) is a [Polymer 2](http://polymer-project.org) element providing an accessible and customizable checkbox, part of the [Vaadin Core Elements](https://vaadin.com/elements).
+[&lt;vaadin-checkbox&gt;](https://vaadin.com/elements/vaadin-checkbox) is a [Polymer 2](http://polymer-project.org) element providing an accessible and customizable checkbox, part of the [Vaadin Core Elements](https://vaadin.com/elements).
 
 <!--
 ```
 <custom-element-demo>
   <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="vaadin-checkbox.html">
     <next-code-block></next-code-block>
   </template>

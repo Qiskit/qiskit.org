@@ -1,4 +1,8 @@
-gemini.suite('vaadin-text-field', function(rootSuite) {
+var argv = require('yargs').argv;
+
+var component = argv.component;
+
+gemini.suite(component, function(rootSuite) {
   function wait(actions, find) {
     actions.wait(5000);
   }
@@ -14,35 +18,44 @@ gemini.suite('vaadin-text-field', function(rootSuite) {
     .before(wait)
     .after(goToAboutBlank);
 
-  gemini.suite('default-tests', function(suite) {
-    suite
-      .setUrl('/default.html')
-      .setCaptureElements('#default-tests')
-      .capture('default');
-  });
-
-  gemini.suite('control-state', function(suite) {
-    suite
-      .setUrl('/control-state.html')
-      .setCaptureElements('#focus-ring')
-      .capture('control-state-focused')
-      .capture('control-state-focus-ring', function(actions, find) {
-        actions.sendKeys(gemini.TAB);
+  switch (component) {
+    case 'vaadin-text-field':
+      gemini.suite('text-field', function(suite) {
+        suite
+          .setUrl('vaadin-text-field/text-field.html')
+          .setCaptureElements('#text-field')
+          .capture('text-field');
       });
-  });
 
-  gemini.suite('styling', function(suite) {
-    suite
-      .setUrl('styling.html')
-      .setCaptureElements('vaadin-text-field')
-      .capture('default');
-  });
+      gemini.suite('styling', function(suite) {
+        suite
+          .setUrl('vaadin-text-field/styling.html')
+          .setCaptureElements('vaadin-text-field')
+          .capture('styling');
+      });
 
-  gemini.suite('password', function(suite) {
-    suite
-      .setUrl('password.html')
-      .setCaptureElements('#password')
-      .capture('password');
-  });
+      gemini.suite('rtl', function(suite) {
+        suite
+          .setUrl('vaadin-text-field/rtl.html')
+          .setCaptureElements('#rtl')
+          .capture('rtl');
+      });
+      break;
 
+    case 'vaadin-password-field':
+      gemini.suite('password', function(suite) {
+        suite
+          .setUrl('vaadin-password-field/password-field.html')
+          .setCaptureElements('#password-field')
+          .capture('password-field');
+      });
+
+      gemini.suite('rtl', function(suite) {
+        suite
+          .setUrl('vaadin-password-field/rtl.html')
+          .setCaptureElements('#rtl')
+          .capture('rtl');
+      });
+      break;
+  }
 });

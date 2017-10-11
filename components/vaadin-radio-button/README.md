@@ -1,13 +1,15 @@
 ![Bower version](https://img.shields.io/bower/v/vaadin-radio-button.svg)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/vaadin/vaadin-radio-button)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/vaadin/vaadin-radio-button)
 [![Build Status](https://travis-ci.org/vaadin/vaadin-radio-button.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-radio-button)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # &lt;vaadin-radio-button&gt;
 
-[Live Demo ↗](https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-radio-button/demo/)
+[Live Demo ↗](https://vaadin.com/elements/vaadin-radio-button/html-examples)
+|
+[API documentation ↗](https://vaadin.com/elements/vaadin-radio-button/html-api)
 
-[&lt;vaadin-radio-button&gt;](https://vaadin.com/elements/-/element/vaadin-radio-button) is a [Polymer 2](http://polymer-project.org) element providing &lt;element-functionality&gt;, part of the [Vaadin Core Elements](https://vaadin.com/elements).
+[&lt;vaadin-radio-button&gt;](https://vaadin.com/elements/vaadin-radio-button) is a [Polymer 2](http://polymer-project.org) element providing an accessible and customizable radio button, part of the [Vaadin Core Elements](https://vaadin.com/elements).
 
 <!--
 ```
