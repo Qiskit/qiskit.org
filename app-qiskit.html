@@ -47,6 +47,17 @@
                 .social a:hover {
                     color: #913DBE;
                 }
+                #qiskit-localization {
+                    position: fixed;
+                    top: 0;
+                    right: 20px;
+                    font-size: 0.8em;
+                    z-index: 100;
+                    background-color: #1b2025;
+                    padding: 5px 10px;
+                    border-bottom-right-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                }
 
               </style>
 
@@ -57,13 +68,20 @@
 
     <div class="container-fuid qiskit-top-banner">
         <div class="row">
+            <div class="col-md-12 text-right">
+                <p id="qiskit-localization">
+                    <a class="text-white" href="#" data-lang="en" on-click="_changeLanguage">english</a> / <a class="text-white" href="#" data-lang="ja" on-click="_changeLanguage">japanese</a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-5 text-center text-md-right text-lg-right">
                 <img src="img/qiskit-logo-3.gif" alt="QISKit Logo" width="256px" height="256px">
             </div>
             <div class="col-md-7">
                 <div class="qiskit-title text-center text-md-left text-lg-left">
                     <h1 class="">QISKit</h1>
-                    <p>Quantum Information Software Kit</p>
+                    <p>{{localize('title_description')}}</p>
 
                 </div>
 
@@ -80,8 +98,8 @@
         <!-- Example row of columns -->
         <div class="row qiskit-areas ">
             <div class="col-md-4 c1">
-                <h3>Latest version <a href="https://pypi.python.org/pypi/qiskit"><img src="https://img.shields.io/pypi/v/qiskit.svg" alt="QISKit version"></a></h3>
-                <p class="description">The Quantum Information Software Kit (QISKit for short) is a software development kit (SDK) for working with OpenQASM and the IBM Q experience (QX).
+                <h3>{{localize('latest_version')}} <a href="https://pypi.python.org/pypi/qiskit"><img src="https://img.shields.io/pypi/v/qiskit.svg" alt="QISKit version"></a></h3>
+                <p class="description">{{localize('description')}}
                 </p>
                 <div>
 
@@ -93,29 +111,29 @@
                 </p>
                 <p>
                     <a target="_blank" href="https://github.com/QISKit/qiskit-sdk-py/wiki/Roadmap">
-                        <ibm-q-button secondary>Road map</ibm-q-button>
+                        <ibm-q-button secondary>{{localize('road_map_button')}}</ibm-q-button>
                     </a>
                 </p>
             </div>
 
             <div class="col-md-4 c2">
-                <h3>Learn</h3>
-                <p class="description"> Use QISKit to create quantum computing programs, compile them, and execute them on one of several backends (online Real quantum processors, and simulators).</p>
+                <h3>{{localize('learn_title')}}</h3>
+                <p class="description">{{localize('learn_description')}}</p>
 
                 <p>
                     <a target="_blank" href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb">
-                        <ibm-q-button secondary>Tutorials</ibm-q-button>
+                        <ibm-q-button secondary>{{localize('tutorials_button')}}</ibm-q-button>
                     </a>
                 </p>
                 <p>
                     <a target="_blank" href="documentation/">
-                        <ibm-q-button secondary>Documentation</ibm-q-button>
+                        <ibm-q-button secondary>{{localize('documentation_button')}}</ibm-q-button>
                     </a>
                 </p>
             </div>
 
             <div class="col-md-4 c3">
-                <h3>Run a quantum program</h3>
+                <h3>{{localize('example_title')}}</h3>
                 <p class = "terminal"><pre style='color:#ffffff;'>[python3] $ pip install qiskit</pre></p>
                 <pre class="code" style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>
   from</span> qiskit <span style='color:#800000; font-weight:bold; '>import</span> QuantumProgram
@@ -144,7 +162,7 @@
                     <div class="row">
                         <div class="col">
                             <h4>
-                                Install QISKit
+                                {{localize('install_title')}}
                             </h4>
                         </div>
                     </div>
@@ -153,7 +171,7 @@
 
                             <pre style='color:#000000; margin-top: 10px;'>$ pip install qiskit</pre>
                             <div class="alert alert-secondary" role="alert" style="display: inline-block;">
-                                Python 3.5+ required, see more <a href="/documentation/#installation-and-setuphere" class="alert-link">in the docs</a>
+                                    {{localize('install_requirements')}} <a href="/documentation/#installation-and-setuphere" class="alert-link">{{localize('install_requirements_link')}}</a>
                             </div>
                         </div>
                     </div>
@@ -186,7 +204,7 @@ result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.<
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-12">
-                            <h4>Supporting Organizations
+                            <h4>{{localize('organizations_title')}}
                             </h4>
                         </div>
                     </div>
@@ -217,7 +235,25 @@ result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.<
 </template>
     <script>
         Polymer({
-            is: 'app-qiskit'
+            is: "app-qiskit",
+            behaviors: [
+                Polymer.AppLocalizeBehavior
+            ],
+            properties: {
+                // set the current language—shared across all elements in the app
+                // that use AppLocalizeBehavior
+                language: {
+                    value: 'en',
+                    type: String
+                }
+            },
+            attached: function() {
+                this.loadResources(this.resolveUrl('locales.json'));
+            },
+            _changeLanguage: function(e) {
+                var language = e.target.getAttribute('data-lang');
+                this.language = language;
+            }
         });
     </script>
 
