@@ -1,0 +1,293 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.simulators._localsimulator &#8212; QISKit SDK 0.3.9 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.simulators._qasm_cpp_simulator" href="qiskit.simulators._qasm_cpp_simulator.html" />
+    <link rel="prev" title="qiskit.simulators package" href="qiskit.simulators.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators._qasm_cpp_simulator.html" title="qiskit.simulators._qasm_cpp_simulator"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators.html" title="qiskit.simulators package"
+             accesskey="P">前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.9 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.simulators.html" accesskey="U">qiskit.simulators package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">目次</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.simulators.html">qiskit.simulators package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.simulators.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.simulators._localsimulator</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.simulators._qasm_cpp_simulator.html">qiskit.simulators._qasm_cpp_simulator</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.simulators._qasmsimulator.html">qiskit.simulators._qasmsimulator</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.simulators._unitarysimulator.html">qiskit.simulators._unitarysimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.simulators.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="qiskit.simulators.html"
+                        title="前の章へ">qiskit.simulators package</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="qiskit.simulators._qasm_cpp_simulator.html"
+                        title="次の章へ">qiskit.simulators._qasm_cpp_simulator</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.simulators._localsimulator.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qiskit.simulators._localsimulator">
+<span id="qiskit-simulators-localsimulator"></span><h1>qiskit.simulators._localsimulator<a class="headerlink" href="#module-qiskit.simulators._localsimulator" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Interface to local simulators.</p>
+<p>This module is the interface to all the local simulators in this directory.
+It handles automatically discovering and interfacing with those modules. Once
+instantiated like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">_localsimulator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simulator_list</span> <span class="o">=</span> <span class="n">_localsimulator</span><span class="o">.</span><span class="n">local_backends</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">_localsimulator</span><span class="o">.</span><span class="n">LocalSimulator</span><span class="p">(</span><span class="n">simulator_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">job</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><cite>simulator_list</cite> is the list of names of known simulators and <cite>job</cite> is
+a dictionary of the form {『compiled_circuit』: circuit, 『shots』: shots,
+『seed』: seed}.</p>
+<p>The import does discovery of the simulator modules in this directory. The
+second command attempts to determine which modules are functional, in
+particular for modules which require making calls to compiled binaries.</p>
+<p>In order for a module to be registered it needs to define a module-scope
+dictionary of the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">__configuration</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;local_qasm_simulator&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/IBM/qiskit-sdk-py&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A python simulator for qasm files&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="s1">&#39;all-to-all&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="s1">&#39;u1,u2,u3,cx,id&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>and it needs a class with a 「run」 method. The identifier for the backend
+simulator comes from the 「name」 key in this dictionary. The class』
+__init__ method is called with a single <cite>job</cite> argument. The __init__
+method is also responsible for determining whether an associated
+binary is available. If it is not, the FileNotFoundError exception
+should be raised.</p>
+<dl class="attribute">
+<dt id="qiskit.simulators._localsimulator.local_configuration">
+<code class="descclassname">qiskit.simulators._localsimulator.</code><code class="descname">local_configuration</code><a class="headerlink" href="#qiskit.simulators._localsimulator.local_configuration" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>list of dict()
+This list gets populated with the __configuration records from each
+of the discovered modules.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.simulators._localsimulator._simulator_classes">
+<code class="descclassname">qiskit.simulators._localsimulator.</code><code class="descname">_simulator_classes</code><a class="headerlink" href="#qiskit.simulators._localsimulator._simulator_classes" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>dict {「&lt;simulator name&gt;」 : &lt;simulator class&gt;}
+This dictionary associates a simulator name with the class which
+generates its objects.</p>
+</dd></dl>
+
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.simulators._localsimulator.local_backends" title="qiskit.simulators._localsimulator.local_backends"><code class="xref py py-obj docutils literal"><span class="pre">local_backends</span></code></a>()</td>
+<td>Attempt to determine the local simulator backends which are available.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.simulators._localsimulator.LocalSimulator" title="qiskit.simulators._localsimulator.LocalSimulator"><code class="xref py py-obj docutils literal"><span class="pre">LocalSimulator</span></code></a>(backend,&nbsp;job)</td>
+<td>Interface to simulators</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="qiskit.simulators._localsimulator.LocalSimulator">
+<em class="property">class </em><code class="descclassname">qiskit.simulators._localsimulator.</code><code class="descname">LocalSimulator</code><span class="sig-paren">(</span><em>backend</em>, <em>job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_localsimulator.html#LocalSimulator"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.simulators._localsimulator.LocalSimulator" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Interface to simulators</p>
+<dl class="method">
+<dt id="qiskit.simulators._localsimulator.LocalSimulator.result">
+<code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_localsimulator.html#LocalSimulator.result"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.simulators._localsimulator.LocalSimulator.result" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.simulators._localsimulator.LocalSimulator.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>silent=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_localsimulator.html#LocalSimulator.run"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.simulators._localsimulator.LocalSimulator.run" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.simulators._localsimulator.local_backends">
+<code class="descclassname">qiskit.simulators._localsimulator.</code><code class="descname">local_backends</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/simulators/_localsimulator.html#local_backends"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.simulators._localsimulator.local_backends" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Attempt to determine the local simulator backends which are available.</p>
+<p>Mostly we are concerned about checking for whether the simulator executable
+associated with the discovered backend module exists. Discovery is done
+by instantiating the simulator object which should raise a
+FileNotFoundError if the program has not been compiled and placed in
+the executable path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">A list of backend names.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators._qasm_cpp_simulator.html" title="qiskit.simulators._qasm_cpp_simulator"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.simulators.html" title="qiskit.simulators package"
+             >前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.9 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.simulators.html" >qiskit.simulators package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017 IBM Research.
+      最終更新: 2017/11/08
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
+    </div>
+  </body>
+</html>
