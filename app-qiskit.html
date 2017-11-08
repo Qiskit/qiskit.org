@@ -1,5 +1,7 @@
-<link rel="import" href="/components/polymer/polymer.html">
-<link rel="import" href="components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="./components/polymer/polymer.html">
+<link rel="import" href="./components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="./components/app-route/app-route.html">
+<link rel="import" href="./components/app-route/app-location.html">
 
 <dom-module id="app-qiskit">
 
@@ -65,14 +67,19 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-        
+    <app-location route="{{route}}" use-hash-as-path></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:language"
+        data="{{routeData}}"></app-route>
+
     <div class="host">
 
     <div class="container-fuid qiskit-top-banner">
         <div class="row">
             <div class="col-md-12 text-right">
                 <p id="qiskit-localization">
-                    <a class="text-white" href="#" data-lang="en" on-click="_changeLanguage">english</a> / <a class="text-white" href="#" data-lang="ja" on-click="_changeLanguage">japanese</a>
+                    <a class="text-white" href="/#/en">english</a> / <a class="text-white" href="/#/ja">japanese</a>
                 </p>
             </div>
         </div>
@@ -248,14 +255,20 @@ result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.<
                     value: 'en',
                     type: String,
                     observer: '_activeLanguage'
+                },
+                routeData: {
+                    type: Object,
+                    value: function() {
+                        return {};
+                    },
+                    observer: '_changeRouteData'
                 }
             },
             attached: function() {
                 this.loadResources(this.resolveUrl('locales.json'));
             },
-            _changeLanguage: function(e) {
-                var language = e.target.getAttribute('data-lang');
-                this.language = language;
+            _changeRouteData: function() {
+                this.language = this.routeData.language;
             },
             _activeLanguage: function(newValue) {
                 if (newValue !== 'ja' && newValue !== 'en') {
