@@ -1,4 +1,5 @@
 <link rel="import" href="./components/polymer/polymer.html">
+<link rel="import" href="./app-icons.html">
 <link rel="import" href="./components/ibm-q-components/components/button/ibm-q-button.html">
 <link rel="import" href="./components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="./components/app-route/app-route.html">
@@ -51,6 +52,20 @@
                 .social a:hover {
                     color: #913DBE;
                 }
+
+                .supporting-section {
+                    margin-bottom: 10px;
+                }
+
+                .supporting-section h4 {
+                    margin-bottom: 25px;
+                }
+
+                .supporting-section a.external-link {
+                    color: #913DBE;
+                    font-weight: bold;
+                }
+
                 #qiskit-localization {
                     position: fixed;
                     top: 0;
@@ -136,7 +151,7 @@
                     </a>
                 </p>
                 <p>
-                    <a target="_blank" href="documentation/">
+                    <a target="_blank" href="documentation/[[documentationSuffix]]">
                         <ibm-q-button secondary>{{localize('documentation_button')}}</ibm-q-button>
                     </a>
                 </p>
@@ -144,7 +159,7 @@
 
             <div class="col-md-4 c3">
                 <h3>{{localize('example_title')}}</h3>
-                <p class = "terminal"><pre style='color:#ffffff;'>[python3] $ pip install qiskit</pre></p>
+                <p class = "terminal"><pre style='color:#ffffff; background-color:#1b2024; padding: 5px;'>[python3] $ pip install qiskit</pre></p>
                 <pre class="code" style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>
   from</span> qiskit <span style='color:#800000; font-weight:bold; '>import</span> QuantumProgram
   qp <span style='color:#808030; '>=</span> QuantumProgram<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
@@ -159,6 +174,9 @@
   <span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span>result<span style='color:#808030; '>.</span>get_counts<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
     <span style='color:#808030; '> </span>
                       </pre>
+                <div class="alert alert-secondary" role="alert">
+                        {{localize('install_requirements')}} <a href="/documentation/#installation-and-setuphere" class="alert-link">{{localize('install_requirements_link')}}</a>
+                </div>
             </div>
         </div>
         <hr>
@@ -168,50 +186,7 @@
     <div class="container-fuid qiskit-bottom-banner">
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <h4>
-                                {{localize('install_title')}}
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-
-                            <pre style='color:#000000; margin-top: 10px;'>$ pip install qiskit</pre>
-                            <div class="alert alert-secondary" role="alert" style="display: inline-block;">
-                                    {{localize('install_requirements')}} <a href="/documentation/#installation-and-setuphere" class="alert-link">{{localize('install_requirements_link')}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="row">
-                        <div class="col">
-                            <h4>
-                                Run a quantum program
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>
-from</span> qiskit <span style='color:#800000; font-weight:bold; '>import</span> QuantumProgram
-qp <span style='color:#808030; '>=</span> QuantumProgram<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
-qr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_quantum_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'qr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
-cr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_classical_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'cr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
-qc <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_circuit<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>qr<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>cr<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
-qc<span style='color:#808030; '>.</span>h<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
-qc<span style='color:#808030; '>.</span>cx<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
-qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
-qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
-result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>execute<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span>
-<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span>result<span style='color:#808030; '>.</span>get_counts<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
-                            </pre>
-                        </div>
-                    </div> -->
-
-                </div>
-                <div class="col-md-6">
+                <div class="col-6 supporting-section">
                     <div class="row">
                         <div class="col-12">
                             <h4>{{localize('organizations_title')}}
@@ -220,9 +195,23 @@ result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.<
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <p>IBM Research</p>
+                            <p><a class="external-link" href="http://www.research.ibm.com/">IBM Research</a></p>
                         </div>
-
+                    </div>
+                </div>
+                <div class="col-6 supporting-section">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>{{localize('collaborators_title')}}</h4>
+                            <p>{{localize('collaborators_description_1')}} <a class="external-link" href="mailto:qiskit@qiskit.org">qiskit@qiskit.org</a>. {{localize('collaborators_description_2')}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p><a class="external-link" href="https://www.chem.purdue.edu/kais/" target="_blank">Sabre Kais</a> (Purdue University) </p>
+                            <p><a class="external-link" href="https://sites.google.com/site/woottonjames/home" target="_blank">James Wootton</a> (University of Basel)</p>
+                            <p><a class="external-link" href="http://aqua.sfc.wide.ad.jp/" target="_blank">Rod Van Meter</a> (Keio University)</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -272,8 +261,11 @@ result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.<
                 this.language = this.routeData.language;
             },
             _activeLanguage: function(newValue) {
-                if (newValue !== 'ja' && newValue !== 'en') {
+                if ((newValue !== 'ja' && newValue !== 'en') || newValue === 'en') {
                     this.language = 'en';
+                    this.documentationSuffix = '';
+                } else if (newValue === 'ja') {
+                    this.documentationSuffix = 'ja';
                 }
             }
         });
