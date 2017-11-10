@@ -126,9 +126,9 @@
 <div class="section" id="id2">
 <h2>プログラミング インターフェース<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p><em>qiskit</em> ディレクトリがメインのPythonモジュールで
-<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a>、
-<a class="reference internal" href="_autodoc/qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-class docutils literal"><span class="pre">QuantumRegister</span></code></a>、
-<a class="reference internal" href="_autodoc/qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister"><code class="xref py py-class docutils literal"><span class="pre">ClassicalRegister</span></code></a>、
+<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a>,
+<a class="reference internal" href="_autodoc/qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-class docutils literal"><span class="pre">QuantumRegister</span></code></a>,
+<a class="reference internal" href="_autodoc/qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister"><code class="xref py py-class docutils literal"><span class="pre">ClassicalRegister</span></code></a>,
 <a class="reference internal" href="_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-class docutils literal"><span class="pre">QuantumCircuit</span></code></a> のインターフェースを含みます。</p>
 <p>実行手順は次の通りです。ユーザーは <em>QuantumProgram</em> （量子プログラム）を作成しそれに
 複数の量子回路の生成、変更、コンパイル、と実行ができます。
@@ -146,7 +146,7 @@
 <p>以下のディレクトリは開発中の内部モジュールを含みます:</p>
 <ul class="simple">
 <li><a class="reference internal" href="_autodoc/qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-mod docutils literal"><span class="pre">qasm</span></code></a> モジュールは <strong>OpenQASM</strong> ファイルを解析します。</li>
-<li><a class="reference internal" href="_autodoc/qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-mod docutils literal"><span class="pre">unroll</span></code></a> モジュールはターゲットのゲートに応じて <strong>OpenQASM</strong> の翻訳と“unroll(展開)”を行います。
+<li><a class="reference internal" href="_autodoc/qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-mod docutils literal"><span class="pre">unroll</span></code></a> モジュールはターゲットのゲートに応じて <strong>OpenQASM</strong> の翻訳と展開(unroll)を行います。
 (ゲート文のサブルーチンやループの展開も必要に応じて行います)</li>
 <li><a class="reference internal" href="_autodoc/qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-mod docutils literal"><span class="pre">dagcircuit</span></code></a> モジュールは量子回路をグラフとして処理します。</li>
 <li><a class="reference internal" href="_autodoc/qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-mod docutils literal"><span class="pre">mapper</span></code></a> モジュールは、量子回路をカップリング（直接操作可能な量子ビットのペア）の制限がないバックエンドから制限のある実機で実行するために量子回路の変換を行います。</li>
@@ -160,13 +160,13 @@
 <strong>AST</strong> は <em>Unroller</em> に渡されます。<em>Unroller</em> は異なる <em>UnrollerBackend</em> のいずれかを取り付けることができます。
 テキストを出力する <em>PrinterBackend</em>、シミュレーターと実機のバックエンドの入力を生成する <em>JsonBackend</em>、
 <em>DAGCircuit</em> を生成する <em>DAGBackend</em>、 <em>QuantumCircuit</em> オブジェクトを生成する <em>CircuitBackend</em> があります。
-<em>DAGCircuit</em>　は「展開された」**OpenQASM** の回路を有向非巡回グラフ(directed acyclic graph, DAG)として持ちます。
+<em>DAGCircuit</em> は「展開された」 <strong>OpenQASM</strong> の回路を有向非巡回グラフ(directed acyclic graph, DAG)として持ちます。
 <em>DAGCircuit</em> は回路構成の表現、変換、性質の計算、結果を <strong>OpenQASM</strong> で出力するメソッドがあります。
-この全体の流れは*mapper* モジュールが量子回路を、<em>CouplingGraph</em> で定義されたカップリング（直接操作可能な量子ビットのペア）の実機で実行するために変換するために行われます。
+この全体の流れは <em>mapper</em> モジュールが量子回路を、 <em>CouplingGraph</em> で定義されたカップリング（直接操作可能な量子ビットのペア）の実機で実行するために変換するために行われます。
 このコンポーネントの構成は将来的に変更の可能性があります。</p>
 <p>量子回路が現在のモジュールでどのように変換されるかを以下の図にまとめます。</p>
 <a class="reference internal image-reference" href="_images/circuit_representations.png"><img alt="_images/circuit_representations.png" class="align-center" src="_images/circuit_representations.png" style="width: 600px;" /></a>
-<p>いくつかの unroller バックエンドとその出力は以下にまとめます:</p>
+<p>いくつかのunrollerバックエンドとその出力を以下にまとめます:</p>
 <a class="reference internal image-reference" href="_images/unroller_backends.png"><img alt="_images/unroller_backends.png" class="align-center" src="_images/unroller_backends.png" style="width: 600px;" /></a>
 </div>
 </div>
@@ -204,7 +204,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/11/09
+      最終更新: 2017/11/10
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
     </div>
   </body>
