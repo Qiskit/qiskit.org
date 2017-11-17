@@ -129,8 +129,8 @@
         return {
           collapsed: {
             type: Boolean,
-            value: false,
             reflectToAttribute: true,
+            value: false,
             notify: true
           }
         };
@@ -138,7 +138,7 @@
 
       connectedCallback() {
         super.connectedCallback();
-        this.collapsed = JSON.parse(window.localStorage.getItem('collapsedQThinkBanner')) || false;
+        this.collapsed = JSON.parse(window.localStorage.getItem('collapsedQThinkBanner')) || this.collapsed;
 
         this.addEventListener('click', function(event) {
           if (this.collapsed && event.path[0].nodeName !== 'IRON-ICON') {
