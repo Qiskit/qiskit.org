@@ -10,6 +10,10 @@
 
 [Isaac Chuang (MIT)](http://web.mit.edu/physics/people/faculty/chuang_isaac.html)
 
+[Vincent Dwyer (Loughborough University)] (http://www.lboro.ac.uk/departments/meme/staff/vincent-m-dwyer/)
+
+[Mark Everitt (Loughborough University)] (http://www.lboro.ac.uk/departments/physics/staff/academic/mark-everitt/)
+
 [Michael Geller (University of Georgia)](https://www.physast.uga.edu/people/michael_geller)
 
 [Thomas Haener (ETH Zurich/ProjectQ)](http://www.projectq.ch)
@@ -26,7 +30,11 @@
 
 [Harumichi Nishimura (Nagoya University)](http://www.math.cm.is.nagoya-u.ac.jp/~hnishimura/list.html)
 
+[Russell Rundle (Loughborough University)]
+
 [Damian Steiger (ETH Zurich /ProjectQ)](http://www.projectq.ch)
+
+[Todd Tilma (Tilma Labs)](https://tilma-labs.org)
 
 [Christophe Vuillot (QuTech institute at TU Delft)](https://qutech.nl/person/christopher-vuillot/)
 
