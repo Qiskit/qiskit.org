@@ -10,9 +10,9 @@
 
 [Isaac Chuang (MIT)](http://web.mit.edu/physics/people/faculty/chuang_isaac.html)
 
-[Vincent Dwyer (Loughborough University)] (http://www.lboro.ac.uk/departments/meme/staff/vincent-m-dwyer/)
+[Vincent Dwyer (Loughborough University)](http://www.lboro.ac.uk/departments/meme/staff/vincent-m-dwyer/)
 
-[Mark Everitt (Loughborough University)] (http://www.lboro.ac.uk/departments/physics/staff/academic/mark-everitt/)
+[Mark Everitt (Loughborough University)](http://www.lboro.ac.uk/departments/physics/staff/academic/mark-everitt/)
 
 [Michael Geller (University of Georgia)](https://www.physast.uga.edu/people/michael_geller)
 
@@ -32,7 +32,7 @@
 
 Russell Rundle (Loughborough University) 
 
-[Enrique Solano (University of the Basque Country and Shanghai University)](www.qutisgroup.com)
+[Enrique Solano (University of the Basque Country and Shanghai University)](http://www.qutisgroup.com)
 
 [Damian Steiger (ETH Zurich /ProjectQ)](http://www.projectq.ch)
 
