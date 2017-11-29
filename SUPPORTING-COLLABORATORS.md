@@ -30,7 +30,9 @@
 
 [Harumichi Nishimura (Nagoya University)](http://www.math.cm.is.nagoya-u.ac.jp/~hnishimura/list.html)
 
-Russell Rundle (Loughborough University)
+Russell Rundle (Loughborough University) 
+
+[Enrique Solano (University of the Basque Country and Shanghai University)](http://www.qutisgroup.com)
 
 [Damian Steiger (ETH Zurich /ProjectQ)](http://www.projectq.ch)
 
