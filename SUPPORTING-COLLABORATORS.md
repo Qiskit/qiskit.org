@@ -36,7 +36,7 @@ Russell Rundle (Loughborough University)
 
 [Damian Steiger (ETH Zurich /ProjectQ)](http://www.projectq.ch)
 
-[Todd Tilma (Tilma Labs)](https://tilma-labs.org)
+[Todd Tilma (Tokyo Institute of Technology)](https://www.titech.ac.jp/english/)
 
 [Christophe Vuillot (QuTech institute at TU Delft)](https://qutech.nl/person/christopher-vuillot/)
 
