@@ -85,7 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#setup-the-environment">3.1 Setup the environment</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configure-your-api-token">4. Configure your API token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-your-api-token-and-qe-credentials">4. Configure your API token and QE credentials</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#install-jupyter-based-tutorials">Install Jupyter-based tutorials</a><ul>
@@ -205,8 +205,8 @@ the following command:</li>
 </div>
 </div>
 </div>
-<div class="section" id="configure-your-api-token">
-<h3>4. Configure your API token<a class="headerlink" href="#configure-your-api-token" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="configure-your-api-token-and-qe-credentials">
+<h3>4. Configure your API token and QE credentials<a class="headerlink" href="#configure-your-api-token-and-qe-credentials" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Create an <a class="reference external" href="https://quantumexperience.ng.bluemix.net">IBM Q
 experience</a> account if
@@ -224,7 +224,23 @@ main SDK folder (on Windows, replace <code class="docutils literal"><span class=
 <li>Open your Qconfig.py, remove the <code class="docutils literal"><span class="pre">#</span></code> from the beginning of the API
 token line, and copy/paste your API token into the space between the
 quotation marks on that line. Save and close the file.</li>
+<li>If you have access to the IBM Q features, you also need to setup the
+values for your hub, group, and project. You can do so by filling the
+<code class="docutils literal"><span class="pre">config</span></code> variable with the values you can find on your IBM Q account
+page.</li>
 </ul>
+<p>For example, a valid and fully configured <code class="docutils literal"><span class="pre">Qconfig.py</span></code> file would look like:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">APItoken</span> <span class="o">=</span> <span class="s1">&#39;123456789abc...&#39;</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span><span class="p">,</span>
+    <span class="c1"># The following should only be needed for IBM Q users.</span>
+    <span class="s1">&#39;hub&#39;</span><span class="p">:</span> <span class="s1">&#39;MY_HUB&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="s1">&#39;MY_GROUP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="s1">&#39;MY_PROJECT&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="install-jupyter-based-tutorials">
@@ -305,7 +321,7 @@ on the project’s GitHub wiki</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/04.
+      Last updated on 2017/12/07.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
