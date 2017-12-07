@@ -287,8 +287,11 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.save" title="qiskit.QuantumProgram.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>([file_name,&nbsp;beauty])</td>
 <td>Save Quantum Program in a Json file.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api" title="qiskit.QuantumProgram.set_api"><code class="xref py py-obj docutils literal"><span class="pre">set_api</span></code></a>(token,&nbsp;url[,&nbsp;verify])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api" title="qiskit.QuantumProgram.set_api"><code class="xref py py-obj docutils literal"><span class="pre">set_api</span></code></a>(token,&nbsp;url[,&nbsp;hub,&nbsp;group,&nbsp;project,&nbsp;…])</td>
 <td>Setup the API.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api_hubs_config" title="qiskit.QuantumProgram.set_api_hubs_config"><code class="xref py py-obj docutils literal"><span class="pre">set_api_hubs_config</span></code></a>(hub,&nbsp;group,&nbsp;project)</td>
+<td>Update the API hubs configuration, replacing the previous one.</td>
 </tr>
 </tbody>
 </table>
@@ -1033,7 +1036,7 @@ data</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.set_api">
-<code class="descname">set_api</code><span class="sig-paren">(</span><em>token</em>, <em>url</em>, <em>verify=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.set_api"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.set_api" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">set_api</code><span class="sig-paren">(</span><em>token</em>, <em>url</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>verify=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.set_api"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.set_api" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Setup the API.</p>
 <p>Does not catch exceptions from IBMQuantumExperience.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1041,18 +1044,34 @@ data</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>Token</strong> (<em>str</em>) – The token used to register on the online backend such
+<li><strong>token</strong> (<em>str</em>) – The token used to register on the online backend such
 as the quantum experience.</li>
-<li><strong>URL</strong> (<em>str</em>) – The url used for online backend such as the quantum
+<li><strong>url</strong> (<em>str</em>) – The url used for online backend such as the quantum
 experience.</li>
+<li><strong>hub</strong> (<em>str</em>) – The hub used for online backend.</li>
+<li><strong>group</strong> (<em>str</em>) – The group used for online backend.</li>
+<li><strong>project</strong> (<em>str</em>) – The project used for online backend.</li>
+<li><strong>verify</strong> (<em>bool</em>) – If False, ignores SSL certificates errors.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">Nothing but fills the __ONLINE_BACKENDS, __api, and __api_config</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">Nothing but fills the __ONLINE_BACKENDS, __api, and __api_config</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> – if the API instantiation failed.</p>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.set_api_hubs_config">
+<code class="descname">set_api_hubs_config</code><span class="sig-paren">(</span><em>hub</em>, <em>group</em>, <em>project</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.set_api_hubs_config"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.set_api_hubs_config" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Update the API hubs configuration, replacing the previous one.</p>
+<p>hub (str): The hub used for online backend.
+group (str): The group used for online backend.
+project (str): The project used for online backend.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1093,7 +1112,7 @@ experience.</li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/04
+      最終更新: 2017/12/07
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
     </div>
   </body>
