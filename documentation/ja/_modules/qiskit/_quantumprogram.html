@@ -268,6 +268,22 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
+<div class="viewcode-block" id="QuantumProgram.destroy_quantum_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_quantum_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_quantum_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Destroy an existing Quantum Register.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): the name of the quantum register</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t destroy this register: Not present&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; quantum_register destroyed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="QuantumProgram.create_quantum_registers"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_quantum_registers">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_quantum_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register_array</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new set of Quantum Registers based on a array of them.</span>
 
@@ -291,6 +307,24 @@
                 <span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">register</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">])</span>
             <span class="n">new_registers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">new_registers</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.destroy_quantum_registers"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_quantum_registers">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_quantum_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register_array</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Destroy a set of Quantum Registers based on a array of them.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            register_array (list[dict]): An array of quantum registers in</span>
+<span class="sd">                dictionay format::</span>
+
+<span class="sd">                    &quot;quantum_registers&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                        &quot;name&quot;: &quot;qr&quot;,</span>
+<span class="sd">                        },</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    ]</span>
+<span class="sd">                &quot;size&quot; may be a key for compatibility, but is ignored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">register_array</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">destroy_quantum_register</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.create_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new Classical Register.</span>
@@ -337,6 +371,40 @@
                 <span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">register</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">new_registers</span></div>
 
+<div class="viewcode-block" id="QuantumProgram.destroy_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Destroy an existing Classical Register.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): the name of the classical register</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t destroy this register: Not present&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; classical register destroyed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.destroy_classical_registers"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_classical_registers">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_classical_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registers_array</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Destroy a set of Classical Registers based on a array of them.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            registers_array (list[dict]): An array of classical registers in</span>
+<span class="sd">                dictionay fromat::</span>
+
+<span class="sd">                    &quot;classical_registers&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                        &quot;name&quot;: &quot;qr&quot;,</span>
+<span class="sd">                        },</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    ]</span>
+<span class="sd">                &quot;size&quot; may be a key for compatibility, but is ignored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">registers_array</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">destroy_classical_register</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span></div>
+
 <div class="viewcode-block" id="QuantumProgram.create_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qregisters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cregisters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a empty Quantum Circuit in the Quantum Program.</span>
 
@@ -363,6 +431,20 @@
             <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">quantum_circuit</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.destroy_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Destroy a Quantum Circuit in the Quantum Program. This will not</span>
+<span class="sd">        destroy any registers associated with the circuit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): the name of the circuit</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t destroy this circuit: Not present&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.add_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.add_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">quantum_circuit</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a new circuit based on an Object representation.</span>
@@ -1508,7 +1590,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/07
+      最終更新: 2017/12/08
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
     </div>
   </body>
