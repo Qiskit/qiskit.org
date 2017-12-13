@@ -81,6 +81,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quantum-chips">Quantum Chips</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-real-chip-backend">Example Real Chip Backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-real-chip-backend-using-ibmq">Example Real Chip Backend using IBMQ</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#project-organization">Project Organization</a></li>
@@ -178,6 +179,8 @@ Currently through QX you can use the following chips:</p>
 <p>For chip details visit the <a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q experience backend information</a></p>
 <div class="section" id="example-real-chip-backend">
 <h3>Example Real Chip Backend<a class="headerlink" href="#example-real-chip-backend" title="Permalink to this headline">¶</a></h3>
+<p>The following code is an example of how to execute a Quantum Program on a real
+Quantum device:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -252,6 +255,99 @@ Currently through QX you can use the following chips:</p>
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="section" id="example-real-chip-backend-using-ibmq">
+<h3>Example Real Chip Backend using IBMQ<a class="headerlink" href="#example-real-chip-backend-using-ibmq" title="Permalink to this headline">¶</a></h3>
+<p>If you have access to the IBM Q features, the following code can be used for
+executing the same example as described on the previous section, but using
+the IBM Q features:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
+
+<span class="c1"># Creating Programs create your first QuantumProgram object instance.</span>
+<span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+
+<span class="c1"># Set your API Token and credentials.</span>
+<span class="c1"># You can get them from https://quantumexperience.ng.bluemix.net/qx/account,</span>
+<span class="c1"># looking for &quot;Personal Access Token&quot; section.</span>
+<span class="n">QX_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;API_TOKEN&quot;</span>
+<span class="n">QX_URL</span> <span class="o">=</span> <span class="s2">&quot;https://quantumexperience.ng.bluemix.net/api&quot;</span>
+<span class="n">QX_HUB</span> <span class="o">=</span> <span class="s2">&quot;MY_HUB&quot;</span>
+<span class="n">QX_GROUP</span> <span class="o">=</span> <span class="s2">&quot;MY_GROUP&quot;</span>
+<span class="n">QX_PROJECT</span> <span class="o">=</span> <span class="s2">&quot;MY_PROJECT&quot;</span>
+
+<span class="c1"># Set up the API and execute the program.</span>
+<span class="c1"># You need the API Token, the QX URL, and your hub/group/project details.</span>
+<span class="n">Q_program</span><span class="o">.</span><span class="n">set_api</span><span class="p">(</span><span class="n">QX_TOKEN</span><span class="p">,</span> <span class="n">QX_URL</span><span class="p">,</span>
+                  <span class="n">hub</span><span class="o">=</span><span class="n">QX_HUB</span><span class="p">,</span>
+                  <span class="n">group</span><span class="o">=</span><span class="n">QX_GROUP</span><span class="p">,</span>
+                  <span class="n">project</span><span class="o">=</span><span class="n">QX_PROJECT</span><span class="p">)</span>
+
+<span class="c1"># Creating Registers create your first Quantum Register called &quot;qr&quot; with 2 qubits</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># create your first Classical Register called &quot;cr&quot; with 2 bits</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span><span class="s2">&quot;cr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Creating Circuits create your first Quantum Circuit called &quot;qc&quot; involving your Quantum Register &quot;qr&quot;</span>
+<span class="c1"># and your Classical Register &quot;cr&quot;</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">],</span> <span class="p">[</span><span class="n">cr</span><span class="p">])</span>
+
+<span class="c1"># add the H gate in the Qubit 0, we put this Qubit in superposition</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># add measure to see the state</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+<span class="c1"># Compiled  and execute in the local_qasm_simulator</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">execute</span><span class="p">([</span><span class="s2">&quot;superposition&quot;</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;ibmqx2&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+
+<span class="c1"># Show the results</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p>Please check the Installation <a class="reference internal" href="install.html#qconfig-setup"><span class="std std-ref">4. Configure your API token and QE credentials</span></a> section for more details on
+how to setup your IBM Q credentials.</p>
+</div>
 </div>
 <div class="section" id="project-organization">
 <h2>Project Organization<a class="headerlink" href="#project-organization" title="Permalink to this headline">¶</a></h2>
@@ -293,7 +389,7 @@ located in <em>test</em>. The <em>qiskit</em> directory is the main module of th
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/08.
+      Last updated on 2017/12/13.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
