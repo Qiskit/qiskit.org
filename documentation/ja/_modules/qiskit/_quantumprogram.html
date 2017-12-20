@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.3.13 ドキュメント</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.3.14 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.3.13',
+        VERSION:     '0.3.14',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.13 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.14 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -609,7 +609,7 @@
     <span class="c1">###############################################################</span>
 
 <div class="viewcode-block" id="QuantumProgram.set_api"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.set_api">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_api</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Setup the API.</span>
 
 <span class="sd">        Does not catch exceptions from IBMQuantumExperience.</span>
@@ -622,6 +622,8 @@
 <span class="sd">            hub (str): The hub used for online backend.</span>
 <span class="sd">            group (str): The group used for online backend.</span>
 <span class="sd">            project (str): The project used for online backend.</span>
+<span class="sd">            proxies (dict): Proxy configuration for the API, as a dict with</span>
+<span class="sd">                &#39;urls&#39; and credential keys.</span>
 <span class="sd">            verify (bool): If False, ignores SSL certificates errors.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            Nothing but fills the __ONLINE_BACKENDS, __api, and __api_config</span>
@@ -636,6 +638,8 @@
                 <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
                 <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="n">project</span>
             <span class="p">}</span>
+            <span class="k">if</span> <span class="n">proxies</span><span class="p">:</span>
+                <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proxies</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t connect to IBMQuantumExperience server: </span><span class="si">{0}</span><span class="s2">&quot;</span>
@@ -1583,14 +1587,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.13 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.14 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/18
+      最終更新: 2017/12/20
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
     </div>
   </body>
