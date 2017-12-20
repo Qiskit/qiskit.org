@@ -39,7 +39,7 @@ $(window).resize(function(){
         $("div.related:last  ul li:not(.right, #toc-toggle):first a").text("Top");
     }
     else {
-        $("div.related:first ul li:not(.right, #toc-toggle):first a").text("QISKit SDK 0.3.13 ドキュメント");
-        $("div.related:last  ul li:not(.right, #toc-toggle):first a").text("QISKit SDK 0.3.13 ドキュメント");
+        $("div.related:first ul li:not(.right, #toc-toggle):first a").text("QISKit SDK 0.3.14 ドキュメント");
+        $("div.related:last  ul li:not(.right, #toc-toggle):first a").text("QISKit SDK 0.3.14 ドキュメント");
     }
 });
