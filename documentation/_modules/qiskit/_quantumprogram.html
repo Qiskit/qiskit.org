@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.3.14 documentation</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.3.15 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.3.14',
+        VERSION:     '0.3.15',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -641,8 +641,13 @@
                 <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proxies</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="n">root_exception</span> <span class="o">=</span> <span class="n">ex</span>
+            <span class="k">if</span> <span class="s1">&#39;License required&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">):</span>
+                <span class="c1"># For the 401 License required exception from the API, be</span>
+                <span class="c1"># less verbose with the exceptions.</span>
+                <span class="n">root_exception</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t connect to IBMQuantumExperience server: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">root_exception</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">online_backends</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
@@ -922,7 +927,7 @@
 <div class="viewcode-block" id="QuantumProgram.compile"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.compile">[docs]</a>    <span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">qobjid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">qobjid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compile the circuits into the exectution list.</span>
 
 <span class="sd">        This builds the internal &quot;to execute&quot; list which is list of quantum</span>
@@ -968,6 +973,15 @@
 <span class="sd">            shots (int): the number of shots</span>
 <span class="sd">            max_credits (int): the max credits to use 3, or 5</span>
 <span class="sd">            seed (int): the intial seed the simulatros use</span>
+<span class="sd">            hpc (dict): This will setup some parameter for</span>
+<span class="sd">                        ibmqx_hpc_qasm_simulator, using a JSON-like format like:</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &#39;multi_shot_optimization&#39;: Boolean,</span>
+<span class="sd">                            &#39;omp_num_threads&#39;: Numeric</span>
+<span class="sd">                        }</span>
+<span class="sd">                        This paramter MUST be used only with</span>
+<span class="sd">                        ibmqx_hpc_qasm_simulator, otherwise the SDK will warn</span>
+<span class="sd">                        the user via logging, and set the value to None.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            the job id and populates the qobj::</span>
@@ -1011,6 +1025,27 @@
         <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qobjid</span>
         <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_credits&quot;</span><span class="p">:</span> <span class="n">max_credits</span><span class="p">,</span> <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="n">backend</span><span class="p">,</span>
                           <span class="s2">&quot;shots&quot;</span><span class="p">:</span> <span class="n">shots</span><span class="p">}</span>
+
+        <span class="c1"># TODO This backend needs HPC parameters to be passed in order to work</span>
+        <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;ibmqx_hpc_qasm_simulator&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ibmqx_hpc_qasm_simulator backend needs HPC &#39;</span>
+                      <span class="s1">&#39;parameter. Setting defaults to hpc.multi_shot_optimization &#39;</span>
+                      <span class="s1">&#39;= true and hpc.omp_num_threads = 16&#39;</span><span class="p">)</span>
+                <span class="n">hpc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">}</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">hpc</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span>
+                <span class="p">(</span><span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">,</span><span class="s1">&#39;omp_num_threads&#39;</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Unknown HPC parameter format!&#39;</span><span class="p">)</span>
+
+            <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;hpc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hpc</span>
+        <span class="k">elif</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HPC paramter is only available for &#39;</span>
+                  <span class="s1">&#39;ibmqx_hpc_qasm_simulator. You are passing an HPC parameter &#39;</span>
+                  <span class="s1">&#39;but you are not using ibmqx_hpc_qasm_simulator, so we will &#39;</span>
+                  <span class="s1">&#39;ignore it.&#39;</span><span class="p">)</span>
+            <span class="n">hpc</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">name_of_circuits</span><span class="p">:</span>
@@ -1209,8 +1244,15 @@
             <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">]:</span>
                 <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;qasm&#39;</span><span class="p">:</span> <span class="n">job</span><span class="p">[</span><span class="s2">&quot;compiled_circuit_qasm&quot;</span><span class="p">]})</span>
+
+            <span class="n">hpc</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;backend&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ibmqx_hpc_qasm_simulator&#39;</span> <span class="ow">and</span>
+                    <span class="s1">&#39;hpc&#39;</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]):</span>
+                <span class="n">hpc</span> <span class="o">=</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;hpc&#39;</span><span class="p">]</span>
+
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">run_job</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
-                                        <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+                                        <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+                                        <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
             <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ResultError</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span>
             <span class="n">qobj_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_job</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
@@ -1309,7 +1351,7 @@
 <div class="viewcode-block" id="QuantumProgram.execute"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-                <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;Execute, compile, and run an array of quantum circuits).</span>
 
@@ -1354,6 +1396,15 @@
 <span class="sd">            shots (int): the number of shots</span>
 <span class="sd">            max_credits (int): the max credits to use 3, or 5</span>
 <span class="sd">            seed (int): the intial seed the simulatros use</span>
+<span class="sd">            hpc (dict): This will setup some parameter for</span>
+<span class="sd">                        ibmqx_hpc_qasm_simulator, using a JSON-like format like:</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &#39;multi_shot_optimization&#39;: Boolean,</span>
+<span class="sd">                            &#39;omp_num_threads&#39;: Numeric</span>
+<span class="sd">                        }</span>
+<span class="sd">                        This paramter MUST be used only with</span>
+<span class="sd">                        ibmqx_hpc_qasm_simulator, otherwise the SDK will warn</span>
+<span class="sd">                        the user via logging, and set the value to None.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            status done and populates the internal __quantum_program with the</span>
@@ -1366,7 +1417,8 @@
                             <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
                             <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
                             <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
-                            <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+                            <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+                            <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div></div>
 
@@ -1586,14 +1638,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/20.
+      Last updated on 2017/12/22.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>

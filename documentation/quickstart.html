@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Getting Started &#8212; QISKit SDK 0.3.14 documentation</title>
+    <title>Getting Started &#8212; QISKit SDK 0.3.15 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.14',
+        VERSION:     '0.3.15',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.3.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.3.15 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -82,6 +82,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#quantum-chips">Quantum Chips</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-real-chip-backend">Example Real Chip Backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-real-chip-backend-using-ibmq">Example Real Chip Backend using IBMQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-hpc-online-backend">Using the HPC online backend</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#project-organization">Project Organization</a></li>
@@ -348,6 +349,37 @@ the IBM Q features:</p>
 <p>Please check the Installation <a class="reference internal" href="install.html#qconfig-setup"><span class="std std-ref">4. Configure your API token and QE credentials</span></a> section for more details on
 how to setup your IBM Q credentials.</p>
 </div>
+<div class="section" id="using-the-hpc-online-backend">
+<h3>Using the HPC online backend<a class="headerlink" href="#using-the-hpc-online-backend" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">ibmqx_hpc_qasm_simulator</span></code> online backend has the following configurable
+parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">multi_shot_optimization</span></code>: boolean (True or False)</li>
+<li><code class="docutils literal"><span class="pre">omp_num_threads</span></code>: integer between 1 and 16.</li>
+</ul>
+<p>The parameters can be specified to <code class="docutils literal"><span class="pre">QuantumProgram.compile()</span></code> and
+<code class="docutils literal"><span class="pre">QuantumProgram.execute</span></code> via the <code class="docutils literal"><span class="pre">hpc</span></code> parameter. For example:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">QP_program</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
+                   <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
+                   <span class="n">seed</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span>
+                   <span class="n">hpc</span><span class="o">=</span><span class="p">{</span>
+                       <span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                       <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">:</span> <span class="mi">16</span>
+                   <span class="p">})</span>
+</pre></div>
+</td></tr></table></div>
+<p>Please note that these parameters must only be used for the
+<code class="docutils literal"><span class="pre">ibmqx_hpc_qasm_simulator</span></code>, and will be reset to None along with emitting
+a warning by the SDK if used with another backend.</p>
+</div>
 </div>
 <div class="section" id="project-organization">
 <h2>Project Organization<a class="headerlink" href="#project-organization" title="Permalink to this headline">¶</a></h2>
@@ -383,13 +415,13 @@ located in <em>test</em>. The <em>qiskit</em> directory is the main module of th
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.3.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.3.15 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/20.
+      Last updated on 2017/12/22.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
