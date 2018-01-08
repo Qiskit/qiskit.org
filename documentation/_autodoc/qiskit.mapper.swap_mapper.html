@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.mapper.swap_mapper &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit.mapper.swap_mapper &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.mapper.html" accesskey="U">qiskit.mapper package</a> &#187;</li> 
@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul class="current">
@@ -104,7 +105,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.simulators.html">qiskit.simulators package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 </ul>
 </li>
@@ -112,6 +112,7 @@
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -150,7 +151,7 @@
 <h1>qiskit.mapper.swap_mapper<a class="headerlink" href="#qiskit-mapper-swap-mapper" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.mapper.swap_mapper">
-<code class="descclassname">qiskit.mapper.</code><code class="descname">swap_mapper</code><span class="sig-paren">(</span><em>circuit_graph</em>, <em>coupling_graph</em>, <em>initial_layout=None</em>, <em>basis='cx</em>, <em>u1</em>, <em>u2</em>, <em>u3</em>, <em>id'</em>, <em>verbose=False</em>, <em>trials=20</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#swap_mapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper.swap_mapper" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">qiskit.mapper.</code><code class="descname">swap_mapper</code><span class="sig-paren">(</span><em>circuit_graph</em>, <em>coupling_graph</em>, <em>initial_layout=None</em>, <em>basis='cx</em>, <em>u1</em>, <em>u2</em>, <em>u3</em>, <em>id'</em>, <em>trials=20</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_mapping.html#swap_mapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.mapper.swap_mapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map a DAGCircuit onto a CouplingGraph using swap gates.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -161,18 +162,25 @@
 <li><strong>coupling_graph</strong> (<em>CouplingGraph</em>) – coupling graph to map onto</li>
 <li><strong>initial_layout</strong> (<em>dict</em>) – dict from qubits of circuit_graph to qubits
 of coupling_graph (optional)</li>
-<li><strong>basis</strong> (<em>str</em><em>, </em><em>optional</em>) – basis string specifying basis of output
-DAGCircuit</li>
-<li><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – print more information</li>
+<li><strong>basis</strong> (<em>str</em>) – basis string specifying basis of output DAGCircuit</li>
+<li><strong>trials</strong> (<em>int</em>) – number of trials.</li>
+<li><strong>seed</strong> (<em>int</em>) – initial seed.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Returns a DAGCircuit object containing a circuit equivalent to
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">object containing a circuit equivalent to
 circuit_graph that respects couplings in coupling_graph, and
 a layout dict mapping qubits of circuit_graph into qubits
 of coupling_graph. The layout may differ from the initial_layout
 if the first layer of gates cannot be executed on the
 initial_layout.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit" title="qiskit.dagcircuit.DAGCircuit">DAGCircuit</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.mapper.MapperError.html#qiskit.mapper.MapperError" title="qiskit.mapper.MapperError"><code class="xref py py-exc docutils literal"><span class="pre">MapperError</span></code></a> – if there was any error during the mapping or with the
+parameters.</p>
 </td>
 </tr>
 </tbody>
@@ -208,7 +216,7 @@ initial_layout.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.mapper.html" >qiskit.mapper package</a> &#187;</li> 
@@ -216,8 +224,8 @@ initial_layout.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit package &#8212; QISKit SDK 0.3.16 ドキュメント</title>
+    <title>qiskit package &#8212; QISKit SDK 0.4.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -28,7 +28,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="qiskit.dagcircuit package" href="qiskit.dagcircuit.html" />
+    <link rel="next" title="qiskit.backends package" href="qiskit.backends.html" />
     <link rel="prev" title="ライブラリの構成" href="../dev_introduction.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
@@ -53,7 +53,7 @@
           <a href="../py-modindex.html" title="Pythonモジュール索引"
              >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.dagcircuit.html" title="qiskit.dagcircuit package"
+          <a href="qiskit.backends.html" title="qiskit.backends package"
              accesskey="N">次へ</a> |</li>
         <li class="right" >
           <a href="../dev_introduction.html" title="ライブラリの構成"
@@ -64,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
  
       </ul>
     </div>
@@ -84,11 +84,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SDKリファレンス</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.simulators.html">qiskit.simulators package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 </ul>
 </li>
@@ -98,9 +98,13 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumProgram.html">qiskit.QuantumProgram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumRegister.html">qiskit.QuantumRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Reset.html">qiskit.Reset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Result.html">qiskit.Result</a></li>
 </ul>
 </li>
@@ -117,8 +121,8 @@
   <p class="topless"><a href="../dev_introduction.html"
                         title="前の章へ">ライブラリの構成</a></p>
   <h4>次のトピックへ</h4>
-  <p class="topless"><a href="qiskit.dagcircuit.html"
-                        title="次の章へ">qiskit.dagcircuit package</a></p>
+  <p class="topless"><a href="qiskit.backends.html"
+                        title="次の章へ">qiskit.backends package</a></p>
   <div role="note" aria-label="source link">
     <h3>このページ</h3>
     <ul class="this-page-menu">
@@ -146,6 +150,7 @@
             
   <div class="section" id="module-qiskit">
 <span id="qiskit-package"></span><h1>qiskit package<a class="headerlink" href="#module-qiskit" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Main QISKit public functionality.</p>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <table border="1" class="longtable docutils">
@@ -154,23 +159,23 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-obj docutils literal"><span class="pre">dagcircuit</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.backends.html#module-qiskit.backends" title="qiskit.backends"><code class="xref py py-obj docutils literal"><span class="pre">backends</span></code></a></td>
+<td>Utilities for using backends.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.extensions.html#module-qiskit.extensions" title="qiskit.extensions"><code class="xref py py-obj docutils literal"><span class="pre">extensions</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-obj docutils literal"><span class="pre">dagcircuit</span></code></a></td>
+<td>Module for DAG Circuits.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-obj docutils literal"><span class="pre">mapper</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.extensions.html#module-qiskit.extensions" title="qiskit.extensions"><code class="xref py py-obj docutils literal"><span class="pre">extensions</span></code></a></td>
+<td>Extensions to quantum circuits.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a></td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-obj docutils literal"><span class="pre">mapper</span></code></a></td>
+<td>Utils for mapping.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.simulators.html#module-qiskit.simulators" title="qiskit.simulators"><code class="xref py py-obj docutils literal"><span class="pre">simulators</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a></td>
+<td>Tools for QASM.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-obj docutils literal"><span class="pre">unroll</span></code></a></td>
-<td></td>
+<td>Unroll QASM and different backends.</td>
 </tr>
 </tbody>
 </table>
@@ -198,14 +203,26 @@
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.InstructionSet.html#qiskit.InstructionSet" title="qiskit.InstructionSet"><code class="xref py py-obj docutils literal"><span class="pre">InstructionSet</span></code></a></td>
 <td>Instruction collection.</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.JobProcessor.html#qiskit.JobProcessor" title="qiskit.JobProcessor"><code class="xref py py-obj docutils literal"><span class="pre">JobProcessor</span></code></a></td>
+<td>Process a series of jobs and collect the results</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.Measure.html#qiskit.Measure" title="qiskit.Measure"><code class="xref py py-obj docutils literal"><span class="pre">Measure</span></code></a></td>
+<td>Quantum measurement in the computational basis.</td>
+</tr>
 <tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-obj docutils literal"><span class="pre">QuantumCircuit</span></code></a></td>
 <td>Quantum circuit.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-obj docutils literal"><span class="pre">QuantumProgram</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob" title="qiskit.QuantumJob"><code class="xref py py-obj docutils literal"><span class="pre">QuantumJob</span></code></a></td>
+<td>Creates a quantum circuit job</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-obj docutils literal"><span class="pre">QuantumProgram</span></code></a></td>
 <td>Quantum Program Class.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-obj docutils literal"><span class="pre">QuantumRegister</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-obj docutils literal"><span class="pre">QuantumRegister</span></code></a></td>
 <td>Implement a quantum register.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.Reset.html#qiskit.Reset" title="qiskit.Reset"><code class="xref py py-obj docutils literal"><span class="pre">Reset</span></code></a></td>
+<td>Qubit reset.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.Result.html#qiskit.Result" title="qiskit.Result"><code class="xref py py-obj docutils literal"><span class="pre">Result</span></code></a></td>
 <td>Result Class.</td>
@@ -245,7 +262,7 @@
           <a href="../py-modindex.html" title="Pythonモジュール索引"
              >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.dagcircuit.html" title="qiskit.dagcircuit package"
+          <a href="qiskit.backends.html" title="qiskit.backends package"
              >次へ</a> |</li>
         <li class="right" >
           <a href="../dev_introduction.html" title="ライブラリの構成"
@@ -256,14 +273,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/22
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
+      最終更新: 2018/01/08
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
     </div>
   </body>
 </html>

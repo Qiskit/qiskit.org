@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.unroll._dagbackend &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit.unroll._dagbackend &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -75,6 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -130,6 +131,7 @@
 
 <span class="sd">        basis is a list of operation name strings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DAGBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">15</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="kc">None</span>
@@ -191,7 +193,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
-                <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
+                <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
                                            <span class="n">arg</span><span class="p">)),</span> <span class="n">condition</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAGBackend.cx"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.DAGBackend.html#qiskit.unroll.DAGBackend.cx">[docs]</a>    <span class="k">def</span> <span class="nf">cx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">):</span>
@@ -234,9 +236,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
             <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qubitlists</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-                    <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qubitlists</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qubit</span><span class="p">):</span>
+                    <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
             <span class="k">if</span> <span class="s2">&quot;barrier&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -280,7 +282,7 @@
 <span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> \
-           <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="n">BackendError</span><span class="p">(</span><span class="s2">&quot;opaque gate </span><span class="si">%s</span><span class="s2"> not in basis&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -291,7 +293,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
-                <span class="n">name</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
+                <span class="n">name</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
                                            <span class="n">args</span><span class="p">)),</span> <span class="n">condition</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAGBackend.end_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.DAGBackend.html#qiskit.unroll.DAGBackend.end_gate">[docs]</a>    <span class="k">def</span> <span class="nf">end_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -332,15 +334,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

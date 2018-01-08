@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumcircuit &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit._quantumcircuit &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -75,6 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -273,18 +274,26 @@
         <span class="k">return</span> <span class="n">string</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.measure"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.measure">[docs]</a>    <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Measure quantum bit into classical bit (tuples).&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Measure quantum bit into classical bit (tuples).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Gate: the attached measure gate.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if qubit is not in this circuit or bad format;</span>
+<span class="sd">                if cbit is not in this circuit or not creg.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">)</span> <span class="ow">and</span> \
            <span class="nb">isinstance</span><span class="p">(</span><span class="n">cbit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">cbit</span><span class="p">):</span>
             <span class="n">instructions</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qubit</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
                 <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">measure</span><span class="p">((</span><span class="n">qubit</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">cbit</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span>
             <span class="k">return</span> <span class="n">instructions</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_check_creg</span><span class="p">(</span><span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">cbit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Measure</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_creg</span><span class="p">(</span><span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">cbit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Measure</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.reset"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quantum_register</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reset q.&quot;&quot;&quot;</span>
@@ -293,9 +302,8 @@
             <span class="k">for</span> <span class="n">sizes</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">quantum_register</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
                 <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">((</span><span class="n">quantum_register</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)))</span>
             <span class="k">return</span> <span class="n">instructions</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Reset</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Reset</span><span class="p">(</span><span class="n">quantum_register</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div></div>
 </pre></div>
 
           </div>
@@ -318,15 +326,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

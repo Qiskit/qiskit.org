@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.extensions.standard.t &#8212; QISKit SDK 0.3.16 ドキュメント</title>
+    <title>qiskit.extensions.standard.t &#8212; QISKit SDK 0.4.0 ドキュメント</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -99,6 +99,7 @@
             
   <h1>qiskit.extensions.standard.t のソースコード</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=invalid-name</span>
 
 <span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
 <span class="c1">#</span>
@@ -118,13 +119,12 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">T=sqrt(S) phase gate or its inverse.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">InstructionSet</span>
-<span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">header</span>
-<span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">u1</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">pi</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">header</span>  <span class="c1"># pylint: disable=unused-import</span>
 
 
 <span class="k">class</span> <span class="nc">TGate</span><span class="p">(</span><span class="n">CompositeGate</span><span class="p">):</span>
@@ -133,7 +133,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new T gate.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TGate</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="n">circ</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reapply this gate to corresponding qubits in circ.&quot;&quot;&quot;</span>
@@ -145,8 +145,8 @@
         <span class="n">phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">phi</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="s2">&quot;t </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="s2">&quot;tdg </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="s2">&quot;tdg </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
 
 <div class="viewcode-block" id="t"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.standard.html#qiskit.t">[ドキュメント]</a><span class="k">def</span> <span class="nf">t</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
@@ -156,9 +156,9 @@
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
             <span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">((</span><span class="n">q</span><span class="p">,</span> <span class="n">j</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">gs</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">TGate</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">TGate</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
 
 
 <span class="k">def</span> <span class="nf">tdg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
@@ -192,15 +192,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/22
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
+      最終更新: 2018/01/08
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
     </div>
   </body>
 </html>

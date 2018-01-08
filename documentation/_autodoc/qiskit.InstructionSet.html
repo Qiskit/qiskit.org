@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.InstructionSet &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit.InstructionSet &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.QuantumCircuit" href="qiskit.QuantumCircuit.html" />
+    <link rel="next" title="qiskit.JobProcessor" href="qiskit.JobProcessor.html" />
     <link rel="prev" title="qiskit.Instruction" href="qiskit.Instruction.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
@@ -52,7 +52,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="qiskit.QuantumCircuit.html" title="qiskit.QuantumCircuit"
+          <a href="qiskit.JobProcessor.html" title="qiskit.JobProcessor"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="qiskit.Instruction.html" title="qiskit.Instruction"
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -90,15 +90,20 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.InstructionSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumProgram.html">qiskit.QuantumProgram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumRegister.html">qiskit.QuantumRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Reset.html">qiskit.Reset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Result.html">qiskit.Result</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -106,8 +111,8 @@
   <p class="topless"><a href="qiskit.Instruction.html"
                         title="previous chapter">qiskit.Instruction</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="qiskit.QuantumCircuit.html"
-                        title="next chapter">qiskit.QuantumCircuit</a></p>
+  <p class="topless"><a href="qiskit.JobProcessor.html"
+                        title="next chapter">qiskit.JobProcessor</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -153,7 +158,7 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.InstructionSet.add" title="qiskit.InstructionSet.add"><code class="xref py py-obj docutils literal"><span class="pre">add</span></code></a>(gate)</td>
 <td>Add instruction to set.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.InstructionSet.c_if" title="qiskit.InstructionSet.c_if"><code class="xref py py-obj docutils literal"><span class="pre">c_if</span></code></a>(c,&nbsp;val)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.InstructionSet.c_if" title="qiskit.InstructionSet.c_if"><code class="xref py py-obj docutils literal"><span class="pre">c_if</span></code></a>(classical,&nbsp;val)</td>
 <td>Add classical control register to all instructions.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.InstructionSet.inverse" title="qiskit.InstructionSet.inverse"><code class="xref py py-obj docutils literal"><span class="pre">inverse</span></code></a>()</td>
@@ -178,7 +183,7 @@
 
 <dl class="method">
 <dt id="qiskit.InstructionSet.c_if">
-<code class="descname">c_if</code><span class="sig-paren">(</span><em>c</em>, <em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_instructionset.html#InstructionSet.c_if"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.InstructionSet.c_if" title="Permalink to this definition">¶</a></dt>
+<code class="descname">c_if</code><span class="sig-paren">(</span><em>classical</em>, <em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_instructionset.html#InstructionSet.c_if"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.InstructionSet.c_if" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add classical control register to all instructions.</p>
 </dd></dl>
 
@@ -214,7 +219,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="qiskit.QuantumCircuit.html" title="qiskit.QuantumCircuit"
+          <a href="qiskit.JobProcessor.html" title="qiskit.JobProcessor"
              >next</a> |</li>
         <li class="right" >
           <a href="qiskit.Instruction.html" title="qiskit.Instruction"
@@ -225,15 +230,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

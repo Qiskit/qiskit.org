@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -75,6 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -126,9 +127,10 @@
 <span class="sd">composed, and modified. Some natural properties like depth can be computed</span>
 <span class="sd">directly from the graph.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">sympy</span>
 <span class="kn">from</span> <span class="nn">._dagcircuiterror</span> <span class="k">import</span> <span class="n">DAGCircuitError</span>
 
 
@@ -140,6 +142,7 @@
 <span class="sd">    The nodes are connected by directed edges that correspond to qubits and</span>
 <span class="sd">    bits.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
 
 <div class="viewcode-block" id="DAGCircuit.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an empty circuit.&quot;&quot;&quot;</span>
@@ -217,7 +220,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[(</span><span class="n">newname</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[(</span><span class="n">regname</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="o">.</span><span class="n">pop</span><span class="p">((</span><span class="n">regname</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
         <span class="c1"># n node d = data</span>
-        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">nodes_iter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;in&quot;</span> <span class="ow">or</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;out&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">regname</span><span class="p">:</span>
                     <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">newname</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
@@ -238,7 +241,7 @@
                     <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">regname</span><span class="p">:</span>
                         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">newname</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
         <span class="c1"># eX = edge, d= data</span>
-        <span class="k">for</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">regname</span><span class="p">:</span>
                 <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">newname</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span></div>
 
@@ -366,13 +369,13 @@
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># &quot;barrier&quot; is a special case</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">qargs</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of qubits for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cargs</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of bits for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">params</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of parameters for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
 
@@ -434,16 +437,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">node_counter</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nparams</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">node_counter</span><span class="p">][</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncondition</span>
 
-<div class="viewcode-block" id="DAGCircuit.apply_operation_back"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.apply_operation_back">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="p">[],</span> <span class="n">params</span><span class="o">=</span><span class="p">[],</span>
+<div class="viewcode-block" id="DAGCircuit.apply_operation_back"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.apply_operation_back">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply an operation to the output of the circuit.</span>
 
 <span class="sd">        name is a string</span>
 <span class="sd">        qargs is a list of tuples like (&quot;q&quot;,0)</span>
 <span class="sd">        cargs is a list of tuples like (&quot;c&quot;,0)</span>
-<span class="sd">        params is a list of strings that represent floats</span>
+<span class="sd">        params is a list of symbols that represent numbers</span>
 <span class="sd">        condition is either None or a tuple (string,int) giving (creg,value)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cargs</span> <span class="o">=</span> <span class="n">cargs</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="n">all_cbits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bits_in_condition</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
         <span class="n">all_cbits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span>
 
@@ -452,7 +457,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">qargs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">all_cbits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">)),</span>
+        <span class="c1"># params is a list of sympy symbols and the str() method</span>
+        <span class="c1"># will return Python expressions. To get the correct</span>
+        <span class="c1"># OpenQASM expression, we need to replace &quot;**&quot; with &quot;^&quot;.</span>
+        <span class="n">node_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
+                               <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">node_params</span><span class="p">,</span>
                           <span class="n">condition</span><span class="p">)</span>
         <span class="c1"># Add new in-edges from predecessors of the output nodes to the</span>
         <span class="c1"># operation node while deleting the old in-edges of the output nodes</span>
@@ -466,7 +476,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">node_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">q</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.apply_operation_front"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.apply_operation_front">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="p">[],</span> <span class="n">params</span><span class="o">=</span><span class="p">[],</span>
+<div class="viewcode-block" id="DAGCircuit.apply_operation_front"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.apply_operation_front">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply an operation to the input of the circuit.</span>
 
@@ -476,6 +486,8 @@
 <span class="sd">        params is a list of strings that represent floats</span>
 <span class="sd">        condition is either None or a tuple (string,int) giving (creg,value)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cargs</span> <span class="o">=</span> <span class="n">cargs</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="n">all_cbits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bits_in_condition</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
         <span class="n">all_cbits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span>
 
@@ -484,7 +496,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">qargs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_map</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">all_cbits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_map</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">)),</span>
+        <span class="c1"># params is a list of sympy symbols and the str() method</span>
+        <span class="c1"># will return Python expressions. To get the correct</span>
+        <span class="c1"># OpenQASM expression, we need to replace &quot;**&quot; with &quot;^&quot;.</span>
+        <span class="n">node_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
+                               <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">node_params</span><span class="p">,</span>
                           <span class="n">condition</span><span class="p">)</span>
         <span class="c1"># Add new out-edges to successors of the input nodes from the</span>
         <span class="c1"># operation node while deleting the old out-edges of the input nodes</span>
@@ -630,7 +647,7 @@
             <span class="n">n_condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">bit0</span><span class="p">,</span> <span class="n">bit0</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">condition</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">n_condition</span>
 
-<div class="viewcode-block" id="DAGCircuit.compose_back"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.compose_back">[docs]</a>    <span class="k">def</span> <span class="nf">compose_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wire_map</span><span class="o">=</span><span class="p">{}):</span>
+<div class="viewcode-block" id="DAGCircuit.compose_back"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.compose_back">[docs]</a>    <span class="k">def</span> <span class="nf">compose_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wire_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply the input circuit to the output of this circuit.</span>
 
 <span class="sd">        The two bases must be &quot;compatible&quot; or an exception occurs.</span>
@@ -638,6 +655,7 @@
 <span class="sd">        to a subset of output qubits of this circuit.</span>
 <span class="sd">        wire_map[input_qubit_to_input_circuit] = output_qubit_of_self</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">wire_map</span> <span class="o">=</span> <span class="n">wire_map</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="n">union_basis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_union_basis</span><span class="p">(</span><span class="n">input_circuit</span><span class="p">)</span>
         <span class="n">union_gates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_union_gates</span><span class="p">(</span><span class="n">input_circuit</span><span class="p">)</span>
 
@@ -665,7 +683,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gates</span> <span class="o">=</span> <span class="n">union_gates</span>
         <span class="n">topological_sort</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">(</span><span class="n">input_circuit</span><span class="o">.</span><span class="n">multi_graph</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topological_sort</span><span class="p">:</span>
-            <span class="n">nd</span> <span class="o">=</span> <span class="n">input_circuit</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+            <span class="n">nd</span> <span class="o">=</span> <span class="n">input_circuit</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;in&quot;</span><span class="p">:</span>
                 <span class="c1"># if in wire_map, get new name, else use existing name</span>
                 <span class="n">m_name</span> <span class="o">=</span> <span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
@@ -688,7 +706,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;bad node type </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.compose_front"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.compose_front">[docs]</a>    <span class="k">def</span> <span class="nf">compose_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wire_map</span><span class="o">=</span><span class="p">{}):</span>
+<div class="viewcode-block" id="DAGCircuit.compose_front"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.compose_front">[docs]</a>    <span class="k">def</span> <span class="nf">compose_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wire_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply the input circuit to the input of this circuit.</span>
 
 <span class="sd">        The two bases must be &quot;compatible&quot; or an exception occurs.</span>
@@ -696,6 +714,7 @@
 <span class="sd">        to a subset of input qubits of</span>
 <span class="sd">        this circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">wire_map</span> <span class="o">=</span> <span class="n">wire_map</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="n">union_basis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_union_basis</span><span class="p">(</span><span class="n">input_circuit</span><span class="p">)</span>
         <span class="n">union_gates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_union_gates</span><span class="p">(</span><span class="n">input_circuit</span><span class="p">)</span>
 
@@ -784,11 +803,14 @@
         <span class="k">return</span> <span class="n">out</span>
 
 <div class="viewcode-block" id="DAGCircuit.qasm"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.qasm">[docs]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decls_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">add_swap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-             <span class="n">no_decls</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">qeflag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+             <span class="n">no_decls</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">qeflag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eval_symbols</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a string containing QASM for this circuit.</span>
 
 <span class="sd">        if qeflag is True, add a line to include &quot;qelib1.inc&quot;</span>
 <span class="sd">        and only generate gate code for gates not in qelib1.</span>
+
+<span class="sd">        if eval_symbols is True, evaluate all symbolic</span>
+<span class="sd">        expressions to their floating point representation.</span>
 
 <span class="sd">        if no_decls is True, only print the instructions.</span>
 
@@ -854,7 +876,7 @@
                     <span class="k">if</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> \
                                <span class="o">%</span> <span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;cargs&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;cargs&quot;</span><span class="p">]:</span>
                         <span class="n">nm</span> <span class="o">=</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
                         <span class="k">if</span> <span class="n">aliases</span><span class="p">:</span>
                             <span class="n">qarglist</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aliases</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">])</span>
@@ -862,8 +884,12 @@
                             <span class="n">qarglist</span> <span class="o">=</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">]</span>
                         <span class="n">qarg</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
                                             <span class="n">qarglist</span><span class="p">))</span>
-                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">eval_symbols</span><span class="p">:</span>
+                                <span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+                                                     <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]))</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span>
                             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">) </span><span class="si">%s</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">qarg</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">qarg</span><span class="p">)</span>
@@ -871,7 +897,7 @@
                         <span class="k">if</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;measure&quot;</span><span class="p">:</span>
                             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;cargs&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> \
                                 <span class="nb">len</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> \
-                                <span class="nb">len</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;bad node data&quot;</span>
+                                <span class="ow">not</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">],</span> <span class="s2">&quot;bad node data&quot;</span>
                             <span class="n">qname</span> <span class="o">=</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
                             <span class="n">qindex</span> <span class="o">=</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">aliases</span><span class="p">:</span>
@@ -946,15 +972,16 @@
                 <span class="c1"># Otherwise, use the corresponding output nodes of self</span>
                 <span class="c1"># and compute the predecessor.</span>
                 <span class="n">full_succ_map</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
-                <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])[</span>
-                    <span class="mi">0</span><span class="p">]</span>
+                <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span>\
                     <span class="s2">&quot;too many predecessors for (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%d</span><span class="s2">) output node&quot;</span> <span class="o">%</span> <span class="p">(</span>
                         <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">full_pred_map</span><span class="p">,</span> <span class="n">full_succ_map</span>
 
-<div class="viewcode-block" id="DAGCircuit.substitute_circuit_all"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.substitute_circuit_all">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_circuit_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="DAGCircuit.substitute_circuit_all"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.substitute_circuit_all">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_circuit_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Replace every occurrence of named operation with input_circuit.&quot;&quot;&quot;</span>
+        <span class="n">wires</span> <span class="o">=</span> <span class="n">wires</span> <span class="ow">or</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not in the list of basis operations&quot;</span>
                                   <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
@@ -1010,10 +1037,8 @@
                             <span class="c1"># Insert a new node</span>
                             <span class="n">condition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_condition</span><span class="p">(</span><span class="n">wire_map</span><span class="p">,</span>
                                                             <span class="n">md</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">])</span>
-                            <span class="n">m_qargs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span>
-                                               <span class="n">md</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">]))</span>
-                            <span class="n">m_cargs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span>
-                                               <span class="n">md</span><span class="p">[</span><span class="s2">&quot;cargs&quot;</span><span class="p">]))</span>
+                            <span class="n">m_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">md</span><span class="p">[</span><span class="s2">&quot;qargs0&quot;</span><span class="p">]]</span>
+                            <span class="n">m_cargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">md</span><span class="p">[</span><span class="s2">&quot;cargs0&quot;</span><span class="p">]]</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">m_qargs</span><span class="p">,</span> <span class="n">m_cargs</span><span class="p">,</span>
                                               <span class="n">md</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">],</span> <span class="n">condition</span><span class="p">)</span>
                             <span class="c1"># Add edges from predecessor nodes to new node</span>
@@ -1027,7 +1052,7 @@
                                 <span class="n">full_pred_map</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_counter</span><span class="p">)</span>
                     <span class="c1"># Connect all predecessors and successors, and remove</span>
                     <span class="c1"># residual edges between input and output nodes</span>
-                    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">full_pred_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">full_pred_map</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">full_succ_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span>
                                                   <span class="n">name</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
                         <span class="n">o_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span>
@@ -1035,19 +1060,19 @@
                         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">o_pred</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o_pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> \
                                 <span class="s2">&quot;expected 2 predecessors here&quot;</span>
-                            <span class="n">p</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span>
-                                            <span class="n">o_pred</span><span class="p">))</span>
+                            <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">o_pred</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">]]</span>
                             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> \
                                 <span class="s2">&quot;expected 1 predecessor to pass filter&quot;</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span>
                                 <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.substitute_circuit_one"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.substitute_circuit_one">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_circuit_one</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="DAGCircuit.substitute_circuit_one"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.substitute_circuit_one">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_circuit_one</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Replace one node with input_circuit.</span>
 
 <span class="sd">        node is a reference to a node of self.multi_graph of type &quot;op&quot;</span>
 <span class="sd">        input_circuit is a DAGCircuit</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">wires</span> <span class="o">=</span> <span class="n">wires</span> <span class="ow">or</span> <span class="kc">None</span>
         <span class="n">nd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
 
         <span class="c1"># TODO: reuse common code in substitute_circuit_one and _all</span>
@@ -1121,13 +1146,13 @@
                         <span class="n">full_pred_map</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_counter</span><span class="p">)</span>
             <span class="c1"># Connect all predecessors and successors, and remove</span>
             <span class="c1"># residual edges between input and output nodes</span>
-            <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">full_pred_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">full_pred_map</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span>
                     <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">full_succ_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
                 <span class="n">o_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">o_pred</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o_pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;expected 2 predecessors here&quot;</span>
-                    <span class="n">p</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">o_pred</span><span class="p">))</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">o_pred</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">full_pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">]]</span>
                     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;expected 1 predecessor to pass filter&quot;</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])</span></div>
 
@@ -1234,9 +1259,9 @@
             <span class="n">wires_loop</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">wires_with_ops_remaining</span><span class="p">)</span>
             <span class="n">emit</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wires_loop</span><span class="p">:</span>
-                <span class="n">oe</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span><span class="p">,</span>
-                                 <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">nbunch</span><span class="o">=</span><span class="p">[</span><span class="n">node_map</span><span class="p">[</span><span class="n">w</span><span class="p">]],</span>
-                                                            <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+                <span class="n">oe</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="n">nbunch</span><span class="o">=</span><span class="p">[</span><span class="n">node_map</span><span class="p">[</span><span class="n">w</span><span class="p">]],</span>
+                                                            <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span>
+                      <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span><span class="p">]</span>
                 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">oe</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;should only be one out-edge per (qu)bit&quot;</span>
                 <span class="n">nxt_nd_idx</span> <span class="o">=</span> <span class="n">oe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">nxt_nd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">nxt_nd_idx</span><span class="p">]</span>
@@ -1306,7 +1331,7 @@
                 <span class="n">ca</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;cargs&quot;</span><span class="p">])</span>
                 <span class="n">pa</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span>
                 <span class="n">co</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">])</span>
-                <span class="n">cob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bits_in_condition</span><span class="p">(</span><span class="n">co</span><span class="p">)</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bits_in_condition</span><span class="p">(</span><span class="n">co</span><span class="p">)</span>
                 <span class="c1"># Add node to new_layer</span>
                 <span class="n">new_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
                                                <span class="n">qa</span><span class="p">,</span> <span class="n">ca</span><span class="p">,</span> <span class="n">pa</span><span class="p">,</span> <span class="n">co</span><span class="p">)</span>
@@ -1402,15 +1427,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>
