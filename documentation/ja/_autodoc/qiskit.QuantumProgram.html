@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.QuantumProgram &#8212; QISKit SDK 0.3.16 ドキュメント</title>
+    <title>qiskit.QuantumProgram &#8212; QISKit SDK 0.4.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -29,7 +29,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="qiskit.QuantumRegister" href="qiskit.QuantumRegister.html" />
-    <link rel="prev" title="qiskit.QuantumCircuit" href="qiskit.QuantumCircuit.html" />
+    <link rel="prev" title="qiskit.QuantumJob" href="qiskit.QuantumJob.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -56,7 +56,7 @@
           <a href="qiskit.QuantumRegister.html" title="qiskit.QuantumRegister"
              accesskey="N">次へ</a> |</li>
         <li class="right" >
-          <a href="qiskit.QuantumCircuit.html" title="qiskit.QuantumCircuit"
+          <a href="qiskit.QuantumJob.html" title="qiskit.QuantumJob"
              accesskey="P">前へ</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
@@ -64,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -91,9 +91,13 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.QuantumProgram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumRegister.html">qiskit.QuantumRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Reset.html">qiskit.Reset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Result.html">qiskit.Result</a></li>
 </ul>
 </li>
@@ -104,8 +108,8 @@
 
 <p class="spacer"/>
   <h4>前のトピックへ</h4>
-  <p class="topless"><a href="qiskit.QuantumCircuit.html"
-                        title="前の章へ">qiskit.QuantumCircuit</a></p>
+  <p class="topless"><a href="qiskit.QuantumJob.html"
+                        title="前の章へ">qiskit.QuantumJob</a></p>
   <h4>次のトピックへ</h4>
   <p class="topless"><a href="qiskit.QuantumRegister.html"
                         title="次の章へ">qiskit.QuantumRegister</a></p>
@@ -143,20 +147,20 @@
 <p>Quantum Program Class.</p>
 <p>Class internal properties.</p>
 <p>Elements that are not python identifiers or string constants are denoted
-by 「–description (type)–」. For example, a circuit’s name is denoted by
-「–circuit name (string)–」 and might have the value 「teleport」.</p>
+by &quot;--description (type)--&quot;. For example, a circuit's name is denoted by
+&quot;--circuit name (string)--&quot; and might have the value &quot;teleport&quot;.</p>
 <p>Internal:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">__quantum_registers</span> <span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">dic</span><span class="p">]):</span> <span class="n">An</span> <span class="n">dictionary</span> <span class="n">of</span> <span class="n">quantum</span> <span class="n">registers</span>
     <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">quantum</span> <span class="n">program</span><span class="o">.</span>
     <span class="n">__quantum_registers</span> <span class="o">=</span>
         <span class="p">{</span>
-        <span class="o">--</span><span class="n">register</span> <span class="n">name</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">--</span><span class="p">:</span> <span class="n">QuantumRegistor</span><span class="p">,</span>
+        <span class="o">--</span><span class="n">register</span> <span class="n">name</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">--</span><span class="p">:</span> <span class="n">QuantumRegister</span><span class="p">,</span>
         <span class="p">}</span>
 <span class="n">__classical_registers</span> <span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">dic</span><span class="p">]):</span> <span class="n">An</span> <span class="n">ordered</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">classical</span>
     <span class="n">registers</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">quantum</span> <span class="n">program</span><span class="o">.</span>
     <span class="n">__classical_registers</span> <span class="o">=</span>
         <span class="p">{</span>
-        <span class="o">--</span><span class="n">register</span> <span class="n">name</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">--</span><span class="p">:</span> <span class="n">ClassicalRegistor</span><span class="p">,</span>
+        <span class="o">--</span><span class="n">register</span> <span class="n">name</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">--</span><span class="p">:</span> <span class="n">ClassicalRegister</span><span class="p">,</span>
         <span class="p">}</span>
 <span class="n">__quantum_program</span> <span class="p">(</span><span class="n">dic</span><span class="p">):</span> <span class="n">An</span> <span class="n">dictionary</span> <span class="n">of</span> <span class="n">quantum</span> <span class="n">circuits</span>
     <span class="n">__quantum_program</span> <span class="o">=</span>
@@ -185,19 +189,19 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.available_backends" title="qiskit.QuantumProgram.available_backends"><code class="xref py py-obj docutils literal"><span class="pre">available_backends</span></code></a>()</td>
 <td>All the backends that are seen by QISKIT.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.compile" title="qiskit.QuantumProgram.compile"><code class="xref py py-obj docutils literal"><span class="pre">compile</span></code></a>(name_of_circuits[,&nbsp;backend,&nbsp;config,&nbsp;…])</td>
-<td>Compile the circuits into the exectution list.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.compile" title="qiskit.QuantumProgram.compile"><code class="xref py py-obj docutils literal"><span class="pre">compile</span></code></a>(name_of_circuits[,&nbsp;backend,&nbsp;config,&nbsp;...])</td>
+<td>Compile the circuits into the execution list.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_circuit" title="qiskit.QuantumProgram.create_circuit"><code class="xref py py-obj docutils literal"><span class="pre">create_circuit</span></code></a>(name[,&nbsp;qregisters,&nbsp;cregisters])</td>
 <td>Create a empty Quantum Circuit in the Quantum Program.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_classical_register" title="qiskit.QuantumProgram.create_classical_register"><code class="xref py py-obj docutils literal"><span class="pre">create_classical_register</span></code></a>(name,&nbsp;size[,&nbsp;verbose])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_classical_register" title="qiskit.QuantumProgram.create_classical_register"><code class="xref py py-obj docutils literal"><span class="pre">create_classical_register</span></code></a>(name,&nbsp;size)</td>
 <td>Create a new Classical Register.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_classical_registers" title="qiskit.QuantumProgram.create_classical_registers"><code class="xref py py-obj docutils literal"><span class="pre">create_classical_registers</span></code></a>(registers_array)</td>
 <td>Create a new set of Classical Registers based on a array of them.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_quantum_register" title="qiskit.QuantumProgram.create_quantum_register"><code class="xref py py-obj docutils literal"><span class="pre">create_quantum_register</span></code></a>(name,&nbsp;size[,&nbsp;verbose])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_quantum_register" title="qiskit.QuantumProgram.create_quantum_register"><code class="xref py py-obj docutils literal"><span class="pre">create_quantum_register</span></code></a>(name,&nbsp;size)</td>
 <td>Create a new Quantum Register.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.create_quantum_registers" title="qiskit.QuantumProgram.create_quantum_registers"><code class="xref py py-obj docutils literal"><span class="pre">create_quantum_registers</span></code></a>(register_array)</td>
@@ -206,19 +210,25 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_circuit" title="qiskit.QuantumProgram.destroy_circuit"><code class="xref py py-obj docutils literal"><span class="pre">destroy_circuit</span></code></a>(name)</td>
 <td>Destroy a Quantum Circuit in the Quantum Program.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_classical_register" title="qiskit.QuantumProgram.destroy_classical_register"><code class="xref py py-obj docutils literal"><span class="pre">destroy_classical_register</span></code></a>(name[,&nbsp;verbose])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_classical_register" title="qiskit.QuantumProgram.destroy_classical_register"><code class="xref py py-obj docutils literal"><span class="pre">destroy_classical_register</span></code></a>(name)</td>
 <td>Destroy an existing Classical Register.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_classical_registers" title="qiskit.QuantumProgram.destroy_classical_registers"><code class="xref py py-obj docutils literal"><span class="pre">destroy_classical_registers</span></code></a>(registers_array)</td>
 <td>Destroy a set of Classical Registers based on a array of them.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_quantum_register" title="qiskit.QuantumProgram.destroy_quantum_register"><code class="xref py py-obj docutils literal"><span class="pre">destroy_quantum_register</span></code></a>(name[,&nbsp;verbose])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_quantum_register" title="qiskit.QuantumProgram.destroy_quantum_register"><code class="xref py py-obj docutils literal"><span class="pre">destroy_quantum_register</span></code></a>(name)</td>
 <td>Destroy an existing Quantum Register.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.destroy_quantum_registers" title="qiskit.QuantumProgram.destroy_quantum_registers"><code class="xref py py-obj docutils literal"><span class="pre">destroy_quantum_registers</span></code></a>(register_array)</td>
 <td>Destroy a set of Quantum Registers based on a array of them.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.execute" title="qiskit.QuantumProgram.execute"><code class="xref py py-obj docutils literal"><span class="pre">execute</span></code></a>(name_of_circuits[,&nbsp;backend,&nbsp;config,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.disable_logs" title="qiskit.QuantumProgram.disable_logs"><code class="xref py py-obj docutils literal"><span class="pre">disable_logs</span></code></a>()</td>
+<td>Disable the console output of the logging messages.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.enable_logs" title="qiskit.QuantumProgram.enable_logs"><code class="xref py py-obj docutils literal"><span class="pre">enable_logs</span></code></a>([level])</td>
+<td>Enable the console output of the logging messages.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.execute" title="qiskit.QuantumProgram.execute"><code class="xref py py-obj docutils literal"><span class="pre">execute</span></code></a>(name_of_circuits[,&nbsp;backend,&nbsp;config,&nbsp;...])</td>
 <td>Execute, compile, and run an array of quantum circuits).</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.get_api" title="qiskit.QuantumProgram.get_api"><code class="xref py py-obj docutils literal"><span class="pre">get_api</span></code></a>()</td>
@@ -255,9 +265,9 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 <td>Get the compiled layout for the named circuit and backend.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.get_compiled_qasm" title="qiskit.QuantumProgram.get_compiled_qasm"><code class="xref py py-obj docutils literal"><span class="pre">get_compiled_qasm</span></code></a>(qobj,&nbsp;name)</td>
-<td>Print the compiled cricuit in qasm format.</td>
+<td>Return the compiled cricuit in qasm format.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.get_execution_list" title="qiskit.QuantumProgram.get_execution_list"><code class="xref py py-obj docutils literal"><span class="pre">get_execution_list</span></code></a>(qobj[,&nbsp;verbose])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.get_execution_list" title="qiskit.QuantumProgram.get_execution_list"><code class="xref py py-obj docutils literal"><span class="pre">get_execution_list</span></code></a>(qobj[,&nbsp;print_func])</td>
 <td>Print the compiled circuits that are ready to run.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.get_initial_circuit" title="qiskit.QuantumProgram.get_initial_circuit"><code class="xref py py-obj docutils literal"><span class="pre">get_initial_circuit</span></code></a>()</td>
@@ -278,35 +288,47 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.load" title="qiskit.QuantumProgram.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>([file_name])</td>
 <td>Load Quantum Program Json file into the Quantum Program object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.load_qasm_file" title="qiskit.QuantumProgram.load_qasm_file"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_file</span></code></a>(qasm_file[,&nbsp;name,&nbsp;verbose])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.load_qasm_file" title="qiskit.QuantumProgram.load_qasm_file"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_file</span></code></a>(qasm_file[,&nbsp;name,&nbsp;basis_gates])</td>
 <td>Load qasm file into the quantum program.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.load_qasm_text" title="qiskit.QuantumProgram.load_qasm_text"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_text</span></code></a>(qasm_string[,&nbsp;name,&nbsp;verbose])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.load_qasm_text" title="qiskit.QuantumProgram.load_qasm_text"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_text</span></code></a>(qasm_string[,&nbsp;name,&nbsp;basis_gates])</td>
 <td>Load qasm string in the quantum program.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.local_backends" title="qiskit.QuantumProgram.local_backends"><code class="xref py py-obj docutils literal"><span class="pre">local_backends</span></code></a>()</td>
-<td>Get the local backends.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.online_backends" title="qiskit.QuantumProgram.online_backends"><code class="xref py py-obj docutils literal"><span class="pre">online_backends</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.online_backends" title="qiskit.QuantumProgram.online_backends"><code class="xref py py-obj docutils literal"><span class="pre">online_backends</span></code></a>()</td>
 <td>Get the online backends.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.online_devices" title="qiskit.QuantumProgram.online_devices"><code class="xref py py-obj docutils literal"><span class="pre">online_devices</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.online_devices" title="qiskit.QuantumProgram.online_devices"><code class="xref py py-obj docutils literal"><span class="pre">online_devices</span></code></a>()</td>
 <td>Gets online devices via QX API calls.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.online_simulators" title="qiskit.QuantumProgram.online_simulators"><code class="xref py py-obj docutils literal"><span class="pre">online_simulators</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.online_simulators" title="qiskit.QuantumProgram.online_simulators"><code class="xref py py-obj docutils literal"><span class="pre">online_simulators</span></code></a>()</td>
 <td>Gets online simulators via QX API calls.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.run" title="qiskit.QuantumProgram.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>(qobj[,&nbsp;wait,&nbsp;timeout,&nbsp;silent])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.reconfig" title="qiskit.QuantumProgram.reconfig"><code class="xref py py-obj docutils literal"><span class="pre">reconfig</span></code></a>(qobj[,&nbsp;backend,&nbsp;config,&nbsp;shots,&nbsp;...])</td>
+<td>Change configuration parameters for a compile qobj.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.run" title="qiskit.QuantumProgram.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>(qobj[,&nbsp;wait,&nbsp;timeout])</td>
 <td>Run a program (a pre-compiled quantum program).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.save" title="qiskit.QuantumProgram.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>([file_name,&nbsp;beauty])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.run_async" title="qiskit.QuantumProgram.run_async"><code class="xref py py-obj docutils literal"><span class="pre">run_async</span></code></a>(qobj[,&nbsp;wait,&nbsp;timeout,&nbsp;callback])</td>
+<td>Run a program (a pre-compiled quantum program) asynchronously.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.run_batch" title="qiskit.QuantumProgram.run_batch"><code class="xref py py-obj docutils literal"><span class="pre">run_batch</span></code></a>(qobj_list[,&nbsp;wait,&nbsp;timeout])</td>
+<td>Run various programs (a list of pre-compiled quantum programs).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.run_batch_async" title="qiskit.QuantumProgram.run_batch_async"><code class="xref py py-obj docutils literal"><span class="pre">run_batch_async</span></code></a>(qobj_list[,&nbsp;wait,&nbsp;timeout,&nbsp;...])</td>
+<td>Run various programs (a list of pre-compiled quantum program) asynchronously.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.save" title="qiskit.QuantumProgram.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>([file_name,&nbsp;beauty])</td>
 <td>Save Quantum Program in a Json file.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api" title="qiskit.QuantumProgram.set_api"><code class="xref py py-obj docutils literal"><span class="pre">set_api</span></code></a>(token,&nbsp;url[,&nbsp;hub,&nbsp;group,&nbsp;project,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api" title="qiskit.QuantumProgram.set_api"><code class="xref py py-obj docutils literal"><span class="pre">set_api</span></code></a>(token,&nbsp;url[,&nbsp;hub,&nbsp;group,&nbsp;project,&nbsp;...])</td>
 <td>Setup the API.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api_hubs_config" title="qiskit.QuantumProgram.set_api_hubs_config"><code class="xref py py-obj docutils literal"><span class="pre">set_api_hubs_config</span></code></a>(hub,&nbsp;group,&nbsp;project)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumProgram.set_api_hubs_config" title="qiskit.QuantumProgram.set_api_hubs_config"><code class="xref py py-obj docutils literal"><span class="pre">set_api_hubs_config</span></code></a>(hub,&nbsp;group,&nbsp;project)</td>
 <td>Update the API hubs configuration, replacing the previous one.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumProgram.wait_for_results" title="qiskit.QuantumProgram.wait_for_results"><code class="xref py py-obj docutils literal"><span class="pre">wait_for_results</span></code></a>(timeout)</td>
+<td>Wait for all the results to be ready during an execution.</td>
 </tr>
 </tbody>
 </table>
@@ -318,13 +340,11 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – the name of the circuit to add.</li>
-<li><strong>quantum_circuit</strong> – a quantum circuit to add to the program-name</li>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) -- the name of the circuit to add.</li>
+<li><strong>quantum_circuit</strong> (<a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a>) -- a quantum circuit to add to the
+program-name</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">the quantum circuit is added to the object.</p>
 </td>
 </tr>
 </tbody>
@@ -339,24 +359,22 @@ by 「–description (type)–」. For example, a circuit’s name is denoted by
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.compile">
-<code class="descname">compile</code><span class="sig-paren">(</span><em>name_of_circuits</em>, <em>backend='local_qasm_simulator'</em>, <em>config=None</em>, <em>silent=True</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>shots=1024</em>, <em>max_credits=10</em>, <em>seed=None</em>, <em>qobjid=None</em>, <em>hpc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.compile"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.compile" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Compile the circuits into the exectution list.</p>
-<p>This builds the internal 「to execute」 list which is list of quantum
+<code class="descname">compile</code><span class="sig-paren">(</span><em>name_of_circuits</em>, <em>backend='local_qasm_simulator'</em>, <em>config=None</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>shots=1024</em>, <em>max_credits=10</em>, <em>seed=None</em>, <em>qobj_id=None</em>, <em>hpc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.compile"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.compile" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Compile the circuits into the execution list.</p>
+<p>This builds the internal &quot;to execute&quot; list which is list of quantum
 circuits to run on different backends.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name_of_circuits</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – circuit names to be compiled.</li>
-<li><strong>backend</strong> (<em>str</em>) – a string representing the backend to compile to</li>
-<li><strong>config</strong> (<em>dict</em>) – a dictionary of configurations parameters for the
-compiler</li>
-<li><strong>silent</strong> (<em>bool</em>) – is an option to print out the compiling information
-or not</li>
-<li><strong>basis_gates</strong> (<em>str</em>) – a comma seperated string and are the base gates,
-which by default are: u1,u2,u3,cx,id</li>
-<li><strong>coupling_map</strong> (<em>dict</em>) – <p>A directed graph of coupling:</p>
+<li><strong>name_of_circuits</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) -- circuit names to be compiled.</li>
+<li><strong>backend</strong> (<em>str</em>) -- a string representing the backend to compile to.</li>
+<li><strong>config</strong> (<em>dict</em>) -- a dictionary of configurations parameters for the
+compiler.</li>
+<li><strong>basis_gates</strong> (<em>str</em>) -- a comma separated string and are the base gates,
+which by default are provided by the backend.</li>
+<li><strong>coupling_map</strong> (<em>dict</em>) -- <p>A directed graph of coupling:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
  <span class="n">control</span><span class="p">(</span><span class="nb">int</span><span class="p">):</span>
      <span class="p">[</span>
@@ -371,39 +389,41 @@ which by default are: u1,u2,u3,cx,id</li>
 </pre></div>
 </div>
 </li>
-<li><strong>initial_layout</strong> (<em>dict</em>) – <p>A mapping of qubit to qubit:</p>
+<li><strong>initial_layout</strong> (<em>dict</em>) -- <p>A mapping of qubit to qubit:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">strart</span><span class="p">(</span><span class="nb">int</span><span class="p">)):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">final</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
-  <span class="o">...</span>
+<span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">strart</span><span class="p">(</span><span class="nb">int</span><span class="p">)):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">final</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+<span class="o">...</span>
 <span class="p">}</span>
 <span class="n">eg</span><span class="o">.</span>
 <span class="p">{</span>
-  <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-  <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-  <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-  <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </li>
-<li><strong>shots</strong> (<em>int</em>) – the number of shots</li>
-<li><strong>max_credits</strong> (<em>int</em>) – the max credits to use 3, or 5</li>
-<li><strong>seed</strong> (<em>int</em>) – the intial seed the simulatros use</li>
-<li><strong>hpc</strong> (<em>dict</em>) – <p>This will setup some parameter for
-ibmqx_hpc_qasm_simulator, using a JSON-like format like:
-{</p>
-<blockquote>
-<div>』multi_shot_optimization』: Boolean,
-『omp_num_threads』: Numeric</div></blockquote>
-<p>}
-This paramter MUST be used only with
+<li><strong>shots</strong> (<em>int</em>) -- the number of shots</li>
+<li><strong>max_credits</strong> (<em>int</em>) -- the max credits to use 3, or 5</li>
+<li><strong>seed</strong> (<em>int</em>) -- the initial seed the simulators use</li>
+<li><strong>qobj_id</strong> (<em>str</em>) -- identifier of the qobj.</li>
+<li><strong>hpc</strong> (<em>dict</em>) -- <p>This will setup some parameter for
+ibmqx_hpc_qasm_simulator, using a JSON-like format like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">,</span>
+    <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">:</span> <span class="n">Numeric</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This parameter MUST be used only with
 ibmqx_hpc_qasm_simulator, otherwise the SDK will warn
 the user via logging, and set the value to None.</p>
 </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last"><p>the job id and populates the qobj:</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><p>the job id and populates the qobj:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qobj</span> <span class="o">=</span>
     <span class="p">{</span>
         <span class="nb">id</span><span class="p">:</span> <span class="o">--</span><span class="n">job</span> <span class="nb">id</span> <span class="p">(</span><span class="n">string</span><span class="p">),</span>
@@ -429,10 +449,20 @@ the user via logging, and set the value to None.</p>
                 <span class="p">},</span>
                 <span class="o">...</span>
             <span class="p">]</span>
-        <span class="p">}</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
 </p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> -- if no names of the circuits have been specified.</li>
+<li><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if any of the circuit names cannot be found on the
+Quantum Program.</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -448,15 +478,23 @@ the user via logging, and set the value to None.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – the name of the circuit</li>
-<li><strong>list</strong> (<em>cregisters</em>) – is an Array of Quantum Registers by object
-reference</li>
-<li><strong>list</strong> – is an Array of Classical Registers by
-object reference</li>
+<li><strong>name</strong> (<em>str</em>) -- the name of the circuit.</li>
+<li><strong>qregisters</strong> (<em>list</em><em>(</em><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><em>QuantumRegister</em></a><em>)</em>) -- is an Array of Quantum
+Registers by object reference</li>
+<li><strong>cregisters</strong> (<em>list</em><em>(</em><a class="reference internal" href="qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister"><em>ClassicalRegister</em></a><em>)</em>) -- is an Array of Classical
+Registers by object reference</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">A quantum circuit is created and added to the Quantum Program</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A quantum circuit is created and added to the</dt>
+<dd><p class="first last">Quantum Program</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></p>
 </td>
 </tr>
 </tbody>
@@ -465,20 +503,30 @@ object reference</li>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.create_classical_register">
-<code class="descname">create_classical_register</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.create_classical_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.create_classical_register" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">create_classical_register</code><span class="sig-paren">(</span><em>name</em>, <em>size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.create_classical_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.create_classical_register" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Create a new Classical Register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – the name of the quantum register</li>
-<li><strong>size</strong> (<em>int</em>) – the size of the quantum register</li>
-<li><strong>verbose</strong> (<em>bool</em>) – controls how information is returned.</li>
+<li><strong>name</strong> (<em>str</em>) -- the name of the classical register</li>
+<li><strong>size</strong> (<em>int</em>) -- the size of the classical register</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">internal reference to a quantum register in __quantum_register</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>internal reference to a classical register</dt>
+<dd><p class="first last">in __classical_registers</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister">ClassicalRegister</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the register already exists in the program.</p>
 </td>
 </tr>
 </tbody>
@@ -493,8 +541,8 @@ object reference</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>register_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – <p>An array of classical registers in
-dictionay fromat:</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>registers_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) -- <p>An array of classical registers in
+dictionary format:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;classical_registers&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;qr&quot;</span><span class="p">,</span>
@@ -508,26 +556,38 @@ dictionay fromat:</p>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">Array of clasical registers objects</td>
 </tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">list(<a class="reference internal" href="qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister">ClassicalRegister</a>)</td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.create_quantum_register">
-<code class="descname">create_quantum_register</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.create_quantum_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.create_quantum_register" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">create_quantum_register</code><span class="sig-paren">(</span><em>name</em>, <em>size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.create_quantum_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.create_quantum_register" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Create a new Quantum Register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – the name of the quantum register</li>
-<li><strong>size</strong> (<em>int</em>) – the size of the quantum register</li>
-<li><strong>verbose</strong> (<em>bool</em>) – controls how information is returned.</li>
+<li><strong>name</strong> (<em>str</em>) -- the name of the quantum register</li>
+<li><strong>size</strong> (<em>int</em>) -- the size of the quantum register</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">internal reference to a quantum register in __quantum_register s</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>internal reference to a quantum register in</dt>
+<dd><p class="first last">__quantum_registers</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister">QuantumRegister</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the register already exists in the program.</p>
 </td>
 </tr>
 </tbody>
@@ -542,8 +602,8 @@ dictionay fromat:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>register_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – <p>An array of quantum registers in
-dictionay format:</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>register_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) -- <p>An array of quantum registers in
+dictionary format:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;quantum_registers&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;qr&quot;</span><span class="p">,</span>
@@ -556,6 +616,8 @@ dictionay format:</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">Array of quantum registers objects</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">list(<a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister">QuantumRegister</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -570,9 +632,9 @@ destroy any registers associated with the circuit.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the circuit</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- the name of the circuit</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if the register does not exist in the program.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the register does not exist in the program.</td>
 </tr>
 </tbody>
 </table>
@@ -580,15 +642,15 @@ destroy any registers associated with the circuit.</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.destroy_classical_register">
-<code class="descname">destroy_classical_register</code><span class="sig-paren">(</span><em>name</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.destroy_classical_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.destroy_classical_register" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">destroy_classical_register</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.destroy_classical_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.destroy_classical_register" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Destroy an existing Classical Register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the classical register</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- the name of the classical register</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if the register does not exist in the program.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the register does not exist in the program.</td>
 </tr>
 </tbody>
 </table>
@@ -602,8 +664,8 @@ destroy any registers associated with the circuit.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>registers_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – <p>An array of classical registers in
-dictionay fromat:</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>registers_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) -- <p>An array of classical registers in
+dictionary format:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;classical_registers&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;qr&quot;</span><span class="p">,</span>
@@ -612,7 +674,7 @@ dictionay fromat:</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>」size」 may be a key for compatibility, but is ignored.</p>
+<p>&quot;size&quot; may be a key for compatibility, but is ignored.</p>
 </td>
 </tr>
 </tbody>
@@ -621,15 +683,15 @@ dictionay fromat:</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.destroy_quantum_register">
-<code class="descname">destroy_quantum_register</code><span class="sig-paren">(</span><em>name</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.destroy_quantum_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.destroy_quantum_register" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">destroy_quantum_register</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.destroy_quantum_register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.destroy_quantum_register" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Destroy an existing Quantum Register.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the quantum register</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- the name of the quantum register</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if the register does not exist in the program.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the register does not exist in the program.</td>
 </tr>
 </tbody>
 </table>
@@ -643,8 +705,8 @@ dictionay fromat:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>register_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – <p>An array of quantum registers in
-dictionay format:</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>register_array</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) -- <p>An array of quantum registers in
+dictionary format:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;quantum_registers&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;qr&quot;</span><span class="p">,</span>
@@ -653,7 +715,7 @@ dictionay format:</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>」size」 may be a key for compatibility, but is ignored.</p>
+<p>&quot;size&quot; may be a key for compatibility, but is ignored.</p>
 </td>
 </tr>
 </tbody>
@@ -661,27 +723,59 @@ dictionay format:</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="qiskit.QuantumProgram.disable_logs">
+<code class="descname">disable_logs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.disable_logs"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.disable_logs" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Disable the console output of the logging messages.</p>
+<p>Disable the output of logging messages (above level <cite>level</cite>) to the
+console, by removing the handlers from the <cite>qiskit</cite> logger.</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">This is a convenience method over the standard Python logging
+facilities, and modifies the configuration of the 'qiskit.*'
+loggers. If finer control over the logging configuration is needed,
+it is encouraged to bypass this method.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.enable_logs">
+<code class="descname">enable_logs</code><span class="sig-paren">(</span><em>level=20</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.enable_logs"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.enable_logs" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Enable the console output of the logging messages.</p>
+<p>Enable the output of logging messages (above level <cite>level</cite>) to the
+console, by configuring the <cite>qiskit</cite> logger accordingly.</p>
+<dl class="docutils">
+<dt>Params:</dt>
+<dd>level (int): minimum severity of the messages that are displayed.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">This is a convenience method over the standard Python logging
+facilities, and modifies the configuration of the 'qiskit.*'
+loggers. If finer control over the logging configuration is needed,
+it is encouraged to bypass this method.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="qiskit.QuantumProgram.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>name_of_circuits</em>, <em>backend='local_qasm_simulator'</em>, <em>config=None</em>, <em>wait=5</em>, <em>timeout=60</em>, <em>silent=True</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>shots=1024</em>, <em>max_credits=10</em>, <em>seed=None</em>, <em>hpc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.execute"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.execute" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">execute</code><span class="sig-paren">(</span><em>name_of_circuits</em>, <em>backend='local_qasm_simulator'</em>, <em>config=None</em>, <em>wait=5</em>, <em>timeout=60</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>shots=1024</em>, <em>max_credits=3</em>, <em>seed=None</em>, <em>hpc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.execute"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.execute" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Execute, compile, and run an array of quantum circuits).</p>
-<p>This builds the internal 「to execute」 list which is list of quantum
+<p>This builds the internal &quot;to execute&quot; list which is list of quantum
 circuits to run on different backends.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name_of_circuits</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – circuit names to be compiled.</li>
-<li><strong>backend</strong> (<em>str</em>) – a string representing the backend to compile to</li>
-<li><strong>config</strong> (<em>dict</em>) – a dictionary of configurations parameters for the
+<li><strong>name_of_circuits</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) -- circuit names to be compiled.</li>
+<li><strong>backend</strong> (<em>str</em>) -- a string representing the backend to compile to</li>
+<li><strong>config</strong> (<em>dict</em>) -- a dictionary of configurations parameters for the
 compiler</li>
-<li><strong>wait</strong> (<em>int</em>) – wait time is how long to check if the job is completed</li>
-<li><strong>timeout</strong> (<em>int</em>) – is time until the execution stops</li>
-<li><strong>silent</strong> (<em>bool</em>) – is an option to print out the compiling information</li>
-<li><strong>not</strong> (<em>or</em>) – </li>
-<li><strong>basis_gates</strong> (<em>str</em>) – a comma seperated string and are the base gates,
+<li><strong>wait</strong> (<em>int</em>) -- Time interval to wait between requests for results</li>
+<li><strong>timeout</strong> (<em>int</em>) -- Total time to wait until the execution stops</li>
+<li><strong>basis_gates</strong> (<em>str</em>) -- a comma separated string and are the base gates,
 which by default are: u1,u2,u3,cx,id</li>
-<li><strong>coupling_map</strong> (<em>dict</em>) – <p>A directed graph of coupling:</p>
+<li><strong>coupling_map</strong> (<em>dict</em>) -- <p>A directed graph of coupling:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="n">control</span><span class="p">(</span><span class="nb">int</span><span class="p">):</span>
     <span class="p">[</span>
@@ -695,37 +789,41 @@ which by default are: u1,u2,u3,cx,id</li>
 </pre></div>
 </div>
 </li>
-<li><strong>initial_layout</strong> (<em>dict</em>) – A mapping of qubit to qubit
+<li><strong>initial_layout</strong> (<em>dict</em>) -- A mapping of qubit to qubit
 {
-(「q」, strart(int)): (「q」, final(int)),
-…
+(&quot;q&quot;, start(int)): (&quot;q&quot;, final(int)),
+...
 }
 eg.
 {
-(「q」, 0): (「q」, 0),
-(「q」, 1): (「q」, 1),
-(「q」, 2): (「q」, 2),
-(「q」, 3): (「q」, 3)
+(&quot;q&quot;, 0): (&quot;q&quot;, 0),
+(&quot;q&quot;, 1): (&quot;q&quot;, 1),
+(&quot;q&quot;, 2): (&quot;q&quot;, 2),
+(&quot;q&quot;, 3): (&quot;q&quot;, 3)
 }</li>
-<li><strong>shots</strong> (<em>int</em>) – the number of shots</li>
-<li><strong>max_credits</strong> (<em>int</em>) – the max credits to use 3, or 5</li>
-<li><strong>seed</strong> (<em>int</em>) – the intial seed the simulatros use</li>
-<li><strong>hpc</strong> (<em>dict</em>) – <p>This will setup some parameter for
-ibmqx_hpc_qasm_simulator, using a JSON-like format like:
-{</p>
-<blockquote>
-<div>』multi_shot_optimization』: Boolean,
-『omp_num_threads』: Numeric</div></blockquote>
-<p>}
-This paramter MUST be used only with
+<li><strong>shots</strong> (<em>int</em>) -- the number of shots</li>
+<li><strong>max_credits</strong> (<em>int</em>) -- the max credits to use 3, or 5</li>
+<li><strong>seed</strong> (<em>int</em>) -- the initial seed the simulators use</li>
+<li><strong>hpc</strong> (<em>dict</em>) -- <p>This will setup some parameter for
+ibmqx_hpc_qasm_simulator, using a JSON-like format like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">,</span>
+    <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">:</span> <span class="n">Numeric</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This parameter MUST be used only with
 ibmqx_hpc_qasm_simulator, otherwise the SDK will warn
 the user via logging, and set the value to None.</p>
 </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">status done and populates the internal __quantum_program with the
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">status done and populates the internal __quantum_program with the
 data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.Result.html#qiskit.Result" title="qiskit.Result">Result</a></p>
 </td>
 </tr>
 </tbody>
@@ -753,15 +851,19 @@ data</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend</strong> (<em>str</em>) – Name of the backend.</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend</strong> (<em>str</em>) -- Name of the backend.</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The configuration of the named backend.</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The calibration of the named backend.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li>If a configuration for the named backend can’t be found</li>
-<li>raise a LookupError.</li>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> -- If a configuration for the named backend can't be
+found.</li>
 </ul>
 </td>
 </tr>
@@ -778,15 +880,23 @@ data</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend</strong> (<em>str</em>) – Name of the backend.</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>backend</strong> (<em>str</em>) -- Name of the backend.</li>
+<li><strong>list_format</strong> (<em>bool</em>) -- Struct used for the configuration coupling
+map: dict (if False) or list (if True).</li>
+</ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The configuration of the named backend.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li>If a configuration for the named backend can’t be found</li>
-<li>raise a LookupError.</li>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> -- if a configuration for the named backend can't be
+found.</li>
 </ul>
 </td>
 </tr>
@@ -803,15 +913,19 @@ data</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend</strong> (<em>str</em>) – Name of the backend.</p>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend</strong> (<em>str</em>) -- Name of the backend.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The configuration of the named backend.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li>If a configuration for the named backend can’t be found</li>
-<li>raise a LookupError.</li>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> -- If a configuration for the named backend can't be
+found.</li>
 </ul>
 </td>
 </tr>
@@ -829,7 +943,20 @@ local or online simulator or experiment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>banckend</strong> (<em>str</em>) – The backend to check</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend</strong> (<em>str</em>) -- The backend to check</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">{'available': True}</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> -- if the backend is not available.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -846,6 +973,10 @@ local or online simulator or experiment.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">The quantum circuit with this name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code> -- if the circuit is not on the quantum program.</td>
 </tr>
 </tbody>
 </table>
@@ -865,9 +996,13 @@ local or online simulator or experiment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the quantum circuit</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- the name of the classical register</td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">The classical registers with this name</td>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">The classical register with this name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister">ClassicalRegister</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code> -- if the classical register is not on the quantum program.</td>
 </tr>
 </tbody>
 </table>
@@ -888,12 +1023,18 @@ local or online simulator or experiment.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – the circuit name</li>
-<li><strong>qobj</strong> (<em>str</em>) – the name of the qobj</li>
+<li><strong>name</strong> (<em>str</em>) -- the circuit name</li>
+<li><strong>qobj</strong> (<em>dict</em>) -- the qobj</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">the config of the circuit.</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the config of the circuit.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the circuit has no configurations</p>
 </td>
 </tr>
 </tbody>
@@ -903,15 +1044,24 @@ local or online simulator or experiment.</p>
 <dl class="method">
 <dt id="qiskit.QuantumProgram.get_compiled_qasm">
 <code class="descname">get_compiled_qasm</code><span class="sig-paren">(</span><em>qobj</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.get_compiled_qasm"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.get_compiled_qasm" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Print the compiled cricuit in qasm format.</p>
+<dd><p>Return the compiled cricuit in qasm format.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qobj</strong> (<em>str</em>) – the name of the qobj</li>
-<li><strong>name</strong> (<em>str</em>) – name of the quantum circuit</li>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>qobj</strong> (<em>dict</em>) -- the qobj</li>
+<li><strong>name</strong> (<em>str</em>) -- name of the quantum circuit</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the QASM of the compiled circuit.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">str</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the circuit has no configurations</p>
 </td>
 </tr>
 </tbody>
@@ -920,13 +1070,22 @@ local or online simulator or experiment.</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.get_execution_list">
-<code class="descname">get_execution_list</code><span class="sig-paren">(</span><em>qobj</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.get_execution_list"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.get_execution_list" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">get_execution_list</code><span class="sig-paren">(</span><em>qobj</em>, <em>print_func=&lt;built-in function print&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.get_execution_list"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.get_execution_list" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Print the compiled circuits that are ready to run.</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">This method is intended to be used during interactive sessions, and
+prints directly to stdout instead of using the logger by default. If
+you set print_func with a log function (eg. log.info) it will be used
+instead of the stdout.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>verbose</strong> (<em>bool</em>) – controls how much is returned.</td>
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">names of the circuits in <cite>qobj</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">list(str)</td>
 </tr>
 </tbody>
 </table>
@@ -946,9 +1105,11 @@ local or online simulator or experiment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – name of the circuit</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- name of the circuit</td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">The quantum circuit in qasm format</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
@@ -962,9 +1123,11 @@ local or online simulator or experiment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>list_circuit_name</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – names of the circuit</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>list_circuit_name</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) -- names of the circuit</td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">List of quantum circuit in qasm format</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">list(<a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -978,9 +1141,13 @@ local or online simulator or experiment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the quantum circuit</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- the name of the quantum register</td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">The quantum registers with this name</td>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">The quantum register with this name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister">QuantumRegister</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code> -- if the quantum register is not on the quantum program.</td>
 </tr>
 </tbody>
 </table>
@@ -1000,17 +1167,14 @@ local or online simulator or experiment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>file_name</strong> (<em>str</em>) – file name and path.</p>
-</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>file_name</strong> (<em>str</em>) -- file name and path.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The dictionary with the status and result of the operation</p>
-</td>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">The dictionary with the status and result of the operation</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><em>When you don’t provide a correct file name</em> – raise a LookupError.</li>
-<li><em>When something happen with the file management</em> – raise a LookupError.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> -- if the file_name is not correct, or reading from the
+file resulted in an error.</td>
 </tr>
 </tbody>
 </table>
@@ -1018,59 +1182,60 @@ local or online simulator or experiment.</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.load_qasm_file">
-<code class="descname">load_qasm_file</code><span class="sig-paren">(</span><em>qasm_file</em>, <em>name=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.load_qasm_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.load_qasm_file" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">load_qasm_file</code><span class="sig-paren">(</span><em>qasm_file</em>, <em>name=None</em>, <em>basis_gates='u1</em>, <em>u2</em>, <em>u3</em>, <em>cx</em>, <em>id'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.load_qasm_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.load_qasm_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Load qasm file into the quantum program.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qasm_file</strong> (<em>str</em>) – a string for the filename including its location.</li>
-<li><strong>name</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – the name of the quantum circuit after
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>qasm_file</strong> (<em>str</em>) -- a string for the filename including its location.</li>
+<li><strong>name</strong> (<em>str</em><em> or </em><em>None</em>) -- the name of the quantum circuit after
 loading qasm text into it. If no name is give the name is of
 the text file.</li>
-<li><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – controls how information is returned.</li>
+<li><strong>basis_gates</strong> (<em>str</em>) -- basis gates for the quantum circuit.</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">Adds a quantum circuit with the gates given in the qasm file to the
+quantum program and returns the name to be used to get this circuit</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">str</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if the file cannot be read.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>Retuns:</dt>
-<dd>Adds a quantum circuit with the gates given in the qasm file to the
-quantum program and returns the name to be used to get this circuit</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.load_qasm_text">
-<code class="descname">load_qasm_text</code><span class="sig-paren">(</span><em>qasm_string</em>, <em>name=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.load_qasm_text"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.load_qasm_text" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">load_qasm_text</code><span class="sig-paren">(</span><em>qasm_string</em>, <em>name=None</em>, <em>basis_gates='u1</em>, <em>u2</em>, <em>u3</em>, <em>cx</em>, <em>id'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.load_qasm_text"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.load_qasm_text" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Load qasm string in the quantum program.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qasm_string</strong> (<em>str</em>) – a string for the file name.</li>
-<li><strong>name</strong> (<em>str</em>) – the name of the quantum circuit after loading qasm
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>qasm_string</strong> (<em>str</em>) -- a string for the file name.</li>
+<li><strong>name</strong> (<em>str</em><em> or </em><em>None</em>) -- the name of the quantum circuit after loading qasm
 text into it. If no name is give the name is of the text file.</li>
-<li><strong>verbose</strong> (<em>bool</em>) – controls how information is returned.</li>
+<li><strong>basis_gates</strong> (<em>str</em>) -- basis gates for the quantum circuit.</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">Adds a quantum circuit with the gates given in the qasm string to
+the quantum program.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">str</p>
 </td>
 </tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>Retuns:</dt>
-<dd>Adds a quantum circuit with the gates given in the qasm string to
-the quantum program.</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.QuantumProgram.local_backends">
-<code class="descname">local_backends</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.local_backends"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.local_backends" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Get the local backends.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1082,8 +1247,15 @@ the quantum program.</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">List of online backends if the online api has been set or an empty
-list of it has not been set.</td>
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body"><dl class="docutils">
+<dt>List of online backends names if the online api has been set or an empty</dt>
+<dd>list if it has not been set.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">list(str)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</td>
 </tr>
 </tbody>
 </table>
@@ -1097,7 +1269,11 @@ list of it has not been set.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">List of online simulator names.</td>
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">List of online devices names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">list(str)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</td>
 </tr>
 </tbody>
 </table>
@@ -1113,30 +1289,146 @@ list of it has not been set.</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">List of online simulator names.</td>
 </tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">list(str)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.reconfig">
+<code class="descname">reconfig</code><span class="sig-paren">(</span><em>qobj</em>, <em>backend=None</em>, <em>config=None</em>, <em>shots=None</em>, <em>max_credits=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.reconfig"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.reconfig" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Change configuration parameters for a compile qobj. Only parameters which
+don't affect the circuit compilation can change, e.g., the coupling_map
+cannot be changed here!</p>
+<p class="rubric">Notes</p>
+<p>If the inputs are left as None then the qobj is not updated</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>qobj</strong> (<em>dict</em>) -- already compile qobj</li>
+<li><strong>backend</strong> (<em>str</em>) -- see .compile</li>
+<li><strong>config</strong> (<em>dict</em>) -- see .compile</li>
+<li><strong>shots</strong> (<em>int</em>) -- see .compile</li>
+<li><strong>max_credits</strong> (<em>int</em>) -- see .compile</li>
+<li><strong>seed</strong> (<em>int</em>) -- see .compile</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">updated qobj</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob.qobj" title="qiskit.QuantumJob.qobj">qobj</a></p>
+</td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.QuantumProgram.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>qobj</em>, <em>wait=5</em>, <em>timeout=60</em>, <em>silent=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.run"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.run" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Run a program (a pre-compiled quantum program).</p>
-<p>All input for run comes from qobj</p>
+<code class="descname">run</code><span class="sig-paren">(</span><em>qobj</em>, <em>wait=5</em>, <em>timeout=60</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.run"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.run" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Run a program (a pre-compiled quantum program). This function will
+block until the Job is processed.</p>
+<p>The program to run is extracted from the qobj parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>qobj</strong> (<em>dict</em>) – the dictionary of the quantum object to run</li>
-<li><strong>wait</strong> (<em>int</em>) – wait time is how long to check if the job is completed</li>
-<li><strong>timeout</strong> (<em>int</em>) – is time until the execution stops</li>
-<li><strong>silent</strong> (<em>bool</em>) – is an option to print out the running information or</li>
-<li><strong>not</strong> – </li>
+<li><strong>qobj</strong> (<em>dict</em>) -- the dictionary of the quantum object to run.</li>
+<li><strong>wait</strong> (<em>int</em>) -- Time interval to wait between requests for results</li>
+<li><strong>timeout</strong> (<em>int</em>) -- Total time to wait until the execution stops</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first last">status done and populates the internal __quantum_program with the
-data</p>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A Result (class).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.Result.html#qiskit.Result" title="qiskit.Result">Result</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.run_async">
+<code class="descname">run_async</code><span class="sig-paren">(</span><em>qobj</em>, <em>wait=5</em>, <em>timeout=60</em>, <em>callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.run_async"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.run_async" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Run a program (a pre-compiled quantum program) asynchronously. This
+is a non-blocking function, so it will return immediately.</p>
+<p>All input for run comes from qobj.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>qobj</strong> (<em>dict</em>) -- the dictionary of the quantum object to
+run or list of qobj.</li>
+<li><strong>wait</strong> (<em>int</em>) -- Time interval to wait between requests for results</li>
+<li><strong>timeout</strong> (<em>int</em>) -- Total time to wait until the execution stops</li>
+<li><strong>callback</strong> (<em>fn</em><em>(</em><em>result</em><em>)</em>) -- A function with signature:
+fn(result):
+The result param will be a Result object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.run_batch">
+<code class="descname">run_batch</code><span class="sig-paren">(</span><em>qobj_list</em>, <em>wait=5</em>, <em>timeout=120</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.run_batch"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.run_batch" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Run various programs (a list of pre-compiled quantum programs). This
+function will block until all programs are processed.</p>
+<p>The programs to run are extracted from qobj elements of the list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>qobj_list</strong> (<em>list</em><em>(</em><em>dict</em><em>)</em>) -- The list of quantum objects to run.</li>
+<li><strong>wait</strong> (<em>int</em>) -- Time interval to wait between requests for results</li>
+<li><strong>timeout</strong> (<em>int</em>) -- Total time to wait until the execution stops</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">A list of Result (class). The list will contain one Result object
+per qobj in the input list.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">list(<a class="reference internal" href="qiskit.Result.html#qiskit.Result" title="qiskit.Result">Result</a>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.run_batch_async">
+<code class="descname">run_batch_async</code><span class="sig-paren">(</span><em>qobj_list</em>, <em>wait=5</em>, <em>timeout=120</em>, <em>callback=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.run_batch_async"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.run_batch_async" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Run various programs (a list of pre-compiled quantum program)
+asynchronously. This is a non-blocking function, so it will return
+immediately.</p>
+<p>All input for run comes from qobj.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>qobj_list</strong> (<em>list</em><em>(</em><em>dict</em><em>)</em>) -- The list of quantum objects to run.</li>
+<li><strong>wait</strong> (<em>int</em>) -- Time interval to wait between requests for results</li>
+<li><strong>timeout</strong> (<em>int</em>) -- Total time to wait until the execution stops</li>
+<li><strong>callback</strong> (<em>fn</em><em>(</em><em>results</em><em>)</em>) -- A function with signature:
+fn(results):
+The results param will be a list of Result objects, one
+Result per qobj in the input list.</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -1152,18 +1444,19 @@ data</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>file_name</strong> (<em>str</em>) – file name and path.</li>
-<li><strong>beauty</strong> (<em>boolean</em>) – save the text with indent 4 to make it readable.</li>
+<li><strong>file_name</strong> (<em>str</em>) -- file name and path.</li>
+<li><strong>beauty</strong> (<em>boolean</em>) -- save the text with indent 4 to make it readable.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The dictionary with the status and result of the operation</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><em>When you don’t provide a correct file name</em> – raise a LookupError.</li>
-<li><em>When something happen with the file management</em> – raise a LookupError.</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> -- if the file_name is not correct, or writing to the
+file resulted in an error.</p>
 </td>
 </tr>
 </tbody>
@@ -1174,29 +1467,30 @@ data</p>
 <dt id="qiskit.QuantumProgram.set_api">
 <code class="descname">set_api</code><span class="sig-paren">(</span><em>token</em>, <em>url</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>proxies=None</em>, <em>verify=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.set_api"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.set_api" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Setup the API.</p>
-<p>Does not catch exceptions from IBMQuantumExperience.</p>
+<p>Fills the __ONLINE_BACKENDS, __api, and __api_config variables.
+Does not catch exceptions from IBMQuantumExperience.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>token</strong> (<em>str</em>) – The token used to register on the online backend such
+<li><strong>token</strong> (<em>str</em>) -- The token used to register on the online backend such
 as the quantum experience.</li>
-<li><strong>url</strong> (<em>str</em>) – The url used for online backend such as the quantum
+<li><strong>url</strong> (<em>str</em>) -- The url used for online backend such as the quantum
 experience.</li>
-<li><strong>hub</strong> (<em>str</em>) – The hub used for online backend.</li>
-<li><strong>group</strong> (<em>str</em>) – The group used for online backend.</li>
-<li><strong>project</strong> (<em>str</em>) – The project used for online backend.</li>
-<li><strong>proxies</strong> (<em>dict</em>) – Proxy configuration for the API, as a dict with
-『urls』 and credential keys.</li>
-<li><strong>verify</strong> (<em>bool</em>) – If False, ignores SSL certificates errors.</li>
+<li><strong>hub</strong> (<em>str</em>) -- The hub used for online backend.</li>
+<li><strong>group</strong> (<em>str</em>) -- The group used for online backend.</li>
+<li><strong>project</strong> (<em>str</em>) -- The project used for online backend.</li>
+<li><strong>proxies</strong> (<em>dict</em>) -- Proxy configuration for the API, as a dict with
+'urls' and credential keys.</li>
+<li><strong>verify</strong> (<em>bool</em>) -- If False, ignores SSL certificates errors.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">Nothing but fills the __ONLINE_BACKENDS, __api, and __api_config</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> – if the API instantiation failed.</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API instantiation failed.</li>
+<li><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> -- if no hub, group or project were specified.</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -1210,6 +1504,12 @@ experience.</li>
 <p>hub (str): The hub used for online backend.
 group (str): The group used for online backend.
 project (str): The project used for online backend.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumProgram.wait_for_results">
+<code class="descname">wait_for_results</code><span class="sig-paren">(</span><em>timeout</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#QuantumProgram.wait_for_results"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumProgram.wait_for_results" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Wait for all the results to be ready during an execution.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1235,7 +1535,7 @@ project (str): The project used for online backend.</p>
           <a href="qiskit.QuantumRegister.html" title="qiskit.QuantumRegister"
              >次へ</a> |</li>
         <li class="right" >
-          <a href="qiskit.QuantumCircuit.html" title="qiskit.QuantumCircuit"
+          <a href="qiskit.QuantumJob.html" title="qiskit.QuantumJob"
              >前へ</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
@@ -1243,15 +1543,15 @@ project (str): The project used for online backend.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/22
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
+      最終更新: 2018/01/08
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
     </div>
   </body>
 </html>

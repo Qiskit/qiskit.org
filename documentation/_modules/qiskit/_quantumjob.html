@@ -1,0 +1,267 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit._quantumjob &#8212; QISKit SDK 0.4.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/_quantumjob.html">english</a> /
+        <a href="/documentation/ja/_modules/qiskit/_quantumjob.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Release history</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit._quantumjob</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;Quantum Job class&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">_openquantumcompiler</span> <span class="k">as</span> <span class="n">openquantumcompiler</span>
+<span class="kn">import</span> <span class="nn">qiskit.backends</span> <span class="k">as</span> <span class="nn">backends</span>
+
+
+<div class="viewcode-block" id="QuantumJob"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumJob.html#qiskit.QuantumJob">[docs]</a><span class="k">class</span> <span class="nc">QuantumJob</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Creates a quantum circuit job</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">       qobj (dict): describes circuits and configuration to run them</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># TODO We need to create more tests for checking all possible inputs.</span>
+<div class="viewcode-block" id="QuantumJob.__init__"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumJob.html#qiskit.QuantumJob.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;local_qasm_simulator&#39;</span><span class="p">,</span>
+                 <span class="n">circuit_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">do_compile</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">preformatted</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            circuits (QuantumCircuit or list(QuantumCircuit)):</span>
+<span class="sd">                QuantumCircuit or list of QuantumCircuit. If preformatted=True,</span>
+<span class="sd">                this is a raw qobj.</span>
+<span class="sd">            backend (str): The backend to run the circuit on.</span>
+<span class="sd">            circuit_config (dict): Circuit configuration.</span>
+<span class="sd">            seed (int): The intial seed the simulatros use.</span>
+<span class="sd">            resources (dict): Resource requirements of job.</span>
+<span class="sd">            shots (int): the number of shots</span>
+<span class="sd">            names (str or list(str)): names/ids for circuits</span>
+<span class="sd">            do_compile (boolean): compile flag.</span>
+<span class="sd">            preformatted (bool): the objects in circuits are already compiled</span>
+<span class="sd">                and formatted (qasm for online, json for local). If true the</span>
+<span class="sd">                parameters &quot;names&quot; and &quot;circuit_config&quot; must also be defined</span>
+<span class="sd">                of the same length as &quot;circuits&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="n">resources</span> <span class="ow">or</span> <span class="p">{</span><span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;wait&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuits</span> <span class="o">=</span> <span class="n">circuits</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuits</span> <span class="o">=</span> <span class="p">[</span><span class="n">circuits</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_job_id</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">names</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;timeout&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;wait&#39;</span><span class="p">]</span>
+        <span class="c1"># check whether circuits have already been compiled</span>
+        <span class="c1"># and formatted for backend.</span>
+        <span class="k">if</span> <span class="n">preformatted</span><span class="p">:</span>
+            <span class="c1"># circuits is actually a qobj...validate (not ideal but conventient)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qobj</span> <span class="o">=</span> <span class="n">circuits</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_qobj</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">circuit_config</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+                                          <span class="n">seed</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">do_compile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;backend&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resources</span> <span class="o">=</span> <span class="n">resources</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_qobj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">circuit_config</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span>
+                     <span class="n">resources</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">do_compile</span><span class="p">):</span>
+        <span class="c1"># local and remote backends currently need different</span>
+        <span class="c1"># compilied circuit formats</span>
+        <span class="n">formatted_circuits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">do_compile</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">:</span>
+                <span class="n">formatted_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="o">.</span><span class="n">local_backends</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">:</span>
+                    <span class="n">formatted_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">openquantumcompiler</span><span class="o">.</span><span class="n">dag2json</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">:</span>
+                    <span class="n">formatted_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span><span class="n">qeflag</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="c1"># create circuit component of qobj</span>
+        <span class="n">circuit_records</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">circuit_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="s1">&#39;u1,u2,u3,cx,id&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;layout&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="n">seed</span><span class="p">}</span>
+            <span class="n">circuit_config</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">fcircuit</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">,</span>
+                                                   <span class="n">formatted_circuits</span><span class="p">,</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">,</span>
+                                                   <span class="n">circuit_config</span><span class="p">):</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;compiled_circuit&#39;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">do_compile</span> <span class="k">else</span> <span class="n">fcircuit</span><span class="p">,</span>
+                <span class="s1">&#39;compiled_circuit_qasm&#39;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">do_compile</span> <span class="k">else</span> <span class="n">fcircuit</span><span class="p">,</span>
+                <span class="s1">&#39;circuit&#39;</span><span class="p">:</span> <span class="n">circuit</span><span class="p">,</span>
+                <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span>
+            <span class="p">}</span>
+            <span class="n">circuit_records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_job_id</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+                <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;max_credits&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="n">shots</span><span class="p">,</span>
+                    <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="n">backend</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;circuits&#39;</span><span class="p">:</span> <span class="n">circuit_records</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_generate_job_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+            <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)])</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017 IBM Research.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

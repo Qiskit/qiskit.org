@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit.DAGCircuit &#8212; QISKit SDK 0.3.16 ドキュメント</title>
+    <title>qiskit.dagcircuit.DAGCircuit &#8212; QISKit SDK 0.4.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -64,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.dagcircuit.html" accesskey="U">qiskit.dagcircuit package</a> &#187;</li> 
@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.dagcircuit.DAGCircuit</a></li>
@@ -96,7 +97,6 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.simulators.html">qiskit.simulators package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 </ul>
 </li>
@@ -158,7 +158,7 @@ bits.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.__init__" title="qiskit.dagcircuit.DAGCircuit.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>()</td>
 <td>Create an empty circuit.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_basis_element" title="qiskit.dagcircuit.DAGCircuit.add_basis_element"><code class="xref py py-obj docutils literal"><span class="pre">add_basis_element</span></code></a>(name,&nbsp;number_qubits[,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_basis_element" title="qiskit.dagcircuit.DAGCircuit.add_basis_element"><code class="xref py py-obj docutils literal"><span class="pre">add_basis_element</span></code></a>(name,&nbsp;number_qubits[,&nbsp;...])</td>
 <td>Add an operation to the basis.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_creg" title="qiskit.dagcircuit.DAGCircuit.add_creg"><code class="xref py py-obj docutils literal"><span class="pre">add_creg</span></code></a>(name,&nbsp;size)</td>
@@ -170,14 +170,14 @@ bits.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.add_qreg" title="qiskit.dagcircuit.DAGCircuit.add_qreg"><code class="xref py py-obj docutils literal"><span class="pre">add_qreg</span></code></a>(name,&nbsp;size)</td>
 <td>Add all wires in a quantum register named name with size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="qiskit.dagcircuit.DAGCircuit.apply_operation_back"><code class="xref py py-obj docutils literal"><span class="pre">apply_operation_back</span></code></a>(name,&nbsp;qargs[,&nbsp;cargs,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="qiskit.dagcircuit.DAGCircuit.apply_operation_back"><code class="xref py py-obj docutils literal"><span class="pre">apply_operation_back</span></code></a>(name,&nbsp;qargs[,&nbsp;cargs,&nbsp;...])</td>
 <td>Apply an operation to the output of the circuit.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="qiskit.dagcircuit.DAGCircuit.apply_operation_front"><code class="xref py py-obj docutils literal"><span class="pre">apply_operation_front</span></code></a>(name,&nbsp;qargs[,&nbsp;cargs,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="qiskit.dagcircuit.DAGCircuit.apply_operation_front"><code class="xref py py-obj docutils literal"><span class="pre">apply_operation_front</span></code></a>(name,&nbsp;qargs[,&nbsp;cargs,&nbsp;...])</td>
 <td>Apply an operation to the input of the circuit.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.collect_runs" title="qiskit.dagcircuit.DAGCircuit.collect_runs"><code class="xref py py-obj docutils literal"><span class="pre">collect_runs</span></code></a>(namelist)</td>
-<td>Return a set of runs of 「op」 nodes with the given names.</td>
+<td>Return a set of runs of &quot;op&quot; nodes with the given names.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="qiskit.dagcircuit.DAGCircuit.compose_back"><code class="xref py py-obj docutils literal"><span class="pre">compose_back</span></code></a>(input_circuit[,&nbsp;wire_map])</td>
 <td>Apply the input circuit to the output of this circuit.</td>
@@ -198,7 +198,7 @@ bits.</p>
 <td>Format a float f as a string with self.prec digits.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.get_named_nodes" title="qiskit.dagcircuit.DAGCircuit.get_named_nodes"><code class="xref py py-obj docutils literal"><span class="pre">get_named_nodes</span></code></a>(name)</td>
-<td>Return a list of 「op」 nodes with the given name.</td>
+<td>Return a list of &quot;op&quot; nodes with the given name.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.get_qubits" title="qiskit.dagcircuit.DAGCircuit.get_qubits"><code class="xref py py-obj docutils literal"><span class="pre">get_qubits</span></code></a>()</td>
 <td>Return a list of qubits as (qreg, index) pairs.</td>
@@ -215,7 +215,7 @@ bits.</p>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.property_summary" title="qiskit.dagcircuit.DAGCircuit.property_summary"><code class="xref py py-obj docutils literal"><span class="pre">property_summary</span></code></a>()</td>
 <td>Return a dictionary of circuit properties.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.qasm" title="qiskit.dagcircuit.DAGCircuit.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>([decls_only,&nbsp;add_swap,&nbsp;no_decls,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.qasm" title="qiskit.dagcircuit.DAGCircuit.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>([decls_only,&nbsp;add_swap,&nbsp;no_decls,&nbsp;...])</td>
 <td>Return a string containing QASM for this circuit.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.remove_all_ops_named" title="qiskit.dagcircuit.DAGCircuit.remove_all_ops_named"><code class="xref py py-obj docutils literal"><span class="pre">remove_all_ops_named</span></code></a>(opname)</td>
@@ -268,7 +268,7 @@ number_qubits is number of qubit arguments
 number_classical is number of bit arguments
 number_parameters is number of real parameters</p>
 <p>The parameters (nq,nc,np) are ignored for the special case
-when name = 「barrier」. The barrier instruction has a variable
+when name = &quot;barrier&quot;. The barrier instruction has a variable
 number of qubit arguments.</p>
 </dd></dl>
 
@@ -283,12 +283,12 @@ number of qubit arguments.</p>
 <code class="descname">add_gate_data</code><span class="sig-paren">(</span><em>name</em>, <em>gatedata</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.add_gate_data"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.add_gate_data" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Add the definition of a gate.</p>
 <p>gatedata is dict with fields:
-「opaque」 = True or False
-「n_args」 = number of real parameters
-「n_bits」 = number of qubits
-「args」   = list of parameter names
-「bits」   = list of qubit names
-「body」   = GateBody AST node</p>
+&quot;opaque&quot; = True or False
+&quot;n_args&quot; = number of real parameters
+&quot;n_bits&quot; = number of qubits
+&quot;args&quot;   = list of parameter names
+&quot;bits&quot;   = list of qubit names
+&quot;body&quot;   = GateBody AST node</p>
 </dd></dl>
 
 <dl class="method">
@@ -299,22 +299,22 @@ number of qubit arguments.</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.apply_operation_back">
-<code class="descname">apply_operation_back</code><span class="sig-paren">(</span><em>name</em>, <em>qargs</em>, <em>cargs=[]</em>, <em>params=[]</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.apply_operation_back"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">apply_operation_back</code><span class="sig-paren">(</span><em>name</em>, <em>qargs</em>, <em>cargs=None</em>, <em>params=None</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.apply_operation_back"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_back" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an operation to the output of the circuit.</p>
 <p>name is a string
-qargs is a list of tuples like (「q」,0)
-cargs is a list of tuples like (「c」,0)
-params is a list of strings that represent floats
+qargs is a list of tuples like (&quot;q&quot;,0)
+cargs is a list of tuples like (&quot;c&quot;,0)
+params is a list of symbols that represent numbers
 condition is either None or a tuple (string,int) giving (creg,value)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.apply_operation_front">
-<code class="descname">apply_operation_front</code><span class="sig-paren">(</span><em>name</em>, <em>qargs</em>, <em>cargs=[]</em>, <em>params=[]</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.apply_operation_front"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">apply_operation_front</code><span class="sig-paren">(</span><em>name</em>, <em>qargs</em>, <em>cargs=None</em>, <em>params=None</em>, <em>condition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.apply_operation_front"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.apply_operation_front" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply an operation to the input of the circuit.</p>
 <p>name is a string
-qargs is a list of strings like 「q[0]」
-cargs is a list of strings like 「c[0]」
+qargs is a list of strings like &quot;q[0]&quot;
+cargs is a list of strings like &quot;c[0]&quot;
 params is a list of strings that represent floats
 condition is either None or a tuple (string,int) giving (creg,value)</p>
 </dd></dl>
@@ -322,21 +322,21 @@ condition is either None or a tuple (string,int) giving (creg,value)</p>
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.collect_runs">
 <code class="descname">collect_runs</code><span class="sig-paren">(</span><em>namelist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.collect_runs"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.collect_runs" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return a set of runs of 「op」 nodes with the given names.</p>
-<p>For example, 「… h q[0]; cx q[0],q[1]; cx q[0],q[1]; h q[1]; ..」
+<dd><p>Return a set of runs of &quot;op&quot; nodes with the given names.</p>
+<p>For example, &quot;... h q[0]; cx q[0],q[1]; cx q[0],q[1]; h q[1]; ..&quot;
 would produce the tuple of cx nodes as an element of the set returned
-from a call to collect_runs([「cx」]). If instead the cx nodes were
-「cx q[0],q[1]; cx q[1],q[0];」, the method would still return the
+from a call to collect_runs([&quot;cx&quot;]). If instead the cx nodes were
+&quot;cx q[0],q[1]; cx q[1],q[0];&quot;, the method would still return the
 pair in a tuple. The namelist can contain names that are not
-in the circuit’s basis.</p>
+in the circuit's basis.</p>
 <p>Nodes must have only one successor to continue the run.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.compose_back">
-<code class="descname">compose_back</code><span class="sig-paren">(</span><em>input_circuit</em>, <em>wire_map={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.compose_back"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">compose_back</code><span class="sig-paren">(</span><em>input_circuit</em>, <em>wire_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.compose_back"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_back" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply the input circuit to the output of this circuit.</p>
-<p>The two bases must be 「compatible」 or an exception occurs.
+<p>The two bases must be &quot;compatible&quot; or an exception occurs.
 A subset of input qubits of the input circuit are mapped
 to a subset of output qubits of this circuit.
 wire_map[input_qubit_to_input_circuit] = output_qubit_of_self</p>
@@ -344,9 +344,9 @@ wire_map[input_qubit_to_input_circuit] = output_qubit_of_self</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.compose_front">
-<code class="descname">compose_front</code><span class="sig-paren">(</span><em>input_circuit</em>, <em>wire_map={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.compose_front"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_front" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">compose_front</code><span class="sig-paren">(</span><em>input_circuit</em>, <em>wire_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.compose_front"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.compose_front" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Apply the input circuit to the input of this circuit.</p>
-<p>The two bases must be 「compatible」 or an exception occurs.
+<p>The two bases must be &quot;compatible&quot; or an exception occurs.
 A subset of output qubits of the input circuit are mapped
 to a subset of input qubits of
 this circuit.</p>
@@ -380,7 +380,7 @@ this circuit.</p>
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.get_named_nodes">
 <code class="descname">get_named_nodes</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.get_named_nodes"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.get_named_nodes" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return a list of 「op」 nodes with the given name.</p>
+<dd><p>Return a list of &quot;op&quot; nodes with the given name.</p>
 </dd></dl>
 
 <dl class="method">
@@ -398,7 +398,7 @@ a layer has depth 1. The total number of layers equals the
 circuit depth d. The layers are indexed from 0 to d-1 with the
 earliest layer at index 0. The layers are constructed using a
 greedy algorithm. Each returned layer is a dict containing
-{「graph」: circuit graph, 「partition」: list of qubit lists}.</p>
+{&quot;graph&quot;: circuit graph, &quot;partition&quot;: list of qubit lists}.</p>
 <p>TODO: Gates that use the same cbits will end up in different
 layers as this is currently implemented. This may not be
 the desired behavior.</p>
@@ -424,10 +424,12 @@ the desired behavior.</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.qasm">
-<code class="descname">qasm</code><span class="sig-paren">(</span><em>decls_only=False</em>, <em>add_swap=False</em>, <em>no_decls=False</em>, <em>qeflag=False</em>, <em>aliases=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.qasm"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.qasm" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">qasm</code><span class="sig-paren">(</span><em>decls_only=False</em>, <em>add_swap=False</em>, <em>no_decls=False</em>, <em>qeflag=False</em>, <em>aliases=None</em>, <em>eval_symbols=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.qasm"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.qasm" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return a string containing QASM for this circuit.</p>
-<p>if qeflag is True, add a line to include 「qelib1.inc」
+<p>if qeflag is True, add a line to include &quot;qelib1.inc&quot;
 and only generate gate code for gates not in qelib1.</p>
+<p>if eval_symbols is True, evaluate all symbolic
+expressions to their floating point representation.</p>
 <p>if no_decls is True, only print the instructions.</p>
 <p>if aliases is not None, aliases contains a dict mapping
 the current qubits in the circuit to new qubit names.
@@ -491,15 +493,15 @@ same structure as in layers().</p>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.substitute_circuit_all">
-<code class="descname">substitute_circuit_all</code><span class="sig-paren">(</span><em>name</em>, <em>input_circuit</em>, <em>wires=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.substitute_circuit_all"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.substitute_circuit_all" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">substitute_circuit_all</code><span class="sig-paren">(</span><em>name</em>, <em>input_circuit</em>, <em>wires=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.substitute_circuit_all"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.substitute_circuit_all" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Replace every occurrence of named operation with input_circuit.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.substitute_circuit_one">
-<code class="descname">substitute_circuit_one</code><span class="sig-paren">(</span><em>node</em>, <em>input_circuit</em>, <em>wires=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.substitute_circuit_one"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.substitute_circuit_one" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">substitute_circuit_one</code><span class="sig-paren">(</span><em>node</em>, <em>input_circuit</em>, <em>wires=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.substitute_circuit_one"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.substitute_circuit_one" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Replace one node with input_circuit.</p>
-<p>node is a reference to a node of self.multi_graph of type 「op」
+<p>node is a reference to a node of self.multi_graph of type &quot;op&quot;
 input_circuit is a DAGCircuit</p>
 </dd></dl>
 
@@ -540,7 +542,7 @@ input_circuit is a DAGCircuit</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.dagcircuit.html" >qiskit.dagcircuit package</a> &#187;</li> 
@@ -548,8 +550,8 @@ input_circuit is a DAGCircuit</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/22
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
+      最終更新: 2018/01/08
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
     </div>
   </body>
 </html>

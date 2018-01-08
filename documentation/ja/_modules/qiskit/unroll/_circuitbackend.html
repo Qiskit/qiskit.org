@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.unroll._circuitbackend &#8212; QISKit SDK 0.3.16 ドキュメント</title>
+    <title>qiskit.unroll._circuitbackend &#8212; QISKit SDK 0.4.0 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -118,15 +118,12 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Backend for the unroller that produces a QuantumCircuit.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span> <span class="nn">._backenderror</span> <span class="k">import</span> <span class="n">BackendError</span>
 <span class="kn">from</span> <span class="nn">._unrollerbackend</span> <span class="k">import</span> <span class="n">UnrollerBackend</span>
-<span class="kn">from</span> <span class="nn">.._quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">.._classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
 <span class="kn">from</span> <span class="nn">.._quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../..&quot;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">qiskit.extensions.standard</span>
+<span class="kn">from</span> <span class="nn">.._quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 
 
 <div class="viewcode-block" id="CircuitBackend"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.CircuitBackend.html#qiskit.unroll.CircuitBackend">[ドキュメント]</a><span class="k">class</span> <span class="nc">CircuitBackend</span><span class="p">(</span><span class="n">UnrollerBackend</span><span class="p">):</span>
@@ -140,6 +137,7 @@
 
 <span class="sd">        basis is a list of operation name strings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CircuitBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">basis</span><span class="p">:</span>
@@ -172,8 +170,8 @@
 <span class="sd">        sz = size of the register</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;invalid qreg size&quot;</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">q</span><span class="p">)</span></div>
+        <span class="n">q_register</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">q_register</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CircuitBackend.new_creg"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.CircuitBackend.html#qiskit.unroll.CircuitBackend.new_creg">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new classical register.</span>
@@ -182,8 +180,8 @@
 <span class="sd">        sz = size of the register</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;invalid creg size&quot;</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></div>
+        <span class="n">c_register</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c_register</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CircuitBackend.define_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.CircuitBackend.html#qiskit.unroll.CircuitBackend.define_gate">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">define_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">gatedata</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Define a new quantum gate.</span>
@@ -227,9 +225,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
             <span class="k">if</span> <span class="s2">&quot;U&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
-            <span class="n">this_gate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">u_base</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
-                                                     <span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
-                                                     <span class="n">arg</span><span class="p">)),</span>
+
+            <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">)</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span> <span class="n">arg</span><span class="p">))</span>
+            <span class="n">this_gate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">u_base</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span>
                                             <span class="bp">self</span><span class="o">.</span><span class="n">_map_qubit</span><span class="p">(</span><span class="n">qubit</span><span class="p">))</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">this_gate</span><span class="o">.</span><span class="n">c_if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_map_creg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">)</span></div>
@@ -346,11 +344,9 @@
                    <span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
                    <span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
                    <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
-                   <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
-                           <span class="p">],</span>
+                   <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">inverse</span><span class="p">()],</span>
                    <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">inverse</span><span class="p">()],</span>
-                   <span class="s2">&quot;tdg&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
-                           <span class="p">],</span>
+                   <span class="s2">&quot;tdg&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">inverse</span><span class="p">()],</span>
                    <span class="s2">&quot;u1&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
                    <span class="s2">&quot;u2&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">u2</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
                                                             <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
@@ -358,19 +354,18 @@
                                                             <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
                    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
                    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
-                   <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
-                   <span class="p">}</span>
+                   <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])]}</span>
             <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lut</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">BackendError</span><span class="p">(</span><span class="s2">&quot;gate </span><span class="si">%s</span><span class="s2"> not in standard extensions&quot;</span> <span class="o">%</span>
-                                       <span class="n">name</span><span class="p">)</span>
+                                   <span class="n">name</span><span class="p">)</span>
             <span class="n">gate_data</span> <span class="o">=</span> <span class="n">lut</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">gate_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)):</span>
                 <span class="k">raise</span> <span class="n">BackendError</span><span class="p">(</span><span class="s2">&quot;gate </span><span class="si">%s</span><span class="s2"> signature (</span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">) is &quot;</span> <span class="o">%</span>
-                                       <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">))</span> <span class="o">+</span>
-                                       <span class="s2">&quot;incompatible with the standard &quot;</span> <span class="o">+</span>
-                                       <span class="s2">&quot;extensions&quot;</span><span class="p">)</span>
+                                   <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">))</span> <span class="o">+</span>
+                                   <span class="s2">&quot;incompatible with the standard &quot;</span> <span class="o">+</span>
+                                   <span class="s2">&quot;extensions&quot;</span><span class="p">)</span>
             <span class="n">this_gate</span> <span class="o">=</span> <span class="n">gate_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]([</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
-                                               <span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span> <span class="n">args</span><span class="p">)),</span>
+                                               <span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span> <span class="n">args</span><span class="p">)),</span>
                                       <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_map_qubit</span><span class="p">,</span> <span class="n">qubits</span><span class="p">))])</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">this_gate</span><span class="o">.</span><span class="n">c_if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_map_creg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">)</span></div>
@@ -413,15 +408,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2017/12/22
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5 で生成しました。
+      最終更新: 2018/01/08
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
     </div>
   </body>
 </html>

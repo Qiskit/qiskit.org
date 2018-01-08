@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -75,6 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -98,6 +99,7 @@
             
   <h1>Source code for qiskit.mapper._mapping</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=invalid-name, inconsistent-return-statements</span>
 
 <span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
 <span class="c1">#</span>
@@ -117,14 +119,22 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Layout module to assist with mapping circuit qubits onto physical qubits.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">._mappererror</span> <span class="k">import</span> <span class="n">MapperError</span>
-<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Number</span> <span class="k">as</span> <span class="n">N</span>
+
 <span class="kn">import</span> <span class="nn">qiskit.unroll</span> <span class="k">as</span> <span class="nn">unroll</span>
+<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
+<span class="kn">from</span> <span class="nn">._mappererror</span> <span class="k">import</span> <span class="n">MapperError</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
 
 <span class="c1"># Notes:</span>
 <span class="c1"># Measurements may occur and be followed by swaps that result in repeated</span>
@@ -136,7 +146,8 @@
 <span class="c1"># because the initial state is zero. We don&#39;t do this.</span>
 
 
-<span class="k">def</span> <span class="nf">layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span>
+                      <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find a swap circuit that implements a permutation for this layer.</span>
 
 <span class="sd">    The goal is to swap qubits such that qubits in the same two-qubit gates</span>
@@ -161,12 +172,16 @@
 <span class="sd">    swap circuit has been applied. The trivial_flag is set if the layer</span>
 <span class="sd">    has no multi-qubit gates.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- enter -----&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layer_partition = &quot;</span><span class="p">,</span> <span class="n">layer_partition</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layout = &quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: qubit_subset = &quot;</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trials = &quot;</span><span class="p">,</span> <span class="n">trials</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- enter -----&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layer_partition = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                 <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                 <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: qubit_subset = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                 <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trials = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trials</span><span class="p">)</span>
     <span class="n">rev_layout</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="n">gates</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layer_partition</span><span class="p">:</span>
@@ -175,19 +190,16 @@
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">layer</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: gates = &quot;</span><span class="p">,</span> <span class="n">gates</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: gates = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
 
     <span class="c1"># Can we already apply the gates?</span>
     <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
                                   <span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: dist = &quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: dist = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: done already&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: done already&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span>
 
     <span class="c1"># Begin loop over trials of randomized algorithm</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">coupling</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -196,8 +208,7 @@
     <span class="n">best_layout</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initialize best final layout</span>
     <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trial &quot;</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trial </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
         <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="n">rev_trial_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">rev_layout</span><span class="p">)</span>
         <span class="n">trial_circ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># circuit produced in this trial</span>
@@ -208,14 +219,14 @@
             <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">coupling</span><span class="o">.</span><span class="n">get_qubits</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">coupling</span><span class="o">.</span><span class="n">get_qubits</span><span class="p">():</span>
-                <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
-                <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+                <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
                 <span class="n">xi</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
 
         <span class="c1"># Loop over depths d up to a max depth of 2n+1</span>
         <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">circ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># circuit for this swap slice</span>
-        <span class="k">while</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># Set of available qubits</span>
             <span class="n">qubit_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">)</span>
             <span class="c1"># While there are still qubits available</span>
@@ -241,8 +252,8 @@
                                         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
                         <span class="c1"># Record progress if we succceed</span>
                         <span class="k">if</span> <span class="n">new_cost</span> <span class="o">&lt;</span> <span class="n">min_cost</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: progress! min_cost = &quot;</span><span class="p">,</span> <span class="n">min_cost</span><span class="p">)</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: progress! &quot;</span>
+                                         <span class="s2">&quot;min_cost = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">min_cost</span><span class="p">)</span>
                             <span class="n">progress_made</span> <span class="o">=</span> <span class="kc">True</span>
                             <span class="n">min_cost</span> <span class="o">=</span> <span class="n">new_cost</span>
                             <span class="n">opt_layout</span> <span class="o">=</span> <span class="n">new_layout</span>
@@ -259,8 +270,8 @@
                                                       <span class="n">opt_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
                                                       <span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
                                                       <span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: chose pair &quot;</span><span class="p">,</span> <span class="n">opt_edge</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: chose pair </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                                 <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">opt_edge</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">break</span>
 
@@ -268,52 +279,44 @@
             <span class="c1"># Compute the coupling graph distance</span>
             <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
                                           <span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: dist = &quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: dist = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
             <span class="c1"># If all gates can be applied now, we are finished</span>
             <span class="c1"># Otherwise we need to consider a deeper swap circuit</span>
             <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: all can be applied now&quot;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: all can be applied now&quot;</span><span class="p">)</span>
                 <span class="n">trial_circ</span> <span class="o">+=</span> <span class="n">circ</span>
                 <span class="k">break</span>
 
             <span class="c1"># Increment the depth</span>
             <span class="n">d</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: increment depth to &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: increment depth to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 
         <span class="c1"># Either we have succeeded at some depth d &lt; dmax or failed</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
                                       <span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: dist = &quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: dist = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">best_d</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: got circuit with depth &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: got circuit with depth </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
                 <span class="n">best_circ</span> <span class="o">=</span> <span class="n">trial_circ</span>
                 <span class="n">best_layout</span> <span class="o">=</span> <span class="n">trial_layout</span>
             <span class="n">best_d</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">best_d</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">best_circ</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: failed!&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: failed!&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: done&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circ</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="kc">False</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: done&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circ</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="kc">False</span>
 
 
-<div class="viewcode-block" id="direction_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.direction_mapper.html#qiskit.mapper.direction_mapper">[docs]</a><span class="k">def</span> <span class="nf">direction_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="direction_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.direction_mapper.html#qiskit.mapper.direction_mapper">[docs]</a><span class="k">def</span> <span class="nf">direction_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Change the direction of CNOT gates to conform to CouplingGraph.</span>
 
 <span class="sd">    circuit_graph = input DAGCircuit</span>
 <span class="sd">    coupling_graph = corresponding CouplingGraph</span>
-<span class="sd">    verbose = optional flag to print more information</span>
 
 <span class="sd">    Adds &quot;h&quot; to the circuit basis.</span>
 
@@ -325,8 +328,8 @@
     <span class="k">if</span> <span class="s2">&quot;cx&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">circuit_graph</span>
     <span class="k">if</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="s2">&quot;cx&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;cx gate has unexpected signature </span><span class="si">%s</span><span class="s2">&quot;</span>
-                              <span class="o">%</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="s2">&quot;cx&quot;</span><span class="p">])</span>
+        <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;cx gate has unexpected signature </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                          <span class="n">circuit_graph</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="s2">&quot;cx&quot;</span><span class="p">])</span>
     <span class="n">flipped_qasm</span> <span class="o">=</span> <span class="s2">&quot;OPENQASM 2.0;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
                    <span class="s2">&quot;gate cx c,t { CX c,t; }</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
                    <span class="s2">&quot;gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
@@ -343,26 +346,25 @@
         <span class="n">nd</span> <span class="o">=</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">cx_node</span><span class="p">]</span>
         <span class="n">cxedge</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">cxedge</span> <span class="ow">in</span> <span class="n">cg_edges</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cx </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">], </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] -- OK&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                   <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;cx </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">], </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] -- OK&quot;</span><span class="p">,</span>
+                         <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                         <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
             <span class="k">continue</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">cg_edges</span><span class="p">:</span>
             <span class="n">circuit_graph</span><span class="o">.</span><span class="n">substitute_circuit_one</span><span class="p">(</span><span class="n">cx_node</span><span class="p">,</span>
                                                  <span class="n">flipped_cx_circuit</span><span class="p">,</span>
                                                  <span class="n">wires</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cx </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">], </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] -FLIP&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                   <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;cx </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">], </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] -FLIP&quot;</span><span class="p">,</span>
+                         <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                         <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cxedge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;circuit incompatible with CouplingGraph: &quot;</span>
-                                  <span class="o">+</span> <span class="s2">&quot;cx on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cxedge</span><span class="p">)</span>
+                              <span class="s2">&quot;cx on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">cxedge</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">circuit_graph</span></div>
 
 
 <span class="k">def</span> <span class="nf">update_qasm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
-                <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">,</span>
-                <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Update the QASM string for an iteration of swap_mapper.</span>
 
 <span class="sd">    i = layer number</span>
@@ -372,7 +374,6 @@
 <span class="sd">    best_circ = swap circuit returned from swap algorithm</span>
 <span class="sd">    circuit_graph = original input circuit</span>
 <span class="sd">    layer_list = list of circuit objects for each layer</span>
-<span class="sd">    verbose = set True for more print output</span>
 
 <span class="sd">    Return openqasm_output, the QASM string to append.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -383,14 +384,13 @@
     <span class="c1"># output all layers up to this point and ignore any</span>
     <span class="c1"># swap gates. Set the initial layout.</span>
     <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: first multi-qubit gate layer&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: first multi-qubit gate layer&quot;</span><span class="p">)</span>
         <span class="c1"># Output all layers up to this point</span>
         <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
             <span class="n">add_swap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">decls_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">layer_list</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
                 <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
@@ -398,13 +398,11 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Output any swaps</span>
         <span class="k">if</span> <span class="n">best_d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: swaps in this layer, depth </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span>
-                      <span class="n">best_d</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: swaps in this layer, &quot;</span>
+                         <span class="s2">&quot;depth </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">best_d</span><span class="p">)</span>
             <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">best_circ</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: no swaps in this layer&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: no swaps in this layer&quot;</span><span class="p">)</span>
         <span class="c1"># Output this layer</span>
         <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
             <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -414,7 +412,7 @@
 
 <div class="viewcode-block" id="swap_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.swap_mapper.html#qiskit.mapper.swap_mapper">[docs]</a><span class="k">def</span> <span class="nf">swap_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">basis</span><span class="o">=</span><span class="s2">&quot;cx,u1,u2,u3,id&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+                <span class="n">basis</span><span class="o">=</span><span class="s2">&quot;cx,u1,u2,u3,id&quot;</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Map a DAGCircuit onto a CouplingGraph using swap gates.</span>
 
 <span class="sd">    Args:</span>
@@ -422,27 +420,29 @@
 <span class="sd">        coupling_graph (CouplingGraph): coupling graph to map onto</span>
 <span class="sd">        initial_layout (dict): dict from qubits of circuit_graph to qubits</span>
 <span class="sd">            of coupling_graph (optional)</span>
-<span class="sd">        basis (str, optional): basis string specifying basis of output</span>
-<span class="sd">            DAGCircuit</span>
-<span class="sd">        verbose (bool, optional): print more information</span>
+<span class="sd">        basis (str): basis string specifying basis of output DAGCircuit</span>
+<span class="sd">        trials (int): number of trials.</span>
+<span class="sd">        seed (int): initial seed.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Returns a DAGCircuit object containing a circuit equivalent to</span>
+<span class="sd">        DAGCircuit: object containing a circuit equivalent to</span>
 <span class="sd">        circuit_graph that respects couplings in coupling_graph, and</span>
 <span class="sd">        a layout dict mapping qubits of circuit_graph into qubits</span>
 <span class="sd">        of coupling_graph. The layout may differ from the initial_layout</span>
 <span class="sd">        if the first layer of gates cannot be executed on the</span>
 <span class="sd">        initial_layout.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        MapperError: if there was any error during the mapping or with the</span>
+<span class="sd">            parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">coupling_graph</span><span class="o">.</span><span class="n">size</span><span class="p">():</span>
         <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;Not enough qubits in CouplingGraph&quot;</span><span class="p">)</span>
 
     <span class="c1"># Schedule the input circuit</span>
     <span class="n">layerlist</span> <span class="o">=</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">layers</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;schedule:&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layerlist</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">layerlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;partition&quot;</span><span class="p">]))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;schedule:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">initial_layout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Check the input layout</span>
@@ -452,13 +452,11 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">qubit_subset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">circ_qubits</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;initial_layout qubit </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] not &quot;</span> <span class="o">%</span>
-                                      <span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span>
-                                      <span class="s2">&quot;in input DAGCircuit&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;initial_layout qubit </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] not in input &quot;</span>
+                                  <span class="s2">&quot;DAGCircuit&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
             <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coup_qubits</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;initial_layout qubit </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] not &quot;</span> <span class="o">%</span>
-                                      <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span>
-                                      <span class="s2">&quot; in input CouplingGraph&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;initial_layout qubit </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] not in input &quot;</span>
+                                  <span class="s2">&quot;CouplingGraph&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Supply a default layout</span>
         <span class="n">qubit_subset</span> <span class="o">=</span> <span class="n">coupling_graph</span><span class="o">.</span><span class="n">get_qubits</span><span class="p">()</span>
@@ -470,8 +468,7 @@
     <span class="n">layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
     <span class="n">openqasm_output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">first_layer</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># True until first layer is output</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;initial_layout = &quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;initial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
 
     <span class="c1"># Iterate over layers</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
@@ -479,26 +476,15 @@
         <span class="c1"># Attempt to find a permutation for this layer</span>
         <span class="n">success_flag</span><span class="p">,</span> <span class="n">best_circ</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">trivial_flag</span> \
             <span class="o">=</span> <span class="n">layer_permutation</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">],</span> <span class="n">layout</span><span class="p">,</span>
-                                <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">trials</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: layer </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: success_flag=</span><span class="si">%s</span><span class="s2">,&quot;</span> <span class="o">%</span> <span class="n">success_flag</span> <span class="o">+</span>
-                  <span class="s2">&quot;best_d=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">best_d</span><span class="p">)</span> <span class="o">+</span>
-                  <span class="s2">&quot;,trivial_flag=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">trivial_flag</span><span class="p">)</span>
-
-        <span class="c1"># If this layer is only single-qubit gates,</span>
-        <span class="c1"># and we have yet to see multi-qubit gates,</span>
-        <span class="c1"># continue to the next iteration</span>
-        <span class="k">if</span> <span class="n">trivial_flag</span> <span class="ow">and</span> <span class="n">first_layer</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: skip to next layer&quot;</span><span class="p">)</span>
-            <span class="k">continue</span>
+                                <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;swap_mapper: layer </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;swap_mapper: success_flag=</span><span class="si">%s</span><span class="s2">,best_d=</span><span class="si">%s</span><span class="s2">,trivial_flag=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                     <span class="n">success_flag</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">best_d</span><span class="p">),</span> <span class="n">trivial_flag</span><span class="p">)</span>
 
         <span class="c1"># If this fails, try one gate at a time in this layer</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">success_flag</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: failed, layer </span><span class="si">%d</span><span class="s2">, &quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span>
-                      <span class="s2">&quot; retrying sequentially&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;swap_mapper: failed, layer </span><span class="si">%d</span><span class="s2">, &quot;</span>
+                         <span class="s2">&quot;retrying sequentially&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
             <span class="n">serial_layerlist</span> <span class="o">=</span> <span class="n">layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">serial_layers</span><span class="p">()</span>
 
             <span class="c1"># Go through each gate in the layer</span>
@@ -507,29 +493,27 @@
                 <span class="n">success_flag</span><span class="p">,</span> <span class="n">best_circ</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">trivial_flag</span> \
                     <span class="o">=</span> <span class="n">layer_permutation</span><span class="p">(</span><span class="n">serial_layer</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">],</span>
                                         <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
-                                        <span class="n">trials</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: success_flag=</span><span class="si">%s</span><span class="s2">,&quot;</span> <span class="o">%</span> <span class="n">success_flag</span> <span class="o">+</span>
-                          <span class="s2">&quot;best_d=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">best_d</span><span class="p">)</span> <span class="o">+</span>
-                          <span class="s2">&quot;,trivial_flag=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">trivial_flag</span><span class="p">)</span>
+                                        <span class="n">trials</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;swap_mapper: layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;swap_mapper: success_flag=</span><span class="si">%s</span><span class="s2">,best_d=</span><span class="si">%s</span><span class="s2">,&quot;</span>
+                             <span class="s2">&quot;trivial_flag=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                             <span class="n">success_flag</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">best_d</span><span class="p">),</span> <span class="n">trivial_flag</span><span class="p">)</span>
 
                 <span class="c1"># Give up if we fail again</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">success_flag</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;swap_mapper failed: &quot;</span> <span class="o">+</span>
-                                          <span class="s2">&quot;layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span>
-                                          <span class="s2">&quot;, </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">%</span>
-                                          <span class="n">serial_layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-                                              <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                              <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">))</span>
+                                      <span class="s2">&quot;layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span>
+                                      <span class="s2">&quot;, </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">%</span>
+                                      <span class="n">serial_layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
+                                          <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">))</span>
 
                 <span class="c1"># If this layer is only single-qubit gates,</span>
                 <span class="c1"># and we have yet to see multi-qubit gates,</span>
                 <span class="c1"># continue to the next inner iteration</span>
                 <span class="k">if</span> <span class="n">trivial_flag</span> <span class="ow">and</span> <span class="n">first_layer</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swap_mapper: skip to next sublayer&quot;</span><span class="p">)</span>
-                        <span class="k">continue</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;swap_mapper: skip to next sublayer&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
 
                 <span class="c1"># Update the record of qubit positions for each inner iteration</span>
                 <span class="n">layout</span> <span class="o">=</span> <span class="n">best_layout</span>
@@ -537,7 +521,7 @@
                 <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">update_qasm</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span>
                                                <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
                                                <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span>
-                                               <span class="n">serial_layerlist</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+                                               <span class="n">serial_layerlist</span><span class="p">)</span>
                 <span class="c1"># Update initial layout</span>
                 <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
                     <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">layout</span>
@@ -551,7 +535,7 @@
             <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">update_qasm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span>
                                            <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
                                            <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span>
-                                           <span class="n">layerlist</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+                                           <span class="n">layerlist</span><span class="p">)</span>
             <span class="c1"># Update initial layout</span>
             <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
                 <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">layout</span>
@@ -578,28 +562,34 @@
 
 
 <span class="k">def</span> <span class="nf">test_trig_solution</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Test if arguments are a solution to a system of equations.</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Test if arguments are a solution to a system of equations.</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">       \cos(\phi+\lambda) \cos(\\theta) = \cos(xi) * \cos(\\theta1+\\theta2)</span>
 
-<span class="sd">       \sin(\phi+\lambda) \cos(\\theta) = \sin(xi) * \cos(\\theta1-\\theta2) </span>
+<span class="sd">       \sin(\phi+\lambda) \cos(\\theta) = \sin(xi) * \cos(\\theta1-\\theta2)</span>
 
 <span class="sd">       \cos(\phi-\lambda) \sin(\\theta) = \cos(xi) * \sin(\\theta1+\\theta2)</span>
 
 <span class="sd">       \sin(\phi-\lambda) \sin(\\theta) = \sin(xi) * \sin(-\\theta1+\\theta2)</span>
 
-<span class="sd">    Returns the maximum absolute difference between right and left hand sides.</span>
+<span class="sd">    Returns the maximum absolute difference between right and left hand sides</span>
+<span class="sd">    as a Max symbol. See:</span>
+<span class="sd">    http://docs.sympy.org/latest/modules/functions/elementary.html?highlight=max</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">delta1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
-        <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
-    <span class="n">delta2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
-        <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">)</span>
-    <span class="n">delta3</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
-        <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
-    <span class="n">delta4</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
-        <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span> <span class="p">[</span><span class="n">delta1</span><span class="p">,</span> <span class="n">delta2</span><span class="p">,</span> <span class="n">delta3</span><span class="p">,</span> <span class="n">delta4</span><span class="p">]))</span>
+    <span class="n">delta1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
+        <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
+    <span class="n">delta2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
+        <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">)</span>
+    <span class="n">delta3</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
+        <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
+    <span class="n">delta4</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> \
+        <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span>
+
+    <span class="p">[</span><span class="n">delta1</span><span class="p">,</span> <span class="n">delta2</span><span class="p">,</span> <span class="n">delta3</span><span class="p">,</span> <span class="n">delta4</span><span class="p">]</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">simplify</span><span class="p">()),</span>
+                                           <span class="p">[</span><span class="n">delta1</span><span class="p">,</span> <span class="n">delta2</span><span class="p">,</span> <span class="n">delta3</span><span class="p">,</span> <span class="n">delta4</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">delta1</span><span class="p">,</span> <span class="n">delta2</span><span class="p">,</span> <span class="n">delta3</span><span class="p">,</span> <span class="n">delta4</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">yzy_to_zyz</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">):</span>
@@ -618,42 +608,43 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">solutions</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of potential solutions</span>
     <span class="c1"># Four cases to avoid singularities</span>
-    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">/</span> <span class="mi">10</span><span class="p">:</span>
-        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">theta2</span> <span class="o">-</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">/</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="c1"># TODO investigate when these can be .is_zero</span>
+    <span class="k">if</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">theta2</span> <span class="o">-</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
         <span class="n">phi_minus_lambda</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="mi">3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="mi">3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
-        <span class="n">stheta_1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span>
-        <span class="n">stheta_2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span>
-        <span class="n">stheta_3</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">stheta_1</span>
-        <span class="n">stheta_4</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">stheta_2</span>
+            <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">3</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">3</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">stheta_1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span>
+        <span class="n">stheta_2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span>
+        <span class="n">stheta_3</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">stheta_1</span>
+        <span class="n">stheta_4</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">stheta_2</span>
         <span class="n">stheta</span> <span class="o">=</span> <span class="p">[</span><span class="n">stheta_1</span><span class="p">,</span> <span class="n">stheta_2</span><span class="p">,</span> <span class="n">stheta_3</span><span class="p">,</span> <span class="n">stheta_4</span><span class="p">]</span>
         <span class="n">phi_plus_lambda</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
-                                   <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">*</span>
-                                             <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+                                   <span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">*</span>
+                                              <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">/</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
                                    <span class="n">stheta</span><span class="p">))</span>
         <span class="n">sphi</span> <span class="o">=</span> <span class="p">[(</span><span class="n">term</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">term</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span>
                 <span class="nb">zip</span><span class="p">(</span><span class="n">phi_plus_lambda</span><span class="p">,</span> <span class="n">phi_minus_lambda</span><span class="p">)]</span>
         <span class="n">slam</span> <span class="o">=</span> <span class="p">[(</span><span class="n">term</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">term</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span>
                 <span class="nb">zip</span><span class="p">(</span><span class="n">phi_plus_lambda</span><span class="p">,</span> <span class="n">phi_minus_lambda</span><span class="p">)]</span>
         <span class="n">solutions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">stheta</span><span class="p">,</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">slam</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">/</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
         <span class="n">phi_plus_lambda</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="mi">3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="mi">3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
-        <span class="n">stheta_1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">))</span>
-        <span class="n">stheta_2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">))</span>
+            <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">3</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">3</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">stheta_1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">))</span>
+        <span class="n">stheta_2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">))</span>
         <span class="n">stheta_3</span> <span class="o">=</span> <span class="o">-</span><span class="n">stheta_1</span>
         <span class="n">stheta_4</span> <span class="o">=</span> <span class="o">-</span><span class="n">stheta_2</span>
         <span class="n">stheta</span> <span class="o">=</span> <span class="p">[</span><span class="n">stheta_1</span><span class="p">,</span> <span class="n">stheta_2</span><span class="p">,</span> <span class="n">stheta_3</span><span class="p">,</span> <span class="n">stheta_4</span><span class="p">]</span>
         <span class="n">phi_minus_lambda</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">*</span>
-                                              <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+                                    <span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">*</span>
+                                               <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">/</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
                                     <span class="n">stheta</span><span class="p">))</span>
         <span class="n">sphi</span> <span class="o">=</span> <span class="p">[(</span><span class="n">term</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">term</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span>
                 <span class="nb">zip</span><span class="p">(</span><span class="n">phi_plus_lambda</span><span class="p">,</span> <span class="n">phi_minus_lambda</span><span class="p">)]</span>
@@ -661,38 +652,40 @@
                 <span class="nb">zip</span><span class="p">(</span><span class="n">phi_plus_lambda</span><span class="p">,</span> <span class="n">phi_minus_lambda</span><span class="p">)]</span>
         <span class="n">solutions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">stheta</span><span class="p">,</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">slam</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">phi_plus_lambda</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
-                                    <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)))</span>
-        <span class="n">phi_minus_lambda</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span>
-                                                             <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
-                                     <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span>
-                                                              <span class="n">theta2</span><span class="p">)))</span>
+        <span class="n">phi_plus_lambda</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">-</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
+                                     <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)))</span>
+        <span class="n">phi_minus_lambda</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">theta1</span> <span class="o">+</span>
+                                                                <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
+                                      <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span>
+                                                                 <span class="n">theta2</span><span class="p">)))</span>
         <span class="n">sphi</span> <span class="o">=</span> <span class="p">(</span><span class="n">phi_plus_lambda</span> <span class="o">+</span> <span class="n">phi_minus_lambda</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">slam</span> <span class="o">=</span> <span class="p">(</span><span class="n">phi_plus_lambda</span> <span class="o">-</span> <span class="n">phi_minus_lambda</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span><span class="p">)),</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">slam</span><span class="p">))</span>
-        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)),</span>
-                          <span class="n">sphi</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                          <span class="n">slam</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span><span class="p">)),</span>
-                          <span class="n">sphi</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">slam</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)),</span>
-                          <span class="n">sphi</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">slam</span><span class="p">))</span>
+        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
+                                     <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span><span class="p">)),</span> <span class="n">sphi</span><span class="p">,</span> <span class="n">slam</span><span class="p">))</span>
+        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
+                                     <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">)),</span>
+                          <span class="n">sphi</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                          <span class="n">slam</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
+                                     <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span><span class="p">)),</span>
+                          <span class="n">sphi</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">slam</span> <span class="o">-</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sympy</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">)</span> <span class="o">/</span>
+                                     <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sphi</span> <span class="o">+</span> <span class="n">slam</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">)),</span>
+                          <span class="n">sphi</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">slam</span><span class="p">))</span>
+
     <span class="c1"># Select the first solution with the required accuracy</span>
     <span class="n">deltas</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">test_trig_solution</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
                                                    <span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">),</span>
                       <span class="n">solutions</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">delta_sol</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">deltas</span><span class="p">,</span> <span class="n">solutions</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">delta_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="c1"># TODO investigate when this can be .is_zero</span>
+        <span class="k">if</span> <span class="n">delta_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">delta_sol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xi=&quot;</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;theta1=&quot;</span><span class="p">,</span> <span class="n">theta1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;theta2=&quot;</span><span class="p">,</span> <span class="n">theta2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solutions=&quot;</span><span class="p">,</span> <span class="n">solutions</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;deltas=&quot;</span><span class="p">,</span> <span class="n">deltas</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;xi=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;theta1=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">theta1</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;theta2=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">theta2</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;solutions=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">solutions</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;deltas=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">deltas</span><span class="p">))</span>
     <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Error! No solution found. This should not happen.&quot;</span>
 
 
@@ -708,9 +701,10 @@
 <span class="sd">    Return theta, phi, lambda.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Careful with the factor of two in yzy_to_zyz</span>
-    <span class="n">thetap</span><span class="p">,</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambdap</span> <span class="o">=</span> <span class="n">yzy_to_zyz</span><span class="p">((</span><span class="n">lambda1</span> <span class="o">+</span> <span class="n">phi2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span>
-                                       <span class="n">theta1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">thetap</span><span class="p">,</span> <span class="n">phi1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lambdap</span><span class="p">)</span>
+    <span class="n">thetap</span><span class="p">,</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambdap</span> <span class="o">=</span> <span class="n">yzy_to_zyz</span><span class="p">((</span><span class="n">lambda1</span> <span class="o">+</span> <span class="n">phi2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                       <span class="n">theta1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">thetap</span><span class="p">,</span> <span class="n">phi1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">phip</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lambdap</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">simplify</span><span class="p">(),</span> <span class="n">phi</span><span class="o">.</span><span class="n">simplify</span><span class="p">(),</span> <span class="n">lamb</span><span class="o">.</span><span class="n">simplify</span><span class="p">())</span>
 
 
 <div class="viewcode-block" id="cx_cancellation"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.cx_cancellation.html#qiskit.mapper.cx_cancellation">[docs]</a><span class="k">def</span> <span class="nf">cx_cancellation</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
@@ -745,7 +739,7 @@
 <span class="sd">    Return a new circuit that has been optimized.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qx_basis</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]</span>
-    <span class="n">urlr</span> <span class="o">=</span> <span class="n">unroll</span><span class="o">.</span><span class="n">Unroller</span><span class="p">(</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span><span class="n">qeflag</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">parse</span><span class="p">(),</span>
+    <span class="n">urlr</span> <span class="o">=</span> <span class="n">unroll</span><span class="o">.</span><span class="n">Unroller</span><span class="p">(</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">())</span><span class="o">.</span><span class="n">parse</span><span class="p">(),</span>
                            <span class="n">unroll</span><span class="o">.</span><span class="n">DAGBackend</span><span class="p">(</span><span class="n">qx_basis</span><span class="p">))</span>
     <span class="n">unrolled</span> <span class="o">=</span> <span class="n">urlr</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
@@ -753,7 +747,7 @@
     <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
         <span class="n">qname</span> <span class="o">=</span> <span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s2">&quot;qargs&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u1&quot;</span>
-        <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>  <span class="c1"># (theta, phi, lambda)</span>
+        <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># (theta, phi, lambda)</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
             <span class="n">nd</span> <span class="o">=</span> <span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
             <span class="k">assert</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;internal error&quot;</span>
@@ -762,29 +756,29 @@
             <span class="n">left_name</span> <span class="o">=</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
             <span class="k">assert</span> <span class="n">left_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="s2">&quot;internal error&quot;</span>
             <span class="k">if</span> <span class="n">left_name</span> <span class="o">==</span> <span class="s2">&quot;u1&quot;</span><span class="p">:</span>
-                <span class="n">left_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">left_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">elif</span> <span class="n">left_name</span> <span class="o">==</span> <span class="s2">&quot;u2&quot;</span><span class="p">:</span>
-                <span class="n">left_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
-                                   <span class="nb">float</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">left_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                                   <span class="n">sympy</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
             <span class="k">elif</span> <span class="n">left_name</span> <span class="o">==</span> <span class="s2">&quot;u3&quot;</span><span class="p">:</span>
-                <span class="n">left_parameters</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]))</span>
+                <span class="n">left_parameters</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">left_name</span> <span class="o">=</span> <span class="s2">&quot;u1&quot;</span>  <span class="c1"># replace id with u1</span>
-                <span class="n">left_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">left_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
             <span class="c1"># Compose gates</span>
             <span class="n">name_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_name</span><span class="p">,</span> <span class="n">right_name</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">name_tuple</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u1&quot;</span><span class="p">):</span>
                 <span class="c1"># u1(lambda1) * u1(lambda2) = u1(lambda1 + lambda2)</span>
-                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
                                     <span class="n">left_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
             <span class="k">elif</span> <span class="n">name_tuple</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">):</span>
                 <span class="c1"># u1(lambda1) * u2(phi2, lambda2) = u2(phi2 + lambda1, lambda2)</span>
-                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
                                     <span class="n">left_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
             <span class="k">elif</span> <span class="n">name_tuple</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u1&quot;</span><span class="p">):</span>
                 <span class="c1"># u2(phi1, lambda1) * u1(lambda2) = u2(phi1, lambda1 + lambda2)</span>
                 <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u2&quot;</span>
-                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">left_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">left_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                     <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">left_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
             <span class="k">elif</span> <span class="n">name_tuple</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">):</span>
                 <span class="c1"># u1(lambda1) * u3(theta2, phi2, lambda2) =</span>
@@ -803,65 +797,97 @@
                 <span class="c1"># u2(phi1, lambda1) * u2(phi2, lambda2) =</span>
                 <span class="c1">#    u3(pi - lambda1 - phi2, phi1 + pi/2, lambda2 + pi/2)</span>
                 <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u3&quot;</span>
-                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">left_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">left_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span>
                                     <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">left_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
-                                    <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+                                    <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
+                                    <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">name_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;nop&quot;</span><span class="p">:</span>
+                <span class="n">right_name</span> <span class="o">=</span> <span class="n">left_name</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="n">left_parameters</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># For composing u3&#39;s or u2&#39;s with u3&#39;s, use</span>
                 <span class="c1"># u2(phi, lambda) = u3(pi/2, phi, lambda)</span>
                 <span class="c1"># together with the qiskit.mapper.compose_u3 method.</span>
                 <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u3&quot;</span>
+                <span class="c1"># Evaluate the symbolic expressions for efficiency</span>
+                <span class="n">left_parameters</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">evalf</span><span class="p">(),</span> <span class="nb">list</span><span class="p">(</span><span class="n">left_parameters</span><span class="p">)))</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">evalf</span><span class="p">(),</span> <span class="nb">list</span><span class="p">(</span><span class="n">right_parameters</span><span class="p">)))</span>
                 <span class="n">right_parameters</span> <span class="o">=</span> <span class="n">compose_u3</span><span class="p">(</span><span class="n">left_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                               <span class="n">left_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                               <span class="n">left_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
                                               <span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                               <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                               <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-            <span class="c1"># Here down, when we simplify, we add f(theta) to lambda to correct</span>
-            <span class="c1"># the global phase when f(theta) is 2*pi. This isn&#39;t necessary but</span>
-            <span class="c1"># the other steps preserve the global phase, so we continue.</span>
-            <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-9</span>  <span class="c1"># for comparison with zero</span>
+                <span class="c1"># Why evalf()? This program:</span>
+                <span class="c1">#   OPENQASM 2.0;</span>
+                <span class="c1">#   include &quot;qelib1.inc&quot;;</span>
+                <span class="c1">#   qreg q[2];</span>
+                <span class="c1">#   creg c[2];</span>
+                <span class="c1">#   u3(0.518016983430947*pi,1.37051598592907*pi,1.36816383603222*pi) q[0];</span>
+                <span class="c1">#   u3(1.69867232277986*pi,0.371448347747471*pi,0.461117217930936*pi) q[0];</span>
+                <span class="c1">#   u3(0.294319836336836*pi,0.450325871124225*pi,1.46804720442555*pi) q[0];</span>
+                <span class="c1">#   measure q -&gt; c;</span>
+                <span class="c1"># took &gt;630 seconds (did not complete) to optimize without</span>
+                <span class="c1"># calling evalf() at all, 19 seconds to optimize calling</span>
+                <span class="c1"># evalf() AFTER compose_u3, and 1 second to optimize</span>
+                <span class="c1"># calling evalf() BEFORE compose_u3.</span>
+            <span class="c1"># 1. Here down, when we simplify, we add f(theta) to lambda to</span>
+            <span class="c1"># correct the global phase when f(theta) is 2*pi. This isn&#39;t</span>
+            <span class="c1"># necessary but the other steps preserve the global phase, so</span>
+            <span class="c1"># we continue in that manner.</span>
+            <span class="c1"># 2. The final step will remove Z rotations by 2*pi.</span>
+            <span class="c1"># 3. Note that is_zero is true only if the expression is exactly</span>
+            <span class="c1"># zero. If the input expressions have already been evaluated</span>
+            <span class="c1"># then these final simplifications will not occur.</span>
+            <span class="c1"># TODO After we refactor, we should have separate passes for</span>
+            <span class="c1"># exact and approximate rewriting.</span>
+
             <span class="c1"># Y rotation is 0 mod 2*pi, so the gate is a u1</span>
-            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span> \
-               <span class="ow">and</span> <span class="n">right_name</span> <span class="o">!=</span> <span class="s2">&quot;u1&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">is_zero</span> \
+                    <span class="ow">and</span> <span class="n">right_name</span> <span class="o">!=</span> <span class="s2">&quot;u1&quot;</span><span class="p">:</span>
                 <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u1&quot;</span>
-                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+                <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
                                     <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
                                     <span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="c1"># Y rotation is pi/2 or -pi/2 mod 2*pi, so the gate is a u2</span>
             <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;u3&quot;</span><span class="p">:</span>
                 <span class="c1"># theta = pi/2 + 2*k*pi</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">((</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> \
-                   <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
                     <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u2&quot;</span>
-                    <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                         <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
-                                        <span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+                                        <span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
                 <span class="c1"># theta = -pi/2 + 2*k*pi</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">((</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> \
-                   <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
                     <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u2&quot;</span>
-                    <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
-                                        <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span>
-                                        <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span>
-                                                   <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
-            <span class="c1"># u1 and lambda is 0 mod 4*pi so gate is nop</span>
-            <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;u1&quot;</span> <span class="ow">and</span> \
-               <span class="nb">abs</span><span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">%</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+                    <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+                                        <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span>
+                                        <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span>
+                                                    <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="c1"># u1 and lambda is 0 mod 2*pi so gate is nop (up to a global phase)</span>
+            <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;u1&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
                 <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;nop&quot;</span>
+            <span class="c1"># Simplify the symbolic parameters</span>
+            <span class="n">right_parameters</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">simplify</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">right_parameters</span><span class="p">)))</span>
         <span class="c1"># Replace the data of the first node in the run</span>
         <span class="n">new_params</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;u1&quot;</span><span class="p">:</span>
-            <span class="n">new_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">new_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
         <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;u2&quot;</span><span class="p">:</span>
             <span class="n">new_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">right_parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">right_parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
         <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;u3&quot;</span><span class="p">:</span>
             <span class="n">new_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">right_parameters</span><span class="p">)</span>
+
         <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
                                <span class="p">{</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">right_name</span><span class="p">})</span>
+        <span class="c1"># params is a list of sympy symbols and the str() method</span>
+        <span class="c1"># will return Python expressions. To get the correct</span>
+        <span class="c1"># OpenQASM expression, we need to replace &quot;**&quot; with &quot;^&quot;.</span>
         <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,</span>
-                               <span class="p">{</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_params</span><span class="p">))})</span>
+                               <span class="p">{</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+                                                  <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
+                                                  <span class="n">new_params</span><span class="p">))})</span>
+
         <span class="c1"># Delete the other nodes in the run</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
             <span class="n">unrolled</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
@@ -890,15 +916,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

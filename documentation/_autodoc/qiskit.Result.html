@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.Result &#8212; QISKit SDK 0.3.16 documentation</title>
+    <title>qiskit.Result &#8212; QISKit SDK 0.4.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.16',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -28,7 +28,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="qiskit.QISKitError" href="qiskit.QISKitError.html" />
-    <link rel="prev" title="qiskit.QuantumRegister" href="qiskit.QuantumRegister.html" />
+    <link rel="prev" title="qiskit.Reset" href="qiskit.Reset.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -55,7 +55,7 @@
           <a href="qiskit.QISKitError.html" title="qiskit.QISKitError"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="qiskit.QuantumRegister.html" title="qiskit.QuantumRegister"
+          <a href="qiskit.Reset.html" title="qiskit.Reset"
              accesskey="P">previous</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -90,21 +90,26 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumProgram.html">qiskit.QuantumProgram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumRegister.html">qiskit.QuantumRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Reset.html">qiskit.Reset</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.Result</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="qiskit.QuantumRegister.html"
-                        title="previous chapter">qiskit.QuantumRegister</a></p>
+  <p class="topless"><a href="qiskit.Reset.html"
+                        title="previous chapter">qiskit.Reset</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="qiskit.QISKitError.html"
                         title="next chapter">qiskit.QISKitError</a></p>
@@ -137,25 +142,31 @@
 <h1>qiskit.Result<a class="headerlink" href="#qiskit-result" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.Result">
-<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">Result</code><span class="sig-paren">(</span><em>qobj_result</em>, <em>qobj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">Result</code><span class="sig-paren">(</span><em>qobj_result</em>, <em>qobj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Result Class.</p>
 <p>Class internal properties.</p>
 <p>Methods to process the quantum program after it has been run</p>
 <p>Internal:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>qobj =  { -- the quantum object that was complied --}
-result =
-    [
-        {
-        &quot;data&quot;:
-            {  #### DATA CAN BE A DIFFERENT DICTIONARY FOR EACH BACKEND ####
-            &quot;counts&quot;: {’00000’: XXXX, ’00001’: XXXXX},
-            &quot;time&quot;  : xx.xxxxxxxx
-            },
-        &quot;status&quot;: --status (string)--
-        },
-        ...
-    ]
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qobj</span> <span class="o">=</span>  <span class="p">{</span> <span class="o">--</span> <span class="n">the</span> <span class="n">quantum</span> <span class="nb">object</span> <span class="n">that</span> <span class="n">was</span> <span class="n">complied</span> <span class="o">--</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;job_id&quot;</span><span class="p">:</span> <span class="o">--</span><span class="n">job</span><span class="o">-</span><span class="nb">id</span> <span class="p">(</span><span class="n">string</span><span class="p">),</span>
+              <span class="c1">#This string links the result with the job that computes it,</span>
+              <span class="c1">#it should be issued by the backend it is run on.</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="o">--</span><span class="n">status</span> <span class="p">(</span><span class="n">string</span><span class="p">),</span>
+    <span class="s2">&quot;result&quot;</span><span class="p">:</span>
+        <span class="p">[</span>
+            <span class="p">{</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span>
+                <span class="p">{</span>  <span class="c1">#### DATA CAN BE A DIFFERENT DICTIONARY FOR EACH BACKEND ####</span>
+                <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00000&#39;</span><span class="p">:</span> <span class="n">XXXX</span><span class="p">,</span> <span class="s1">&#39;00001&#39;</span><span class="p">:</span> <span class="n">XXXXX</span><span class="p">},</span>
+                <span class="s2">&quot;time&quot;</span>  <span class="p">:</span> <span class="n">xx</span><span class="o">.</span><span class="n">xxxxxxxx</span>
+                <span class="p">},</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="o">--</span><span class="n">status</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">--</span>
+            <span class="p">},</span>
+            <span class="o">...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
 <p class="rubric">Methods</p>
@@ -171,23 +182,38 @@ result =
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.average_data" title="qiskit.Result.average_data"><code class="xref py py-obj docutils literal"><span class="pre">average_data</span></code></a>(name,&nbsp;observable)</td>
 <td>Compute the mean value of an diagonal observable.</td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.circuit_statuses" title="qiskit.Result.circuit_statuses"><code class="xref py py-obj docutils literal"><span class="pre">circuit_statuses</span></code></a>()</td>
+<td>Return statuses of all circuits</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_circuit_status" title="qiskit.Result.get_circuit_status"><code class="xref py py-obj docutils literal"><span class="pre">get_circuit_status</span></code></a>(icircuit)</td>
+<td>Return the status of circuit at index icircuit.</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_counts" title="qiskit.Result.get_counts"><code class="xref py py-obj docutils literal"><span class="pre">get_counts</span></code></a>(name)</td>
-<td>Get the histogram data of cicuit name.</td>
+<td>Get the histogram data of circuit name.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_data" title="qiskit.Result.get_data"><code class="xref py py-obj docutils literal"><span class="pre">get_data</span></code></a>(name)</td>
-<td>Get the data of cicuit name.</td>
+<td>Get the data of circuit name.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_error" title="qiskit.Result.get_error"><code class="xref py py-obj docutils literal"><span class="pre">get_error</span></code></a>()</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_job_id" title="qiskit.Result.get_job_id"><code class="xref py py-obj docutils literal"><span class="pre">get_job_id</span></code></a>()</td>
+<td>Return the job id assigned by the api if this is a remote job.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_names" title="qiskit.Result.get_names"><code class="xref py py-obj docutils literal"><span class="pre">get_names</span></code></a>()</td>
+<td>Get the circuit names of the results.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_qubitpol_vs_xval" title="qiskit.Result.get_qubitpol_vs_xval"><code class="xref py py-obj docutils literal"><span class="pre">get_qubitpol_vs_xval</span></code></a>([xvals_dict])</td>
+<td>Compute the polarization of each qubit for all circuits and pull out each circuits xval into an array.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_ran_qasm" title="qiskit.Result.get_ran_qasm"><code class="xref py py-obj docutils literal"><span class="pre">get_ran_qasm</span></code></a>(name)</td>
 <td>Get the ran qasm for the named circuit and backend.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_status" title="qiskit.Result.get_status"><code class="xref py py-obj docutils literal"><span class="pre">get_status</span></code></a>()</td>
+<td>Return whole qobj result status.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="qiskit.Result.average_data">
-<code class="descname">average_data</code><span class="sig-paren">(</span><em>name</em>, <em>observable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#Result.average_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.average_data" title="Permalink to this definition">¶</a></dt>
+<code class="descname">average_data</code><span class="sig-paren">(</span><em>name</em>, <em>observable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.average_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.average_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the mean value of an diagonal observable.</p>
 <p>Takes in an observable in dictionary format and then
 calculates the sum_i value(i) P(i) where value(i) is the value of
@@ -198,13 +224,50 @@ the observable for state i.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<em>str</em>) – the name of the quantum circuit</li>
-<li><strong>obsevable</strong> (<em>dict</em>) – The observable to be averaged over. As an example</li>
+<li><strong>observable</strong> (<em>dict</em>) – The observable to be averaged over. As an example</li>
 <li><strong>on qubits equals {&quot;00&quot;</strong> (<em>ZZ</em>) – 1, “11”: 1, “01”: -1, “10”: -1}</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a double for the average of the observable</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Average of the observable</p>
 </td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Double</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.circuit_statuses">
+<code class="descname">circuit_statuses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.circuit_statuses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.circuit_statuses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return statuses of all circuits</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of status result strings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list(str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.get_circuit_status">
+<code class="descname">get_circuit_status</code><span class="sig-paren">(</span><em>icircuit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_circuit_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_circuit_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the status of circuit at index icircuit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>icircuit</strong> (<em>int</em>) – index of circuit</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the status of the circuit.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
@@ -212,25 +275,21 @@ the observable for state i.</p>
 
 <dl class="method">
 <dt id="qiskit.Result.get_counts">
-<code class="descname">get_counts</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#Result.get_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_counts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the histogram data of cicuit name.</p>
+<code class="descname">get_counts</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the histogram data of circuit name.</p>
 <p>The data from the a qasm circuit is dictionary of the format
-{’00000’: XXXX, ’00001’: XXXXX}.</p>
+{‘00000’: XXXX, ‘00001’: XXXXX}.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – the name of the quantum circuit.</li>
-<li><strong>backend</strong> (<em>str</em>) – the name of the backend the data was run on.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the quantum circuit.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">XXXX, ’00001’: XXXXX}.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Counts {‘00000’: XXXX, ‘00001’: XXXXX}.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A dictionary of counts {’00000’</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Dictionary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if there are no counts for the circuit.</td>
 </tr>
 </tbody>
 </table>
@@ -238,12 +297,12 @@ the observable for state i.</p>
 
 <dl class="method">
 <dt id="qiskit.Result.get_data">
-<code class="descname">get_data</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#Result.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the data of cicuit name.</p>
+<code class="descname">get_data</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data of circuit name.</p>
 <p>The data format will depend on the backend. For a real device it
 will be for the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&quot;counts&quot;: {’00000’: XXXX, ’00001’: XXXX},
-&quot;time&quot;  : xx.xxxxxxxx
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00000&#39;</span><span class="p">:</span> <span class="n">XXXX</span><span class="p">,</span> <span class="s1">&#39;00001&#39;</span><span class="p">:</span> <span class="n">XXXX</span><span class="p">},</span>
+<span class="s2">&quot;time&quot;</span>  <span class="p">:</span> <span class="n">xx</span><span class="o">.</span><span class="n">xxxxxxxx</span>
 </pre></div>
 </div>
 <p>for the qasm simulators of 1 shot:</p>
@@ -269,22 +328,88 @@ will be for the form:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the quantum circuit.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> (<em>str</em>) – the name of the quantum circuit.</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary of data for the different backends.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A dictionary of data for the different backends.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">dict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if there is no data for the circuit, or an unhandled
+error occurred while fetching the data.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">Exception</span></code> – if a handled error occurred while fetching the data.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.Result.get_error">
-<code class="descname">get_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#Result.get_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_error" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="qiskit.Result.get_job_id">
+<code class="descname">get_job_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_job_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_job_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the job id assigned by the api if this is a remote job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a string containing the job id.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.get_names">
+<code class="descname">get_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the circuit names of the results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of circuit names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.get_qubitpol_vs_xval">
+<code class="descname">get_qubitpol_vs_xval</code><span class="sig-paren">(</span><em>xvals_dict=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_qubitpol_vs_xval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_qubitpol_vs_xval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the polarization of each qubit for all circuits and pull out each circuits
+xval into an array. Assumes that each circuit has the same number of qubits and that
+all qubits are measured.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xvals_dict</strong> (<em>dict</em>) – xvals for each circuit {‘circuitname1’: xval1,…}. If this</li>
+<li><strong>none then the xvals list is just left as an array of zeros</strong> (<em>is</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">mxn double array where m is the number of circuit, n the number of qubits
+xvals: mx1 array of the circuit xvals</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">qubit_pol</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.Result.get_ran_qasm">
-<code class="descname">get_ran_qasm</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumprogram.html#Result.get_ran_qasm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_ran_qasm" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_ran_qasm</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_ran_qasm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_ran_qasm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the ran qasm for the named circuit and backend.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -294,8 +419,18 @@ will be for the form:</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A text version of the qasm file that has been run.</td>
 </tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if the circuit was not found.</td>
+</tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.get_status">
+<code class="descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whole qobj result status.</p>
 </dd></dl>
 
 </dd></dl>
@@ -321,7 +456,7 @@ will be for the form:</p>
           <a href="qiskit.QISKitError.html" title="qiskit.QISKitError"
              >next</a> |</li>
         <li class="right" >
-          <a href="qiskit.QuantumRegister.html" title="qiskit.QuantumRegister"
+          <a href="qiskit.Reset.html" title="qiskit.Reset"
              >previous</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
@@ -329,15 +464,15 @@ will be for the form:</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.3.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2017/12/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

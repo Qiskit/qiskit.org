@@ -1,0 +1,707 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.extensions.quantum_initializer.InitializeGate &#8212; QISKit SDK 0.4.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.mapper package" href="qiskit.mapper.html" />
+    <link rel="prev" title="qiskit.extensions.quantum_initializer package" href="qiskit.extensions.quantum_initializer.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html">english</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.mapper.html" title="qiskit.mapper package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.extensions.quantum_initializer.html" title="qiskit.extensions.quantum_initializer package"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.extensions.html" >qiskit.extensions package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.extensions.quantum_initializer.html" accesskey="U">qiskit.extensions.quantum_initializer package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.extensions.standard.html">qiskit.extensions.standard package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.extensions.qiskit_simulator.html">qiskit.extensions.qiskit_simulator package</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="qiskit.extensions.quantum_initializer.html">qiskit.extensions.quantum_initializer package</a><ul class="current">
+<li class="toctree-l6 current"><a class="reference internal" href="qiskit.extensions.quantum_initializer.html#classes">Classes</a><ul class="current">
+<li class="toctree-l7 current"><a class="current reference internal" href="#">qiskit.extensions.quantum_initializer.InitializeGate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qiskit.extensions.quantum_initializer.html"
+                        title="previous chapter">qiskit.extensions.quantum_initializer package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.mapper.html"
+                        title="next chapter">qiskit.mapper package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-extensions-quantum-initializer-initializegate">
+<h1>qiskit.extensions.quantum_initializer.InitializeGate<a class="headerlink" href="#qiskit-extensions-quantum-initializer-initializegate" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate">
+<em class="property">class </em><code class="descclassname">qiskit.extensions.quantum_initializer.</code><code class="descname">InitializeGate</code><span class="sig-paren">(</span><em>name</em>, <em>param</em>, <em>arg</em>, <em>circ=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/quantum_initializer/_initializer.html#InitializeGate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">qiskit._compositegate.CompositeGate</span></code></p>
+<p>Complex amplitude initialization.</p>
+<p>Class that implements the (complex amplitude) initialization of some
+flexible collection of qubit registers (assuming the qubits are in the
+zero state).</p>
+<p>Implements a recursive initialization algorithm including optimizations
+from “Synthesis of Quantum Logic Circuits” Shende, Bullock, Markov
+<a class="reference external" href="https://arxiv.org/abs/quant-ph/0406176v5">https://arxiv.org/abs/quant-ph/0406176v5</a></p>
+<p>Additionally implements some extra optimizations: remove zero rotations and
+double cnots.`</p>
+<p>It inherits from CompositeGate in the same way that the Fredkin (cswap)
+gate does. Therefore self.data is the list of gates (in order) that must
+be applied to implement this meta-gate.</p>
+<p>name = instruction name string
+param = list of complex amplitudes
+arg = list of qubits
+circ = QuantumCircuit or CompositeGate containing this gate</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.__init__" title="qiskit.extensions.quantum_initializer.InitializeGate.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(name,&nbsp;param,&nbsp;arg[,&nbsp;circ])</td>
+<td>Create new initialize composite gate.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.barrier" title="qiskit.extensions.quantum_initializer.InitializeGate.barrier"><code class="xref py py-obj docutils literal"><span class="pre">barrier</span></code></a>(*tuples)</td>
+<td>Apply barrier to tuples (reg, idx).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.c_if" title="qiskit.extensions.quantum_initializer.InitializeGate.c_if"><code class="xref py py-obj docutils literal"><span class="pre">c_if</span></code></a>(classical,&nbsp;val)</td>
+<td>Add classical control register.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.ccx" title="qiskit.extensions.quantum_initializer.InitializeGate.ccx"><code class="xref py py-obj docutils literal"><span class="pre">ccx</span></code></a>(ctl1,&nbsp;ctl2,&nbsp;tgt)</td>
+<td>Apply Toffoli to circuit.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.ch" title="qiskit.extensions.quantum_initializer.InitializeGate.ch"><code class="xref py py-obj docutils literal"><span class="pre">ch</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CH from ctl to tgt.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.check_circuit" title="qiskit.extensions.quantum_initializer.InitializeGate.check_circuit"><code class="xref py py-obj docutils literal"><span class="pre">check_circuit</span></code></a>()</td>
+<td>Raise exception if self.circuit is None.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.chop_num" title="qiskit.extensions.quantum_initializer.InitializeGate.chop_num"><code class="xref py py-obj docutils literal"><span class="pre">chop_num</span></code></a>(numb)</td>
+<td>Set very small numbers (as defined by global variable _EPS) to zero.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.crz" title="qiskit.extensions.quantum_initializer.InitializeGate.crz"><code class="xref py py-obj docutils literal"><span class="pre">crz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply crz from ctl to tgt with angle theta.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cswap" title="qiskit.extensions.quantum_initializer.InitializeGate.cswap"><code class="xref py py-obj docutils literal"><span class="pre">cswap</span></code></a>(ctl,&nbsp;tgt1,&nbsp;tgt2)</td>
+<td>Apply Fredkin to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cu1" title="qiskit.extensions.quantum_initializer.InitializeGate.cu1"><code class="xref py py-obj docutils literal"><span class="pre">cu1</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply cu1 from ctl to tgt with angle theta.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cu3" title="qiskit.extensions.quantum_initializer.InitializeGate.cu3"><code class="xref py py-obj docutils literal"><span class="pre">cu3</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply cu3 from ctl to tgt with angle theta, phi, lam.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cx" title="qiskit.extensions.quantum_initializer.InitializeGate.cx"><code class="xref py py-obj docutils literal"><span class="pre">cx</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CNOT from ctl to tgt.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cx_base" title="qiskit.extensions.quantum_initializer.InitializeGate.cx_base"><code class="xref py py-obj docutils literal"><span class="pre">cx_base</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CX ctl, tgt.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cy" title="qiskit.extensions.quantum_initializer.InitializeGate.cy"><code class="xref py py-obj docutils literal"><span class="pre">cy</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CY to circuit.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.cz" title="qiskit.extensions.quantum_initializer.InitializeGate.cz"><code class="xref py py-obj docutils literal"><span class="pre">cz</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CZ to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.first_atomic_gate_host" title="qiskit.extensions.quantum_initializer.InitializeGate.first_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">first_atomic_gate_host</span></code></a>()</td>
+<td>Return the host list of the leaf gate on the left edge.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.gates_to_uncompute" title="qiskit.extensions.quantum_initializer.InitializeGate.gates_to_uncompute"><code class="xref py py-obj docutils literal"><span class="pre">gates_to_uncompute</span></code></a>()</td>
+<td>Call to populate the self.data list with gates that takes the desired vector to zero.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.h" title="qiskit.extensions.quantum_initializer.InitializeGate.h"><code class="xref py py-obj docutils literal"><span class="pre">h</span></code></a>(q)</td>
+<td>Apply H to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.has_register" title="qiskit.extensions.quantum_initializer.InitializeGate.has_register"><code class="xref py py-obj docutils literal"><span class="pre">has_register</span></code></a>(register)</td>
+<td>Test if this gate’s circuit has the register r.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.iden" title="qiskit.extensions.quantum_initializer.InitializeGate.iden"><code class="xref py py-obj docutils literal"><span class="pre">iden</span></code></a>(q)</td>
+<td>Apply Identity to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.initialize" title="qiskit.extensions.quantum_initializer.InitializeGate.initialize"><code class="xref py py-obj docutils literal"><span class="pre">initialize</span></code></a>(name,&nbsp;params,&nbsp;qubits)</td>
+<td>Apply initialize to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.inverse" title="qiskit.extensions.quantum_initializer.InitializeGate.inverse"><code class="xref py py-obj docutils literal"><span class="pre">inverse</span></code></a>()</td>
+<td>Invert this gate.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.last_atomic_gate_host" title="qiskit.extensions.quantum_initializer.InitializeGate.last_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">last_atomic_gate_host</span></code></a>()</td>
+<td>Return the host list of the leaf gate on the right edge.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.load" title="qiskit.extensions.quantum_initializer.InitializeGate.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(m,&nbsp;q)</td>
+<td>Load cached quantum state of local_qiskit_simulator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.noise" title="qiskit.extensions.quantum_initializer.InitializeGate.noise"><code class="xref py py-obj docutils literal"><span class="pre">noise</span></code></a>(m,&nbsp;q)</td>
+<td>Cache the quantum state of locla_qiskit_simulator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.nth_qubit_from_least_sig_qubit" title="qiskit.extensions.quantum_initializer.InitializeGate.nth_qubit_from_least_sig_qubit"><code class="xref py py-obj docutils literal"><span class="pre">nth_qubit_from_least_sig_qubit</span></code></a>(nth)</td>
+<td>Return the qubit that is nth away from the least significant qubit (LSB), so n=0 corresponds to the LSB.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.number_atomic_gates" title="qiskit.extensions.quantum_initializer.InitializeGate.number_atomic_gates"><code class="xref py py-obj docutils literal"><span class="pre">number_atomic_gates</span></code></a>()</td>
+<td>Count the number of leaf gates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.optimize_gates" title="qiskit.extensions.quantum_initializer.InitializeGate.optimize_gates"><code class="xref py py-obj docutils literal"><span class="pre">optimize_gates</span></code></a>()</td>
+<td>Remove Zero rotations and Double CNOTS.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.q_if" title="qiskit.extensions.quantum_initializer.InitializeGate.q_if"><code class="xref py py-obj docutils literal"><span class="pre">q_if</span></code></a>(*qregs)</td>
+<td>Add controls to this gate.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.qasm" title="qiskit.extensions.quantum_initializer.InitializeGate.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>()</td>
+<td>Return OPENQASM string.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.reapply" title="qiskit.extensions.quantum_initializer.InitializeGate.reapply"><code class="xref py py-obj docutils literal"><span class="pre">reapply</span></code></a>(circ)</td>
+<td>Reapply this gate to the corresponding qubits in circ.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.remove_double_cnots_once" title="qiskit.extensions.quantum_initializer.InitializeGate.remove_double_cnots_once"><code class="xref py py-obj docutils literal"><span class="pre">remove_double_cnots_once</span></code></a>()</td>
+<td>Remove Double CNOTS paying attention that gates may be neighbours across Composite Gate boundaries.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.remove_zero_rotations" title="qiskit.extensions.quantum_initializer.InitializeGate.remove_zero_rotations"><code class="xref py py-obj docutils literal"><span class="pre">remove_zero_rotations</span></code></a>()</td>
+<td>Remove Zero Rotations by looking (recursively) at rotation gates at the leaf ends.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.reverse" title="qiskit.extensions.quantum_initializer.InitializeGate.reverse"><code class="xref py py-obj docutils literal"><span class="pre">reverse</span></code></a>()</td>
+<td>Reverse (recursively) the sub-gates of this CompositeGate.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.rx" title="qiskit.extensions.quantum_initializer.InitializeGate.rx"><code class="xref py py-obj docutils literal"><span class="pre">rx</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply rx to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.ry" title="qiskit.extensions.quantum_initializer.InitializeGate.ry"><code class="xref py py-obj docutils literal"><span class="pre">ry</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply ry to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.rz" title="qiskit.extensions.quantum_initializer.InitializeGate.rz"><code class="xref py py-obj docutils literal"><span class="pre">rz</span></code></a>(phi,&nbsp;q)</td>
+<td>Apply rz to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.s" title="qiskit.extensions.quantum_initializer.InitializeGate.s"><code class="xref py py-obj docutils literal"><span class="pre">s</span></code></a>(q)</td>
+<td>Apply S to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.save" title="qiskit.extensions.quantum_initializer.InitializeGate.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>(m,&nbsp;q)</td>
+<td>Cache the quantum state of local_qiskit_simulator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.sdg" title="qiskit.extensions.quantum_initializer.InitializeGate.sdg"><code class="xref py py-obj docutils literal"><span class="pre">sdg</span></code></a>(q)</td>
+<td>Apply Sdg to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.swap" title="qiskit.extensions.quantum_initializer.InitializeGate.swap"><code class="xref py py-obj docutils literal"><span class="pre">swap</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply SWAP from ctl to tgt.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.t" title="qiskit.extensions.quantum_initializer.InitializeGate.t"><code class="xref py py-obj docutils literal"><span class="pre">t</span></code></a>(q)</td>
+<td>Apply T to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.tdg" title="qiskit.extensions.quantum_initializer.InitializeGate.tdg"><code class="xref py py-obj docutils literal"><span class="pre">tdg</span></code></a>(q)</td>
+<td>Apply Tdg to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.u0" title="qiskit.extensions.quantum_initializer.InitializeGate.u0"><code class="xref py py-obj docutils literal"><span class="pre">u0</span></code></a>(m,&nbsp;q)</td>
+<td>Apply u0 with length m to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.u1" title="qiskit.extensions.quantum_initializer.InitializeGate.u1"><code class="xref py py-obj docutils literal"><span class="pre">u1</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply u1 with angle theta to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.u2" title="qiskit.extensions.quantum_initializer.InitializeGate.u2"><code class="xref py py-obj docutils literal"><span class="pre">u2</span></code></a>(phi,&nbsp;lam,&nbsp;q)</td>
+<td>Apply u2 to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.u3" title="qiskit.extensions.quantum_initializer.InitializeGate.u3"><code class="xref py py-obj docutils literal"><span class="pre">u3</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
+<td>Apply u3 to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.u_base" title="qiskit.extensions.quantum_initializer.InitializeGate.u_base"><code class="xref py py-obj docutils literal"><span class="pre">u_base</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
+<td>Apply U to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.uzz" title="qiskit.extensions.quantum_initializer.InitializeGate.uzz"><code class="xref py py-obj docutils literal"><span class="pre">uzz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply CZ to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.wait" title="qiskit.extensions.quantum_initializer.InitializeGate.wait"><code class="xref py py-obj docutils literal"><span class="pre">wait</span></code></a>(t,&nbsp;q)</td>
+<td>Apply wait for time t to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.x" title="qiskit.extensions.quantum_initializer.InitializeGate.x"><code class="xref py py-obj docutils literal"><span class="pre">x</span></code></a>(q)</td>
+<td>Apply X to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.y" title="qiskit.extensions.quantum_initializer.InitializeGate.y"><code class="xref py py-obj docutils literal"><span class="pre">y</span></code></a>(quantum_register)</td>
+<td>Apply Y to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.z" title="qiskit.extensions.quantum_initializer.InitializeGate.z"><code class="xref py py-obj docutils literal"><span class="pre">z</span></code></a>(quantum_register)</td>
+<td>Apply Z to q.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name</em>, <em>param</em>, <em>arg</em>, <em>circ=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/quantum_initializer/_initializer.html#InitializeGate.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new initialize composite gate.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.barrier">
+<code class="descname">barrier</code><span class="sig-paren">(</span><em>*tuples</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.barrier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply barrier to tuples (reg, idx).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.c_if">
+<code class="descname">c_if</code><span class="sig-paren">(</span><em>classical</em>, <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.c_if" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add classical control register.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.ccx">
+<code class="descname">ccx</code><span class="sig-paren">(</span><em>ctl1</em>, <em>ctl2</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.ccx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Toffoli to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.ch">
+<code class="descname">ch</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.ch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply CH from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.check_circuit">
+<code class="descname">check_circuit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.check_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise exception if self.circuit is None.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.chop_num">
+<em class="property">static </em><code class="descname">chop_num</code><span class="sig-paren">(</span><em>numb</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/quantum_initializer/_initializer.html#InitializeGate.chop_num"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.chop_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set very small numbers (as defined by global variable _EPS) to zero.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.crz">
+<code class="descname">crz</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.crz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply crz from ctl to tgt with angle theta.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cswap">
+<code class="descname">cswap</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt1</em>, <em>tgt2</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cswap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Fredkin to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cu1">
+<code class="descname">cu1</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cu1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply cu1 from ctl to tgt with angle theta.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cu3">
+<code class="descname">cu3</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cu3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply cu3 from ctl to tgt with angle theta, phi, lam.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cx">
+<code class="descname">cx</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply CNOT from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cx_base">
+<code class="descname">cx_base</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cx_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply CX ctl, tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cy">
+<code class="descname">cy</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply CY to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.cz">
+<code class="descname">cz</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.cz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply CZ to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.first_atomic_gate_host">
+<code class="descname">first_atomic_gate_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.first_atomic_gate_host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the host list of the leaf gate on the left edge.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.gates_to_uncompute">
+<code class="descname">gates_to_uncompute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/quantum_initializer/_initializer.html#InitializeGate.gates_to_uncompute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.gates_to_uncompute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to populate the self.data list with gates that takes the
+desired vector to zero.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.h">
+<code class="descname">h</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply H to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.has_register">
+<code class="descname">has_register</code><span class="sig-paren">(</span><em>register</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.has_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if this gate’s circuit has the register r.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.iden">
+<code class="descname">iden</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.iden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Identity to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>name</em>, <em>params</em>, <em>qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply initialize to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invert this gate.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.last_atomic_gate_host">
+<code class="descname">last_atomic_gate_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.last_atomic_gate_host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the host list of the leaf gate on the right edge.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load cached quantum state of local_qiskit_simulator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.noise">
+<code class="descname">noise</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cache the quantum state of locla_qiskit_simulator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.nth_qubit_from_least_sig_qubit">
+<code class="descname">nth_qubit_from_least_sig_qubit</code><span class="sig-paren">(</span><em>nth</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/quantum_initializer/_initializer.html#InitializeGate.nth_qubit_from_least_sig_qubit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.nth_qubit_from_least_sig_qubit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the qubit that is nth away from the least significant qubit
+(LSB), so n=0 corresponds to the LSB.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.number_atomic_gates">
+<code class="descname">number_atomic_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.number_atomic_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of leaf gates.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.optimize_gates">
+<code class="descname">optimize_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.optimize_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove Zero rotations and Double CNOTS.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.q_if">
+<code class="descname">q_if</code><span class="sig-paren">(</span><em>*qregs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.q_if" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add controls to this gate.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.qasm">
+<code class="descname">qasm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.qasm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return OPENQASM string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.reapply">
+<code class="descname">reapply</code><span class="sig-paren">(</span><em>circ</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/extensions/quantum_initializer/_initializer.html#InitializeGate.reapply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.reapply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reapply this gate to the corresponding qubits in circ.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.remove_double_cnots_once">
+<code class="descname">remove_double_cnots_once</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.remove_double_cnots_once" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove Double CNOTS paying attention that gates may be neighbours across
+Composite Gate boundaries.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.remove_zero_rotations">
+<code class="descname">remove_zero_rotations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.remove_zero_rotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove Zero Rotations by looking (recursively) at rotation gates at the
+leaf ends.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.reverse">
+<code class="descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse (recursively) the sub-gates of this CompositeGate. Note this does
+not invert the gates!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.rx">
+<code class="descname">rx</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.rx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply rx to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.ry">
+<code class="descname">ry</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.ry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply ry to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.rz">
+<code class="descname">rz</code><span class="sig-paren">(</span><em>phi</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.rz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply rz to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.s">
+<code class="descname">s</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply S to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cache the quantum state of local_qiskit_simulator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.sdg">
+<code class="descname">sdg</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.sdg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Sdg to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.swap">
+<code class="descname">swap</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply SWAP from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.t">
+<code class="descname">t</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply T to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.tdg">
+<code class="descname">tdg</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.tdg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Tdg to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.u0">
+<code class="descname">u0</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.u0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply u0 with length m to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.u1">
+<code class="descname">u1</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.u1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply u1 with angle theta to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.u2">
+<code class="descname">u2</code><span class="sig-paren">(</span><em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.u2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply u2 to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.u3">
+<code class="descname">u3</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.u3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply u3 to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.u_base">
+<code class="descname">u_base</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.u_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply U to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.uzz">
+<code class="descname">uzz</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.uzz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply CZ to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.wait">
+<code class="descname">wait</code><span class="sig-paren">(</span><em>t</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply wait for time t to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.x">
+<code class="descname">x</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply X to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.y">
+<code class="descname">y</code><span class="sig-paren">(</span><em>quantum_register</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Y to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.z">
+<code class="descname">z</code><span class="sig-paren">(</span><em>quantum_register</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply Z to q.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.mapper.html" title="qiskit.mapper package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.extensions.quantum_initializer.html" title="qiskit.extensions.quantum_initializer package"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.extensions.html" >qiskit.extensions package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.extensions.quantum_initializer.html" >qiskit.extensions.quantum_initializer package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017 IBM Research.
+      Last updated on 2018/01/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
