@@ -80,12 +80,16 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation and setup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#get-the-tools">1. Get the tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pip-install">2. PIP Install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#repository-install">3. Repository Install</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#setup-the-environment">3.1 Setup the environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2. Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#option-a-installing-via-pip">Option A: Installing via PIP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option-b-installing-from-the-git-repository">Option B: Installing from the git repository</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#getting-the-source-files">Getting the source files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#setup-the-environment">Setup the environment</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configure-your-api-token-and-qe-credentials">4. Configure your API token and QE credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-your-api-token-and-qe-credentials">3. Configure your API token and QE credentials</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#install-jupyter-based-tutorials">Install Jupyter-based tutorials</a><ul>
@@ -150,17 +154,26 @@ python distribution, which already comes with all these dependencies pre-install
 <p>if you are willing to contribute to QISKit or just wanted to extend it, you
 should install Git too: <a class="reference external" href="https://git-scm.com/download/">https://git-scm.com/download/</a>.</p>
 </div>
-<div class="section" id="pip-install">
-<h3>2. PIP Install<a class="headerlink" href="#pip-install" title="Permalink to this headline">¶</a></h3>
-<p>The fastest way to install QISKit is by using the PIP tool (Python package manager):</p>
+<div class="section" id="id1">
+<h3>2. Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="option-a-installing-via-pip">
+<h4>Option A: Installing via PIP<a class="headerlink" href="#option-a-installing-via-pip" title="Permalink to this headline">¶</a></h4>
+<p>The recommended way to install QISKit is by using the PIP tool (Python
+package manager):</p>
 <div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span>
 </pre></div>
 </div>
+<p>This will install the latest stable release along with all the dependencies.</p>
 </div>
-<div class="section" id="repository-install">
-<h3>3. Repository Install<a class="headerlink" href="#repository-install" title="Permalink to this headline">¶</a></h3>
-<p>Other common option is to clone the QISKit SDK repository on your local machine,
-and change into the cloned directory:</p>
+<div class="section" id="option-b-installing-from-the-git-repository">
+<h4>Option B: Installing from the git repository<a class="headerlink" href="#option-b-installing-from-the-git-repository" title="Permalink to this headline">¶</a></h4>
+<p>As an alternative for users interesting in contributing to QISKit or using
+features that are still in development, QISKit can be installed manually from
+the git repository.</p>
+<p>Please note that this option requires more familiarity with the tools involved
+compared to the more streamline option of installing via PIP:</p>
+<div class="section" id="getting-the-source-files">
+<h5>Getting the source files<a class="headerlink" href="#getting-the-source-files" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">
 <li>If you have Git installed, run the following commands:</li>
 </ul>
@@ -173,8 +186,9 @@ and change into the cloned directory:</p>
 button on the <a class="reference external" href="https://github.com/QISKit/qiskit-sdk-py">QISKit SDK GitHub repo</a>, unzip the file if
 needed and finally change into the unziped directory.</li>
 </ul>
+</div>
 <div class="section" id="setup-the-environment">
-<h4>3.1 Setup the environment<a class="headerlink" href="#setup-the-environment" title="Permalink to this headline">¶</a></h4>
+<h5>Setup the environment<a class="headerlink" href="#setup-the-environment" title="Permalink to this headline">¶</a></h5>
 <p>To use QISKit as standalone library, install all the dependencies:</p>
 <div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Depending on the system and setup, appending &quot;sudo -H&quot; before this command could be needed.</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
@@ -213,8 +227,9 @@ the following command:</li>
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="configure-your-api-token-and-qe-credentials">
-<span id="qconfig-setup"></span><h3>4. Configure your API token and QE credentials<a class="headerlink" href="#configure-your-api-token-and-qe-credentials" title="Permalink to this headline">¶</a></h3>
+<span id="qconfig-setup"></span><h3>3. Configure your API token and QE credentials<a class="headerlink" href="#configure-your-api-token-and-qe-credentials" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Create an <a class="reference external" href="https://quantumexperience.ng.bluemix.net">IBM Q
 experience</a> account if
@@ -329,7 +344,7 @@ on the project’s GitHub wiki.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/01/12.
+      Last updated on 2018/01/19.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
