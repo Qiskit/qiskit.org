@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Structure &#8212; QISKit SDK 0.4.8 documentation</title>
+    <title>Structure &#8212; QISKit SDK 0.4.9 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.8',
+        VERSION:     '0.4.9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.8 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.9 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -240,14 +240,51 @@ the messages. For example, if the module is <cite>qiskit/some/module.py</cite>:<
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>The SDK uses the <a class="reference external" href="https://docs.python.org/3/library/unittest.html">standard Pyton “unittest” framework</a> for the testing of the
 different components and functionality.</p>
-<p>For executing the tests, a <code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code> target is available. The execution
-of the tests (both via the make target and during manual invocation) takes into
-account the <code class="docutils literal"><span class="pre">LOG_LEVEL</span></code> environment variable. If present, a <code class="docutils literal"><span class="pre">.log</span></code> file
-will be created on the test directory with the output of the log calls, which
+<p>As our build system is based on CMake, we need to perform what is called an
+“out-of-source” build before running the tests.
+This is as simple as executing these commands:</p>
+<p>Linux and Mac:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ mkdir out
+$ <span class="nb">cd</span> out
+out$ cmake ..
+out$ make
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>C:<span class="se">\.</span>.<span class="se">\&gt;</span> mkdir out
+C:<span class="se">\.</span>.<span class="se">\&gt;</span> <span class="nb">cd</span> out
+C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; cmake -DUSER_LIB_PATH<span class="o">=</span>C:<span class="se">\p</span>ath<span class="se">\t</span>o<span class="se">\m</span>ingw64<span class="se">\l</span>ib<span class="se">\l</span>ibpthreads.a -G <span class="s2">&quot;MinGW Makefiles&quot;</span> ..
+C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; make
+</pre></div>
+</div>
+<p>This will generate all needed binaries for your specific platform.</p>
+<p>For executing the tests, a <code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code> target is available.
+The execution of the tests (both via the make target and during manual invocation)
+takes into account the <code class="docutils literal"><span class="pre">LOG_LEVEL</span></code> environment variable. If present, a <code class="docutils literal"><span class="pre">.log</span></code>
+file will be created on the test directory with the output of the log calls, which
 will also be printed to stdout. You can adjust the verbosity via the content
 of that variable, for example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">LOG_LEVEL</span><span class="o">=</span>DEBUG make <span class="nb">test</span>
-$ <span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO python -m unittest test/python/test_apps.py
+<p>Linux and Mac:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> out
+out$ <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span> <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;-V&quot;</span> make <span class="nb">test</span>
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> out
+C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; <span class="nb">set</span> <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span>
+C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; <span class="nb">set</span> <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;-V&quot;</span>
+C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; make <span class="nb">test</span>
+</pre></div>
+</div>
+<p>For executing a simple python test manually, we don’t need to change the directory
+to <code class="docutils literal"><span class="pre">out</span></code>, just run this command:</p>
+<p>Linux and Mac:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO python -m unittest test/python/test_apps.py
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>C:<span class="se">\.</span>.<span class="se">\&gt;</span> <span class="nb">set</span> <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+C:<span class="se">\.</span>.<span class="se">\&gt;</span> python -m unittest test/python/test_apps.py
 </pre></div>
 </div>
 </div>
@@ -280,14 +317,14 @@ $ <span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO python -m unitte
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.8 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.9 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/01/29.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+      Last updated on 2018/02/12.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

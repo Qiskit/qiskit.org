@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.4.8 documentation</title>
+    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.4.9 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.8',
+        VERSION:     '0.4.9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.8 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.9 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -847,7 +847,7 @@
             <span class="k">if</span> <span class="n">qeflag</span><span class="p">:</span>
                 <span class="n">qelib</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
                          <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;tdg&quot;</span><span class="p">,</span> <span class="s2">&quot;cz&quot;</span><span class="p">,</span> <span class="s2">&quot;cy&quot;</span><span class="p">,</span> <span class="s2">&quot;ccx&quot;</span><span class="p">,</span> <span class="s2">&quot;cu1&quot;</span><span class="p">,</span>
-                         <span class="s2">&quot;cu3&quot;</span><span class="p">]</span>
+                         <span class="s2">&quot;cu3&quot;</span><span class="p">,</span> <span class="s2">&quot;swap&quot;</span><span class="p">]</span>
                 <span class="n">omit</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qelib</span><span class="p">)</span>
                 <span class="n">printed_gates</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qelib</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -1289,7 +1289,7 @@
                         <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;barrier&quot;</span><span class="p">:</span>
                             <span class="c1"># support_list.append(list(set(qa) | set(ca) |</span>
                             <span class="c1">#                          set(cob)))</span>
-                            <span class="n">support_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">qa</span><span class="p">)))</span>
+                            <span class="n">support_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">qa</span><span class="p">))</span>
                         <span class="n">emit</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">emit</span><span class="p">:</span>
                 <span class="n">l_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="n">new_layer</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">support_list</span><span class="p">}</span>
@@ -1330,7 +1330,7 @@
                 <span class="c1"># Add operation to partition</span>
                 <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;barrier&quot;</span><span class="p">:</span>
                     <span class="c1"># support_list.append(list(set(qa) | set(ca) | set(cob)))</span>
-                    <span class="n">support_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">qa</span><span class="p">)))</span>
+                    <span class="n">support_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">qa</span><span class="p">))</span>
                 <span class="n">l_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="n">new_layer</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">support_list</span><span class="p">}</span>
                 <span class="n">layers_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_dict</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">layers_list</span></div>
@@ -1418,15 +1418,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.8 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.9 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/01/29.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+      Last updated on 2018/02/12.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>
