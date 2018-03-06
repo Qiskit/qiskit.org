@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.4.9 ドキュメント</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.4.10 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.9',
+        VERSION:     '0.4.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.9 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.10 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -212,11 +212,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper</span>
         <span class="k">if</span> <span class="n">specs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__init_specs</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results_ready_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">are_multiple_results</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># are we expecting multiple results?</span>
 
 <div class="viewcode-block" id="QuantumProgram.enable_logs"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.enable_logs">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">enable_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Enable the console output of the logging messages.</span>
@@ -1326,12 +1321,27 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Result: A Result (class).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">job_blocker_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
+        <span class="n">job_result</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">job_done_callback</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Callback called when the job is done. It basically</span>
+<span class="sd">            transforms the results to what the user expects and pass it</span>
+<span class="sd">            to the main thread</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">nonlocal</span> <span class="n">job_result</span>
+            <span class="n">job_result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">job_blocker_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_internal</span><span class="p">([</span><span class="n">qobj</span><span class="p">],</span>
                            <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
-                           <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait_for_results</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+                           <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+                           <span class="n">callback</span><span class="o">=</span><span class="n">job_done_callback</span><span class="p">)</span>
+
+        <span class="c1"># Do not set a timeout, as the timeout is being managed by the job</span>
+        <span class="n">job_blocker_event</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">job_result</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.run_batch"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.run_batch">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_list</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run various programs (a list of pre-compiled quantum programs). This</span>
@@ -1348,12 +1358,25 @@
 <span class="sd">            list(Result): A list of Result (class). The list will contain one Result object</span>
 <span class="sd">            per qobj in the input list.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">job_blocker_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
+        <span class="n">job_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">def</span> <span class="nf">job_done_callback</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Callback called when the job is done. It basically</span>
+<span class="sd">            transforms the results to what the user expects and pass it</span>
+<span class="sd">            to the main thread.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">nonlocal</span> <span class="n">job_results</span>
+            <span class="n">job_results</span> <span class="o">=</span> <span class="n">results</span>
+            <span class="n">job_blocker_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_internal</span><span class="p">(</span><span class="n">qobj_list</span><span class="p">,</span>
                            <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
                            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-                           <span class="n">are_multiple_results</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait_for_results</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results</span></div>
+                           <span class="n">callback</span><span class="o">=</span><span class="n">job_done_callback</span><span class="p">)</span>
+
+        <span class="n">job_blocker_event</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">job_results</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.run_async"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.run_async">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run a program (a pre-compiled quantum program) asynchronously. This</span>
@@ -1370,10 +1393,18 @@
 <span class="sd">                    fn(result):</span>
 <span class="sd">                    The result param will be a Result object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">job_done_callback</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Callback called when the job is done. It basically</span>
+<span class="sd">            transforms the results to what the user expects and pass it</span>
+<span class="sd">            to the main thread.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">callback</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># The user is expecting a single Result</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_internal</span><span class="p">([</span><span class="n">qobj</span><span class="p">],</span>
                            <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
                            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-                           <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span></div>
+                           <span class="n">callback</span><span class="o">=</span><span class="n">job_done_callback</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.run_batch_async"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.run_batch_async">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run_batch_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_list</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run various programs (a list of pre-compiled quantum program)</span>
@@ -1394,15 +1425,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_run_internal</span><span class="p">(</span><span class="n">qobj_list</span><span class="p">,</span>
                            <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span>
                            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-                           <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span>
-                           <span class="n">are_multiple_results</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+                           <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_run_internal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_list</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                      <span class="n">are_multiple_results</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">are_multiple_results</span> <span class="o">=</span> <span class="n">are_multiple_results</span>
-
+    <span class="k">def</span> <span class="nf">_run_internal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_list</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">q_job_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">qobj</span> <span class="ow">in</span> <span class="n">qobj_list</span><span class="p">:</span>
             <span class="n">q_job</span> <span class="o">=</span> <span class="n">QuantumJob</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">preformatted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="p">{</span>
@@ -1411,34 +1436,8 @@
             <span class="n">q_job_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_job</span><span class="p">)</span>
 
         <span class="n">job_processor</span> <span class="o">=</span> <span class="n">JobProcessor</span><span class="p">(</span><span class="n">q_job_list</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                     <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_jobs_done_callback</span><span class="p">)</span>
+                                     <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
         <span class="n">job_processor</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">_jobs_done_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jobs_results</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This internal callback will be called once all Jobs submitted have</span>
-<span class="sd">            finished. NOT every time a job has finished.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            jobs_results (list): list of Result objects</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># We are calling from blocking functions (run, run_batch...)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results</span> <span class="o">=</span> <span class="n">jobs_results</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results_ready_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-            <span class="k">return</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">are_multiple_results</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">jobs_results</span><span class="p">)</span>  <span class="c1"># for run_batch_async() callback</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">jobs_results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># for run_async() callback</span>
-
-<div class="viewcode-block" id="QuantumProgram.wait_for_results"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.wait_for_results">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">wait_for_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wait for all the results to be ready during an execution.&quot;&quot;&quot;</span>
-        <span class="n">is_ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results_ready_event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">jobs_results_ready_event</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_ok</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Error waiting for Job results: Timeout after </span><span class="si">{0}</span><span class="s1"> &#39;</span>
-                              <span class="s1">&#39;seconds.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeout</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.execute"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.execute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1534,14 +1533,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.9 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.10 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/02/12
+      最終更新: 2018/03/06
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
