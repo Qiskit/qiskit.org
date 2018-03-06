@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.4.9 ドキュメント</title>
+    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.4.10 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.9',
+        VERSION:     '0.4.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.9 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.10 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -457,13 +457,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">qargs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">all_cbits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># params is a list of sympy symbols and the str() method</span>
-        <span class="c1"># will return Python expressions. To get the correct</span>
-        <span class="c1"># OpenQASM expression, we need to replace &quot;**&quot; with &quot;^&quot;.</span>
-        <span class="n">node_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
-                               <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">node_params</span><span class="p">,</span>
-                          <span class="n">condition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">condition</span><span class="p">)</span>
         <span class="c1"># Add new in-edges from predecessors of the output nodes to the</span>
         <span class="c1"># operation node while deleting the old in-edges of the output nodes</span>
         <span class="c1"># and adding new edges from the operation node to each output node</span>
@@ -496,12 +490,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">qargs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_map</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_bits</span><span class="p">(</span><span class="n">all_cbits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_map</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># params is a list of sympy symbols and the str() method</span>
-        <span class="c1"># will return Python expressions. To get the correct</span>
-        <span class="c1"># OpenQASM expression, we need to replace &quot;**&quot; with &quot;^&quot;.</span>
-        <span class="n">node_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
-                               <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">node_params</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_op_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span>
                           <span class="n">condition</span><span class="p">)</span>
         <span class="c1"># Add new out-edges to successors of the input nodes from the</span>
         <span class="c1"># operation node while deleting the old out-edges of the input nodes</span>
@@ -886,7 +875,8 @@
                                 <span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
                                                      <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]))</span>
                             <span class="k">else</span><span class="p">:</span>
-                                <span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span>
+                                <span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
+                                                     <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])))</span>
                             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">) </span><span class="si">%s</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">qarg</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">qarg</span><span class="p">)</span>
@@ -1418,14 +1408,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.9 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.10 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/02/12
+      最終更新: 2018/03/06
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
