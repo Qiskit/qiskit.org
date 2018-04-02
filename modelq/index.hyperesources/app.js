@@ -5,9 +5,11 @@ window.onload = function() {
 				       ">> If you are interesgting in have access to something more powerfull, visit qiskit.org \n\n\n";
 
 	console.log(consoleText);
-	updateQposition();
-	help();
-	
+
+	setTimeout(function() {
+		updateQposition();
+		help(); 
+	}, 20*1000);
 };
 
 var circuit = new QuantumCircuit(),
@@ -32,6 +34,20 @@ function addGate (gate, qubit){
 		mScreen("Sorry :), This gate is not supported in this version.");
 		return;
 	}
+	console.log(gate)
+	if(gate=="cx"){
+		 var namePositionAlternative=""
+
+		if(qubit[0]===0){ 
+			 var namePositionAlternative = 'a'+1+(previoSelected[1])
+		}
+		else {
+			 var namePositionAlternative = 'a'+2+(previoSelected[1])
+		}
+	
+		var element = document.getElementById(namePositionAlternative);
+		element.innerHTML = "●"		
+	}
 
     circuit.addGate(gate, (Qbit-1)*2+PosQ, qubit);
     var namePosition = 'a'+previoSelected[0]+(previoSelected[1])
@@ -50,6 +66,7 @@ function execute(){
 
 	circuit.run([0,0]);
 	mScreen(circuit.getState());
+// 	console.log(circuit.getState())
 	if( circuit.getState()===" 00:50% 01:0% 10:0% 11:50%"){
 		mScreen("Open the Developer Console :).")
 		console.log(vartext_h_2+regenerate()+h_vartext)
