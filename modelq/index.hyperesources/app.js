@@ -20,11 +20,10 @@ var circuit = new QuantumCircuit(),
 	colorBase = "#373737",
 	colorSelected = "#666666",
 	colorSelectedQ = "#FFF",
-	generate = [6561, 9801, 12321, 10000, 10201, 4225, 12544, 12996, 11025, 11664, 2401],
 	noGates = ["U1","U2","U3","B"];
 
 function help(){
-   mScreen("This is a basic Q-simulator, create a Bell and see")
+   mScreen("This is a basic Q-simulator, you can play with it")
 }
 
 function addGate (gate, qubit){
@@ -66,11 +65,6 @@ function execute(){
 
 	circuit.run([0,0]);
 	mScreen(circuit.getState());
-// 	console.log(circuit.getState())
-	if( circuit.getState()===" 00:50% 01:0% 10:0% 11:50%"){
-		mScreen("Open the Developer Console :).")
-		console.log(vartext_h_2+regenerate()+h_vartext)
-	}
 }
 
 function objectSelect(base,q,pos){
