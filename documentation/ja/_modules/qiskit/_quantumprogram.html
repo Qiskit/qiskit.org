@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.4.11 ドキュメント</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.4.12 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -127,8 +127,10 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Event</span>
 <span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="c1"># use the external IBMQuantumExperience Library</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">from</span> <span class="nn">IBMQuantumExperience</span> <span class="k">import</span> <span class="n">IBMQuantumExperience</span>
 
 <span class="c1"># Local Simulator Modules</span>
@@ -141,6 +143,9 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">QISKitError</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">JobProcessor</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">QuantumJob</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Measure</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Gate</span>
+<span class="kn">from</span> <span class="nn">.extensions.standard.barrier</span> <span class="k">import</span> <span class="n">Barrier</span>
 <span class="kn">from</span> <span class="nn">._logging</span> <span class="k">import</span> <span class="n">set_qiskit_logger</span><span class="p">,</span> <span class="n">unset_qiskit_logger</span>
 
 <span class="c1"># Beta Modules</span>
@@ -192,8 +197,6 @@
 <span class="sd">                }</span>
 <span class="sd">        __init_circuit (obj): A quantum circuit object for the initial quantum</span>
 <span class="sd">            circuit</span>
-<span class="sd">        __ONLINE_BACKENDS (list[str]): A list of online backends</span>
-<span class="sd">        __LOCAL_BACKENDS (list[str]): A list of local backends</span>
 <span class="sd">     &quot;&quot;&quot;</span>
     <span class="c1"># -- FUTURE IMPROVEMENTS --</span>
     <span class="c1"># TODO: for status results make ALL_CAPS (check) or some unified method</span>
@@ -206,9 +209,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># stores all the quantum programs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__init_circuit</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># stores the intial quantum circuit of the program</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># pylint: disable=invalid-name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__LOCAL_BACKENDS</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">local_backends</span><span class="p">()</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_circuit</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># stores the initial quantum circuit of the program</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__counter</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper</span>
         <span class="k">if</span> <span class="n">specs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__init_specs</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
@@ -269,25 +271,26 @@
 <span class="sd">                            }]</span>
 <span class="sd">                        }],</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">quantumr</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">classicalr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">quantum_r</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">classical_r</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="s2">&quot;circuits&quot;</span> <span class="ow">in</span> <span class="n">specs</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">specs</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">]:</span>
-                <span class="n">quantumr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_quantum_registers</span><span class="p">(</span>
+                <span class="n">quantum_r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_quantum_registers</span><span class="p">(</span>
                     <span class="n">circuit</span><span class="p">[</span><span class="s2">&quot;quantum_registers&quot;</span><span class="p">])</span>
-                <span class="n">classicalr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_classical_registers</span><span class="p">(</span>
+                <span class="n">classical_r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_classical_registers</span><span class="p">(</span>
                     <span class="n">circuit</span><span class="p">[</span><span class="s2">&quot;classical_registers&quot;</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">circuit</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">qregisters</span><span class="o">=</span><span class="n">quantumr</span><span class="p">,</span>
-                                    <span class="n">cregisters</span><span class="o">=</span><span class="n">classicalr</span><span class="p">)</span>
-        <span class="c1"># TODO: Jay: I think we should return function handles for the</span>
-        <span class="c1"># registers and circuit. So that we dont need to get them after we</span>
-        <span class="c1"># create them with get_quantum_register etc</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">circuit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span> <span class="n">qregisters</span><span class="o">=</span><span class="n">quantum_r</span><span class="p">,</span>
+                                    <span class="n">cregisters</span><span class="o">=</span><span class="n">classical_r</span><span class="p">)</span>
+                <span class="c1"># TODO: Jay: I think we should return function handles for the</span>
+                <span class="c1"># registers and circuit. So that we dont need to get them after we</span>
+                <span class="c1"># create them with get_quantum_register etc</span>
 
-<div class="viewcode-block" id="QuantumProgram.create_quantum_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_quantum_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_quantum_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumProgram.create_quantum_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_quantum_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_quantum_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new Quantum Register.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the quantum register</span>
+<span class="sd">            name (hashable or None): the name of the quantum register. If None, an</span>
+<span class="sd">                automatically generated identifier will be assigned.</span>
 <span class="sd">            size (int): the size of the quantum register</span>
 
 <span class="sd">        Returns:</span>
@@ -297,21 +300,25 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the register already exists in the program.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">size</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]):</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t make this register: Already in&quot;</span>
                                   <span class="s2">&quot; program with different size&quot;</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; quantum_register exists: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; new quantum_register created: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_id</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; new quantum_register created: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.destroy_quantum_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_quantum_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_quantum_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Destroy an existing Quantum Register.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the quantum register</span>
+<span class="sd">            name (hashable): the name of the quantum register</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the register does not exist in the program.</span>
@@ -327,22 +334,22 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            register_array (list[dict]): An array of quantum registers in</span>
-<span class="sd">                dictionary format::</span>
+<span class="sd">                dictionary format. For example::</span>
 
-<span class="sd">                    &quot;quantum_registers&quot;: [</span>
-<span class="sd">                        {</span>
-<span class="sd">                        &quot;name&quot;: &quot;qr&quot;,</span>
-<span class="sd">                        &quot;size&quot;: 4</span>
-<span class="sd">                        },</span>
+<span class="sd">                    [{&quot;name&quot;: &quot;qr&quot;, &quot;size&quot;: 4},</span>
 <span class="sd">                        ...</span>
 <span class="sd">                    ]</span>
+
+<span class="sd">                Any other key in the dictionary will be ignored. If &quot;name&quot;</span>
+<span class="sd">                is not defined (or None) a random name wil be assigned.</span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            list(QuantumRegister): Array of quantum registers objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_registers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">register_array</span><span class="p">:</span>
             <span class="n">register</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span>
-                <span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">register</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">])</span>
+                <span class="n">register</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">register</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">])</span>
             <span class="n">new_registers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">new_registers</span></div>
 
@@ -351,25 +358,23 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            register_array (list[dict]): An array of quantum registers in</span>
-<span class="sd">                dictionary format::</span>
+<span class="sd">                dictionary format. For example::</span>
 
-<span class="sd">                    &quot;quantum_registers&quot;: [</span>
-<span class="sd">                        {</span>
-<span class="sd">                        &quot;name&quot;: &quot;qr&quot;,</span>
-<span class="sd">                        },</span>
+<span class="sd">                    [{&quot;name&quot;: &quot;qr&quot;},</span>
 <span class="sd">                        ...</span>
 <span class="sd">                    ]</span>
 
-<span class="sd">                &quot;size&quot; may be a key for compatibility, but is ignored.</span>
+<span class="sd">                Any other key in the dictionary will be ignored.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">register_array</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">destroy_quantum_register</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="QuantumProgram.create_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumProgram.create_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new Classical Register.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the classical register</span>
+<span class="sd">            name (hashable or None): the name of the classical register. If None, an</span>
+<span class="sd">                automatically generated identifier will be assigned.</span>
 <span class="sd">            size (int): the size of the classical register</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            ClassicalRegister: internal reference to a classical register</span>
@@ -378,14 +383,18 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the register already exists in the program.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">size</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]):</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t make this register: Already in&quot;</span>
                                   <span class="s2">&quot; program with different size&quot;</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; classical register exists: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; new classical register created: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_id</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; new classical register created: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.create_classical_registers"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_classical_registers">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_classical_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registers_array</span><span class="p">):</span>
@@ -393,29 +402,29 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            registers_array (list[dict]): An array of classical registers in</span>
-<span class="sd">                dictionary format::</span>
+<span class="sd">                dictionary format. For example::</span>
 
-<span class="sd">                    &quot;classical_registers&quot;: [</span>
-<span class="sd">                        {</span>
-<span class="sd">                        &quot;name&quot;: &quot;qr&quot;,</span>
-<span class="sd">                        &quot;size&quot;: 4</span>
-<span class="sd">                        },</span>
+<span class="sd">                    [{&quot;name&quot;: &quot;cr&quot;, &quot;size&quot;: 4},</span>
 <span class="sd">                        ...</span>
 <span class="sd">                    ]</span>
+
+<span class="sd">                Any other key in the dictionary will be ignored. If &quot;name&quot;</span>
+<span class="sd">                is not defined (or None) a random name wil be assigned.</span>
+
 <span class="sd">        Returns:</span>
-<span class="sd">            list(ClassicalRegister): Array of clasical registers objects</span>
+<span class="sd">            list(ClassicalRegister): Array of classical registers objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_registers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">registers_array</span><span class="p">:</span>
             <span class="n">new_registers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span>
-                <span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">register</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]))</span>
+                <span class="n">register</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span> <span class="n">register</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">new_registers</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.destroy_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.destroy_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">destroy_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Destroy an existing Classical Register.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the classical register</span>
+<span class="sd">            name (hashable): the name of the classical register</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the register does not exist in the program.</span>
@@ -431,25 +440,23 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            registers_array (list[dict]): An array of classical registers in</span>
-<span class="sd">                dictionary format::</span>
+<span class="sd">                dictionary format. For example::</span>
 
-<span class="sd">                    &quot;classical_registers&quot;: [</span>
-<span class="sd">                        {</span>
-<span class="sd">                        &quot;name&quot;: &quot;qr&quot;,</span>
-<span class="sd">                        },</span>
+<span class="sd">                    [{&quot;name&quot;: &quot;cr&quot;},</span>
 <span class="sd">                        ...</span>
 <span class="sd">                    ]</span>
 
-<span class="sd">                &quot;size&quot; may be a key for compatibility, but is ignored.</span>
+<span class="sd">                Any other key in the dictionary will be ignored.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">registers_array</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">destroy_classical_register</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="QuantumProgram.create_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qregisters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cregisters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumProgram.create_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.create_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qregisters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cregisters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a empty Quantum Circuit in the Quantum Program.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the circuit.</span>
+<span class="sd">            name (hashable or None): the name of the circuit. If None, an</span>
+<span class="sd">                automatically generated identifier will be assigned.</span>
 <span class="sd">            qregisters (list(QuantumRegister)): is an Array of Quantum</span>
 <span class="sd">                Registers by object reference</span>
 <span class="sd">            cregisters (list(ClassicalRegister)): is an Array of Classical</span>
@@ -459,11 +466,13 @@
 <span class="sd">            QuantumCircuit: A quantum circuit is created and added to the</span>
 <span class="sd">                Quantum Program</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_id</span><span class="p">(</span><span class="s1">&#39;qc&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">qregisters</span><span class="p">:</span>
             <span class="n">qregisters</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cregisters</span><span class="p">:</span>
             <span class="n">cregisters</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">quantum_circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">()</span>
+        <span class="n">quantum_circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__init_circuit</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__init_circuit</span> <span class="o">=</span> <span class="n">quantum_circuit</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">qregisters</span><span class="p">:</span>
@@ -478,7 +487,7 @@
 <span class="sd">        destroy any registers associated with the circuit.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the circuit</span>
+<span class="sd">            name (hashable): the name of the circuit</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the register does not exist in the program.</span>
@@ -487,14 +496,29 @@
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t destroy this circuit: Not present&quot;</span><span class="p">)</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="QuantumProgram.add_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.add_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">quantum_circuit</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumProgram.add_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.add_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quantum_circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a new circuit based on an Object representation.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the circuit to add.</span>
+<span class="sd">            name (hashable or None): the name of the circuit to add. If None, an</span>
+<span class="sd">                automatically generated identifier will be assigned to the</span>
+<span class="sd">                circuit.</span>
 <span class="sd">            quantum_circuit (QuantumCircuit): a quantum circuit to add to the</span>
 <span class="sd">                program-name</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if `quantum_circuit` is None, as the attribute is</span>
+<span class="sd">                optional only for not breaking backwards compatibility (as</span>
+<span class="sd">                it is placed after an optional argument).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">quantum_circuit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;quantum_circuit is required when invoking &#39;</span>
+                              <span class="s1">&#39;add_circuit&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_id</span><span class="p">(</span><span class="s1">&#39;qc&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">for</span> <span class="n">qname</span><span class="p">,</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">get_qregs</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="n">qname</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">qreg</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">cname</span><span class="p">,</span> <span class="n">creg</span> <span class="ow">in</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">get_cregs</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -548,7 +572,7 @@
         <span class="n">node_circuit</span> <span class="o">=</span> <span class="n">qasm</span><span class="o">.</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">qasm_string</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>  <span class="c1"># Node (AST)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
             <span class="c1"># Get a random name if none is given</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="o">+</span><span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
                             <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;circuit name: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;******************************&quot;</span><span class="p">)</span>
@@ -559,170 +583,6 @@
         <span class="n">circuit_unrolled</span> <span class="o">=</span> <span class="n">unrolled_circuit</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">circuit_unrolled</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">name</span></div>
-
-    <span class="c1">###############################################################</span>
-    <span class="c1"># methods to get elements from a QuantumProgram</span>
-    <span class="c1">###############################################################</span>
-
-<div class="viewcode-block" id="QuantumProgram.get_quantum_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_quantum_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_quantum_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a Quantum Register by name.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the quantum register</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            QuantumRegister: The quantum register with this name</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            KeyError: if the quantum register is not on the quantum program.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;No quantum register &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a Classical Register by name.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the classical register</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            ClassicalRegister: The classical register with this name</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            KeyError: if the classical register is not on the quantum program.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;No classical register &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_quantum_register_names"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_quantum_register_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_quantum_register_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return all the names of the quantum Registers.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_classical_register_names"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_classical_register_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_classical_register_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return all the names of the classical Registers.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a Circuit Object by name</span>
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the quantum circuit</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            QuantumCircuit: The quantum circuit with this name</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            KeyError: if the circuit is not on the quantum program.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;No quantum circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_circuit_names"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_circuit_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_circuit_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return all the names of the quantum circuits.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_qasm"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_qasm">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get qasm format of circuit by name.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): name of the circuit</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            str: The quantum circuit in qasm format</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">quantum_circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_circuit</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_qasms"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_qasms">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_qasms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_circuit_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get qasm format of circuit by list of names.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            list_circuit_name (list[str]): names of the circuit</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            list(QuantumCircuit): List of quantum circuit in qasm format</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">qasm_source</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">list_circuit_name</span><span class="p">:</span>
-            <span class="n">qasm_source</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_qasm</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">qasm_source</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_initial_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_initial_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_initial_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the initialization Circuit.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__init_circuit</span></div>
-
-    <span class="c1">###############################################################</span>
-    <span class="c1"># methods for working with backends</span>
-    <span class="c1">###############################################################</span>
-
-<div class="viewcode-block" id="QuantumProgram.set_api"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.set_api">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_api</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Setup the API.</span>
-
-<span class="sd">        Fills the __ONLINE_BACKENDS, __api, and __api_config variables.</span>
-<span class="sd">        Does not catch exceptions from IBMQuantumExperience.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            token (str): The token used to register on the online backend such</span>
-<span class="sd">                as the quantum experience.</span>
-<span class="sd">            url (str): The url used for online backend such as the quantum</span>
-<span class="sd">                experience.</span>
-<span class="sd">            hub (str): The hub used for online backend.</span>
-<span class="sd">            group (str): The group used for online backend.</span>
-<span class="sd">            project (str): The project used for online backend.</span>
-<span class="sd">            proxies (dict): Proxy configuration for the API, as a dict with</span>
-<span class="sd">                &#39;urls&#39; and credential keys.</span>
-<span class="sd">            verify (bool): If False, ignores SSL certificates errors.</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            ConnectionError: if the API instantiation failed.</span>
-<span class="sd">            QISKitError: if no hub, group or project were specified.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
-                <span class="s1">&#39;hub&#39;</span><span class="p">:</span> <span class="n">hub</span><span class="p">,</span>
-                <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
-                <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="n">project</span>
-            <span class="p">}</span>
-            <span class="k">if</span> <span class="n">proxies</span><span class="p">:</span>
-                <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proxies</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="n">root_exception</span> <span class="o">=</span> <span class="n">ex</span>
-            <span class="k">if</span> <span class="s1">&#39;License required&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">):</span>
-                <span class="c1"># For the 401 License required exception from the API, be</span>
-                <span class="c1"># less verbose with the exceptions.</span>
-                <span class="n">root_exception</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t connect to IBMQuantumExperience server: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">root_exception</span>
-        <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">online_backends</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.set_api_hubs_config"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.set_api_hubs_config">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_api_hubs_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Update the API hubs configuration, replacing the previous one.</span>
-
-<span class="sd">            hub (str): The hub used for online backend.</span>
-<span class="sd">            group (str): The group used for online backend.</span>
-<span class="sd">            project (str): The project used for online backend.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;hub&#39;</span><span class="p">:</span> <span class="n">hub</span><span class="p">,</span>
-            <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
-            <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="n">project</span>
-        <span class="p">}</span>
-
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_api_config"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_api_config">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_api_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the program specs.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span></div>
-
-<div class="viewcode-block" id="QuantumProgram.get_api"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_api">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a function handle to the API.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.save"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.save">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">beauty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Save Quantum Program in a Json file.</span>
@@ -747,17 +607,17 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="n">elemements_to_save</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span>
+        <span class="n">elements_to_save</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span>
         <span class="n">elements_saved</span> <span class="o">=</span> <span class="p">{}</span>
 
-        <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">elemements_to_save</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">elements_to_save</span><span class="p">:</span>
             <span class="n">elements_saved</span><span class="p">[</span><span class="n">circuit</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">elements_saved</span><span class="p">[</span><span class="n">circuit</span><span class="p">][</span><span class="s2">&quot;qasm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elemements_to_save</span><span class="p">[</span><span class="n">circuit</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span>
+            <span class="n">elements_saved</span><span class="p">[</span><span class="n">circuit</span><span class="p">][</span><span class="s2">&quot;qasm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements_to_save</span><span class="p">[</span><span class="n">circuit</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">save_file</span><span class="p">:</span>
                 <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">elements_saved</span><span class="p">,</span> <span class="n">save_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Done&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">elemements_to_save</span><span class="p">}</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Done&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">elements_to_save</span><span class="p">}</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="n">error</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="s1">&#39;Some Problem happened to save the file&#39;</span><span class="p">}</span>
             <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span></div>
@@ -781,12 +641,12 @@
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">load_file</span><span class="p">:</span>
-                <span class="n">elemements_loaded</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">load_file</span><span class="p">)</span>
+                <span class="n">elements_loaded</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">load_file</span><span class="p">)</span>
 
-            <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">elemements_loaded</span><span class="p">:</span>
-                <span class="n">circuit_qasm</span> <span class="o">=</span> <span class="n">elemements_loaded</span><span class="p">[</span><span class="n">circuit</span><span class="p">][</span><span class="s2">&quot;qasm&quot;</span><span class="p">]</span>
-                <span class="n">elemements_loaded</span><span class="p">[</span><span class="n">circuit</span><span class="p">]</span> <span class="o">=</span> <span class="n">qasm</span><span class="o">.</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">circuit_qasm</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span> <span class="o">=</span> <span class="n">elemements_loaded</span>
+            <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">elements_loaded</span><span class="p">:</span>
+                <span class="n">circuit_qasm</span> <span class="o">=</span> <span class="n">elements_loaded</span><span class="p">[</span><span class="n">circuit</span><span class="p">][</span><span class="s2">&quot;qasm&quot;</span><span class="p">]</span>
+                <span class="n">elements_loaded</span><span class="p">[</span><span class="n">circuit</span><span class="p">]</span> <span class="o">=</span> <span class="n">qasm</span><span class="o">.</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">circuit_qasm</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span> <span class="o">=</span> <span class="n">elements_loaded</span>
 
             <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s1">&#39;Done&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">}</span>
 
@@ -794,9 +654,253 @@
             <span class="n">error</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="s1">&#39;Some Problem happened to load the file&#39;</span><span class="p">}</span>
             <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span></div>
 
+    <span class="c1">###############################################################</span>
+    <span class="c1"># methods to get elements from a QuantumProgram</span>
+    <span class="c1">###############################################################</span>
+
+<div class="viewcode-block" id="QuantumProgram.get_quantum_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_quantum_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_quantum_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a Quantum Register by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (hashable or None): the name of the quantum register. If None and there is only</span>
+<span class="sd">                one quantum register available, returns that one.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumRegister: The quantum register with this name.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: if the quantum register is not on the quantum program.</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_single_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_quantum_register_names</span><span class="p">(),</span> <span class="s2">&quot;a quantum register&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;No quantum register &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_classical_register"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_classical_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_classical_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a Classical Register by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (hashable or None): the name of the classical register. If None and there is only</span>
+<span class="sd">                one classical register available, returns that one.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            ClassicalRegister: The classical register with this name.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: if the classical register is not on the quantum program.</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_single_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_classical_register_names</span><span class="p">(),</span>
+                                         <span class="s2">&quot;a classical register&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;No classical register &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_quantum_register_names"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_quantum_register_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_quantum_register_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the names of the quantum Registers.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__quantum_registers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_classical_register_names"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_classical_register_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_classical_register_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the names of the classical Registers.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__classical_registers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a Circuit Object by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (hashable or None): the name of the quantum circuit.</span>
+<span class="sd">                If None and there is only one circuit available, returns</span>
+<span class="sd">                that one.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumCircuit: The quantum circuit with this name</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: if the circuit is not on the quantum program.</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_single_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_circuit_names</span><span class="p">(),</span> <span class="s2">&quot;a circuit&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;No quantum circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_circuit_names"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_circuit_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_circuit_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the names of the quantum circuits.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_qasm"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_qasm">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get qasm format of circuit by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (hashable or None): name of the circuit. If None and only one circuit is</span>
+<span class="sd">                available, that one is selected.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The quantum circuit in qasm format</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_single_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_circuit_names</span><span class="p">(),</span> <span class="s2">&quot;a circuit&quot;</span><span class="p">)</span>
+        <span class="n">quantum_circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_circuit</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_qasms"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_qasms">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_qasms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get qasm format of circuit by list of names.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            list_circuit_name (list[hashable] or None): names of the circuit.</span>
+<span class="sd">                If None, it gets all the circuits in the program.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list(QuantumCircuit): List of quantum circuit in qasm format</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the register does not exist in the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qasm_source</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">list_circuit_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">list_circuit_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_circuit_names</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">list_circuit_name</span><span class="p">:</span>
+            <span class="n">qasm_source</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_qasm</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">qasm_source</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_initial_circuit"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_initial_circuit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_initial_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the initialization Circuit.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__init_circuit</span></div>
+
+    <span class="c1">###############################################################</span>
+    <span class="c1"># methods for working with backends</span>
+    <span class="c1">###############################################################</span>
+
+<div class="viewcode-block" id="QuantumProgram.set_api"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.set_api">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_api</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Setup the API.</span>
+
+<span class="sd">        Fills the __api, and __api_config variables.</span>
+<span class="sd">        Does not catch exceptions from IBMQuantumExperience.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            token (str): The token used to register on the online backend such</span>
+<span class="sd">                as the quantum experience.</span>
+<span class="sd">            url (str): The url used for online backend such as the quantum</span>
+<span class="sd">                experience.</span>
+<span class="sd">            hub (str): The hub used for online backend.</span>
+<span class="sd">            group (str): The group used for online backend.</span>
+<span class="sd">            project (str): The project used for online backend.</span>
+<span class="sd">            proxies (dict): Proxy configuration for the API, as a dict with</span>
+<span class="sd">                &#39;urls&#39; and credential keys.</span>
+<span class="sd">            verify (bool): If False, ignores SSL certificates errors.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ConnectionError: if the API instantiation failed.</span>
+<span class="sd">            QISKitError: if no hub, group or project were specified.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            API object instead is recommended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: remove the tests as well when the deprecation is completed</span>
+
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;set_api() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using the API object instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="c1"># Only append hub/group/project if they are different than None.</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">]):</span>
+                <span class="n">config_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                    <span class="s1">&#39;hub&#39;</span><span class="p">:</span> <span class="n">hub</span><span class="p">,</span>
+                    <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
+                    <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="n">project</span>
+                <span class="p">})</span>
+            <span class="k">if</span> <span class="n">proxies</span><span class="p">:</span>
+                <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proxies</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="n">root_exception</span> <span class="o">=</span> <span class="n">ex</span>
+            <span class="k">if</span> <span class="s1">&#39;License required&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">):</span>
+                <span class="c1"># For the 401 License required exception from the API, be</span>
+                <span class="c1"># less verbose with the exceptions.</span>
+                <span class="n">root_exception</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t connect to IBMQuantumExperience server: </span><span class="si">{0}</span><span class="s2">&quot;</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">root_exception</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.set_api_hubs_config"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.set_api_hubs_config">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_api_hubs_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update the API hubs configuration, replacing the previous one.</span>
+
+<span class="sd">            hub (str): The hub used for online backend.</span>
+<span class="sd">            group (str): The group used for online backend.</span>
+<span class="sd">            project (str): The project used for online backend.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            API object instead is recommended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;set_api_hubs_config() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using the API object instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;hub&#39;</span><span class="p">:</span> <span class="n">hub</span><span class="p">,</span>
+            <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
+            <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="n">project</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_api_config"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_api_config">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_api_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the program specs.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            API object instead is recommended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;get_api_config() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using the API object instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api_config</span></div>
+
+<div class="viewcode-block" id="QuantumProgram.get_api"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_api">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a function handle to the API.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            API object instead is recommended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;get_api() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using the API object instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span></div>
+
 <div class="viewcode-block" id="QuantumProgram.available_backends"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.available_backends">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;All the backends that are seen by QISKIT.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LOCAL_BACKENDS</span></div>
+        <span class="sd">&quot;&quot;&quot;All the backends that are seen by QISKIT.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;available_backends() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.local_backends() and &quot;</span>
+            <span class="s2">&quot;qiskit.backends.remote_backends() instead is recommended.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">local</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">local_backends</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="n">remote</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">remote_backends</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">local</span> <span class="o">+</span> <span class="n">remote</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.online_backends"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.online_backends">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">online_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the online backends.</span>
@@ -809,15 +913,19 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the API call failed.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">]</span>
-        <span class="k">return</span> <span class="p">[]</span></div>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;online_backends() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.remote_backends() object instead is recommended.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">remote_backends</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.online_simulators"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.online_simulators">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">online_simulators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Gets online simulators via QX API calls.</span>
@@ -827,17 +935,25 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the API call failed.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;online_simulators() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.remote_backends() instead is recommended.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
         <span class="n">online_simulators_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">backend</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
-                    <span class="n">online_simulators_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="n">online_backends</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">remote_backends</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">online_backends</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">configuration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
+                <span class="n">online_simulators_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">online_simulators_list</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.online_devices"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.online_devices">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">online_devices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -848,18 +964,26 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the API call failed.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">backend</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
-                    <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">devices</span></div>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;online_devices() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.remote_backends() instead is recommended.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">online_device_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="n">online_backends</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">remote_backends</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">online_backends</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">configuration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
+                <span class="n">online_device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">online_device_list</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.get_backend_status"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_backend_status">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the online backend status.</span>
@@ -876,28 +1000,28 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the API call failed.</span>
 <span class="sd">            ValueError: if the backend is not available.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;get_backend_status() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.get_backend_instance(&#39;name&#39;).status &quot;</span>
+            <span class="s2">&quot;instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_status</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get backend status: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LOCAL_BACKENDS</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;available&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;the backend &quot;</span><span class="si">{0}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">))</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="n">my_backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_instance</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">my_backend</span><span class="o">.</span><span class="n">status</span></div>
 
-<div class="viewcode-block" id="QuantumProgram.get_backend_configuration"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_backend_configuration">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">list_format</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumProgram.get_backend_configuration"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_backend_configuration">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the configuration of the backend.</span>
 
 <span class="sd">        The return is via QX API call.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            backend (str):  Name of the backend.</span>
-<span class="sd">            list_format (bool): Struct used for the configuration coupling</span>
-<span class="sd">                map: dict (if False) or list (if True).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: The configuration of the named backend.</span>
@@ -906,37 +1030,19 @@
 <span class="sd">            ConnectionError: if the API call failed.</span>
 <span class="sd">            LookupError: if a configuration for the named backend can&#39;t be</span>
 <span class="sd">                found.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_api</span><span class="p">():</span>
-            <span class="n">configuration_edit</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get available backend list: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">configuration</span> <span class="ow">in</span> <span class="n">backends</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">backend</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">configuration</span><span class="p">:</span>
-                        <span class="n">new_key</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-                        <span class="c1"># TODO: removed these from the API code</span>
-                        <span class="k">if</span> <span class="n">new_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;serial_number&#39;</span><span class="p">,</span> <span class="s1">&#39;topology_id&#39;</span><span class="p">,</span>
-                                           <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;coupling_map&#39;</span><span class="p">]:</span>
-                            <span class="n">configuration_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-                        <span class="k">if</span> <span class="n">new_key</span> <span class="o">==</span> <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;all-to-all&#39;</span><span class="p">:</span>
-                                <span class="n">configuration_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> \
-                                    <span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-                            <span class="k">else</span><span class="p">:</span>
-                                <span class="k">if</span> <span class="ow">not</span> <span class="n">list_format</span><span class="p">:</span>
-                                    <span class="n">cmap</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">coupling_list2dict</span><span class="p">(</span><span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-                                <span class="k">else</span><span class="p">:</span>
-                                    <span class="n">cmap</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-                                <span class="n">configuration_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmap</span>
-                    <span class="k">return</span> <span class="n">configuration_edit</span>
-            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;Configuration for </span><span class="si">%s</span><span class="s1"> could not be found.&#39;</span> <span class="o">%</span>
-                              <span class="n">backend</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_configuration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span></div>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;get_backend_configuration() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.get_backend_instance(&#39;name&#39;).configuration &quot;</span>
+            <span class="s2">&quot;instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">configuration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.get_backend_calibration"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_backend_calibration">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend_calibration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the online backend calibrations.</span>
@@ -953,23 +1059,20 @@
 <span class="sd">            ConnectionError: if the API call failed.</span>
 <span class="sd">            LookupError: If a configuration for the named backend can&#39;t be</span>
 <span class="sd">                found.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">calibrations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_calibration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get backend calibration: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="n">calibrations_edit</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">calibrations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">new_key</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-                <span class="n">calibrations_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">vals</span>
-            <span class="k">return</span> <span class="n">calibrations_edit</span>
-        <span class="k">elif</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LOCAL_BACKENDS</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;calibrations&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span>
-                <span class="s1">&#39;backend calibration for &quot;</span><span class="si">{0}</span><span class="s1">&quot; not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">))</span></div>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;get_backend_calibration() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.get_backend_instance(&#39;name&#39;).calibration &quot;</span>
+            <span class="s2">&quot;instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">my_backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_instance</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">my_backend</span><span class="o">.</span><span class="n">calibration</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.get_backend_parameters"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_backend_parameters">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the online backend parameters.</span>
@@ -986,29 +1089,26 @@
 <span class="sd">            ConnectionError: if the API call failed.</span>
 <span class="sd">            LookupError: If a configuration for the named backend can&#39;t be</span>
 <span class="sd">                found.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            This method will be deprecated in upcoming versions. Using the</span>
+<span class="sd">            qiskit.backends family of functions instead is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ONLINE_BACKENDS</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">backend_parameters</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t get backend parameters: </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-            <span class="n">parameters_edit</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">new_key</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-                <span class="n">parameters_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">vals</span>
-            <span class="k">return</span> <span class="n">parameters_edit</span>
-        <span class="k">elif</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LOCAL_BACKENDS</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span>
-                <span class="s1">&#39;backend parameters for &quot;</span><span class="si">{0}</span><span class="s1">&quot; not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">))</span></div>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;get_backend_parameters() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.backends.get_backend_instance(&#39;name&#39;).parameters&quot;</span>
+            <span class="s2">&quot;instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">my_backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_instance</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">:</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">my_backend</span><span class="o">.</span><span class="n">parameters</span></div>
 
     <span class="c1">###############################################################</span>
     <span class="c1"># methods to compile quantum programs into qobj</span>
     <span class="c1">###############################################################</span>
 
-<div class="viewcode-block" id="QuantumProgram.compile"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.compile">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
+<div class="viewcode-block" id="QuantumProgram.compile"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.compile">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1018,30 +1118,26 @@
 <span class="sd">        circuits to run on different backends.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name_of_circuits (list[str]): circuit names to be compiled.</span>
+<span class="sd">            name_of_circuits (list[hashable] or hashable or None): circuit</span>
+<span class="sd">                names to be compiled. If None, all the circuits will be compiled.</span>
 <span class="sd">            backend (str): a string representing the backend to compile to.</span>
 <span class="sd">            config (dict): a dictionary of configurations parameters for the</span>
 <span class="sd">                compiler.</span>
 <span class="sd">            basis_gates (str): a comma separated string and are the base gates,</span>
-<span class="sd">                               which by default are provided by the backend.</span>
-<span class="sd">            coupling_map (dict): A directed graph of coupling::</span>
+<span class="sd">                which by default are provided by the backend.</span>
+<span class="sd">            coupling_map (list): A graph of coupling::</span>
 
-<span class="sd">                {</span>
-<span class="sd">                 control(int):</span>
-<span class="sd">                     [</span>
-<span class="sd">                         target1(int),</span>
-<span class="sd">                         target2(int),</span>
-<span class="sd">                         , ...</span>
-<span class="sd">                     ],</span>
-<span class="sd">                     ...</span>
-<span class="sd">                }</span>
+<span class="sd">                [</span>
+<span class="sd">                    [control0(int), target0(int)],</span>
+<span class="sd">                    [control1(int), target1(int)],</span>
+<span class="sd">                ]</span>
 
-<span class="sd">                eg. {0: [2], 1: [2], 3: [2]}</span>
+<span class="sd">                eg. [[0, 2], [1, 2], [3, 2]]</span>
 
 <span class="sd">            initial_layout (dict): A mapping of qubit to qubit::</span>
 
 <span class="sd">                {</span>
-<span class="sd">                (&quot;q&quot;, strart(int)): (&quot;q&quot;, final(int)),</span>
+<span class="sd">                (&quot;q&quot;, start(int)): (&quot;q&quot;, final(int)),</span>
 <span class="sd">                ...</span>
 <span class="sd">                }</span>
 <span class="sd">                eg.</span>
@@ -1088,7 +1184,7 @@
 <span class="sd">                            &quot;compiled_circuit_qasm&quot;: --compiled quantum circuit (QASM format)--,</span>
 <span class="sd">                            &quot;config&quot;: --dictionary of additional config settings (dict)--,</span>
 <span class="sd">                                {</span>
-<span class="sd">                                &quot;coupling_map&quot;: --adjacency list (dict)--,</span>
+<span class="sd">                                &quot;coupling_map&quot;: --adjacency list (list)--,</span>
 <span class="sd">                                &quot;basis_gates&quot;: --comma separated gate names (string)--,</span>
 <span class="sd">                                &quot;layout&quot;: --layout computed by mapper (dict)--,</span>
 <span class="sd">                                &quot;seed&quot;: (simulator only)--initial seed for the simulator (int)--,</span>
@@ -1102,13 +1198,23 @@
 <span class="sd">            ValueError: if no names of the circuits have been specified.</span>
 <span class="sd">            QISKitError: if any of the circuit names cannot be found on the</span>
 <span class="sd">                Quantum Program.</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            The `coupling_map` parameter as a dictionary will be deprecated in</span>
+<span class="sd">            upcoming versions. Using the coupling_map as a list is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: Jay: currently basis_gates, coupling_map, initial_layout,</span>
         <span class="c1"># shots, max_credits and seed are extra inputs but I would like</span>
         <span class="c1"># them to go into the config.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">coupling_dict2list</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;coupling_map as a dictionary will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+                <span class="s2">&quot;Using the coupling_map as a list recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
         <span class="n">qobj</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">qobj_id</span><span class="p">:</span>
-            <span class="n">qobj_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="o">+</span><span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
+            <span class="n">qobj_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
                                <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)])</span>
         <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qobj_id</span>
         <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;max_credits&quot;</span><span class="p">:</span> <span class="n">max_credits</span><span class="p">,</span> <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="n">backend</span><span class="p">,</span>
@@ -1135,7 +1241,7 @@
             <span class="n">hpc</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">backend_conf</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_configuration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+        <span class="n">backend_conf</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">configuration</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">basis_gates</span><span class="p">:</span>
             <span class="k">if</span> <span class="s1">&#39;basis_gates&#39;</span> <span class="ow">in</span> <span class="n">backend_conf</span><span class="p">:</span>
                 <span class="n">basis_gates</span> <span class="o">=</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">]</span>
@@ -1147,13 +1253,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">coupling_map</span><span class="p">:</span>
             <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">name_of_circuits</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&quot;name_of_circuits&quot; must be specified&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Since not circuits was specified, all the circuits will be compiled.&#39;</span><span class="p">)</span>
+            <span class="n">name_of_circuits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_circuit_names</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_of_circuits</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">name_of_circuits</span> <span class="o">=</span> <span class="p">[</span><span class="n">name_of_circuits</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">name_of_circuits</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot; not found in program&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-            <span class="c1"># TODO: The circuit object going into this is to have .qasm() method (be careful)</span>
             <span class="n">circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__quantum_program</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
             <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">qreg</span><span class="p">)</span> <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">get_qregs</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
             <span class="c1"># TODO: A better solution is to have options to enable/disable optimizations</span>
@@ -1161,8 +1267,22 @@
                 <span class="n">coupling_map</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">coupling_map</span> <span class="o">==</span> <span class="s1">&#39;all-to-all&#39;</span><span class="p">:</span>
                 <span class="n">coupling_map</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="c1"># if the backend is a real chip, insert barrier before measurements</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
+                <span class="n">measured_qubits</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">qasm_idx</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Measure</span><span class="p">):</span>
+                        <span class="n">measured_qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">qasm_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Gate</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">arg</span><span class="p">)</span> <span class="o">&amp;</span>
+                                                                <span class="nb">set</span><span class="p">(</span><span class="n">measured_qubits</span><span class="p">)):</span>
+                        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{0}</span><span class="s1">&quot; rejects gate after &#39;</span>
+                                          <span class="s1">&#39;measurement in circuit &quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">qasm_idx</span><span class="p">,</span> <span class="n">measured_qubits</span><span class="p">):</span>
+                    <span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Barrier</span><span class="p">([</span><span class="n">qubit</span><span class="p">],</span> <span class="n">circuit</span><span class="p">))</span>
             <span class="n">dag_circuit</span><span class="p">,</span> <span class="n">final_layout</span> <span class="o">=</span> <span class="n">openquantumcompiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-                <span class="n">circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">(),</span>
+                <span class="n">circuit</span><span class="p">,</span>
                 <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
                 <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span>
@@ -1174,7 +1294,7 @@
             <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># default to empty config dict</span>
             <span class="n">job</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-            <span class="n">job</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">][</span><span class="s2">&quot;coupling_map&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">coupling_dict2list</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
+            <span class="n">job</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">][</span><span class="s2">&quot;coupling_map&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coupling_map</span>
             <span class="c1"># TODO: Jay: make config options optional for different backends</span>
             <span class="c1"># Map the layout to a format that can be json encoded</span>
             <span class="n">list_layout</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1187,8 +1307,11 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">job</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">][</span><span class="s2">&quot;seed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seed</span>
             <span class="c1"># the compiled circuit to be run saved as a dag</span>
-            <span class="n">job</span><span class="p">[</span><span class="s2">&quot;compiled_circuit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">openquantumcompiler</span><span class="o">.</span><span class="n">dag2json</span><span class="p">(</span><span class="n">dag_circuit</span><span class="p">,</span>
-                                                                   <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">)</span>
+            <span class="c1"># we assume that openquantumcompiler has already expanded gates</span>
+            <span class="c1"># to the target basis, so we just need to generate json</span>
+            <span class="n">json_circuit</span> <span class="o">=</span> <span class="n">unroll</span><span class="o">.</span><span class="n">DagUnroller</span><span class="p">(</span><span class="n">dag_circuit</span><span class="p">,</span>
+                                              <span class="n">unroll</span><span class="o">.</span><span class="n">JsonBackend</span><span class="p">(</span><span class="n">dag_circuit</span><span class="o">.</span><span class="n">basis</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+            <span class="n">job</span><span class="p">[</span><span class="s2">&quot;compiled_circuit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json_circuit</span>
             <span class="c1"># set eval_symbols=True to evaluate each symbolic expression</span>
             <span class="c1"># TODO after transition to qobj, we can drop this</span>
             <span class="n">job</span><span class="p">[</span><span class="s2">&quot;compiled_circuit_qasm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dag_circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span><span class="n">qeflag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1241,7 +1364,7 @@
 <span class="sd">            instead of the stdout.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list(str): names of the circuits in `qobj`</span>
+<span class="sd">            list(hashable): names of the circuits in `qobj`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">qobj</span><span class="p">:</span>
             <span class="n">print_func</span><span class="p">(</span><span class="s2">&quot;no executions to run&quot;</span><span class="p">)</span>
@@ -1255,7 +1378,7 @@
                 <span class="n">print_func</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]:</span>
             <span class="n">execution_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
-            <span class="n">print_func</span><span class="p">(</span><span class="s1">&#39;  circuit name: &#39;</span> <span class="o">+</span> <span class="n">circuit</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+            <span class="n">print_func</span><span class="p">(</span><span class="s1">&#39;  circuit name: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">circuit</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]))</span>
             <span class="n">print_func</span><span class="p">(</span><span class="s1">&#39;  circuit config:&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]:</span>
                 <span class="n">print_func</span><span class="p">(</span><span class="s1">&#39;   &#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]))</span>
@@ -1283,7 +1406,7 @@
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No compiled configurations for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.get_compiled_qasm"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.get_compiled_qasm">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_compiled_qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the compiled cricuit in qasm format.</span>
+        <span class="sd">&quot;&quot;&quot;Return the compiled circuit in qasm format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            qobj (dict): the qobj</span>
@@ -1439,7 +1562,7 @@
                                      <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
         <span class="n">job_processor</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
 
-<div class="viewcode-block" id="QuantumProgram.execute"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.execute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
+<div class="viewcode-block" id="QuantumProgram.execute"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.execute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
                 <span class="n">max_credits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1450,26 +1573,25 @@
 <span class="sd">        circuits to run on different backends.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name_of_circuits (list[str]): circuit names to be compiled.</span>
-<span class="sd">            backend (str): a string representing the backend to compile to</span>
+<span class="sd">            name_of_circuits (list[hashable] or hashable or None): circuit</span>
+<span class="sd">                names to be executed. If None, all the circuits will be</span>
+<span class="sd">                executed.</span>
+<span class="sd">            backend (str): a string representing the backend to compile to.</span>
 <span class="sd">            config (dict): a dictionary of configurations parameters for the</span>
-<span class="sd">                compiler</span>
+<span class="sd">                compiler.</span>
 <span class="sd">            wait (int): Time interval to wait between requests for results</span>
 <span class="sd">            timeout (int): Total time to wait until the execution stops</span>
 <span class="sd">            basis_gates (str): a comma separated string and are the base gates,</span>
-<span class="sd">                               which by default are: u1,u2,u3,cx,id</span>
-<span class="sd">            coupling_map (dict): A directed graph of coupling::</span>
+<span class="sd">                               which by default are: u1,u2,u3,cx,id.</span>
+<span class="sd">            coupling_map (list): A graph of coupling::</span>
 
-<span class="sd">                                {</span>
-<span class="sd">                                control(int):</span>
-<span class="sd">                                    [</span>
-<span class="sd">                                        target1(int),</span>
-<span class="sd">                                        target2(int),</span>
-<span class="sd">                                        , ...</span>
-<span class="sd">                                    ],</span>
-<span class="sd">                                    ...</span>
-<span class="sd">                                }</span>
-<span class="sd">                                eg. {0: [2], 1: [2], 3: [2]}</span>
+<span class="sd">                [</span>
+<span class="sd">                    [control0(int), target0(int)],</span>
+<span class="sd">                    [control1(int), target1(int)],</span>
+<span class="sd">                ]</span>
+
+<span class="sd">                eg. [[0, 2], [1, 2], [3, 2]]</span>
+
 <span class="sd">            initial_layout (dict): A mapping of qubit to qubit</span>
 <span class="sd">                                  {</span>
 <span class="sd">                                  (&quot;q&quot;, start(int)): (&quot;q&quot;, final(int)),</span>
@@ -1500,17 +1622,71 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Result: status done and populates the internal __quantum_program with the</span>
 <span class="sd">            data</span>
+
+<span class="sd">        .. deprecated:: 0.5</span>
+<span class="sd">            The `coupling_map` parameter as a dictionary will be deprecated in</span>
+<span class="sd">            upcoming versions. Using the coupling_map as a list is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># TODO: Jay: currently basis_gates, coupling_map, intial_layout, shots,</span>
+        <span class="c1"># TODO: Jay: currently basis_gates, coupling_map, initial_layout, shots,</span>
         <span class="c1"># max_credits, and seed are extra inputs but I would like them to go</span>
         <span class="c1"># into the config</span>
-        <span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+        <span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">name_of_circuits</span><span class="o">=</span><span class="n">name_of_circuits</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
                             <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
                             <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span>
                             <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
                             <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span></div></div>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="c1">###############################################################</span>
+    <span class="c1"># utility methods</span>
+    <span class="c1">###############################################################</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_single_item</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">item_description</span><span class="o">=</span><span class="s2">&quot;an item&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the first and only element of `items`, raising an error</span>
+<span class="sd">        otherwise.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            items (list): list of items.</span>
+<span class="sd">            item_description (string): text description of the item type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            object: the first and only element of `items`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the list does not have exactly one item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span>
+                <span class="s2">&quot;The name of </span><span class="si">%s</span><span class="s2"> needs to be explicitly indicated, as there is &quot;</span>
+                <span class="s2">&quot;more than one available&quot;</span> <span class="o">%</span> <span class="n">item_description</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">existing_ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return an automatically generated identifier, increased sequentially</span>
+<span class="sd">        based on the internal `_counter` generator, with the form</span>
+<span class="sd">        &quot;[prefix][numeric_id]&quot; (ie. &quot;q2&quot;, where the prefix is &quot;q&quot;).</span>
+<span class="sd">        Args:</span>
+<span class="sd">            prefix (str): string to be prepended to the numeric id.</span>
+<span class="sd">            existing_ids (iterable): list of ids that should be checked for</span>
+<span class="sd">                duplicates.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: the new identifier.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QISKitError: if the identifier is already in `existing_ids`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__counter</span><span class="p">)</span>
+        <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">identifier</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing_ids</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">identifier</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;The automatically generated identifier &#39;</span><span class="si">%s</span><span class="s2">&#39; already &quot;</span>
+                          <span class="s2">&quot;exists&quot;</span> <span class="o">%</span> <span class="n">identifier</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -1533,14 +1709,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/03/22
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/04/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

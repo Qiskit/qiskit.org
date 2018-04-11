@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.extensions.qiskit_simulator.wait &#8212; QISKit SDK 0.4.11 ドキュメント</title>
+    <title>qiskit.extensions.qiskit_simulator.wait &#8212; QISKit SDK 0.4.12 ドキュメント</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -124,6 +124,7 @@
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit._instructionset</span> <span class="k">import</span> <span class="n">InstructionSet</span>
 <span class="kn">from</span> <span class="nn">qiskit._quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">_node</span> <span class="k">as</span> <span class="n">node</span>
 
 
 <span class="k">class</span> <span class="nc">WaitGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
@@ -165,9 +166,18 @@
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">wait</span> <span class="o">=</span> <span class="n">wait</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">wait</span> <span class="o">=</span> <span class="n">wait</span>
 
-<span class="c1"># Add to QASM header for parsing</span>
-<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">header</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">gate wait(t) a </span><span class="si">{}</span><span class="s2">&quot;</span> <span class="o">+</span> \
-    <span class="s2">&quot;  // (local_qiskit_simulator) idle for time t&quot;</span>
+
+<span class="c1"># idle for time t (identity)</span>
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;print&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;opaque&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;n_args&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;n_bits&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span>
+    <span class="c1"># gate wait(t) a { }</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">GateBody</span><span class="p">([])</span>
+<span class="p">}</span>
 </pre></div>
 
           </div>
@@ -190,14 +200,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/03/22
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/04/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

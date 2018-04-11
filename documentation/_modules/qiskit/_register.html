@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._register &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit._register &#8212; QISKit SDK 0.4.12 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -119,7 +119,11 @@
 <span class="sd">Base register reference object.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
 <span class="kn">from</span> <span class="nn">._qiskiterror</span> <span class="k">import</span> <span class="n">QISKitError</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">Register</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -127,11 +131,9 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new generic register.&quot;&quot;&quot;</span>
-        <span class="n">test</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[a-z][a-zA-Z0-9_]*&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;invalid OPENQASM register name&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_openqasm_name</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;register size must be positive&quot;</span><span class="p">)</span>
 
@@ -147,6 +149,21 @@
         <span class="sd">&quot;&quot;&quot;Check that j is a valid index into self.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;register index out of range&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">openqasm_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts names to strings that are OpenQASM 2.0 complain.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_openqasm_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_openqasm_name</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[a-z][a-zA-Z0-9_]*&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">oq_name</span> <span class="o">=</span> <span class="s2">&quot;id</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The name </span><span class="si">%s</span><span class="s2"> is an invalid OpenQASM register name.&quot;</span>
+                        <span class="s2">&quot;Coverting it to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">oq_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_openqasm_name</span> <span class="o">=</span> <span class="n">oq_name</span>
+            <span class="k">return</span> <span class="n">oq_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_openqasm_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return tuple (self, key) if key is valid.&quot;&quot;&quot;</span>
@@ -176,14 +193,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

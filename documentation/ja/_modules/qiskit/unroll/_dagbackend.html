@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.unroll._dagbackend &#8212; QISKit SDK 0.4.11 ドキュメント</title>
+    <title>qiskit.unroll._dagbackend &#8212; QISKit SDK 0.4.12 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -118,13 +118,23 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Backend for the unroller that creates a DAGCircuit object.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">._unrollerbackend</span> <span class="k">import</span> <span class="n">UnrollerBackend</span>
 <span class="kn">from</span> <span class="nn">._backenderror</span> <span class="k">import</span> <span class="n">BackendError</span>
-<span class="kn">from</span> <span class="nn">..dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 
 
 <div class="viewcode-block" id="DAGBackend"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.DAGBackend.html#qiskit.unroll.DAGBackend">[ドキュメント]</a><span class="k">class</span> <span class="nc">DAGBackend</span><span class="p">(</span><span class="n">UnrollerBackend</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Backend for the unroller that creates a DAGCircuit object.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Backend for the unroller that creates a DAGCircuit object.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        qasm = Qasm(filename = &quot;teleport.qasm&quot;).parse()</span>
+<span class="sd">        dagcircuit = Unroller(qasm, DAGBackend()).execute()</span>
+<span class="sd">        print(dagcircuit.qasm())</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="DAGBackend.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.DAGBackend.html#qiskit.unroll.DAGBackend.__init__">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Setup this backend.</span>
@@ -142,7 +152,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gates</span> <span class="o">=</span> <span class="p">{}</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="DAGBackend.set_basis"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.DAGBackend.html#qiskit.unroll.DAGBackend.set_basis">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Declare the set of user-defined gates to emit.&quot;&quot;&quot;</span>
@@ -335,14 +345,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/03/22
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/04/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

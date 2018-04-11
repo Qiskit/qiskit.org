@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.extensions.quantum_initializer._initializer &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit.extensions.quantum_initializer._initializer &#8212; QISKit SDK 0.4.12 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -126,7 +126,6 @@
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Gate</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Reset</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.ry</span> <span class="k">import</span> <span class="n">RYGate</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.rz</span> <span class="k">import</span> <span class="n">RZGate</span>
@@ -152,12 +151,11 @@
 <span class="sd">    gate does. Therefore self.data is the list of gates (in order) that must</span>
 <span class="sd">    be applied to implement this meta-gate.</span>
 
-<span class="sd">    name = instruction name string</span>
 <span class="sd">    param = list of complex amplitudes</span>
 <span class="sd">    arg = list of qubits</span>
 <span class="sd">    circ = QuantumCircuit or CompositeGate containing this gate</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="InitializeGate.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="InitializeGate.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new initialize composite gate.&quot;&quot;&quot;</span>
         <span class="n">num_qubits</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
 
@@ -177,7 +175,7 @@
                             <span class="n">abs_tol</span><span class="o">=</span><span class="n">_EPS</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Sum of amplitudes-squared does not equal one.&quot;</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span>
 
         <span class="c1"># call to generate the circuit that takes the desired vector to zero</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gates_to_uncompute</span><span class="p">()</span>
@@ -537,15 +535,15 @@
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">last_atomic_gate_host</span> <span class="o">=</span> <span class="n">last_atomic_gate_host</span>
 
 
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply initialize to circuit.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_check_dups</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Reset</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+        <span class="c1"># TODO: make initialize an Instruction, and insert reset</span>
         <span class="c1"># TODO: avoid explicit reset if compiler determines a |0&gt; state</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">InitializeGate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">InitializeGate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">initialize</span> <span class="o">=</span> <span class="n">initialize</span>
@@ -572,14 +570,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

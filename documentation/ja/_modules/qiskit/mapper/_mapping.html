@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.4.11 ドキュメント</title>
+    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.4.12 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -129,9 +129,10 @@
 <span class="kn">import</span> <span class="nn">sympy</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Number</span> <span class="k">as</span> <span class="n">N</span>
 
-<span class="kn">import</span> <span class="nn">qiskit.unroll</span> <span class="k">as</span> <span class="nn">unroll</span>
-<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
-<span class="kn">from</span> <span class="nn">._mappererror</span> <span class="k">import</span> <span class="n">MapperError</span>
+<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">_node</span> <span class="k">as</span> <span class="n">node</span>
+<span class="kn">from</span> <span class="nn">qiskit.mapper</span> <span class="k">import</span> <span class="n">MapperError</span>
+<span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.unroll</span> <span class="k">import</span> <span class="n">DagUnroller</span><span class="p">,</span> <span class="n">DAGBackend</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -144,6 +145,97 @@
 <span class="c1"># qubits in the layout. We don&#39;t do this.</span>
 <span class="c1"># It can happen that initial swaps can be removed or partly simplified</span>
 <span class="c1"># because the initial state is zero. We don&#39;t do this.</span>
+
+<span class="n">cx_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;opaque&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;n_args&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;n_bits&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">],</span>
+    <span class="c1"># gate cx c,t { CX c,t; }</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">GateBody</span><span class="p">([</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">Cnot</span><span class="p">([</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="p">])</span>
+<span class="p">}</span>
+
+<span class="n">swap_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;opaque&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;n_args&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;n_bits&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
+    <span class="c1"># gate swap a,b { cx a,b; cx b,a; cx a,b; }</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">GateBody</span><span class="p">([</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">CustomUnitary</span><span class="p">([</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">PrimaryList</span><span class="p">([</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="p">])</span>
+        <span class="p">]),</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">CustomUnitary</span><span class="p">([</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">PrimaryList</span><span class="p">([</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="p">])</span>
+        <span class="p">]),</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">CustomUnitary</span><span class="p">([</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">PrimaryList</span><span class="p">([</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="p">])</span>
+        <span class="p">])</span>
+    <span class="p">])</span>
+<span class="p">}</span>
+
+<span class="n">u2_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;opaque&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;n_args&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;n_bits&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="s2">&quot;lambda&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">],</span>
+    <span class="c1"># gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">GateBody</span><span class="p">([</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">UniversalUnitary</span><span class="p">([</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">ExpressionList</span><span class="p">([</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">BinaryOp</span><span class="p">([</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">BinaryOperator</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">),</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">Real</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">Int</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="p">]),</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;lambda&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="p">]),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="p">])</span>
+<span class="p">}</span>
+
+<span class="n">h_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;opaque&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;n_args&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;n_bits&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;bits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span>
+    <span class="c1"># gate h a { u2(0,pi) a; }</span>
+    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">GateBody</span><span class="p">([</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">CustomUnitary</span><span class="p">([</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">ExpressionList</span><span class="p">([</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Real</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+            <span class="p">]),</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">PrimaryList</span><span class="p">([</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">Id</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="p">])</span>
+        <span class="p">])</span>
+    <span class="p">])</span>
+<span class="p">}</span>
 
 
 <span class="k">def</span> <span class="nf">layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span>
@@ -166,7 +258,7 @@
 
 <span class="sd">    Returns: success_flag, best_circ, best_d, best_layout, trivial_flag</span>
 
-<span class="sd">    If success_flag is True, then best_circ contains an OPENQASM string with</span>
+<span class="sd">    If success_flag is True, then best_circ contains a DAGCircuit with</span>
 <span class="sd">    the swap circuit, best_d contains the depth of the swap circuit, and</span>
 <span class="sd">    best_layout contains the new positions of the data qubits after the</span>
 <span class="sd">    swap circuit has been applied. The trivial_flag is set if the layer</span>
@@ -192,6 +284,9 @@
 
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: gates = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
 
+    <span class="c1"># Find layout maximum index</span>
+    <span class="n">layout_max_index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">layout</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
     <span class="c1"># Can we already apply the gates?</span>
     <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
                                   <span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
@@ -199,7 +294,14 @@
     <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: done already&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: ----- exit -----&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span>
+        <span class="n">circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">layout_max_index</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;CX&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="n">cx_data</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="n">swap_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span>
 
     <span class="c1"># Begin loop over trials of randomized algorithm</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">coupling</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -211,7 +313,9 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trial </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
         <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="n">rev_trial_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">rev_layout</span><span class="p">)</span>
-        <span class="n">trial_circ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># circuit produced in this trial</span>
+        <span class="c1"># SWAP circuit constructed this trial</span>
+        <span class="n">trial_circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+        <span class="n">trial_circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">layout_max_index</span><span class="p">)</span>
 
         <span class="c1"># Compute Sergey&#39;s randomized distance</span>
         <span class="n">xi</span> <span class="o">=</span> <span class="p">{}</span>
@@ -225,7 +329,18 @@
 
         <span class="c1"># Loop over depths d up to a max depth of 2n+1</span>
         <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">circ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># circuit for this swap slice</span>
+        <span class="c1"># Circuit for this swap slice</span>
+        <span class="n">circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">layout_max_index</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;CX&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="n">cx_data</span><span class="p">)</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="n">swap_data</span><span class="p">)</span>
+
+        <span class="c1"># Identity wire-map for composing the circuits</span>
+        <span class="n">identity_wire_map</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layout_max_index</span><span class="p">)}</span>
+
         <span class="k">while</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># Set of available qubits</span>
             <span class="n">qubit_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">)</span>
@@ -266,10 +381,10 @@
                     <span class="n">qubit_set</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                     <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">opt_layout</span>
                     <span class="n">rev_trial_layout</span> <span class="o">=</span> <span class="n">rev_opt_layout</span>
-                    <span class="n">circ</span> <span class="o">+=</span> <span class="s2">&quot;swap </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">],</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]; &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">opt_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                                                      <span class="n">opt_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                      <span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                                                      <span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">circ</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="n">opt_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                        <span class="n">opt_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                                                       <span class="p">(</span><span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                        <span class="n">opt_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])])</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: chose pair </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
                                  <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">opt_edge</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -284,7 +399,7 @@
             <span class="c1"># Otherwise we need to consider a deeper swap circuit</span>
             <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: all can be applied now&quot;</span><span class="p">)</span>
-                <span class="n">trial_circ</span> <span class="o">+=</span> <span class="n">circ</span>
+                <span class="n">trial_circ</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">identity_wire_map</span><span class="p">)</span>
                 <span class="k">break</span>
 
             <span class="c1"># Increment the depth</span>
@@ -330,16 +445,23 @@
     <span class="k">if</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="s2">&quot;cx&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">MapperError</span><span class="p">(</span><span class="s2">&quot;cx gate has unexpected signature </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
                           <span class="n">circuit_graph</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="s2">&quot;cx&quot;</span><span class="p">])</span>
-    <span class="n">flipped_qasm</span> <span class="o">=</span> <span class="s2">&quot;OPENQASM 2.0;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                   <span class="s2">&quot;gate cx c,t { CX c,t; }</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                   <span class="s2">&quot;gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                   <span class="s2">&quot;gate h a { u2(0,pi) a; }</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                   <span class="s2">&quot;gate cx_flipped a,b { h a; h b; cx b, a; h a; h b; }</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                   <span class="s2">&quot;qreg q[2];</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                   <span class="s2">&quot;cx_flipped q[0],q[1];</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">unroll</span><span class="o">.</span><span class="n">Unroller</span><span class="p">(</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flipped_qasm</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(),</span>
-                        <span class="n">unroll</span><span class="o">.</span><span class="n">DAGBackend</span><span class="p">([</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">]))</span>
-    <span class="n">flipped_cx_circuit</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+    <span class="n">flipped_cx_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;CX&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="n">cx_data</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="n">u2_data</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">add_gate_data</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">h_data</span><span class="p">)</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+    <span class="n">flipped_cx_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+
     <span class="n">cx_node_list</span> <span class="o">=</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">get_named_nodes</span><span class="p">(</span><span class="s2">&quot;cx&quot;</span><span class="p">)</span>
     <span class="n">cg_edges</span> <span class="o">=</span> <span class="n">coupling_graph</span><span class="o">.</span><span class="n">get_edges</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">cx_node</span> <span class="ow">in</span> <span class="n">cx_node_list</span><span class="p">:</span>
@@ -363,22 +485,25 @@
     <span class="k">return</span> <span class="n">circuit_graph</span></div>
 
 
-<span class="k">def</span> <span class="nf">update_qasm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
-                <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">swap_mapper_layer_update</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
+                             <span class="n">best_circ</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Update the QASM string for an iteration of swap_mapper.</span>
 
 <span class="sd">    i = layer number</span>
 <span class="sd">    first_layer = True if this is the first layer with multi-qubit gates</span>
 <span class="sd">    best_layout = layout returned from swap algorithm</span>
-<span class="sd">    best_d = depth returns from swap algorithm</span>
+<span class="sd">    best_d = depth returned from swap algorithm</span>
 <span class="sd">    best_circ = swap circuit returned from swap algorithm</span>
-<span class="sd">    circuit_graph = original input circuit</span>
 <span class="sd">    layer_list = list of circuit objects for each layer</span>
 
-<span class="sd">    Return openqasm_output, the QASM string to append.</span>
+<span class="sd">    Return DAGCircuit object to append to the output DAGCircuit.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">openqasm_output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="n">best_layout</span>
+    <span class="n">layout_max_index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">layout</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="n">dagcircuit_output</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+    <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">layout_max_index</span><span class="p">)</span>
+    <span class="c1"># Identity wire-map for composing the circuits</span>
+    <span class="n">identity_wire_map</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layout_max_index</span><span class="p">)}</span>
 
     <span class="c1"># If this is the first layer with multi-qubit gates,</span>
     <span class="c1"># output all layers up to this point and ignore any</span>
@@ -386,28 +511,20 @@
     <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: first multi-qubit gate layer&quot;</span><span class="p">)</span>
         <span class="c1"># Output all layers up to this point</span>
-        <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-            <span class="n">add_swap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">decls_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">layer_list</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-                <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+            <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">layout</span><span class="p">)</span>
     <span class="c1"># Otherwise, we output the current layer and the associated swap gates.</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Output any swaps</span>
         <span class="k">if</span> <span class="n">best_d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: swaps in this layer, &quot;</span>
                          <span class="s2">&quot;depth </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">best_d</span><span class="p">)</span>
-            <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">best_circ</span>
+            <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">best_circ</span><span class="p">,</span> <span class="n">identity_wire_map</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;update_qasm_and_layout: no swaps in this layer&quot;</span><span class="p">)</span>
         <span class="c1"># Output this layer</span>
-        <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-            <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">openqasm_output</span>
+        <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">layout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dagcircuit_output</span>
 
 
 <div class="viewcode-block" id="swap_mapper"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.swap_mapper.html#qiskit.mapper.swap_mapper">[ドキュメント]</a><span class="k">def</span> <span class="nf">swap_mapper</span><span class="p">(</span><span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
@@ -466,7 +583,25 @@
 
     <span class="c1"># Find swap circuit to preceed to each layer of input circuit</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
-    <span class="n">openqasm_output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">layout_max_index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">layout</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="c1"># Construct an empty DAGCircuit with one qreg &quot;q&quot;</span>
+    <span class="c1"># and the same set of cregs as the input circuit</span>
+    <span class="n">dagcircuit_output</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+    <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">layout_max_index</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">add_creg</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+
+    <span class="c1"># Make a trivial wire mapping between the subcircuits</span>
+    <span class="c1"># returned by swap_mapper_layer_update and the circuit</span>
+    <span class="c1"># we are building</span>
+    <span class="n">identity_wire_map</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layout_max_index</span><span class="p">):</span>
+        <span class="n">identity_wire_map</span><span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">identity_wire_map</span><span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
     <span class="n">first_layer</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># True until first layer is output</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;initial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
 
@@ -518,10 +653,14 @@
                 <span class="c1"># Update the record of qubit positions for each inner iteration</span>
                 <span class="n">layout</span> <span class="o">=</span> <span class="n">best_layout</span>
                 <span class="c1"># Update the QASM</span>
-                <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">update_qasm</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span>
-                                               <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
-                                               <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span>
-                                               <span class="n">serial_layerlist</span><span class="p">)</span>
+                <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span>
+                    <span class="n">swap_mapper_layer_update</span><span class="p">(</span><span class="n">j</span><span class="p">,</span>
+                                             <span class="n">first_layer</span><span class="p">,</span>
+                                             <span class="n">best_layout</span><span class="p">,</span>
+                                             <span class="n">best_d</span><span class="p">,</span>
+                                             <span class="n">best_circ</span><span class="p">,</span>
+                                             <span class="n">serial_layerlist</span><span class="p">),</span>
+                    <span class="n">identity_wire_map</span><span class="p">)</span>
                 <span class="c1"># Update initial layout</span>
                 <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
                     <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">layout</span>
@@ -532,10 +671,14 @@
             <span class="n">layout</span> <span class="o">=</span> <span class="n">best_layout</span>
 
             <span class="c1"># Update the QASM</span>
-            <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">update_qasm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span>
-                                           <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_d</span><span class="p">,</span>
-                                           <span class="n">best_circ</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span>
-                                           <span class="n">layerlist</span><span class="p">)</span>
+            <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span>
+                <span class="n">swap_mapper_layer_update</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
+                                         <span class="n">first_layer</span><span class="p">,</span>
+                                         <span class="n">best_layout</span><span class="p">,</span>
+                                         <span class="n">best_d</span><span class="p">,</span>
+                                         <span class="n">best_circ</span><span class="p">,</span>
+                                         <span class="n">layerlist</span><span class="p">),</span>
+                <span class="n">identity_wire_map</span><span class="p">)</span>
             <span class="c1"># Update initial layout</span>
             <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
                 <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">layout</span>
@@ -545,20 +688,14 @@
     <span class="c1"># so we can use the initial layout to output the entire circuit</span>
     <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
-        <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-            <span class="n">add_swap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">decls_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
-            <span class="n">openqasm_output</span> <span class="o">+=</span> <span class="n">layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-                <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+            <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">layout</span><span class="p">)</span>
 
     <span class="c1"># Parse openqasm_output into DAGCircuit object</span>
-    <span class="n">basis</span> <span class="o">+=</span> <span class="s2">&quot;,swap&quot;</span>
-    <span class="n">ast</span> <span class="o">=</span> <span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">openqasm_output</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">unroll</span><span class="o">.</span><span class="n">Unroller</span><span class="p">(</span><span class="n">ast</span><span class="p">,</span> <span class="n">unroll</span><span class="o">.</span><span class="n">DAGBackend</span><span class="p">(</span><span class="n">basis</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">u</span><span class="o">.</span><span class="n">execute</span><span class="p">(),</span> <span class="n">initial_layout</span></div>
+    <span class="n">dag_unrrolled</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">dagcircuit_output</span><span class="p">,</span>
+                                <span class="n">DAGBackend</span><span class="p">(</span><span class="n">basis</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+    <span class="n">dagcircuit_output</span> <span class="o">=</span> <span class="n">dag_unrrolled</span><span class="o">.</span><span class="n">expand_gates</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dagcircuit_output</span><span class="p">,</span> <span class="n">initial_layout</span></div>
 
 
 <span class="k">def</span> <span class="nf">test_trig_solution</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">):</span>
@@ -736,17 +873,16 @@
 <span class="sd">    Return a new circuit that has been optimized.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qx_basis</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]</span>
-    <span class="n">urlr</span> <span class="o">=</span> <span class="n">unroll</span><span class="o">.</span><span class="n">Unroller</span><span class="p">(</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">())</span><span class="o">.</span><span class="n">parse</span><span class="p">(),</span>
-                           <span class="n">unroll</span><span class="o">.</span><span class="n">DAGBackend</span><span class="p">(</span><span class="n">qx_basis</span><span class="p">))</span>
-    <span class="n">unrolled</span> <span class="o">=</span> <span class="n">urlr</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+    <span class="n">dag_unroller</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">DAGBackend</span><span class="p">(</span><span class="n">qx_basis</span><span class="p">))</span>
+    <span class="n">unrolled</span> <span class="o">=</span> <span class="n">dag_unroller</span><span class="o">.</span><span class="n">expand_gates</span><span class="p">()</span>
 
     <span class="n">runs</span> <span class="o">=</span> <span class="n">unrolled</span><span class="o">.</span><span class="n">collect_runs</span><span class="p">([</span><span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
         <span class="n">qname</span> <span class="o">=</span> <span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s2">&quot;qargs&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">right_name</span> <span class="o">=</span> <span class="s2">&quot;u1&quot;</span>
         <span class="n">right_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># (theta, phi, lambda)</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
-            <span class="n">nd</span> <span class="o">=</span> <span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">current_node</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
+            <span class="n">nd</span> <span class="o">=</span> <span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">current_node</span><span class="p">]</span>
             <span class="k">assert</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;internal error&quot;</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;internal error&quot;</span>
             <span class="k">assert</span> <span class="n">nd</span><span class="p">[</span><span class="s2">&quot;qargs&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">qname</span><span class="p">,</span> <span class="s2">&quot;internal error&quot;</span>
@@ -876,16 +1012,12 @@
 
         <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
                                <span class="n">values</span><span class="o">=</span><span class="p">{</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">right_name</span><span class="p">})</span>
-        <span class="c1"># params is a list of sympy symbols and the str() method</span>
-        <span class="c1"># will return Python expressions. To get the correct</span>
-        <span class="c1"># OpenQASM expression, we need to replace &quot;**&quot; with &quot;^&quot;.</span>
+        <span class="c1"># params is a list of sympy symbols</span>
         <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">unrolled</span><span class="o">.</span><span class="n">multi_graph</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;params&#39;</span><span class="p">,</span>
-                               <span class="n">values</span><span class="o">=</span><span class="p">{</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
-                                                         <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">),</span>
-                                                         <span class="n">new_params</span><span class="p">))})</span>
+                               <span class="n">values</span><span class="o">=</span><span class="p">{</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">new_params</span><span class="p">})</span>
         <span class="c1"># Delete the other nodes in the run</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-            <span class="n">unrolled</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">current_node</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">unrolled</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">current_node</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">right_name</span> <span class="o">==</span> <span class="s2">&quot;nop&quot;</span><span class="p">:</span>
             <span class="n">unrolled</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">unrolled</span></div>
@@ -911,14 +1043,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/03/22
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/04/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
