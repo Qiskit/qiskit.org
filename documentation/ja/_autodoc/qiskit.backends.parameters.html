@@ -2,16 +2,16 @@
 
 <!doctype html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.get_backend_configuration &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit.backends.parameters &#8212; QISKit SDK 0.4.12 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -21,14 +21,15 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/bizstyle.js"></script>
     <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.backends.get_backend_instance" href="qiskit.backends.get_backend_instance.html" />
-    <link rel="prev" title="qiskit.backends.get_backend_class" href="qiskit.backends.get_backend_class.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.backends.register_backend" href="qiskit.backends.register_backend.html" />
+    <link rel="prev" title="qiskit.backends.local_backends" href="qiskit.backends.local_backends.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -38,32 +39,32 @@
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
-        <a href="/documentation/_autodoc/qiskit.backends.get_backend_configuration.html">english</a> /
-        <a href="/documentation/ja/_autodoc/qiskit.backends.get_backend_configuration.html">japanese</a>
+        <a href="/documentation/_autodoc/qiskit.backends.parameters.html">english</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.backends.parameters.html">japanese</a>
     </div>
 </div>
     <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
+      <h3>ナビゲーション</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
+          <a href="../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.backends.get_backend_instance.html" title="qiskit.backends.get_backend_instance"
-             accesskey="N">next</a> |</li>
+          <a href="qiskit.backends.register_backend.html" title="qiskit.backends.register_backend"
+             accesskey="N">次へ</a> |</li>
         <li class="right" >
-          <a href="qiskit.backends.get_backend_class.html" title="qiskit.backends.get_backend_class"
-             accesskey="P">previous</a> |</li>
+          <a href="qiskit.backends.local_backends.html" title="qiskit.backends.local_backends"
+             accesskey="P">前へ</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
    href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" accesskey="U">qiskit.backends package</a> &#187;</li> 
@@ -77,26 +78,29 @@
             </a></p>
 <p class="logo-description">Quantum Information Software Kit</p>
 
-  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <h3><a href="../index.html">目次</a></h3>
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Developer documentation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK reference</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#classes">Classes</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="qiskit.backends.html#functions">Functions</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.calibration.html">qiskit.backends.calibration</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.configuration.html">qiskit.backends.configuration</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.discover_local_backends.html">qiskit.backends.discover_local_backends</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.discover_remote_backends.html">qiskit.backends.discover_remote_backends</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.get_backend_class.html">qiskit.backends.get_backend_class</a></li>
-<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.backends.get_backend_configuration</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.get_backend_instance.html">qiskit.backends.get_backend_instance</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.local_backends.html">qiskit.backends.local_backends</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.backends.parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.register_backend.html">qiskit.backends.register_backend</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.remote_backends.html">qiskit.backends.remote_backends</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.status.html">qiskit.backends.status</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.update_backends.html">qiskit.backends.update_backends</a></li>
 </ul>
 </li>
@@ -113,28 +117,27 @@
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="qiskit.backends.get_backend_class.html"
-                        title="previous chapter">qiskit.backends.get_backend_class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="qiskit.backends.get_backend_instance.html"
-                        title="next chapter">qiskit.backends.get_backend_instance</a></p>
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="qiskit.backends.local_backends.html"
+                        title="前の章へ">qiskit.backends.local_backends</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="qiskit.backends.register_backend.html"
+                        title="次の章へ">qiskit.backends.register_backend</a></p>
   <div role="note" aria-label="source link">
-    <h3>This Page</h3>
+    <h3>このページ</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/_autodoc/qiskit.backends.get_backend_configuration.rst.txt"
-            rel="nofollow">Show Source</a></li>
+      <li><a href="../_sources/_autodoc/qiskit.backends.parameters.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3>クイック検索</h3>
     <form class="search" action="../search.html" method="get">
       <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <div><input type="submit" value="検索" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -148,23 +151,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="qiskit-backends-get-backend-configuration">
-<h1>qiskit.backends.get_backend_configuration<a class="headerlink" href="#qiskit-backends-get-backend-configuration" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="qiskit-backends-parameters">
+<h1>qiskit.backends.parameters<a class="headerlink" href="#qiskit-backends-parameters" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="function">
-<dt id="qiskit.backends.get_backend_configuration">
-<code class="descclassname">qiskit.backends.</code><code class="descname">get_backend_configuration</code><span class="sig-paren">(</span><em>backend_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/_backendutils.html#get_backend_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.get_backend_configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the configuration for the named backend.</p>
+<dt id="qiskit.backends.parameters">
+<code class="descclassname">qiskit.backends.</code><code class="descname">parameters</code><span class="sig-paren">(</span><em>backend_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/_backendutils.html#parameters"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.parameters" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return the online backend parameters.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>backend_name</strong> (<em>str</em>) – the backend name</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><p class="first"><strong>backend_name</strong> (<em>str</em>) -- Name of the backend.</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration dict</td>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">The parameters of the named backend.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">dict</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> – if backend is unavailable</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ConnectionError</span></code> -- if the API call failed.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">LookupError</span></code> -- If parameters for the named backend can't be
+found.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -179,36 +190,36 @@
       <div class="clearer"></div>
     </div>
     <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
+      <h3>ナビゲーション</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
+          <a href="../genindex.html" title="総合索引"
+             >索引</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.backends.get_backend_instance.html" title="qiskit.backends.get_backend_instance"
-             >next</a> |</li>
+          <a href="qiskit.backends.register_backend.html" title="qiskit.backends.register_backend"
+             >次へ</a> |</li>
         <li class="right" >
-          <a href="qiskit.backends.get_backend_class.html" title="qiskit.backends.get_backend_class"
-             >previous</a> |</li>
+          <a href="qiskit.backends.local_backends.html" title="qiskit.backends.local_backends"
+             >前へ</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
    href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/04/11
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
 </html>

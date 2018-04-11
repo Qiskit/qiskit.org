@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._compositegate &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit._compositegate &#8212; QISKit SDK 0.4.12 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -136,6 +136,20 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">circuit</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># gate sequence defining the composite unitary</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="CompositeGate.instruction_list"><a class="viewcode-back" href="../../_autodoc/qiskit.CompositeGate.html#qiskit.CompositeGate.instruction_list">[docs]</a>    <span class="k">def</span> <span class="nf">instruction_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of instructions for this CompositeGate.</span>
+
+<span class="sd">        If the CompositeGate itself contains composites, call</span>
+<span class="sd">        this method recursively.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">instruction_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">):</span>
+                <span class="n">instruction_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">instruction_list</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">instruction_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instruction_list</span></div>
 
 <div class="viewcode-block" id="CompositeGate.has_register"><a class="viewcode-back" href="../../_autodoc/qiskit.CompositeGate.html#qiskit.CompositeGate.has_register">[docs]</a>    <span class="k">def</span> <span class="nf">has_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Test if this gate&#39;s circuit has the register r.&quot;&quot;&quot;</span>
@@ -228,14 +242,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

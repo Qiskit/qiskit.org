@@ -1,0 +1,244 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.unroll.DagUnroller &#8212; QISKit SDK 0.4.12 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.unroll.JsonBackend" href="qiskit.unroll.JsonBackend.html" />
+    <link rel="prev" title="qiskit.unroll.DAGBackend" href="qiskit.unroll.DAGBackend.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.unroll.DagUnroller.html">english</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.unroll.DagUnroller.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll.JsonBackend.html" title="qiskit.unroll.JsonBackend"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll.DAGBackend.html" title="qiskit.unroll.DAGBackend"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.unroll.html" accesskey="U">qiskit.unroll package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.unroll.html#classes">Classes</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.unroll.CircuitBackend.html">qiskit.unroll.CircuitBackend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.unroll.DAGBackend.html">qiskit.unroll.DAGBackend</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.unroll.DagUnroller</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.unroll.JsonBackend.html">qiskit.unroll.JsonBackend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.unroll.PrinterBackend.html">qiskit.unroll.PrinterBackend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.unroll.Unroller.html">qiskit.unroll.Unroller</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.unroll.UnrollerBackend.html">qiskit.unroll.UnrollerBackend</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unroll.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qiskit.unroll.DAGBackend.html"
+                        title="previous chapter">qiskit.unroll.DAGBackend</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.unroll.JsonBackend.html"
+                        title="next chapter">qiskit.unroll.JsonBackend</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.unroll.DagUnroller.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-unroll-dagunroller">
+<h1>qiskit.unroll.DagUnroller<a class="headerlink" href="#qiskit-unroll-dagunroller" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.unroll.DagUnroller">
+<em class="property">class </em><code class="descclassname">qiskit.unroll.</code><code class="descname">DagUnroller</code><span class="sig-paren">(</span><em>dag_circuit</em>, <em>backend=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_dagunroller.html#DagUnroller"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll.DagUnroller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>An Unroller that takes Dag circuits as the input.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code>(dag_circuit[,&nbsp;backend])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.unroll.DagUnroller.execute" title="qiskit.unroll.DagUnroller.execute"><code class="xref py py-obj docutils literal"><span class="pre">execute</span></code></a>()</td>
+<td>Interpret OPENQASM and make appropriate backend calls.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.unroll.DagUnroller.expand_gates" title="qiskit.unroll.DagUnroller.expand_gates"><code class="xref py py-obj docutils literal"><span class="pre">expand_gates</span></code></a>([basis])</td>
+<td>Expand all gate nodes to the given basis.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.unroll.DagUnroller.set_backend" title="qiskit.unroll.DagUnroller.set_backend"><code class="xref py py-obj docutils literal"><span class="pre">set_backend</span></code></a>(backend)</td>
+<td>Set the backend object.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.unroll.DagUnroller.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_dagunroller.html#DagUnroller.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll.DagUnroller.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret OPENQASM and make appropriate backend calls.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll.DagUnroller.expand_gates">
+<code class="descname">expand_gates</code><span class="sig-paren">(</span><em>basis=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_dagunroller.html#DagUnroller.expand_gates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll.DagUnroller.expand_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand all gate nodes to the given basis.</p>
+<p>If basis is empty, each custom gate node is replaced by its
+implementation over U and CX. If basis contains names, then
+those custom gates are not expanded. For example, if “u3”
+is in basis, then the gate “u3” will not be expanded wherever
+it occurs.</p>
+<p>This member function replicates the behavior of the unroller
+module without using the OpenQASM parser.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.unroll.DagUnroller.set_backend">
+<code class="descname">set_backend</code><span class="sig-paren">(</span><em>backend</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/unroll/_dagunroller.html#DagUnroller.set_backend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.unroll.DagUnroller.set_backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the backend object.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll.JsonBackend.html" title="qiskit.unroll.JsonBackend"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.unroll.DAGBackend.html" title="qiskit.unroll.DAGBackend"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.unroll.html" >qiskit.unroll package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

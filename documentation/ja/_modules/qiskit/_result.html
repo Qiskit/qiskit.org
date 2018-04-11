@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._result &#8212; QISKit SDK 0.4.11 ドキュメント</title>
+    <title>qiskit._result &#8212; QISKit SDK 0.4.12 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -259,7 +259,7 @@
             <span class="k">pass</span>
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No  qasm for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_data"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_data">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_data"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_data">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the data of circuit name.</span>
 
 <span class="sd">        The data format will depend on the backend. For a real device it</span>
@@ -305,6 +305,14 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">))</span>
 
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">circuits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">circuits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;You have to select a circuit when there is more than&quot;</span>
+                                  <span class="s2">&quot;one available&quot;</span><span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span>
             <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">])):</span>
@@ -314,14 +322,16 @@
             <span class="k">pass</span>
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No data for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_counts">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_counts">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the histogram data of circuit name.</span>
 
 <span class="sd">        The data from the a qasm circuit is dictionary of the format</span>
 <span class="sd">        {&#39;00000&#39;: XXXX, &#39;00001&#39;: XXXXX}.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the quantum circuit.</span>
+<span class="sd">            name (hashable or None): the name of the quantum circuit.</span>
+<span class="sd">                If None and there is only one circuit available, returns</span>
+<span class="sd">                that one.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dictionary: Counts {&#39;00000&#39;: XXXX, &#39;00001&#39;: XXXXX}.</span>
@@ -425,14 +435,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      最終更新: 2018/03/22
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/04/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

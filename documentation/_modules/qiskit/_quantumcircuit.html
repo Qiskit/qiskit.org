@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumcircuit &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit._quantumcircuit &#8212; QISKit SDK 0.4.12 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -135,8 +135,21 @@
     <span class="c1"># Class variable OPENQASM header</span>
     <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;OPENQASM 2.0;&quot;</span>
 
-<div class="viewcode-block" id="QuantumCircuit.__init__"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
+    <span class="c1"># Class variable with gate definitions</span>
+    <span class="c1"># This is a dict whose values are dicts with the</span>
+    <span class="c1"># following keys:</span>
+    <span class="c1">#   &quot;print&quot; = True or False</span>
+    <span class="c1">#   &quot;opaque&quot; = True or False</span>
+    <span class="c1">#   &quot;n_args&quot; = number of real parameters</span>
+    <span class="c1">#   &quot;n_bits&quot; = number of qubits</span>
+    <span class="c1">#   &quot;args&quot;   = list of parameter names</span>
+    <span class="c1">#   &quot;bits&quot;   = list of qubit names</span>
+    <span class="c1">#   &quot;body&quot;   = GateBody AST node</span>
+    <span class="n">definitions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QuantumCircuit.__init__"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new circuit.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="c1"># Data contains a list of instructions in the order they were applied.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># This is a map of registers bound to this circuit, by name.</span>
@@ -177,28 +190,51 @@
 
 <div class="viewcode-block" id="QuantumCircuit.combine"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Append rhs to self if self contains rhs&#39;s registers.</span>
+<span class="sd">        Append rhs to self if self contains compatible registers.</span>
+
+<span class="sd">        Two circuits are compatible if they contain the same registers</span>
+<span class="sd">        or if they contain different registers with unique names. The</span>
+<span class="sd">        returned circuit will contain all unique registers between both</span>
+<span class="sd">        circuits.</span>
 
 <span class="sd">        Return self + rhs as a new object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+        <span class="n">combined_registers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Check registers in LHS are compatible with RHS</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span> <span class="ow">and</span> <span class="n">register</span> <span class="o">!=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="p">[</span><span class="n">name</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;circuits are not compatible&quot;</span><span class="p">)</span>
-        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span>
-            <span class="o">*</span><span class="p">[</span><span class="n">register</span> <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">combined_registers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+        <span class="c1"># Add registers in RHS not in LHS</span>
+        <span class="n">complement_registers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">complement_registers</span><span class="p">:</span>
+            <span class="n">combined_registers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="c1"># Make new circuit with combined registers</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">combined_registers</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
             <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">circuit</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.extend"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Append rhs to self if self contains rhs&#39;s registers.</span>
+<span class="sd">        Append rhs to self if self if it contains compatible registers.</span>
+
+<span class="sd">        Two circuits are compatible if they contain the same registers</span>
+<span class="sd">        or if they contain different registers with unique names. The</span>
+<span class="sd">        returned circuit will contain all unique registers between both</span>
+<span class="sd">        circuits.</span>
 
 <span class="sd">        Modify and return self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+        <span class="c1"># Check compatibility and add new registers</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span> <span class="ow">and</span> <span class="n">register</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="p">[</span><span class="n">name</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;circuits are not compatible&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add new gates</span>
         <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
             <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
@@ -264,9 +300,28 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">squbits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;duplicate qubit arguments&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_gate_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a QASM string for the named gate.&quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;opaque &quot;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;gate &quot;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;n_args&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;args&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;bits&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">{</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+        <span class="k">return</span> <span class="n">out</span>
+
 <div class="viewcode-block" id="QuantumCircuit.qasm"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit.qasm">[docs]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return OPENQASM string.&quot;&quot;&quot;</span>
         <span class="n">string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">gate_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">gate_name</span><span class="p">][</span><span class="s2">&quot;print&quot;</span><span class="p">]:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gate_string</span><span class="p">(</span><span class="n">gate_name</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">string</span> <span class="o">+=</span> <span class="n">register</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
@@ -326,14 +381,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.CompositeGate &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit.CompositeGate &#8212; QISKit SDK 0.4.12 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -162,7 +162,7 @@
 <td>Add classical control register.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.ccx" title="qiskit.CompositeGate.ccx"><code class="xref py py-obj docutils literal"><span class="pre">ccx</span></code></a>(ctl1,&nbsp;ctl2,&nbsp;tgt)</td>
-<td>Apply Toffoli to circuit.</td>
+<td>Apply Toffoli to from ctl1 and ctl2 to tgt.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.ch" title="qiskit.CompositeGate.ch"><code class="xref py py-obj docutils literal"><span class="pre">ch</span></code></a>(ctl,&nbsp;tgt)</td>
 <td>Apply CH from ctl to tgt.</td>
@@ -206,97 +206,100 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.iden" title="qiskit.CompositeGate.iden"><code class="xref py py-obj docutils literal"><span class="pre">iden</span></code></a>(q)</td>
 <td>Apply Identity to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.initialize" title="qiskit.CompositeGate.initialize"><code class="xref py py-obj docutils literal"><span class="pre">initialize</span></code></a>(name,&nbsp;params,&nbsp;qubits)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.initialize" title="qiskit.CompositeGate.initialize"><code class="xref py py-obj docutils literal"><span class="pre">initialize</span></code></a>(params,&nbsp;qubits)</td>
 <td>Apply initialize to circuit.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.inverse" title="qiskit.CompositeGate.inverse"><code class="xref py py-obj docutils literal"><span class="pre">inverse</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.instruction_list" title="qiskit.CompositeGate.instruction_list"><code class="xref py py-obj docutils literal"><span class="pre">instruction_list</span></code></a>()</td>
+<td>Return a list of instructions for this CompositeGate.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.inverse" title="qiskit.CompositeGate.inverse"><code class="xref py py-obj docutils literal"><span class="pre">inverse</span></code></a>()</td>
 <td>Invert this gate.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.last_atomic_gate_host" title="qiskit.CompositeGate.last_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">last_atomic_gate_host</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.last_atomic_gate_host" title="qiskit.CompositeGate.last_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">last_atomic_gate_host</span></code></a>()</td>
 <td>Return the host list of the leaf gate on the right edge.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.load" title="qiskit.CompositeGate.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(m,&nbsp;q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.load" title="qiskit.CompositeGate.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(m,&nbsp;q)</td>
 <td>Load cached quantum state of local_qiskit_simulator.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.noise" title="qiskit.CompositeGate.noise"><code class="xref py py-obj docutils literal"><span class="pre">noise</span></code></a>(m,&nbsp;q)</td>
-<td>Cache the quantum state of locla_qiskit_simulator.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.number_atomic_gates" title="qiskit.CompositeGate.number_atomic_gates"><code class="xref py py-obj docutils literal"><span class="pre">number_atomic_gates</span></code></a>()</td>
-<td>Count the number of leaf gates.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.optimize_gates" title="qiskit.CompositeGate.optimize_gates"><code class="xref py py-obj docutils literal"><span class="pre">optimize_gates</span></code></a>()</td>
-<td>Remove Zero rotations and Double CNOTS.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.q_if" title="qiskit.CompositeGate.q_if"><code class="xref py py-obj docutils literal"><span class="pre">q_if</span></code></a>(*qregs)</td>
-<td>Add controls to this gate.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.qasm" title="qiskit.CompositeGate.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>()</td>
-<td>Return OPENQASM string.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.remove_double_cnots_once" title="qiskit.CompositeGate.remove_double_cnots_once"><code class="xref py py-obj docutils literal"><span class="pre">remove_double_cnots_once</span></code></a>()</td>
-<td>Remove Double CNOTS paying attention that gates may be neighbours across Composite Gate boundaries.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.remove_zero_rotations" title="qiskit.CompositeGate.remove_zero_rotations"><code class="xref py py-obj docutils literal"><span class="pre">remove_zero_rotations</span></code></a>()</td>
-<td>Remove Zero Rotations by looking (recursively) at rotation gates at the leaf ends.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.reverse" title="qiskit.CompositeGate.reverse"><code class="xref py py-obj docutils literal"><span class="pre">reverse</span></code></a>()</td>
-<td>Reverse (recursively) the sub-gates of this CompositeGate.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.rx" title="qiskit.CompositeGate.rx"><code class="xref py py-obj docutils literal"><span class="pre">rx</span></code></a>(theta,&nbsp;q)</td>
-<td>Apply rx to q.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.ry" title="qiskit.CompositeGate.ry"><code class="xref py py-obj docutils literal"><span class="pre">ry</span></code></a>(theta,&nbsp;q)</td>
-<td>Apply ry to q.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.rz" title="qiskit.CompositeGate.rz"><code class="xref py py-obj docutils literal"><span class="pre">rz</span></code></a>(phi,&nbsp;q)</td>
-<td>Apply rz to q.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.s" title="qiskit.CompositeGate.s"><code class="xref py py-obj docutils literal"><span class="pre">s</span></code></a>(q)</td>
-<td>Apply S to q.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.save" title="qiskit.CompositeGate.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>(m,&nbsp;q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.noise" title="qiskit.CompositeGate.noise"><code class="xref py py-obj docutils literal"><span class="pre">noise</span></code></a>(m,&nbsp;q)</td>
 <td>Cache the quantum state of local_qiskit_simulator.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.sdg" title="qiskit.CompositeGate.sdg"><code class="xref py py-obj docutils literal"><span class="pre">sdg</span></code></a>(q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.number_atomic_gates" title="qiskit.CompositeGate.number_atomic_gates"><code class="xref py py-obj docutils literal"><span class="pre">number_atomic_gates</span></code></a>()</td>
+<td>Count the number of leaf gates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.optimize_gates" title="qiskit.CompositeGate.optimize_gates"><code class="xref py py-obj docutils literal"><span class="pre">optimize_gates</span></code></a>()</td>
+<td>Remove Zero rotations and Double CNOTS.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.q_if" title="qiskit.CompositeGate.q_if"><code class="xref py py-obj docutils literal"><span class="pre">q_if</span></code></a>(*qregs)</td>
+<td>Add controls to this gate.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.qasm" title="qiskit.CompositeGate.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>()</td>
+<td>Return OPENQASM string.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.remove_double_cnots_once" title="qiskit.CompositeGate.remove_double_cnots_once"><code class="xref py py-obj docutils literal"><span class="pre">remove_double_cnots_once</span></code></a>()</td>
+<td>Remove Double CNOTS paying attention that gates may be neighbours across Composite Gate boundaries.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.remove_zero_rotations" title="qiskit.CompositeGate.remove_zero_rotations"><code class="xref py py-obj docutils literal"><span class="pre">remove_zero_rotations</span></code></a>()</td>
+<td>Remove Zero Rotations by looking (recursively) at rotation gates at the leaf ends.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.reverse" title="qiskit.CompositeGate.reverse"><code class="xref py py-obj docutils literal"><span class="pre">reverse</span></code></a>()</td>
+<td>Reverse (recursively) the sub-gates of this CompositeGate.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.rx" title="qiskit.CompositeGate.rx"><code class="xref py py-obj docutils literal"><span class="pre">rx</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply Rx to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.ry" title="qiskit.CompositeGate.ry"><code class="xref py py-obj docutils literal"><span class="pre">ry</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply Ry to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.rz" title="qiskit.CompositeGate.rz"><code class="xref py py-obj docutils literal"><span class="pre">rz</span></code></a>(phi,&nbsp;q)</td>
+<td>Apply Rz to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.s" title="qiskit.CompositeGate.s"><code class="xref py py-obj docutils literal"><span class="pre">s</span></code></a>(q)</td>
+<td>Apply S to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.save" title="qiskit.CompositeGate.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>(m,&nbsp;q)</td>
+<td>Cache the quantum state of local_qiskit_simulator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.sdg" title="qiskit.CompositeGate.sdg"><code class="xref py py-obj docutils literal"><span class="pre">sdg</span></code></a>(q)</td>
 <td>Apply Sdg to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.swap" title="qiskit.CompositeGate.swap"><code class="xref py py-obj docutils literal"><span class="pre">swap</span></code></a>(ctl,&nbsp;tgt)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.swap" title="qiskit.CompositeGate.swap"><code class="xref py py-obj docutils literal"><span class="pre">swap</span></code></a>(ctl,&nbsp;tgt)</td>
 <td>Apply SWAP from ctl to tgt.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.t" title="qiskit.CompositeGate.t"><code class="xref py py-obj docutils literal"><span class="pre">t</span></code></a>(q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.t" title="qiskit.CompositeGate.t"><code class="xref py py-obj docutils literal"><span class="pre">t</span></code></a>(q)</td>
 <td>Apply T to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.tdg" title="qiskit.CompositeGate.tdg"><code class="xref py py-obj docutils literal"><span class="pre">tdg</span></code></a>(q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.tdg" title="qiskit.CompositeGate.tdg"><code class="xref py py-obj docutils literal"><span class="pre">tdg</span></code></a>(q)</td>
 <td>Apply Tdg to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.u0" title="qiskit.CompositeGate.u0"><code class="xref py py-obj docutils literal"><span class="pre">u0</span></code></a>(m,&nbsp;q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.u0" title="qiskit.CompositeGate.u0"><code class="xref py py-obj docutils literal"><span class="pre">u0</span></code></a>(m,&nbsp;q)</td>
 <td>Apply u0 with length m to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.u1" title="qiskit.CompositeGate.u1"><code class="xref py py-obj docutils literal"><span class="pre">u1</span></code></a>(theta,&nbsp;q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.u1" title="qiskit.CompositeGate.u1"><code class="xref py py-obj docutils literal"><span class="pre">u1</span></code></a>(theta,&nbsp;q)</td>
 <td>Apply u1 with angle theta to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.u2" title="qiskit.CompositeGate.u2"><code class="xref py py-obj docutils literal"><span class="pre">u2</span></code></a>(phi,&nbsp;lam,&nbsp;q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.u2" title="qiskit.CompositeGate.u2"><code class="xref py py-obj docutils literal"><span class="pre">u2</span></code></a>(phi,&nbsp;lam,&nbsp;q)</td>
 <td>Apply u2 to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.u3" title="qiskit.CompositeGate.u3"><code class="xref py py-obj docutils literal"><span class="pre">u3</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.u3" title="qiskit.CompositeGate.u3"><code class="xref py py-obj docutils literal"><span class="pre">u3</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
 <td>Apply u3 to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.u_base" title="qiskit.CompositeGate.u_base"><code class="xref py py-obj docutils literal"><span class="pre">u_base</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.u_base" title="qiskit.CompositeGate.u_base"><code class="xref py py-obj docutils literal"><span class="pre">u_base</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
 <td>Apply U to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.uzz" title="qiskit.CompositeGate.uzz"><code class="xref py py-obj docutils literal"><span class="pre">uzz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.uzz" title="qiskit.CompositeGate.uzz"><code class="xref py py-obj docutils literal"><span class="pre">uzz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
 <td>Apply CZ to circuit.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.wait" title="qiskit.CompositeGate.wait"><code class="xref py py-obj docutils literal"><span class="pre">wait</span></code></a>(t,&nbsp;q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.wait" title="qiskit.CompositeGate.wait"><code class="xref py py-obj docutils literal"><span class="pre">wait</span></code></a>(t,&nbsp;q)</td>
 <td>Apply wait for time t to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.x" title="qiskit.CompositeGate.x"><code class="xref py py-obj docutils literal"><span class="pre">x</span></code></a>(q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.x" title="qiskit.CompositeGate.x"><code class="xref py py-obj docutils literal"><span class="pre">x</span></code></a>(q)</td>
 <td>Apply X to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.y" title="qiskit.CompositeGate.y"><code class="xref py py-obj docutils literal"><span class="pre">y</span></code></a>(quantum_register)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.y" title="qiskit.CompositeGate.y"><code class="xref py py-obj docutils literal"><span class="pre">y</span></code></a>(q)</td>
 <td>Apply Y to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.CompositeGate.z" title="qiskit.CompositeGate.z"><code class="xref py py-obj docutils literal"><span class="pre">z</span></code></a>(quantum_register)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.CompositeGate.z" title="qiskit.CompositeGate.z"><code class="xref py py-obj docutils literal"><span class="pre">z</span></code></a>(q)</td>
 <td>Apply Z to q.</td>
 </tr>
 </tbody>
@@ -326,7 +329,7 @@ circ = QuantumCircuit or CompositeGate containing this gate</p>
 <dl class="method">
 <dt id="qiskit.CompositeGate.ccx">
 <code class="descname">ccx</code><span class="sig-paren">(</span><em>ctl1</em>, <em>ctl2</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.ccx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply Toffoli to circuit.</p>
+<dd><p>Apply Toffoli to from ctl1 and ctl2 to tgt.</p>
 </dd></dl>
 
 <dl class="method">
@@ -415,8 +418,16 @@ circ = QuantumCircuit or CompositeGate containing this gate</p>
 
 <dl class="method">
 <dt id="qiskit.CompositeGate.initialize">
-<code class="descname">initialize</code><span class="sig-paren">(</span><em>name</em>, <em>params</em>, <em>qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.initialize" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>params</em>, <em>qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply initialize to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.CompositeGate.instruction_list">
+<code class="descname">instruction_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_compositegate.html#CompositeGate.instruction_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.CompositeGate.instruction_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of instructions for this CompositeGate.</p>
+<p>If the CompositeGate itself contains composites, call
+this method recursively.</p>
 </dd></dl>
 
 <dl class="method">
@@ -440,7 +451,7 @@ circ = QuantumCircuit or CompositeGate containing this gate</p>
 <dl class="method">
 <dt id="qiskit.CompositeGate.noise">
 <code class="descname">noise</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.noise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cache the quantum state of locla_qiskit_simulator.</p>
+<dd><p>Cache the quantum state of local_qiskit_simulator.</p>
 </dd></dl>
 
 <dl class="method">
@@ -491,19 +502,19 @@ not invert the gates!</p>
 <dl class="method">
 <dt id="qiskit.CompositeGate.rx">
 <code class="descname">rx</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.rx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply rx to q.</p>
+<dd><p>Apply Rx to q.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.CompositeGate.ry">
 <code class="descname">ry</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.ry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply ry to q.</p>
+<dd><p>Apply Ry to q.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.CompositeGate.rz">
 <code class="descname">rz</code><span class="sig-paren">(</span><em>phi</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.rz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply rz to q.</p>
+<dd><p>Apply Rz to q.</p>
 </dd></dl>
 
 <dl class="method">
@@ -592,13 +603,13 @@ not invert the gates!</p>
 
 <dl class="method">
 <dt id="qiskit.CompositeGate.y">
-<code class="descname">y</code><span class="sig-paren">(</span><em>quantum_register</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.y" title="Permalink to this definition">¶</a></dt>
+<code class="descname">y</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.y" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply Y to q.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.CompositeGate.z">
-<code class="descname">z</code><span class="sig-paren">(</span><em>quantum_register</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.z" title="Permalink to this definition">¶</a></dt>
+<code class="descname">z</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.CompositeGate.z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply Z to q.</p>
 </dd></dl>
 
@@ -633,14 +644,14 @@ not invert the gates!</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

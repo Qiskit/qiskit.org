@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends._backendutils &#8212; QISKit SDK 0.4.11 documentation</title>
+    <title>qiskit.backends._backendutils &#8212; QISKit SDK 0.4.12 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -125,7 +125,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
 
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">mapper</span>
+<span class="kn">import</span> <span class="nn">qiskit</span>
 <span class="kn">from</span> <span class="nn">._basebackend</span> <span class="k">import</span> <span class="n">BaseBackend</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">QISKitError</span>
 
@@ -189,41 +189,36 @@
 
 
 <div class="viewcode-block" id="discover_remote_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.discover_remote_backends.html#qiskit.backends.discover_remote_backends">[docs]</a><span class="k">def</span> <span class="nf">discover_remote_backends</span><span class="p">(</span><span class="n">api</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Discover backends available on the Quantum Experience</span>
+    <span class="sd">&quot;&quot;&quot;Discover backends available from IBM Q</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        api (IBMQuantumExperience): Quantum Experience API</span>
+<span class="sd">        api (IBMQuantumExperience): IBM Q API</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        list: list of discovered backend names</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">._qeremote</span> <span class="k">import</span> <span class="n">QeRemote</span>
     <span class="n">QeRemote</span><span class="o">.</span><span class="n">set_api</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-    <span class="n">configuration_list</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
+    <span class="n">config_list</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
     <span class="n">backend_name_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">configuration</span> <span class="ow">in</span> <span class="n">configuration_list</span><span class="p">:</span>
-        <span class="n">configuration_edit</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">backend_name</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">config_list</span><span class="p">:</span>
+        <span class="n">config_edit</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">backend_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
         <span class="n">backend_name_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
-        <span class="n">configuration_edit</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">configuration</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">config_edit</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">new_key</span> <span class="o">=</span> <span class="n">_snake_case_to_camel_case</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">new_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;serial_number&#39;</span><span class="p">,</span> <span class="s1">&#39;topology_id&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">]:</span>
-                <span class="n">configuration_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">new_key</span> <span class="o">==</span> <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                    <span class="n">cmap</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">coupling_list2dict</span><span class="p">(</span><span class="n">configuration</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-                    <span class="n">configuration_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmap</span>
+                <span class="n">config_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="c1"># online_qasm_simulator uses different name for basis_gates</span>
-        <span class="k">if</span> <span class="s1">&#39;gateSet&#39;</span> <span class="ow">in</span> <span class="n">configuration</span><span class="p">:</span>
-            <span class="n">configuration_edit</span><span class="p">[</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;gateSet&#39;</span><span class="p">]</span>
-            <span class="k">del</span> <span class="n">configuration_edit</span><span class="p">[</span><span class="s1">&#39;gate_set&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;gateSet&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="n">config_edit</span><span class="p">[</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gateSet&#39;</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">config_edit</span><span class="p">[</span><span class="s1">&#39;gate_set&#39;</span><span class="p">]</span>
         <span class="c1"># ibmqx_qasm_simulator doesn&#39;t report coupling_map</span>
-        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;coupling_map&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">configuration_edit</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span>
-                <span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]):</span>
-            <span class="n">configuration_edit</span><span class="p">[</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;all-to-all&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;coupling_map&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config_edit</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
+            <span class="n">config_edit</span><span class="p">[</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;all-to-all&#39;</span>
         <span class="n">registered_backend</span> <span class="o">=</span> <span class="n">RegisteredBackend</span><span class="p">(</span><span class="n">backend_name</span><span class="p">,</span>
                                                <span class="n">QeRemote</span><span class="p">,</span>
-                                               <span class="n">configuration_edit</span><span class="p">)</span>
+                                               <span class="n">config_edit</span><span class="p">)</span>
         <span class="n">_REGISTERED_BACKENDS</span><span class="p">[</span><span class="n">backend_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">registered_backend</span>
     <span class="k">return</span> <span class="n">backend_name_list</span></div>
 
@@ -253,7 +248,7 @@
     <span class="k">return</span> <span class="n">backend_name_list</span></div>
 
 
-<div class="viewcode-block" id="register_backend"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.register_backend.html#qiskit.backends.register_backend">[docs]</a><span class="k">def</span> <span class="nf">register_backend</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="register_backend"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.register_backend.html#qiskit.backends.register_backend">[docs]</a><span class="k">def</span> <span class="nf">register_backend</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Register a backend in the list of available backends.</span>
 
 <span class="sd">    Register a `cls` backend in the `_REGISTERED_BACKENDS` dict, validating</span>
@@ -264,7 +259,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        cls (class): a subclass of BaseBackend that contains a backend</span>
-<span class="sd">        configuration (dict): backend configuration to use instead of class&#39;</span>
+<span class="sd">        configuration_ (dict): backend configuration to use instead of class&#39;</span>
 <span class="sd">            default.</span>
 
 <span class="sd">    Returns:</span>
@@ -284,7 +279,7 @@
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Could not register backend: </span><span class="si">%s</span><span class="s1"> is not a subclass &#39;</span>
                           <span class="s1">&#39;of BaseBackend&#39;</span> <span class="o">%</span> <span class="bp">cls</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">backend_instance</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">)</span>
+        <span class="n">backend_instance</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration_</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Could not register backend: </span><span class="si">%s</span><span class="s1"> could not be &#39;</span>
                           <span class="s1">&#39;instantiated: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">err</span><span class="p">))</span>
@@ -307,7 +302,7 @@
     <span class="sd">&quot;&quot;&quot;Remove backend from list of available backens</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        backend_name (str): name of backend to unregister</span>
+<span class="sd">        backend_name (str): name of backend to deregister</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        KeyError if backend_name is not registered.</span>
@@ -347,13 +342,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">registered_backend</span> <span class="o">=</span> <span class="n">_REGISTERED_BACKENDS</span><span class="p">[</span><span class="n">backend_name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">registered_backend</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="n">registered_backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">registered_backend</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span>
-        <span class="n">configuration</span><span class="o">=</span><span class="n">registered_backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="get_backend_configuration"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.get_backend_configuration.html#qiskit.backends.get_backend_configuration">[docs]</a><span class="k">def</span> <span class="nf">get_backend_configuration</span><span class="p">(</span><span class="n">backend_name</span><span class="p">):</span>
+<div class="viewcode-block" id="configuration"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.configuration.html#qiskit.backends.configuration">[docs]</a><span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="n">backend_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the configuration for the named backend.</span>
 
 <span class="sd">    Args:</span>
@@ -367,6 +362,65 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_REGISTERED_BACKENDS</span><span class="p">[</span><span class="n">backend_name</span><span class="p">]</span><span class="o">.</span><span class="n">configuration</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="calibration"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.calibration.html#qiskit.backends.calibration">[docs]</a><span class="k">def</span> <span class="nf">calibration</span><span class="p">(</span><span class="n">backend_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the calibration for the named backend.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        backend_name (str): the backend name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: calibration dict</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        LookupError: if backend is unavailable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_instance</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">calibration</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="parameters"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.parameters.html#qiskit.backends.parameters">[docs]</a><span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="n">backend_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the online backend parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        backend_name (str):  Name of the backend.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: The parameters of the named backend.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ConnectionError: if the API call failed.</span>
+<span class="sd">        LookupError: If parameters for the named backend can&#39;t be</span>
+<span class="sd">            found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_instance</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">parameters</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="status"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.status.html#qiskit.backends.status">[docs]</a><span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">backend_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the status for the named backend.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        backend_name (str): the backend name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: status dict</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        LookupError: if backend is unavailable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">get_backend_instance</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">status</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{}</span><span class="s1">&quot; is not available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span></div>
 
@@ -406,14 +460,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017 IBM Research.
-      Last updated on 2018/03/22.
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/04/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
