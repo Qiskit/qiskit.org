@@ -1,0 +1,26 @@
+{
+  "name": "qiskit-website",
+  "homepage": "https://www.qiskit.org",
+  "license": "UNLICENSED",
+  "repository": "QISKit/qiskit.github.io",
+  "devDependencies": {
+    "bower": "^1.8.4",
+    "eslint": "^4.11.0",
+    "eslint-config-ibmresearch": "^0.9.0",
+    "eslint-plugin-html": "^4.0.0",
+    "polymer-cli": "^1.6.0"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "lint": "eslint . --ext js,html --ignore-path .eslintignore",
+    "start": "polymer serve",
+    "build:landing": "polymer build && mv build/es5-bundled/* build/ && rm -r build/polymer.json build/es5-bundled/ && touch build/.nojekyll",
+    "build:modelq": "cp -r modelq/ build/modelq/",
+    "build:documentation": "cp -r documentation/ build/documentation/",
+    "build": "npm run build:landing && npm run build:modelq && npm run build:documentation"
+  },
+  "engines": {
+    "node": ">=6.0"
+  },
+  "private": true
+}
