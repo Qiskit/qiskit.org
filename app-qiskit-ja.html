@@ -1,0 +1,225 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="app-qiskit">
+
+    <template strip-whitespace>
+            <link rel="stylesheet" href="css/ibm-plex-font.css">
+            <link rel="stylesheet" href="css/style.css">
+
+            <style include="paper-material-styles">
+            @font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-light.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-light.woff2") format("woff2");font-weight:300;font-style:normal}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-lightitalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-lightitalic.woff2") format("woff2");font-weight:300;font-style:italic}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-regular.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-regular.woff2") format("woff2");font-weight:400;font-style:normal}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-regularitalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-regularitalic.woff2") format("woff2");font-weight:400;font-style:italic}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-medium.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-medium.woff2") format("woff2");font-weight:500;font-style:normal}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-mediumitalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-mediumitalic.woff2") format("woff2");font-weight:500;font-style:italic}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-semibold.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-semibold.woff2") format("woff2");font-weight:600;font-style:normal}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-semibolditalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-semibolditalic.woff2") format("woff2");font-weight:600;font-style:italic}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-bold.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-bold.woff2") format("woff2");font-weight:700;font-style:normal}@font-face{font-family:"ibm-plex-sans";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-bolditalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexsans-bolditalic.woff2") format("woff2");font-weight:700;font-style:italic}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-light.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-light.woff2") format("woff2");font-weight:300;font-style:normal}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-lightitalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-lightitalic.woff2") format("woff2");font-weight:300;font-style:italic}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-regular.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-regular.woff2") format("woff2");font-weight:400;font-style:normal}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-regularitalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-regularitalic.woff2") format("woff2");font-weight:400;font-style:italic}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-medium.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-medium.woff2") format("woff2");font-weight:500;font-style:normal}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-mediumitalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-mediumitalic.woff2") format("woff2");font-weight:500;font-style:italic}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-semibold.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-semibold.woff2") format("woff2");font-weight:600;font-style:normal}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-semibolditalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-semibolditalic.woff2") format("woff2");font-weight:600;font-style:italic}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-bold.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-bold.woff2") format("woff2");font-weight:700;font-style:normal}@font-face{font-family:"ibm-plex-mono";src:url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-bolditalic.woff") format("woff"),url("https://1.www.s81c.com/common/fonts/plex/v1/ibmplexmono-bolditalic.woff2") format("woff2");font-weight:700;font-style:italic}
+
+
+                :host{
+                    background-color: #1b2024;
+                    color: #ffffff;
+                    font-family: "ibm-plex-sans", "HelvLightIBM", "Helvetica Neue", Arial, sans-serif;
+                }
+
+                .host{
+                    background-color: #1b2024;
+                    color: #ffffff;
+                    font-family: "ibm-plex-sans", "HelvLightIBM", "Helvetica Neue", Arial, sans-serif;
+                }
+
+                .qiskit-areas {
+                    margin-bottom: -32px;
+                }
+
+                .code {
+                   font-size: 70%;
+                }
+
+                .terminal {
+                    background-color: #000;
+                    color: #FFF;
+                }
+
+                .social {
+                    margin-top: 20px;
+                    padding-bottom: 40px;
+                }
+
+                .social a {
+                    color: white;
+                }
+
+                .social a:hover {
+                    color: #913DBE;
+                }
+
+              </style>
+
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <div class="host">
+
+    <div class="container-fuid qiskit-top-banner">
+        <div class="row">
+            <div class="col-md-5 text-center text-md-right text-lg-right">
+                <img src="img/qiskit-logo-3.gif" alt="QISKit Logo" width="256px" height="256px">
+            </div>
+            <div class="col-md-7">
+                <div class="qiskit-title text-center text-md-left text-lg-left">
+                    <h1 class="">QISKit</h1>
+                    <p>量子情報ソフトウェア開発キット（Quantum Information Software Kit)</p>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <!-- Example row of columns -->
+        <div class="row qiskit-areas ">
+            <div class="col-md-4 c1">
+                <h3>最新バージョン <a href="https://pypi.python.org/pypi/qiskit"><img src="https://img.shields.io/pypi/v/qiskit.svg" alt="QISKit version"></a></h3>
+                <p class="description">量子情報ソフトウェア開発キットであるQISKitはIBM Q experience (QX)とOpenQASMを利用するためのソフトウェア開発キットです．
+                </p>
+                <div>
+
+                </div>
+                <p>
+                    <a target="_blank" href="https://github.com/QISKit/qiskit-sdk-py">
+                        <ibm-q-button secondary>GitHub</ibm-q-button>
+                    </a>
+                </p>
+                <p>
+                    <a target="_blank" href="https://github.com/QISKit/qiskit-sdk-py/wiki/Roadmap">
+                        <ibm-q-button secondary>開発ロードマップ</ibm-q-button>
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-md-4 c2">
+                <h3>利用方法</h3>
+                <p class="description"> QISKitで量子コンピューターのプログラムを記述とコンパイルでオンラインで稼働している実デバイスやシミュレーター等のバックエンドで実行．</p>
+
+                <p>
+                    <a target="_blank" href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb">
+                        <ibm-q-button secondary>チュートリアル</ibm-q-button>
+                    </a>
+                </p>
+                <p>
+                    <a target="_blank" href="documentation/">
+                        <ibm-q-button secondary>利用手引き</ibm-q-button>
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-md-4 c3">
+                <h3>量子プログラムの実行</h3>
+                <p class = "terminal"><pre style='color:#ffffff;'>[python3] $ pip install qiskit</pre></p>
+                <pre class="code" style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>
+  from</span> qiskit <span style='color:#800000; font-weight:bold; '>import</span> QuantumProgram
+  qp <span style='color:#808030; '>=</span> QuantumProgram<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+  qr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_quantum_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'qr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+  cr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_classical_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'cr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+  qc <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_circuit<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>qr<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>cr<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>h<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>cx<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+  result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>execute<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span>result<span style='color:#808030; '>.</span>get_counts<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+    <span style='color:#808030; '> </span>
+                      </pre>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- /container -->
+
+    <div class="container-fuid qiskit-bottom-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <h4>
+                                QISKitのインストール
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+
+                            <pre style='color:#000000; margin-top: 10px;'>$ pip install qiskit</pre>
+                            <div class="alert alert-secondary" role="alert" style="display: inline-block;">
+                                Python 3.5+ が必要．詳細は <a href="/documentation/#installation-and-setuphere" class="alert-link">こちら</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col">
+                            <h4>
+                                Run a quantum program
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>
+from</span> qiskit <span style='color:#800000; font-weight:bold; '>import</span> QuantumProgram
+qp <span style='color:#808030; '>=</span> QuantumProgram<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+qr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_quantum_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'qr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+cr <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_classical_register<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'cr'</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span>
+qc <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>create_circuit<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>qr<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>[</span>cr<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+qc<span style='color:#808030; '>.</span>h<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+qc<span style='color:#808030; '>.</span>cx<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+qc<span style='color:#808030; '>.</span>measure<span style='color:#808030; '>(</span>qr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span> cr<span style='color:#808030; '>[</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span>
+result <span style='color:#808030; '>=</span> qp<span style='color:#808030; '>.</span>execute<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span>
+<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span>result<span style='color:#808030; '>.</span>get_counts<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'Bell'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+                            </pre>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>支援機関・団体
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p>IBM Research</p>
+                            <p> IBM 東京基礎研究所</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container">
+        <footer>
+            <div class="row social justify-content-end">
+                <div class="col-md-3 text-right">
+                    <p><a href="https://twitter.com/qiskit"><iron-icon icon="app-icons:twitter"></iron-icon>&nbsp;&nbsp;@qiskit</a></p>
+                </div>
+            </div>
+            <!-- <p>&copy; IBM Research 2017</p> -->
+        </footer>
+    </div>
+
+</div>
+</template>
+    <script>
+        Polymer({
+            is: 'app-qiskit'
+        });
+    </script>
+
+</dom-module>
