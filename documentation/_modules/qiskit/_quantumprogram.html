@@ -143,9 +143,6 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">QISKitError</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">JobProcessor</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">QuantumJob</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Measure</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Gate</span>
-<span class="kn">from</span> <span class="nn">.extensions.standard.barrier</span> <span class="k">import</span> <span class="n">Barrier</span>
 <span class="kn">from</span> <span class="nn">._logging</span> <span class="k">import</span> <span class="n">set_qiskit_logger</span><span class="p">,</span> <span class="n">unset_qiskit_logger</span>
 
 <span class="c1"># Beta Modules</span>
@@ -822,6 +819,7 @@
             <span class="k">if</span> <span class="n">proxies</span><span class="p">:</span>
                 <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proxies</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">IBMQuantumExperience</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
+            <span class="n">qiskit</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">discover_remote_backends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__api</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="n">root_exception</span> <span class="o">=</span> <span class="n">ex</span>
             <span class="k">if</span> <span class="s1">&#39;License required&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">):</span>
@@ -1267,20 +1265,6 @@
                 <span class="n">coupling_map</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">coupling_map</span> <span class="o">==</span> <span class="s1">&#39;all-to-all&#39;</span><span class="p">:</span>
                 <span class="n">coupling_map</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="c1"># if the backend is a real chip, insert barrier before measurements</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]:</span>
-                <span class="n">measured_qubits</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">qasm_idx</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Measure</span><span class="p">):</span>
-                        <span class="n">measured_qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                        <span class="n">qasm_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Gate</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">arg</span><span class="p">)</span> <span class="o">&amp;</span>
-                                                                <span class="nb">set</span><span class="p">(</span><span class="n">measured_qubits</span><span class="p">)):</span>
-                        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;backend &quot;</span><span class="si">{0}</span><span class="s1">&quot; rejects gate after &#39;</span>
-                                          <span class="s1">&#39;measurement in circuit &quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
-                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">qasm_idx</span><span class="p">,</span> <span class="n">measured_qubits</span><span class="p">):</span>
-                    <span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Barrier</span><span class="p">([</span><span class="n">qubit</span><span class="p">],</span> <span class="n">circuit</span><span class="p">))</span>
             <span class="n">dag_circuit</span><span class="p">,</span> <span class="n">final_layout</span> <span class="o">=</span> <span class="n">openquantumcompiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
                 <span class="n">circuit</span><span class="p">,</span>
                 <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
@@ -1716,7 +1700,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/04/11.
+      Last updated on 2018/04/16.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
