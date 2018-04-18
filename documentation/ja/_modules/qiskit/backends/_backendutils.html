@@ -210,7 +210,7 @@
             <span class="k">if</span> <span class="n">new_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;serial_number&#39;</span><span class="p">,</span> <span class="s1">&#39;topology_id&#39;</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">]:</span>
                 <span class="n">config_edit</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="c1"># online_qasm_simulator uses different name for basis_gates</span>
-        <span class="k">if</span> <span class="s1">&#39;gateSet&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;gateSet&#39;</span> <span class="ow">in</span> <span class="n">config</span> <span class="ow">and</span> <span class="s1">&#39;basisGates&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
             <span class="n">config_edit</span><span class="p">[</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gateSet&#39;</span><span class="p">]</span>
             <span class="k">del</span> <span class="n">config_edit</span><span class="p">[</span><span class="s1">&#39;gate_set&#39;</span><span class="p">]</span>
         <span class="c1"># ibmqx_qasm_simulator doesn&#39;t report coupling_map</span>
@@ -467,7 +467,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/04/16
+      最終更新: 2018/04/18
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
