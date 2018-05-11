@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -361,20 +361,8 @@
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not in the list of basis operations&quot;</span>
                                   <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-
         <span class="c1"># Check the number of arguments matches the signature</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;barrier&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
-                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of qubits for </span><span class="si">%s</span><span class="s2">&quot;</span>
-                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of bits for </span><span class="si">%s</span><span class="s2">&quot;</span>
-                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
-                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of parameters for </span><span class="si">%s</span><span class="s2">&quot;</span>
-                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># &quot;barrier&quot; is a special case</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;barrier&quot;</span><span class="p">]:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">qargs</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of qubits for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
@@ -382,6 +370,26 @@
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of bits for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">params</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of parameters for </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;noise&quot;</span><span class="p">,</span> <span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">qargs</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of qubits for </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cargs</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of bits for </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">params</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of parameters for </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of qubits for </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of bits for </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;incorrect number of parameters for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
 
@@ -407,7 +415,7 @@
         <span class="c1"># Check for each wire</span>
         <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">q</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">amap</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;(qu)bit </span><span class="si">%s</span><span class="s2"> not found&quot;</span> <span class="o">%</span> <span class="n">q</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;(qu)bit </span><span class="si">%s</span><span class="s2"> not found&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">q</span><span class="p">,))</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wire_type</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bval</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;expected wire type </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%s</span><span class="s2">&quot;</span>
                                       <span class="o">%</span> <span class="p">(</span><span class="n">bval</span><span class="p">,</span> <span class="n">q</span><span class="p">))</span>
@@ -584,12 +592,13 @@
             <span class="k">if</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">keyregs</span><span class="p">:</span>
                 <span class="n">reg_frag_chk</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">reg_frag_chk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">rname</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
             <span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;wire_map fragments reg </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;wire_map fragments reg </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rname</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="kc">False</span><span class="p">]):</span>
                 <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="ow">or</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;unmapped duplicate reg </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;unmapped duplicate reg </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rname</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># Add registers that appear only in keyregs</span>
                     <span class="n">add_regs</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">keyregs</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
@@ -856,9 +865,12 @@
             <span class="k">if</span> <span class="n">qeflag</span><span class="p">:</span>
                 <span class="n">qelib</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u1&quot;</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
                          <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;tdg&quot;</span><span class="p">,</span> <span class="s2">&quot;cz&quot;</span><span class="p">,</span> <span class="s2">&quot;cy&quot;</span><span class="p">,</span> <span class="s2">&quot;ccx&quot;</span><span class="p">,</span> <span class="s2">&quot;cu1&quot;</span><span class="p">,</span>
-                         <span class="s2">&quot;cu3&quot;</span><span class="p">,</span> <span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="s2">&quot;u0&quot;</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">,</span> <span class="s2">&quot;ry&quot;</span><span class="p">,</span> <span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="s2">&quot;ch&quot;</span><span class="p">,</span> <span class="s2">&quot;crz&quot;</span><span class="p">]</span>
+                         <span class="s2">&quot;cu3&quot;</span><span class="p">,</span> <span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="s2">&quot;cswap&quot;</span><span class="p">,</span> <span class="s2">&quot;u0&quot;</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">,</span> <span class="s2">&quot;ry&quot;</span><span class="p">,</span> <span class="s2">&quot;rz&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;ch&quot;</span><span class="p">,</span> <span class="s2">&quot;crz&quot;</span><span class="p">,</span> <span class="s2">&quot;rzz&quot;</span><span class="p">]</span>
                 <span class="n">omit</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qelib</span><span class="p">)</span>
                 <span class="n">printed_gates</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qelib</span><span class="p">)</span>
+            <span class="n">simulator_instructions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="s2">&quot;noise&quot;</span><span class="p">,</span> <span class="s2">&quot;wait&quot;</span><span class="p">]</span>
+            <span class="n">omit</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">simulator_instructions</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">omit</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
@@ -1240,7 +1252,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.layers"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.layers">[docs]</a>    <span class="k">def</span> <span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of layers for all d layers of this circuit.</span>
+        <span class="sd">&quot;&quot;&quot;Yield a layer for all d layers of this circuit.</span>
 
 <span class="sd">        A layer is a circuit whose gates act on disjoint qubits, i.e.</span>
 <span class="sd">        a layer has depth 1. The total number of layers equals the</span>
@@ -1254,7 +1266,6 @@
 <span class="sd">        layers as this is currently implemented. This may not be</span>
 <span class="sd">        the desired behavior.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">layers_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># node_map contains an input node or previous layer node for</span>
         <span class="c1"># each wire in the circuit.</span>
         <span class="n">node_map</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_map</span><span class="p">)</span>
@@ -1320,28 +1331,26 @@
                         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">qa</span><span class="p">,</span> <span class="n">ca</span><span class="p">,</span> <span class="n">cob</span><span class="p">):</span>
                             <span class="n">node_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">nxt_nd_idx</span>
                         <span class="c1"># Add operation to partition</span>
-                        <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;barrier&quot;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span>
+                                                  <span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="s2">&quot;noise&quot;</span><span class="p">]:</span>
                             <span class="c1"># support_list.append(list(set(qa) | set(ca) |</span>
                             <span class="c1">#                          set(cob)))</span>
                             <span class="n">support_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">qa</span><span class="p">))</span>
                         <span class="n">emit</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">emit</span><span class="p">:</span>
                 <span class="n">l_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="n">new_layer</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">support_list</span><span class="p">}</span>
-                <span class="n">layers_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_dict</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">l_dict</span>
                 <span class="n">emit</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">wires_with_ops_remaining</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;not finished but empty?&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">layers_list</span></div>
+                    <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;not finished but empty?&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.serial_layers"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.serial_layers">[docs]</a>    <span class="k">def</span> <span class="nf">serial_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of layers for all gates of this circuit.</span>
+        <span class="sd">&quot;&quot;&quot;Yield a layer for all gates of this circuit.</span>
 
 <span class="sd">        A serial layer is a circuit with one gate. The layers have the</span>
 <span class="sd">        same structure as in layers().</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">layers_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="p">):</span>
             <span class="n">nxt_nd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
@@ -1364,12 +1373,12 @@
                 <span class="n">new_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
                                                <span class="n">qa</span><span class="p">,</span> <span class="n">ca</span><span class="p">,</span> <span class="n">pa</span><span class="p">,</span> <span class="n">co</span><span class="p">)</span>
                 <span class="c1"># Add operation to partition</span>
-                <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;barrier&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nxt_nd</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span>
+                                          <span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="s2">&quot;noise&quot;</span><span class="p">]:</span>
                     <span class="c1"># support_list.append(list(set(qa) | set(ca) | set(cob)))</span>
                     <span class="n">support_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">qa</span><span class="p">))</span>
                 <span class="n">l_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="n">new_layer</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">support_list</span><span class="p">}</span>
-                <span class="n">layers_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_dict</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">layers_list</span></div>
+                <span class="k">yield</span> <span class="n">l_dict</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.collect_runs"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.collect_runs">[docs]</a>    <span class="k">def</span> <span class="nf">collect_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namelist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a set of runs of &quot;op&quot; nodes with the given names.</span>
@@ -1459,6 +1468,13 @@
             <span class="s2">&quot;reset&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;reset&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
             <span class="s2">&quot;barrier&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="p">}</span>
+        <span class="c1"># Add simulator instructions</span>
+        <span class="n">simulator_instructions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;snapshot&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="s2">&quot;save&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="s2">&quot;load&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="s2">&quot;noise&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;noise&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">}</span>
         <span class="k">for</span> <span class="n">main_instruction</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
             <span class="c1"># TODO: generate definitions and nodes for CompositeGates,</span>
             <span class="c1"># for now simply drop their instructions into the DAG</span>
@@ -1471,6 +1487,9 @@
                 <span class="c1"># Add OpenQASM built-in gates on demand</span>
                 <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">builtins</span><span class="p">:</span>
                     <span class="n">dagcircuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="o">*</span><span class="n">builtins</span><span class="p">[</span><span class="n">instruction</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+                <span class="c1"># Add simulator extension instructions</span>
+                <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">simulator_instructions</span><span class="p">:</span>
+                    <span class="n">dagcircuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="o">*</span><span class="n">simulator_instructions</span><span class="p">[</span><span class="n">instruction</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
                 <span class="c1"># Separate classical arguments to measurements</span>
                 <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;measure&quot;</span><span class="p">:</span>
                     <span class="n">qargs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">instruction</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">instruction</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
@@ -1509,14 +1528,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

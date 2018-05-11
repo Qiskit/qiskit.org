@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Getting Started &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>Getting Started &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -91,7 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autodoc/qiskit.html">SDK reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -128,32 +128,49 @@
             
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>The starting point for writing code is the
-<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a> object. The
-QuantumProgram is a collection of circuits, or scores if you are
-coming from the Quantum Experience, quantum register objects, and
-classical register objects. The QuantumProgram methods can send these
-circuits to quantum hardware or simulator backends and collect the
+<p>The starting point for writing code is the <a class="reference internal" href="_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-class docutils literal"><span class="pre">QuantumCircuit</span></code></a>.
+A circuit (or score if you are coming from the Quantum Experience) are
+collections of <a class="reference internal" href="_autodoc/qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister"><code class="xref py py-class docutils literal"><span class="pre">ClassicalRegister</span></code></a> objects,
+<a class="reference internal" href="_autodoc/qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-class docutils literal"><span class="pre">QuantumRegister</span></code></a> objects and
+<a class="reference internal" href="_autodoc/qiskit.extensions.standard.html#module-qiskit.extensions.standard" title="qiskit.extensions.standard"><code class="xref py py-mod docutils literal"><span class="pre">gates</span></code></a>. Through the
+<a class="reference internal" href="_autodoc/qiskit.html#qiskit-top-level-functions"><span class="std std-ref">top-level functions</span></a>, the circuits can be
+sent to remote quantum devices or local simulator backends and collect the
 results for further analysis.</p>
 <p>To compose and run a circuit on a simulator, which is distributed with
 this project, one can do,</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
-<span class="n">qp</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the QISKit SDK</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">available_backends</span><span class="p">,</span> <span class="n">execute</span>
 
-<span class="n">qr</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s1">&#39;qr&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cr</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span><span class="s1">&#39;cr&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">],</span> <span class="p">[</span><span class="n">cr</span><span class="p">])</span>
+<span class="c1"># Create a Quantum Register with 2 qubits.</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Create a Classical Register with 2 bits.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Create a Quantum Circuit</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Add a H gate on qubit 0, putting this qubit in superposition.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Add a CX (CNOT) gate on control qubit 0 and target qubit 1, putting</span>
+<span class="c1"># the qubits in a Bell state.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Add a Measure gate to see the state.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">))</span>
+<span class="c1"># See a list of available local simulators</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Local backends: &quot;</span><span class="p">,</span> <span class="n">available_backends</span><span class="p">({</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}))</span>
+
+<span class="c1"># Compile and run the Quantum circuit on a simulator backend</span>
+<span class="n">job_sim</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">)</span>
+<span class="n">sim_result</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="c1"># Show the results</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;simulation: &quot;</span><span class="p">,</span> <span class="n">sim_result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sim_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>The <code class="code docutils literal"><span class="pre">get_counts</span></code> method outputs a dictionary of state:counts pairs;</p>
+<p>The <a class="reference internal" href="_autodoc/qiskit.Result.html#qiskit.Result.get_counts" title="qiskit.Result.get_counts"><code class="xref py py-func docutils literal"><span class="pre">get_counts()</span></code></a> method outputs a dictionary of
+<code class="docutils literal"><span class="pre">state:counts</span></code> pairs;</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">531</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">493</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -162,50 +179,52 @@ this project, one can do,</p>
 <p>You can execute your QASM circuits on a real chip by using the IBM Q experience (QX) cloud platform.
 Currently through QX you can use the following chips:</p>
 <ul class="simple">
-<li>ibmqx2: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx2">5-qubit backend</a></li>
-<li>ibmqx3: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx3">16-qubit backend</a></li>
+<li><code class="docutils literal"><span class="pre">ibmqx4</span></code>: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx4">5-qubit backend</a></li>
+<li><code class="docutils literal"><span class="pre">ibmqx5</span></code>: <a class="reference external" href="https://ibm.biz/qiskit-ibmqx5">16-qubit backend</a></li>
 </ul>
-<p>For chip details visit the <a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q experience backend information</a></p>
+<p>For chip details and realtime information about availability visit the
+<a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q experience backend information</a>
+and the <a class="reference external" href="https://quantumexperience.ng.bluemix.net/qx/devices">IBM Q experience devices page</a>.</p>
 <div class="section" id="example-real-chip-backend">
 <h3>Example Real Chip Backend<a class="headerlink" href="#example-real-chip-backend" title="Permalink to this headline">¶</a></h3>
 <p>The following code is an example of how to execute a Quantum Program on a real
 Quantum device:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the QISKit SDK</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">execute</span><span class="p">,</span> <span class="n">register</span>
 
-<span class="c1"># Creating Programs create your first QuantumProgram object instance.</span>
-<span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
-
-<span class="c1"># Set your API Token</span>
+<span class="c1"># Set your API Token.</span>
 <span class="c1"># You can get it from https://quantumexperience.ng.bluemix.net/qx/account,</span>
 <span class="c1"># looking for &quot;Personal Access Token&quot; section.</span>
 <span class="n">QX_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;API_TOKEN&quot;</span>
 <span class="n">QX_URL</span> <span class="o">=</span> <span class="s2">&quot;https://quantumexperience.ng.bluemix.net/api&quot;</span>
 
-<span class="c1"># Set up the API and execute the program.</span>
+<span class="c1"># Authenticate with the IBM Q API in order to use online devices.</span>
 <span class="c1"># You need the API Token and the QX URL.</span>
-<span class="n">Q_program</span><span class="o">.</span><span class="n">set_api</span><span class="p">(</span><span class="n">QX_TOKEN</span><span class="p">,</span> <span class="n">QX_URL</span><span class="p">)</span>
+<span class="n">register</span><span class="p">(</span><span class="n">QX_TOKEN</span><span class="p">,</span> <span class="n">QX_URL</span><span class="p">)</span>
 
-<span class="c1"># Creating Registers create your first Quantum Register called &quot;qr&quot; with 2 qubits</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="c1"># create your first Classical Register called &quot;cr&quot; with 2 bits</span>
-<span class="n">cr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span><span class="s2">&quot;cr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="c1"># Creating Circuits create your first Quantum Circuit called &quot;qc&quot; involving your Quantum Register &quot;qr&quot;</span>
-<span class="c1"># and your Classical Register &quot;cr&quot;</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">],</span> <span class="p">[</span><span class="n">cr</span><span class="p">])</span>
+<span class="c1"># Create a Quantum Register with 2 qubits.</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Create a Classical Register with 2 bits.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Create a Quantum Circuit</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="c1"># add the H gate in the Qubit 0, we put this Qubit in superposition</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Add a H gate on qubit 0, putting this qubit in superposition.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Add a CX (CNOT) gate on control qubit 0 and target qubit 1, putting</span>
+<span class="c1"># the qubits in a Bell state.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Add a Measure gate to see the state.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="c1"># add measure to see the state</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
-
-<span class="c1"># Compiled  and execute in the local_qasm_simulator</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">execute</span><span class="p">([</span><span class="s2">&quot;superposition&quot;</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;ibmqx2&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="c1"># Compile and run the Quantum Program on a real device backend</span>
+<span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="s1">&#39;ibmqx4&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
 <span class="c1"># Show the results</span>
 <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -214,13 +233,12 @@ Quantum device:</p>
 <p>If you have access to the IBM Q features, the following code can be used for
 executing the same example as described on the previous section, but using
 the IBM Q features:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
-
-<span class="c1"># Creating Programs create your first QuantumProgram object instance.</span>
-<span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the QISKit SDK</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">execute</span><span class="p">,</span> <span class="n">register</span>
 
 <span class="c1"># Set your API Token and credentials.</span>
-<span class="c1"># You can get them from https://quantumexperience.ng.bluemix.net/qx/account,</span>
+<span class="c1"># You can get it from https://quantumexperience.ng.bluemix.net/qx/account,</span>
 <span class="c1"># looking for &quot;Personal Access Token&quot; section.</span>
 <span class="n">QX_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;API_TOKEN&quot;</span>
 <span class="n">QX_URL</span> <span class="o">=</span> <span class="s2">&quot;https://quantumexperience.ng.bluemix.net/api&quot;</span>
@@ -228,34 +246,35 @@ the IBM Q features:</p>
 <span class="n">QX_GROUP</span> <span class="o">=</span> <span class="s2">&quot;MY_GROUP&quot;</span>
 <span class="n">QX_PROJECT</span> <span class="o">=</span> <span class="s2">&quot;MY_PROJECT&quot;</span>
 
-<span class="c1"># Set up the API and execute the program.</span>
-<span class="c1"># You need the API Token, the QX URL, and your hub/group/project details.</span>
-<span class="n">Q_program</span><span class="o">.</span><span class="n">set_api</span><span class="p">(</span><span class="n">QX_TOKEN</span><span class="p">,</span> <span class="n">QX_URL</span><span class="p">,</span>
-                  <span class="n">hub</span><span class="o">=</span><span class="n">QX_HUB</span><span class="p">,</span>
-                  <span class="n">group</span><span class="o">=</span><span class="n">QX_GROUP</span><span class="p">,</span>
-                  <span class="n">project</span><span class="o">=</span><span class="n">QX_PROJECT</span><span class="p">)</span>
+<span class="c1"># Authenticate with the IBM Q API in order to use online devices.</span>
+<span class="c1"># You need the API Token and the QX URL.</span>
+<span class="n">register</span><span class="p">(</span><span class="n">QX_TOKEN</span><span class="p">,</span> <span class="n">QX_URL</span><span class="p">,</span>
+         <span class="n">hub</span><span class="o">=</span><span class="n">QX_HUB</span><span class="p">,</span>
+         <span class="n">group</span><span class="o">=</span><span class="n">QX_GROUP</span><span class="p">,</span>
+         <span class="n">project</span><span class="o">=</span><span class="n">QX_PROJECT</span><span class="p">)</span>
 
-<span class="c1"># Creating Registers create your first Quantum Register called &quot;qr&quot; with 2 qubits</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="c1"># create your first Classical Register called &quot;cr&quot; with 2 bits</span>
-<span class="n">cr</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_classical_register</span><span class="p">(</span><span class="s2">&quot;cr&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="c1"># Creating Circuits create your first Quantum Circuit called &quot;qc&quot; involving your Quantum Register &quot;qr&quot;</span>
-<span class="c1"># and your Classical Register &quot;cr&quot;</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">create_circuit</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">],</span> <span class="p">[</span><span class="n">cr</span><span class="p">])</span>
+<span class="c1"># Create a Quantum Register with 2 qubits.</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Create a Classical Register with 2 bits.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Create a Quantum Circuit</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="c1"># add the H gate in the Qubit 0, we put this Qubit in superposition</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Add a H gate on qubit 0, putting this qubit in superposition.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Add a CX (CNOT) gate on control qubit 0 and target qubit 1, putting</span>
+<span class="c1"># the qubits in a Bell state.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Add a Measure gate to see the state.</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="c1"># add measure to see the state</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
-
-<span class="c1"># Compiled  and execute in the local_qasm_simulator</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">execute</span><span class="p">([</span><span class="s2">&quot;superposition&quot;</span><span class="p">],</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;ibmqx2&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="c1"># Compile and run the Quantum Program on a real device backend</span>
+<span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="s1">&#39;ibmqx4&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
 <span class="c1"># Show the results</span>
 <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;superposition&quot;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Please check the Installation <a class="reference internal" href="install.html#qconfig-setup"><span class="std std-ref">3. Configure your API token and QE credentials</span></a> section for more details on
@@ -263,25 +282,25 @@ how to setup your IBM Q credentials.</p>
 </div>
 <div class="section" id="using-the-hpc-online-backend">
 <h3>Using the HPC online backend<a class="headerlink" href="#using-the-hpc-online-backend" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal"><span class="pre">ibmqx_hpc_qasm_simulator</span></code> online backend has the following configurable
+<p>The <code class="docutils literal"><span class="pre">ibmq_qasm_simulator_hpc</span></code> online backend has the following configurable
 parameters:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">multi_shot_optimization</span></code>: boolean (True or False)</li>
 <li><code class="docutils literal"><span class="pre">omp_num_threads</span></code>: integer between 1 and 16.</li>
 </ul>
-<p>The parameters can be specified to <code class="docutils literal"><span class="pre">QuantumProgram.compile()</span></code> and
-<code class="docutils literal"><span class="pre">QuantumProgram.execute()</span></code> via the <code class="docutils literal"><span class="pre">hpc</span></code> parameter. For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">QP_program</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span>
-                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
-                   <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
-                   <span class="n">seed</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span>
-                   <span class="n">hpc</span><span class="o">=</span><span class="p">{</span>
-                       <span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
-                       <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">:</span> <span class="mi">16</span>
-                   <span class="p">})</span>
+<p>The parameters can be specified to <a class="reference internal" href="_autodoc/qiskit.compile.html#qiskit.compile" title="qiskit.compile"><code class="xref py py-func docutils literal"><span class="pre">qiskit.compile()</span></code></a> and
+<a class="reference internal" href="_autodoc/qiskit.execute.html#qiskit.execute" title="qiskit.execute"><code class="xref py py-func docutils literal"><span class="pre">qiskit.execute()</span></code></a> via the <code class="docutils literal"><span class="pre">hpc</span></code> parameter. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">qiskit</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
+               <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
+               <span class="n">seed</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span>
+               <span class="n">hpc</span><span class="o">=</span><span class="p">{</span>
+                   <span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                   <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">:</span> <span class="mi">16</span>
+               <span class="p">})</span>
 </pre></div>
 </div>
-<p>If the <code class="docutils literal"><span class="pre">ibmqx_hpc_qasm_simulator</span></code> backend is used and the <code class="docutils literal"><span class="pre">hpc</span></code> parameter
+<p>If the <code class="docutils literal"><span class="pre">ibmq_qasm_simulator_hpc</span></code> backend is used and the <code class="docutils literal"><span class="pre">hpc</span></code> parameter
 is not specified, the following values will be used by default:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">hpc</span><span class="o">=</span><span class="p">{</span>
     <span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
@@ -290,7 +309,7 @@ is not specified, the following values will be used by default:</p>
 </pre></div>
 </div>
 <p>Please note that these parameters must only be used for the
-<code class="docutils literal"><span class="pre">ibmqx_hpc_qasm_simulator</span></code>, and will be reset to None along with emitting
+<code class="docutils literal"><span class="pre">ibmq_qasm_simulator_hpc</span></code>, and will be reset to None along with emitting
 a warning by the SDK if used with another backend.</p>
 </div>
 </div>
@@ -328,13 +347,13 @@ located in <em>test</em>. The <em>qiskit</em> directory is the main module of th
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

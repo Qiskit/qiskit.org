@@ -1,0 +1,211 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.wrapper.get_backend &#8212; QISKit SDK 0.5.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.wrapper.local_backends" href="qiskit.wrapper.local_backends.html" />
+    <link rel="prev" title="qiskit.wrapper.execute" href="qiskit.wrapper.execute.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.wrapper.get_backend.html">english</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.wrapper.get_backend.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.wrapper.local_backends.html" title="qiskit.wrapper.local_backends"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.wrapper.execute.html" title="qiskit.wrapper.execute"
+             accesskey="P">前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" accesskey="U">qiskit.wrapper package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">目次</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.available_backends.html">qiskit.wrapper.available_backends</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.compile.html">qiskit.wrapper.compile</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.execute.html">qiskit.wrapper.execute</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.wrapper.get_backend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.local_backends.html">qiskit.wrapper.local_backends</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.register.html">qiskit.wrapper.register</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.remote_backends.html">qiskit.wrapper.remote_backends</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="qiskit.wrapper.execute.html"
+                        title="前の章へ">qiskit.wrapper.execute</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="qiskit.wrapper.local_backends.html"
+                        title="次の章へ">qiskit.wrapper.local_backends</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.wrapper.get_backend.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-wrapper-get-backend">
+<h1>qiskit.wrapper.get_backend<a class="headerlink" href="#qiskit-wrapper-get-backend" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="function">
+<dt id="qiskit.wrapper.get_backend">
+<code class="descclassname">qiskit.wrapper.</code><code class="descname">get_backend</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#get_backend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper.get_backend" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return an instance of a <cite>Backend</cite> object from its name identifier.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>name</strong> (<em>str</em>) -- unique name of the backend.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">a Backend instance.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.backends.BaseBackend.html#qiskit.backends.BaseBackend" title="qiskit.backends.BaseBackend">BaseBackend</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.wrapper.local_backends.html" title="qiskit.wrapper.local_backends"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.wrapper.execute.html" title="qiskit.wrapper.execute"
+             >前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" >qiskit.wrapper package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/05/11
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+    </div>
+  </body>
+</html>

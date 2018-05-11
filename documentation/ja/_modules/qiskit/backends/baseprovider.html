@@ -1,0 +1,212 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.baseprovider &#8212; QISKit SDK 0.5.0 ドキュメント</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/backends/baseprovider.html">english</a> /
+        <a href="/documentation/ja/_modules/qiskit/backends/baseprovider.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../../../index.html">目次</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDKリファレンス</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>qiskit.backends.baseprovider のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=redundant-returns-doc,missing-raises-doc</span>
+
+<span class="c1"># Copyright 2018 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;Base class for a backend provider.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<div class="viewcode-block" id="BaseProvider"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.BaseProvider.html#qiskit.backends.BaseProvider">[ドキュメント]</a><span class="k">class</span> <span class="nc">BaseProvider</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for a backend provider.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="BaseProvider.available_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.BaseProvider.html#qiskit.backends.BaseProvider.available_backends">[ドキュメント]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list[BaseBackend]: a list of backend available from this provider.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="BaseProvider.get_backend"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.BaseProvider.html#qiskit.backends.BaseProvider.get_backend">[ドキュメント]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a backend instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): identifier</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            BaseBackend: a backend instance.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: if `name` is not among the list of backends available</span>
+<span class="sd">                from this provider.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="BaseProvider.aliased_backend_names"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.BaseProvider.html#qiskit.backends.BaseProvider.aliased_backend_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">aliased_backend_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns dict that defines alias names, usually shorter names</span>
+<span class="sd">        for referring to the backends.</span>
+
+<span class="sd">        If an alias key is used, the corresponding backend will be chosen</span>
+<span class="sd">        in order of priority from the value list, depending on availability.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict[str: list[str]]: {alias_name: list(backend_name)}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="BaseProvider.deprecated_backend_names"><a class="viewcode-back" href="../../../_autodoc/qiskit.backends.BaseProvider.html#qiskit.backends.BaseProvider.deprecated_backend_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">deprecated_backend_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dict that stores the current name for all deprecated backends.</span>
+<span class="sd">        The conversion to the current name is done with a warning.</span>
+<span class="sd">        These can be gradually removed in subsequent releases.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict[str: str]: {deprecated_name: backend_name}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{}</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/05/11
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+    </div>
+  </body>
+</html>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.Result &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>qiskit.Result &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -90,7 +90,6 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
@@ -101,9 +100,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -188,10 +188,10 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_circuit_status" title="qiskit.Result.get_circuit_status"><code class="xref py py-obj docutils literal"><span class="pre">get_circuit_status</span></code></a>(icircuit)</td>
 <td>Return the status of circuit at index icircuit.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_counts" title="qiskit.Result.get_counts"><code class="xref py py-obj docutils literal"><span class="pre">get_counts</span></code></a>([name])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_counts" title="qiskit.Result.get_counts"><code class="xref py py-obj docutils literal"><span class="pre">get_counts</span></code></a>([circuit_name])</td>
 <td>Get the histogram data of circuit name.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_data" title="qiskit.Result.get_data"><code class="xref py py-obj docutils literal"><span class="pre">get_data</span></code></a>([name])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_data" title="qiskit.Result.get_data"><code class="xref py py-obj docutils literal"><span class="pre">get_data</span></code></a>([circuit_name])</td>
 <td>Get the data of circuit name.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_job_id" title="qiskit.Result.get_job_id"><code class="xref py py-obj docutils literal"><span class="pre">get_job_id</span></code></a>()</td>
@@ -206,7 +206,16 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_ran_qasm" title="qiskit.Result.get_ran_qasm"><code class="xref py py-obj docutils literal"><span class="pre">get_ran_qasm</span></code></a>(name)</td>
 <td>Get the ran qasm for the named circuit and backend.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_status" title="qiskit.Result.get_status"><code class="xref py py-obj docutils literal"><span class="pre">get_status</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_snapshot" title="qiskit.Result.get_snapshot"><code class="xref py py-obj docutils literal"><span class="pre">get_snapshot</span></code></a>([circuit_name,&nbsp;slot])</td>
+<td>Get snapshot at a specific slot.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_snapshots" title="qiskit.Result.get_snapshots"><code class="xref py py-obj docutils literal"><span class="pre">get_snapshots</span></code></a>([circuit_name])</td>
+<td>Get snapshots recorded during the run.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_statevector" title="qiskit.Result.get_statevector"><code class="xref py py-obj docutils literal"><span class="pre">get_statevector</span></code></a>([circuit_name])</td>
+<td>Get the final statevector of circuit name.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_status" title="qiskit.Result.get_status"><code class="xref py py-obj docutils literal"><span class="pre">get_status</span></code></a>()</td>
 <td>Return whole qobj result status.</td>
 </tr>
 </tbody>
@@ -275,7 +284,7 @@ the observable for state i.</p>
 
 <dl class="method">
 <dt id="qiskit.Result.get_counts">
-<code class="descname">get_counts</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_counts" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_counts</code><span class="sig-paren">(</span><em>circuit_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_counts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the histogram data of circuit name.</p>
 <p>The data from the a qasm circuit is dictionary of the format
 {‘00000’: XXXX, ‘00001’: XXXXX}.</p>
@@ -283,7 +292,7 @@ the observable for state i.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>hashable</em><em> or </em><em>None</em>) – the name of the quantum circuit.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>circuit_name</strong> (<em>str</em><em> or </em><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>None</em>) – reference to a quantum circuit
 If None and there is only one circuit available, returns
 that one.</td>
 </tr>
@@ -299,7 +308,7 @@ that one.</td>
 
 <dl class="method">
 <dt id="qiskit.Result.get_data">
-<code class="descname">get_data</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_data" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_data</code><span class="sig-paren">(</span><em>circuit_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the data of circuit name.</p>
 <p>The data format will depend on the backend. For a real device it
 will be for the form:</p>
@@ -308,7 +317,7 @@ will be for the form:</p>
 </pre></div>
 </div>
 <p>for the qasm simulators of 1 shot:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;quantum_state&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span> <span class="n">XXX</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="n">XXX</span><span class="p">]),</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;statevector&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span> <span class="n">XXX</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="n">XXX</span><span class="p">]),</span>
 <span class="s1">&#39;classical_state&#39;</span><span class="p">:</span> <span class="mi">0</span>
 </pre></div>
 </div>
@@ -330,7 +339,9 @@ will be for the form:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> (<em>str</em>) – the name of the quantum circuit.</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>circuit_name</strong> (<em>str</em><em> or </em><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>None</em>) – reference to a quantum circuit
+If None and there is only one circuit available, returns
+that one.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A dictionary of data for the different backends.</p>
@@ -430,6 +441,84 @@ xvals: mx1 array of the circuit xvals</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="qiskit.Result.get_snapshot">
+<code class="descname">get_snapshot</code><span class="sig-paren">(</span><em>circuit_name=None</em>, <em>slot=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_snapshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get snapshot at a specific slot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>circuit_name</strong> (<em>str</em><em> or </em><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>None</em>) – reference to a quantum circuit
+If None and there is only one circuit available, returns
+that one.</li>
+<li><strong>slot</strong> (<em>str</em>) – snapshot slot to retrieve</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dict[str: array]]: list of 2^n_qubits complex amplitudes.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">dict[slot</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if there is no snapshot at all, or in this slot</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.get_snapshots">
+<code class="descname">get_snapshots</code><span class="sig-paren">(</span><em>circuit_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_snapshots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_snapshots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get snapshots recorded during the run.</p>
+<p>The data is a dictionary:
+where keys are requested snapshot slots.
+and values are a dictionary of the snapshots themselves.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>circuit_name</strong> (<em>str</em><em> or </em><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>None</em>) – reference to a quantum circuit
+If None and there is only one circuit available, returns
+that one.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict[str: array]]: list of 2^n_qubits complex amplitudes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict[slot</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if there are no snapshots for the circuit.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.Result.get_statevector">
+<code class="descname">get_statevector</code><span class="sig-paren">(</span><em>circuit_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_statevector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_statevector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the final statevector of circuit name.</p>
+<p>The data is a list of complex numbers
+[1.+0.j, 0.+0.j].</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>circuit_name</strong> (<em>str</em><em> or </em><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>None</em>) – reference to a quantum circuit
+If None and there is only one circuit available, returns
+that one.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of 2^n_qubits complex amplitudes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[complex]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if there is no statevector for the circuit.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="qiskit.Result.get_status">
 <code class="descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whole qobj result status.</p>
@@ -466,14 +555,14 @@ xvals: mx1 array of the circuit xvals</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -1,0 +1,230 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.extensions.simulator.snapshot &#8212; QISKit SDK 0.5.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/extensions/simulator/snapshot.html">english</a> /
+        <a href="/documentation/ja/_modules/qiskit/extensions/simulator/snapshot.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../releases.html">Release history</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit.extensions.simulator.snapshot</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Simulator command to snapshot internal simulator representation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Instruction</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions._extensionerror</span> <span class="k">import</span> <span class="n">ExtensionError</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">header</span>  <span class="c1"># pylint: disable=unused-import</span>
+
+
+<span class="k">class</span> <span class="nc">Snapshot</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simulator snapshot instruction.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new snapshot instruction.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">slot</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span> <span class="n">circ</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Special case. Return self.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return OPENQASM string.&quot;&quot;&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;snapshot(</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;;&quot;</span>
+        <span class="k">return</span> <span class="n">string</span>
+
+    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reapply this instruction to corresponding qubits in circ.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modifiers</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">snapshot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Take a snapshot of the internal simulator representation (statevector,</span>
+<span class="sd">    probability, density matrix, clifford table)</span>
+<span class="sd">    Works on all qubits, and prevents reordering (like barrier).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        slot (int): a snapshot slot to report the result</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: with attached command</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ExtensionError: malformed command</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tuples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tuples</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ExtensionError</span><span class="p">(</span><span class="s2">&quot;no qubits for snapshot&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">slot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ExtensionError</span><span class="p">(</span><span class="s2">&quot;no snapshot slot passed&quot;</span><span class="p">)</span>
+    <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tuple_element</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tuple_element</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tuple_element</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">((</span><span class="n">tuple_element</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tuple_element</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">tuple_element</span><span class="p">)</span>
+            <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tuple_element</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_dups</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Snapshot</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+
+
+<span class="c1"># Add to QuantumCircuit and CompositeGate classes</span>
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">snapshot</span> <span class="o">=</span> <span class="n">snapshot</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">snapshot</span> <span class="o">=</span> <span class="n">snapshot</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/05/11.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

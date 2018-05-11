@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit package &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>qiskit package &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a><ul>
@@ -97,7 +98,6 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
@@ -111,9 +111,17 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QISKitError.html">qiskit.QISKitError</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.available_backends.html">qiskit.available_backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.compile.html">qiskit.compile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.execute.html">qiskit.execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.get_backend.html">qiskit.get_backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.register.html">qiskit.register</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -177,6 +185,9 @@
 <tr class="row-even"><td><a class="reference internal" href="qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-obj docutils literal"><span class="pre">unroll</span></code></a></td>
 <td>Unroll QASM and different backends.</td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.wrapper.html#module-qiskit.wrapper" title="qiskit.wrapper"><code class="xref py py-obj docutils literal"><span class="pre">wrapper</span></code></a></td>
+<td>Helper module for simplified QISKit usage.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -203,28 +214,25 @@
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.InstructionSet.html#qiskit.InstructionSet" title="qiskit.InstructionSet"><code class="xref py py-obj docutils literal"><span class="pre">InstructionSet</span></code></a></td>
 <td>Instruction collection.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.JobProcessor.html#qiskit.JobProcessor" title="qiskit.JobProcessor"><code class="xref py py-obj docutils literal"><span class="pre">JobProcessor</span></code></a></td>
-<td>Process a series of jobs and collect the results</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.Measure.html#qiskit.Measure" title="qiskit.Measure"><code class="xref py py-obj docutils literal"><span class="pre">Measure</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.Measure.html#qiskit.Measure" title="qiskit.Measure"><code class="xref py py-obj docutils literal"><span class="pre">Measure</span></code></a></td>
 <td>Quantum measurement in the computational basis.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-obj docutils literal"><span class="pre">QuantumCircuit</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-obj docutils literal"><span class="pre">QuantumCircuit</span></code></a></td>
 <td>Quantum circuit.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob" title="qiskit.QuantumJob"><code class="xref py py-obj docutils literal"><span class="pre">QuantumJob</span></code></a></td>
-<td>Creates a quantum circuit job</td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob" title="qiskit.QuantumJob"><code class="xref py py-obj docutils literal"><span class="pre">QuantumJob</span></code></a></td>
+<td>Creates a quantum circuit job.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-obj docutils literal"><span class="pre">QuantumProgram</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-obj docutils literal"><span class="pre">QuantumProgram</span></code></a></td>
 <td>Quantum Program Class.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-obj docutils literal"><span class="pre">QuantumRegister</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-obj docutils literal"><span class="pre">QuantumRegister</span></code></a></td>
 <td>Implement a quantum register.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.Reset.html#qiskit.Reset" title="qiskit.Reset"><code class="xref py py-obj docutils literal"><span class="pre">Reset</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.Reset.html#qiskit.Reset" title="qiskit.Reset"><code class="xref py py-obj docutils literal"><span class="pre">Reset</span></code></a></td>
 <td>Qubit reset.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.Result.html#qiskit.Result" title="qiskit.Result"><code class="xref py py-obj docutils literal"><span class="pre">Result</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.Result.html#qiskit.Result" title="qiskit.Result"><code class="xref py py-obj docutils literal"><span class="pre">Result</span></code></a></td>
 <td>Result Class.</td>
 </tr>
 </tbody>
@@ -240,6 +248,32 @@
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-obj docutils literal"><span class="pre">QISKitError</span></code></a></td>
 <td>Base class for errors raised by the QISKit SDK.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functions">
+<span id="qiskit-top-level-functions"></span><h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.available_backends.html#qiskit.available_backends" title="qiskit.available_backends"><code class="xref py py-obj docutils literal"><span class="pre">available_backends</span></code></a></td>
+<td>Return the backends that are available in the SDK, optionally filtering them based on their capabilities.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.compile.html#qiskit.compile" title="qiskit.compile"><code class="xref py py-obj docutils literal"><span class="pre">compile</span></code></a></td>
+<td>Compile a list of circuits into a qobj.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.execute.html#qiskit.execute" title="qiskit.execute"><code class="xref py py-obj docutils literal"><span class="pre">execute</span></code></a></td>
+<td>Executes a set of circuits.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.get_backend.html#qiskit.get_backend" title="qiskit.get_backend"><code class="xref py py-obj docutils literal"><span class="pre">get_backend</span></code></a></td>
+<td>Return an instance of a <cite>Backend</cite> object from its name identifier.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.register.html#qiskit.register" title="qiskit.register"><code class="xref py py-obj docutils literal"><span class="pre">register</span></code></a></td>
+<td>Authenticate against an online backend provider.</td>
 </tr>
 </tbody>
 </table>
@@ -273,13 +307,13 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
