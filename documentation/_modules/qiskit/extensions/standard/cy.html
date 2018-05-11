@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.extensions.standard.cy &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>qiskit.extensions.standard.cy &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDK reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -138,8 +138,8 @@
         <span class="sd">&quot;&quot;&quot;Return OPENQASM string.&quot;&quot;&quot;</span>
         <span class="n">ctl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">tgt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="s2">&quot;cy </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">],</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">openqasm_name</span><span class="p">,</span> <span class="n">ctl</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                                                   <span class="n">tgt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">openqasm_name</span><span class="p">,</span> <span class="n">tgt</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="s2">&quot;cy </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">],</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">ctl</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                   <span class="n">tgt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tgt</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this gate.&quot;&quot;&quot;</span>
@@ -158,6 +158,18 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ctl</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
             <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cy</span><span class="p">((</span><span class="n">ctl</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">tgt</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">instructions</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ctl</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ctl</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cy</span><span class="p">((</span><span class="n">ctl</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">tgt</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">gs</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tgt</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tgt</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cy</span><span class="p">(</span><span class="n">ctl</span><span class="p">,</span> <span class="p">(</span><span class="n">tgt</span><span class="p">,</span> <span class="n">j</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">gs</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">ctl</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">tgt</span><span class="p">)</span>
@@ -189,14 +201,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

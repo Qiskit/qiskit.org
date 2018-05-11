@@ -1,0 +1,358 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.ibmq.IBMQJob &#8212; QISKit SDK 0.5.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.backends.ibmq.IBMQProvider" href="qiskit.backends.ibmq.IBMQProvider.html" />
+    <link rel="prev" title="qiskit.backends.ibmq.IBMQBackend" href="qiskit.backends.ibmq.IBMQBackend.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.backends.ibmq.IBMQJob.html">english</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.backends.ibmq.IBMQJob.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.ibmq.IBMQProvider.html" title="qiskit.backends.ibmq.IBMQProvider"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.ibmq.IBMQBackend.html" title="qiskit.backends.ibmq.IBMQBackend"
+             accesskey="P">前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.backends.ibmq.html" accesskey="U">qiskit.backends.ibmq package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">目次</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.backends.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.basebackend.html">qiskit.backends.basebackend module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.basejob.html">qiskit.backends.basejob module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.baseprovider.html">qiskit.backends.baseprovider module</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="qiskit.backends.ibmq.html">qiskit.backends.ibmq package</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="qiskit.backends.ibmq.html#submodules">Submodules</a></li>
+<li class="toctree-l6 current"><a class="reference internal" href="qiskit.backends.ibmq.html#classes">Classes</a><ul class="current">
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.ibmq.IBMQBackend.html">qiskit.backends.ibmq.IBMQBackend</a></li>
+<li class="toctree-l7 current"><a class="current reference internal" href="#">qiskit.backends.ibmq.IBMQJob</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.ibmq.IBMQProvider.html">qiskit.backends.ibmq.IBMQProvider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.local.html">qiskit.backends.local package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="qiskit.backends.ibmq.IBMQBackend.html"
+                        title="前の章へ">qiskit.backends.ibmq.IBMQBackend</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="qiskit.backends.ibmq.IBMQProvider.html"
+                        title="次の章へ">qiskit.backends.ibmq.IBMQProvider</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.backends.ibmq.IBMQJob.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-backends-ibmq-ibmqjob">
+<h1>qiskit.backends.ibmq.IBMQJob<a class="headerlink" href="#qiskit-backends-ibmq-ibmqjob" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.backends.ibmq.IBMQJob">
+<em class="property">class </em><code class="descclassname">qiskit.backends.ibmq.</code><code class="descname">IBMQJob</code><span class="sig-paren">(</span><em>q_job</em>, <em>api</em>, <em>is_device</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqjob.html#IBMQJob"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">qiskit.backends.basejob.BaseJob</span></code></p>
+<p>IBM Q Job class</p>
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob._executor">
+<code class="descname">_executor</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob._executor" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p><em>futures.Executor</em> -- executor to handle asynchronous jobs</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQJob.__init__" title="qiskit.backends.ibmq.IBMQJob.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(q_job,&nbsp;api,&nbsp;is_device)</td>
+<td>IBMQJob init function.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQJob.cancel" title="qiskit.backends.ibmq.IBMQJob.cancel"><code class="xref py py-obj docutils literal"><span class="pre">cancel</span></code></a>()</td>
+<td>Attempt to cancel job.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQJob.result" title="qiskit.backends.ibmq.IBMQJob.result"><code class="xref py py-obj docutils literal"><span class="pre">result</span></code></a>([timeout,&nbsp;wait])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQJob.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>q_job</em>, <em>api</em>, <em>is_device</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqjob.html#IBMQJob.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>IBMQJob init function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>q_job</strong> (<a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob" title="qiskit.QuantumJob"><em>QuantumJob</em></a>) -- job description</li>
+<li><strong>api</strong> (<em>IBMQuantumExperience</em>) -- IBM Q API</li>
+<li><strong>is_device</strong> (<em>bool</em>) -- whether backend is a real device  # TODO: remove this after Qobj</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.backend_name">
+<code class="descname">backend_name</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.backend_name" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend name used for this job</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQJob.cancel">
+<code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqjob.html#IBMQJob.cancel"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.cancel" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Attempt to cancel job. Currently this is only possible on
+commercial systems.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">True if job can be cancelled, else False.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code> -- if server returned error</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.cancelled">
+<code class="descname">cancelled</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.cancelled" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.done">
+<code class="descname">done</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.done" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Returns True if job successfully finished running.</p>
+<p>Note behavior is slightly different than Future objects which would
+also return true if successfully cancelled.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.exception">
+<code class="descname">exception</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.exception" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return Exception object previously raised by job else None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">exception raised by job</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">Exception</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.job_id">
+<code class="descname">job_id</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.job_id" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend determined job_id (also available in status method).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.queued">
+<code class="descname">queued</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.queued" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Returns whether job is queued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">True if job is queued, else False.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code> -- couldn't get job status from server</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQJob.result">
+<code class="descname">result</code><span class="sig-paren">(</span><em>timeout=None</em>, <em>wait=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqjob.html#IBMQJob.result"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.result" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.running">
+<code class="descname">running</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.running" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Returns whether job is actively running</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">True if job is running, else False.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code> -- couldn't get job status from server</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.ibmq.IBMQJob.status">
+<code class="descname">status</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQJob.status" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.ibmq.IBMQProvider.html" title="qiskit.backends.ibmq.IBMQProvider"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.ibmq.IBMQBackend.html" title="qiskit.backends.ibmq.IBMQBackend"
+             >前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.backends.ibmq.html" >qiskit.backends.ibmq package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/05/11
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+    </div>
+  </body>
+</html>

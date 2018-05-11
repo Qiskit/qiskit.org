@@ -1,0 +1,470 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.local.statevector_simulator_sympy &#8212; QISKit SDK 0.5.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/backends/local/statevector_simulator_sympy.html">english</a> /
+        <a href="/documentation/ja/_modules/qiskit/backends/local/statevector_simulator_sympy.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../qiskit.html">QISKit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDK reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../releases.html">Release history</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit.backends.local.statevector_simulator_sympy</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=abstract-method,too-many-ancestors</span>
+
+<span class="c1"># Copyright 2018 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains a (slow) python sympy-based simulator.</span>
+
+<span class="sd">It produces the state vector in symbolic form.</span>
+<span class="sd">In particular, it simulates the quantum computation with the sympy APIs,</span>
+<span class="sd">which preserve the symbolic form of numbers, e.g., sqrt(2), e^{i*pi/2}.</span>
+
+<span class="sd">How to use this simulator:</span>
+<span class="sd">see examples/python/use_sympy_simulators.py</span>
+
+<span class="sd">Example output:</span>
+<span class="sd">final quantum amplitude vector: [sqrt(2)/2 0 0 sqrt(2)/2]</span>
+
+<span class="sd">Advantages:</span>
+<span class="sd">1. The tool obviates the manual calculation with a pen and paper, enabling</span>
+<span class="sd"> quick adjustment of your prototype code.</span>
+<span class="sd">2. The tool leverages sympy&#39;s symbolic computational power to keep the most</span>
+<span class="sd">leverages sympy&#39;s simplification engine to simplify the expressions as much as possible.</span>
+<span class="sd">3. The tool supports u gates, including u1, u2, u3, cu1, cu2, cu3.</span>
+
+<span class="sd">Analysis of results and limitations:</span>
+<span class="sd">1. It can simplify expressions, including complex ones such as sqrt(2)*I*exp(-I*pi/4)/4.</span>
+<span class="sd">2. It may miss some simplification opportunities.</span>
+<span class="sd">For instance, the amplitude</span>
+<span class="sd">&quot;0.245196320100808*sqrt(2)*exp(-I*pi/4) - 0.048772580504032*sqrt(2)*I*exp(-I*pi/4)&quot;</span>
+<span class="sd">can be further simplified.</span>
+<span class="sd">3. It may produce results that are hard to interpret.</span>
+<span class="sd">4. Memory error may occur if there are many qubits in the system.</span>
+<span class="sd">This is due to the limit of classical computers and show the advantage of the quantum hardware.</span>
+
+<span class="sd">Warning: it is slow.</span>
+<span class="sd">Warning: this simulator computes the final amplitude vector precisely within a single shot.</span>
+<span class="sd">Therefore we do not need multiple shots.</span>
+<span class="sd">If you specify multiple shots, it will automatically set shots=1.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">re</span><span class="p">,</span> <span class="n">im</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.quantum.gate</span> <span class="k">import</span> <span class="n">H</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">CNOT</span><span class="p">,</span> <span class="n">IdentityGate</span><span class="p">,</span> <span class="n">OneQubitGate</span><span class="p">,</span> <span class="n">CGate</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.quantum.qapply</span> <span class="k">import</span> <span class="n">qapply</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.quantum.qubit</span> <span class="k">import</span> <span class="n">Qubit</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.quantum.represent</span> <span class="k">import</span> <span class="n">represent</span>
+
+<span class="kn">from</span> <span class="nn">qiskit._result</span> <span class="k">import</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends</span> <span class="k">import</span> <span class="n">BaseBackend</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends.local.localjob</span> <span class="k">import</span> <span class="n">LocalJob</span>
+<span class="kn">from</span> <span class="nn">._simulatorerror</span> <span class="k">import</span> <span class="n">SimulatorError</span>
+<span class="kn">from</span> <span class="nn">._simulatortools</span> <span class="k">import</span> <span class="n">compute_ugate_matrix</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SDGGate</span><span class="p">(</span><span class="n">OneQubitGate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;implements the SDG gate&quot;&quot;&quot;</span>
+    <span class="n">gate_name</span> <span class="o">=</span> <span class="s1">&#39;SDG&#39;</span>
+
+    <span class="k">def</span> <span class="nf">get_target_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;sympy&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the Matrix that corresponds to the gate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Matrix: the matrix that corresponds to the gate.</span>
+<span class="sd">                    Matrix is a type from sympy.</span>
+<span class="sd">                    Each entry in it can be in the symbolic form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=redefined-builtin</span>
+        <span class="k">return</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">I</span><span class="p">]])</span>
+
+
+<span class="k">class</span> <span class="nc">TDGGate</span><span class="p">(</span><span class="n">OneQubitGate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;implements the TDG gate&quot;&quot;&quot;</span>
+    <span class="n">gate_name</span> <span class="o">=</span> <span class="s1">&#39;TDG&#39;</span>
+
+    <span class="k">def</span> <span class="nf">get_target_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;sympy&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the Matrix that corresponds to the gate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Matrix: the matrix that corresponds to the gate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=redefined-builtin</span>
+        <span class="k">return</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)]])</span>
+
+
+<span class="k">class</span> <span class="nc">UGateGeneric</span><span class="p">(</span><span class="n">OneQubitGate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;implements the general U gate&quot;&quot;&quot;</span>
+    <span class="n">_u_mat</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">gate_name</span> <span class="o">=</span> <span class="s1">&#39;U&#39;</span>
+
+    <span class="k">def</span> <span class="nf">set_target_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_matrix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;this API sets the raw matrix that corresponds to the U gate</span>
+<span class="sd">            the client should use this API whenever she creates a UGateGeneric object!</span>
+<span class="sd">            Args:</span>
+<span class="sd">                u_matrix (Matrix): set the matrix that corresponds to the gate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_u_mat</span> <span class="o">=</span> <span class="n">u_matrix</span>
+
+    <span class="k">def</span> <span class="nf">get_target_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;sympy&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return the Matrix that corresponds to the gate</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Matrix: the matrix that corresponds to the gate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=redefined-builtin</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u_mat</span>
+
+
+<div class="viewcode-block" id="StatevectorSimulatorSympy"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorSympy.html#qiskit.backends.local.StatevectorSimulatorSympy">[docs]</a><span class="k">class</span> <span class="nc">StatevectorSimulatorSympy</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sympy implementation of a statevector simulator.&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULT_CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;local_statevector_simulator_sympy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/QISKit/qiskit-sdk-py&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A sympy-based statevector simulator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="s1">&#39;all-to-all&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="s1">&#39;u1,u2,u3,cx,id&#39;</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="StatevectorSimulatorSympy.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorSympy.html#qiskit.backends.local.StatevectorSimulatorSympy.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the StatevectorSimulatorSympy object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            configuration (dict): backend configuration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_conjugate_square</span><span class="p">(</span><span class="n">com</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;simpler helper for returning com*conjugate(com), where com is a complex number</span>
+<span class="sd">            Args:</span>
+<span class="sd">                com (object): a complex number</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                object: com*conjugate(com)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="p">(</span><span class="n">com</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">re</span><span class="p">(</span><span class="n">com</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<div class="viewcode-block" id="StatevectorSimulatorSympy.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorSympy.html#qiskit.backends.local.StatevectorSimulatorSympy.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run q_job asynchronously.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            q_job (QuantumJob): QuantumJob object</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            LocalJob: derived from BaseJob</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q_job</span><span class="o">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">q_job</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run circuits in q_job and return the result</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                q_job (QuantumJob): all the information necessary</span>
+<span class="sd">                    (e.g., circuit, backend and resources) for running a circuit</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                Result: Result is a class including the information to be returned to users.</span>
+<span class="sd">                    Specifically, result_list in the return contains the essential information,</span>
+<span class="sd">                    which looks like this::</span>
+
+<span class="sd">                        [{&#39;data&#39;:</span>
+<span class="sd">                        {</span>
+<span class="sd">                          &#39;statevector&#39;: array([sqrt(2)/2, 0, 0, sqrt(2)/2], dtype=object),</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &#39;status&#39;: &#39;DONE&#39;</span>
+<span class="sd">                        }]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qobj</span> <span class="o">=</span> <span class="n">q_job</span><span class="o">.</span><span class="n">qobj</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">shots</span> <span class="o">=</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">shots</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No need for multiple shots. A single execution will be performed.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]:</span>
+            <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_circuit</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Result</span><span class="p">({</span><span class="s1">&#39;job_id&#39;</span><span class="p">:</span> <span class="n">q_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result_list</span><span class="p">,</span>
+                       <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">},</span> <span class="n">qobj</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StatevectorSimulatorSympy.run_circuit"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorSympy.html#qiskit.backends.local.StatevectorSimulatorSympy.run_circuit">[docs]</a>    <span class="k">def</span> <span class="nf">run_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a circuit and return object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            circuit (dict): JSON that describes the circuit</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary of results which looks something like::</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &quot;data&quot;:{</span>
+<span class="sd">                        &#39;statevector&#39;: array([sqrt(2)/2, 0, 0, sqrt(2)/2], dtype=object)},</span>
+<span class="sd">                &quot;status&quot;: --status (string)--</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            SimulatorError: if an error occurred.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ccircuit</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;compiled_circuit&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="n">ccircuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;number_of_qubits&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">Qubit</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">ccircuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;conditional&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="s1">&#39;conditional operations not supported &#39;</span>
+                                     <span class="s1">&#39;in statevector simulator&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;measure&#39;</span> <span class="ow">or</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;reset&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="s1">&#39;operation </span><span class="si">{}</span><span class="s1"> not supported by &#39;</span>
+                                     <span class="s1">&#39;sympy statevector simulator.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">]:</span>
+                <span class="n">qubit</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">opname</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                <span class="n">opparas</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+                <span class="n">_sym_op</span> <span class="o">=</span> <span class="n">StatevectorSimulatorSympy</span><span class="o">.</span><span class="n">get_sym_op</span><span class="p">(</span><span class="n">opname</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">qubit</span><span class="p">]),</span> <span class="n">opparas</span><span class="p">)</span>
+                <span class="n">_applied_statevector</span> <span class="o">=</span> <span class="n">_sym_op</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">qapply</span><span class="p">(</span><span class="n">_applied_statevector</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Identity gate is ignored by sympy-based statevector simulator.&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;barrier&#39;</span><span class="p">]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Barrier is ignored by sympy-based statevector simulator.&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;CX&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">]:</span>
+                <span class="n">qubit0</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">qubit1</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">opname</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                <span class="k">if</span> <span class="s1">&#39;params&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                    <span class="n">opparas</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">opparas</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">q0q1tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">])</span>
+                <span class="n">_sym_op</span> <span class="o">=</span> <span class="n">StatevectorSimulatorSympy</span><span class="o">.</span><span class="n">get_sym_op</span><span class="p">(</span><span class="n">opname</span><span class="p">,</span> <span class="n">q0q1tuple</span><span class="p">,</span> <span class="n">opparas</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">qapply</span><span class="p">(</span><span class="n">_sym_op</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">backend</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;__configuration&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> encountered unrecognized operation &quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+                <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="n">err_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]))</span>
+
+        <span class="n">matrix_form</span> <span class="o">=</span> <span class="n">represent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">)</span>
+        <span class="n">shape_n</span> <span class="o">=</span> <span class="n">matrix_form</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">list_form</span> <span class="o">=</span> <span class="p">[</span><span class="n">matrix_form</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape_n</span><span class="p">)]</span>
+
+        <span class="c1"># Return the results</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;statevector&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">list_form</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;DONE&#39;</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="StatevectorSimulatorSympy.get_sym_op"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorSympy.html#qiskit.backends.local.StatevectorSimulatorSympy.get_sym_op">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_sym_op</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qid_tuple</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; return the sympy version for the gate</span>
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): gate name</span>
+<span class="sd">            qid_tuple (tuple): the ids of the qubits being operated on</span>
+<span class="sd">            params (list): optional parameter lists, which may be needed by the U gates.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            object: (the sympy representation of) the gate being applied to the qubits</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: if an unsupported operation is seen</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">the_gate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;ID&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">IdentityGate</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>  <span class="c1"># de-tuple means unpacking</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">Y</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">Z</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;SDG&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">SDGGate</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;TDG&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">TDGGate</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CX&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CNOT&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">CNOT</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CY&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">CGate</span><span class="p">(</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">(</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># qid_tuple: control target</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CZ&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">CGate</span><span class="p">(</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Z</span><span class="p">(</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># qid_tuple: control target</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CCX&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CCNOT&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;TOFFOLI&#39;</span><span class="p">:</span>
+            <span class="n">the_gate</span> <span class="o">=</span> <span class="n">CGate</span><span class="p">((</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qid_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">X</span><span class="p">(</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+        <span class="k">if</span> <span class="n">the_gate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">the_gate</span>
+
+        <span class="c1"># U gate, CU gate handled below</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;CU&#39;</span><span class="p">):</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">params</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># [theta=0, phi=0, lambda]</span>
+                <span class="n">parameters</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">parameters</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># [theta=pi/2, phi, lambda]</span>
+                <span class="n">parameters</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># [theta, phi, lambda]</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;U gate must carry 1, 2 or 3 parameters!&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">):</span>
+                <span class="n">ugate</span> <span class="o">=</span> <span class="n">UGateGeneric</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+                <span class="n">u_mat</span> <span class="o">=</span> <span class="n">compute_ugate_matrix</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+                <span class="n">ugate</span><span class="o">.</span><span class="n">set_target_matrix</span><span class="p">(</span><span class="n">u_matrix</span><span class="o">=</span><span class="n">u_mat</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">ugate</span>
+
+            <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;CU&#39;</span><span class="p">):</span>  <span class="c1"># additional treatment for CU1, CU2, CU3</span>
+                <span class="n">ugate</span> <span class="o">=</span> <span class="n">UGateGeneric</span><span class="p">(</span><span class="o">*</span><span class="n">qid_tuple</span><span class="p">)</span>
+                <span class="n">u_mat</span> <span class="o">=</span> <span class="n">compute_ugate_matrix</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+                <span class="n">ugate</span><span class="o">.</span><span class="n">set_target_matrix</span><span class="p">(</span><span class="n">u_matrix</span><span class="o">=</span><span class="n">u_mat</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">CGate</span><span class="p">(</span><span class="n">qid_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ugate</span><span class="p">)</span>
+        <span class="c1"># if the control flow comes here,  alarm!</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Not supported&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Last updated on 2018/05/11.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

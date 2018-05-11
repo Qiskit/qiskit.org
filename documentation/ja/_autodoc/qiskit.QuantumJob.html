@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.QuantumJob &#8212; QISKit SDK 0.4.15 ドキュメント</title>
+    <title>qiskit.QuantumJob &#8212; QISKit SDK 0.5.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -64,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -91,7 +91,6 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.QuantumJob</a></li>
@@ -102,6 +101,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -142,9 +142,9 @@
 <h1>qiskit.QuantumJob<a class="headerlink" href="#qiskit-quantumjob" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.QuantumJob">
-<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">QuantumJob</code><span class="sig-paren">(</span><em>circuits</em>, <em>backend='local_qasm_simulator'</em>, <em>circuit_config=None</em>, <em>seed=None</em>, <em>resources=None</em>, <em>shots=1024</em>, <em>names=None</em>, <em>do_compile=False</em>, <em>preformatted=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumjob.html#QuantumJob"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumJob" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">QuantumJob</code><span class="sig-paren">(</span><em>circuits</em>, <em>backend</em>, <em>circuit_config=None</em>, <em>seed=None</em>, <em>resources=None</em>, <em>shots=1024</em>, <em>names=None</em>, <em>do_compile=False</em>, <em>preformatted=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumjob.html#QuantumJob"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumJob" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Creates a quantum circuit job</p>
+<p>Creates a quantum circuit job.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -152,7 +152,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumJob.__init__" title="qiskit.QuantumJob.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(circuits[,&nbsp;backend,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumJob.__init__" title="qiskit.QuantumJob.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(circuits,&nbsp;backend[,&nbsp;...])</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -167,7 +167,7 @@
 </table>
 <dl class="method">
 <dt id="qiskit.QuantumJob.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>circuits</em>, <em>backend='local_qasm_simulator'</em>, <em>circuit_config=None</em>, <em>seed=None</em>, <em>resources=None</em>, <em>shots=1024</em>, <em>names=None</em>, <em>do_compile=False</em>, <em>preformatted=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumjob.html#QuantumJob.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumJob.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>circuits</em>, <em>backend</em>, <em>circuit_config=None</em>, <em>seed=None</em>, <em>resources=None</em>, <em>shots=1024</em>, <em>names=None</em>, <em>do_compile=False</em>, <em>preformatted=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumjob.html#QuantumJob.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.QuantumJob.__init__" title="この定義へのパーマリンク">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -175,7 +175,7 @@
 <tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
 <li><strong>circuits</strong> (<em>QuantumCircuit|DagCircuit | list</em><em>(</em><em>QuantumCircuit|DagCircuit</em><em>)</em>) -- QuantumCircuit|DagCircuit or list of QuantumCircuit|DagCircuit.
 If preformatted=True, this is a raw qobj.</li>
-<li><strong>backend</strong> (<em>str</em>) -- The backend to run the circuit on.</li>
+<li><strong>backend</strong> (<a class="reference internal" href="qiskit.backends.BaseBackend.html#qiskit.backends.BaseBackend" title="qiskit.backends.BaseBackend"><em>BaseBackend</em></a>) -- The backend to run the circuit on, required.</li>
 <li><strong>circuit_config</strong> (<em>dict</em>) -- Circuit configuration.</li>
 <li><strong>seed</strong> (<em>int</em>) -- The intial seed the simulatros use.</li>
 <li><strong>resources</strong> (<em>dict</em>) -- Resource requirements of job.</li>
@@ -224,14 +224,14 @@ of the same length as &quot;circuits&quot;.</li>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/05/07
+      最終更新: 2018/05/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

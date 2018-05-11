@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit.DAGCircuit &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>qiskit.dagcircuit.DAGCircuit &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.dagcircuit.html" accesskey="U">qiskit.dagcircuit package</a> &#187;</li> 
@@ -98,13 +98,15 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -208,7 +210,7 @@ bits.</p>
 <td>Return a list of qubits as (qreg, index) pairs.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.layers" title="qiskit.dagcircuit.DAGCircuit.layers"><code class="xref py py-obj docutils literal"><span class="pre">layers</span></code></a>()</td>
-<td>Return a list of layers for all d layers of this circuit.</td>
+<td>Yield a layer for all d layers of this circuit.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.num_cbits" title="qiskit.dagcircuit.DAGCircuit.num_cbits"><code class="xref py py-obj docutils literal"><span class="pre">num_cbits</span></code></a>()</td>
 <td>Return the total number of bits used by the circuit.</td>
@@ -241,7 +243,7 @@ bits.</p>
 <td>Rename a classical or quantum register throughout the circuit.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.serial_layers" title="qiskit.dagcircuit.DAGCircuit.serial_layers"><code class="xref py py-obj docutils literal"><span class="pre">serial_layers</span></code></a>()</td>
-<td>Return a list of layers for all gates of this circuit.</td>
+<td>Yield a layer for all gates of this circuit.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.dagcircuit.DAGCircuit.size" title="qiskit.dagcircuit.DAGCircuit.size"><code class="xref py py-obj docutils literal"><span class="pre">size</span></code></a>()</td>
 <td>Return the number of operations.</td>
@@ -405,7 +407,7 @@ circuit are included in the gate basis.</p>
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.layers">
 <code class="descname">layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.layers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.layers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of layers for all d layers of this circuit.</p>
+<dd><p>Yield a layer for all d layers of this circuit.</p>
 <p>A layer is a circuit whose gates act on disjoint qubits, i.e.
 a layer has depth 1. The total number of layers equals the
 circuit depth d. The layers are indexed from 0 to d-1 with the
@@ -493,7 +495,7 @@ newname = replacement register name string</p>
 <dl class="method">
 <dt id="qiskit.dagcircuit.DAGCircuit.serial_layers">
 <code class="descname">serial_layers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/dagcircuit/_dagcircuit.html#DAGCircuit.serial_layers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.dagcircuit.DAGCircuit.serial_layers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of layers for all gates of this circuit.</p>
+<dd><p>Yield a layer for all gates of this circuit.</p>
 <p>A serial layer is a circuit with one gate. The layers have the
 same structure as in layers().</p>
 </dd></dl>
@@ -555,7 +557,7 @@ input_circuit is a DAGCircuit</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.dagcircuit.html" >qiskit.dagcircuit package</a> &#187;</li> 
@@ -563,7 +565,7 @@ input_circuit is a DAGCircuit</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

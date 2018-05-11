@@ -1,0 +1,338 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.0 ドキュメント</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/wrapper/_wrapper.html">english</a> /
+        <a href="/documentation/ja/_modules/qiskit/wrapper/_wrapper.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../../../index.html">目次</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDKリファレンス</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>qiskit.wrapper._wrapper のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2018 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+<span class="sd">&quot;&quot;&quot;Helper module for simplified QISKit usage.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qiskit._compiler</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends.ibmq.ibmqprovider</span> <span class="k">import</span> <span class="n">IBMQProvider</span>
+<span class="kn">from</span> <span class="nn">qiskit.wrapper.defaultqiskitprovider</span> <span class="k">import</span> <span class="n">DefaultQISKitProvider</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumJob</span>
+
+<span class="c1"># Default provider used by the rest of the functions on this module. Please</span>
+<span class="c1"># note that this is a global object.</span>
+<span class="n">_DEFAULT_PROVIDER</span> <span class="o">=</span> <span class="n">DefaultQISKitProvider</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="register"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.register.html#qiskit.register">[ドキュメント]</a><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+             <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">provider_name</span><span class="o">=</span><span class="s1">&#39;ibmq&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Authenticate against an online backend provider.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">            token (str): The token used to register on the online backend such</span>
+<span class="sd">                as the quantum experience.</span>
+<span class="sd">            url (str): The url used for online backend such as the quantum</span>
+<span class="sd">                experience.</span>
+<span class="sd">            hub (str): The hub used for online backend.</span>
+<span class="sd">            group (str): The group used for online backend.</span>
+<span class="sd">            project (str): The project used for online backend.</span>
+<span class="sd">            proxies (dict): Proxy configuration for the API, as a dict with</span>
+<span class="sd">                &#39;urls&#39; and credential keys.</span>
+<span class="sd">            verify (bool): If False, ignores SSL certificates errors.</span>
+<span class="sd">            provider_name (str): the unique name for the online backend</span>
+<span class="sd">                provider (for example, &#39;ibmq&#39; for the IBM Quantum Experience).</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QISKitError: if the provider name is not recognized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">provider_name</span> <span class="o">==</span> <span class="s1">&#39;ibmq&#39;</span><span class="p">:</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQProvider</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+                                <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">proxies</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
+        <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;provider name </span><span class="si">%s</span><span class="s1"> is not recognized&#39;</span> <span class="o">%</span> <span class="n">provider_name</span><span class="p">)</span></div>
+
+
+<span class="c1"># Functions for inspecting and retrieving backends.</span>
+
+
+<div class="viewcode-block" id="available_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.available_backends.html#qiskit.available_backends">[ドキュメント]</a><span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the backends that are available in the SDK, optionally filtering</span>
+<span class="sd">    them based on their capabilities.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In order for this function to return online backends, a connection with</span>
+<span class="sd">        an online backend provider needs to be established by calling the</span>
+<span class="sd">        `register()` function.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        filters (dict): dictionary of filtering conditions.</span>
+<span class="sd">        compact (bool): group backend names based on aliases</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: the names of the available backends.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">backend_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">available_backends</span><span class="p">(</span><span class="n">filters</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">compact</span><span class="p">:</span>
+        <span class="n">alias_dict</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">aliased_backend_names</span><span class="p">()</span>
+        <span class="n">aliases</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">backend_names</span><span class="p">:</span>
+            <span class="n">backend_alias</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">alias_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_alias</span><span class="p">:</span>
+                <span class="n">aliases</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">backend_alias</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">alias</span><span class="p">,)</span> <span class="o">=</span> <span class="n">backend_alias</span>
+                <span class="n">aliases</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span>
+        <span class="n">backend_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">aliases</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">backend_names</span></div>
+
+
+<div class="viewcode-block" id="local_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.local_backends.html#qiskit.local_backends">[ドキュメント]</a><span class="k">def</span> <span class="nf">local_backends</span><span class="p">(</span><span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the available local backends.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        compact (bool): only report alias names. this is usually shorter, any several</span>
+<span class="sd">        backends usually share the same alias.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: the names of the available remote backends.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">available_backends</span><span class="p">({</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="n">compact</span><span class="o">=</span><span class="n">compact</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="remote_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.remote_backends.html#qiskit.remote_backends">[ドキュメント]</a><span class="k">def</span> <span class="nf">remote_backends</span><span class="p">(</span><span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the available remote backends.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        compact (bool): only report alias names. this is usually shorter, any several</span>
+<span class="sd">        backends usually share the same alias.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: the names of the available remote backends.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">available_backends</span><span class="p">({</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">compact</span><span class="o">=</span><span class="n">compact</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_backend"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.get_backend.html#qiskit.get_backend">[ドキュメント]</a><span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return an instance of a `Backend` object from its name identifier.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name(str): unique name of the backend.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        BaseBackend: a Backend instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="c1"># Functions for compiling and executing.</span>
+
+
+<div class="viewcode-block" id="compile"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.compile.html#qiskit.compile">[ドキュメント]</a><span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compile a list of circuits into a qobj.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuits (QuantumCircuit or list[QuantumCircuit]): circuits to compile</span>
+<span class="sd">        backend (BaseBackend or str): a backend to compile for</span>
+<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
+<span class="sd">        basis_gates (str): comma-separated basis gate set to compile to</span>
+<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
+<span class="sd">        initial_layout (list): initial layout of qubits in mapping</span>
+<span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
+<span class="sd">        max_credits (int): maximum credits to use</span>
+<span class="sd">        seed (int): random seed for simulators</span>
+<span class="sd">        qobj_id (int): identifier for the generated qobj</span>
+<span class="sd">        hpc (dict): HPC simulator parameters</span>
+<span class="sd">        skip_translation (bool): If True, bypass most of the compilation process and</span>
+<span class="sd">            creates a qobj with minimal check nor translation</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        obj: the qobj to be run on the backends</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=redefined-builtin</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">_compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+                                    <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
+                                    <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span>
+                                    <span class="n">skip_translation</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="execute"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.execute.html#qiskit.execute">[ドキュメント]</a><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Executes a set of circuits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuits (QuantumCircuit or list[QuantumCircuit]): circuits to execute</span>
+<span class="sd">        backend (BaseBackend or str): a backend to execute the circuits on</span>
+<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
+<span class="sd">        basis_gates (str): comma-separated basis gate set to compile to</span>
+<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
+<span class="sd">        initial_layout (list): initial layout of qubits in mapping</span>
+<span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
+<span class="sd">        max_credits (int): maximum credits to use</span>
+<span class="sd">        seed (int): random seed for simulators</span>
+<span class="sd">        qobj_id (int): identifier for the generated qobj</span>
+<span class="sd">        hpc (dict): HPC simulator parameters</span>
+<span class="sd">        skip_translation (bool): skip most of the compile steps and produce qobj directly</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        BaseJob: returns job instance derived from BaseJob</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+    <span class="n">qobj</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+                   <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
+                   <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span>
+                   <span class="n">skip_translation</span><span class="p">)</span>
+    <span class="c1"># XXX When qobj is done this should replace q_job</span>
+    <span class="n">q_job</span> <span class="o">=</span> <span class="n">QuantumJob</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">preformatted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;max_credits&#39;</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">q_job</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/05/11
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+    </div>
+  </body>
+</html>

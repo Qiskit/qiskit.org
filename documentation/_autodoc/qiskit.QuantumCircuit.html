@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.QuantumCircuit &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>qiskit.QuantumCircuit &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -90,7 +90,6 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.JobProcessor.html">qiskit.JobProcessor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.QuantumCircuit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
@@ -101,9 +100,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
@@ -158,14 +158,20 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.add" title="qiskit.QuantumCircuit.add"><code class="xref py py-obj docutils literal"><span class="pre">add</span></code></a>(*regs)</td>
 <td>Add registers.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.barrier" title="qiskit.QuantumCircuit.barrier"><code class="xref py py-obj docutils literal"><span class="pre">barrier</span></code></a>(*tuples)</td>
-<td>Apply barrier to tuples (reg, idx).</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.barrier" title="qiskit.QuantumCircuit.barrier"><code class="xref py py-obj docutils literal"><span class="pre">barrier</span></code></a>(*args)</td>
+<td>Apply barrier to circuit.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.ccx" title="qiskit.QuantumCircuit.ccx"><code class="xref py py-obj docutils literal"><span class="pre">ccx</span></code></a>(ctl1,&nbsp;ctl2,&nbsp;tgt)</td>
 <td>Apply Toffoli to from ctl1 and ctl2 to tgt.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.ch" title="qiskit.QuantumCircuit.ch"><code class="xref py py-obj docutils literal"><span class="pre">ch</span></code></a>(ctl,&nbsp;tgt)</td>
 <td>Apply CH from ctl to tgt.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cls_instances" title="qiskit.QuantumCircuit.cls_instances"><code class="xref py py-obj docutils literal"><span class="pre">cls_instances</span></code></a>()</td>
+<td>Return the current number of instances of this class, useful for auto naming.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cls_prefix" title="qiskit.QuantumCircuit.cls_prefix"><code class="xref py py-obj docutils literal"><span class="pre">cls_prefix</span></code></a>()</td>
+<td>Return the prefix to use for auto naming.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.combine" title="qiskit.QuantumCircuit.combine"><code class="xref py py-obj docutils literal"><span class="pre">combine</span></code></a>(rhs)</td>
 <td>Append rhs to self if self contains compatible registers.</td>
@@ -183,7 +189,7 @@
 <td>Apply cu3 from ctl to tgt with angle theta, phi, lam.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cx" title="qiskit.QuantumCircuit.cx"><code class="xref py py-obj docutils literal"><span class="pre">cx</span></code></a>(ctl,&nbsp;tgt)</td>
-<td>Apply CNOT from ctl to tgt.</td>
+<td>Apply CX from ctl to tgt.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cx_base" title="qiskit.QuantumCircuit.cx_base"><code class="xref py py-obj docutils literal"><span class="pre">cx_base</span></code></a>(ctl,&nbsp;tgt)</td>
 <td>Apply CX ctl, tgt.</td>
@@ -221,14 +227,14 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.last_atomic_gate_host" title="qiskit.QuantumCircuit.last_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">last_atomic_gate_host</span></code></a>()</td>
 <td>Return the host list of the leaf gate on the right edge.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.load" title="qiskit.QuantumCircuit.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(m,&nbsp;q)</td>
-<td>Load cached quantum state of local_qiskit_simulator.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.load" title="qiskit.QuantumCircuit.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(slot)</td>
+<td>Load the internal simulator representation (statevector, probability, density matrix, clifford table) Works on all qubits, and prevents reordering (like barrier).</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.measure" title="qiskit.QuantumCircuit.measure"><code class="xref py py-obj docutils literal"><span class="pre">measure</span></code></a>(qubit,&nbsp;cbit)</td>
 <td>Measure quantum bit into classical bit (tuples).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.noise" title="qiskit.QuantumCircuit.noise"><code class="xref py py-obj docutils literal"><span class="pre">noise</span></code></a>(m,&nbsp;q)</td>
-<td>Cache the quantum state of local_qiskit_simulator.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.noise" title="qiskit.QuantumCircuit.noise"><code class="xref py py-obj docutils literal"><span class="pre">noise</span></code></a>(switch)</td>
+<td>Turn noise on/off in simulator.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.number_atomic_gates" title="qiskit.QuantumCircuit.number_atomic_gates"><code class="xref py py-obj docutils literal"><span class="pre">number_atomic_gates</span></code></a>()</td>
 <td>Count the number of leaf gates.</td>
@@ -260,14 +266,20 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.rz" title="qiskit.QuantumCircuit.rz"><code class="xref py py-obj docutils literal"><span class="pre">rz</span></code></a>(phi,&nbsp;q)</td>
 <td>Apply Rz to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.s" title="qiskit.QuantumCircuit.s"><code class="xref py py-obj docutils literal"><span class="pre">s</span></code></a>(q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.rzz" title="qiskit.QuantumCircuit.rzz"><code class="xref py py-obj docutils literal"><span class="pre">rzz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply RZZ to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.s" title="qiskit.QuantumCircuit.s"><code class="xref py py-obj docutils literal"><span class="pre">s</span></code></a>(q)</td>
 <td>Apply S to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.save" title="qiskit.QuantumCircuit.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>(m,&nbsp;q)</td>
-<td>Cache the quantum state of local_qiskit_simulator.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.save" title="qiskit.QuantumCircuit.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>(slot)</td>
+<td>Save the internal simulator representation (statevector, probability, density matrix, clifford table).</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.sdg" title="qiskit.QuantumCircuit.sdg"><code class="xref py py-obj docutils literal"><span class="pre">sdg</span></code></a>(q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.sdg" title="qiskit.QuantumCircuit.sdg"><code class="xref py py-obj docutils literal"><span class="pre">sdg</span></code></a>(q)</td>
 <td>Apply Sdg to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.snapshot" title="qiskit.QuantumCircuit.snapshot"><code class="xref py py-obj docutils literal"><span class="pre">snapshot</span></code></a>(slot)</td>
+<td>Take a snapshot of the internal simulator representation (statevector, probability, density matrix, clifford table) Works on all qubits, and prevents reordering (like barrier).</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.swap" title="qiskit.QuantumCircuit.swap"><code class="xref py py-obj docutils literal"><span class="pre">swap</span></code></a>(ctl,&nbsp;tgt)</td>
 <td>Apply SWAP from ctl to tgt.</td>
@@ -293,19 +305,16 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.u_base" title="qiskit.QuantumCircuit.u_base"><code class="xref py py-obj docutils literal"><span class="pre">u_base</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
 <td>Apply U to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.uzz" title="qiskit.QuantumCircuit.uzz"><code class="xref py py-obj docutils literal"><span class="pre">uzz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
-<td>Apply CZ to circuit.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.wait" title="qiskit.QuantumCircuit.wait"><code class="xref py py-obj docutils literal"><span class="pre">wait</span></code></a>(t,&nbsp;q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.wait" title="qiskit.QuantumCircuit.wait"><code class="xref py py-obj docutils literal"><span class="pre">wait</span></code></a>(t,&nbsp;q)</td>
 <td>Apply wait for time t to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.x" title="qiskit.QuantumCircuit.x"><code class="xref py py-obj docutils literal"><span class="pre">x</span></code></a>(q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.x" title="qiskit.QuantumCircuit.x"><code class="xref py py-obj docutils literal"><span class="pre">x</span></code></a>(q)</td>
 <td>Apply X to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.y" title="qiskit.QuantumCircuit.y"><code class="xref py py-obj docutils literal"><span class="pre">y</span></code></a>(q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.y" title="qiskit.QuantumCircuit.y"><code class="xref py py-obj docutils literal"><span class="pre">y</span></code></a>(q)</td>
 <td>Apply Y to q.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.z" title="qiskit.QuantumCircuit.z"><code class="xref py py-obj docutils literal"><span class="pre">z</span></code></a>(q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.z" title="qiskit.QuantumCircuit.z"><code class="xref py py-obj docutils literal"><span class="pre">z</span></code></a>(q)</td>
 <td>Apply Z to q.</td>
 </tr>
 </tbody>
@@ -314,6 +323,23 @@
 <dt id="qiskit.QuantumCircuit.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>*regs</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new circuit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>*regs</strong> (<em>Registers</em>) – registers to include in the circuit.</li>
+<li><strong>name</strong> (<em>str</em><em> or </em><em>None</em>) – the name of the quantum circuit. If
+None, an automatically generated identifier will be
+assigned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if the circuit name, if given, is not valid.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -324,8 +350,11 @@
 
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.barrier">
-<code class="descname">barrier</code><span class="sig-paren">(</span><em>*tuples</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.barrier" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply barrier to tuples (reg, idx).</p>
+<code class="descname">barrier</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.barrier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply barrier to circuit.
+If args is None, applies to all the qbits.
+Args is a list of QuantumRegister or single qubits.
+For QuantumRegister, applies barrier to all the qbits in that register.</p>
 </dd></dl>
 
 <dl class="method">
@@ -338,6 +367,19 @@
 <dt id="qiskit.QuantumCircuit.ch">
 <code class="descname">ch</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.ch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply CH from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="qiskit.QuantumCircuit.cls_instances">
+<em class="property">classmethod </em><code class="descname">cls_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.cls_instances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.cls_instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current number of instances of this class,
+useful for auto naming.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="qiskit.QuantumCircuit.cls_prefix">
+<em class="property">classmethod </em><code class="descname">cls_prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.cls_prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.cls_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the prefix to use for auto naming.</p>
 </dd></dl>
 
 <dl class="method">
@@ -378,7 +420,7 @@ circuits.</p>
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.cx">
 <code class="descname">cx</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply CNOT from ctl to tgt.</p>
+<dd><p>Apply CX from ctl to tgt.</p>
 </dd></dl>
 
 <dl class="method">
@@ -401,7 +443,7 @@ circuits.</p>
 
 <dl class="attribute">
 <dt id="qiskit.QuantumCircuit.definitions">
-<code class="descname">definitions</code><em class="property"> = {'ccx': {'bits': ['a', 'b', 'c'], 'n_args': 0, 'args': [], 'n_bits': 3, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e45780&gt;}, 'ch': {'bits': ['a', 'b'], 'n_args': 0, 'args': [], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e41898&gt;}, 'crz': {'bits': ['a', 'b'], 'n_args': 1, 'args': ['lambda'], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e45e48&gt;}, 'cu1': {'bits': ['a', 'b'], 'n_args': 1, 'args': ['lambda'], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e48748&gt;}, 'cu3': {'bits': ['c', 't'], 'n_args': 3, 'args': ['theta', 'phi', 'lambda'], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e4b390&gt;}, 'cx': {'bits': ['c', 't'], 'n_args': 0, 'args': [], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435eae780&gt;}, 'cy': {'bits': ['a', 'b'], 'n_args': 0, 'args': [], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3ea90&gt;}, 'cz': {'bits': ['a', 'b'], 'n_args': 0, 'args': [], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3e780&gt;}, 'h': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3a358&gt;}, 'id': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435eae908&gt;}, 'load': {'bits': ['a'], 'n_args': 1, 'args': ['m'], 'n_bits': 1, 'print': True, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x1543e867bb70&gt;}, 'noise': {'bits': ['a'], 'n_args': 1, 'args': ['m'], 'n_bits': 1, 'print': True, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x1543e86205f8&gt;}, 'rx': {'bits': ['a'], 'n_args': 1, 'args': ['theta'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3e0f0&gt;}, 'ry': {'bits': ['a'], 'n_args': 1, 'args': ['theta'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3e2e8&gt;}, 'rz': {'bits': ['a'], 'n_args': 1, 'args': ['phi'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3e470&gt;}, 's': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3a588&gt;}, 'save': {'bits': ['a'], 'n_args': 1, 'args': ['m'], 'n_bits': 1, 'print': True, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x1543e85dd0b8&gt;}, 'sdg': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3a828&gt;}, 'swap': {'bits': ['a', 'b'], 'n_args': 0, 'args': [], 'n_bits': 2, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3ee10&gt;}, 't': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3aa58&gt;}, 'tdg': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3acf8&gt;}, 'u0': {'bits': ['q'], 'n_args': 1, 'args': ['gamma'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435eaea90&gt;}, 'u1': {'bits': ['q'], 'n_args': 1, 'args': ['lambda'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435eae668&gt;}, 'u2': {'bits': ['q'], 'n_args': 2, 'args': ['phi', 'lambda'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435ea12e8&gt;}, 'u3': {'bits': ['q'], 'n_args': 3, 'args': ['theta', 'phi', 'lambda'], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435ec5780&gt;}, 'uzz': {'bits': ['a', 'b'], 'n_args': 1, 'args': ['theta'], 'n_bits': 2, 'print': True, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x1543e85dda20&gt;}, 'wait': {'bits': ['a'], 'n_args': 1, 'args': ['t'], 'n_bits': 1, 'print': True, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x1543e85ddc50&gt;}, 'x': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435eaec88&gt;}, 'y': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435eaefd0&gt;}, 'z': {'bits': ['a'], 'n_args': 0, 'args': [], 'n_bits': 1, 'print': False, 'opaque': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x154435e3a198&gt;}}</em><a class="headerlink" href="#qiskit.QuantumCircuit.definitions" title="Permalink to this definition">¶</a></dt>
+<code class="descname">definitions</code><em class="property"> = {'ccx': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f226d8&gt;, 'print': False, 'opaque': False, 'n_bits': 3, 'n_args': 0, 'bits': ['a', 'b', 'c'], 'args': []}, 'ch': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1f7f0&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 0, 'bits': ['a', 'b'], 'args': []}, 'crz': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f25198&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 1, 'bits': ['a', 'b'], 'args': ['lambda']}, 'cswap': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f22a90&gt;, 'print': False, 'opaque': False, 'n_bits': 3, 'n_args': 0, 'bits': ['a', 'b', 'c'], 'args': []}, 'cu1': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f25a58&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 1, 'bits': ['a', 'b'], 'args': ['lambda']}, 'cu3': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f296a0&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 3, 'bits': ['c', 't'], 'args': ['theta', 'phi', 'lambda']}, 'cx': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f0c710&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 0, 'bits': ['c', 't'], 'args': []}, 'cy': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1b9e8&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 0, 'bits': ['a', 'b'], 'args': []}, 'cz': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1b6d8&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 0, 'bits': ['a', 'b'], 'args': []}, 'h': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f172b0&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'id': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f0c860&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'rx': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1b048&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 1, 'bits': ['a'], 'args': ['theta']}, 'ry': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1b240&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 1, 'bits': ['a'], 'args': ['theta']}, 'rz': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1b3c8&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 1, 'bits': ['a'], 'args': ['phi']}, 'rzz': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f29a58&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 1, 'bits': ['a', 'b'], 'args': ['theta']}, 's': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f174e0&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'sdg': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f17780&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'swap': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f1bd68&gt;, 'print': False, 'opaque': False, 'n_bits': 2, 'n_args': 0, 'bits': ['a', 'b'], 'args': []}, 't': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f179b0&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'tdg': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f17c50&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'u0': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f0c9e8&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 1, 'bits': ['q'], 'args': ['gamma']}, 'u1': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f0c630&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 1, 'bits': ['q'], 'args': ['lambda']}, 'u2': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a2517588&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 2, 'bits': ['q'], 'args': ['phi', 'lambda']}, 'u3': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1fa6080&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 3, 'bits': ['q'], 'args': ['theta', 'phi', 'lambda']}, 'wait': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f09a48deb8&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 1, 'bits': ['a'], 'args': ['t']}, 'x': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f0cbe0&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'y': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f0cf28&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}, 'z': {'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x14f0a1f170f0&gt;, 'print': False, 'opaque': False, 'n_bits': 1, 'n_args': 0, 'bits': ['a'], 'args': []}}</em><a class="headerlink" href="#qiskit.QuantumCircuit.definitions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -463,6 +505,11 @@ circuits.</p>
 <dd><p>Apply initialize to circuit.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="qiskit.QuantumCircuit.instances">
+<code class="descname">instances</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit.QuantumCircuit.instances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.last_atomic_gate_host">
 <code class="descname">last_atomic_gate_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.last_atomic_gate_host" title="Permalink to this definition">¶</a></dt>
@@ -471,8 +518,24 @@ circuits.</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load cached quantum state of local_qiskit_simulator.</p>
+<code class="descname">load</code><span class="sig-paren">(</span><em>slot</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the internal simulator representation (statevector, probability,
+density matrix, clifford table)
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>slot</strong> (<em>int</em>) – a slot to load from</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -496,8 +559,23 @@ if cbit is not in this circuit or not creg.</td>
 
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.noise">
-<code class="descname">noise</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.noise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cache the quantum state of local_qiskit_simulator.</p>
+<code class="descname">noise</code><span class="sig-paren">(</span><em>switch</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn noise on/off in simulator.
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>switch</strong> (<em>int</em>) – turn noise on (1) or off (0)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -511,6 +589,11 @@ if cbit is not in this circuit or not creg.</td>
 <code class="descname">optimize_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.optimize_gates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove Zero rotations and Double CNOTS.</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.QuantumCircuit.prefix">
+<code class="descname">prefix</code><em class="property"> = 'circuit'</em><a class="headerlink" href="#qiskit.QuantumCircuit.prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.qasm">
@@ -564,6 +647,12 @@ not invert the gates!</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="qiskit.QuantumCircuit.rzz">
+<code class="descname">rzz</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.rzz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply RZZ to circuit.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="qiskit.QuantumCircuit.s">
 <code class="descname">s</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.s" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply S to q.</p>
@@ -571,14 +660,52 @@ not invert the gates!</p>
 
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cache the quantum state of local_qiskit_simulator.</p>
+<code class="descname">save</code><span class="sig-paren">(</span><em>slot</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the internal simulator representation (statevector, probability,
+density matrix, clifford table).
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>slot</strong> (<em>int</em>) – a slot to save into</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="qiskit.QuantumCircuit.sdg">
 <code class="descname">sdg</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.sdg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply Sdg to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.snapshot">
+<code class="descname">snapshot</code><span class="sig-paren">(</span><em>slot</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a snapshot of the internal simulator representation (statevector,
+probability, density matrix, clifford table)
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>slot</strong> (<em>int</em>) – a snapshot slot to report the result</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -627,12 +754,6 @@ not invert the gates!</p>
 <dt id="qiskit.QuantumCircuit.u_base">
 <code class="descname">u_base</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.u_base" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply U to q.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.QuantumCircuit.uzz">
-<code class="descname">uzz</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.uzz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply CZ to circuit.</p>
 </dd></dl>
 
 <dl class="method">
@@ -690,14 +811,14 @@ not invert the gates!</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

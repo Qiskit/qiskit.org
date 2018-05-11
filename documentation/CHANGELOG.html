@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Release history &#8212; QISKit SDK 0.4.15 documentation</title>
+    <title>QISKit SDK 0.5.0 &#8212; QISKit SDK 0.5.0 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.15',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -27,7 +27,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="qiskit.QISKitError" href="_autodoc/qiskit.QISKitError.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -50,16 +49,13 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="_autodoc/qiskit.QISKitError.html" title="qiskit.QISKitError"
-             accesskey="P">previous</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
    href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -72,27 +68,16 @@
 <p class="logo-description">Quantum Information Software Kit</p>
 
   <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul class="current">
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation and setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qiskit.html">QISKit overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev_introduction.html">Developer documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autodoc/qiskit.html">SDK reference</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Release history</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#qiskit-sdk-0-4-0">QISKit SDK 0.4.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#improvements">Improvements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#backward-incompatible-changes">Backward-incompatible changes</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Release history</a></li>
 </ul>
 
 <p class="spacer"/>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="_autodoc/qiskit.QISKitError.html"
-                        title="previous chapter">qiskit.QISKitError</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -118,13 +103,126 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="release-history">
-<h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="qiskit-sdk-0-4-0">
-<h2>QISKit SDK 0.4.0<a class="headerlink" href="#qiskit-sdk-0-4-0" title="Permalink to this headline">¶</a></h2>
-<p>2018/01/08</p>
+  <div class="section" id="qiskit-sdk-0-5-0">
+<h1>QISKit SDK 0.5.0<a class="headerlink" href="#qiskit-sdk-0-5-0" title="Permalink to this headline">¶</a></h1>
+<p>2018/05/11</p>
 <div class="section" id="improvements">
-<h3>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h3>
+<h2>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Introduce providers and rework backends (#376).</dt>
+<dd><ul class="first last">
+<li>Split backends into <code class="docutils literal"><span class="pre">local</span></code> and <code class="docutils literal"><span class="pre">ibmq</span></code>.</li>
+<li><dl class="first docutils">
+<dt>Each provider derives from the following classes for its specific requirements.</dt>
+<dd><code class="docutils literal"><span class="pre">BaseProvider</span></code> class.
+<code class="docutils literal"><span class="pre">BaseBackend</span></code> class.
+<code class="docutils literal"><span class="pre">BaseJob</span></code> class.</dd>
+</dl>
+</li>
+<li>Allow querying result by both circuit name and QuantumCircuit instance.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Introduce the QISKit <code class="docutils literal"><span class="pre">wrapper</span></code> (#376).</dt>
+<dd><ul class="first last">
+<li>Introduce convenience wrapper functions around commonly used QISKit components
+(e.g. <code class="docutils literal"><span class="pre">compile</span></code> and <code class="docutils literal"><span class="pre">execute</span></code> functions).</li>
+<li>Introduce the DefaultQISKitProvider, which acts as a context manager for the current session
+(e.g. providing easy access to all <code class="docutils literal"><span class="pre">available_backends</span></code>).</li>
+<li>Avoid relying on QuantumProgram (eventual deprecation).</li>
+<li>The functions are also available as top-level functions (for example,
+<code class="docutils literal"><span class="pre">qiskit.get_backend()</span></code>).</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Introduce <code class="docutils literal"><span class="pre">BaseJob</span></code> class and asynchronous jobs (#403).</dt>
+<dd><ul class="first last">
+<li>Return <code class="docutils literal"><span class="pre">BaseJob</span></code> after <code class="docutils literal"><span class="pre">run()</span></code>.</li>
+<li>Mechanisms for querying <code class="docutils literal"><span class="pre">status</span></code> and <code class="docutils literal"><span class="pre">results</span></code>, or to <code class="docutils literal"><span class="pre">cancel</span></code> a job</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Introduce a <code class="docutils literal"><span class="pre">skip_transpiler</span></code> flag for <code class="docutils literal"><span class="pre">compile()</span></code> (#411).</li>
+<li><dl class="first docutils">
+<dt>Introduce schemas for validating interfaces between qiskit and backends (#434)</dt>
+<dd><ul class="first last">
+<li>qobj_schema</li>
+<li>result_schema</li>
+<li>job_status_schema</li>
+<li>default_pulse_config_schema</li>
+<li>backend_config_schema</li>
+<li>backend_props_schema</li>
+<li>backend_status_schema</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Improve C++ simulator (#386)</dt>
+<dd><ul class="first last">
+<li>Add <code class="docutils literal"><span class="pre">tensor_index.hpp</span></code> for multi-partite qubit vector indexing.</li>
+<li>Add <code class="docutils literal"><span class="pre">qubit_vector.hpp</span></code> for multi-partite qubit vector algebra.</li>
+<li>Rework C++ simulator backends to use QubitVector class instead of std::vector.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Improve interface to simulator backends (#435)</dt>
+<dd><ul class="first last">
+<li>Introduce <code class="docutils literal"><span class="pre">local_statevector_simulator_py</span></code> and <code class="docutils literal"><span class="pre">local_statevector_simulator_cpp</span></code>.</li>
+<li>Introduce aliased and deprecated backend names and mechanisms for resolving them.</li>
+<li>Introduce optional <code class="docutils literal"><span class="pre">compact</span></code> flag to query backend names only by unique function.</li>
+<li>Introduce result convenience functions <code class="docutils literal"><span class="pre">get_statevector</span></code>, <code class="docutils literal"><span class="pre">get_unitary</span></code></li>
+<li>Add <code class="docutils literal"><span class="pre">snapshot</span></code> command for caching a copy of the current simulator state.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Introduce circuit drawing via <code class="docutils literal"><span class="pre">circuit_drawer()</span></code> and <code class="docutils literal"><span class="pre">plot_circuit()</span></code> (#295, #414)</li>
+<li>Introduce benchmark suite for performance testing (<code class="docutils literal"><span class="pre">test/performance</span></code>) (#277)</li>
+<li>Introduce more robust probability testing via assertDictAlmostEqual (#390)</li>
+<li>Allow combining circuits across both depth and width (#389)</li>
+<li>Enforce string token names (#395)</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fix coherent error bug in <code class="docutils literal"><span class="pre">local_qasm_simulator_cpp</span></code> (#318)</li>
+<li>Fix the order and format of result bits obtained from device backends (#430)</li>
+<li>Fix support for noises in the idle gate of <code class="docutils literal"><span class="pre">local_clifford_simulator_cpp</span></code> (#440)</li>
+<li>Fix JobProcessor modifying input qobj (#392) (and removed JobProcessor during #403)</li>
+<li>Fix ability to apply all gates on register (#369)</li>
+</ul>
+</div>
+<div class="section" id="backward-incompatible-changes">
+<h2>Backward-incompatible changes<a class="headerlink" href="#backward-incompatible-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Some methods of <code class="docutils literal"><span class="pre">QuantumProgram</span></code> are soon to be deprecated. Please use the
+top-level functions instead.</li>
+<li>The <code class="docutils literal"><span class="pre">Register</span></code> instantiation now expects <code class="docutils literal"><span class="pre">size,</span> <span class="pre">name</span></code>. Using
+<code class="docutils literal"><span class="pre">name,</span> <span class="pre">size</span></code> is still supported but will be deprecated in the future.</li>
+<li>Simulators no longer return wavefunction by setting shots=1. Instead,
+use the <code class="docutils literal"><span class="pre">local_statevector_simulator</span></code>, or explicitly ask for <code class="docutils literal"><span class="pre">snapshot</span></code>.</li>
+<li>Return <code class="docutils literal"><span class="pre">job</span></code> instance after <code class="docutils literal"><span class="pre">run()</span></code>, rather than <code class="docutils literal"><span class="pre">result</span></code>.</li>
+<li>Rename simulators according to <code class="docutils literal"><span class="pre">PROVIDERNAME_SIMPLEALIAS_simulator_LANGUAGEORPROJECT</span></code></li>
+<li>Move simulator extensions to <code class="docutils literal"><span class="pre">qiskit/extensions/simulator</span></code></li>
+<li>Move Rzz and CSwap to standard extension library</li>
+</ul>
+</div>
+</div>
+<div class="section" id="qiskit-sdk-0-4-0">
+<h1>QISKit SDK 0.4.0<a class="headerlink" href="#qiskit-sdk-0-4-0" title="Permalink to this headline">¶</a></h1>
+<p>2018/01/08</p>
+<div class="section" id="id1">
+<h2>Improvements<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="first docutils">
 <dt>Job handling improvements.</dt>
@@ -228,8 +326,8 @@ circuit into one which can run on the backend.</dd>
 </li>
 </ul>
 </div>
-<div class="section" id="bug-fixes">
-<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h2>Bug Fixes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Fix basis gates (#76).</li>
 <li>Enable QASM parser to work in multiuser environments.</li>
@@ -237,8 +335,8 @@ circuit into one which can run on the backend.</dd>
 <li>Fix “math domain error” in mapping (#111, #151).</li>
 </ul>
 </div>
-<div class="section" id="backward-incompatible-changes">
-<h3>Backward-incompatible changes<a class="headerlink" href="#backward-incompatible-changes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h2>Backward-incompatible changes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>The standard extension for creating U base gates has been modified to be
 consistent with the rest of the gate APIs (see #203).</li>
@@ -247,7 +345,6 @@ methods. The same behaviour can be achieved now by using the
 <code class="docutils literal"><span class="pre">enable_logs()</span></code> and <code class="docutils literal"><span class="pre">disable_logs()</span></code> methods, which use the standard
 Python logging.</li>
 </ul>
-</div>
 </div>
 </div>
 
@@ -266,22 +363,19 @@ Python logging.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="_autodoc/qiskit.QISKitError.html" title="qiskit.QISKitError"
-             >previous</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
    href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/07.
+      Last updated on 2018/05/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

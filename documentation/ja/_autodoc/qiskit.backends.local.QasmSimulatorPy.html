@@ -1,0 +1,340 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.local.QasmSimulatorPy &#8212; QISKit SDK 0.5.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.backends.local.StatevectorSimulatorCpp" href="qiskit.backends.local.StatevectorSimulatorCpp.html" />
+    <link rel="prev" title="qiskit.backends.local.QasmSimulatorProjectQ" href="qiskit.backends.local.QasmSimulatorProjectQ.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.backends.local.QasmSimulatorPy.html">english</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.backends.local.QasmSimulatorPy.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.local.StatevectorSimulatorCpp.html" title="qiskit.backends.local.StatevectorSimulatorCpp"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.local.QasmSimulatorProjectQ.html" title="qiskit.backends.local.QasmSimulatorProjectQ"
+             accesskey="P">前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.backends.local.html" accesskey="U">qiskit.backends.local package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Software Kit</p>
+
+  <h3><a href="../index.html">目次</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.backends.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.basebackend.html">qiskit.backends.basebackend module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.basejob.html">qiskit.backends.basejob module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.baseprovider.html">qiskit.backends.baseprovider module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.ibmq.html">qiskit.backends.ibmq package</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="qiskit.backends.local.html">qiskit.backends.local package</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="qiskit.backends.local.html#submodules">Submodules</a></li>
+<li class="toctree-l6 current"><a class="reference internal" href="qiskit.backends.local.html#classes">Classes</a><ul class="current">
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.CliffordSimulatorCpp.html">qiskit.backends.local.CliffordSimulatorCpp</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.LocalJob.html">qiskit.backends.local.LocalJob</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.LocalProvider.html">qiskit.backends.local.LocalProvider</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.QasmSimulatorCpp.html">qiskit.backends.local.QasmSimulatorCpp</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.QasmSimulatorProjectQ.html">qiskit.backends.local.QasmSimulatorProjectQ</a></li>
+<li class="toctree-l7 current"><a class="current reference internal" href="#">qiskit.backends.local.QasmSimulatorPy</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.StatevectorSimulatorCpp.html">qiskit.backends.local.StatevectorSimulatorCpp</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.StatevectorSimulatorPy.html">qiskit.backends.local.StatevectorSimulatorPy</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.StatevectorSimulatorSympy.html">qiskit.backends.local.StatevectorSimulatorSympy</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.UnitarySimulatorPy.html">qiskit.backends.local.UnitarySimulatorPy</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.local.UnitarySimulatorSympy.html">qiskit.backends.local.UnitarySimulatorSympy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="qiskit.backends.local.QasmSimulatorProjectQ.html"
+                        title="前の章へ">qiskit.backends.local.QasmSimulatorProjectQ</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="qiskit.backends.local.StatevectorSimulatorCpp.html"
+                        title="次の章へ">qiskit.backends.local.StatevectorSimulatorCpp</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.backends.local.QasmSimulatorPy.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-backends-local-qasmsimulatorpy">
+<h1>qiskit.backends.local.QasmSimulatorPy<a class="headerlink" href="#qiskit-backends-local-qasmsimulatorpy" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.backends.local.QasmSimulatorPy">
+<em class="property">class </em><code class="descclassname">qiskit.backends.local.</code><code class="descname">QasmSimulatorPy</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/local/qasm_simulator_py.html#QasmSimulatorPy"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">qiskit.backends.basebackend.BaseBackend</span></code></p>
+<p>Python implementation of a qasm simulator.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.local.QasmSimulatorPy.__init__" title="qiskit.backends.local.QasmSimulatorPy.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>([configuration])</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param configuration:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">backend configuration</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.local.QasmSimulatorPy.run" title="qiskit.backends.local.QasmSimulatorPy.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>(q_job)</td>
+<td>Run q_job asynchronously.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.local.QasmSimulatorPy.run_circuit" title="qiskit.backends.local.QasmSimulatorPy.run_circuit"><code class="xref py py-obj docutils literal"><span class="pre">run_circuit</span></code></a>(circuit)</td>
+<td>Run a circuit and return a single Result.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="qiskit.backends.local.QasmSimulatorPy.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'basis_gates': 'u1,u2,u3,cx,id,snapshot', 'coupling_map': 'all-to-all', 'description': 'A python simulator for qasm files', 'local': True, 'name': 'local_qasm_simulator_py', 'simulator': True, 'url': 'https://github.com/QISKit/qiskit-sdk-py'}</em><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.DEFAULT_CONFIGURATION" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.local.QasmSimulatorPy.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/local/qasm_simulator_py.html#QasmSimulatorPy.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>configuration</strong> (<em>dict</em>) -- backend configuration</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.local.QasmSimulatorPy.calibration">
+<code class="descname">calibration</code><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.calibration" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend calibration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.local.QasmSimulatorPy.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.configuration" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.local.QasmSimulatorPy.name">
+<code class="descname">name</code><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.name" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.local.QasmSimulatorPy.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.parameters" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.local.QasmSimulatorPy.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>q_job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/local/qasm_simulator_py.html#QasmSimulatorPy.run"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.run" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Run q_job asynchronously.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>q_job</strong> (<a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob" title="qiskit.QuantumJob"><em>QuantumJob</em></a>) -- QuantumJob object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">derived from BaseJob</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><a class="reference internal" href="qiskit.backends.local.LocalJob.html#qiskit.backends.local.LocalJob" title="qiskit.backends.local.LocalJob">LocalJob</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.local.QasmSimulatorPy.run_circuit">
+<code class="descname">run_circuit</code><span class="sig-paren">(</span><em>circuit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/local/qasm_simulator_py.html#QasmSimulatorPy.run_circuit"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.run_circuit" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Run a circuit and return a single Result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>circuit</strong> (<em>dict</em>) -- JSON circuit from qobj circuits list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">A dictionary of results which looks something like:<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;data&quot;</span><span class="p">:</span>
+    <span class="p">{</span>  <span class="c1">#### DATA CAN BE A DIFFERENT DICTIONARY FOR EACH BACKEND ####</span>
+    <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;00000&#39;</span><span class="p">:</span> <span class="n">XXXX</span><span class="p">,</span> <span class="s1">&#39;00001&#39;</span><span class="p">:</span> <span class="n">XXXXX</span><span class="p">},</span>
+    <span class="s2">&quot;time&quot;</span>  <span class="p">:</span> <span class="n">xx</span><span class="o">.</span><span class="n">xxxxxxxx</span>
+    <span class="p">},</span>
+<span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="o">--</span><span class="n">status</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">--</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">SimulatorError</span></code> -- if an error occurred.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.backends.local.QasmSimulatorPy.status">
+<code class="descname">status</code><a class="headerlink" href="#qiskit.backends.local.QasmSimulatorPy.status" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return backend status</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.local.StatevectorSimulatorCpp.html" title="qiskit.backends.local.StatevectorSimulatorCpp"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.local.QasmSimulatorProjectQ.html" title="qiskit.backends.local.QasmSimulatorProjectQ"
+             >前へ</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.backends.local.html" >qiskit.backends.local package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      最終更新: 2018/05/11
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+    </div>
+  </body>
+</html>
