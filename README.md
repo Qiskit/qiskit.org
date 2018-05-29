@@ -2,9 +2,9 @@
 https://www.qiskit.org
 
 ## QISKit
-Open Source Quantum Information Software Kit
+Open Source Quantum Information Science Kit
 
-The Open Source Quantum Information Software Kit (QISKit for short) is a software development kit (SDK) for working with OpenQASM and the IBM Q experience (QX) quantum processors.
+The Open Source Quantum Information Science Kit (QISKit for short) is a software development kit (SDK) for working with OpenQASM and the IBM Q experience (QX) quantum processors.
 
 Use QISKit to create quantum computing programs, compile them, and execute them on one of several backends (online Real quantum processors, and simulators).
 
