@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.5.0 documentation</title>
+    <title>qiskit.mapper._mapping &#8212; QISKit SDK 0.5.3 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -66,7 +66,7 @@
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -119,7 +119,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Layout module to assist with mapping circuit qubits onto physical qubits.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -311,8 +310,8 @@
     <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trial </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
-        <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
-        <span class="n">rev_trial_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">rev_layout</span><span class="p">)</span>
+        <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">rev_trial_layout</span> <span class="o">=</span> <span class="n">rev_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="c1"># SWAP circuit constructed this trial</span>
         <span class="n">trial_circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
         <span class="n">trial_circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">layout_max_index</span><span class="p">)</span>
@@ -356,10 +355,10 @@
                     <span class="c1"># Are the qubits available?</span>
                     <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">qubit_set</span> <span class="ow">and</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">qubit_set</span><span class="p">:</span>
                         <span class="c1"># Try this edge to reduce the cost</span>
-                        <span class="n">new_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">trial_layout</span><span class="p">)</span>
+                        <span class="n">new_layout</span> <span class="o">=</span> <span class="n">trial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
                         <span class="n">new_layout</span><span class="p">[</span><span class="n">rev_trial_layout</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                         <span class="n">new_layout</span><span class="p">[</span><span class="n">rev_trial_layout</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                        <span class="n">rev_new_layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">rev_trial_layout</span><span class="p">)</span>
+                        <span class="n">rev_new_layout</span> <span class="o">=</span> <span class="n">rev_trial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
                         <span class="n">rev_new_layout</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rev_trial_layout</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
                         <span class="n">rev_new_layout</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rev_trial_layout</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
                         <span class="c1"># Compute the objective function</span>
@@ -582,7 +581,7 @@
                           <span class="nb">zip</span><span class="p">(</span><span class="n">circuit_graph</span><span class="o">.</span><span class="n">get_qubits</span><span class="p">(),</span> <span class="n">qubit_subset</span><span class="p">)}</span>
 
     <span class="c1"># Find swap circuit to preceed to each layer of input circuit</span>
-    <span class="n">layout</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">layout_max_index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">layout</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
 
     <span class="c1"># Construct an empty DAGCircuit with one qreg &quot;q&quot;</span>
@@ -1043,14 +1042,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/11.
+      Last updated on 2018/05/29.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

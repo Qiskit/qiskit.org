@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.0 documentation</title>
+    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.3 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -66,7 +66,7 @@
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -116,18 +116,22 @@
 <span class="c1"># =============================================================================</span>
 <span class="sd">&quot;&quot;&quot;Helper module for simplified QISKit usage.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">qiskit._compiler</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
 <span class="kn">from</span> <span class="nn">qiskit.backends.ibmq.ibmqprovider</span> <span class="k">import</span> <span class="n">IBMQProvider</span>
 <span class="kn">from</span> <span class="nn">qiskit.wrapper.defaultqiskitprovider</span> <span class="k">import</span> <span class="n">DefaultQISKitProvider</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumJob</span>
+<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
+<span class="kn">from</span> <span class="nn">qiskit.unroll</span> <span class="k">import</span> <span class="n">Unroller</span><span class="p">,</span> <span class="n">CircuitBackend</span>
+
 
 <span class="c1"># Default provider used by the rest of the functions on this module. Please</span>
 <span class="c1"># note that this is a global object.</span>
 <span class="n">_DEFAULT_PROVIDER</span> <span class="o">=</span> <span class="n">DefaultQISKitProvider</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="register"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.register.html#qiskit.register">[docs]</a><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+<div class="viewcode-block" id="register"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.register.html#qiskit.register">[docs]</a><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span><span class="p">,</span>
              <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
              <span class="n">provider_name</span><span class="o">=</span><span class="s1">&#39;ibmq&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -302,6 +306,59 @@
     <span class="n">q_job</span> <span class="o">=</span> <span class="n">QuantumJob</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">preformatted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="p">{</span>
         <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;max_credits&#39;</span><span class="p">]})</span>
     <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">q_job</span><span class="p">)</span></div>
+
+
+<span class="c1"># Functions for importing qasm</span>
+
+
+<div class="viewcode-block" id="load_qasm_string"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.load_qasm_string.html#qiskit.load_qasm_string">[docs]</a><span class="k">def</span> <span class="nf">load_qasm_string</span><span class="p">(</span><span class="n">qasm_string</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">basis_gates</span><span class="o">=</span><span class="s2">&quot;id,u0,u1,u2,u3,x,y,z,h,s,sdg,t,tdg,rx,ry,rz,&quot;</span>
+                                 <span class="s2">&quot;cx,cy,cz,ch,crz,cu1,cu3,swap,ccx,cswap&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a quantum circuit from a qasm representation (string).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        qasm_string (str): a string of qasm, or a filename containing qasm.</span>
+<span class="sd">        basis_gates (str): basis gates for the quantum circuit.</span>
+<span class="sd">        name (str or None): the name of the quantum circuit after loading qasm</span>
+<span class="sd">            text into it. If no name given, assign automatically.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: circuit constructed from qasm.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QISKitError: if the string is not valid QASM</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">node_circuit</span> <span class="o">=</span> <span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">qasm_string</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+    <span class="n">unrolled_circuit</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">(</span><span class="n">node_circuit</span><span class="p">,</span> <span class="n">CircuitBackend</span><span class="p">(</span><span class="n">basis_gates</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+    <span class="n">circuit_unrolled</span> <span class="o">=</span> <span class="n">unrolled_circuit</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">circuit_unrolled</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">return</span> <span class="n">circuit_unrolled</span></div>
+
+
+<div class="viewcode-block" id="load_qasm_file"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.load_qasm_file.html#qiskit.load_qasm_file">[docs]</a><span class="k">def</span> <span class="nf">load_qasm_file</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">basis_gates</span><span class="o">=</span><span class="s2">&quot;id,u0,u1,u2,u3,x,y,z,h,s,sdg,t,tdg,rx,ry,rz,&quot;</span>
+                               <span class="s2">&quot;cx,cy,cz,ch,crz,cu1,cu3,swap,ccx,cswap&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a quantum circuit from a qasm representation (file).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        qasm_file (str): a string for the filename including its location.</span>
+<span class="sd">        name (str or None): the name of the quantum circuit after</span>
+<span class="sd">            loading qasm text into it. If no name is give the name is of</span>
+<span class="sd">            the text file.</span>
+<span class="sd">        basis_gates (str): basis gates for the quantum circuit.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">         QuantumCircuit: circuit constructed from qasm.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QISKitError: if the file cannot be read.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;qasm file &quot;</span><span class="si">{0}</span><span class="s1">&quot; not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">qasm_data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">load_qasm_string</span><span class="p">(</span><span class="n">qasm_data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -324,14 +381,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/11.
+      Last updated on 2018/05/29.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
