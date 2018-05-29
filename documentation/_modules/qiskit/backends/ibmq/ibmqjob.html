@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.ibmq.ibmqjob &#8212; QISKit SDK 0.5.0 documentation</title>
+    <title>qiskit.backends.ibmq.ibmqjob &#8212; QISKit SDK 0.5.3 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -66,7 +66,7 @@
             <p class="logo"><a href="../../../../index.html">
               <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../../../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -172,13 +172,15 @@
         <span class="n">this_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_job</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_device</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
             <span class="n">_reorder_bits</span><span class="p">(</span><span class="n">this_result</span><span class="p">)</span>  <span class="c1"># TODO: remove this after Qobj</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+        <span class="k">if</span> <span class="n">this_result</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
         <span class="k">return</span> <span class="n">this_result</span></div>
 
 <div class="viewcode-block" id="IBMQJob.cancel"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQJob.html#qiskit.backends.ibmq.IBMQJob.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Attempt to cancel job. Currently this is only possible on</span>
 <span class="sd">        commercial systems.</span>
-
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: True if job can be cancelled, else False.</span>
 
@@ -198,6 +200,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
     <span class="nd">@property</span>
@@ -227,17 +230,22 @@
                     <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;queue_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job_result</span><span class="p">[</span><span class="s1">&#39;infoQueue&#39;</span><span class="p">][</span><span class="s1">&#39;position&#39;</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">job_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">cancelled</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">job_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CANCELLED&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">CANCELLED</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future_submit</span><span class="o">.</span><span class="n">exception</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future_submit</span><span class="o">.</span><span class="n">exception</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_status_msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;ERROR&#39;</span> <span class="ow">in</span> <span class="n">job_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]:</span>
+            <span class="c1"># ERROR_CREATING_JOB or ERROR_RUNNING_JOB</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status_msg</span> <span class="o">=</span> <span class="n">job_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
-            <span class="k">raise</span> <span class="n">IBMQJobError</span><span class="p">(</span><span class="s1">&#39;Unexpected behavior of </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">IBMQJobError</span><span class="p">(</span><span class="s1">&#39;Unexpected behavior of </span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">job_result</span><span class="p">)))</span>
         <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
         <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;status_msg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_status_msg</span>
         <span class="k">return</span> <span class="n">stats</span>
@@ -290,13 +298,15 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Exception: exception raised by job</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exception</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status_msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exception</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_is_commercial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">config</span>
         <span class="c1"># this check may give false positives so should probably be improved</span>
-        <span class="k">return</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;hub&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hub&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">job_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -338,8 +348,7 @@
 
         <span class="n">seed0</span> <span class="o">=</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span>
         <span class="n">hpc</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;backend_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ibmq_qasm_simulator_hpc&#39;</span> <span class="ow">and</span>
-                <span class="s1">&#39;hpc&#39;</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="s1">&#39;hpc&#39;</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># Use CamelCase when passing the hpc parameters to the API.</span>
                 <span class="n">hpc</span> <span class="o">=</span> <span class="p">{</span>
@@ -356,6 +365,7 @@
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;inconsistent qobj backend &quot;</span>
                               <span class="s2">&quot;name (</span><span class="si">{0}</span><span class="s2"> != </span><span class="si">{1}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">,</span>
                                                          <span class="bp">self</span><span class="o">.</span><span class="n">_backend_name</span><span class="p">))</span>
+        <span class="n">submit_info</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">submit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">run_job</span><span class="p">(</span><span class="n">api_jobs</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span>
                                             <span class="n">shots</span><span class="o">=</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">],</span>
@@ -517,14 +527,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/11.
+      Last updated on 2018/05/29.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

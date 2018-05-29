@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.ibmq.ibmqprovider &#8212; QISKit SDK 0.5.0 documentation</title>
+    <title>qiskit.backends.ibmq.ibmqprovider &#8212; QISKit SDK 0.5.3 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -66,7 +66,7 @@
             <p class="logo"><a href="../../../../index.html">
               <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../../../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -118,7 +118,7 @@
 <span class="sd">&quot;&quot;&quot;Provider for remote IbmQ backends.&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">IBMQuantumExperience</span> <span class="k">import</span> <span class="n">IBMQuantumExperience</span>
 
-<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">_snake_case_to_camel_case</span>
+<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">_camel_case_to_snake_case</span>
 <span class="kn">from</span> <span class="nn">qiskit.backends.baseprovider</span> <span class="k">import</span> <span class="n">BaseProvider</span>
 <span class="kn">from</span> <span class="nn">qiskit.backends.ibmq.ibmqbackend</span> <span class="k">import</span> <span class="n">IBMQBackend</span>
 
@@ -150,17 +150,12 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">backends</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="IBMQProvider.aliased_backend_names"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider.aliased_backend_names">[docs]</a>    <span class="k">def</span> <span class="nf">aliased_backend_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="c1"># FIXME: uncomment after API fix: online simulator names should change</span>
-            <span class="c1"># &#39;ibmq_qasm_simulator&#39;: [&#39;ibmq_qasm_simulator&#39;,</span>
-            <span class="c1">#                         &#39;ibmq_qasm_simulator_hpc&#39;]</span>
-            <span class="p">}</span></div>
+        <span class="k">return</span> <span class="p">{}</span></div>
 
 <div class="viewcode-block" id="IBMQProvider.deprecated_backend_names"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider.deprecated_backend_names">[docs]</a>    <span class="k">def</span> <span class="nf">deprecated_backend_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="c1"># FIXME: uncomment after API fix: online simulator names should change</span>
-            <span class="c1"># &#39;ibmq_qasm_simulator&#39;: &#39;ibmq_qasm_simulator&#39;,</span>
-            <span class="c1"># &#39;ibmq_qasm_simulator_hpc&#39;: &#39;ibmq_qasm_simulator_hpc&#39;,</span>
+            <span class="s1">&#39;ibmqx_qasm_simulator&#39;</span><span class="p">:</span> <span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ibmqx_hpc_qasm_simulator&#39;</span><span class="p">:</span> <span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span>
             <span class="s1">&#39;real&#39;</span><span class="p">:</span> <span class="s1">&#39;ibmqx1&#39;</span>
             <span class="p">}</span></div>
 
@@ -217,7 +212,7 @@
         <span class="p">}</span>
 
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">new_key</span> <span class="o">=</span> <span class="n">_snake_case_to_camel_case</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">new_key</span> <span class="o">=</span> <span class="n">_camel_case_to_snake_case</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">new_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;serial_number&#39;</span><span class="p">,</span> <span class="s1">&#39;topology_id&#39;</span><span class="p">,</span>
                                <span class="s1">&#39;status&#39;</span><span class="p">]:</span>
                 <span class="n">edited_config</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
@@ -261,14 +256,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/11.
+      Last updated on 2018/05/29.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper.get_backend &#8212; QISKit SDK 0.5.0 documentation</title>
+    <title>qiskit.wrapper.get_backend &#8212; QISKit SDK 0.5.3 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.wrapper.local_backends" href="qiskit.wrapper.local_backends.html" />
+    <link rel="next" title="qiskit.wrapper.load_qasm_file" href="qiskit.wrapper.load_qasm_file.html" />
     <link rel="prev" title="qiskit.wrapper.execute" href="qiskit.wrapper.execute.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
@@ -52,7 +52,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="qiskit.wrapper.local_backends.html" title="qiskit.wrapper.local_backends"
+          <a href="qiskit.wrapper.load_qasm_file.html" title="qiskit.wrapper.load_qasm_file"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="qiskit.wrapper.execute.html" title="qiskit.wrapper.execute"
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" accesskey="U">qiskit.wrapper package</a> &#187;</li> 
@@ -75,7 +75,7 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul class="current">
@@ -98,6 +98,8 @@
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.compile.html">qiskit.wrapper.compile</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.execute.html">qiskit.wrapper.execute</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.wrapper.get_backend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.load_qasm_file.html">qiskit.wrapper.load_qasm_file</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.load_qasm_string.html">qiskit.wrapper.load_qasm_string</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.local_backends.html">qiskit.wrapper.local_backends</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.register.html">qiskit.wrapper.register</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.remote_backends.html">qiskit.wrapper.remote_backends</a></li>
@@ -120,8 +122,8 @@
   <p class="topless"><a href="qiskit.wrapper.execute.html"
                         title="previous chapter">qiskit.wrapper.execute</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="qiskit.wrapper.local_backends.html"
-                        title="next chapter">qiskit.wrapper.local_backends</a></p>
+  <p class="topless"><a href="qiskit.wrapper.load_qasm_file.html"
+                        title="next chapter">qiskit.wrapper.load_qasm_file</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -185,7 +187,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="qiskit.wrapper.local_backends.html" title="qiskit.wrapper.local_backends"
+          <a href="qiskit.wrapper.load_qasm_file.html" title="qiskit.wrapper.load_qasm_file"
              >next</a> |</li>
         <li class="right" >
           <a href="qiskit.wrapper.execute.html" title="qiskit.wrapper.execute"
@@ -196,7 +198,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" >qiskit.wrapper package</a> &#187;</li> 
@@ -204,7 +206,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/11.
+      Last updated on 2018/05/29.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.5.0 ドキュメント</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.5.3 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -67,7 +67,7 @@
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../../index.html">目次</a></h3>
   <ul>
@@ -122,9 +122,6 @@
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">string</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">qiskit.wrapper</span>
@@ -137,7 +134,6 @@
 <span class="kn">from</span> <span class="nn">._quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">.mapper</span> <span class="k">import</span> <span class="n">coupling_dict2list</span>
 <span class="kn">from</span> <span class="nn">.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
-<span class="kn">from</span> <span class="nn">.unroll</span> <span class="k">import</span> <span class="n">CircuitBackend</span><span class="p">,</span> <span class="n">Unroller</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -523,17 +519,10 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the file cannot be read.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;qasm file &quot;</span><span class="si">{0}</span><span class="s1">&quot; not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">))</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">node_circuit</span> <span class="o">=</span> <span class="n">Qasm</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">qasm_file</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>  <span class="c1"># Node (AST)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;circuit name: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;******************************&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">node_circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">())</span>
-        <span class="c1"># current method to turn it a DAG quantum circuit.</span>
-        <span class="n">unrolled_circuit</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">(</span><span class="n">node_circuit</span><span class="p">,</span> <span class="n">CircuitBackend</span><span class="p">(</span><span class="n">basis_gates</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
-        <span class="n">circuit_unrolled</span> <span class="o">=</span> <span class="n">unrolled_circuit</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;QuantumProgram.load_qasm_file() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.load_qasm_file() instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">circuit_unrolled</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">wrapper</span><span class="o">.</span><span class="n">load_qasm_file</span><span class="p">(</span><span class="n">qasm_file</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">circuit_unrolled</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">name</span></div>
 
@@ -550,17 +539,10 @@
 <span class="sd">            str: Adds a quantum circuit with the gates given in the qasm string to</span>
 <span class="sd">            the quantum program.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">node_circuit</span> <span class="o">=</span> <span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">qasm_string</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>  <span class="c1"># Node (AST)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
-            <span class="c1"># Get a random name if none is given</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
-                            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;circuit name: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;******************************&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">node_circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">())</span>
-        <span class="c1"># current method to turn it a DAG quantum circuit.</span>
-        <span class="n">unrolled_circuit</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">(</span><span class="n">node_circuit</span><span class="p">,</span> <span class="n">CircuitBackend</span><span class="p">(</span><span class="n">basis_gates</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
-        <span class="n">circuit_unrolled</span> <span class="o">=</span> <span class="n">unrolled_circuit</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;QuantumProgram.load_qasm_text() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
+            <span class="s2">&quot;Using qiskit.load_qasm_text() instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">circuit_unrolled</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">wrapper</span><span class="o">.</span><span class="n">load_qasm_string</span><span class="p">(</span><span class="n">qasm_string</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">circuit_unrolled</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">name</span></div>
 
@@ -1295,16 +1277,13 @@
 <span class="sd">            max_credits (int): the max credits to use 3, or 5</span>
 <span class="sd">            seed (int): the initial seed the simulators use</span>
 <span class="sd">            hpc (dict): This will setup some parameter for</span>
-<span class="sd">                        ibmq_qasm_simulator_hpc, using a JSON-like format like::</span>
+<span class="sd">                        ibmq_qasm_simulator, using a JSON-like format like::</span>
 
 <span class="sd">                            {</span>
 <span class="sd">                                &#39;multi_shot_optimization&#39;: Boolean,</span>
 <span class="sd">                                &#39;omp_num_threads&#39;: Numeric</span>
 <span class="sd">                            }</span>
 
-<span class="sd">                        This parameter MUST be used only with</span>
-<span class="sd">                        ibmq_qasm_simulator_hpc, otherwise the SDK will warn</span>
-<span class="sd">                        the user via logging, and set the value to None.</span>
 <span class="sd">            skip_translation (bool): If True, bypass most of the compilation process and</span>
 <span class="sd">                creates a qobj with minimal check nor translation</span>
 <span class="sd">        Returns:</span>
@@ -1397,14 +1376,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.0 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/05/11
+      最終更新: 2018/05/29
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

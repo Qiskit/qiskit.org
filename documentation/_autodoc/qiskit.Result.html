@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.Result &#8212; QISKit SDK 0.5.0 documentation</title>
+    <title>qiskit.Result &#8212; QISKit SDK 0.5.3 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0',
+        VERSION:     '0.5.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -74,7 +74,7 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
-<p class="logo-description">Quantum Information Software Kit</p>
+<p class="logo-description">Quantum Information Science Kit</p>
 
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul class="current">
@@ -217,6 +217,9 @@
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_status" title="qiskit.Result.get_status"><code class="xref py py-obj docutils literal"><span class="pre">get_status</span></code></a>()</td>
 <td>Return whole qobj result status.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_unitary" title="qiskit.Result.get_unitary"><code class="xref py py-obj docutils literal"><span class="pre">get_unitary</span></code></a>([circuit_name])</td>
+<td>Get the final unitary of circuit name.</td>
 </tr>
 </tbody>
 </table>
@@ -524,6 +527,30 @@ that one.</td>
 <dd><p>Return whole qobj result status.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="qiskit.Result.get_unitary">
+<code class="descname">get_unitary</code><span class="sig-paren">(</span><em>circuit_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_unitary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_unitary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the final unitary of circuit name.</p>
+<p>The data is a matrix of complex numbers
+[[1.+0.j, 0.+0.j], .. ].</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>circuit_name</strong> (<em>str</em><em> or </em><a class="reference internal" href="qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><em>QuantumCircuit</em></a><em> or </em><em>None</em>) – reference to a quantum circuit
+If None and there is only one circuit available, returns
+that one.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of 2^n_qubits x 2^n_qubits complex amplitudes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[list[complex]]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if there is no unitary for the circuit.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -555,14 +582,14 @@ that one.</td>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/11.
+      Last updated on 2018/05/29.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
