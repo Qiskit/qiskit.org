@@ -218,7 +218,7 @@
 
     <app-location
         route="{{_route}}"
-        url-space-regex="^[[rootPath]]">
+        url-space-regex="^[[rootPath]](?!modelq)">
     </app-location>
     <app-route
         route="{{_route}}"
@@ -504,9 +504,6 @@
       }
 
       _routeDataChanged(_routeData) {
-        if (_routeData.page && _routeData.page === 'modelq') {
-          window.location.assign('/modelq');
-        }
       }
 
       _routeQueryParamsChanged(_routeQueryParams) {
