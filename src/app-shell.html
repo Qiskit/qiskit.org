@@ -216,8 +216,16 @@
       }
     </style>
 
-    <app-location route="{{_route}}" use-hash-as-path></app-location>
-    <app-route route="{{_route}}" pattern="/:language" data="{{_routeData}}"></app-route>
+    <app-location
+        route="{{_route}}"
+        url-space-regex="^[[rootPath]]"
+        use-hash-as-path>
+    </app-location>
+    <app-route
+        route="{{_route}}"
+        pattern="[[rootPath]]:language"
+        data="{{_routeData}}">
+    </app-route>
 
     <div class="language">
       <a href$="[[rootPath]]#/en">english</a> / <a href$="[[rootPath]]#/ja">japanese</a>
