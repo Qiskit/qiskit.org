@@ -218,17 +218,17 @@
 
     <app-location
         route="{{_route}}"
-        url-space-regex="^[[rootPath]]"
-        use-hash-as-path>
+        url-space-regex="^[[rootPath]]">
     </app-location>
     <app-route
         route="{{_route}}"
-        pattern="[[rootPath]]:language"
-        data="{{_routeData}}">
+        pattern="[[rootPath]]"
+        data="{{_routeData}}"
+        query-params="{{_routeQueryParams}}">
     </app-route>
 
     <div class="language">
-      <a href$="[[rootPath]]#/en">english</a> / <a href$="[[rootPath]]#/ja">japanese</a>
+      <a href$="[[rootPath]]?language=en">english</a> / <a href$="[[rootPath]]?language=ja">japanese</a>
     </div>
 
     <header>
@@ -380,6 +380,11 @@
             observer: '_routeDataChanged'
           },
 
+          _routeQueryParams: {
+            type: Object,
+            observer: '_routeQueryParamsChanged'
+          },
+
           _documentationSuffix: {
             type: String
           },
@@ -498,9 +503,9 @@
         this.set('_documentationSuffix', language === 'ja' ? '/ja/' : '');
       }
 
-      _routeDataChanged(_routeData) {
-        if (_routeData.language) {
-          this.set('language', _routeData.language);
+      _routeQueryParamsChanged(_routeQueryParams) {
+        if (_routeQueryParams.language) {
+          this.set('language', _routeQueryParams.language);
         }
       }
     }
