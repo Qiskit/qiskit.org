@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.5.3 ドキュメント</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.5.4 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.3',
+        VERSION:     '0.5.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -100,20 +100,10 @@
   <h1>qiskit._quantumprogram のソースコード</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1"># Copyright 2017, IBM.</span>
 <span class="c1">#</span>
-<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1"># you may not use this file except in compliance with the License.</span>
-<span class="c1"># You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1"># See the License for the specific language governing permissions and</span>
-<span class="c1"># limitations under the License.</span>
-<span class="c1"># =============================================================================</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Qasm Program Class</span>
@@ -1042,14 +1032,19 @@
 <div class="viewcode-block" id="QuantumProgram.compile"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.compile">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compile the circuits into the execution list.</span>
 
 <span class="sd">        .. deprecated:: 0.5</span>
 <span class="sd">            The `coupling_map` parameter as a dictionary will be deprecated in</span>
 <span class="sd">            upcoming versions. Using the coupling_map as a list is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="c1"># pylint: disable=missing-param-doc, missing-type-doc</span>
+        <span class="k">if</span> <span class="n">skip_translation</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;skip_translation will be called skip_transpiler in future versions.&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">skip_transpiler</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_dict2list</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
@@ -1071,7 +1066,7 @@
         <span class="n">qobj</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">wrapper</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">list_of_circuits</span><span class="p">,</span> <span class="n">my_backend</span><span class="p">,</span>
                                       <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
                                       <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span>
-                                      <span class="n">skip_translation</span><span class="p">)</span>
+                                      <span class="n">skip_transpiler</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">qobj</span></div>
 
 <div class="viewcode-block" id="QuantumProgram.reconfig"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.reconfig">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">reconfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1236,7 +1231,7 @@
 <div class="viewcode-block" id="QuantumProgram.execute"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.execute">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-                <span class="n">max_credits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="n">max_credits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute, compile, and run an array of quantum circuits).</span>
 
 <span class="sd">        This builds the internal &quot;to execute&quot; list which is list of quantum</span>
@@ -1284,7 +1279,7 @@
 <span class="sd">                                &#39;omp_num_threads&#39;: Numeric</span>
 <span class="sd">                            }</span>
 
-<span class="sd">            skip_translation (bool): If True, bypass most of the compilation process and</span>
+<span class="sd">            skip_transpiler (bool): If True, bypass most of the compilation process and</span>
 <span class="sd">                creates a qobj with minimal check nor translation</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            Result: status done and populates the internal __quantum_program with the data.</span>
@@ -1293,6 +1288,12 @@
 <span class="sd">            The `coupling_map` parameter as a dictionary will be deprecated in</span>
 <span class="sd">            upcoming versions. Using the coupling_map as a list is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=missing-param-doc, missing-type-doc</span>
+        <span class="k">if</span> <span class="n">skip_translation</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;skip_translation will be called skip_transpiler in future versions.&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">skip_transpiler</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># TODO: Jay: currently basis_gates, coupling_map, initial_layout, shots,</span>
         <span class="c1"># max_credits, and seed are extra inputs but I would like them to go</span>
         <span class="c1"># into the config</span>
@@ -1301,7 +1302,7 @@
                             <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
                             <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span>
                             <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
-                            <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="n">skip_translation</span><span class="p">)</span>
+                            <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="n">skip_transpiler</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
@@ -1376,14 +1377,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/05/29
+      最終更新: 2018/06/11
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
