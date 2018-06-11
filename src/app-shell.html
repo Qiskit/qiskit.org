@@ -222,7 +222,7 @@
     </app-location>
     <app-route
         route="{{_route}}"
-        pattern="[[rootPath]]"
+        pattern="[[rootPath]]:page"
         data="{{_routeData}}"
         query-params="{{_routeQueryParams}}">
     </app-route>
@@ -501,6 +501,12 @@
 
       languageChanged(language) {
         this.set('_documentationSuffix', language === 'ja' ? '/ja/' : '');
+      }
+
+      _routeDataChanged(_routeData) {
+        if (_routeData.page && _routeData.page === 'modelq') {
+          window.location.assign('/modelq');
+        }
       }
 
       _routeQueryParamsChanged(_routeQueryParams) {
