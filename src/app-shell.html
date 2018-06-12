@@ -106,7 +106,9 @@
     </app-route>
 
     <div class="language">
-      <a href$="[[rootPath]]?language=en">english</a> / <a href$="[[rootPath]]?language=ja">japanese</a>
+      <a href="" on-click="_updateLanguage" data-language="en">english</a>
+      /
+      <a href="" on-click="_updateLanguage" data-language="ja">japanese</a>
     </div>
 
     <iron-pages
@@ -186,8 +188,7 @@
           },
 
           _routeQueryParams: {
-            type: Object,
-            observer: '_routeQueryParamsChanged'
+            type: Object
           },
 
           _selectedPageId: {
@@ -205,6 +206,18 @@
             }
           }
         };
+      }
+
+      static get observers() {
+        return [
+          '_routeQueryParamLanguageChanged(_routeQueryParams.language)'
+        ];
+      }
+
+      _routeQueryParamLanguageChanged(language) {
+        if (language) {
+          this.set('language', language);
+        }
       }
 
       connectedCallback() {
@@ -248,10 +261,11 @@
         Polymer.importHref(this.resolveUrl(pagePath), null, null, true);
       }
 
-      _routeQueryParamsChanged(_routeQueryParams) {
-        if (_routeQueryParams.language) {
-          this.set('language', _routeQueryParams.language);
-        }
+      _updateLanguage(event) {
+        event.preventDefault();
+
+        const language = event.target.dataset.language;
+        this.set('_routeQueryParams.language', language);
       }
     }
 
