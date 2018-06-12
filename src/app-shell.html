@@ -101,8 +101,7 @@
     <app-route
         route="{{_route}}"
         pattern="[[rootPath]]:pageName"
-        data="{{_routeData}}"
-        query-params="{{_routeQueryParams}}">
+        data="{{_routeData}}">
     </app-route>
 
     <div class="language">
@@ -188,10 +187,6 @@
             observer: '_routeDataChanged'
           },
 
-          _routeQueryParams: {
-            type: Object
-          },
-
           _selectedPageId: {
             type: String
           },
@@ -211,7 +206,7 @@
 
       static get observers() {
         return [
-          '_routeQueryParamLanguageChanged(_routeQueryParams.language)'
+          '_routeQueryParamLanguageChanged(_route.__queryParams.language)'
         ];
       }
 
@@ -273,7 +268,7 @@
         event.preventDefault();
 
         const language = event.target.dataset.language;
-        this.set('_routeQueryParams.language', language);
+        this.set('_route.__queryParams.language', language);
       }
     }
 
