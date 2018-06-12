@@ -7,6 +7,7 @@
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../ibmq-components/vaadin-button.html">
 <link rel="import" href="../app-icons.html">
+<link rel="import" href="../app-styles.html">
 
 <dom-module id="page-acqua">
   <template>
@@ -25,6 +26,22 @@
         flex-direction: column;
       }
 
+      .qiskit-link {
+        position: fixed;
+        top: 0;
+        left: 1em;
+        font-size: 1.2em;
+        z-index: 99;
+        padding: .5em 1em;
+        border-bottom-right-radius: .5em;
+        border-bottom-left-radius: .5em;
+        background-color: #1b2025;
+      }
+
+      .qiskit-link a {
+        color: #ffffff;
+      }
+
       header {
         background-color: rgb(2, 70, 98);
         background: radial-gradient(circle, rgba(2,70,98,1) 0%, rgba(49,100,136,1) 74%, rgba(85,114,135,1) 100%);
@@ -37,6 +54,10 @@
         pattern="[[rootPath]]acqua/:sectionName"
         data="{{_routeData}}">
     </app-route>
+
+    <div class="qiskit-link">
+      <a href="[[rootPath]]">&lt; QISKit</a>
+    </div>
 
     <header>
       <img src$="[[rootPath]]images/qiskit-acqua-logo.gif" alt="QISKit ACQUA logo">
@@ -107,7 +128,7 @@
         <div class="card">
           <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id">
             <div section-id="home">
-              <h3>[[localize('exampleTitle')]]</h3>
+              <h3>[[localize('acqua.exampleTitle')]]</h3>
               <pre class="terminal">$ pip install qiskit-acqua</pre>
               <code-sample type="python" copy-clipboard-button>
                 <!-- htmlmin:ignore -->
