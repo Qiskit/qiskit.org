@@ -1,0 +1,708 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/code-sample/themes/atom-one-light.html">
+<link rel="import" href="../bower_components/code-sample/code-sample.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="ibmq-components/vaadin-button.html">
+<link rel="import" href="app-icons.html">
+
+<dom-module id="app-shell-acqua">
+
+  <link rel="import" type="css" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css">
+  <template>
+    <style>
+      :host {
+        --primary-color: #459FE1;
+        --light-primary-color: #4CB0F8;
+        --dark-primary-color: #0089C1;
+
+        --ibmq-button-primary-background-color: var(--dark-primary-color);
+        --ibmq-button-primary-focus-background-color: var(--light-primary-color);
+        --ibmq-button-secondary-color: #ffffff;
+        --ibmq-button-secondary-focus-color: var(--primary-color);
+
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      iron-icon {
+        --iron-icon-height: 20px;
+        --iron-icon-width: 20px;
+      }
+
+      .language {
+        position: fixed;
+        top: 0;
+        right: 1em;
+        font-size: 0.8em;
+        z-index: 99;
+        padding: .5em 1em;
+        border-bottom-right-radius: .5em;
+        border-bottom-left-radius: .5em;
+        background-color: #1b2025;
+        color: #ffffff;
+      }
+
+      .language a {
+        color: #ffffff;
+      }
+
+      .qiskit-link {
+        position: fixed;
+        top: 0;
+        left: 1em;
+        font-size: 1.2em;
+        z-index: 99;
+        padding: .5em 1em;
+        border-bottom-right-radius: .5em;
+        border-bottom-left-radius: .5em;
+        background-color: #1b2025;
+        color: #ffffff;
+      }
+
+      .qiskit-link a {
+        color: #ffffff;
+      }
+
+      header,
+      footer,
+      .collaborators-section {
+        padding: 2em 1em;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: rgb(2,70,98);
+        background: radial-gradient(circle, rgba(2,70,98,1) 0%, rgba(49,100,136,1) 74%, rgba(85,114,135,1) 100%);
+        color: #ffffff;
+      }
+
+      header iron-pages {
+        display: inline-block;
+      }
+
+      header img {
+        width: 256px;
+        height: 256px;
+      }
+
+      header a, header a:hover {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      header h2 {
+        font-weight: bold;
+      }
+
+      header h3 {
+        margin: .2em 0 .6em;
+        font-weight: 300;
+        font-size: 1.4em;
+      }
+
+      h1 {
+        font-size: 2.6em;
+        margin: 0;
+      }
+
+      h2 {
+        font-size: 1.8em;
+        font-weight: 300;
+        margin: .2em 0 .6em;
+      }
+
+      h3 {
+        font-size: 1.7em;
+        margin: 0;
+      }
+
+      .cards-section {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+      }
+
+      .card {
+        color: #ffffff;
+        padding: 2em;
+        overflow: hidden;
+      }
+
+      .card:nth-child(1) {
+        background-color: var(--dark-primary-color);
+      }
+
+      .card:nth-child(2) {
+        background-color: var(--primary-color);
+      }
+
+      .card:nth-child(3) {
+        background-color: var(--light-primary-color);
+      }
+
+      .terminal {
+        background-color: #1b2024;
+        color: #ffffff;
+        padding: .5em 1em;
+        font-size: 1.2em;
+        overflow-x: auto;
+      }
+
+      code-sample {
+        --code-sample-font-size: .85em;
+      }
+
+      .alert {
+        color: #464a4e;
+        background-color: #e7e8ea;
+        border-color: #dddfe2;
+        padding: .6em 1em;
+      }
+
+      .alert a {
+        font-weight: bold;
+        color: #000000;
+      }
+
+      footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: #1b2024;
+        color: #ffffff;
+      }
+
+      footer a {
+        color: #ffffff;
+      }
+
+      footer a:hover {
+        color: var(--primary-color);
+      }
+
+      .social-networks {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .social-networks li + li {
+        margin-left: 1em;
+      }
+
+      .acqua-center {
+        text-align: center;
+        margin-top: 16px;
+      }
+
+      .acqua-center p {
+        font-size: 0.8em;
+      }
+
+      h3.center {
+        text-align: center;
+      }
+
+      .acqua-center .divider {
+        border-bottom: 1px solid #ffffff;
+        height: 70px;
+      }
+
+      .lighter {
+        opacity: 0.5;
+      }
+
+      .acqua-center.applications div[class^="col-"],
+      .acqua-center.applications div[class*=" col-"] {
+        border-right: 1px solid #ffffff;
+      }
+      .acqua-center.applications div[class^="col-"]:last-child,
+      .acqua-center.applications div[class*=" col-"]:last-child {
+        border-right: none;
+      }
+
+      .acqua-center vaadin-button {
+        min-width: 50px;
+        margin-bottom: 10px;
+      }
+
+      .acqua-center .box {
+        margin-bottom: 5px;
+      }
+
+      .section-break {
+        padding: 20px;
+      }
+
+      .qiskit-core, .ibm-q-hardware {
+        display: block;
+        padding: 10px;
+        font-weight: normal;
+        margin: 0;
+        text-align: center;
+        background-color: #913DBE;
+        position: relative;
+      }
+
+      .qiskit-core a, .ibm-q-hardware a {
+        color: #ffffff;
+      }
+
+      .qiskit-core:hover {
+        background-color: rgb(128, 61, 165);
+      }
+
+      .ibm-q-hardware:hover {
+        background-color: #2f3158;
+      }
+
+      /* .qiskit-core:after, .ibm-q-hardware:after {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        content: '';
+        border-left: 10px solid var(--light-primary-color);
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+      } */
+
+      .ibm-q-hardware {
+        background-color: #212567;
+      }
+
+      .qiskit-core span, .ibm-q-hardware span {
+        display: block;
+        font-style: italic;
+      }
+
+      @media (min-width: 768px) {
+        header,
+        footer {
+          padding: 4em 2em;
+        }
+
+        header {
+          flex-direction: row;
+          justify-content: center;
+          text-align: left;
+        }
+
+        header img {
+          margin-right: 1em;
+        }
+
+        .cards-section {
+          flex-direction: row;
+        }
+
+        .card {
+          flex: 1;
+        }
+      }
+    </style>
+
+    <app-location route="{{_route}}" url-space-regex="^/acqua.*" prefix="acqua" use-hash-as-path></app-location>
+
+    <app-route
+      route="{{_route}}"
+      pattern="/:section"
+      data="{{_routeData}}"></app-route>
+
+    <div class="qiskit-link">
+      <a href="/">&lt; QISKit</a>
+    </div>
+
+    <header>
+      <img src="/images/qiskit-logo.gif" alt="QISKit logo">
+      <div>
+        <h1 name=""><a href$="[[rootPath]]#/">QISKit ACQUA</a>&nbsp;<iron-pages selected="[[_routeData.section]]" attr-for-selected="name" fallback-selection="default">
+            <span name="default"></span>
+            <span name="chemistry">[[localize('chemistryApplication')]]</span>
+            <span name="ai">[[localize('aiLongTitle')]]</span>
+            <span name="optimization">[[localize('optimizationApplication')]]</span>
+          </iron-pages>
+        </h1>
+        <h3>
+          <iron-pages selected="[[_routeData.section]]" attr-for-selected="name" fallback-selection="default">
+            <span name="default">[[localize('title')]]</span>
+            <span name="chemistry">[[localize('chemistryTitle')]]</span>
+            <span name="ai">[[localize('aiTitle')]]</span>
+            <span name="optimization">[[localize('optimizationTitle')]]</span>
+          </iron-pages>
+        </h3>
+        <a href="https://join.slack.com/t/qiskit/shared_invite/enQtMzYyMjY5Nzg2ODk4LTNkMWNmMjc3N2E0ZTdlNzg1Mzk4MDY4YjFlNWZmNTdmZTFkMDFmMjVjZTIxZThjMTlhMjA2MmQxYTViMzhiNzE" target="_blank">
+          <vaadin-button theme="primary">
+            <iron-icon icon="app-icons:slack"></iron-icon>
+            [[localize('joinSlack')]]
+          </vaadin-button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="cards-section">
+        <div class="card">
+          <h3>
+            [[localize('latestVersion')]]
+            <a href="https://pypi.python.org/pypi/qiskit_acqua">
+              <img src="https://img.shields.io/pypi/v/qiskit_acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+            </a>
+          </h3>
+          <iron-pages selected="[[_routeData.section]]" attr-for-selected="name" fallback-selection="default">
+            <p name="default">[[localize('description')]]</p>
+            <p name="chemistry">[[localize('chemistryDescription')]]</p>
+            <p name="ai">[[localize('aiDescription')]]</p>
+            <p name="optimization">[[localize('optimizationDescription')]]</p>
+          </iron-pages>
+          <p>
+            <a href="https://github.com/QISKit/qiskit-acqua" target="_blank">
+              <vaadin-button theme="secondary">GitHub</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href="https://github.com/QISKit/qiskit-acqua/tree/master/examples" target="_blank">
+              <vaadin-button theme="secondary">[[localize('tutorialsButton')]]</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href$="[[rootPath]]documentation-acqua[[_documentationSuffix]]" target="_blank">
+              <vaadin-button theme="secondary">[[localize('documentationButton')]]</vaadin-button>
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">[[localize('applicationsTitle')]]</h3>
+          <div class="row between-xs center-xs acqua-center applications">
+            <div class$="[[getColumnClasses(_routeData.section, 'chemistry')]]">
+              <div class="box">
+                <a href$="[[rootPath]]#/chemistry">
+                  <vaadin-button theme="secondary">[[localize('chemistryApplication')]]</vaadin-button>
+                </a>
+              </div>
+              <div class="box">
+                <p>[[localize('inputTitle')]]</p>
+                <p class="divider">
+                  <b>PSI4, PySCF</b><br>
+                  <b>PyQuante</b><br>
+                  <b>Gaussian, HDF5</b>
+                </p>
+                <p>[[localize('translationTitle')]]</p>
+                <p><b>Fermionic Hamiltonian</b><br>
+                    <b>Qubit Hamiltonian</b></p>
+              </div>
+            </div>
+            <div class$="[[getColumnClasses(_routeData.section, 'ai')]]">
+              <div class="box">
+                <a href$="[[rootPath]]#/ai">
+                  <vaadin-button theme="secondary">[[localize('aiApplication')]]</vaadin-button>
+                </a>
+              </div>
+              <div class="box">
+                <p>[[localize('inputTitle')]]</p>
+                <p class="divider"><b>Domain-specific</b></p>
+                <p>[[localize('translationTitle')]]</p>
+                <p><b>Problem-specific</b></p>
+              </div>
+            </div>
+            <div class$="[[getColumnClasses(_routeData.section, 'optimization')]]">
+              <div class="box">
+                <a href$="[[rootPath]]#/optimization">
+                  <vaadin-button theme="secondary">[[localize('optimizationApplication')]]</vaadin-button>
+                </a>
+              </div>
+              <div class="box">
+                <p>[[localize('inputTitle')]]</p>
+                <p class="divider"><b>Domain-specific</b></p>
+                <p>[[localize('translationTitle')]]</p>
+                <p><b>Reduction to Grover oracle</b><br>
+                  <b>Ising Hamiltonian</b></p>
+              </div>
+            </div>
+          </div>
+          <div class="section-break"></div>
+          <h3 class="center">ACQUA Library</h3>
+          <div class="row between-xs acqua-center">
+            <div class="col-md-4">
+              <p class$="[[getAlgorithmClasses(_routeData.section, 'chemistry', 'optimization')]]">VQE</p>
+            </div>
+            <div class="col-md-4">
+              <p class$="[[getAlgorithmClasses(_routeData.section, 'chemistry')]]">QPE</p>
+            </div>
+            <div class="col-md-4">
+              <p class$="[[getAlgorithmClasses(_routeData.section, 'chemistry')]]">IQPE</p>
+            </div>
+            <div class="col-md-4">
+              <p class$="[[getAlgorithmClasses(_routeData.section, '-')]]">Dynamics</p>
+            </div>
+            <div class="col-md-4">
+              <p class$="[[getAlgorithmClasses(_routeData.section, 'ai')]]">SVM Q Kernel</p>
+            </div>
+            <div class="col-md-4">
+              <p class$="[[getAlgorithmClasses(_routeData.section, 'ai')]]">SVM Variational</p>
+            </div>
+            <div class="col-md-12">
+              <p class$="[[getAlgorithmClasses(_routeData.section, 'optimization')]]">Grover</p>
+            </div>
+          </div>
+          <p class="qiskit-core">
+            <a href="/" target="_self">
+              QISKit Core
+              <span>[[localize('coreDescription')]]</span>
+            </a>
+          </p>
+          <p class="ibm-q-hardware">
+            <a href="https://quantumexperience.ng.bluemix.net/qx/devices" target="_blank">
+              IBM Q Devices
+              <span>[[localize('devicesDescription')]]</span>
+            </a>
+          </p>
+        </div>
+        <div class="card">
+
+            <!-- htmlmin:ignore -->
+            <iron-pages selected="[[_routeData.section]]" attr-for-selected="name" fallback-selection="default">
+              <div name="default">
+                <h3>[[localize('exampleTitle')]]</h3>
+                <pre class="terminal">$ pip install qiskit-acqua</pre>
+                <code-sample type="python" copy-clipboard-button>
+                  <template preserve-content>
+                    from qiskit_acqua import Operator, run_algorithm
+                    from qiskit_acqua.input import get_input_instance
+
+                    pauli_dict = {
+                        'paulis': [{"coeff": {"imag": 0.0, "real": -1.052373245772859},
+                                    "label": "II"},
+                                  {"coeff": {"imag": 0.0, "real": 0.39793742484318045},
+                                    "label": "ZI"},
+                                  {"coeff": {"imag": 0.0, "real": -0.39793742484318045},
+                                    "label": "ZZ"},
+                                  {"coeff": {"imag": 0.0, "real": 0.18093119978423156},
+                                    "label": "XX"}
+                                  ]
+                    }
+                    algo_input = get_input_instance('EnergyInput')
+                    algo_input.qubit_op = Operator.load_from_dict(pauli_dict)
+                    params = {
+                        'algorithm': {'name': 'VQE'},
+                        'optimizer': {'name': 'SPSA'},
+                        'variational_form': {'name': 'RY', 'depth': 5},
+                        'backend': {'name': 'local_qasm_simulator'}
+                    }
+                    result = run_algorithm(params, algo_input)
+                    print(result['energy'])
+                  </template>
+                </code-sample>
+              </div>
+              <div name="chemistry">
+                <h3>[[localize('exampleTitleChemistry')]]</h3>
+                <pre class="terminal">$ pip install qiskit-acqua-chemistry</pre>
+                <code-sample type="python" copy-clipboard-button>
+                  <template preserve-content>
+                    from qiskit_acqua_chemistry import ACQUAChemistry
+
+                    # Input dictionary to configure QISKit ACQUA Chemistry for LiH
+                    acqua_chemistry_dict = {
+                        'driver': {'name': 'PYSCF'},
+                        'PYSCF': {'atom': 'Li .0 .0 -0.8; H .0 .0 0.8', 'basis': 'sto3g'},
+                        'operator': {'name': 'hamiltonian', 'qubit_mapping': 'parity',
+                                    'two_qubit_reduction': True, 'freeze_core': True,
+                                    'orbital_reduction': [-3, -2]},
+                        'algorithm': {'name': 'VQE'},
+                        'optimizer': {'name': 'COBYLA', 'maxiter': 10000},
+                        'variational_form': {'name': 'UCCSD'},
+                        'initial_state': {'name': 'HartreeFock'},
+                        'backend': {'name': 'local_qasm_simulator'}
+                    }
+
+                    solver = ACQUAChemistry()
+                    result = solver.run(acqua_chemistry_dict)
+                    print(result['energy'])
+                  </template>
+                </code-sample>
+              </div>
+              <div name="ai">
+                <h3>[[localize('exampleTitleAI')]]</h3>
+                <pre class="terminal">$ pip install qiskit-acqua</pre>
+                <code-sample type="python" copy-clipboard-button>
+                  <template preserve-content>
+                    from datasets import *
+                    from qiskit_acqua.svm.data_preprocess import *
+                    from qiskit_acqua.input import get_input_instance
+                    from qiskit_acqua import run_algorithm
+
+                    num_of_qubits = 2
+                    sample_Total, training_input, test_input, class_labels = \
+                        ad_hoc_data(training_size=20, test_size=10, n=num_of_qubits,
+                                    gap=0.3, PLOT_DATA=False)
+                    total_array, label_to_labelclass = get_points(test_input, class_labels)
+
+                    params = {
+                        'problem': {'name': 'svm_classification'},
+                        'backend': {'name': 'local_qasm_simulator', 'shots': 1000},
+                        'algorithm': {'name': 'SVM_QKernel', 'print_info': True}
+                    }
+
+                    algo_input = get_input_instance('SVMInput')
+                    algo_input.training_dataset = training_input
+                    algo_input.test_dataset = test_input
+                    algo_input.datapoints = total_array
+                    result = run_algorithm(params, algo_input)
+                    print(result)
+                  </template>
+                </code-sample>
+              </div>
+              <div name="optimization">
+                <h3>[[localize('exampleTitleOptimization')]]</h3>
+                <pre class="terminal">$ pip install qiskit-acqua</pre>
+                <code-sample type="python" copy-clipboard-button>
+                  <template preserve-content>
+                    from qiskit_acqua.input import get_input_instance
+                    from qiskit_acqua import run_algorithm
+
+                    sat_cnf = """
+                    c Example DIMACS 3-sat, with 3 solutions: 1 -2 3 0, -1 -2 -3 0, 1 2 -3 0
+                    p cnf 3 5
+                    -1 -2 -3 0
+                    1 -2 3 0
+                    1 2 -3 0
+                    1 -2 -3 0
+                    -1 2 3 0
+                    """
+
+                    params = {
+                        'problem': {'name': 'search'},
+                        'algorithm': {'name': 'Grover'},
+                        'oracle': {'name': 'SAT', 'cnf': sat_cnf},
+                        'backend': {'name': 'local_qasm_simulator'}
+                    }
+
+                    result = run_algorithm(params)
+                    print(result['result'])
+                  </template>
+                </code-sample>
+              </div>
+
+
+            </iron-pages>
+            <!-- htmlmin:ignore -->
+          </code-sample>
+          <p class="alert">[[localize('installRequirements')]] <a href$="/documentation[[_documentationSuffix]]" target="_blank">[[localize('installRequirementsLink')]]</a></p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-networks-section">
+        <ul class="social-networks">
+          <li>
+            <a href="https://github.com/QISKit" target="_blank">
+              <iron-icon icon="app-icons:github"></iron-icon>
+              /QISKit
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/QISKit" target="_blank">
+              <iron-icon icon="app-icons:twitter"></iron-icon>
+              @QISKit
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="copyright">
+        <p>QISKit ™ - [[localize('title')]], 2017-2018</p>
+      </div>
+    </footer>
+  </template>
+
+  <script>
+    /**
+     * Gesture events like tap and track generated from touch will not be
+     * preventable, allowing for better scrolling performance.
+     */
+    Polymer.setPassiveTouchGestures(true);
+
+    class AppShell extends Polymer.mixinBehaviors(
+      [Polymer.AppLocalizeBehavior], Polymer.Element
+    ) {
+      static get is() {
+        return 'app-shell-acqua';
+      }
+
+      static get properties() {
+        return {
+          language: {
+            value: 'en',
+            observer: 'languageChanged'
+          },
+
+          _route: {
+            type: Object
+          },
+
+          _routeData: {
+            type: Object,
+            observer: '_routeDataChanged'
+          },
+
+          _documentationSuffix: {
+            type: String
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        this.loadResources(this.resolveUrl('locales.json'));
+      }
+
+      languageChanged(language) {
+        this.set('_documentationSuffix', language === 'ja' ? '/ja/' : '');
+      }
+
+      _routeDataChanged(_routeData) {
+        if (_routeData.language) {
+          this.set('language', _routeData.language);
+        }
+        window.scrollTo(0, 0);
+      }
+
+      isDefaultOrSection(_routeData, section) {
+        return !_routeData.section || _routeData.section === section;
+      }
+
+      getColumnClasses(currentsection, section) {
+        return currentsection && currentsection !== section ? 'col-md-4 col-xs-12 lighter' : 'col-md-4 col-xs-12';
+      }
+
+      getAlgorithmClasses(currentsection, firstSection, secondSection) {
+        return currentsection
+                && (currentsection !== firstSection)
+                && (currentsection !== secondSection) ? 'lighter' : 'pepe';
+      }
+
+    }
+
+    window.customElements.define(AppShell.is, AppShell);
+  </script>
+</dom-module>
