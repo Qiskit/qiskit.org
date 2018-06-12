@@ -130,7 +130,7 @@
     </app-route>
 
     <div class="qiskit-link">
-      <a href="[[rootPath]]">&lt; QISKit</a>
+      <a href$="[[rootPath]]">&lt; QISKit</a>
     </div>
 
     <header>
@@ -270,7 +270,7 @@
             </div>
           </div>
           <p class="qiskit-core">
-            <a href="/" target="_self">
+            <a href$="[[rootPath]]" target="_self">
               QISKit Core
               <span>[[localize('coreDescription')]]</span>
             </a>
@@ -435,8 +435,7 @@
           },
 
           route: {
-            type: Object,
-            observer: '_routeChanged'
+            type: Object
           },
 
           _routeData: {
@@ -458,13 +457,6 @@
         const sectionId = _routeData.sectionName || 'home';
 
         this._selectedSectionId = sectionId;
-      }
-
-      // TODO: Update when fix the app-route/issues/37
-      _routeChanged(route) {
-        if ((route.path === '/' || route.path === '/acqua') && this._routeData) {
-          this.set('_routeData', {});
-        }
       }
 
       getColumnClasses(currentsection, section) {
