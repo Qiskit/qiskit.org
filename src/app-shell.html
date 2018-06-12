@@ -91,6 +91,27 @@
         font-size: 1.7em;
         margin: 0;
       }
+      
+      .acqua-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #995ED4;
+        color: #ffffff;
+        padding: 2em 1em;
+      }
+
+      .acqua-banner h3 {
+        font-size: 1.4em;
+      }
+
+      .acqua-banner a {
+        margin-right: 10px;
+      }
+
+      .acqua-banner p {
+        max-width: 800px;
+      }
 
       .cards-section {
         display: flex;
@@ -193,7 +214,7 @@
         header,
         footer,
         .collaborators-section {
-          padding: 4em 2em;
+          padding: 2em;
         }
 
         header {
@@ -216,7 +237,7 @@
       }
     </style>
 
-    <app-location route="{{_route}}" use-hash-as-path></app-location>
+    <app-location route="{{_route}}" url-space-regex="^(?!/acqua).*" use-hash-as-path></app-location>
     <app-route route="{{_route}}" pattern="/:language" data="{{_routeData}}"></app-route>
 
     <div class="language">
@@ -238,6 +259,36 @@
     </header>
 
     <main>
+      <div class="acqua-banner">
+        <div>
+          <h3>[[localize('newLibrary')]]</h3>
+          <p>
+            [[localize('acquaDescription')]]
+          </p>
+        </div>
+        <div>
+          <a href="/acqua">
+            <vaadin-button theme="secondary">
+              QISKit ACQUA
+            </vaadin-button>
+          </a>
+          <a href="/acqua/#/chemistry">
+            <vaadin-button theme="secondary">
+              ACQUA Chemistry
+            </vaadin-button>
+          </a>
+          <a href="/acqua/#/ai">
+            <vaadin-button theme="secondary">
+              ACQUA AI
+            </vaadin-button>
+          </a>
+          <a href="/acqua/#/optimization">
+            <vaadin-button theme="secondary">
+              ACQUA Optimization
+            </vaadin-button>
+          </a>
+        </div>
+      </div>
       <div class="cards-section">
         <div class="card">
           <h3>
