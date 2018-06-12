@@ -1,0 +1,295 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/code-sample/themes/atom-one-light.html">
+<link rel="import" href="../../bower_components/code-sample/code-sample.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../ibmq-components/vaadin-button.html">
+<link rel="import" href="../app-icons.html">
+
+<dom-module id="page-acqua">
+  <template>
+    <style include="app-styles cards-section-styles">
+      :host {
+        --primary-color: #459FE1;
+        --light-primary-color: #4CB0F8;
+        --dark-primary-color: #0089C1;
+
+        --ibmq-button-primary-background-color: var(--dark-primary-color);
+        --ibmq-button-primary-focus-background-color: var(--light-primary-color);
+        --ibmq-button-secondary-color: #ffffff;
+        --ibmq-button-secondary-focus-color: var(--primary-color);
+
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background-color: rgb(2, 70, 98);
+        background: radial-gradient(circle, rgba(2,70,98,1) 0%, rgba(49,100,136,1) 74%, rgba(85,114,135,1) 100%);
+        color: #ffffff;
+      }
+    </style>
+
+    <app-route
+        route="{{route}}"
+        pattern="[[rootPath]]acqua/:sectionName"
+        data="{{_routeData}}">
+    </app-route>
+
+    <header>
+      <img src$="[[rootPath]]images/qiskit-acqua-logo.gif" alt="QISKit ACQUA logo">
+      <div>
+        <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id">
+          <div section-id="home">
+            <h1>QISKit ACQUA</h1>
+            <h2>[[localize('acqua.title')]]</h2>
+          </div>
+          <div section-id="chemistry">
+            <h1>QISKit ACQUA [[localize('chemistryApplication')]]</h1>
+            <h2>[[localize('chemistryTitle')]]</h2>
+          </div>
+          <div section-id="ai">
+            <h1>QISKit ACQUA [[localize('aiLongTitle')]]</h1>
+            <h2>[[localize('aiTitle')]]</h2>
+          </div>
+          <div section-id="optimization">
+            <h1>QISKit ACQUA [[localize('optimizationApplication')]]</h1>
+            <h2>[[localize('optimizationTitle')]]</h2>
+          </div>
+        </iron-pages>
+        <a href="https://join.slack.com/t/qiskit/shared_invite/enQtMzYyMjY5Nzg2ODk4LTNkMWNmMjc3N2E0ZTdlNzg1Mzk4MDY4YjFlNWZmNTdmZTFkMDFmMjVjZTIxZThjMTlhMjA2MmQxYTViMzhiNzE" target="_blank">
+          <vaadin-button theme="primary">
+            <iron-icon icon="app-icons:slack"></iron-icon>
+            [[localize('joinSlack')]]
+          </vaadin-button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="cards-section">
+        <div class="card">
+          <h3>
+            [[localize('latestVersion')]]
+            <a href="https://pypi.python.org/pypi/qiskit_acqua">
+              <img src="https://img.shields.io/pypi/v/qiskit_acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+            </a>
+          </h3>
+          <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id">
+            <p section-id="home">[[localize('acqua.description')]]</p>
+            <p section-id="chemistry">[[localize('chemistryDescription')]]</p>
+            <p section-id="ai">[[localize('aiDescription')]]</p>
+            <p section-id="optimization">[[localize('optimizationDescription')]]</p>
+          </iron-pages>
+          <p>
+            <a href="https://github.com/QISKit/qiskit-acqua" target="_blank">
+              <vaadin-button theme="secondary">GitHub</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href="https://github.com/QISKit/qiskit-acqua/tree/master/examples" target="_blank">
+              <vaadin-button theme="secondary">[[localize('tutorialsButton')]]</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href$="[[rootPath]]documentation-acqua[[_documentationSuffix]]" target="_blank">
+              <vaadin-button theme="secondary">[[localize('documentationButton')]]</vaadin-button>
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">[[localize('applicationsTitle')]]</h3>
+
+          TODO
+        </div>
+        <div class="card">
+          <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id">
+            <div section-id="home">
+              <h3>[[localize('exampleTitle')]]</h3>
+              <pre class="terminal">$ pip install qiskit-acqua</pre>
+              <code-sample type="python" copy-clipboard-button>
+                <!-- htmlmin:ignore -->
+                <template preserve-content>
+                  from qiskit_acqua import Operator, run_algorithm
+                  from qiskit_acqua.input import get_input_instance
+
+                  pauli_dict = {
+                      'paulis': [{"coeff": {"imag": 0.0, "real": -1.052373245772859},
+                                  "label": "II"},
+                                {"coeff": {"imag": 0.0, "real": 0.39793742484318045},
+                                  "label": "ZI"},
+                                {"coeff": {"imag": 0.0, "real": -0.39793742484318045},
+                                  "label": "ZZ"},
+                                {"coeff": {"imag": 0.0, "real": 0.18093119978423156},
+                                  "label": "XX"}
+                                ]
+                  }
+                  algo_input = get_input_instance('EnergyInput')
+                  algo_input.qubit_op = Operator.load_from_dict(pauli_dict)
+                  params = {
+                      'algorithm': {'name': 'VQE'},
+                      'optimizer': {'name': 'SPSA'},
+                      'variational_form': {'name': 'RY', 'depth': 5},
+                      'backend': {'name': 'local_qasm_simulator'}
+                  }
+                  result = run_algorithm(params, algo_input)
+                  print(result['energy'])
+                </template>
+                <!-- htmlmin:ignore -->
+              </code-sample>
+            </div>
+            <div section-id="chemistry">
+              <h3>[[localize('exampleTitleChemistry')]]</h3>
+              <pre class="terminal">$ pip install qiskit-acqua-chemistry</pre>
+              <code-sample type="python" copy-clipboard-button>
+                <!-- htmlmin:ignore -->
+                <template preserve-content>
+                  from qiskit_acqua_chemistry import ACQUAChemistry
+
+                  # Input dictionary to configure QISKit ACQUA Chemistry for LiH
+                  acqua_chemistry_dict = {
+                      'driver': {'name': 'PYSCF'},
+                      'PYSCF': {'atom': 'Li .0 .0 -0.8; H .0 .0 0.8', 'basis': 'sto3g'},
+                      'operator': {'name': 'hamiltonian', 'qubit_mapping': 'parity',
+                                  'two_qubit_reduction': True, 'freeze_core': True,
+                                  'orbital_reduction': [-3, -2]},
+                      'algorithm': {'name': 'VQE'},
+                      'optimizer': {'name': 'COBYLA', 'maxiter': 10000},
+                      'variational_form': {'name': 'UCCSD'},
+                      'initial_state': {'name': 'HartreeFock'},
+                      'backend': {'name': 'local_qasm_simulator'}
+                  }
+
+                  solver = ACQUAChemistry()
+                  result = solver.run(acqua_chemistry_dict)
+                  print(result['energy'])
+                </template>
+                <!-- htmlmin:ignore -->
+              </code-sample>
+            </div>
+            <div section-id="ai">
+              <h3>[[localize('exampleTitleAI')]]</h3>
+              <pre class="terminal">$ pip install qiskit-acqua</pre>
+              <code-sample type="python" copy-clipboard-button>
+                <!-- htmlmin:ignore -->
+                <template preserve-content>
+                  from datasets import *
+                  from qiskit_acqua.svm.data_preprocess import *
+                  from qiskit_acqua.input import get_input_instance
+                  from qiskit_acqua import run_algorithm
+
+                  num_of_qubits = 2
+                  sample_Total, training_input, test_input, class_labels = \
+                      ad_hoc_data(training_size=20, test_size=10, n=num_of_qubits,
+                                  gap=0.3, PLOT_DATA=False)
+                  total_array, label_to_labelclass = get_points(test_input, class_labels)
+
+                  params = {
+                      'problem': {'name': 'svm_classification'},
+                      'backend': {'name': 'local_qasm_simulator', 'shots': 1000},
+                      'algorithm': {'name': 'SVM_QKernel', 'print_info': True}
+                  }
+
+                  algo_input = get_input_instance('SVMInput')
+                  algo_input.training_dataset = training_input
+                  algo_input.test_dataset = test_input
+                  algo_input.datapoints = total_array
+                  result = run_algorithm(params, algo_input)
+                  print(result)
+                </template>
+                <!-- htmlmin:ignore -->
+              </code-sample>
+            </div>
+            <div section-id="optimization">
+              <h3>[[localize('exampleTitleOptimization')]]</h3>
+              <pre class="terminal">$ pip install qiskit-acqua</pre>
+              <code-sample type="python" copy-clipboard-button>
+                <!-- htmlmin:ignore -->
+                <template preserve-content>
+                  from qiskit_acqua.input import get_input_instance
+                  from qiskit_acqua import run_algorithm
+
+                  sat_cnf = """
+                  c Example DIMACS 3-sat, with 3 solutions: 1 -2 3 0, -1 -2 -3 0, 1 2 -3 0
+                  p cnf 3 5
+                  -1 -2 -3 0
+                  1 -2 3 0
+                  1 2 -3 0
+                  1 -2 -3 0
+                  -1 2 3 0
+                  """
+
+                  params = {
+                      'problem': {'name': 'search'},
+                      'algorithm': {'name': 'Grover'},
+                      'oracle': {'name': 'SAT', 'cnf': sat_cnf},
+                      'backend': {'name': 'local_qasm_simulator'}
+                  }
+
+                  result = run_algorithm(params)
+                  print(result['result'])
+                </template>
+                <!-- htmlmin:ignore -->
+              </code-sample>
+            </div>
+          </iron-pages>
+          <p class="alert">[[localize('installRequirements')]] <a href$="[[rootPath]]documentation[[_documentationSuffix]]" target="_blank">[[localize('installRequirementsLink')]]</a></p>
+        </div>
+      </div>
+    </main>
+  </template>
+
+  <script>
+    class PageAcqua extends Polymer.mixinBehaviors(
+      [Polymer.AppLocalizeBehavior], Polymer.Element
+    ) {
+      static get is() {
+        return 'page-acqua';
+      }
+
+      static get properties() {
+        return {
+          language: {
+            type: String,
+            observer: 'languageChanged'
+          },
+
+          route: {
+            type: Object,
+            observer: '_routeChanged'
+          },
+
+          _routeData: {
+            type: Object,
+            observer: '_routeDataChanged'
+          },
+
+          _selectedSectionId: {
+            type: String
+          }
+        };
+      }
+
+      languageChanged(language) {
+        this.set('_documentationSuffix', language === 'ja' ? '/ja/' : '');
+      }
+
+      _routeDataChanged(_routeData) {
+        const sectionId = _routeData.sectionName || 'home';
+
+        this._selectedSectionId = sectionId;
+      }
+
+      // TODO: Update when fix the app-route/issues/37
+      _routeChanged(route) {
+        if ((route.path === '/' || route.path === '/acqua') && this._routeData) {
+          this.set('_routeData', {});
+        }
+      }
+    }
+
+    window.customElements.define(PageAcqua.is, PageAcqua);
+  </script>
+</dom-module>

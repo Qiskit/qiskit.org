@@ -119,6 +119,12 @@
           language="[[language]]"
           resources="[[resources]]">
       </page-home>
+      <page-acqua
+          page-id="acqua"
+          route="[[_route]]"
+          language="[[language]]"
+          resources="[[resources]]">
+      </page-acqua>
       <page-not-found
           page-id="not-found"
           language="[[language]]"
@@ -193,6 +199,7 @@
             value: () => {
               return {
                 home: 'pages/page-home.html',
+                acqua: 'pages/page-acqua.html',
                 'not-found': 'pages/page-not-found.html'
               };
             }
@@ -210,6 +217,24 @@
         const pageId = _routeData.pageName || 'home';
 
         this._selectPage(pageId);
+        this._updateMetadata(pageId);
+      }
+
+      _updateMetadata(pageId) {
+        let title;
+
+        switch (pageId) {
+          case 'acqua':
+            title = this.localize('documentAcquaTitle');
+            break;
+          default:
+            title = this.localize('documentTitle');
+            break;
+        }
+
+        if (title) {
+          document.title = title;
+        }
       }
 
       _selectPage(pageId) {
