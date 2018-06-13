@@ -1,0 +1,1058 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit_acqua.parser._inputparser &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimizers.html">Optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit_acqua.parser._inputparser</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2018 IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="kn">from</span> <span class="nn">qiskit_acqua.algorithmerror</span> <span class="k">import</span> <span class="n">AlgorithmError</span>
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">jsonschema</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">qiskit_acqua</span> <span class="k">import</span> <span class="p">(</span><span class="n">local_pluggables_types</span><span class="p">,</span>
+                        <span class="n">get_pluggable_configuration</span><span class="p">,</span>
+                        <span class="n">get_algorithm_configuration</span><span class="p">,</span>
+                        <span class="n">local_algorithms</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiskit_acqua.input</span> <span class="k">import</span> <span class="p">(</span><span class="n">local_inputs</span><span class="p">,</span><span class="n">get_input_configuration</span><span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="InputParser"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser">[docs]</a><span class="k">class</span> <span class="nc">InputParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;JSON input Parser.&quot;&quot;&quot;</span>
+    
+    <span class="n">NAME</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span>
+    <span class="n">INPUT</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span>
+    <span class="n">PROBLEM</span> <span class="o">=</span> <span class="s1">&#39;problem&#39;</span>
+    <span class="n">ALGORITHM</span> <span class="o">=</span> <span class="s1">&#39;algorithm&#39;</span>
+    <span class="n">BACKEND</span> <span class="o">=</span> <span class="s1">&#39;backend&#39;</span>
+   
+    <span class="n">_UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+    <span class="n">_PROPERTY_ORDER</span> <span class="o">=</span> <span class="p">[</span><span class="n">NAME</span><span class="p">,</span><span class="n">_UNKNOWN</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="InputParser.__init__"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create InputParser object.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_original_sections</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="nb">input</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="nb">input</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;Invalid parser input type.&quot;</span><span class="p">)</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">_section_order</span> <span class="o">=</span> <span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">local_pluggables_types</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="o">!=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_section_order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">)</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">_section_order</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">_UNKNOWN</span><span class="p">])</span>
+        
+        <span class="n">problems_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">algo_name</span> <span class="ow">in</span> <span class="n">local_algorithms</span><span class="p">():</span>
+            <span class="n">problems</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">get_algorithm_problems</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">problem</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">:</span>
+                <span class="n">problems_dict</span><span class="p">[</span><span class="n">problem</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+          
+        <span class="n">problems_enum</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;enum&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">problems_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="p">}</span>
+        <span class="n">jsonfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;input_schema.json&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">][</span><span class="s1">&#39;oneOf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">problems_enum</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">)</span></div>
+            
+    <span class="k">def</span> <span class="nf">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sections</span><span class="p">):</span>
+        <span class="n">sections_sorted</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sections</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+             <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_section_order</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+             <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_section_order</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_section_order</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">_UNKNOWN</span><span class="p">)))</span>
+        
+        <span class="k">for</span> <span class="n">section</span><span class="p">,</span><span class="n">properties</span> <span class="ow">in</span> <span class="n">sections_sorted</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+                <span class="n">sections_sorted</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+                               <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_PROPERTY_ORDER</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+                               <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_PROPERTY_ORDER</span> <span class="k">else</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_PROPERTY_ORDER</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">_UNKNOWN</span><span class="p">)))</span>
+            
+        <span class="k">return</span> <span class="n">sections_sorted</span>
+            
+<div class="viewcode-block" id="InputParser.parse"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the data.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;Missing input file&quot;</span><span class="p">)</span>
+             
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_pluggable_input_schemas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_algorithm_input_schema</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_original_sections</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="InputParser.is_modified"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.is_modified">[docs]</a>    <span class="k">def</span> <span class="nf">is_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns true if data has been changed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_sections</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span></div>
+
+<div class="viewcode-block" id="InputParser.is_pluggable_section"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.is_pluggable_section">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_pluggable_section</span><span class="p">(</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span> <span class="ow">in</span> <span class="n">local_pluggables_types</span><span class="p">()</span></div>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">section_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">section_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;Empty section name.&quot;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">section_name</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">property_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">property_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">property_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;Empty property name.&quot;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">property_name</span>
+    
+<div class="viewcode-block" id="InputParser.get_section_types"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section_types">[docs]</a>    <span class="k">def</span> <span class="nf">get_section_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="n">types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">types</span>
+            
+        <span class="k">return</span> <span class="p">[</span><span class="n">types</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_property_types"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_property_types">[docs]</a>    <span class="k">def</span> <span class="nf">get_property_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="n">property_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        
+        <span class="n">prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">property_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">prop</span><span class="p">:</span>
+            <span class="n">types</span>  <span class="o">=</span> <span class="n">prop</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">types</span>
+            
+            <span class="k">return</span> <span class="p">[</span><span class="n">types</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="p">[]</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_default_sections"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_default_sections">[docs]</a>    <span class="k">def</span> <span class="nf">get_default_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">])</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_default_section_names"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_default_section_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_default_section_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_default_sections</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">sections</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">sections</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_section_default_properties"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section_default_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_section_default_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]]</span> <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]</span> <span class="k">else</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">],</span><span class="n">types</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;object&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">types</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">property_name</span><span class="p">,</span><span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]]</span> <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">else</span> <span class="p">[]</span>
+            <span class="n">default_value</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">default_value</span><span class="p">,</span><span class="n">types</span><span class="p">)</span>
+           
+        <span class="k">return</span> <span class="n">properties</span></div>
+        
+<div class="viewcode-block" id="InputParser.allows_additional_properties"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.allows_additional_properties">[docs]</a>    <span class="k">def</span> <span class="nf">allows_additional_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;additionalProperties&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        
+        <span class="k">return</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">])</span></div>
+        
+<div class="viewcode-block" id="InputParser.get_property_default_values"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_property_default_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_property_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">property_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="n">prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">property_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">prop</span><span class="p">:</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="n">prop</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
+                <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">types</span><span class="p">]</span>
+                
+            <span class="k">if</span> <span class="s1">&#39;boolean&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">]</span>
+            
+        <span class="k">if</span> <span class="s1">&#39;oneOf&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prop</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prop</span><span class="p">[</span><span class="s1">&#39;oneOf&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;enum&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;enum&#39;</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="kc">None</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_property_default_value"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_property_default_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_property_default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;definitions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">property_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="n">prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">section_name</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">property_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="n">prop</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">prop</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="kc">None</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_filename"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_filename">[docs]</a>    <span class="k">def</span> <span class="nf">get_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the filename.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_input_problems"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_input_problems">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_input_problems</span><span class="p">(</span><span class="n">input_name</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">get_input_configuration</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;problems&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;problems&#39;</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="p">[]</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_algorithm_problems"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_algorithm_problems">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_algorithm_problems</span><span class="p">(</span><span class="n">algo_name</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">get_algorithm_configuration</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;problems&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;problems&#39;</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="p">[]</span></div>
+                
+    <span class="k">def</span> <span class="nf">_update_pluggable_input_schemas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># find alogorithm</span>
+        <span class="n">default_algo_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="n">algo_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">default_algo_name</span><span class="p">)</span>
+           
+        <span class="c1"># update alogorithm scheme</span>
+        <span class="k">if</span> <span class="n">algo_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_pluggable_input_schema</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">algo_name</span><span class="p">,</span><span class="n">default_algo_name</span><span class="p">)</span>
+            
+        <span class="c1"># update alogorithm depoendencies scheme</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">algo_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">get_algorithm_configuration</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span> 
+        <span class="n">classical</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;classical&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;classical&#39;</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="kc">False</span> 
+        <span class="n">pluggable_dependencies</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="s1">&#39;depends&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;depends&#39;</span><span class="p">]</span>
+        <span class="n">pluggable_defaults</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="s1">&#39;defaults&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
+        <span class="n">pluggable_types</span> <span class="o">=</span> <span class="n">local_pluggables_types</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="o">!=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span> <span class="ow">and</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pluggable_dependencies</span><span class="p">:</span>
+                <span class="c1"># remove pluggables from schema that ate not in the dependencies</span>
+                <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+                    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+                    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">]</span> 
+                    
+        <span class="c1"># update algorithm backend from schema if it is classical or not</span>
+        <span class="k">if</span> <span class="n">classical</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span>
+        
+        <span class="c1"># update schema with dependencies</span>
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_dependencies</span><span class="p">:</span>
+            <span class="n">pluggable_name</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">default_properties</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_defaults</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">pluggable_defaults</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">:</span>
+                        <span class="n">pluggable_name</span> <span class="o">=</span> <span class="n">pluggable_defaults</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">default_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+              
+            <span class="n">default_name</span> <span class="o">=</span> <span class="n">pluggable_name</span>
+            <span class="n">pluggable_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">pluggable_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">pluggable_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            
+            <span class="c1"># update dependency schema</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_pluggable_input_schema</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">pluggable_name</span><span class="p">,</span><span class="n">default_name</span><span class="p">)</span> 
+            <span class="k">for</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="n">default_properties</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">property_name</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span>
+   
+    <span class="k">def</span> <span class="nf">_update_algorithm_input_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># find alogorithm input</span>
+        <span class="n">default_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="n">input_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">default_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">input_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># find the first valid input for the problem</span>
+            <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+                
+            <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;No algorithm &#39;problem&#39; section found on input.&quot;</span><span class="p">)</span>
+        
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">local_inputs</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_problems</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+                    <span class="c1"># set to the first input to solve the problem</span>
+                    <span class="n">input_name</span> <span class="o">=</span> <span class="n">name</span>
+                    <span class="k">break</span>
+                
+        <span class="k">if</span> <span class="n">input_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># just remove fromm schema if none solves the problem</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">]</span>
+            <span class="k">return</span>
+        
+        <span class="k">if</span> <span class="n">default_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">default_name</span> <span class="o">=</span> <span class="n">input_name</span>
+        
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">get_input_configuration</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+            
+        <span class="n">input_schema</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;input_schema&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;input_schema&#39;</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">input_schema</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">properties</span><span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span> <span class="p">}</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;required&#39;</span> <span class="ow">in</span> <span class="n">input_schema</span> <span class="k">else</span> <span class="p">[]</span> 
+        <span class="n">additionalProperties</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">[</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;additionalProperties&#39;</span> <span class="ow">in</span> <span class="n">input_schema</span> <span class="k">else</span> <span class="kc">True</span> 
+        <span class="k">if</span> <span class="n">default_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">properties</span><span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_name</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span> 
+        
+        <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span> <span class="p">}</span>
+            
+        <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;$ref&#39;</span><span class="p">:</span> <span class="s2">&quot;#/definitions/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">)</span>
+            <span class="p">}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">][</span><span class="s1">&#39;required&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">required</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">][</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">additionalProperties</span>
+        
+    <span class="k">def</span> <span class="nf">_update_pluggable_input_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">pluggable_name</span><span class="p">,</span><span class="n">default_name</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">get_pluggable_configuration</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">pluggable_name</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+            
+        <span class="n">input_schema</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;input_schema&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;input_schema&#39;</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">input_schema</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">properties</span><span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span> <span class="p">}</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;required&#39;</span> <span class="ow">in</span> <span class="n">input_schema</span> <span class="k">else</span> <span class="p">[]</span> 
+        <span class="n">additionalProperties</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">[</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;additionalProperties&#39;</span> <span class="ow">in</span> <span class="n">input_schema</span> <span class="k">else</span> <span class="kc">True</span> 
+        <span class="k">if</span> <span class="n">default_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">properties</span><span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_name</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span> 
+        
+        <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span> <span class="p">}</span>
+            
+        <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;$ref&#39;</span><span class="p">:</span> <span class="s2">&quot;#/definitions/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">)</span>
+            <span class="p">}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">][</span><span class="s1">&#39;required&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">required</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">[</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="n">pluggable_type</span><span class="p">][</span><span class="s1">&#39;additionalProperties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">additionalProperties</span>
+        
+    <span class="k">def</span> <span class="nf">_merge_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">algo_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">algo_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="n">config</span> <span class="o">=</span> <span class="n">get_algorithm_configuration</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span>
+        <span class="n">pluggable_dependencies</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="s1">&#39;depends&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;depends&#39;</span><span class="p">]</span>
+        <span class="n">pluggable_defaults</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="s1">&#39;defaults&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">local_pluggables_types</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="o">!=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span> <span class="ow">and</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pluggable_dependencies</span><span class="p">:</span>
+                <span class="c1"># remove pluggables from input that are not in the dependencies</span>
+                <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+                   <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">]</span> 
+        
+        <span class="n">section_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_names</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_dependencies</span><span class="p">:</span>
+            <span class="n">pluggable_name</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">new_properties</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_defaults</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">pluggable_defaults</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">:</span>
+                        <span class="n">pluggable_name</span> <span class="o">=</span> <span class="n">pluggable_defaults</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                        
+            <span class="k">if</span> <span class="n">pluggable_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">section_names</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">)</span>
+                
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section_property</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">pluggable_name</span><span class="p">)</span>
+               
+            <span class="k">if</span> <span class="n">pluggable_name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">):</span>
+                <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_properties</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">new_properties</span><span class="p">:</span>
+                    <span class="n">new_properties</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_properties</span> <span class="o">=</span> <span class="n">properties</span>
+                    
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section_properties</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">new_properties</span><span class="p">)</span>
+                
+    <span class="k">def</span> <span class="nf">_merge_default_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">section_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_names</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span> <span class="ow">in</span> <span class="n">section_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">section_names</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">)</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_pluggable_input_schemas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_algorithm_input_schema</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_merge_dependencies</span><span class="p">()</span>
+      
+        <span class="n">section_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_section_names</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_default_section_names</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="n">section_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                
+            <span class="n">new_properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_default_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">new_properties</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section_is_text</span><span class="p">(</span><span class="n">section_name</span><span class="p">):</span>
+                    <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_text</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> \
+                        <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_properties</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> \
+                        <span class="nb">len</span><span class="p">(</span><span class="n">new_properties</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> \
+                        <span class="n">text</span> <span class="o">!=</span> <span class="n">new_properties</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">set_section_data</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">new_properties</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                    <span class="n">new_properties</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_section_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">new_properties</span><span class="p">)</span>
+                    
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span>
+               
+<div class="viewcode-block" id="InputParser.validate_merge_defaults"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.validate_merge_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">validate_merge_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_merge_default_values</span><span class="p">()</span>
+            <span class="n">json_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sections</span><span class="p">()</span> 
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Algorithm Input: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_dict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Algorithm Input Schema: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)))</span>
+            <span class="n">jsonschema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">json_dict</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;JSON Validation error: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ve</span><span class="p">)))</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="n">ve</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_algorithm_problem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_input_problem</span><span class="p">()</span></div>
+            
+    <span class="k">def</span> <span class="nf">_validate_algorithm_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">algo_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">algo_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+                
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;No algorithm &#39;problem&#39; section found on input.&quot;</span><span class="p">)</span>
+       
+        <span class="n">problems</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">get_algorithm_problems</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span>
+            <span class="s2">&quot;Problem: </span><span class="si">{}</span><span class="s2"> not in the list of problems: </span><span class="si">{}</span><span class="s2"> for algorithm: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">problem_name</span><span class="p">,</span><span class="n">problems</span><span class="p">,</span><span class="n">algo_name</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">_validate_input_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">input_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">input_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+                
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;No algorithm &#39;problem&#39; section found on input.&quot;</span><span class="p">)</span>
+       
+        <span class="n">problems</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">get_input_problems</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span>
+            <span class="s2">&quot;Problem: </span><span class="si">{}</span><span class="s2"> not in the list of problems: </span><span class="si">{}</span><span class="s2"> for input: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">problem_name</span><span class="p">,</span><span class="n">problems</span><span class="p">,</span><span class="n">input_name</span><span class="p">))</span>
+           
+<div class="viewcode-block" id="InputParser.commit_changes"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.commit_changes">[docs]</a>    <span class="k">def</span> <span class="nf">commit_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_original_sections</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="InputParser.save_to_file"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.save_to_file">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s1">&#39;Missing file path&#39;</span><span class="p">)</span>
+            
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s1">&#39;Missing file path&#39;</span><span class="p">)</span>
+            
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sections</span><span class="p">(),</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>            </div>
+               
+<div class="viewcode-block" id="InputParser.section_is_text"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.section_is_text">[docs]</a>    <span class="k">def</span> <span class="nf">section_is_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_types</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="s1">&#39;object&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span>
+        
+        <span class="n">section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="k">return</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">section</span><span class="p">,</span><span class="nb">dict</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="InputParser.get_sections"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_sections">[docs]</a>    <span class="k">def</span> <span class="nf">get_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span></div>
+                
+<div class="viewcode-block" id="InputParser.get_section"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section">[docs]</a>    <span class="k">def</span> <span class="nf">get_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a Section by name.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Section: The section with this name</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            AlgorithmError: if the section does not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>     
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s1">&#39;No section &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">))</span></div>
+            
+<div class="viewcode-block" id="InputParser.get_section_text"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section_text">[docs]</a>    <span class="k">def</span> <span class="nf">get_section_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">section</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">str</span>
+        
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+     
+<div class="viewcode-block" id="InputParser.get_section_properties"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_section_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">section_name</span><span class="p">):</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+       
+        <span class="k">return</span> <span class="n">section</span></div>
+           
+<div class="viewcode-block" id="InputParser.get_section_property"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section_property">[docs]</a>    <span class="k">def</span> <span class="nf">get_section_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">default_value</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a property by name.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">            property_name (str): the property name in the section</span>
+<span class="sd">            default_value : default value in case it is not found</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Value: The property value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">section</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="n">default_value</span></div>
+    
+<div class="viewcode-block" id="InputParser.set_section"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.set_section">[docs]</a>    <span class="k">def</span> <span class="nf">set_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span></div>
+            
+<div class="viewcode-block" id="InputParser.delete_section"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.delete_section">[docs]</a>    <span class="k">def</span> <span class="nf">delete_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+            <span class="k">return</span>
+            
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+            
+        <span class="c1"># update schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_original_schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_pluggable_input_schemas</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_algorithm_input_schema</span><span class="p">()</span></div>
+           
+<div class="viewcode-block" id="InputParser.set_section_properties"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.set_section_properties">[docs]</a>    <span class="k">def</span> <span class="nf">set_section_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_section_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">property_name</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_section_property</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="InputParser.set_section_property"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.set_section_property">[docs]</a>    <span class="k">def</span> <span class="nf">set_section_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_types</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">types</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">validator</span> <span class="o">=</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">Draft4Validator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">)</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="n">valid</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">is_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="nb">type</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+                    <span class="k">break</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">: Value &#39;</span><span class="si">{}</span><span class="s2">&#39; is not of types: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">types</span><span class="p">))</span> 
+            
+        <span class="n">sections_temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span>
+        <span class="n">InputParser</span><span class="o">.</span><span class="n">_set_section_property</span><span class="p">(</span><span class="n">sections_temp</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">sections_temp</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">: Value &#39;</span><span class="si">{}</span><span class="s2">&#39;: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">msg</span><span class="p">))</span> 
+      
+        <span class="n">InputParser</span><span class="o">.</span><span class="n">_set_section_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">property_name</span> <span class="o">==</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span> <span class="o">==</span> <span class="n">section_name</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_algorithm_input_schema</span><span class="p">()</span>
+                <span class="c1"># remove properties that are not valid for this section</span>
+                <span class="n">default_properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_default_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">default_properties</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">if</span> <span class="n">property_name</span> <span class="o">!=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span> <span class="ow">and</span> <span class="n">property_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">default_properties</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">delete_section_property</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span> <span class="o">==</span> <span class="n">section_name</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_algorithm_problem</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_input_problem</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">is_pluggable_section</span><span class="p">(</span><span class="n">section_name</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_pluggable_input_schemas</span><span class="p">()</span>
+                <span class="c1"># remove properties that are not valid for this section</span>
+                <span class="n">default_properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_default_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">default_properties</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_properties</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">if</span> <span class="n">property_name</span> <span class="o">!=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span> <span class="ow">and</span> <span class="n">property_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">default_properties</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">delete_section_property</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">property_name</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">section_name</span> <span class="o">==</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_dependency_sections</span><span class="p">()</span>
+                    
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_sections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">)</span></div>
+       
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sections</span><span class="p">,</span><span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+        <span class="n">validator</span> <span class="o">=</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">Draft4Validator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">iter_errors</span><span class="p">(</span><span class="n">sections</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">error</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">section_name</span> <span class="ow">and</span> <span class="n">error</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">property_name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">error</span><span class="o">.</span><span class="n">message</span>
+          
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="k">def</span> <span class="nf">_update_algorithm_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+                
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;No algorithm &#39;problem&#39; section found on input.&quot;</span><span class="p">)</span>
+            
+        <span class="n">algo_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">algo_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">problem_name</span> <span class="ow">in</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">get_algorithm_problems</span><span class="p">(</span><span class="n">algo_name</span><span class="p">):</span>
+            <span class="k">return</span>
+        
+        <span class="k">for</span> <span class="n">algo_name</span> <span class="ow">in</span> <span class="n">local_algorithms</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_algorithm_problems</span><span class="p">(</span><span class="n">algo_name</span><span class="p">):</span>
+                <span class="c1"># set to the first algorithm to solve the problem</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">algo_name</span><span class="p">)</span>
+                <span class="k">return</span>
+            
+        <span class="c1"># no algorithm solve this problem, remove section</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_section</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_update_input_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">problem_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property_default_value</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">PROBLEM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+                
+        <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;No algorithm &#39;problem&#39; section found on input.&quot;</span><span class="p">)</span>
+            
+        <span class="n">input_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">input_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">problem_name</span> <span class="ow">in</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">get_input_problems</span><span class="p">(</span><span class="n">input_name</span><span class="p">):</span>
+            <span class="k">return</span>
+        
+        <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="n">local_inputs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">problem_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_problems</span><span class="p">(</span><span class="n">input_name</span><span class="p">):</span>
+                <span class="c1"># set to the first input to solve the problem</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">input_name</span><span class="p">)</span>
+                <span class="k">return</span>
+            
+        <span class="c1"># no input solve this problem, remove section</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_section</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">INPUT</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_update_dependency_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">algo_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_property</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">algo_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">get_algorithm_configuration</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span> 
+        <span class="n">classical</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;classical&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;classical&#39;</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="kc">False</span> 
+        <span class="n">pluggable_dependencies</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="s1">&#39;depends&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;depends&#39;</span><span class="p">]</span>
+        <span class="n">pluggable_defaults</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="s1">&#39;defaults&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
+        <span class="n">pluggable_types</span> <span class="o">=</span> <span class="n">local_pluggables_types</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="o">!=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">ALGORITHM</span> <span class="ow">and</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pluggable_dependencies</span><span class="p">:</span>
+                <span class="c1"># remove pluggables from input that are not in the dependencies</span>
+                <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+                   <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">]</span> 
+       
+        <span class="k">for</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_dependencies</span><span class="p">:</span>
+            <span class="n">pluggable_name</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">pluggable_type</span> <span class="ow">in</span> <span class="n">pluggable_defaults</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span> <span class="ow">in</span> <span class="n">pluggable_defaults</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">]:</span>
+                    <span class="n">pluggable_name</span> <span class="o">=</span> <span class="n">pluggable_defaults</span><span class="p">[</span><span class="n">pluggable_type</span><span class="p">][</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span>
+           
+            <span class="k">if</span> <span class="n">pluggable_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pluggable_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_section_property</span><span class="p">(</span><span class="n">pluggable_type</span><span class="p">,</span><span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span><span class="n">pluggable_name</span><span class="p">)</span>
+               
+        <span class="c1"># update backend based on classical</span>
+        <span class="k">if</span> <span class="n">classical</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_default_properties</span><span class="p">(</span><span class="n">InputParser</span><span class="o">.</span><span class="n">BACKEND</span><span class="p">)</span>
+                    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_set_section_property</span><span class="p">(</span><span class="n">sections</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">            property_name (str): the property name in the section</span>
+<span class="sd">            value : property value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">:</span>
+            <span class="n">sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+       
+        <span class="c1"># name should come first</span>
+        <span class="k">if</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">NAME</span> <span class="o">==</span> <span class="n">property_name</span> <span class="ow">and</span> <span class="n">property_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="n">new_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)])</span>
+            <span class="n">new_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">])</span>
+            <span class="n">sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_dict</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">][</span><span class="n">property_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            
+<div class="viewcode-block" id="InputParser.delete_section_property"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.delete_section_property">[docs]</a>    <span class="k">def</span> <span class="nf">delete_section_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">            property_name (str): the property name in the section</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_property_name</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span> <span class="ow">and</span> <span class="n">property_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">][</span><span class="n">property_name</span><span class="p">]</span></div>
+            
+<div class="viewcode-block" id="InputParser.delete_section_properties"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.delete_section_properties">[docs]</a>    <span class="k">def</span> <span class="nf">delete_section_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span></div>
+            
+<div class="viewcode-block" id="InputParser.set_section_data"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.set_section_data">[docs]</a>    <span class="k">def</span> <span class="nf">set_section_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a section data.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            section_name (str): the name of the section, case insensitive</span>
+<span class="sd">            value : value to set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section_name</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_format_section_name</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>    
+        <span class="n">types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_section_types</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">InputParser</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">types</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">validator</span> <span class="o">=</span> <span class="n">jsonschema</span><span class="o">.</span><span class="n">Draft4Validator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_schema</span><span class="p">)</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="n">valid</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">is_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="nb">type</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+                    <span class="k">break</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">AlgorithmError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: Value &#39;</span><span class="si">{}</span><span class="s2">&#39; is not of types: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">types</span><span class="p">))</span> 
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="InputParser.get_section_names"><a class="viewcode-back" href="../../../qiskit_acqua.parser.html#qiskit_acqua.parser.InputParser.get_section_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_section_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all the names of the sections.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sections</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="c1"># return propet values based on type</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;null&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="s1">&#39;string&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                 <span class="k">if</span> <span class="s1">&#39;string&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                     <span class="k">return</span> <span class="n">value</span>
+                 <span class="k">if</span> <span class="s1">&#39;null&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                     <span class="k">return</span> <span class="kc">None</span>
+            
+            <span class="k">if</span> <span class="s1">&#39;integer&#39;</span> <span class="ow">in</span> <span class="n">types</span> <span class="ow">or</span> <span class="s1">&#39;number&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="s1">&#39;object&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="s1">&#39;array&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="s1">&#39;boolean&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            
+            <span class="k">return</span> <span class="n">value</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;number&#39;</span> <span class="ow">in</span> <span class="n">types</span> <span class="ow">or</span> <span class="s1">&#39;integer&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;integer&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            
+        <span class="k">if</span> <span class="s1">&#39;string&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">str_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">str_value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">str_value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            
+            <span class="n">v</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">str_value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+            
+            <span class="k">return</span> <span class="n">v</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

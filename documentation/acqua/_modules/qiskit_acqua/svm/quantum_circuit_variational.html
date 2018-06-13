@@ -1,0 +1,310 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit_acqua.svm.quantum_circuit_variational &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimizers.html">Optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit_acqua.svm.quantum_circuit_variational</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2018 IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumProgram</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+
+<span class="kn">from</span> <span class="nn">qiskit_acqua.svm</span> <span class="k">import</span> <span class="n">assign_label</span><span class="p">,</span> <span class="n">cost_estimate_sigmoid</span><span class="p">,</span> <span class="n">return_probabilities</span>
+
+
+<div class="viewcode-block" id="trial_circuit_ML"><a class="viewcode-back" href="../../../qiskit_acqua.svm.html#qiskit_acqua.svm.quantum_circuit_variational.trial_circuit_ML">[docs]</a><span class="k">def</span> <span class="nf">trial_circuit_ML</span><span class="p">(</span><span class="n">entangler_map</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;circuit&#39;</span><span class="p">,</span>
+                     <span class="n">meas_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">measurement</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Trial function for classical optimization problems.</span>
+
+<span class="sd">    n = number of qubits</span>
+<span class="sd">    m = depth</span>
+<span class="sd">    theta = control vector of size n*m*2 stacked as theta[n*i*2+2*j+p] where j</span>
+<span class="sd">    counts the qubits and i the depth and p if y and z.</span>
+<span class="sd">    entangler_map = {0: [2, 1],</span>
+<span class="sd">                     1: [2],</span>
+<span class="sd">                     3: [2],</span>
+<span class="sd">                     4: [2]}</span>
+<span class="sd">    control is the key and values are the target</span>
+<span class="sd">    pauli_string = length of number of qubits string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+    <span class="n">trial_circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="c1"># write input state from sample distribution</span>
+    <span class="k">for</span> <span class="n">feat_map</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_vec</span><span class="p">)):</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>  <span class="c1"># h</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_vec</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">entangler_map</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">entangler_map</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="n">trial_circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">x_vec</span><span class="p">[</span><span class="n">node</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">x_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">trial_circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="n">trial_circuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_vec</span><span class="p">)):</span>
+        <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u3</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">r</span><span class="p">])</span> <span class="c1">#ry</span>
+        <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">r</span><span class="p">])</span> <span class="c1">#rz</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">entangler_map</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">entangler_map</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="c1">#cz</span>
+                <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>  <span class="c1"># h</span>
+                <span class="n">trial_circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>  <span class="c1"># h</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u3</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="c1">#ry</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="c1">#rz</span>
+    <span class="n">trial_circuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">measurement</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">trial_circuit</span></div>
+
+<span class="n">print_info</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="set_print_info"><a class="viewcode-back" href="../../../qiskit_acqua.svm.html#qiskit_acqua.svm.quantum_circuit_variational.set_print_info">[docs]</a><span class="k">def</span> <span class="nf">set_print_info</span><span class="p">(</span><span class="n">print_info_arg</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">print_info</span>
+    <span class="n">print_info</span> <span class="o">=</span> <span class="n">print_info_arg</span></div>
+
+<div class="viewcode-block" id="eval_cost_function"><a class="viewcode-back" href="../../../qiskit_acqua.svm.html#qiskit_acqua.svm.quantum_circuit_variational.eval_cost_function">[docs]</a><span class="k">def</span> <span class="nf">eval_cost_function</span><span class="p">(</span><span class="n">entangler_map</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">,</span> <span class="n">class_labels</span><span class="p">,</span>
+                       <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="n">sample_shots</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># x_vec is the vector of training characteristics - size n</span>
+    <span class="c1"># y is the binary outcome for each x_vec</span>
+    <span class="n">number_of_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">class_labels</span><span class="p">)</span>
+    <span class="n">cost</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_cost</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">std_cost</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">predicted_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+    <span class="c1"># Q_program.set_api(Qconfig.APItoken,Qconfig.config[&quot;url&quot;])</span>
+
+    <span class="c1">### RUN CIRCUITS</span>
+    <span class="n">circuits</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sequences</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">unlabeled_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">arrays</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_classes</span><span class="p">):</span>
+        <span class="n">labelgroup</span> <span class="o">=</span> <span class="n">x_vec</span><span class="p">[</span><span class="n">class_labels</span><span class="p">[</span><span class="n">arrays</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">labelgroup</span><span class="p">:</span>
+            <span class="n">unlabeled_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="c1"># unlabeled_data = np.array([])</span>
+    <span class="c1"># for arrays in range(number_of_classes):</span>
+    <span class="c1">#     unlabeled_data = np.vstack((unlabeled_data,x_vec[class_labels[arrays]])) if unlabeled_data.size else x_vec[class_labels[arrays]]</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">x_vec</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">inpt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_vec</span><span class="p">[</span><span class="n">key</span><span class="p">]):</span>
+            <span class="n">c</span><span class="p">,</span> <span class="n">sequences</span> <span class="o">=</span> <span class="n">trial_circuit_ML</span><span class="p">(</span><span class="n">entangler_map</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span>
+                                            <span class="n">theta</span><span class="p">,</span> <span class="n">inpt</span><span class="p">,</span> <span class="n">key</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># c is &#39;A0&#39;, &#39;A1&#39;, &#39;A2&#39;, etc...</span>
+            <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+            <span class="n">Q_program</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">sequences</span><span class="p">)</span>
+
+    <span class="n">circuit_list</span>  <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">]</span>
+
+    <span class="c1"># circuits is [&#39;A&#39;, &#39;A0&#39;], [&#39;A&#39;, &#39;A1&#39;], ..., [&#39;B&#39;, &#39;B0&#39;],... etc</span>
+    <span class="c1"># print(Q_program.get_qasm(circuit_list[0]))</span>
+
+    <span class="n">program_data</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
+                                     <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">)):</span>
+        <span class="n">countsloop</span> <span class="o">=</span> <span class="n">program_data</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_classes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">circuits</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">class_labels</span><span class="p">[</span><span class="n">cl</span><span class="p">]:</span>
+                <span class="n">expected_outcome</span> <span class="o">=</span> <span class="n">class_labels</span><span class="p">[</span><span class="n">cl</span><span class="p">]</span>
+
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">return_probabilities</span><span class="p">(</span><span class="n">countsloop</span><span class="p">,</span> <span class="n">class_labels</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">cost_estimate_sigmoid</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">probs</span><span class="p">,</span> <span class="n">expected_outcome</span><span class="p">)</span>
+
+        <span class="n">predicted_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_outcome</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">global</span> <span class="n">print_info</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">train</span> <span class="ow">and</span> <span class="n">print_info</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=============================================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Classifying point </span><span class="si">%s</span><span class="s1">. Label should be  </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">unlabeled_data</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="p">,</span><span class="n">expected_outcome</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Measured label probability distribution is </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">probs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_outcome</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Assigned label is  </span><span class="si">%s</span><span class="s1">  CORRECT </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Assigned label is  </span><span class="si">%s</span><span class="s1"> INCORRECT </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">total_cost</span> <span class="o">=</span> <span class="n">result</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">)</span>
+    <span class="n">success_ratio</span> <span class="o">=</span> <span class="n">success</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">total_cost</span><span class="p">,</span> <span class="n">std_cost</span><span class="p">,</span> <span class="n">success_ratio</span><span class="p">,</span> <span class="n">predicted_results</span></div>
+
+
+<div class="viewcode-block" id="eval_cost_function_with_unlabeled_data"><a class="viewcode-back" href="../../../qiskit_acqua.svm.html#qiskit_acqua.svm.quantum_circuit_variational.eval_cost_function_with_unlabeled_data">[docs]</a><span class="k">def</span> <span class="nf">eval_cost_function_with_unlabeled_data</span><span class="p">(</span><span class="n">entangler_map</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">unlabeled_data</span><span class="p">,</span>
+                                           <span class="n">class_labels</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="n">predicted_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+    <span class="n">circuits</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">inpt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unlabeled_data</span><span class="p">):</span>
+        <span class="n">circuit_name</span><span class="p">,</span> <span class="n">sequences</span> <span class="o">=</span> <span class="n">trial_circuit_ML</span><span class="p">(</span><span class="n">entangler_map</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span>
+                                                   <span class="n">theta</span><span class="p">,</span> <span class="n">inpt</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">circuit_name</span><span class="p">))</span>
+        <span class="n">Q_program</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">,</span><span class="n">sequences</span><span class="p">)</span>
+
+    <span class="n">circuit_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">]</span>
+    <span class="n">program_data</span> <span class="o">=</span> <span class="n">Q_program</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
+                                     <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">)):</span>
+        <span class="n">countsloop</span> <span class="o">=</span> <span class="n">program_data</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit_list</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">return_probabilities</span><span class="p">(</span><span class="n">countsloop</span><span class="p">,</span> <span class="n">class_labels</span><span class="p">)</span>
+        <span class="n">predicted_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">predicted_results</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
