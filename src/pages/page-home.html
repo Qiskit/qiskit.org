@@ -1,0 +1,314 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../../bower_components/code-sample/themes/atom-one-light.html">
+<link rel="import" href="../../bower_components/code-sample/code-sample.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../ibmq-components/vaadin-button.html">
+<link rel="import" href="../app-icons.html">
+<link rel="import" href="../app-styles.html">
+
+<dom-module id="page-home">
+  <template>
+    <style include="app-styles cards-section-styles">
+      :host {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .acqua-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #995ED4;
+        color: #ffffff;
+        padding: 2em;
+      }
+
+      .acqua-banner h3 {
+        font-size: 1.4em;
+      }
+
+      .acqua-banner a {
+        margin-right: 10px;
+      }
+
+      .acqua-banner p {
+        max-width: 800px;
+      }
+
+      .collaborators-section {
+        padding: 2em 1em;
+      }
+
+      .collaborators-section {
+        max-width: 868px;
+        margin: 0 auto;
+      }
+
+      .collaborators-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .collaborators-list li + li {
+        margin-top: .5em;
+      }
+
+      .collaborators-list li {
+        font-weight: bold;
+      }
+
+      @media (min-width: 768px) {
+        .collaborators-section {
+          padding: 4em 2em;
+        }
+      }
+    </style>
+
+    <header>
+      <img src$="[[rootPath]]images/qiskit-logo.gif" alt="QISKit logo">
+      <div>
+        <h1>QISKit</h1>
+        <h2>[[localize('title')]]</h2>
+        <a href="https://join.slack.com/t/qiskit/shared_invite/enQtMzYyMjY5Nzg2ODk4LTNkMWNmMjc3N2E0ZTdlNzg1Mzk4MDY4YjFlNWZmNTdmZTFkMDFmMjVjZTIxZThjMTlhMjA2MmQxYTViMzhiNzE" target="_blank">
+          <vaadin-button theme="primary">
+            <iron-icon icon="app-icons:slack"></iron-icon>
+            [[localize('joinSlack')]]
+          </vaadin-button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="acqua-banner">
+        <div>
+          <h3>[[localize('newLibrary')]]</h3>
+          <p>
+            [[localize('acquaDescription')]]
+          </p>
+        </div>
+        <div>
+          <a href$="[[rootPath]]#/acqua">
+            <vaadin-button theme="secondary">QISKit ACQUA</vaadin-button>
+          </a>
+          <a href$="[[rootPath]]#/acqua/chemistry">
+            <vaadin-button theme="secondary">ACQUA Chemistry</vaadin-button>
+          </a>
+          <a href$="[[rootPath]]#/acqua/ai">
+            <vaadin-button theme="secondary">ACQUA AI</vaadin-button>
+          </a>
+          <a href$="[[rootPath]]#/acqua/optimization">
+            <vaadin-button theme="secondary">ACQUA Optimization</vaadin-button>
+          </a>
+        </div>
+      </div>
+      <div class="cards-section">
+        <div class="card">
+          <h3>
+            [[localize('latestVersion')]]
+            <a href="https://pypi.python.org/pypi/qiskit">
+              <img src="https://img.shields.io/pypi/v/qiskit.svg" alt="QISKit version" style="height: 20px; min-width: 86px;">
+            </a>
+          </h3>
+          <p>[[localize('description')]]</p>
+          <p>
+            <a href="https://github.com/QISKit/qiskit-core" target="_blank">
+              <vaadin-button theme="secondary">GitHub</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href="https://github.com/QISKit/qiskit-core/wiki/Roadmap" target="_blank">
+              <vaadin-button theme="secondary">[[localize('roadmapButton')]]</vaadin-button>
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>[[localize('learnTitle')]]</h3>
+          <p>[[localize('learnDescription')]]</p>
+          <p>
+            <a href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb" target="_blank">
+              <vaadin-button theme="secondary">[[localize('tutorialsButton')]]</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href$="[[rootPath]]documentation[[_documentationSuffix]]" target="_blank">
+              <vaadin-button theme="secondary">[[localize('documentationButton')]]</vaadin-button>
+            </a>
+          </p>
+          <p>
+            <a href="https://quantumexperience.ng.bluemix.net" target="_blank">
+              <vaadin-button theme="secondary">IBM Q Experience</vaadin-button>
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>[[localize('exampleTitle')]]</h3>
+          <pre class="terminal">[python3] $ pip install qiskit</pre>
+          <code-sample type="python" copy-clipboard-button>
+            <!-- htmlmin:ignore -->
+            <template preserve-content>
+              from qiskit import ClassicalRegister, QuantumRegister
+              from qiskit import QuantumCircuit, execute
+              q = QuantumRegister(2)
+              c = ClassicalRegister(2)
+              qc = QuantumCircuit(q, c)
+              qc.h(q[0])
+              qc.cx(q[0], q[1])
+              qc.measure(q, c)
+              job_sim = execute(qc, "local_qasm_simulator")
+              sim_result = job_sim.result()
+              print(sim_result.get_counts(qc))
+            </template>
+            <!-- htmlmin:ignore -->
+          </code-sample>
+          <p class="alert">[[localize('installRequirements')]] <a href$="[[rootPath]]documentation[[_documentationSuffix]]" target="_blank">[[localize('installRequirementsLink')]]</a></p>
+        </div>
+      </div>
+
+      <div class="collaborators-section">
+        <h3>[[localize('collaboratorsTitle')]]</h3>
+        <p>[[localize('collaboratorsDescription1')]] <a href="mailto:qiskit@qiskit.org">qiskit@qiskit.org</a>. [[localize('collaboratorsDescription2')]]</p>
+        <ul class="collaborators-list">
+          <template is="dom-repeat" items="[[collaborators]]" as="collaborator">
+            <li>
+              <template is="dom-if" if="[[collaborator.url]]">
+                <a href$="[[collaborator.url]]" target="_blank">[[collaborator.name]]</a>
+              </template>
+              <template is="dom-if" if="[[!collaborator.url]]">
+                [[collaborator.name]]
+              </template>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </main>
+  </template>
+
+  <script>
+    class PageHome extends Polymer.mixinBehaviors(
+      [Polymer.AppLocalizeBehavior], Polymer.Element
+    ) {
+      static get is() {
+        return 'page-home';
+      }
+
+      static get properties() {
+        return {
+          language: {
+            type: String,
+            observer: 'languageChanged'
+          },
+
+          collaborators: {
+            type: Array,
+            value: () => [
+              {
+                name: 'IBM Research',
+                url: 'https://www.research.ibm.com'
+              },
+              {
+                name: 'Alexandre Blais (Université de Sherbrooke)',
+                url: 'https://www.physique.usherbrooke.ca/blais/index.php?sec=accueil&lan=EN'
+              },
+              {
+                name: 'Robin Blume Kohout (Sandia)',
+                url: 'https://cfwebprod.sandia.gov/cfdocs/CompResearch/index.cfm'
+              },
+              {
+                name: 'Francesco Buscemi (Nagoya University)',
+                url: 'http://www.math.cm.is.nagoya-u.ac.jp/Staff/buscemi-en.html'
+              },
+              {
+                name: 'Jonas Bylander (Chalmers University of Technology)',
+                url: 'http://www.chalmers.se/en/staff/Pages/Jonas-Bylander.aspx'
+              },
+              {
+                name: 'Isaac Chuang (MIT)',
+                url: 'http://web.mit.edu/physics/people/faculty/chuang_isaac.html'
+              },
+              {
+                name: 'Vincent Dwyer (Loughborough University)',
+                url: 'http://www.lboro.ac.uk/departments/meme/staff/vincent-m-dwyer/'
+              },
+              {
+                name: 'Mark Everitt (Loughborough University)',
+                url: 'http://www.lboro.ac.uk/departments/physics/staff/academic/mark-everitt/'
+              },
+              {
+                name: 'Michael Geller (University of Georgia)',
+                url: 'https://www.physast.uga.edu/people/michael_geller'
+              },
+              {
+                name: 'Thomas Haener (ETH Zurich/ProjectQ)',
+                url: 'http://www.projectq.ch'
+              },
+              {
+                name: 'Andrew Houck (Princeton)',
+                url: 'http://ee.princeton.edu/people/faculty/andrew-houck'
+              },
+              {
+                name: 'Thomas Ihn (ETHZ)',
+                url: 'https://people.phys.ethz.ch/~ihn/'
+              },
+              {
+                name: 'Sabre Kais (Purdue)',
+                url: 'https://www.chem.purdue.edu/kais/'
+              },
+              {
+                name: 'Miguel Ángel Martín-Delgado (Universidad Complutense de Madrid)',
+                url: 'http://gicc.fis.ucm.es/people/mamd.html'
+              },
+              {
+                name: 'Rod Van Meter (Keio University)',
+                url: 'http://aqua.sfc.wide.ad.jp/'
+              },
+              {
+                name: 'Harumichi Nishimura (Nagoya University)',
+                url: 'http://www.math.cm.is.nagoya-u.ac.jp/~hnishimura/list.html'
+              },
+              {
+                name: 'Russell Rundle (Loughborough University)',
+                url: ''
+              },
+              {
+                name: 'Enrique Solano (University of the Basque Country and Shanghai University)',
+                url: 'http://www.qutisgroup.com'
+              },
+              {
+                name: 'Damian Steiger (ETH Zurich /ProjectQ)',
+                url: 'http://www.projectq.ch'
+              },
+              {
+                name: 'Todd Tilma (Tokyo Institute of Technology)',
+                url: 'https://www.titech.ac.jp/english/'
+              },
+              {
+                name: 'Christophe Vuillot (QuTech institute at TU Delft)',
+                url: 'https://qutech.nl/person/christopher-vuillot/'
+              },
+              {
+                name: 'Martin Weides (Karlsruhe Institute of Technology)',
+                url: 'https://www.phi.kit.edu/wissenschaftler_weides_martin.php'
+              },
+              {
+                name: 'James Wootton (University of Basel)',
+                url: 'https://sites.google.com/site/woottonjames/home'
+              },
+              {
+                name: 'Shigeru Yamashita (Ritsumeikan University)',
+                url: 'http://www.ngc.is.ritsumei.ac.jp/~ger/english-2/'
+              }
+            ]
+          }
+        };
+      }
+
+      languageChanged(language) {
+        this.set('_documentationSuffix', language === 'ja' ? '/ja/' : '');
+      }
+    }
+
+    window.customElements.define(PageHome.is, PageHome);
+  </script>
+</dom-module>
