@@ -11,10 +11,12 @@ script:
 before_deploy:
   - npm run build
 deploy:
-  - provider: pages
-    local-dir: build/
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    keep-history: true
+  - provider: cloudfoundry
+    username: apikey
+    password: $IBM_CLOUD_API_KEY
+    api: https://api.ng.bluemix.net
+    organization: $IBM_CLOUD_ORGANIZATION
+    space: $IBM_CLOUD_SPACE
+    manifest: manifest.yml
     on:
       branch: master

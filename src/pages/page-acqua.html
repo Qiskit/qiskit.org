@@ -38,6 +38,7 @@
         border-bottom-right-radius: .5em;
         border-bottom-left-radius: .5em;
         background-color: #1b2025;
+        color: #ffffff;
       }
 
       .qiskit-link a {
@@ -130,9 +131,10 @@
     </app-route>
 
     <div class="qiskit-link">
-      <a href$="[[rootPath]]">&lt; QISKit </a> 
+      <a href$="[[rootPath]]">&lt; QISKit </a>
       <template is="dom-if" if=[[_isNotHome(_routeData.sectionName)]]>
-        <a href$="[[rootPath]]#/acqua/"> | QISKit ACQUA</a>
+        <span>|</span>
+        <a href$="[[rootPath]]acqua/">QISKit ACQUA</a>
       </template>
     </div>
 
@@ -203,7 +205,7 @@
           <div class="row between-xs center-xs acqua-center applications">
             <div class$="[[getColumnClasses(_routeData.sectionName, 'chemistry')]]">
               <div class="box">
-                <a href$="[[rootPath]]#/acqua/chemistry">
+                <a href$="[[rootPath]]acqua/chemistry">
                   <vaadin-button theme="secondary">[[localize('chemistryApplication')]]</vaadin-button>
                 </a>
               </div>
@@ -221,7 +223,7 @@
             </div>
             <div class$="[[getColumnClasses(_routeData.sectionName, 'ai')]]">
               <div class="box">
-                <a href$="[[rootPath]]#/acqua/ai">
+                <a href$="[[rootPath]]acqua/ai">
                   <vaadin-button theme="secondary">[[localize('aiApplication')]]</vaadin-button>
                 </a>
               </div>
@@ -234,7 +236,7 @@
             </div>
             <div class$="[[getColumnClasses(_routeData.sectionName, 'optimization')]]">
               <div class="box">
-                <a href$="[[rootPath]]#/acqua/optimization">
+                <a href$="[[rootPath]]acqua/optimization">
                   <vaadin-button theme="secondary">[[localize('optimizationApplication')]]</vaadin-button>
                 </a>
               </div>
