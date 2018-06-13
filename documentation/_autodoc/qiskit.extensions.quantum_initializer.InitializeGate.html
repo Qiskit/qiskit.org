@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.extensions.quantum_initializer.InitializeGate &#8212; QISKit SDK 0.5.3 documentation</title>
+    <title>qiskit.extensions.quantum_initializer.InitializeGate &#8212; QISKit SDK 0.5.4 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.3',
+        VERSION:     '0.5.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -63,7 +63,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.extensions.html" >qiskit.extensions package</a> &#187;</li>
@@ -228,23 +228,29 @@ circ = QuantumCircuit or CompositeGate containing this gate</p>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.gates_to_uncompute" title="qiskit.extensions.quantum_initializer.InitializeGate.gates_to_uncompute"><code class="xref py py-obj docutils literal"><span class="pre">gates_to_uncompute</span></code></a>()</td>
 <td>Call to populate the self.data list with gates that takes the desired vector to zero.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.h" title="qiskit.extensions.quantum_initializer.InitializeGate.h"><code class="xref py py-obj docutils literal"><span class="pre">h</span></code></a>(q)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.get_qubit_coupling" title="qiskit.extensions.quantum_initializer.InitializeGate.get_qubit_coupling"><code class="xref py py-obj docutils literal"><span class="pre">get_qubit_coupling</span></code></a>()</td>
+<td>Gets the coupling graph of the qubits in case this is a multi-qubit gate</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.h" title="qiskit.extensions.quantum_initializer.InitializeGate.h"><code class="xref py py-obj docutils literal"><span class="pre">h</span></code></a>(q)</td>
 <td>Apply H to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.has_register" title="qiskit.extensions.quantum_initializer.InitializeGate.has_register"><code class="xref py py-obj docutils literal"><span class="pre">has_register</span></code></a>(register)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.has_register" title="qiskit.extensions.quantum_initializer.InitializeGate.has_register"><code class="xref py py-obj docutils literal"><span class="pre">has_register</span></code></a>(register)</td>
 <td>Test if this gate’s circuit has the register r.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.iden" title="qiskit.extensions.quantum_initializer.InitializeGate.iden"><code class="xref py py-obj docutils literal"><span class="pre">iden</span></code></a>(q)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.iden" title="qiskit.extensions.quantum_initializer.InitializeGate.iden"><code class="xref py py-obj docutils literal"><span class="pre">iden</span></code></a>(q)</td>
 <td>Apply Identity to q.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.initialize" title="qiskit.extensions.quantum_initializer.InitializeGate.initialize"><code class="xref py py-obj docutils literal"><span class="pre">initialize</span></code></a>(params,&nbsp;qubits)</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.initialize" title="qiskit.extensions.quantum_initializer.InitializeGate.initialize"><code class="xref py py-obj docutils literal"><span class="pre">initialize</span></code></a>(params,&nbsp;qubits)</td>
 <td>Apply initialize to circuit.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.instruction_list" title="qiskit.extensions.quantum_initializer.InitializeGate.instruction_list"><code class="xref py py-obj docutils literal"><span class="pre">instruction_list</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.instruction_list" title="qiskit.extensions.quantum_initializer.InitializeGate.instruction_list"><code class="xref py py-obj docutils literal"><span class="pre">instruction_list</span></code></a>()</td>
 <td>Return a list of instructions for this CompositeGate.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.inverse" title="qiskit.extensions.quantum_initializer.InitializeGate.inverse"><code class="xref py py-obj docutils literal"><span class="pre">inverse</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.inverse" title="qiskit.extensions.quantum_initializer.InitializeGate.inverse"><code class="xref py py-obj docutils literal"><span class="pre">inverse</span></code></a>()</td>
 <td>Invert this gate.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.is_multi_qubit" title="qiskit.extensions.quantum_initializer.InitializeGate.is_multi_qubit"><code class="xref py py-obj docutils literal"><span class="pre">is_multi_qubit</span></code></a>()</td>
+<td>Returns True if this Gate is uses multiple qubits as arguments</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.extensions.quantum_initializer.InitializeGate.last_atomic_gate_host" title="qiskit.extensions.quantum_initializer.InitializeGate.last_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">last_atomic_gate_host</span></code></a>()</td>
 <td>Return the host list of the leaf gate on the right edge.</td>
@@ -451,6 +457,12 @@ desired vector to zero.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.get_qubit_coupling">
+<code class="descname">get_qubit_coupling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.get_qubit_coupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the coupling graph of the qubits in case this is a multi-qubit gate</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="qiskit.extensions.quantum_initializer.InitializeGate.h">
 <code class="descname">h</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.h" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply H to q.</p>
@@ -486,6 +498,12 @@ this method recursively.</p>
 <dt id="qiskit.extensions.quantum_initializer.InitializeGate.inverse">
 <code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.inverse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Invert this gate.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.extensions.quantum_initializer.InitializeGate.is_multi_qubit">
+<code class="descname">is_multi_qubit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.extensions.quantum_initializer.InitializeGate.is_multi_qubit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this Gate is uses multiple qubits as arguments</p>
 </dd></dl>
 
 <dl class="method">
@@ -778,7 +796,7 @@ Works on all qubits, and prevents reordering (like barrier).</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.extensions.html" >qiskit.extensions package</a> &#187;</li>
@@ -787,7 +805,7 @@ Works on all qubits, and prevents reordering (like barrier).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/29.
+      Last updated on 2018/06/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
