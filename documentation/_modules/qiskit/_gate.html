@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._gate &#8212; QISKit SDK 0.5.3 documentation</title>
+    <title>qiskit._gate &#8212; QISKit SDK 0.5.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.3',
+        VERSION:     '0.5.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -100,20 +100,10 @@
   <h1>Source code for qiskit._gate</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1"># Copyright 2017, IBM.</span>
 <span class="c1">#</span>
-<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1"># you may not use this file except in compliance with the License.</span>
-<span class="c1"># You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1"># See the License for the specific language governing permissions and</span>
-<span class="c1"># limitations under the License.</span>
-<span class="c1"># =============================================================================</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Unitary gate.</span>
@@ -134,10 +124,19 @@
 <span class="sd">        arg = list of pairs (Register, index)</span>
 <span class="sd">        circuit = QuantumCircuit or CompositeGate containing this gate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_coupling</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">number_of_arguments</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">number_of_arguments</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">number_of_arguments</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_coupling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span> <span class="o">=</span> <span class="kc">True</span>
+
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argument</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">QuantumRegister</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;argument not (QuantumRegister, int) &quot;</span>
                                   <span class="o">+</span> <span class="s2">&quot;tuple&quot;</span><span class="p">)</span>
+
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">circuit</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Gate.inverse"><a class="viewcode-back" href="../../_autodoc/qiskit.Gate.html#qiskit.Gate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -147,7 +146,17 @@
 <div class="viewcode-block" id="Gate.q_if"><a class="viewcode-back" href="../../_autodoc/qiskit.Gate.html#qiskit.Gate.q_if">[docs]</a>    <span class="k">def</span> <span class="nf">q_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qregs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add controls to this gate.&quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=unused-argument</span>
-        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;control not implemented&quot;</span><span class="p">)</span></div></div>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;control not implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Gate.is_multi_qubit"><a class="viewcode-back" href="../../_autodoc/qiskit.Gate.html#qiskit.Gate.is_multi_qubit">[docs]</a>    <span class="k">def</span> <span class="nf">is_multi_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if this Gate is uses multiple qubits as arguments&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span></div>
+
+<div class="viewcode-block" id="Gate.get_qubit_coupling"><a class="viewcode-back" href="../../_autodoc/qiskit.Gate.html#qiskit.Gate.get_qubit_coupling">[docs]</a>    <span class="k">def</span> <span class="nf">get_qubit_coupling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets the coupling graph of the qubits in case this is a multi-qubit gate&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_multi_qubit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t get the qubit coupling of non multi-qubit gates!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_coupling</span></div></div>
 </pre></div>
 
           </div>
@@ -170,14 +179,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/29.
+      Last updated on 2018/06/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

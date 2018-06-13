@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._result &#8212; QISKit SDK 0.5.3 documentation</title>
+    <title>qiskit._result &#8212; QISKit SDK 0.5.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.3',
+        VERSION:     '0.5.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -55,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -99,22 +99,13 @@
             
   <h1>Source code for qiskit._result</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1"># pylint: disable=no-else-return</span>
 
-<span class="c1"># Copyright 2017 IBM RESEARCH. All Rights Reserved.</span>
+<span class="c1"># Copyright 2017, IBM.</span>
 <span class="c1">#</span>
-<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1"># you may not use this file except in compliance with the License.</span>
-<span class="c1"># You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1"># See the License for the specific language governing permissions and</span>
-<span class="c1"># limitations under the License.</span>
-<span class="c1"># =============================================================================</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="c1"># pylint: disable=no-else-return</span>
 
 <span class="sd">&quot;&quot;&quot;Module for working with Results.&quot;&quot;&quot;</span>
 
@@ -269,7 +260,7 @@
             <span class="k">pass</span>
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No  qasm for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_data"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_data"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the data of circuit name.</span>
 
 <span class="sd">        The data format will depend on the backend. For a real device it</span>
@@ -298,7 +289,7 @@
 <span class="sd">                                   XX + XXj]]</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit_name (str or QuantumCircuit or None): reference to a quantum circuit</span>
+<span class="sd">            circuit (str or QuantumCircuit or None): reference to a quantum circuit</span>
 <span class="sd">                If None and there is only one circuit available, returns</span>
 <span class="sd">                that one.</span>
 
@@ -316,36 +307,36 @@
                 <span class="k">raise</span> <span class="n">exception</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">))</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
-            <span class="n">circuit_name</span> <span class="o">=</span> <span class="n">circuit_name</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
+            <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">name</span>
 
-        <span class="k">if</span> <span class="n">circuit_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">circuit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">circuits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]])</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">circuit_name</span> <span class="o">=</span> <span class="n">circuits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;You have to select a circuit when there is more than&quot;</span>
                                   <span class="s2">&quot;one available&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">circuit_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">circuit</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span>
             <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">])):</span>
-                <span class="k">if</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">circuit_name</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">circuit</span><span class="p">:</span>
                     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
             <span class="k">pass</span>
-        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No data for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No data for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_counts">[docs]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_counts">[docs]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the histogram data of circuit name.</span>
 
 <span class="sd">        The data from the a qasm circuit is dictionary of the format</span>
 <span class="sd">        {&#39;00000&#39;: XXXX, &#39;00001&#39;: XXXXX}.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit_name (str or QuantumCircuit or None): reference to a quantum circuit</span>
+<span class="sd">            circuit (str or QuantumCircuit or None): reference to a quantum circuit</span>
 <span class="sd">                If None and there is only one circuit available, returns</span>
 <span class="sd">                that one.</span>
 
@@ -356,18 +347,18 @@
 <span class="sd">            QISKitError: if there are no counts for the circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">)[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No counts for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No counts for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_statevector"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_statevector">[docs]</a>    <span class="k">def</span> <span class="nf">get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_statevector"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_statevector">[docs]</a>    <span class="k">def</span> <span class="nf">get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the final statevector of circuit name.</span>
 
 <span class="sd">        The data is a list of complex numbers</span>
 <span class="sd">        [1.+0.j, 0.+0.j].</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit_name (str or QuantumCircuit or None): reference to a quantum circuit</span>
+<span class="sd">            circuit (str or QuantumCircuit or None): reference to a quantum circuit</span>
 <span class="sd">                If None and there is only one circuit available, returns</span>
 <span class="sd">                that one.</span>
 
@@ -378,18 +369,18 @@
 <span class="sd">            QISKitError: if there is no statevector for the circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">)[</span><span class="s1">&#39;statevector&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;statevector&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No statevector for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No statevector for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_unitary"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_unitary">[docs]</a>    <span class="k">def</span> <span class="nf">get_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_unitary"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_unitary">[docs]</a>    <span class="k">def</span> <span class="nf">get_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the final unitary of circuit name.</span>
 
 <span class="sd">        The data is a matrix of complex numbers</span>
 <span class="sd">        [[1.+0.j, 0.+0.j], .. ].</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit_name (str or QuantumCircuit or None): reference to a quantum circuit</span>
+<span class="sd">            circuit (str or QuantumCircuit or None): reference to a quantum circuit</span>
 <span class="sd">                If None and there is only one circuit available, returns</span>
 <span class="sd">                that one.</span>
 
@@ -400,11 +391,11 @@
 <span class="sd">            QISKitError: if there is no unitary for the circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">)[</span><span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No unitary for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No unitary for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_snapshots"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_snapshots">[docs]</a>    <span class="k">def</span> <span class="nf">get_snapshots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_snapshots"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_snapshots">[docs]</a>    <span class="k">def</span> <span class="nf">get_snapshots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get snapshots recorded during the run.</span>
 
 <span class="sd">        The data is a dictionary:</span>
@@ -412,7 +403,7 @@
 <span class="sd">        and values are a dictionary of the snapshots themselves.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit_name (str or QuantumCircuit or None): reference to a quantum circuit</span>
+<span class="sd">            circuit (str or QuantumCircuit or None): reference to a quantum circuit</span>
 <span class="sd">                If None and there is only one circuit available, returns</span>
 <span class="sd">                that one.</span>
 
@@ -423,18 +414,19 @@
 <span class="sd">            QISKitError: if there are no snapshots for the circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">)[</span><span class="s1">&#39;snapshots&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;snapshots&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No snapshots for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No snapshots for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_snapshot"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_snapshot">[docs]</a>    <span class="k">def</span> <span class="nf">get_snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">slot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_snapshot"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_snapshot">[docs]</a>    <span class="k">def</span> <span class="nf">get_snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get snapshot at a specific slot.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit_name (str or QuantumCircuit or None): reference to a quantum circuit</span>
+<span class="sd">            slot (str): snapshot slot to retrieve. If None and there is only one</span>
+<span class="sd">                slot, return that one.</span>
+<span class="sd">            circuit (str or QuantumCircuit or None): reference to a quantum circuit</span>
 <span class="sd">                If None and there is only one circuit available, returns</span>
 <span class="sd">                that one.</span>
-<span class="sd">            slot (str): snapshot slot to retrieve</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict[slot: dict[str: array]]: list of 2^n_qubits complex amplitudes.</span>
@@ -443,7 +435,7 @@
 <span class="sd">            QISKitError: if there is no snapshot at all, or in this slot</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">snapshots_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_snapshots</span><span class="p">(</span><span class="n">circuit_name</span><span class="p">)</span>
+            <span class="n">snapshots_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_snapshots</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">slot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">slots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">snapshots_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -465,7 +457,7 @@
                 <span class="k">return</span> <span class="n">snapshot_dict</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No snapshot at slot </span><span class="si">{0}</span><span class="s1"> for &#39;</span>
-                              <span class="s1">&#39;circuit &quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="n">circuit_name</span><span class="p">))</span></div>
+                              <span class="s1">&#39;circuit &quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="n">circuit</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Result.get_names"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the circuit names of the results.</span>
@@ -558,14 +550,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/05/29.
+      Last updated on 2018/06/11.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
