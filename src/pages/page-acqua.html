@@ -130,7 +130,10 @@
     </app-route>
 
     <div class="qiskit-link">
-      <a href$="[[rootPath]]">&lt; QISKit</a>
+      <a href$="[[rootPath]]">&lt; QISKit</a> 
+      <template is="dom-if" if=[[_isNotHome(_routeData.sectionName)]]>
+        <a href$="[[rootPath]]#/acqua/">| QISKit ACQUA</a>
+      </template>
     </div>
 
     <header>
@@ -179,12 +182,12 @@
             <p section-id="optimization">[[localize('optimizationDescription')]]</p>
           </iron-pages>
           <p>
-            <a href="https://github.com/QISKit/qiskit-acqua" target="_blank">
+            <a href$="[[getGitHubUrl(_routeData.sectionName)]]" target="_blank">
               <vaadin-button theme="secondary">GitHub</vaadin-button>
             </a>
           </p>
           <p>
-            <a href="https://github.com/QISKit/qiskit-acqua-tutorials" target="_blank">
+            <a href="https://nbviewer.jupyter.org/github/QISKit/qiskit-acqua-tutorials/blob/master/index.ipynb" target="_blank">
               <vaadin-button theme="secondary">[[localize('tutorialsButton')]]</vaadin-button>
             </a>
           </p>
@@ -459,6 +462,10 @@
         this._selectedSectionId = sectionId;
       }
 
+      _isNotHome(sectionName) {
+        return sectionName && sectionName !== 'home';
+      }
+
       getColumnClasses(currentsection, section) {
         return currentsection && currentsection !== section ? 'col-md-4 col-xs-12 lighter' : 'col-md-4 col-xs-12';
       }
@@ -467,6 +474,10 @@
         return currentsection
                 && (currentsection !== firstSection)
                 && (currentsection !== secondSection) ? 'lighter' : 'pepe';
+      }
+
+      getGitHubUrl(currentSection) {
+        return currentSection === 'chemistry' ? 'https://github.com/QISKit/qiskit-acqua-chemistry' : 'https://github.com/QISKit/qiskit-acqua'
       }
     }
 
