@@ -28,6 +28,10 @@
         flex-direction: column;
       }
 
+      .inline {
+        display: inline;
+      }
+
       .qiskit-link {
         position: fixed;
         top: 0;
@@ -173,9 +177,20 @@
         <div class="card">
           <h3>
             [[localize('latestVersion')]]
-            <a href="https://pypi.python.org/pypi/qiskit_acqua">
-              <img src="https://img.shields.io/pypi/v/qiskit_acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
-            </a>
+            <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id" class="inline">
+              <a href="https://pypi.python.org/pypi/qiskit-acqua" section-id="home">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+              <a href="https://pypi.python.org/pypi/qiskit-acqua-chemistry" section-id="chemistry">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua-chemistry.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+              <a href="https://pypi.python.org/pypi/qiskit-acqua" section-id="ai">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+              <a href="https://pypi.python.org/pypi/qiskit-acqua" section-id="optimization">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+            </iron-pages>
           </h3>
           <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id">
             <p section-id="home">[[localize('acqua.description')]]</p>
