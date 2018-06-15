@@ -28,6 +28,10 @@
         flex-direction: column;
       }
 
+      .inline {
+        display: inline;
+      }
+
       .qiskit-link {
         position: fixed;
         top: 0;
@@ -39,10 +43,15 @@
         border-bottom-left-radius: .5em;
         background-color: #1b2025;
         color: #ffffff;
+        display: flex;
       }
 
       .qiskit-link a {
         color: #ffffff;
+      }
+
+      .qiskit-link span {
+        margin: 0 .4em;
       }
 
       header {
@@ -134,7 +143,7 @@
       <a href$="[[rootPath]]">&lt; QISKit </a>
       <template is="dom-if" if=[[_isNotHome(_routeData.sectionName)]]>
         <span>|</span>
-        <a href$="[[rootPath]]acqua/">QISKit ACQUA</a>
+        <a href$="[[rootPath]]acqua">QISKit ACQUA</a>
       </template>
     </div>
 
@@ -173,9 +182,20 @@
         <div class="card">
           <h3>
             [[localize('latestVersion')]]
-            <a href="https://pypi.python.org/pypi/qiskit_acqua">
-              <img src="https://img.shields.io/pypi/v/qiskit_acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
-            </a>
+            <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id" class="inline">
+              <a href="https://pypi.python.org/pypi/qiskit-acqua" section-id="home">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+              <a href="https://pypi.python.org/pypi/qiskit-acqua-chemistry" section-id="chemistry">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua-chemistry.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+              <a href="https://pypi.python.org/pypi/qiskit-acqua" section-id="ai">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+              <a href="https://pypi.python.org/pypi/qiskit-acqua" section-id="optimization">
+                <img src="https://img.shields.io/pypi/v/qiskit-acqua.svg" alt="QISKit ACQUA version" style="height: 20px; min-width: 86px;">
+              </a>
+            </iron-pages>
           </h3>
           <iron-pages selected="[[_selectedSectionId]]" attr-for-selected="section-id">
             <p section-id="home">[[localize('acqua.description')]]</p>
@@ -440,7 +460,8 @@
           },
 
           route: {
-            type: Object
+            type: Object,
+            observer: '_routeChanged'
           },
 
           _routeData: {
@@ -461,7 +482,14 @@
       _routeDataChanged(_routeData) {
         const sectionId = _routeData.sectionName || 'home';
 
-        this._selectedSectionId = sectionId;
+        this.set('_selectedSectionId', sectionId);
+      }
+
+      // TODO: Update when fix the PolymerElements/app-route/issues/37
+      _routeChanged(_route) {
+        if (_route.path === '/acqua' && this._routeData) {
+          this.set('_routeData', {});
+        }
       }
 
       _isNotHome(sectionName) {
