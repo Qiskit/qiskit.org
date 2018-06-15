@@ -143,7 +143,7 @@
       <a href$="[[rootPath]]">&lt; QISKit </a>
       <template is="dom-if" if=[[_isNotHome(_routeData.sectionName)]]>
         <span>|</span>
-        <a href$="[[rootPath]]acqua/">QISKit ACQUA</a>
+        <a href$="[[rootPath]]acqua">QISKit ACQUA</a>
       </template>
     </div>
 
@@ -460,7 +460,8 @@
           },
 
           route: {
-            type: Object
+            type: Object,
+            observer: '_routeChanged'
           },
 
           _routeData: {
@@ -481,7 +482,14 @@
       _routeDataChanged(_routeData) {
         const sectionId = _routeData.sectionName || 'home';
 
-        this._selectedSectionId = sectionId;
+        this.set('_selectedSectionId', sectionId);
+      }
+
+      // TODO: Update when fix the PolymerElements/app-route/issues/37
+      _routeChanged(_route) {
+        if (_route.path === '/acqua' && this._routeData) {
+          this.set('_routeData', {});
+        }
       }
 
       _isNotHome(sectionName) {

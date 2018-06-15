@@ -178,8 +178,7 @@
           },
 
           _route: {
-            type: Object,
-            observer: '_routeChanged'
+            type: Object
           },
 
           _routeData: {
@@ -229,13 +228,6 @@
         this._updateMetadata(pageId);
       }
 
-      // TODO: Update when fix the PolymerElements/app-route/issues/37
-      _routeChanged(_route) {
-        if (_route.path === '' && this._routeData) {
-          this.set('_routeData', {});
-        }
-      }
-
       _updateMetadata(pageId) {
         let title;
 
@@ -255,7 +247,7 @@
 
       _selectPage(pageId) {
         this._importPage(pageId);
-        this._selectedPageId = pageId;
+        this.set('_selectedPageId', pageId);
       }
 
       _importPage(pageId) {
