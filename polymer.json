@@ -1,30 +1,35 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/app-shell.html",
-  "fragments": [
-    "src/pages/page-home.html",
-    "src/pages/page-acqua.html",
-    "src/pages/page-not-found.html"
-  ],
+  "shell": "src/components/app-shell.js",
   "sources": [
+    "data/**/*",
     "images/**/*",
-    "src/**/*"
+    "locales/**/*"
   ],
   "extraDependencies": [
-    "bower_components/webcomponentsjs/*.js",
-    "!bower_components/webcomponentsjs/gulpfile.js",
-    "license/*.pdf",
     "manifest.json",
-    "sitemap.xml",
+    "node_modules/@webcomponents/webcomponentsjs/**",
+    "node_modules/@ibm/plex/**",
     "Staticfile"
   ],
-  "lint": {
-    "rules": ["polymer-2"]
-  },
   "builds": [
     {
-      "preset": "es5-bundled",
+      "name": "es5-bundled",
+      "js": {
+        "compile": "es5",
+        "minify": true,
+        "transformModulesToAmd": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": true,
       "addServiceWorker": false
     }
-  ]
+  ],
+  "moduleResolution": "node",
+  "npm": true
 }
