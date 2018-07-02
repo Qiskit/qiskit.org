@@ -61,8 +61,8 @@ class PageAcqua extends localize(i18next)(PageViewElement) {
 
       <section class="colored">
         <div class="limited-width">
-          <h3>${i18next.t('pages.acqua.howToUseitTitle')}</h3>
-          <div class="content">
+          <div class="description">
+            <h3>${i18next.t('pages.acqua.howToUseitTitle')}</h3>
           </div>
         </div>
       </section>
