@@ -34,7 +34,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-logo.gif" alt="${i18next.t('pages.studio.altLogo')}">
+        <img src="images/qiskit-studio-logo.png" alt="${i18next.t('pages.studio.altLogo')}">
         <div>
           <h1>${i18next.t('pages.studio.headerTitle')}</h1>
           <h2>${i18next.t('pages.studio.headerSubTitle')}</h2>
@@ -51,27 +51,45 @@ class PageStudio extends localize(i18next)(PageViewElement) {
 
       <section class="colored">
         <div class="limited-width">
-          <h3>Title</h3>
-          <div class="content">
-            content
+          <div class="description">
+            <h3>${i18next.t('pages.studio.autocompleteTitle')}</h3>
+            <p>${i18next.t('pages.studio.autocompleteDescription')}</p>
           </div>
         </div>
       </section>
 
       <section>
         <div class="limited-width">
-          <h3>Title</h3>
-          <div class="content">
-            content
+          <div class="description">
+            <h3>${i18next.t('pages.studio.documentationTitle')}</h3>
+            <p>${i18next.t('pages.studio.documentationDescription')}</p>
           </div>
         </div>
       </section>
 
       <section class="colored">
         <div class="limited-width">
-          <h3>Title</h3>
-          <div class="content">
-            content
+          <div class="description">
+            <h3>${i18next.t('pages.studio.linterTitle')}</h3>
+            <p>${i18next.t('pages.studio.linterDescription')}</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.studio.snippetsTitle')}</h3>
+            <p>${i18next.t('pages.studio.snippetsDescription')}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="colored">
+        <div class="limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.studio.integratedToolsTitle')}</h3>
+            <p>${i18next.t('pages.studio.integratedToolsDescription')}</p>
           </div>
         </div>
       </section>
