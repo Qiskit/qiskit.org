@@ -103,6 +103,27 @@ class PageHome extends localize(i18next)(PageViewElement) {
           height: 256px;
         }
 
+        .description-and-image .description {
+          margin-bottom: 2em;
+        }
+
+        .description-and-image .description .actions a {
+          display: inline-flex;
+        }
+
+        .description-and-image .description .actions a + a {
+          margin-left: 1em;
+        }
+
+        .description-and-image .description .actions vaadin-button {
+          --ibmq-button-secondary-color: #FFFFFF;
+          --ibmq-button-secondary-focus-color: var(--app-primary-color);
+        }
+
+        .description-and-image .image img {
+          max-width: 100%;
+        }
+
         .community {
           display: flex;
           flex-direction: column;
@@ -137,32 +158,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
         .social-networks-list li .social-network .name {
           margin-left: .5em;
-        }
-
-        .learn .description .actions a,
-        .imb-q-experience .description .actions a {
-          display: inline-flex;
-        }
-
-        .learn .description .actions a + a,
-        .imb-q-experience .description .actions a + a {
-          margin-left: 1em;
-        }
-
-        .learn .description .actions vaadin-button,
-        .imb-q-experience .description .actions vaadin-button {
-          --ibmq-button-secondary-color: #FFFFFF;
-          --ibmq-button-secondary-focus-color: var(--app-primary-color);
-        }
-
-        .learn .description,
-        .imb-q-experience .description {
-          margin-bottom: 2em;
-        }
-
-        .learn .image img,
-        .imb-q-experience .image img {
-          max-width: 100%;
         }
 
         .supporting .description {
@@ -235,6 +230,20 @@ class PageHome extends localize(i18next)(PageViewElement) {
             margin-left: 2em;
           }
 
+          .description-and-image {
+            flex-direction: row;
+          }
+
+          .description-and-image .description {
+            margin-bottom: 0;
+            flex: 3;
+            margin-right: 2em;
+          }
+
+          .description-and-image .image {
+            flex: 2;
+          }
+
           .community {
             flex-direction: row;
           }
@@ -251,23 +260,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
           .social-networks-list {
             margin: 0;
-          }
-
-          .learn,
-          .imb-q-experience {
-            flex-direction: row;
-          }
-
-          .learn .description,
-          .imb-q-experience .description {
-            margin-bottom: 0;
-            flex: 3;
-            margin-right: 2em;
-          }
-
-          .learn .image,
-          .imb-q-experience .image {
-            flex: 2;
           }
 
           .supporters-list {
@@ -319,7 +311,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="learn colored">
+      <section class="learn description-and-image colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.learnTitle')}</h3>
@@ -446,7 +438,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="imb-q-experience colored">
+      <section class="imb-q-experience description-and-image colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
