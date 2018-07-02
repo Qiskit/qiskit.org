@@ -140,10 +140,12 @@ class PageHome extends localize(i18next)(PageViewElement) {
           margin-left: .5em;
         }
 
+        .learn .description,
         .imb-q-experience .description {
           margin-bottom: 2em;
         }
 
+        .learn .image img,
         .imb-q-experience .image img {
           max-width: 100%;
         }
@@ -236,16 +238,19 @@ class PageHome extends localize(i18next)(PageViewElement) {
             margin: 0;
           }
 
+          .learn,
           .imb-q-experience {
             flex-direction: row;
           }
 
+          .learn .description,
           .imb-q-experience .description {
             margin-bottom: 0;
             flex: 3;
             margin-right: 2em;
           }
 
+          .learn .image,
           .imb-q-experience .image {
             flex: 2;
           }
@@ -290,6 +295,35 @@ class PageHome extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>${i18next.t('pages.home.architectureTitle')}</h3>
             <p>${i18next.t('pages.home.architectureDescription')}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="learn colored">
+        <div class="limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.home.learnTitle')}</h3>
+            <p>${i18next.t('pages.home.learnDescription')}</p>
+            <!-- TODO: Update buttons -->
+            <a
+                href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
+                title="${i18next.t('pages.home.learnTutorialsButton')}"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <button>${i18next.t('pages.home.learnTutorialsButton')}</button>
+            </a>
+            <a
+                href="/documentation/"
+                title="${i18next.t('pages.home.learnDocumentationButton')}"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <button>${i18next.t('pages.home.learnDocumentationButton')}</button>
+            </a>
+          </div>
+          <div class="image">
+            <img src="images/qiskit-learn.png" alt="${i18next.t('pages.home.learnAltImage')}">
           </div>
         </div>
       </section>
