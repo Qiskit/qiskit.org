@@ -27,6 +27,7 @@ import {
   twitterIcon,
   youtubeIcon,
 } from './app-icons.js';
+import './vaadin-ibmq-styles/vaadin-button.js';
 
 import { organizations, collaborators } from '../../data/supporters.js';
 
@@ -136,6 +137,22 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
         .social-networks-list li .social-network .name {
           margin-left: .5em;
+        }
+
+        .learn .description .actions a,
+        .imb-q-experience .description .actions a {
+          display: inline-flex;
+        }
+
+        .learn .description .actions a + a,
+        .imb-q-experience .description .actions a + a {
+          margin-left: 1em;
+        }
+
+        .learn .description .actions vaadin-button,
+        .imb-q-experience .description .actions vaadin-button {
+          --ibmq-button-secondary-color: #FFFFFF;
+          --ibmq-button-secondary-focus-color: var(--app-primary-color);
         }
 
         .learn .description,
@@ -307,23 +324,24 @@ class PageHome extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>${i18next.t('pages.home.learnTitle')}</h3>
             <p>${i18next.t('pages.home.learnDescription')}</p>
-            <!-- TODO: Update buttons -->
-            <a
-                href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
-                title="${i18next.t('pages.home.learnTutorialsButton')}"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <button>${i18next.t('pages.home.learnTutorialsButton')}</button>
-            </a>
-            <a
-                href="/documentation/"
-                title="${i18next.t('pages.home.learnDocumentationButton')}"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <button>${i18next.t('pages.home.learnDocumentationButton')}</button>
-            </a>
+            <div class="actions">
+              <a
+                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
+                  title="${i18next.t('pages.home.learnTutorialsButton')}"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.learnTutorialsButton')}</vaadin-button>
+              </a>
+              <a
+                  href="/documentation/"
+                  title="${i18next.t('pages.home.learnDocumentationButton')}"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.learnDocumentationButton')}</vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="image">
             <img src="images/qiskit-learn.png" alt="${i18next.t('pages.home.learnAltImage')}">
@@ -433,15 +451,16 @@ class PageHome extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
             <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
-            <a
-                href="https://quantumexperience.ng.bluemix.net/qx/editor"
-                title="IBM Q Experience"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <!-- TODO: Update button -->
-              <button>${i18next.t('pages.home.ibmQExperienceButton')}</button>
-            </a>
+            <div class="actions">
+              <a
+                  href="https://quantumexperience.ng.bluemix.net/qx/editor"
+                  title="IBM Q Experience"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButton')}</vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="image">
             <img src="images/ibm-q-experience.png" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
