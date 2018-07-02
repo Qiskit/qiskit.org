@@ -140,6 +140,14 @@ class PageHome extends localize(i18next)(PageViewElement) {
           margin-left: .5em;
         }
 
+        .imb-q-experience .description {
+          margin-bottom: 2em;
+        }
+
+        .imb-q-experience .image img {
+          max-width: 100%;
+        }
+
         .supporting .description {
           margin-bottom: 2em;
         }
@@ -226,6 +234,20 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
           .social-networks-list {
             margin: 0;
+          }
+
+          .imb-q-experience {
+            flex-direction: row;
+          }
+
+          .imb-q-experience .description {
+            margin-bottom: 0;
+            flex: 3;
+            margin-right: 2em;
+          }
+
+          .imb-q-experience .image {
+            flex: 2;
           }
 
           .supporters-list {
@@ -369,19 +391,23 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="colored">
+      <section class="imb-q-experience colored">
         <div class="limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.home.learnTitle')}</h3>
-            <p>${i18next.t('pages.home.learnDescription')}</p>
+            <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
+            <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
             <a
                 href="https://quantumexperience.ng.bluemix.net/qx/editor"
                 title="IBM Q Experience"
                 target="_blank"
-                rel="noopener">
+                rel="noopener"
+                tabindex="-1">
               <!-- TODO: Update button -->
-              <button>${i18next.t('pages.home.learnButton')}</button>
+              <button>${i18next.t('pages.home.ibmQExperienceButton')}</button>
             </a>
+          </div>
+          <div class="image">
+            <img src="images/ibm-q-experience.png" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
           </div>
         </div>
       </section>
