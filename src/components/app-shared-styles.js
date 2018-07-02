@@ -119,7 +119,7 @@ export const SectionStyles = html`<style>
   }
 
   section h3 {
-    margin: 0 0 1.6em;
+    margin: 0 0 1em;
     font-size: 1.7em;
     font-weight: 400;
   }
