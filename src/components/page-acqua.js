@@ -45,7 +45,11 @@ class PageAcqua extends localize(i18next)(PageViewElement) {
               width="100px"
               height="20px">
           </iframe>
-          <a href="https://pypi.python.org/pypi/qiskit-acqua" class="badge-link">
+          <a
+              href="https://pypi.python.org/pypi/qiskit-acqua"
+              target="_blank"
+              rel="noopener"
+              class="badge-link">
             <img
                 src="https://img.shields.io/pypi/v/qiskit-acqua.svg"
                 alt="Qiskit Acqua version badge"

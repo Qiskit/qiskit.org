@@ -45,7 +45,11 @@ class PageTerra extends localize(i18next)(PageViewElement) {
               width="100px"
               height="20px">
           </iframe>
-          <a href="https://pypi.python.org/pypi/qiskit" class="badge-link">
+          <a
+              href="https://pypi.python.org/pypi/qiskit"
+              target="_blank"
+              rel="noopener"
+              class="badge-link">
             <img
                 src="https://img.shields.io/pypi/v/qiskit.svg"
                 alt="Qiskit version badge"
