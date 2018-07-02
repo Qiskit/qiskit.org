@@ -31,10 +31,48 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--qiskit-studio-color);
           --app-section-color: #222222;
         }
+
+        .feature-image .image img {
+          max-width: 100%;
+        }
+
+        .feature-image .description {
+          margin-bottom: 2em;
+        }
+
+        @media (min-width: 768px) {
+          .feature-image.right {
+            flex-direction: row;
+          }
+
+          .feature-image.left {
+            flex-direction: row-reverse;
+          }
+
+          .feature-image .description {
+            margin-bottom: 0;
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .feature-image.right .description {
+            margin-right: 2em;
+          }
+
+          .feature-image.left .description {
+            margin-left: 2em;
+          }
+
+          .feature-image .image {
+            flex: 3;
+          }
+        }
       </style>
 
       <header>
-        <img src="images/qiskit-studio-logo.png" alt="${i18next.t('pages.studio.altLogo')}">
+        <img src="images/studio/qiskit-studio-logo.png" alt="${i18next.t('pages.studio.altLogo')}">
         <div>
           <h1>${i18next.t('pages.studio.headerTitle')}</h1>
           <h2>${i18next.t('pages.studio.headerSubTitle')}</h2>
@@ -49,47 +87,62 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </header>
 
-      <section class="colored">
+      <section class="feature-image right colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.autocompleteTitle')}</h3>
             <p>${i18next.t('pages.studio.autocompleteDescription')}</p>
           </div>
+          <div class="image">
+            <img src="images/studio/qiskit-studio-autocomplete.gif" alt="${i18next.t('pages.studio.autocompleteAltImage')}">
+          </div>
         </div>
       </section>
 
-      <section>
+      <section class="feature-image left">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.documentationTitle')}</h3>
             <p>${i18next.t('pages.studio.documentationDescription')}</p>
           </div>
+          <div class="image">
+            <img src="images/studio/qiskit-studio-documentation.gif" alt="${i18next.t('pages.studio.documentationAltImage')}">
+          </div>
         </div>
       </section>
 
-      <section class="colored">
+      <section class="feature-image right colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.linterTitle')}</h3>
             <p>${i18next.t('pages.studio.linterDescription')}</p>
           </div>
+          <div class="image">
+            <img src="images/studio/qiskit-studio-linter.gif" alt="${i18next.t('pages.studio.linterAltImage')}">
+          </div>
         </div>
       </section>
 
-      <section>
+      <section class="feature-image left">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.snippetsTitle')}</h3>
             <p>${i18next.t('pages.studio.snippetsDescription')}</p>
           </div>
+          <div class="image">
+            <img src="images/studio/qiskit-studio-snippet.gif" alt="${i18next.t('pages.studio.snippetsAltImage')}">
+          </div>
         </div>
       </section>
 
-      <section class="colored">
+      <section class="feature-image right colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.integratedToolsTitle')}</h3>
             <p>${i18next.t('pages.studio.integratedToolsDescription')}</p>
+          </div>
+          <div class="image">
+            <img src="images/studio/qiskit-studio-ibmq-tools.gif" alt="${i18next.t('pages.studio.integratedToolsAltImage')}">
           </div>
         </div>
       </section>
