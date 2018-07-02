@@ -16,11 +16,21 @@ class PageNotFound extends PageViewElement {
   _render(props) {
     return html`
       ${SharedStyles}
+      <style>
+        .limited-width {
+          flex-direction: column;
+          align-items: center;
+          padding-top: 2em;
+        }
+      </style>
+
       <section>
-        <h2>Sorry, that page doesn't exist!</h2>
-        <p>
-          <a href="/">Return to the homepage</a>
-        </p>
+        <div class="limited-width">
+          <h2>Sorry, that page doesn't exist!</h2>
+          <p>
+            <a href="/">Return to the home page</a>
+          </p>
+        </div>
       </section>
     `;
   }
