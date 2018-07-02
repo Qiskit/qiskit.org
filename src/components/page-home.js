@@ -79,6 +79,8 @@ class PageHome extends localize(i18next)(PageViewElement) {
         .architecture {
           display: flex;
           flex-direction: column;
+          background-color: #292C35;
+          color: #FFFFFF;
         }
 
         .architecture .representation {
@@ -98,10 +100,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
         .architecture .representation img.qiskit-architecture {
           width: 256px;
           height: 256px;
-          background-color: #292C35;
-          padding: 1em;
-          box-sizing: border-box;
-          border-radius: 50%;
         }
 
         .community {
@@ -285,7 +283,12 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </header>
 
-      <section class="architecture colored">
+      <section class="news colored">
+        <div class="limited-width">
+        </div>
+      </section>
+
+      <section class="architecture">
         <div class="limited-width">
           <div class="representation">
             <img src="images/qiskit-and-ibm-q.png" alt="" class="qiskit-and-ibm-q">
