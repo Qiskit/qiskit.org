@@ -186,7 +186,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   }
 
   _firstRendered() {
-    installRouter(location => {
+    installRouter((location, event) => {
+      // Only scroll to top on link clicks, not popstate events.
+      if (event && event.type === 'click') {
+        window.scrollTo(0, 0);
+      }
+
       store.dispatch(navigate(window.decodeURIComponent(location.pathname)));
     });
   }
