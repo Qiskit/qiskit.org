@@ -39,7 +39,7 @@ class PageTerra extends localize(i18next)(PageViewElement) {
           <h2>${i18next.t('pages.terra.headerSubTitle')}</h2>
           <p>${i18next.t('pages.terra.headerDescription')}</p>
           <iframe
-              src="https://ghbtns.com/github-btn.html?user=Qiskit&repo=qiskit-core&type=star&count=true"
+              src="https://ghbtns.com/github-btn.html?user=Qiskit&repo=qiskit-terra&type=star&count=true"
               frameborder="0"
               scrolling="0"
               width="100px"
