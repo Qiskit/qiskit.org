@@ -139,12 +139,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
           <nav>
-            <a href="/terra" selected?="${props._page === 'terra'}">
-              ${i18next.t('nav.terra')}
-            </a>
-            <a href="/acqua" selected?="${props._page === 'acqua'}">
-              ${i18next.t('nav.acqua')}
-            </a>
+            <a href="/terra" selected?="${props._page === 'terra'}">Terra</a>
+            <a href="/acqua" selected?="${props._page === 'acqua'}">Acqua</a>
           </nav>
         </div>
       </header>
