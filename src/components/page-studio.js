@@ -85,6 +85,17 @@ class PageStudio extends localize(i18next)(PageViewElement) {
               width="100px"
               height="20px">
           </iframe>
+          <a
+              href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-studio"
+              target="_blank"
+              rel="noopener"
+              class="badge-link">
+            <img
+                src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-studio.svg"
+                alt="Qiskit Studio version badge"
+                width="198px"
+                height="20px">
+          </a>
         </div>
       </header>
 
