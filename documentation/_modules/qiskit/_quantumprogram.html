@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit._quantumprogram &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,6 +37,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/_quantumprogram.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/_quantumprogram.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/_quantumprogram.html">japanese</a>
     </div>
 </div>
@@ -55,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -120,7 +121,6 @@
 <span class="kn">from</span> <span class="nn">._logging</span> <span class="k">import</span> <span class="n">set_qiskit_logger</span><span class="p">,</span> <span class="n">unset_qiskit_logger</span>
 <span class="kn">from</span> <span class="nn">._qiskiterror</span> <span class="k">import</span> <span class="n">QISKitError</span>
 <span class="kn">from</span> <span class="nn">._quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">._quantumjob</span> <span class="k">import</span> <span class="n">QuantumJob</span>
 <span class="kn">from</span> <span class="nn">._quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">.mapper</span> <span class="k">import</span> <span class="n">coupling_dict2list</span>
 <span class="kn">from</span> <span class="nn">.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
@@ -760,9 +760,9 @@
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="s2">&quot;set_api() will be deprecated in upcoming versions (&gt;0.5.0). &quot;</span>
             <span class="s2">&quot;Using qiskit.register() instead is recommended.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="n">qiskit</span><span class="o">.</span><span class="n">wrapper</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
-                                <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">proxies</span><span class="p">,</span> <span class="n">verify</span><span class="p">,</span>
-                                <span class="n">provider_name</span><span class="o">=</span><span class="s1">&#39;ibmq&#39;</span><span class="p">)</span>
+        <span class="n">qiskit</span><span class="o">.</span><span class="n">wrapper</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                <span class="n">hub</span><span class="o">=</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span>
+                                <span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="n">verify</span><span class="p">)</span>
 
         <span class="c1"># TODO: the setting of self._api and self.__api_config is left for</span>
         <span class="c1"># backwards-compatibility.</span>
@@ -923,7 +923,7 @@
 <span class="sd">            backend (str): The backend to check</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            dict: {&#39;available&#39;: True}</span>
+<span class="sd">            dict: {&#39;operational&#39;: True}</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the API call failed.</span>
@@ -1032,7 +1032,7 @@
 <div class="viewcode-block" id="QuantumProgram.compile"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.compile">[docs]</a>    <span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compile the circuits into the execution list.</span>
 
 <span class="sd">        .. deprecated:: 0.5</span>
@@ -1040,11 +1040,6 @@
 <span class="sd">            upcoming versions. Using the coupling_map as a list is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=missing-param-doc, missing-type-doc</span>
-        <span class="k">if</span> <span class="n">skip_translation</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s2">&quot;skip_translation will be called skip_transpiler in future versions.&quot;</span><span class="p">,</span>
-                <span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="n">skip_transpiler</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_dict2list</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
@@ -1222,16 +1217,14 @@
         <span class="n">job_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">qobj</span> <span class="ow">in</span> <span class="n">qobj_list</span><span class="p">:</span>
             <span class="n">backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">wrapper</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;backend_name&#39;</span><span class="p">])</span>
-            <span class="n">q_job</span> <span class="o">=</span> <span class="n">QuantumJob</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">preformatted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="p">{</span>
-                <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;max_credits&#39;</span><span class="p">]})</span>
-            <span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">q_job</span><span class="p">)</span>
+            <span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
             <span class="n">job_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">job_list</span>
 
 <div class="viewcode-block" id="QuantumProgram.execute"><a class="viewcode-back" href="../../_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_of_circuits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;local_qasm_simulator&quot;</span><span class="p">,</span>
                 <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-                <span class="n">max_credits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="n">max_credits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute, compile, and run an array of quantum circuits).</span>
 
 <span class="sd">        This builds the internal &quot;to execute&quot; list which is list of quantum</span>
@@ -1289,11 +1282,6 @@
 <span class="sd">            upcoming versions. Using the coupling_map as a list is recommended.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=missing-param-doc, missing-type-doc</span>
-        <span class="k">if</span> <span class="n">skip_translation</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s2">&quot;skip_translation will be called skip_transpiler in future versions.&quot;</span><span class="p">,</span>
-                <span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="n">skip_transpiler</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># TODO: Jay: currently basis_gates, coupling_map, initial_layout, shots,</span>
         <span class="c1"># max_credits, and seed are extra inputs but I would like them to go</span>
         <span class="c1"># into the config</span>
@@ -1377,14 +1365,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -1,0 +1,268 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.ibmq.IBMQProvider &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="qiskit.backends.jobstatus module" href="qiskit.backends.jobstatus.html" />
+    <link rel="prev" title="qiskit.backends.ibmq.IBMQJob" href="qiskit.backends.ibmq.IBMQJob.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.backends.ibmq.IBMQProvider.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.backends.ibmq.IBMQProvider.html">german</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.backends.ibmq.IBMQProvider.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.jobstatus.html" title="qiskit.backends.jobstatus module"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.ibmq.IBMQJob.html" title="qiskit.backends.ibmq.IBMQJob"
+             accesskey="P">zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.backends.ibmq.html" accesskey="U">qiskit.backends.ibmq package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK Referenz</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.backends.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.basebackend.html">qiskit.backends.basebackend module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.basejob.html">qiskit.backends.basejob module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.baseprovider.html">qiskit.backends.baseprovider module</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="qiskit.backends.ibmq.html">qiskit.backends.ibmq package</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="qiskit.backends.ibmq.html#submodules">Submodules</a></li>
+<li class="toctree-l6 current"><a class="reference internal" href="qiskit.backends.ibmq.html#classes">Classes</a><ul class="current">
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.ibmq.IBMQBackend.html">qiskit.backends.ibmq.IBMQBackend</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.ibmq.IBMQJob.html">qiskit.backends.ibmq.IBMQJob</a></li>
+<li class="toctree-l7 current"><a class="current reference internal" href="#">qiskit.backends.ibmq.IBMQProvider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.jobstatus.html">qiskit.backends.jobstatus module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.local.html">qiskit.backends.local package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="qiskit.backends.ibmq.IBMQJob.html"
+                        title="vorheriges Kapitel">qiskit.backends.ibmq.IBMQJob</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="qiskit.backends.jobstatus.html"
+                        title="nächstes Kapitel">qiskit.backends.jobstatus module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Diese Seite</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.backends.ibmq.IBMQProvider.rst.txt"
+            rel="nofollow">Quellcode anzeigen</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-backends-ibmq-ibmqprovider">
+<h1>qiskit.backends.ibmq.IBMQProvider<a class="headerlink" href="#qiskit-backends-ibmq-ibmqprovider" title="Link zu dieser Überschrift">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.backends.ibmq.IBMQProvider">
+<em class="property">class </em><code class="descclassname">qiskit.backends.ibmq.</code><code class="descname">IBMQProvider</code><span class="sig-paren">(</span><em>token</em>, <em>url='https://quantumexperience.ng.bluemix.net/api'</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>proxies=None</em>, <em>verify=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqprovider.html#IBMQProvider"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQProvider" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">qiskit.backends.baseprovider.BaseProvider</span></code></p>
+<p>Provider for remote IbmQ backends.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code>(token[,&nbsp;url,&nbsp;hub,&nbsp;group,&nbsp;project,&nbsp;…])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQProvider.aliased_backend_names" title="qiskit.backends.ibmq.IBMQProvider.aliased_backend_names"><code class="xref py py-obj docutils literal"><span class="pre">aliased_backend_names</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQProvider.available_backends" title="qiskit.backends.ibmq.IBMQProvider.available_backends"><code class="xref py py-obj docutils literal"><span class="pre">available_backends</span></code></a>()</td>
+<td>Get a list of available backends from the IBMQ provider.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQProvider.deprecated_backend_names" title="qiskit.backends.ibmq.IBMQProvider.deprecated_backend_names"><code class="xref py py-obj docutils literal"><span class="pre">deprecated_backend_names</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQProvider.get_backend" title="qiskit.backends.ibmq.IBMQProvider.get_backend"><code class="xref py py-obj docutils literal"><span class="pre">get_backend</span></code></a>(name)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQProvider.aliased_backend_names">
+<code class="descname">aliased_backend_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqprovider.html#IBMQProvider.aliased_backend_names"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQProvider.aliased_backend_names" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQProvider.available_backends">
+<code class="descname">available_backends</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqprovider.html#IBMQProvider.available_backends"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQProvider.available_backends" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Get a list of available backends from the IBMQ provider.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">a list of backend instances available
+from the IBMQ provider.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">list[<a class="reference internal" href="qiskit.backends.ibmq.IBMQBackend.html#qiskit.backends.ibmq.IBMQBackend" title="qiskit.backends.ibmq.IBMQBackend">IBMQBackend</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQProvider.deprecated_backend_names">
+<code class="descname">deprecated_backend_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqprovider.html#IBMQProvider.deprecated_backend_names"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQProvider.deprecated_backend_names" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQProvider.get_backend">
+<code class="descname">get_backend</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqprovider.html#IBMQProvider.get_backend"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQProvider.get_backend" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.jobstatus.html" title="qiskit.backends.jobstatus module"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.ibmq.IBMQJob.html" title="qiskit.backends.ibmq.IBMQJob"
+             >zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="qiskit.backends.ibmq.html" >qiskit.backends.ibmq package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>

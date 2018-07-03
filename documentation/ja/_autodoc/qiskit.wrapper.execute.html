@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper.execute &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.wrapper.execute &#8212; QISKit SDK 0.5.5 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -40,6 +40,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_autodoc/qiskit.wrapper.execute.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.wrapper.execute.html">german</a> /
         <a href="/documentation/ja/_autodoc/qiskit.wrapper.execute.html">japanese</a>
     </div>
 </div>
@@ -64,7 +65,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" accesskey="U">qiskit.wrapper package</a> &#187;</li> 
@@ -91,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
@@ -99,11 +101,14 @@
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.compile.html">qiskit.wrapper.compile</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.wrapper.execute</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.get_backend.html">qiskit.wrapper.get_backend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.least_busy.html">qiskit.wrapper.least_busy</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.load_qasm_file.html">qiskit.wrapper.load_qasm_file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.load_qasm_string.html">qiskit.wrapper.load_qasm_string</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.local_backends.html">qiskit.wrapper.local_backends</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.register.html">qiskit.wrapper.register</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.registered_providers.html">qiskit.wrapper.registered_providers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.remote_backends.html">qiskit.wrapper.remote_backends</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.unregister.html">qiskit.wrapper.unregister</a></li>
 </ul>
 </li>
 </ul>
@@ -153,7 +158,7 @@
 <h1>qiskit.wrapper.execute<a class="headerlink" href="#qiskit-wrapper-execute" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="function">
 <dt id="qiskit.wrapper.execute">
-<code class="descclassname">qiskit.wrapper.</code><code class="descname">execute</code><span class="sig-paren">(</span><em>circuits</em>, <em>backend</em>, <em>config=None</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>shots=1024</em>, <em>max_credits=10</em>, <em>seed=None</em>, <em>qobj_id=None</em>, <em>hpc=None</em>, <em>skip_transpiler=False</em>, <em>skip_translation=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#execute"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper.execute" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descclassname">qiskit.wrapper.</code><code class="descname">execute</code><span class="sig-paren">(</span><em>circuits</em>, <em>backend</em>, <em>config=None</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>shots=1024</em>, <em>max_credits=10</em>, <em>seed=None</em>, <em>qobj_id=None</em>, <em>hpc=None</em>, <em>skip_transpiler=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#execute"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper.execute" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Executes a set of circuits.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -214,7 +219,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" >qiskit.wrapper package</a> &#187;</li> 
@@ -222,7 +227,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
+      最終更新: 2018/07/03
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.ibmq.IBMQBackend &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit.backends.ibmq.IBMQBackend &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -39,6 +39,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_autodoc/qiskit.backends.ibmq.IBMQBackend.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.backends.ibmq.IBMQBackend.html">german</a> /
         <a href="/documentation/ja/_autodoc/qiskit.backends.ibmq.IBMQBackend.html">japanese</a>
     </div>
 </div>
@@ -63,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
@@ -101,6 +102,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.jobstatus.html">qiskit.backends.jobstatus module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.local.html">qiskit.backends.local package</a></li>
 </ul>
 </li>
@@ -111,6 +113,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
 </ul>
@@ -172,8 +175,14 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQBackend.__init__" title="qiskit.backends.ibmq.IBMQBackend.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(configuration[,&nbsp;api])</td>
 <td>Initialize remote backend for IBM Quantum Experience.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQBackend.run" title="qiskit.backends.ibmq.IBMQBackend.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>(q_job)</td>
-<td>Run q_job asynchronously.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQBackend.jobs" title="qiskit.backends.ibmq.IBMQBackend.jobs"><code class="xref py py-obj docutils literal"><span class="pre">jobs</span></code></a>([limit,&nbsp;skip,&nbsp;status,&nbsp;db_filter])</td>
+<td>Attempt to get the jobs submitted to the backend.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQBackend.retrieve_job" title="qiskit.backends.ibmq.IBMQBackend.retrieve_job"><code class="xref py py-obj docutils literal"><span class="pre">retrieve_job</span></code></a>(job_id)</td>
+<td>Attempt to get the specified job by job_id</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.ibmq.IBMQBackend.run" title="qiskit.backends.ibmq.IBMQBackend.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>(qobj)</td>
+<td>Run qobj asynchronously.</td>
 </tr>
 </tbody>
 </table>
@@ -220,6 +229,57 @@
 <dd><p>Return backend configuration</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQBackend.jobs">
+<code class="descname">jobs</code><span class="sig-paren">(</span><em>limit=50</em>, <em>skip=0</em>, <em>status=None</em>, <em>db_filter=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqbackend.html#IBMQBackend.jobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQBackend.jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to get the jobs submitted to the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>limit</strong> (<em>int</em>) – number of jobs to retrieve</li>
+<li><strong>skip</strong> (<em>int</em>) – starting index of retrieval</li>
+<li><strong>status</strong> (<em>None</em><em> or </em><a class="reference internal" href="qiskit.backends.JobStatus.html#qiskit.backends.JobStatus" title="qiskit.backends.JobStatus"><em>JobStatus</em></a><em> or </em><em>str</em>) – only get jobs with this status,
+where status is e.g. <cite>JobStatus.RUNNING</cite> or <cite>‘RUNNING’</cite></li>
+<li><strong>db_filter</strong> (<em>dict</em>) – <p><a class="reference external" href="https://loopback.io/doc/en/lb2/Querying-data.html">loopback-based filter</a>.
+This is an interface to a database <code class="docutils literal"><span class="pre">where</span></code> filter. Some
+examples of its usage are:</p>
+<p>Filter last five jobs with errors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">job_list</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Filter last five jobs with counts=1024, and counts for
+states <code class="docutils literal"><span class="pre">00</span></code> and <code class="docutils literal"><span class="pre">11</span></code> each exceeding 400:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cnts_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+               <span class="s1">&#39;qasms.result.data.counts.00&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;gt&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">},</span>
+               <span class="s1">&#39;qasms.result.data.counts.11&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;gt&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">}}</span>
+<span class="n">job_list</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">db_filter</span><span class="o">=</span><span class="n">cnts_filter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Filter last five jobs from 30 days ago:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">past_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">date_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;creationDate&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;lt&#39;</span><span class="p">:</span> <span class="n">past_date</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()}}</span>
+<span class="n">job_list</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">db_filter</span><span class="o">=</span><span class="n">date_filter</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of IBMQJob instances</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list(<a class="reference internal" href="qiskit.backends.ibmq.IBMQJob.html#qiskit.backends.ibmq.IBMQJob" title="qiskit.backends.ibmq.IBMQJob">IBMQJob</a>)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">IBMQBackendValueError</span></code> – status keyword value unrecognized</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="qiskit.backends.ibmq.IBMQBackend.name">
 <code class="descname">name</code><a class="headerlink" href="#qiskit.backends.ibmq.IBMQBackend.name" title="Permalink to this definition">¶</a></dt>
@@ -245,14 +305,34 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.backends.ibmq.IBMQBackend.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>q_job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqbackend.html#IBMQBackend.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQBackend.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run q_job asynchronously.</p>
+<dt id="qiskit.backends.ibmq.IBMQBackend.retrieve_job">
+<code class="descname">retrieve_job</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqbackend.html#IBMQBackend.retrieve_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQBackend.retrieve_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to get the specified job by job_id</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>q_job</strong> (<a class="reference internal" href="qiskit.QuantumJob.html#qiskit.QuantumJob" title="qiskit.QuantumJob"><em>QuantumJob</em></a>) – description of job</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>job_id</strong> (<em>str</em>) – the job id of the job to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">class instance</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.backends.ibmq.IBMQJob.html#qiskit.backends.ibmq.IBMQJob" title="qiskit.backends.ibmq.IBMQJob">IBMQJob</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">IBMQBackendError</span></code> – if retrieval failed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.ibmq.IBMQBackend.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>qobj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/ibmq/ibmqbackend.html#IBMQBackend.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.ibmq.IBMQBackend.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run qobj asynchronously.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>qobj</strong> (<em>dict</em>) – description of job</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance derived from BaseJob</td>
 </tr>
@@ -311,7 +391,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li>
@@ -320,7 +400,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

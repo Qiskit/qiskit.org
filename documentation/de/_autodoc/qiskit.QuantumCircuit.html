@@ -1,0 +1,826 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.QuantumCircuit &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="qiskit.QuantumJob" href="qiskit.QuantumJob.html" />
+    <link rel="prev" title="qiskit.Measure" href="qiskit.Measure.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.QuantumCircuit.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.QuantumCircuit.html">german</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.QuantumCircuit.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.QuantumJob.html" title="qiskit.QuantumJob"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.Measure.html" title="qiskit.Measure"
+             accesskey="P">zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK Referenz</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.ClassicalRegister.html">qiskit.ClassicalRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.CompositeGate.html">qiskit.CompositeGate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.QuantumCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumProgram.html">qiskit.QuantumProgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumRegister.html">qiskit.QuantumRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Reset.html">qiskit.Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Result.html">qiskit.Result</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="qiskit.Measure.html"
+                        title="vorheriges Kapitel">qiskit.Measure</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="qiskit.QuantumJob.html"
+                        title="nächstes Kapitel">qiskit.QuantumJob</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Diese Seite</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.QuantumCircuit.rst.txt"
+            rel="nofollow">Quellcode anzeigen</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-quantumcircuit">
+<h1>qiskit.QuantumCircuit<a class="headerlink" href="#qiskit-quantumcircuit" title="Link zu dieser Überschrift">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.QuantumCircuit">
+<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">QuantumCircuit</code><span class="sig-paren">(</span><em>*regs</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Quantum circuit.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.__init__" title="qiskit.QuantumCircuit.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(*regs[,&nbsp;name])</td>
+<td>Create a new circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.add" title="qiskit.QuantumCircuit.add"><code class="xref py py-obj docutils literal"><span class="pre">add</span></code></a>(*regs)</td>
+<td>Add registers.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.barrier" title="qiskit.QuantumCircuit.barrier"><code class="xref py py-obj docutils literal"><span class="pre">barrier</span></code></a>(*args)</td>
+<td>Apply barrier to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.ccx" title="qiskit.QuantumCircuit.ccx"><code class="xref py py-obj docutils literal"><span class="pre">ccx</span></code></a>(ctl1,&nbsp;ctl2,&nbsp;tgt)</td>
+<td>Apply Toffoli to from ctl1 and ctl2 to tgt.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.ch" title="qiskit.QuantumCircuit.ch"><code class="xref py py-obj docutils literal"><span class="pre">ch</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CH from ctl to tgt.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cls_instances" title="qiskit.QuantumCircuit.cls_instances"><code class="xref py py-obj docutils literal"><span class="pre">cls_instances</span></code></a>()</td>
+<td>Return the current number of instances of this class, useful for auto naming.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cls_prefix" title="qiskit.QuantumCircuit.cls_prefix"><code class="xref py py-obj docutils literal"><span class="pre">cls_prefix</span></code></a>()</td>
+<td>Return the prefix to use for auto naming.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.combine" title="qiskit.QuantumCircuit.combine"><code class="xref py py-obj docutils literal"><span class="pre">combine</span></code></a>(rhs)</td>
+<td>Append rhs to self if self contains compatible registers.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.crz" title="qiskit.QuantumCircuit.crz"><code class="xref py py-obj docutils literal"><span class="pre">crz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply crz from ctl to tgt with angle theta.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cswap" title="qiskit.QuantumCircuit.cswap"><code class="xref py py-obj docutils literal"><span class="pre">cswap</span></code></a>(ctl,&nbsp;tgt1,&nbsp;tgt2)</td>
+<td>Apply Fredkin to circuit.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cu1" title="qiskit.QuantumCircuit.cu1"><code class="xref py py-obj docutils literal"><span class="pre">cu1</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply cu1 from ctl to tgt with angle theta.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cu3" title="qiskit.QuantumCircuit.cu3"><code class="xref py py-obj docutils literal"><span class="pre">cu3</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply cu3 from ctl to tgt with angle theta, phi, lam.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cx" title="qiskit.QuantumCircuit.cx"><code class="xref py py-obj docutils literal"><span class="pre">cx</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CX from ctl to tgt.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cx_base" title="qiskit.QuantumCircuit.cx_base"><code class="xref py py-obj docutils literal"><span class="pre">cx_base</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CX ctl, tgt.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cy" title="qiskit.QuantumCircuit.cy"><code class="xref py py-obj docutils literal"><span class="pre">cy</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CY to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.cz" title="qiskit.QuantumCircuit.cz"><code class="xref py py-obj docutils literal"><span class="pre">cz</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply CZ to circuit.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.extend" title="qiskit.QuantumCircuit.extend"><code class="xref py py-obj docutils literal"><span class="pre">extend</span></code></a>(rhs)</td>
+<td>Append rhs to self if self if it contains compatible registers.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.first_atomic_gate_host" title="qiskit.QuantumCircuit.first_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">first_atomic_gate_host</span></code></a>()</td>
+<td>Return the host list of the leaf gate on the left edge.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.get_cregs" title="qiskit.QuantumCircuit.get_cregs"><code class="xref py py-obj docutils literal"><span class="pre">get_cregs</span></code></a>()</td>
+<td>Get the cregs from the registers.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.get_qregs" title="qiskit.QuantumCircuit.get_qregs"><code class="xref py py-obj docutils literal"><span class="pre">get_qregs</span></code></a>()</td>
+<td>Get the qregs from the registers.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.h" title="qiskit.QuantumCircuit.h"><code class="xref py py-obj docutils literal"><span class="pre">h</span></code></a>(q)</td>
+<td>Apply H to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.has_register" title="qiskit.QuantumCircuit.has_register"><code class="xref py py-obj docutils literal"><span class="pre">has_register</span></code></a>(register)</td>
+<td>Test if this circuit has the register r.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.iden" title="qiskit.QuantumCircuit.iden"><code class="xref py py-obj docutils literal"><span class="pre">iden</span></code></a>(q)</td>
+<td>Apply Identity to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.initialize" title="qiskit.QuantumCircuit.initialize"><code class="xref py py-obj docutils literal"><span class="pre">initialize</span></code></a>(params,&nbsp;qubits)</td>
+<td>Apply initialize to circuit.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.last_atomic_gate_host" title="qiskit.QuantumCircuit.last_atomic_gate_host"><code class="xref py py-obj docutils literal"><span class="pre">last_atomic_gate_host</span></code></a>()</td>
+<td>Return the host list of the leaf gate on the right edge.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.load" title="qiskit.QuantumCircuit.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>(slot)</td>
+<td>Load the internal simulator representation (statevector, probability, density matrix, clifford table) Works on all qubits, and prevents reordering (like barrier).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.measure" title="qiskit.QuantumCircuit.measure"><code class="xref py py-obj docutils literal"><span class="pre">measure</span></code></a>(qubit,&nbsp;cbit)</td>
+<td>Measure quantum bit into classical bit (tuples).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.noise" title="qiskit.QuantumCircuit.noise"><code class="xref py py-obj docutils literal"><span class="pre">noise</span></code></a>(switch)</td>
+<td>Turn noise on/off in simulator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.number_atomic_gates" title="qiskit.QuantumCircuit.number_atomic_gates"><code class="xref py py-obj docutils literal"><span class="pre">number_atomic_gates</span></code></a>()</td>
+<td>Count the number of leaf gates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.optimize_gates" title="qiskit.QuantumCircuit.optimize_gates"><code class="xref py py-obj docutils literal"><span class="pre">optimize_gates</span></code></a>()</td>
+<td>Remove Zero rotations and Double CNOTS.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.qasm" title="qiskit.QuantumCircuit.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>()</td>
+<td>Return OPENQASM string.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.remove_double_cnots_once" title="qiskit.QuantumCircuit.remove_double_cnots_once"><code class="xref py py-obj docutils literal"><span class="pre">remove_double_cnots_once</span></code></a>()</td>
+<td>Remove Double CNOTS paying attention that gates may be neighbours across Composite Gate boundaries.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.remove_zero_rotations" title="qiskit.QuantumCircuit.remove_zero_rotations"><code class="xref py py-obj docutils literal"><span class="pre">remove_zero_rotations</span></code></a>()</td>
+<td>Remove Zero Rotations by looking (recursively) at rotation gates at the leaf ends.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.reset" title="qiskit.QuantumCircuit.reset"><code class="xref py py-obj docutils literal"><span class="pre">reset</span></code></a>(quantum_register)</td>
+<td>Reset q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.reverse" title="qiskit.QuantumCircuit.reverse"><code class="xref py py-obj docutils literal"><span class="pre">reverse</span></code></a>()</td>
+<td>Reverse (recursively) the sub-gates of this CompositeGate.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.rx" title="qiskit.QuantumCircuit.rx"><code class="xref py py-obj docutils literal"><span class="pre">rx</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply Rx to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.ry" title="qiskit.QuantumCircuit.ry"><code class="xref py py-obj docutils literal"><span class="pre">ry</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply Ry to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.rz" title="qiskit.QuantumCircuit.rz"><code class="xref py py-obj docutils literal"><span class="pre">rz</span></code></a>(phi,&nbsp;q)</td>
+<td>Apply Rz to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.rzz" title="qiskit.QuantumCircuit.rzz"><code class="xref py py-obj docutils literal"><span class="pre">rzz</span></code></a>(theta,&nbsp;ctl,&nbsp;tgt)</td>
+<td>Apply RZZ to circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.s" title="qiskit.QuantumCircuit.s"><code class="xref py py-obj docutils literal"><span class="pre">s</span></code></a>(q)</td>
+<td>Apply S to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.save" title="qiskit.QuantumCircuit.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>(slot)</td>
+<td>Save the internal simulator representation (statevector, probability, density matrix, clifford table).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.sdg" title="qiskit.QuantumCircuit.sdg"><code class="xref py py-obj docutils literal"><span class="pre">sdg</span></code></a>(q)</td>
+<td>Apply Sdg to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.snapshot" title="qiskit.QuantumCircuit.snapshot"><code class="xref py py-obj docutils literal"><span class="pre">snapshot</span></code></a>(slot)</td>
+<td>Take a snapshot of the internal simulator representation (statevector, probability, density matrix, clifford table) Works on all qubits, and prevents reordering (like barrier).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.swap" title="qiskit.QuantumCircuit.swap"><code class="xref py py-obj docutils literal"><span class="pre">swap</span></code></a>(ctl,&nbsp;tgt)</td>
+<td>Apply SWAP from ctl to tgt.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.t" title="qiskit.QuantumCircuit.t"><code class="xref py py-obj docutils literal"><span class="pre">t</span></code></a>(q)</td>
+<td>Apply T to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.tdg" title="qiskit.QuantumCircuit.tdg"><code class="xref py py-obj docutils literal"><span class="pre">tdg</span></code></a>(q)</td>
+<td>Apply Tdg to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.u0" title="qiskit.QuantumCircuit.u0"><code class="xref py py-obj docutils literal"><span class="pre">u0</span></code></a>(m,&nbsp;q)</td>
+<td>Apply u0 with length m to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.u1" title="qiskit.QuantumCircuit.u1"><code class="xref py py-obj docutils literal"><span class="pre">u1</span></code></a>(theta,&nbsp;q)</td>
+<td>Apply u1 with angle theta to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.u2" title="qiskit.QuantumCircuit.u2"><code class="xref py py-obj docutils literal"><span class="pre">u2</span></code></a>(phi,&nbsp;lam,&nbsp;q)</td>
+<td>Apply u2 to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.u3" title="qiskit.QuantumCircuit.u3"><code class="xref py py-obj docutils literal"><span class="pre">u3</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
+<td>Apply u3 to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.u_base" title="qiskit.QuantumCircuit.u_base"><code class="xref py py-obj docutils literal"><span class="pre">u_base</span></code></a>(theta,&nbsp;phi,&nbsp;lam,&nbsp;q)</td>
+<td>Apply U to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.wait" title="qiskit.QuantumCircuit.wait"><code class="xref py py-obj docutils literal"><span class="pre">wait</span></code></a>(t,&nbsp;q)</td>
+<td>Apply wait for time t to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.x" title="qiskit.QuantumCircuit.x"><code class="xref py py-obj docutils literal"><span class="pre">x</span></code></a>(q)</td>
+<td>Apply X to q.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.QuantumCircuit.y" title="qiskit.QuantumCircuit.y"><code class="xref py py-obj docutils literal"><span class="pre">y</span></code></a>(q)</td>
+<td>Apply Y to q.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.QuantumCircuit.z" title="qiskit.QuantumCircuit.z"><code class="xref py py-obj docutils literal"><span class="pre">z</span></code></a>(q)</td>
+<td>Apply Z to q.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*regs</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.__init__"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.__init__" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Create a new circuit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>*regs</strong> (<em>Registers</em>) – registers to include in the circuit.</li>
+<li><strong>name</strong> (<em>str</em><em> or </em><em>None</em>) – the name of the quantum circuit. If
+None, an automatically generated identifier will be
+assigned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if the circuit name, if given, is not valid.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>*regs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.add"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.add" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Add registers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.barrier">
+<code class="descname">barrier</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.barrier" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply barrier to circuit.
+If args is None, applies to all the qbits.
+Args is a list of QuantumRegister or single qubits.
+For QuantumRegister, applies barrier to all the qbits in that register.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.ccx">
+<code class="descname">ccx</code><span class="sig-paren">(</span><em>ctl1</em>, <em>ctl2</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.ccx" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Toffoli to from ctl1 and ctl2 to tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.ch">
+<code class="descname">ch</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.ch" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply CH from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="qiskit.QuantumCircuit.cls_instances">
+<em class="property">classmethod </em><code class="descname">cls_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.cls_instances"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.cls_instances" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the current number of instances of this class,
+useful for auto naming.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="qiskit.QuantumCircuit.cls_prefix">
+<em class="property">classmethod </em><code class="descname">cls_prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.cls_prefix"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.cls_prefix" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the prefix to use for auto naming.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.combine">
+<code class="descname">combine</code><span class="sig-paren">(</span><em>rhs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.combine"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.combine" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Append rhs to self if self contains compatible registers.</p>
+<p>Two circuits are compatible if they contain the same registers
+or if they contain different registers with unique names. The
+returned circuit will contain all unique registers between both
+circuits.</p>
+<p>Return self + rhs as a new object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.crz">
+<code class="descname">crz</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.crz" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply crz from ctl to tgt with angle theta.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cswap">
+<code class="descname">cswap</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt1</em>, <em>tgt2</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cswap" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Fredkin to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cu1">
+<code class="descname">cu1</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cu1" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply cu1 from ctl to tgt with angle theta.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cu3">
+<code class="descname">cu3</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cu3" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply cu3 from ctl to tgt with angle theta, phi, lam.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cx">
+<code class="descname">cx</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cx" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply CX from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cx_base">
+<code class="descname">cx_base</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cx_base" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply CX ctl, tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cy">
+<code class="descname">cy</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cy" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply CY to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.cz">
+<code class="descname">cz</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.cz" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply CZ to circuit.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.QuantumCircuit.definitions">
+<code class="descname">definitions</code><em class="property"> = {'ccx': {'n_bits': 3, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da64320&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a', 'b', 'c']}, 'ch': {'n_bits': 2, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da61438&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a', 'b']}, 'crz': {'n_bits': 2, 'args': ['lambda'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da64da0&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a', 'b']}, 'cswap': {'n_bits': 3, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da646d8&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a', 'b', 'c']}, 'cu1': {'n_bits': 2, 'args': ['lambda'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da686a0&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a', 'b']}, 'cu3': {'n_bits': 2, 'args': ['theta', 'phi', 'lambda'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da6b2e8&gt;, 'n_args': 3, 'opaque': False, 'bits': ['c', 't']}, 'cx': {'n_bits': 2, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4320&gt;, 'n_args': 0, 'opaque': False, 'bits': ['c', 't']}, 'cy': {'n_bits': 2, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5e630&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a', 'b']}, 'cz': {'n_bits': 2, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5e320&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a', 'b']}, 'h': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4eb8&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'id': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad44a8&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'rx': {'n_bits': 1, 'args': ['theta'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5ac50&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a']}, 'ry': {'n_bits': 1, 'args': ['theta'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5ae48&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a']}, 'rz': {'n_bits': 1, 'args': ['phi'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5afd0&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a']}, 'rzz': {'n_bits': 2, 'args': ['theta'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da6b6a0&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a', 'b']}, 's': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5a128&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'sdg': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5a3c8&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'swap': {'n_bits': 2, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5e9b0&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a', 'b']}, 't': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5a5f8&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'tdg': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13da5a898&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'u0': {'n_bits': 1, 'args': ['gamma'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4630&gt;, 'n_args': 1, 'opaque': False, 'bits': ['q']}, 'u1': {'n_bits': 1, 'args': ['lambda'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4240&gt;, 'n_args': 1, 'opaque': False, 'bits': ['q']}, 'u2': {'n_bits': 1, 'args': ['phi', 'lambda'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dac1d68&gt;, 'n_args': 2, 'opaque': False, 'bits': ['q']}, 'u3': {'n_bits': 1, 'args': ['theta', 'phi', 'lambda'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13daeb908&gt;, 'n_args': 3, 'opaque': False, 'bits': ['q']}, 'wait': {'n_bits': 1, 'args': ['t'], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc129b47748&gt;, 'n_args': 1, 'opaque': False, 'bits': ['a']}, 'x': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4828&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'y': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4b70&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}, 'z': {'n_bits': 1, 'args': [], 'print': False, 'body': &lt;qiskit.qasm._node._gatebody.GateBody object at 0x7fc13dad4cf8&gt;, 'n_args': 0, 'opaque': False, 'bits': ['a']}}</em><a class="headerlink" href="#qiskit.QuantumCircuit.definitions" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.extend">
+<code class="descname">extend</code><span class="sig-paren">(</span><em>rhs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.extend"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.extend" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Append rhs to self if self if it contains compatible registers.</p>
+<p>Two circuits are compatible if they contain the same registers
+or if they contain different registers with unique names. The
+returned circuit will contain all unique registers between both
+circuits.</p>
+<p>Modify and return self.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.first_atomic_gate_host">
+<code class="descname">first_atomic_gate_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.first_atomic_gate_host" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the host list of the leaf gate on the left edge.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.get_cregs">
+<code class="descname">get_cregs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.get_cregs"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.get_cregs" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Get the cregs from the registers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.get_qregs">
+<code class="descname">get_qregs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.get_qregs"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.get_qregs" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Get the qregs from the registers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.h">
+<code class="descname">h</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.h" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply H to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.has_register">
+<code class="descname">has_register</code><span class="sig-paren">(</span><em>register</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.has_register"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.has_register" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Test if this circuit has the register r.</p>
+<p>Return True or False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.QuantumCircuit.header">
+<code class="descname">header</code><em class="property"> = 'OPENQASM 2.0;\ninclude &quot;qelib1.inc&quot;;'</em><a class="headerlink" href="#qiskit.QuantumCircuit.header" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.iden">
+<code class="descname">iden</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.iden" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Identity to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>params</em>, <em>qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.initialize" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply initialize to circuit.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.QuantumCircuit.instances">
+<code class="descname">instances</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit.QuantumCircuit.instances" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.last_atomic_gate_host">
+<code class="descname">last_atomic_gate_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.last_atomic_gate_host" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the host list of the leaf gate on the right edge.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>slot</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.load" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Load the internal simulator representation (statevector, probability,
+density matrix, clifford table)
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>slot</strong> (<em>int</em>) – a slot to load from</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.measure">
+<code class="descname">measure</code><span class="sig-paren">(</span><em>qubit</em>, <em>cbit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.measure"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.measure" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Measure quantum bit into classical bit (tuples).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">the attached measure gate.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.Gate.html#qiskit.Gate" title="qiskit.Gate">Gate</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="qiskit.QISKitError.html#qiskit.QISKitError" title="qiskit.QISKitError"><code class="xref py py-exc docutils literal"><span class="pre">QISKitError</span></code></a> – if qubit is not in this circuit or bad format;
+if cbit is not in this circuit or not creg.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.noise">
+<code class="descname">noise</code><span class="sig-paren">(</span><em>switch</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.noise" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Turn noise on/off in simulator.
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>switch</strong> (<em>int</em>) – turn noise on (1) or off (0)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.number_atomic_gates">
+<code class="descname">number_atomic_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.number_atomic_gates" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Count the number of leaf gates.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.optimize_gates">
+<code class="descname">optimize_gates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.optimize_gates" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Remove Zero rotations and Double CNOTS.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.QuantumCircuit.prefix">
+<code class="descname">prefix</code><em class="property"> = 'circuit'</em><a class="headerlink" href="#qiskit.QuantumCircuit.prefix" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.qasm">
+<code class="descname">qasm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.qasm"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.qasm" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return OPENQASM string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.remove_double_cnots_once">
+<code class="descname">remove_double_cnots_once</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.remove_double_cnots_once" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Remove Double CNOTS paying attention that gates may be neighbours across
+Composite Gate boundaries.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.remove_zero_rotations">
+<code class="descname">remove_zero_rotations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.remove_zero_rotations" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Remove Zero Rotations by looking (recursively) at rotation gates at the
+leaf ends.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><em>quantum_register</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_quantumcircuit.html#QuantumCircuit.reset"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.QuantumCircuit.reset" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Reset q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.reverse">
+<code class="descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.reverse" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Reverse (recursively) the sub-gates of this CompositeGate. Note this does
+not invert the gates!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.rx">
+<code class="descname">rx</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.rx" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Rx to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.ry">
+<code class="descname">ry</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.ry" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Ry to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.rz">
+<code class="descname">rz</code><span class="sig-paren">(</span><em>phi</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.rz" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Rz to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.rzz">
+<code class="descname">rzz</code><span class="sig-paren">(</span><em>theta</em>, <em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.rzz" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply RZZ to circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.s">
+<code class="descname">s</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.s" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply S to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>slot</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.save" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Save the internal simulator representation (statevector, probability,
+density matrix, clifford table).
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>slot</strong> (<em>int</em>) – a slot to save into</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.sdg">
+<code class="descname">sdg</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.sdg" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Sdg to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.snapshot">
+<code class="descname">snapshot</code><span class="sig-paren">(</span><em>slot</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.snapshot" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Take a snapshot of the internal simulator representation (statevector,
+probability, density matrix, clifford table)
+Works on all qubits, and prevents reordering (like barrier).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>slot</strong> (<em>int</em>) – a snapshot slot to report the result</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">with attached command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit">QuantumCircuit</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ExtensionError</span></code> – malformed command</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.swap">
+<code class="descname">swap</code><span class="sig-paren">(</span><em>ctl</em>, <em>tgt</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.swap" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply SWAP from ctl to tgt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.t">
+<code class="descname">t</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.t" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply T to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.tdg">
+<code class="descname">tdg</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.tdg" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Tdg to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.u0">
+<code class="descname">u0</code><span class="sig-paren">(</span><em>m</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.u0" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply u0 with length m to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.u1">
+<code class="descname">u1</code><span class="sig-paren">(</span><em>theta</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.u1" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply u1 with angle theta to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.u2">
+<code class="descname">u2</code><span class="sig-paren">(</span><em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.u2" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply u2 to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.u3">
+<code class="descname">u3</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.u3" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply u3 to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.u_base">
+<code class="descname">u_base</code><span class="sig-paren">(</span><em>theta</em>, <em>phi</em>, <em>lam</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.u_base" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply U to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.wait">
+<code class="descname">wait</code><span class="sig-paren">(</span><em>t</em>, <em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.wait" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply wait for time t to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.x">
+<code class="descname">x</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.x" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply X to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.y">
+<code class="descname">y</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.y" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Y to q.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.QuantumCircuit.z">
+<code class="descname">z</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.QuantumCircuit.z" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Apply Z to q.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.QuantumJob.html" title="qiskit.QuantumJob"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.Measure.html" title="qiskit.Measure"
+             >zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>

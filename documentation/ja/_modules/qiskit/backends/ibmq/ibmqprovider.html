@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.ibmq.ibmqprovider &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.backends.ibmq.ibmqprovider &#8212; QISKit SDK 0.5.5 ドキュメント</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -38,6 +38,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/backends/ibmq/ibmqprovider.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/backends/ibmq/ibmqprovider.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/backends/ibmq/ibmqprovider.html">japanese</a>
     </div>
 </div>
@@ -56,7 +57,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -115,7 +116,7 @@
 
 <div class="viewcode-block" id="IBMQProvider"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider">[ドキュメント]</a><span class="k">class</span> <span class="nc">IBMQProvider</span><span class="p">(</span><span class="n">BaseProvider</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Provider for remote IbmQ backends.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span><span class="p">,</span>
                  <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
@@ -126,18 +127,27 @@
         <span class="c1"># Populate the list of remote backends.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_discover_remote_backends</span><span class="p">()</span>
 
+        <span class="c1"># authentication attributes, which uniquely identify the provider instance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hub</span> <span class="o">=</span> <span class="n">hub</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_group</span> <span class="o">=</span> <span class="n">group</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_project</span> <span class="o">=</span> <span class="n">project</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxies</span> <span class="o">=</span> <span class="n">proxies</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verify</span> <span class="o">=</span> <span class="n">verify</span>
+
 <div class="viewcode-block" id="IBMQProvider.get_backend"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider.get_backend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backends</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="IBMQProvider.available_backends"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider.available_backends">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="c1"># pylint: disable=arguments-differ</span>
-        <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backends</span>
+<div class="viewcode-block" id="IBMQProvider.available_backends"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider.available_backends">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a list of available backends from the IBMQ provider.</span>
 
-        <span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">filters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">backends</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">instance</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">backends</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                        <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span><span class="p">}</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">backends</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+<span class="sd">        Returns:</span>
+<span class="sd">            list[IBMQBackend]: a list of backend instances available</span>
+<span class="sd">            from the IBMQ provider.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=arguments-differ</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="IBMQProvider.aliased_backend_names"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQProvider.html#qiskit.backends.ibmq.IBMQProvider.aliased_backend_names">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">aliased_backend_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{}</span></div>
@@ -223,7 +233,16 @@
             <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_backend_configuration</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span>
             <span class="n">ret</span><span class="p">[</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">IBMQBackend</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">ret</span></div>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">equality</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_token</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_url</span> <span class="ow">and</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_hub</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_hub</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_group</span> <span class="ow">and</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_project</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_project</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">equality</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">equality</span></div>
 </pre></div>
 
           </div>
@@ -246,14 +265,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
+      最終更新: 2018/07/03
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
