@@ -37,6 +37,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         }
 
         .feature-image .description {
+          font-size: 1.1em;
           margin-bottom: 2em;
         }
 
