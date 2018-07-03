@@ -1,0 +1,242 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.ClassicalRegister &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="qiskit.CompositeGate" href="qiskit.CompositeGate.html" />
+    <link rel="prev" title="qiskit.wrapper.unregister" href="qiskit.wrapper.unregister.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.ClassicalRegister.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.ClassicalRegister.html">german</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.ClassicalRegister.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.CompositeGate.html" title="qiskit.CompositeGate"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.wrapper.unregister.html" title="qiskit.wrapper.unregister"
+             accesskey="P">zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK Referenz</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#classes">Classes</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">qiskit.ClassicalRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.CompositeGate.html">qiskit.CompositeGate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Gate.html">qiskit.Gate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Instruction.html">qiskit.Instruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.InstructionSet.html">qiskit.InstructionSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Measure.html">qiskit.Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumCircuit.html">qiskit.QuantumCircuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumJob.html">qiskit.QuantumJob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumProgram.html">qiskit.QuantumProgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.QuantumRegister.html">qiskit.QuantumRegister</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Reset.html">qiskit.Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.Result.html">qiskit.Result</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="qiskit.wrapper.unregister.html"
+                        title="vorheriges Kapitel">qiskit.wrapper.unregister</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="qiskit.CompositeGate.html"
+                        title="nächstes Kapitel">qiskit.CompositeGate</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Diese Seite</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.ClassicalRegister.rst.txt"
+            rel="nofollow">Quellcode anzeigen</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-classicalregister">
+<h1>qiskit.ClassicalRegister<a class="headerlink" href="#qiskit-classicalregister" title="Link zu dieser Überschrift">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.ClassicalRegister">
+<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">ClassicalRegister</code><span class="sig-paren">(</span><em>size</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_classicalregister.html#ClassicalRegister"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ClassicalRegister" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">qiskit._register.Register</span></code></p>
+<p>Implement a classical register.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ClassicalRegister.__init__" title="qiskit.ClassicalRegister.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(size[,&nbsp;name])</td>
+<td>Create a new generic register.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ClassicalRegister.check_range" title="qiskit.ClassicalRegister.check_range"><code class="xref py py-obj docutils literal"><span class="pre">check_range</span></code></a>(j)</td>
+<td>Check that j is a valid index into self.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ClassicalRegister.qasm" title="qiskit.ClassicalRegister.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a>()</td>
+<td>Return OPENQASM string for this register.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.ClassicalRegister.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>size</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ClassicalRegister.__init__" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Create a new generic register.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Veraltet ab Version 0.5: </span>The <cite>name</cite> parameter will be optional in upcoming versions (&gt;0.5.0)
+and the order of the parameters will change (<cite>size</cite>, <cite>name</cite>)
+instead of (<cite>name</cite>, <cite>size</cite>).</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ClassicalRegister.check_range">
+<code class="descname">check_range</code><span class="sig-paren">(</span><em>j</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ClassicalRegister.check_range" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Check that j is a valid index into self.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.ClassicalRegister.instances_counter">
+<code class="descname">instances_counter</code><em class="property"> = count(0)</em><a class="headerlink" href="#qiskit.ClassicalRegister.instances_counter" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.ClassicalRegister.prefix">
+<code class="descname">prefix</code><em class="property"> = 'c'</em><a class="headerlink" href="#qiskit.ClassicalRegister.prefix" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ClassicalRegister.qasm">
+<code class="descname">qasm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_classicalregister.html#ClassicalRegister.qasm"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.ClassicalRegister.qasm" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return OPENQASM string for this register.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.CompositeGate.html" title="qiskit.CompositeGate"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.wrapper.unregister.html" title="qiskit.wrapper.unregister"
+             >zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>

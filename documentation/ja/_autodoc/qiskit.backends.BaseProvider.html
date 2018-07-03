@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.BaseProvider &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.backends.BaseProvider &#8212; QISKit SDK 0.5.5 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -28,7 +28,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="qiskit.dagcircuit package" href="qiskit.dagcircuit.html" />
+    <link rel="next" title="qiskit.backends.JobStatus" href="qiskit.backends.JobStatus.html" />
     <link rel="prev" title="qiskit.backends.BaseJob" href="qiskit.backends.BaseJob.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
@@ -40,6 +40,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_autodoc/qiskit.backends.BaseProvider.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.backends.BaseProvider.html">german</a> /
         <a href="/documentation/ja/_autodoc/qiskit.backends.BaseProvider.html">japanese</a>
     </div>
 </div>
@@ -53,7 +54,7 @@
           <a href="../py-modindex.html" title="Pythonモジュール索引"
              >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.dagcircuit.html" title="qiskit.dagcircuit package"
+          <a href="qiskit.backends.JobStatus.html" title="qiskit.backends.JobStatus"
              accesskey="N">次へ</a> |</li>
         <li class="right" >
           <a href="qiskit.backends.BaseJob.html" title="qiskit.backends.BaseJob"
@@ -64,7 +65,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" accesskey="U">qiskit.backends package</a> &#187;</li> 
@@ -92,6 +93,7 @@
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.BaseBackend.html">qiskit.backends.BaseBackend</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.BaseJob.html">qiskit.backends.BaseJob</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.backends.BaseProvider</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.JobStatus.html">qiskit.backends.JobStatus</a></li>
 </ul>
 </li>
 </ul>
@@ -100,6 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
 </ul>
@@ -116,8 +119,8 @@
   <p class="topless"><a href="qiskit.backends.BaseJob.html"
                         title="前の章へ">qiskit.backends.BaseJob</a></p>
   <h4>次のトピックへ</h4>
-  <p class="topless"><a href="qiskit.dagcircuit.html"
-                        title="次の章へ">qiskit.dagcircuit package</a></p>
+  <p class="topless"><a href="qiskit.backends.JobStatus.html"
+                        title="次の章へ">qiskit.backends.JobStatus</a></p>
   <div role="note" aria-label="source link">
     <h3>このページ</h3>
     <ul class="this-page-menu">
@@ -168,7 +171,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">a list of backend available from this provider.</td>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">a list of backend instances available</td>
 </tr>
 </tbody>
 </table>
@@ -208,7 +211,8 @@ in order of priority from the value list, depending on availability.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">a list of backend available from this provider.</td>
+<tr class="field-odd field"><th class="field-name">戻り値:</th><td class="field-body">a list of backend instances available
+from this provider.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値の型:</th><td class="field-body">list[<a class="reference internal" href="qiskit.backends.BaseBackend.html#qiskit.backends.BaseBackend" title="qiskit.backends.BaseBackend">BaseBackend</a>]</td>
 </tr>
@@ -275,7 +279,7 @@ from this provider.</td>
           <a href="../py-modindex.html" title="Pythonモジュール索引"
              >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.dagcircuit.html" title="qiskit.dagcircuit package"
+          <a href="qiskit.backends.JobStatus.html" title="qiskit.backends.JobStatus"
              >次へ</a> |</li>
         <li class="right" >
           <a href="qiskit.backends.BaseJob.html" title="qiskit.backends.BaseJob"
@@ -286,7 +290,7 @@ from this provider.</td>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li> 
@@ -294,7 +298,7 @@ from this provider.</td>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
+      最終更新: 2018/07/03
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

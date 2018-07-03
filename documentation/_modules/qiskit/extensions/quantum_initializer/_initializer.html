@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.extensions.quantum_initializer._initializer &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit.extensions.quantum_initializer._initializer &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,6 +37,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/extensions/quantum_initializer/_initializer.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/extensions/quantum_initializer/_initializer.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/extensions/quantum_initializer/_initializer.html">japanese</a>
     </div>
 </div>
@@ -55,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -174,7 +175,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">optimize_gates</span><span class="p">()</span>
         <span class="c1"># invert the circuit to create the desired vector from zero (assuming</span>
         <span class="c1"># the qubits are in the zero state)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
+        <span class="c1"># do not set the inverse flag, as this is the actual initialize gate</span>
+        <span class="c1"># we just used inverse() as a method to obtain it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="InitializeGate.nth_qubit_from_least_sig_qubit"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.nth_qubit_from_least_sig_qubit">[docs]</a>    <span class="k">def</span> <span class="nf">nth_qubit_from_least_sig_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nth</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -191,7 +195,7 @@
 
 <div class="viewcode-block" id="InitializeGate.reapply"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.reapply">[docs]</a>    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reapply this gate to the corresponding qubits in circ.&quot;&quot;&quot;</span>
-        <span class="n">circ</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modifiers</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="InitializeGate.gates_to_uncompute"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.gates_to_uncompute">[docs]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -561,14 +565,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

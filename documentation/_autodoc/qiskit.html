@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit package &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit package &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -39,6 +39,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_autodoc/qiskit.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.html">german</a> /
         <a href="/documentation/ja/_autodoc/qiskit.html">japanese</a>
     </div>
 </div>
@@ -63,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -88,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
 </ul>
@@ -116,9 +118,14 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.compile.html">qiskit.compile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.execute.html">qiskit.execute</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.get_backend.html">qiskit.get_backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.least_busy.html">qiskit.least_busy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.load_qasm_file.html">qiskit.load_qasm_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.load_qasm_string.html">qiskit.load_qasm_string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.local_backends.html">qiskit.local_backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.register.html">qiskit.register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.registered_providers.html">qiskit.registered_providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.remote_backends.html">qiskit.remote_backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unregister.html">qiskit.unregister</a></li>
 </ul>
 </li>
 </ul>
@@ -184,10 +191,13 @@
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-obj docutils literal"><span class="pre">qasm</span></code></a></td>
 <td>Tools for QASM.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-obj docutils literal"><span class="pre">unroll</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.transpiler.html#module-qiskit.transpiler" title="qiskit.transpiler"><code class="xref py py-obj docutils literal"><span class="pre">transpiler</span></code></a></td>
+<td>Utils for transpiler.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-obj docutils literal"><span class="pre">unroll</span></code></a></td>
 <td>Unroll QASM and different backends.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.wrapper.html#module-qiskit.wrapper" title="qiskit.wrapper"><code class="xref py py-obj docutils literal"><span class="pre">wrapper</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.wrapper.html#module-qiskit.wrapper" title="qiskit.wrapper"><code class="xref py py-obj docutils literal"><span class="pre">wrapper</span></code></a></td>
 <td>Helper module for simplified QISKit usage.</td>
 </tr>
 </tbody>
@@ -263,7 +273,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.available_backends.html#qiskit.available_backends" title="qiskit.available_backends"><code class="xref py py-obj docutils literal"><span class="pre">available_backends</span></code></a></td>
-<td>Return the backends that are available in the SDK, optionally filtering them based on their capabilities.</td>
+<td>Return names of backends that are available in the SDK, optionally filtering them based on their capabilities.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="qiskit.compile.html#qiskit.compile" title="qiskit.compile"><code class="xref py py-obj docutils literal"><span class="pre">compile</span></code></a></td>
 <td>Compile a list of circuits into a qobj.</td>
@@ -274,14 +284,29 @@
 <tr class="row-even"><td><a class="reference internal" href="qiskit.get_backend.html#qiskit.get_backend" title="qiskit.get_backend"><code class="xref py py-obj docutils literal"><span class="pre">get_backend</span></code></a></td>
 <td>Return an instance of a <cite>Backend</cite> object from its name identifier.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="qiskit.load_qasm_file.html#qiskit.load_qasm_file" title="qiskit.load_qasm_file"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_file</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.least_busy.html#qiskit.least_busy" title="qiskit.least_busy"><code class="xref py py-obj docutils literal"><span class="pre">least_busy</span></code></a></td>
+<td>Return the least busy available backend for those that have a <cite>pending_jobs</cite> in their <cite>status</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.load_qasm_file.html#qiskit.load_qasm_file" title="qiskit.load_qasm_file"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_file</span></code></a></td>
 <td>Construct a quantum circuit from a qasm representation (file).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="qiskit.load_qasm_string.html#qiskit.load_qasm_string" title="qiskit.load_qasm_string"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_string</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.load_qasm_string.html#qiskit.load_qasm_string" title="qiskit.load_qasm_string"><code class="xref py py-obj docutils literal"><span class="pre">load_qasm_string</span></code></a></td>
 <td>Construct a quantum circuit from a qasm representation (string).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.local_backends.html#qiskit.local_backends" title="qiskit.local_backends"><code class="xref py py-obj docutils literal"><span class="pre">local_backends</span></code></a></td>
+<td>Return the available local backends.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="qiskit.register.html#qiskit.register" title="qiskit.register"><code class="xref py py-obj docutils literal"><span class="pre">register</span></code></a></td>
 <td>Authenticate against an online backend provider.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.registered_providers.html#qiskit.registered_providers" title="qiskit.registered_providers"><code class="xref py py-obj docutils literal"><span class="pre">registered_providers</span></code></a></td>
+<td>Return the currently registered providers.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.remote_backends.html#qiskit.remote_backends" title="qiskit.remote_backends"><code class="xref py py-obj docutils literal"><span class="pre">remote_backends</span></code></a></td>
+<td>Return the available remote backends.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.unregister.html#qiskit.unregister" title="qiskit.unregister"><code class="xref py py-obj docutils literal"><span class="pre">unregister</span></code></a></td>
+<td>Removes a provider from list of registered providers.</td>
 </tr>
 </tbody>
 </table>
@@ -315,13 +340,13 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -1,0 +1,392 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.unroll._printerbackend &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/unroll/_printerbackend.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/unroll/_printerbackend.html">german</a> /
+        <a href="/documentation/ja/_modules/qiskit/unroll/_printerbackend.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../../../index.html">Inhalt</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK Referenz</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Quellcode für qiskit.unroll._printerbackend</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Backend for the unroller that prints OpenQASM.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">._backenderror</span> <span class="k">import</span> <span class="n">BackendError</span>
+<span class="kn">from</span> <span class="nn">._unrollerbackend</span> <span class="k">import</span> <span class="n">UnrollerBackend</span>
+
+
+<div class="viewcode-block" id="PrinterBackend"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend">[Doku]</a><span class="k">class</span> <span class="nc">PrinterBackend</span><span class="p">(</span><span class="n">UnrollerBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Backend for the unroller that prints OpenQASM.</span>
+
+<span class="sd">    This backend also serves as an example class for other unroller backends.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PrinterBackend.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.__init__">[Doku]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setup this backend.</span>
+
+<span class="sd">        basis is a list of operation name strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">15</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gates</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comments</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printed_gates</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.set_comments"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.set_comments">[Doku]</a>    <span class="k">def</span> <span class="nf">set_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comments</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set comments to True to enable.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comments</span> <span class="o">=</span> <span class="n">comments</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.set_basis"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.set_basis">[Doku]</a>    <span class="k">def</span> <span class="nf">set_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Declare the set of user-defined gates to emit.</span>
+
+<span class="sd">        basis is a list of operation name strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.version"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.version">[Doku]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Print the version string.</span>
+
+<span class="sd">        v is a version number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OPENQASM </span><span class="si">%s</span><span class="s2">;&quot;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.new_qreg"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.new_qreg">[Doku]</a>    <span class="k">def</span> <span class="nf">new_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new quantum register.</span>
+
+<span class="sd">        name = name of the register</span>
+<span class="sd">        sz = size of the register</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;invalid qreg size&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;qreg </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.new_creg"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.new_creg">[Doku]</a>    <span class="k">def</span> <span class="nf">new_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new classical register.</span>
+
+<span class="sd">        name = name of the register</span>
+<span class="sd">        sz = size of the register</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creg </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_gate_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Print OPENQASM for the named gate.&quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;opaque &quot;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;gate &quot;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;n_args&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;args&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;bits&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">{</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+<div class="viewcode-block" id="PrinterBackend.define_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.define_gate">[Doku]</a>    <span class="k">def</span> <span class="nf">define_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">gatedata</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Define a new quantum gate.</span>
+
+<span class="sd">        name is a string.</span>
+<span class="sd">        gatedata is the AST node for the gate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">atomics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;CX&quot;</span><span class="p">,</span> <span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="s2">&quot;reset&quot;</span><span class="p">,</span> <span class="s2">&quot;barrier&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">gatedata</span>
+        <span class="c1"># Print out the gate definition if it is in self.basis</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">atomics</span><span class="p">:</span>
+            <span class="c1"># Print the hierarchy of gates this gate calls</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+                <span class="n">calls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">calls</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">call</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">printed_gates</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gate_string</span><span class="p">(</span><span class="n">call</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">printed_gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+            <span class="c1"># Print the gate itself</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">printed_gates</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gate_string</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">printed_gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.u"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.u">[Doku]</a>    <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fundamental single qubit gate.</span>
+
+<span class="sd">        arg is 3-tuple of Node expression objects.</span>
+<span class="sd">        qubit is (regname,idx) tuple.</span>
+<span class="sd">        nested_scope is a list of dictionaries mapping expression variables</span>
+<span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;U&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;U(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">) </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
+                                           <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
+                                           <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">),</span>
+                                           <span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                           <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.cx"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.cx">[Doku]</a>    <span class="k">def</span> <span class="nf">cx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fundamental two qubit gate.</span>
+
+<span class="sd">        qubit0 is (regname,idx) tuple for the control qubit.</span>
+<span class="sd">        qubit1 is (regname,idx) tuple for the target qubit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;CX&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CX&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CX </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">],</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubit0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qubit0</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                         <span class="n">qubit1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qubit1</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.measure"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.measure">[Doku]</a>    <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">bit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Measurement operation.</span>
+
+<span class="sd">        qubit is (regname, idx) tuple for the input qubit.</span>
+<span class="sd">        bit is (regname, idx) tuple for the output bit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;measure&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;measure </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] -&gt; </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                             <span class="n">bit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.barrier"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.barrier">[Doku]</a>    <span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubitlists</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Barrier instruction.</span>
+
+<span class="sd">        qubitlists is a list of lists of (regname, idx) tuples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;barrier&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">)</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">qubitlist</span> <span class="ow">in</span> <span class="n">qubitlists</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubitlist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubitlist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">qubitlist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">qubitlist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;barrier </span><span class="si">%s</span><span class="s2">;&quot;</span> <span class="o">%</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.reset"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.reset">[Doku]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset instruction.</span>
+
+<span class="sd">        qubit is a (regname, idx) tuple.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;reset&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;reset&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reset </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.set_condition"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.set_condition">[Doku]</a>    <span class="k">def</span> <span class="nf">set_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">creg</span><span class="p">,</span> <span class="n">cval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attach a current condition.</span>
+
+<span class="sd">        creg is a name string.</span>
+<span class="sd">        cval is the integer value for the test.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="n">creg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="n">cval</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;// set condition </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">creg</span><span class="p">,</span> <span class="n">cval</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.drop_condition"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.drop_condition">[Doku]</a>    <span class="k">def</span> <span class="nf">drop_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Drop the current condition.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;// drop condition&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.start_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.start_gate">[Doku]</a>    <span class="k">def</span> <span class="nf">start_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Begin a custom gate.</span>
+
+<span class="sd">        name is name string.</span>
+<span class="sd">        args is list of Node expression objects.</span>
+<span class="sd">        qubits is list of (regname, idx) tuples.</span>
+<span class="sd">        nested_scope is a list of dictionaries mapping expression variables</span>
+<span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;// start </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span>
+                                           <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+                                                    <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">)),</span>
+                                                    <span class="n">args</span><span class="p">)),</span>
+                                           <span class="n">qubits</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> \
+           <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">BackendError</span><span class="p">(</span><span class="s2">&quot;opaque gate </span><span class="si">%s</span><span class="s2"> not in basis&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">squbits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+                                            <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">)),</span>
+                                            <span class="n">args</span><span class="p">)),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%s</span><span class="s2">;&quot;</span> <span class="o">%</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">squbits</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.end_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.end_gate">[Doku]</a>    <span class="k">def</span> <span class="nf">end_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;End a custom gate.</span>
+
+<span class="sd">        name is name string.</span>
+<span class="sd">        args is list of Node expression objects.</span>
+<span class="sd">        qubits is list of (regname, idx) tuples.</span>
+<span class="sd">        nested_scope is a list of dictionaries mapping expression variables</span>
+<span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;// end </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span>
+                                         <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+                                                  <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">)),</span>
+                                                  <span class="n">args</span><span class="p">)),</span>
+                                         <span class="n">qubits</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PrinterBackend.get_output"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.PrinterBackend.html#qiskit.unroll.PrinterBackend.get_output">[Doku]</a>    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This backend will return nothing, as the output has been directly</span>
+<span class="sd">        written to screen&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.transpiler.PassManager &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="qiskit.transpiler.TranspilerError" href="qiskit.transpiler.TranspilerError.html" />
+    <link rel="prev" title="qiskit.transpiler package" href="qiskit.transpiler.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.transpiler.PassManager.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.transpiler.PassManager.html">german</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.transpiler.PassManager.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.transpiler.TranspilerError.html" title="qiskit.transpiler.TranspilerError"
+             accesskey="N">weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.transpiler.html" title="qiskit.transpiler package"
+             accesskey="P">zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.transpiler.html" accesskey="U">qiskit.transpiler package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK Referenz</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.transpiler.PassManager</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Vorheriges Thema</h4>
+  <p class="topless"><a href="qiskit.transpiler.html"
+                        title="vorheriges Kapitel">qiskit.transpiler package</a></p>
+  <h4>Nächstes Thema</h4>
+  <p class="topless"><a href="qiskit.transpiler.TranspilerError.html"
+                        title="nächstes Kapitel">qiskit.transpiler.TranspilerError</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Diese Seite</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.transpiler.PassManager.rst.txt"
+            rel="nofollow">Quellcode anzeigen</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-transpiler-passmanager">
+<h1>qiskit.transpiler.PassManager<a class="headerlink" href="#qiskit-transpiler-passmanager" title="Link zu dieser Überschrift">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.transpiler.PassManager">
+<em class="property">class </em><code class="descclassname">qiskit.transpiler.</code><code class="descname">PassManager</code><a class="reference internal" href="../_modules/qiskit/transpiler/_passmanager.html#PassManager"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.PassManager" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>PassManager class for the transpiler.</p>
+<p>A PassManager instance is responsible for launching the requisite
+analysis and transformation passes on the quantum circuit, and to
+do this correctly &amp; efficiently
+(i.e. keep track of dependencies between passes)</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.__init__" title="qiskit.transpiler.PassManager.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>()</td>
+<td>Initialize an empty PassManager object (with no passes scheduled).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.add_pass" title="qiskit.transpiler.PassManager.add_pass"><code class="xref py py-obj docutils literal"><span class="pre">add_pass</span></code></a>(pass_)</td>
+<td>Schedule a pass in the passmanager.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler.PassManager.passes" title="qiskit.transpiler.PassManager.passes"><code class="xref py py-obj docutils literal"><span class="pre">passes</span></code></a>()</td>
+<td>Return list of passes scheduled.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.transpiler.PassManager.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_passmanager.html#PassManager.__init__"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.PassManager.__init__" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Initialize an empty PassManager object
+(with no passes scheduled).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.PassManager.add_pass">
+<code class="descname">add_pass</code><span class="sig-paren">(</span><em>pass_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_passmanager.html#PassManager.add_pass"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.PassManager.add_pass" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Schedule a pass in the passmanager.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.PassManager.passes">
+<code class="descname">passes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_passmanager.html#PassManager.passes"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler.PassManager.passes" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return list of passes scheduled.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+        <li class="right" >
+          <a href="qiskit.transpiler.TranspilerError.html" title="qiskit.transpiler.TranspilerError"
+             >weiter</a> |</li>
+        <li class="right" >
+          <a href="qiskit.transpiler.html" title="qiskit.transpiler package"
+             >zurück</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.transpiler.html" >qiskit.transpiler package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>
