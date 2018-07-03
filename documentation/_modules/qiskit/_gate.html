@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._gate &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit._gate &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,6 +37,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/_gate.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/_gate.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/_gate.html">japanese</a>
     </div>
 </div>
@@ -55,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -120,19 +121,14 @@
         <span class="sd">&quot;&quot;&quot;Create a new composite gate.</span>
 
 <span class="sd">        name = instruction name string</span>
-<span class="sd">        param = list of real parameters (will converted to symbolic)</span>
-<span class="sd">        arg = list of pairs (Register, index)</span>
+<span class="sd">        param = list of real parameters (will be converted to symbolic)</span>
+<span class="sd">        args = list of pairs (Register, index)</span>
 <span class="sd">        circuit = QuantumCircuit or CompositeGate containing this gate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_coupling</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">number_of_arguments</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_coupling</span> <span class="o">=</span> <span class="p">[</span><span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="n">number_of_arguments</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">number_of_arguments</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_coupling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span> <span class="o">=</span> <span class="kc">True</span>
-
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argument</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">QuantumRegister</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;argument not (QuantumRegister, int) &quot;</span>
                                   <span class="o">+</span> <span class="s2">&quot;tuple&quot;</span><span class="p">)</span>
@@ -149,7 +145,7 @@
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;control not implemented&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Gate.is_multi_qubit"><a class="viewcode-back" href="../../_autodoc/qiskit.Gate.html#qiskit.Gate.is_multi_qubit">[docs]</a>    <span class="k">def</span> <span class="nf">is_multi_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if this Gate is uses multiple qubits as arguments&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if this Gate uses multiple qubits as arguments&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_multi_qubit</span></div>
 
 <div class="viewcode-block" id="Gate.get_qubit_coupling"><a class="viewcode-back" href="../../_autodoc/qiskit.Gate.html#qiskit.Gate.get_qubit_coupling">[docs]</a>    <span class="k">def</span> <span class="nf">get_qubit_coupling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -179,14 +175,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

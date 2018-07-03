@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper.remote_backends &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.wrapper.remote_backends &#8212; QISKit SDK 0.5.5 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -28,8 +28,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="qiskit.ClassicalRegister" href="qiskit.ClassicalRegister.html" />
-    <link rel="prev" title="qiskit.wrapper.register" href="qiskit.wrapper.register.html" />
+    <link rel="next" title="qiskit.wrapper.unregister" href="qiskit.wrapper.unregister.html" />
+    <link rel="prev" title="qiskit.wrapper.registered_providers" href="qiskit.wrapper.registered_providers.html" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -40,6 +40,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_autodoc/qiskit.wrapper.remote_backends.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.wrapper.remote_backends.html">german</a> /
         <a href="/documentation/ja/_autodoc/qiskit.wrapper.remote_backends.html">japanese</a>
     </div>
 </div>
@@ -53,10 +54,10 @@
           <a href="../py-modindex.html" title="Pythonモジュール索引"
              >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.ClassicalRegister.html" title="qiskit.ClassicalRegister"
+          <a href="qiskit.wrapper.unregister.html" title="qiskit.wrapper.unregister"
              accesskey="N">次へ</a> |</li>
         <li class="right" >
-          <a href="qiskit.wrapper.register.html" title="qiskit.wrapper.register"
+          <a href="qiskit.wrapper.registered_providers.html" title="qiskit.wrapper.registered_providers"
              accesskey="P">前へ</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
@@ -64,7 +65,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" accesskey="U">qiskit.wrapper package</a> &#187;</li> 
@@ -91,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
@@ -99,11 +101,14 @@
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.compile.html">qiskit.wrapper.compile</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.execute.html">qiskit.wrapper.execute</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.get_backend.html">qiskit.wrapper.get_backend</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.least_busy.html">qiskit.wrapper.least_busy</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.load_qasm_file.html">qiskit.wrapper.load_qasm_file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.load_qasm_string.html">qiskit.wrapper.load_qasm_string</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.local_backends.html">qiskit.wrapper.local_backends</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.register.html">qiskit.wrapper.register</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.registered_providers.html">qiskit.wrapper.registered_providers</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.wrapper.remote_backends</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.wrapper.unregister.html">qiskit.wrapper.unregister</a></li>
 </ul>
 </li>
 </ul>
@@ -119,11 +124,11 @@
 
 <p class="spacer"/>
   <h4>前のトピックへ</h4>
-  <p class="topless"><a href="qiskit.wrapper.register.html"
-                        title="前の章へ">qiskit.wrapper.register</a></p>
+  <p class="topless"><a href="qiskit.wrapper.registered_providers.html"
+                        title="前の章へ">qiskit.wrapper.registered_providers</a></p>
   <h4>次のトピックへ</h4>
-  <p class="topless"><a href="qiskit.ClassicalRegister.html"
-                        title="次の章へ">qiskit.ClassicalRegister</a></p>
+  <p class="topless"><a href="qiskit.wrapper.unregister.html"
+                        title="次の章へ">qiskit.wrapper.unregister</a></p>
   <div role="note" aria-label="source link">
     <h3>このページ</h3>
     <ul class="this-page-menu">
@@ -193,10 +198,10 @@
           <a href="../py-modindex.html" title="Pythonモジュール索引"
              >モジュール</a> |</li>
         <li class="right" >
-          <a href="qiskit.ClassicalRegister.html" title="qiskit.ClassicalRegister"
+          <a href="qiskit.wrapper.unregister.html" title="qiskit.wrapper.unregister"
              >次へ</a> |</li>
         <li class="right" >
-          <a href="qiskit.wrapper.register.html" title="qiskit.wrapper.register"
+          <a href="qiskit.wrapper.registered_providers.html" title="qiskit.wrapper.registered_providers"
              >前へ</a> |</li>
 <li id="toc-toggle">
 <a class="btn btn-primary" role="button" data-toggle="collapse"
@@ -204,7 +209,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.wrapper.html" >qiskit.wrapper package</a> &#187;</li> 
@@ -212,7 +217,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
+      最終更新: 2018/07/03
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

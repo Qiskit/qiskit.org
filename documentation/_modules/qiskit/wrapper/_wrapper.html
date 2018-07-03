@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,6 +37,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/wrapper/_wrapper.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/wrapper/_wrapper.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/wrapper/_wrapper.html">japanese</a>
     </div>
 </div>
@@ -55,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -108,11 +109,9 @@
 <span class="sd">&quot;&quot;&quot;Helper module for simplified QISKit usage.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">qiskit._compiler</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
-<span class="kn">from</span> <span class="nn">qiskit.backends.ibmq.ibmqprovider</span> <span class="k">import</span> <span class="n">IBMQProvider</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">transpiler</span><span class="p">,</span> <span class="n">QISKitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends.ibmq</span> <span class="k">import</span> <span class="n">IBMQProvider</span>
 <span class="kn">from</span> <span class="nn">qiskit.wrapper.defaultqiskitprovider</span> <span class="k">import</span> <span class="n">DefaultQISKitProvider</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumJob</span>
 <span class="kn">from</span> <span class="nn">._circuittoolkit</span> <span class="k">import</span> <span class="n">circuit_from_qasm_file</span><span class="p">,</span> <span class="n">circuit_from_qasm_string</span>
 
 
@@ -121,13 +120,16 @@
 <span class="n">_DEFAULT_PROVIDER</span> <span class="o">=</span> <span class="n">DefaultQISKitProvider</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="register"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.register.html#qiskit.register">[docs]</a><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span><span class="p">,</span>
-             <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-             <span class="n">provider_name</span><span class="o">=</span><span class="s1">&#39;ibmq&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="register"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.register.html#qiskit.register">[docs]</a><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">provider_class</span><span class="o">=</span><span class="n">IBMQProvider</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Authenticate against an online backend provider.</span>
+<span class="sd">    This is a factory method that returns the provider that gets registered.</span>
 
 <span class="sd">    Args:</span>
+<span class="sd">        args (tuple): positional arguments passed to provider class initialization</span>
+<span class="sd">        provider_class (BaseProvider): provider class</span>
+<span class="sd">        kwargs (dict): keyword arguments passed to provider class initialization.</span>
+<span class="sd">            For the IBMQProvider default this can include things such as;</span>
 <span class="sd">            token (str): The token used to register on the online backend such</span>
 <span class="sd">                as the quantum experience.</span>
 <span class="sd">            url (str): The url used for online backend such as the quantum</span>
@@ -138,17 +140,43 @@
 <span class="sd">            proxies (dict): Proxy configuration for the API, as a dict with</span>
 <span class="sd">                &#39;urls&#39; and credential keys.</span>
 <span class="sd">            verify (bool): If False, ignores SSL certificates errors.</span>
-<span class="sd">            provider_name (str): the unique name for the online backend</span>
-<span class="sd">                provider (for example, &#39;ibmq&#39; for the IBM Quantum Experience).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        BaseProvider: the provider instance that was just registered.</span>
+
 <span class="sd">    Raises:</span>
-<span class="sd">        QISKitError: if the provider name is not recognized.</span>
+<span class="sd">        QISKitError: if the provider could not be registered</span>
+<span class="sd">        (e.g. due to conflict)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">provider_name</span> <span class="o">==</span> <span class="s1">&#39;ibmq&#39;</span><span class="p">:</span>
-        <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQProvider</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
-                                <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">proxies</span><span class="p">,</span> <span class="n">verify</span><span class="p">)</span>
-        <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;provider name </span><span class="si">%s</span><span class="s1"> is not recognized&#39;</span> <span class="o">%</span> <span class="n">provider_name</span><span class="p">)</span></div>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">provider_class</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t instance provider!. Error: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+
+    <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">provider</span></div>
+
+
+<div class="viewcode-block" id="unregister"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.unregister.html#qiskit.unregister">[docs]</a><span class="k">def</span> <span class="nf">unregister</span><span class="p">(</span><span class="n">provider</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes a provider from list of registered providers.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        If backend names from provider1 and provider2 were clashing,</span>
+<span class="sd">        `unregister(provider1)` removes the clash and makes the backends</span>
+<span class="sd">        from provider2 available.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        provider (BaseProvider): the provider instance to unregister</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QISKitError: if the provider instance is not registered</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">remove_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="registered_providers"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.registered_providers.html#qiskit.registered_providers">[docs]</a><span class="k">def</span> <span class="nf">registered_providers</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return the currently registered providers.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">providers</span><span class="p">)</span></div>
 
 
 <span class="c1"># Functions for inspecting and retrieving backends.</span>
@@ -156,16 +184,28 @@
 
 <div class="viewcode-block" id="available_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.available_backends.html#qiskit.available_backends">[docs]</a><span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return the backends that are available in the SDK, optionally filtering</span>
+<span class="sd">    Return names of backends that are available in the SDK, optionally filtering</span>
 <span class="sd">    them based on their capabilities.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In order for this function to return online backends, a connection with</span>
 <span class="sd">        an online backend provider needs to be established by calling the</span>
 <span class="sd">        `register()` function.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        If two or more providers have backends with the same name, those names</span>
+<span class="sd">        will be shown only once. To disambiguate and choose a backend from a</span>
+<span class="sd">        specific provider, get the backend from that specific provider.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            p1 = register(token1)</span>
+<span class="sd">            p2 = register(token2)</span>
+<span class="sd">            execute(circuit, p1.get_backend(&#39;ibmq_5_tenerife&#39;))</span>
+<span class="sd">            execute(circuit, p2.get_backend(&#39;ibmq_5_tenerife&#39;))</span>
+
 <span class="sd">    Args:</span>
-<span class="sd">        filters (dict): dictionary of filtering conditions.</span>
-<span class="sd">        compact (bool): group backend names based on aliases</span>
+<span class="sd">        filters (dict or callable): filtering conditions.</span>
+<span class="sd">        compact (bool): group backend names based on compact group names.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list[str]: the names of the available backends.</span>
@@ -199,6 +239,10 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        list[str]: the names of the available remote backends.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;local_backends() will be deprecated in upcoming versions (&gt;0.5). &quot;</span>
+        <span class="s2">&quot;using filters instead is recommended (i.e. available_backends({&#39;local&#39;: True}).&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">available_backends</span><span class="p">({</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="n">compact</span><span class="o">=</span><span class="n">compact</span><span class="p">)</span></div>
 
 
@@ -213,7 +257,36 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        list[str]: the names of the available remote backends.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">&quot;remote_backends() will be deprecated in upcoming versions (&gt;0.5). &quot;</span>
+        <span class="s2">&quot;using filters instead is recommended (i.e. available_backends({&#39;local&#39;: False}).&quot;</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">available_backends</span><span class="p">({</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">compact</span><span class="o">=</span><span class="n">compact</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="least_busy"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.least_busy.html#qiskit.least_busy">[docs]</a><span class="k">def</span> <span class="nf">least_busy</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the least busy available backend for those that</span>
+<span class="sd">    have a `pending_jobs` in their `status`. Backends such as</span>
+<span class="sd">    local backends that do not have this are not considered.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        names (list[str]): backend names to choose from</span>
+<span class="sd">                    (e.g. output of ``available_backends()``)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the name of the least busy backend</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QISKitError: if passing a list of backend names that is</span>
+<span class="sd">            either empty or none have attribute ``pending_jobs``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">backends</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_backend</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">([</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">backends</span> <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;operational&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;pending_jobs&#39;</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">status</span><span class="p">],</span>
+                   <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">b</span><span class="p">:</span> <span class="n">b</span><span class="o">.</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;pending_jobs&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Can only find least_busy backend from a non-empty list.&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_backend"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.get_backend.html#qiskit.get_backend">[docs]</a><span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
@@ -234,7 +307,7 @@
 <div class="viewcode-block" id="compile"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.compile.html#qiskit.compile">[docs]</a><span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
             <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compile a list of circuits into a qobj.</span>
 
 <span class="sd">    Args:</span>
@@ -251,29 +324,27 @@
 <span class="sd">        hpc (dict): HPC simulator parameters</span>
 <span class="sd">        skip_transpiler (bool): If True, bypass most of the compilation process and</span>
 <span class="sd">            creates a qobj with minimal check nor translation</span>
-<span class="sd">        skip_translation (bool): DEPRECATED. Use skip_transpiler instead.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        obj: the qobj to be run on the backends</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=redefined-builtin</span>
-    <span class="k">if</span> <span class="n">skip_translation</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;skip_translation will be called skip_transpiler in future versions.&quot;</span><span class="p">,</span>
-            <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="n">skip_transpiler</span> <span class="o">=</span> <span class="kc">True</span>
-
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">backend</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">_compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
-                                    <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
-                                    <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span>
-                                    <span class="n">skip_transpiler</span><span class="p">)</span></div>
+
+    <span class="n">pass_manager</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default pass manager which executes predetermined passes</span>
+    <span class="k">if</span> <span class="n">skip_transpiler</span><span class="p">:</span>  <span class="c1"># empty pass manager which does nothing</span>
+        <span class="n">pass_manager</span> <span class="o">=</span> <span class="n">transpiler</span><span class="o">.</span><span class="n">PassManager</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">transpiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+                              <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
+                              <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span>
+                              <span class="n">pass_manager</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="execute"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.execute.html#qiskit.execute">[docs]</a><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
             <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_translation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Executes a set of circuits.</span>
 
 <span class="sd">    Args:</span>
@@ -294,22 +365,13 @@
 <span class="sd">        BaseJob: returns job instance derived from BaseJob</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=missing-param-doc, missing-type-doc</span>
-    <span class="k">if</span> <span class="n">skip_translation</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;skip_translation will be called skip_transpiler in future versions.&quot;</span><span class="p">,</span>
-            <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="n">skip_transpiler</span> <span class="o">=</span> <span class="kc">True</span>
-
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">backend</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
     <span class="n">qobj</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
                    <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
                    <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span>
                    <span class="n">skip_transpiler</span><span class="p">)</span>
-    <span class="c1"># XXX When qobj is done this should replace q_job</span>
-    <span class="n">q_job</span> <span class="o">=</span> <span class="n">QuantumJob</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">preformatted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;max_credits&#39;</span><span class="p">]})</span>
-    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">q_job</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span></div>
 
 
 <span class="c1"># Functions for importing qasm</span>
@@ -372,14 +434,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._result &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit._result &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,6 +37,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/_result.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/_result.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/_result.html">japanese</a>
     </div>
 </div>
@@ -55,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -124,7 +125,6 @@
 
 <span class="sd">    Internal::</span>
 
-<span class="sd">        qobj =  { -- the quantum object that was complied --}</span>
 <span class="sd">        result = {</span>
 <span class="sd">            &quot;job_id&quot;: --job-id (string),</span>
 <span class="sd">                      #This string links the result with the job that computes it,</span>
@@ -145,9 +145,8 @@
 <span class="sd">            }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_result</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_result</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">qobj_result</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span> <span class="o">=</span> <span class="n">qobj</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the status of the run.</span>
@@ -173,29 +172,19 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QISKitError: if the Results cannot be combined.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># TODO: reevaluate if moving equality to Backend themselves (part of</span>
+        <span class="c1"># todo: reevaluate if moving equality to Backend themselves (part of</span>
         <span class="c1"># a bigger problem - backend instances will not persist between</span>
         <span class="c1"># sessions)</span>
-        <span class="n">my_config</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">])</span>
-        <span class="n">other_config</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">])</span>
-        <span class="n">my_backend</span> <span class="o">=</span> <span class="n">my_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;backend_name&#39;</span><span class="p">)</span>
-        <span class="n">other_backend</span> <span class="o">=</span> <span class="n">other_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;backend_name&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">my_config</span> <span class="o">==</span> <span class="n">other_config</span> <span class="ow">and</span> <span class="n">my_backend</span> <span class="o">==</span> <span class="n">other_backend</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]</span>
+        <span class="n">this_backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend_name&#39;</span><span class="p">)</span>
+        <span class="n">other_backend</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend_name&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">this_backend</span> <span class="o">==</span> <span class="n">other_backend</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Result objects have different configs and cannot be combined.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Result objects from different backends cannot be combined.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Combine Result objects.</span>
-
-<span class="sd">        Note that the qobj id of the returned result will be the same as the</span>
-<span class="sd">        first result.</span>
 
 <span class="sd">        Arg:</span>
 <span class="sd">            other (Result): a Result object to combine.</span>
@@ -210,7 +199,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ERROR&#39;</span>
 
 <div class="viewcode-block" id="Result.get_status"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_status">[docs]</a>    <span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return whole qobj result status.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return whole result status.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Result.circuit_statuses"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.circuit_statuses">[docs]</a>    <span class="k">def</span> <span class="nf">circuit_statuses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -252,10 +241,9 @@
 <span class="sd">            QISKitError: if the circuit was not found.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span>
-            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">])):</span>
-                <span class="k">if</span> <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">qobj</span><span class="p">[</span><span class="s2">&quot;circuits&quot;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;compiled_circuit_qasm&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">exp_result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">exp_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">exp_result</span><span class="p">[</span><span class="s1">&#39;compiled_circuit_qasm&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No  qasm for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
@@ -311,9 +299,8 @@
             <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">name</span>
 
         <span class="k">if</span> <span class="n">circuit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">circuits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]])</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;You have to select a circuit when there is more than&quot;</span>
                                   <span class="s2">&quot;one available&quot;</span><span class="p">)</span>
@@ -321,10 +308,9 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">circuit</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">qobj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span>
-            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">])):</span>
-                <span class="k">if</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">circuit</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">circuit_result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">circuit_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">circuit</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">circuit_result</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;No data for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
@@ -465,7 +451,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            List: A list of circuit names.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="Result.average_data"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.average_data">[docs]</a>    <span class="k">def</span> <span class="nf">average_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">observable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the mean value of an diagonal observable.</span>
@@ -490,12 +476,13 @@
                 <span class="n">temp</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">*</span> <span class="n">observable</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">/</span> <span class="n">tot</span>
         <span class="k">return</span> <span class="n">temp</span></div>
 
-<div class="viewcode-block" id="Result.get_qubitpol_vs_xval"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_qubitpol_vs_xval">[docs]</a>    <span class="k">def</span> <span class="nf">get_qubitpol_vs_xval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xvals_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_qubitpol_vs_xval"><a class="viewcode-back" href="../../_autodoc/qiskit.Result.html#qiskit.Result.get_qubitpol_vs_xval">[docs]</a>    <span class="k">def</span> <span class="nf">get_qubitpol_vs_xval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">xvals_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the polarization of each qubit for all circuits and pull out each circuits</span>
 <span class="sd">        xval into an array. Assumes that each circuit has the same number of qubits and that</span>
 <span class="sd">        all qubits are measured.</span>
 
 <span class="sd">        Args:</span>
+<span class="sd">            nqubits (int): number of qubits</span>
 <span class="sd">            xvals_dict (dict): xvals for each circuit {&#39;circuitname1&#39;: xval1,...}. If this</span>
 <span class="sd">            is none then the xvals list is just left as an array of zeros</span>
 
@@ -503,9 +490,8 @@
 <span class="sd">            qubit_pol: mxn double array where m is the number of circuit, n the number of qubits</span>
 <span class="sd">            xvals: mx1 array of the circuit xvals</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ncircuits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">])</span>
+        <span class="n">ncircuits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span>
         <span class="c1"># Is this the best way to get the number of qubits?</span>
-        <span class="n">nqubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;compiled_circuit&#39;</span><span class="p">][</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;number_of_qubits&#39;</span><span class="p">]</span>
         <span class="n">qubitpol</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">ncircuits</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">xvals</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">ncircuits</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
@@ -521,11 +507,12 @@
 
         <span class="c1"># go through each circuit and for eqch qubit and apply the operators using &quot;average_data&quot;</span>
         <span class="k">for</span> <span class="n">circuit_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncircuits</span><span class="p">):</span>
+            <span class="n">circuit_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">circuit_ind</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">xvals_dict</span><span class="p">:</span>
-                <span class="n">xvals</span><span class="p">[</span><span class="n">circuit_ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">xvals_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="n">circuit_ind</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span>
+                <span class="n">xvals</span><span class="p">[</span><span class="n">circuit_ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">xvals_dict</span><span class="p">[</span><span class="n">circuit_name</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">qubit_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
                 <span class="n">qubitpol</span><span class="p">[</span><span class="n">circuit_ind</span><span class="p">,</span> <span class="n">qubit_ind</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">average_data</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="n">circuit_ind</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">z_dicts</span><span class="p">[</span><span class="n">qubit_ind</span><span class="p">])</span>
+                    <span class="n">circuit_name</span><span class="p">,</span> <span class="n">z_dicts</span><span class="p">[</span><span class="n">qubit_ind</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">qubitpol</span><span class="p">,</span> <span class="n">xvals</span></div></div>
 </pre></div>
@@ -550,14 +537,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
