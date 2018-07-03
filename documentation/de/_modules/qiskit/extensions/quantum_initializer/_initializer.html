@@ -1,0 +1,579 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.extensions.quantum_initializer._initializer &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/extensions/quantum_initializer/_initializer.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/extensions/quantum_initializer/_initializer.html">german</a> /
+        <a href="/documentation/ja/_modules/qiskit/extensions/quantum_initializer/_initializer.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../../../../index.html">Inhalt</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDK Referenz</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Quellcode für qiskit.extensions.quantum_initializer._initializer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Initialize qubit registers to desired arbitrary state.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Gate</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.ry</span> <span class="k">import</span> <span class="n">RYGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.rz</span> <span class="k">import</span> <span class="n">RZGate</span>
+
+<span class="n">_EPS</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># global variable used to chop very small numbers to zero</span>
+
+
+<div class="viewcode-block" id="InitializeGate"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate">[Doku]</a><span class="k">class</span> <span class="nc">InitializeGate</span><span class="p">(</span><span class="n">CompositeGate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Complex amplitude initialization.</span>
+
+<span class="sd">    Class that implements the (complex amplitude) initialization of some</span>
+<span class="sd">    flexible collection of qubit registers (assuming the qubits are in the</span>
+<span class="sd">    zero state).</span>
+
+<span class="sd">    Implements a recursive initialization algorithm including optimizations</span>
+<span class="sd">    from &quot;Synthesis of Quantum Logic Circuits&quot; Shende, Bullock, Markov</span>
+<span class="sd">    https://arxiv.org/abs/quant-ph/0406176v5</span>
+
+<span class="sd">    Additionally implements some extra optimizations: remove zero rotations and</span>
+<span class="sd">    double cnots.`</span>
+
+<span class="sd">    It inherits from CompositeGate in the same way that the Fredkin (cswap)</span>
+<span class="sd">    gate does. Therefore self.data is the list of gates (in order) that must</span>
+<span class="sd">    be applied to implement this meta-gate.</span>
+
+<span class="sd">    param = list of complex amplitudes</span>
+<span class="sd">    arg = list of qubits</span>
+<span class="sd">    circ = QuantumCircuit or CompositeGate containing this gate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="InitializeGate.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.__init__">[Doku]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new initialize composite gate.&quot;&quot;&quot;</span>
+        <span class="n">num_qubits</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+
+        <span class="c1"># Check if param is a power of 2</span>
+        <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">num_qubits</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Desired vector not a positive power of 2.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+
+        <span class="c1"># Check if number of desired qubits agrees with available qubits</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Number of complex amplitudes do not correspond &quot;</span>
+                              <span class="s2">&quot;to the number of qubits.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if probabilities (amplitudes squared) sum to 1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">,</span>
+                            <span class="n">abs_tol</span><span class="o">=</span><span class="n">_EPS</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Sum of amplitudes-squared does not equal one.&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span>
+
+        <span class="c1"># call to generate the circuit that takes the desired vector to zero</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gates_to_uncompute</span><span class="p">()</span>
+        <span class="c1"># remove zero rotations and double cnots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimize_gates</span><span class="p">()</span>
+        <span class="c1"># invert the circuit to create the desired vector from zero (assuming</span>
+        <span class="c1"># the qubits are in the zero state)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
+        <span class="c1"># do not set the inverse flag, as this is the actual initialize gate</span>
+        <span class="c1"># we just used inverse() as a method to obtain it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="InitializeGate.nth_qubit_from_least_sig_qubit"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.nth_qubit_from_least_sig_qubit">[Doku]</a>    <span class="k">def</span> <span class="nf">nth_qubit_from_least_sig_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nth</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the qubit that is nth away from the least significant qubit</span>
+<span class="sd">        (LSB), so n=0 corresponds to the LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># if LSB is first (as is the case with the IBM QE) and significance is</span>
+        <span class="c1"># in order:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">nth</span><span class="p">]</span></div>
+        <span class="c1"># if MSB is first: return self.arg[self.num_qubits - 1 - n]</span>
+        <span class="c1">#  equivalent to self.arg[-(n+1)]</span>
+        <span class="c1"># to generalize any mapping could be placed here or even taken from</span>
+        <span class="c1"># the user</span>
+
+<div class="viewcode-block" id="InitializeGate.reapply"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.reapply">[Doku]</a>    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reapply this gate to the corresponding qubits in circ.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modifiers</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="InitializeGate.gates_to_uncompute"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.gates_to_uncompute">[Doku]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call to populate the self.data list with gates that takes the</span>
+<span class="sd">        desired vector to zero.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># kick start the peeling loop</span>
+        <span class="n">remaining_param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">):</span>
+            <span class="c1"># work out which rotations must be done to disentangle the LSB</span>
+            <span class="c1"># qubit (we peel away one qubit at a time)</span>
+            <span class="p">(</span><span class="n">remaining_param</span><span class="p">,</span>
+             <span class="n">thetas</span><span class="p">,</span>
+             <span class="n">phis</span><span class="p">)</span> <span class="o">=</span> <span class="n">InitializeGate</span><span class="o">.</span><span class="n">_rotations_to_disentangle</span><span class="p">(</span><span class="n">remaining_param</span><span class="p">)</span>
+
+            <span class="c1"># perform the required rotations to decouple the LSB qubit (so that</span>
+            <span class="c1"># it can be &quot;factored&quot; out, leaving a</span>
+            <span class="c1"># shorter amplitude vector to peel away)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">RZGate</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">phis</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">RYGate</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">thetas</span><span class="p">))</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_rotations_to_disentangle</span><span class="p">(</span><span class="n">local_param</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Static internal method to work out Ry and Rz rotation angles used</span>
+<span class="sd">        to disentangle the LSB qubit.</span>
+<span class="sd">        These rotations make up the block diagonal matrix U (i.e. multiplexor)</span>
+<span class="sd">        that disentangles the LSB.</span>
+
+<span class="sd">        [[Ry(theta_1).Rz(phi_1)  0   .   .   0],</span>
+<span class="sd">         [0         Ry(theta_2).Rz(phi_2) .  0],</span>
+<span class="sd">                                    .</span>
+<span class="sd">                                        .</span>
+<span class="sd">          0         0           Ry(theta_2^n).Rz(phi_2^n)]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">remaining_vector</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">thetas</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">phis</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">param_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_param</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">param_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="c1"># Ry and Rz rotations to move bloch vector from 0 to &quot;imaginary&quot;</span>
+            <span class="c1"># qubit</span>
+            <span class="c1"># (imagine a qubit state signified by the amplitudes at index 2*i</span>
+            <span class="c1"># and 2*(i+1), corresponding to the select qubits of the</span>
+            <span class="c1"># multiplexor being in state |i&gt;)</span>
+            <span class="p">(</span><span class="n">remains</span><span class="p">,</span>
+             <span class="n">add_theta</span><span class="p">,</span>
+             <span class="n">add_phi</span><span class="p">)</span> <span class="o">=</span> <span class="n">InitializeGate</span><span class="o">.</span><span class="n">_bloch_angles</span><span class="p">(</span>
+                 <span class="n">local_param</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+
+            <span class="n">remaining_vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remains</span><span class="p">)</span>
+
+            <span class="c1"># rotations for all imaginary qubits of the full vector</span>
+            <span class="c1"># to move from where it is to zero, hence the negative sign</span>
+            <span class="n">thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">add_theta</span><span class="p">)</span>
+            <span class="n">phis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">add_phi</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">remaining_vector</span><span class="p">,</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">phis</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_bloch_angles</span><span class="p">(</span><span class="n">pair_of_complex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Static internal method to work out rotation to create the passed in</span>
+<span class="sd">        qubit from the zero vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">[</span><span class="n">a_complex</span><span class="p">,</span> <span class="n">b_complex</span><span class="p">]</span> <span class="o">=</span> <span class="n">pair_of_complex</span>
+        <span class="c1"># Force a and b to be complex, as otherwise numpy.angle might fail.</span>
+        <span class="n">a_complex</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">a_complex</span><span class="p">)</span>
+        <span class="n">b_complex</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">b_complex</span><span class="p">)</span>
+        <span class="n">mag_a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">a_complex</span><span class="p">)</span>
+        <span class="n">final_r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mag_a</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">b_complex</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">final_r</span> <span class="o">&lt;</span> <span class="n">_EPS</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">final_r</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">final_t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">mag_a</span> <span class="o">/</span> <span class="n">final_r</span><span class="p">))</span>
+            <span class="n">a_arg</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">a_complex</span><span class="p">)</span>
+            <span class="n">b_arg</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">b_complex</span><span class="p">)</span>
+            <span class="n">final_t</span> <span class="o">=</span> <span class="n">a_arg</span> <span class="o">+</span> <span class="n">b_arg</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">b_arg</span> <span class="o">-</span> <span class="n">a_arg</span>
+
+        <span class="k">return</span> <span class="n">final_r</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1.</span><span class="n">J</span> <span class="o">*</span> <span class="n">final_t</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span>
+
+    <span class="k">def</span> <span class="nf">_multiplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bottom_gate</span><span class="p">,</span> <span class="n">bottom_qubit_index</span><span class="p">,</span> <span class="n">list_of_angles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internal recursive method to create gates to perform rotations on the</span>
+<span class="sd">        imaginary qubits: works by rotating LSB (and hence ALL imaginary</span>
+<span class="sd">        qubits) by combo angle and then flipping sign (by flipping the bit,</span>
+<span class="sd">        hence moving the complex amplitudes) of half the imaginary qubits</span>
+<span class="sd">        (CNOT) followed by another combo angle on LSB, therefore executing</span>
+<span class="sd">        conditional (on MSB) rotations, thereby disentangling LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_of_angles</span><span class="p">)</span>
+        <span class="n">target_qubit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nth_qubit_from_least_sig_qubit</span><span class="p">(</span><span class="n">bottom_qubit_index</span><span class="p">)</span>
+
+        <span class="c1"># Case of no multiplexing = base case for recursion</span>
+        <span class="k">if</span> <span class="n">list_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">bottom_gate</span><span class="p">(</span><span class="n">list_of_angles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">target_qubit</span><span class="p">)</span>
+
+        <span class="n">local_num_qubits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">list_len</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">control_qubit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nth_qubit_from_least_sig_qubit</span><span class="p">(</span>
+            <span class="n">local_num_qubits</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">bottom_qubit_index</span><span class="p">)</span>
+
+        <span class="c1"># calc angle weights, assuming recursion (that is the lower-level</span>
+        <span class="c1"># requested angles have been correctly implemented by recursion</span>
+        <span class="n">angle_weight</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">kron</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]],</span>
+                                  <span class="n">numpy</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">local_num_qubits</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)))</span>
+
+        <span class="c1"># calc the combo angles</span>
+        <span class="n">list_of_angles</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle_weight</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span>
+            <span class="n">list_of_angles</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">combine_composite_gates</span> <span class="o">=</span> <span class="n">CompositeGate</span><span class="p">(</span>
+            <span class="s2">&quot;multiplex&quot;</span> <span class="o">+</span> <span class="n">local_num_qubits</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(),</span> <span class="p">[],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="c1"># recursive step on half the angles fulfilling the above assumption</span>
+        <span class="n">combine_composite_gates</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">bottom_gate</span><span class="p">,</span> <span class="n">bottom_qubit_index</span><span class="p">,</span>
+                            <span class="n">list_of_angles</span><span class="p">[</span><span class="mi">0</span><span class="p">:(</span><span class="n">list_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]))</span>
+
+        <span class="c1"># combine_composite_gates.cx(control_qubit,target_qubit) -&gt; does not</span>
+        <span class="c1"># work as expected because checks circuit</span>
+        <span class="c1"># so attach CNOT as follows, thereby flipping the LSB qubit</span>
+        <span class="n">combine_composite_gates</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">(</span><span class="n">control_qubit</span><span class="p">,</span> <span class="n">target_qubit</span><span class="p">))</span>
+
+        <span class="c1"># implement extra efficiency from the paper of cancelling adjacent</span>
+        <span class="c1"># CNOTs (by leaving out last CNOT and reversing (NOT inverting) the</span>
+        <span class="c1"># second lower-level multiplex)</span>
+        <span class="n">sub_gate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span>
+            <span class="n">bottom_gate</span><span class="p">,</span> <span class="n">bottom_qubit_index</span><span class="p">,</span> <span class="n">list_of_angles</span><span class="p">[(</span><span class="n">list_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):])</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_gate</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="n">combine_composite_gates</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">sub_gate</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">combine_composite_gates</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">sub_gate</span><span class="p">)</span>
+
+        <span class="c1"># outer multiplex keeps final CNOT, because no adjacent CNOT to cancel</span>
+        <span class="c1"># with</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">==</span> <span class="n">local_num_qubits</span> <span class="o">+</span> <span class="n">bottom_qubit_index</span><span class="p">:</span>
+            <span class="n">combine_composite_gates</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">(</span><span class="n">control_qubit</span><span class="p">,</span>
+                                                     <span class="n">target_qubit</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">combine_composite_gates</span>
+
+<div class="viewcode-block" id="InitializeGate.chop_num"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.chop_num">[Doku]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">chop_num</span><span class="p">(</span><span class="n">numb</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set very small numbers (as defined by global variable _EPS) to zero.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">numb</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_EPS</span> <span class="k">else</span> <span class="n">numb</span></div></div>
+
+
+<span class="c1"># ###############################################################</span>
+<span class="c1"># Add needed functionality to other classes (it feels</span>
+<span class="c1"># weird following the QISKit convention of adding functionality to other</span>
+<span class="c1"># classes like this ;),</span>
+<span class="c1">#  TODO: multiple inheritance might be better?)</span>
+
+
+<span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reverse (recursively) the sub-gates of this CompositeGate. Note this does</span>
+<span class="sd">    not invert the gates!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">new_data</span>
+
+    <span class="c1"># not just a high-level reverse:</span>
+    <span class="c1"># self.data = [gate for gate in reversed(self.data)]</span>
+
+    <span class="k">return</span> <span class="bp">self</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span>
+
+
+<span class="k">def</span> <span class="nf">optimize_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove Zero rotations and Double CNOTS.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">remove_zero_rotations</span><span class="p">()</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_double_cnots_once</span><span class="p">():</span>
+        <span class="k">pass</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">optimize_gates</span> <span class="o">=</span> <span class="n">optimize_gates</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">optimize_gates</span> <span class="o">=</span> <span class="n">optimize_gates</span>
+
+
+<span class="k">def</span> <span class="nf">remove_zero_rotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove Zero Rotations by looking (recursively) at rotation gates at the</span>
+<span class="sd">    leaf ends.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Removed at least one zero rotation.</span>
+    <span class="n">zero_rotation_removed</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="n">zero_rotation_removed</span> <span class="o">|=</span> <span class="n">gate</span><span class="o">.</span><span class="n">remove_zero_rotations</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">gate</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">((</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">Gate</span><span class="p">))</span> <span class="ow">or</span>
+                    <span class="p">(</span><span class="ow">not</span> <span class="p">(</span><span class="n">gate</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;rz&quot;</span> <span class="ow">or</span> <span class="n">gate</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ry&quot;</span> <span class="ow">or</span>
+                          <span class="n">gate</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;rx&quot;</span><span class="p">)</span> <span class="ow">or</span>
+                     <span class="p">(</span><span class="n">InitializeGate</span><span class="o">.</span><span class="n">chop_num</span><span class="p">(</span><span class="n">gate</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))):</span>
+                <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">zero_rotation_removed</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">new_data</span>
+
+    <span class="k">return</span> <span class="n">zero_rotation_removed</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">remove_zero_rotations</span> <span class="o">=</span> <span class="n">remove_zero_rotations</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">remove_zero_rotations</span> <span class="o">=</span> <span class="n">remove_zero_rotations</span>
+
+
+<span class="k">def</span> <span class="nf">number_atomic_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Count the number of leaf gates. &quot;&quot;&quot;</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">gate</span><span class="o">.</span><span class="n">number_atomic_gates</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">Gate</span><span class="p">):</span>
+                <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">num</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">number_atomic_gates</span> <span class="o">=</span> <span class="n">number_atomic_gates</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">number_atomic_gates</span> <span class="o">=</span> <span class="n">number_atomic_gates</span>
+
+
+<span class="k">def</span> <span class="nf">remove_double_cnots_once</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove Double CNOTS paying attention that gates may be neighbours across</span>
+<span class="sd">    Composite Gate boundaries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_high_level_gates</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">num_high_level_gates</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num_high_level_gates</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remove_double_cnots_once</span><span class="p">()</span>
+
+    <span class="c1"># Removed at least one double cnot.</span>
+    <span class="n">double_cnot_removed</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># last gate might be composite</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">num_high_level_gates</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
+        <span class="n">double_cnot_removed</span> <span class="o">=</span> \
+            <span class="n">double_cnot_removed</span> <span class="ow">or</span>\
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">num_high_level_gates</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remove_double_cnots_once</span><span class="p">()</span>
+
+    <span class="c1"># don&#39;t start with last gate, using reversed so that can del on the go</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_high_level_gates</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="n">double_cnot_removed</span> <span class="o">=</span>\
+                <span class="n">double_cnot_removed</span> \
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">remove_double_cnots_once</span><span class="p">()</span>
+            <span class="n">left_gate_host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">last_atomic_gate_host</span><span class="p">()</span>
+            <span class="n">left_gate_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="c1"># TODO: consider adding if semantics needed:</span>
+            <span class="c1"># to remove empty composite gates</span>
+            <span class="c1"># if left_gate_host == None: del self.data[i]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">left_gate_host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+            <span class="n">left_gate_index</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="k">if</span> <span class="p">((</span><span class="n">left_gate_host</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="n">left_gate_host</span><span class="p">[</span><span class="n">left_gate_index</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cx&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
+                <span class="n">right_gate_host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">first_atomic_gate_host</span><span class="p">()</span>
+                <span class="n">right_gate_index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">right_gate_host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+                <span class="n">right_gate_index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">right_gate_host</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> \
+                    <span class="ow">and</span> <span class="n">right_gate_host</span><span class="p">[</span><span class="n">right_gate_index</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cx&quot;</span> \
+                    <span class="ow">and</span> <span class="p">(</span><span class="n">left_gate_host</span><span class="p">[</span><span class="n">left_gate_index</span><span class="p">]</span><span class="o">.</span><span class="n">arg</span> <span class="o">==</span>
+                         <span class="n">right_gate_host</span><span class="p">[</span><span class="n">right_gate_index</span><span class="p">]</span><span class="o">.</span><span class="n">arg</span><span class="p">):</span>
+                <span class="k">del</span> <span class="n">right_gate_host</span><span class="p">[</span><span class="n">right_gate_index</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">left_gate_host</span><span class="p">[</span><span class="n">left_gate_index</span><span class="p">]</span>
+                <span class="n">double_cnot_removed</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">double_cnot_removed</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">remove_double_cnots_once</span> <span class="o">=</span> <span class="n">remove_double_cnots_once</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">remove_double_cnots_once</span> <span class="o">=</span> <span class="n">remove_double_cnots_once</span>
+
+
+<span class="k">def</span> <span class="nf">first_atomic_gate_host</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the host list of the leaf gate on the left edge.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">first_atomic_gate_host</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">first_atomic_gate_host</span> <span class="o">=</span> <span class="n">first_atomic_gate_host</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">first_atomic_gate_host</span> <span class="o">=</span> <span class="n">first_atomic_gate_host</span>
+
+
+<span class="k">def</span> <span class="nf">last_atomic_gate_host</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the host list of the leaf gate on the right edge.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">last_atomic_gate_host</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">last_atomic_gate_host</span> <span class="o">=</span> <span class="n">last_atomic_gate_host</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">last_atomic_gate_host</span> <span class="o">=</span> <span class="n">last_atomic_gate_host</span>
+
+
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply initialize to circuit.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_dups</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># TODO: make initialize an Instruction, and insert reset</span>
+        <span class="c1"># TODO: avoid explicit reset if compiler determines a |0&gt; state</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">InitializeGate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">initialize</span> <span class="o">=</span> <span class="n">initialize</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">initialize</span> <span class="o">=</span> <span class="n">initialize</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.local.statevector_simulator_cpp &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit.backends.local.statevector_simulator_cpp &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,6 +37,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/backends/local/statevector_simulator_cpp.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/backends/local/statevector_simulator_cpp.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/backends/local/statevector_simulator_cpp.html">japanese</a>
     </div>
 </div>
@@ -55,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -136,20 +137,19 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
 
-<div class="viewcode-block" id="StatevectorSimulatorCpp.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorCpp.html#qiskit.backends.local.StatevectorSimulatorCpp.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run a QuantumJob on the the backend.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">q_job</span><span class="p">)</span></div>
+<div class="viewcode-block" id="StatevectorSimulatorCpp.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorCpp.html#qiskit.backends.local.StatevectorSimulatorCpp.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a qobj on the the backend.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run a QuantumJob on the backend.&quot;&quot;&quot;</span>
-        <span class="n">qobj</span> <span class="o">=</span> <span class="n">q_job</span><span class="o">.</span><span class="n">qobj</span>
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a Qobj on the backend.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
         <span class="n">final_state_key</span> <span class="o">=</span> <span class="mi">32767</span>  <span class="c1"># Internal key for final state snapshot</span>
         <span class="c1"># Add final snapshots to circuits</span>
         <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]:</span>
             <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;compiled_circuit&#39;</span><span class="p">][</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">final_state_key</span><span class="p">]})</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_run_job</span><span class="p">(</span><span class="n">q_job</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_run_job</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
         <span class="c1"># Extract final state snapshot and move to &#39;statevector&#39; data field</span>
         <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]:</span>
             <span class="n">snapshots</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;snapshots&#39;</span><span class="p">]</span>
@@ -208,14 +208,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

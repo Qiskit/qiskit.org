@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.local.localjob &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.backends.local.localjob &#8212; QISKit SDK 0.5.5 ドキュメント</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -38,6 +38,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/backends/local/localjob.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/backends/local/localjob.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/backends/local/localjob.html">japanese</a>
     </div>
 </div>
@@ -56,7 +57,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -112,7 +113,7 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.backends</span> <span class="k">import</span> <span class="n">BaseJob</span>
-<span class="kn">from</span> <span class="nn">qiskit.backends.basejob</span> <span class="k">import</span> <span class="n">JobStatus</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends</span> <span class="k">import</span> <span class="n">JobStatus</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -130,11 +131,11 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">_executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_q_job</span> <span class="o">=</span> <span class="n">q_job</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_backend_name</span> <span class="o">=</span> <span class="n">q_job</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">q_job</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span> <span class="o">=</span> <span class="n">qobj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_backend_name</span> <span class="o">=</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;backend_name&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LocalJob.result"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.LocalJob.html#qiskit.backends.local.LocalJob.result">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># pylint: disable=arguments-differ</span>
@@ -241,14 +242,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
+      最終更新: 2018/07/03
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

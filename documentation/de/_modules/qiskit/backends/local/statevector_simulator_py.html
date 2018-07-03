@@ -1,0 +1,238 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.local.statevector_simulator_py &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/backends/local/statevector_simulator_py.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/backends/local/statevector_simulator_py.html">german</a> /
+        <a href="/documentation/ja/_modules/qiskit/backends/local/statevector_simulator_py.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../../../../index.html">Inhalt</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDK Referenz</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Quellcode für qiskit.backends.local.statevector_simulator_py</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="c1"># pylint: disable=invalid-name</span>
+
+<span class="sd">&quot;&quot;&quot;Contains a (slow) python statevector simulator.</span>
+
+<span class="sd">It simulates the statevector through a quantum circuit. It is exponential in</span>
+<span class="sd">the number of qubits.</span>
+
+<span class="sd">We advise using the c++ simulator or online simulator for larger size systems.</span>
+
+<span class="sd">The input is a qobj dictionary and the output is a Result object.</span>
+
+<span class="sd">The input qobj to this simulator has no shots, no measures, no reset, no noise.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">qiskit._result</span> <span class="k">import</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends.local.localjob</span> <span class="k">import</span> <span class="n">LocalJob</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends.local._simulatorerror</span> <span class="k">import</span> <span class="n">SimulatorError</span>
+<span class="kn">from</span> <span class="nn">.qasm_simulator_py</span> <span class="k">import</span> <span class="n">QasmSimulatorPy</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="StatevectorSimulatorPy"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorPy.html#qiskit.backends.local.StatevectorSimulatorPy">[Doku]</a><span class="k">class</span> <span class="nc">StatevectorSimulatorPy</span><span class="p">(</span><span class="n">QasmSimulatorPy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Python statevector simulator.&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULT_CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;local_statevector_simulator_py&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/QISKit/qiskit-core&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A Python statevector simulator for qobj files&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="s1">&#39;all-to-all&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="s1">&#39;u1,u2,u3,cx,id,snapshot&#39;</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<div class="viewcode-block" id="StatevectorSimulatorPy.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.StatevectorSimulatorPy.html#qiskit.backends.local.StatevectorSimulatorPy.run">[Doku]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run qobj asynchronously.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qobj (dict): job description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            LocalJob: derived from BaseJob</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a Qobj on the backend.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+        <span class="n">final_state_key</span> <span class="o">=</span> <span class="mi">32767</span>  <span class="c1"># Internal key for final state snapshot</span>
+        <span class="c1"># Add final snapshots to circuits</span>
+        <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]:</span>
+            <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;compiled_circuit&#39;</span><span class="p">][</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">final_state_key</span><span class="p">]})</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_run_job</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span><span class="o">.</span><span class="n">_result</span>
+        <span class="c1"># Replace backend name with current backend</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;backend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="c1"># Extract final state snapshot and move to &#39;statevector&#39; data field</span>
+        <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]:</span>
+            <span class="n">snapshots</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;snapshots&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">final_state_key</span><span class="p">)</span> <span class="ow">in</span> <span class="n">snapshots</span><span class="p">:</span>
+                <span class="n">final_state_key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">final_state_key</span><span class="p">)</span>
+            <span class="c1"># Pop off final snapshot added above</span>
+            <span class="n">final_state</span> <span class="o">=</span> <span class="n">snapshots</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">final_state_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">final_state</span> <span class="o">=</span> <span class="n">final_state</span><span class="p">[</span><span class="s1">&#39;statevector&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Add final state to results data</span>
+            <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;statevector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_state</span>
+            <span class="c1"># Remove snapshot dict if empty</span>
+            <span class="k">if</span> <span class="n">snapshots</span> <span class="o">==</span> <span class="p">{}:</span>
+                <span class="n">res</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;snapshots&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Semantic validations of the qobj which cannot be done via schemas.</span>
+<span class="sd">        Some of these may later move to backend schemas.</span>
+
+<span class="sd">        1. No shots</span>
+<span class="sd">        2. No measurements in the middle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;statevector simulator only supports 1 shot. &quot;</span>
+                        <span class="s2">&quot;Setting shots=1.&quot;</span><span class="p">)</span>
+            <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;shots&#39;</span> <span class="ow">in</span> <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;statevector simulator only supports 1 shot. &quot;</span>
+                            <span class="s2">&quot;Setting shots=1 for circuit </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+                <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;compiled_circuit&#39;</span><span class="p">][</span><span class="s1">&#39;operations&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="s1">&#39;reset&#39;</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="s2">&quot;In circuit </span><span class="si">{}</span><span class="s2">: statevector simulator does &quot;</span>
+                                         <span class="s2">&quot;not support measure or reset.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]))</span>
+        <span class="k">return</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>

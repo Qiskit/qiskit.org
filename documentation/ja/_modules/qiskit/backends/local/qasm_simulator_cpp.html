@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.local.qasm_simulator_cpp &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.backends.local.qasm_simulator_cpp &#8212; QISKit SDK 0.5.5 ドキュメント</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -38,6 +38,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/backends/local/qasm_simulator_cpp.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/backends/local/qasm_simulator_cpp.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/backends/local/qasm_simulator_cpp.html">japanese</a>
     </div>
 </div>
@@ -56,7 +57,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -170,15 +171,14 @@
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Simulator executable not found (using </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;exe&#39;</span><span class="p">,</span> <span class="s1">&#39;default locations&#39;</span><span class="p">))</span>
 
-<div class="viewcode-block" id="QasmSimulatorCpp.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.QasmSimulatorCpp.html#qiskit.backends.local.QasmSimulatorCpp.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run a QuantumJob on the the backend.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">q_job</span><span class="p">)</span></div>
+<div class="viewcode-block" id="QasmSimulatorCpp.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.QasmSimulatorCpp.html#qiskit.backends.local.QasmSimulatorCpp.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a qobj on the backend.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="n">qobj</span> <span class="o">=</span> <span class="n">q_job</span><span class="o">.</span><span class="n">qobj</span>
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">[</span><span class="s1">&#39;exe&#39;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;shots&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -226,19 +226,18 @@
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Simulator executable not found (using </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;exe&#39;</span><span class="p">,</span> <span class="s1">&#39;default locations&#39;</span><span class="p">))</span>
 
-<div class="viewcode-block" id="CliffordSimulatorCpp.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.CliffordSimulatorCpp.html#qiskit.backends.local.CliffordSimulatorCpp.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run a QuantumJob on the the backend.</span>
+<div class="viewcode-block" id="CliffordSimulatorCpp.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.local.CliffordSimulatorCpp.html#qiskit.backends.local.CliffordSimulatorCpp.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a Qobj on the backend.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            q_job (QuantumJob): QuantumJob object</span>
+<span class="sd">            qobj (dict): job description</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            LocalJob: derived from BaseJob</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">q_job</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">LocalJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="n">qobj</span> <span class="o">=</span> <span class="n">q_job</span><span class="o">.</span><span class="n">qobj</span>
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
         <span class="c1"># set backend to Clifford simulator</span>
         <span class="k">if</span> <span class="s1">&#39;config&#39;</span> <span class="ow">in</span> <span class="n">qobj</span><span class="p">:</span>
@@ -247,7 +246,7 @@
             <span class="n">qobj</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="s1">&#39;clifford&#39;</span><span class="p">}</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">[</span><span class="s1">&#39;exe&#39;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span></div>
@@ -467,14 +466,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
+      最終更新: 2018/07/03
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>

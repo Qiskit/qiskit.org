@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.Result &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>qiskit.Result &#8212; QISKit SDK 0.5.5 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.4',
+        VERSION:     '0.5.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -39,6 +39,7 @@
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_autodoc/qiskit.Result.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.Result.html">german</a> /
         <a href="/documentation/ja/_autodoc/qiskit.Result.html">japanese</a>
     </div>
 </div>
@@ -63,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" accesskey="U">qiskit package</a> &#187;</li> 
       </ul>
@@ -142,14 +143,13 @@
 <h1>qiskit.Result<a class="headerlink" href="#qiskit-result" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="qiskit.Result">
-<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">Result</code><span class="sig-paren">(</span><em>qobj_result</em>, <em>qobj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">qiskit.</code><code class="descname">Result</code><span class="sig-paren">(</span><em>qobj_result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Result Class.</p>
 <p>Class internal properties.</p>
 <p>Methods to process the quantum program after it has been run</p>
 <p>Internal:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qobj</span> <span class="o">=</span>  <span class="p">{</span> <span class="o">--</span> <span class="n">the</span> <span class="n">quantum</span> <span class="nb">object</span> <span class="n">that</span> <span class="n">was</span> <span class="n">complied</span> <span class="o">--</span><span class="p">}</span>
-<span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;job_id&quot;</span><span class="p">:</span> <span class="o">--</span><span class="n">job</span><span class="o">-</span><span class="nb">id</span> <span class="p">(</span><span class="n">string</span><span class="p">),</span>
               <span class="c1">#This string links the result with the job that computes it,</span>
               <span class="c1">#it should be issued by the backend it is run on.</span>
@@ -176,7 +176,7 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code>(qobj_result,&nbsp;qobj)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code>(qobj_result)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.average_data" title="qiskit.Result.average_data"><code class="xref py py-obj docutils literal"><span class="pre">average_data</span></code></a>(name,&nbsp;observable)</td>
@@ -200,7 +200,7 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_names" title="qiskit.Result.get_names"><code class="xref py py-obj docutils literal"><span class="pre">get_names</span></code></a>()</td>
 <td>Get the circuit names of the results.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_qubitpol_vs_xval" title="qiskit.Result.get_qubitpol_vs_xval"><code class="xref py py-obj docutils literal"><span class="pre">get_qubitpol_vs_xval</span></code></a>([xvals_dict])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_qubitpol_vs_xval" title="qiskit.Result.get_qubitpol_vs_xval"><code class="xref py py-obj docutils literal"><span class="pre">get_qubitpol_vs_xval</span></code></a>(nqubits[,&nbsp;xvals_dict])</td>
 <td>Compute the polarization of each qubit for all circuits and pull out each circuits xval into an array.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_ran_qasm" title="qiskit.Result.get_ran_qasm"><code class="xref py py-obj docutils literal"><span class="pre">get_ran_qasm</span></code></a>(name)</td>
@@ -216,7 +216,7 @@
 <td>Get the final statevector of circuit name.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.Result.get_status" title="qiskit.Result.get_status"><code class="xref py py-obj docutils literal"><span class="pre">get_status</span></code></a>()</td>
-<td>Return whole qobj result status.</td>
+<td>Return whole result status.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.Result.get_unitary" title="qiskit.Result.get_unitary"><code class="xref py py-obj docutils literal"><span class="pre">get_unitary</span></code></a>([circuit])</td>
 <td>Get the final unitary of circuit name.</td>
@@ -398,7 +398,7 @@ error occurred while fetching the data.</li>
 
 <dl class="method">
 <dt id="qiskit.Result.get_qubitpol_vs_xval">
-<code class="descname">get_qubitpol_vs_xval</code><span class="sig-paren">(</span><em>xvals_dict=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_qubitpol_vs_xval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_qubitpol_vs_xval" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_qubitpol_vs_xval</code><span class="sig-paren">(</span><em>nqubits</em>, <em>xvals_dict=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_qubitpol_vs_xval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_qubitpol_vs_xval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the polarization of each qubit for all circuits and pull out each circuits
 xval into an array. Assumes that each circuit has the same number of qubits and that
 all qubits are measured.</p>
@@ -407,6 +407,7 @@ all qubits are measured.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nqubits</strong> (<em>int</em>) – number of qubits</li>
 <li><strong>xvals_dict</strong> (<em>dict</em>) – xvals for each circuit {‘circuitname1’: xval1,…}. If this</li>
 <li><strong>none then the xvals list is just left as an array of zeros</strong> (<em>is</em>) – </li>
 </ul>
@@ -525,7 +526,7 @@ that one.</td>
 <dl class="method">
 <dt id="qiskit.Result.get_status">
 <code class="descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_result.html#Result.get_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.Result.get_status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return whole qobj result status.</p>
+<dd><p>Return whole result status.</p>
 </dd></dl>
 
 <dl class="method">
@@ -583,14 +584,14 @@ that one.</td>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
+      Last updated on 2018/07/03.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

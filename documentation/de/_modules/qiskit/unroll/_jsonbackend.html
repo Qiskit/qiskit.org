@@ -1,0 +1,444 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.unroll._jsonbackend &#8212; QISKit SDK 0.5.5 Dokumentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.5.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../../../genindex.html" />
+    <link rel="search" title="Suche" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/unroll/_jsonbackend.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/unroll/_jsonbackend.html">german</a> /
+        <a href="/documentation/ja/_modules/qiskit/unroll/_jsonbackend.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="Stichwortverzeichnis"
+             accesskey="I">Index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+
+  <h3><a href="../../../index.html">Inhalt</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Entwickler Dokumentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDK Referenz</a></li>
+</ul>
+
+<p class="spacer"/>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Los" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Quellcode für qiskit.unroll._jsonbackend</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="sd">&quot;&quot;&quot;Backend for the unroller that composes qasm into json file.</span>
+
+<span class="sd">The input is a AST and a basis set and returns a json memory object::</span>
+
+<span class="sd">    {</span>
+<span class="sd">     &quot;header&quot;: {</span>
+<span class="sd">     &quot;number_of_qubits&quot;: 2, // int</span>
+<span class="sd">     &quot;number_of_clbits&quot;: 2, // int</span>
+<span class="sd">     &quot;qubit_labels&quot;: [[&quot;q&quot;, 0], [&quot;v&quot;, 0]], // list[list[string, int]]</span>
+<span class="sd">     &quot;clbit_labels&quot;: [[&quot;c&quot;, 2]], // list[list[string, int]]</span>
+<span class="sd">     }</span>
+<span class="sd">     &quot;operations&quot;: // list[map]</span>
+<span class="sd">        [</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;name&quot;: , // required -- string</span>
+<span class="sd">                &quot;params&quot;: , // optional -- list[double]</span>
+<span class="sd">                &quot;texparams&quot;: , // optional -- list[string]</span>
+<span class="sd">                &quot;qubits&quot;: , // optional -- list[int]</span>
+<span class="sd">                &quot;cbits&quot;: , //optional -- list[int]</span>
+<span class="sd">                &quot;conditional&quot;:  // optional -- map</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;type&quot;: &quot;equals&quot;, // string</span>
+<span class="sd">                        &quot;mask&quot;: &quot;0xHexadecimalString&quot;, // big int</span>
+<span class="sd">                        &quot;val&quot;:  &quot;0xHexadecimalString&quot;, // big int</span>
+<span class="sd">                    }</span>
+<span class="sd">            },</span>
+<span class="sd">        ]</span>
+<span class="sd">    }</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">qiskit.unroll</span> <span class="k">import</span> <span class="n">BackendError</span>
+<span class="kn">from</span> <span class="nn">qiskit.unroll</span> <span class="k">import</span> <span class="n">UnrollerBackend</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
+
+
+<div class="viewcode-block" id="JsonBackend"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend">[Doku]</a><span class="k">class</span> <span class="nc">JsonBackend</span><span class="p">(</span><span class="n">UnrollerBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Backend for the unroller that makes a Json quantum circuit.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JsonBackend.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.__init__">[Doku]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setup this backend.</span>
+
+<span class="sd">        basis is a list of operation name strings.</span>
+<span class="sd">        The default basis is [&quot;U&quot;, &quot;CX&quot;].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;number_of_qubits&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;number_of_clbits&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;qubit_labels&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;clbit_labels&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order_internal</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gates</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># default, unroll to U, CX</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printed_gates</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="JsonBackend.set_basis"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.set_basis">[Doku]</a>    <span class="k">def</span> <span class="nf">set_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Declare the set of user-defined gates to emit.</span>
+
+<span class="sd">        basis is a list of operation name strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span></div>
+
+<div class="viewcode-block" id="JsonBackend.version"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.version">[Doku]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Print the version string.</span>
+
+<span class="sd">        v is a version number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="JsonBackend.new_qreg"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.new_qreg">[Doku]</a>    <span class="k">def</span> <span class="nf">new_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new quantum register.</span>
+
+<span class="sd">        name = name of the register</span>
+<span class="sd">        sz = size of the register</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;invalid qreg size&quot;</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">+</span> <span class="n">j</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;number_of_qubits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;qubit_labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order</span></div>
+
+<div class="viewcode-block" id="JsonBackend.new_creg"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.new_creg">[Doku]</a>    <span class="k">def</span> <span class="nf">new_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new classical register.</span>
+
+<span class="sd">        name = name of the register</span>
+<span class="sd">        sz = size of the register</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;invalid creg size&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order_internal</span><span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span> <span class="o">+</span> <span class="n">j</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;number_of_clbits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;clbit_labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order</span></div>
+
+<div class="viewcode-block" id="JsonBackend.define_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.define_gate">[Doku]</a>    <span class="k">def</span> <span class="nf">define_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">gatedata</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Define a new quantum gate.</span>
+
+<span class="sd">        name is a string.</span>
+<span class="sd">        gatedata is the AST node for the gate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">gatedata</span></div>
+
+<div class="viewcode-block" id="JsonBackend.u"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.u">[Doku]</a>    <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fundamental single-qubit gate.</span>
+
+<span class="sd">        arg is 3-tuple of Node expression objects.</span>
+<span class="sd">        qubit is (regname, idx) tuple.</span>
+<span class="sd">        nested_scope is a list of dictionaries mapping expression variables</span>
+<span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;U&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
+            <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s2">&quot;U&quot;</span><span class="p">,</span>
+                <span class="c1"># TODO: keep these real for now, until a later time</span>
+                <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">)),</span>
+                           <span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">)),</span>
+                           <span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">))],</span>
+                <span class="s1">&#39;texparams&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="n">nested_scope</span><span class="p">),</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="n">nested_scope</span><span class="p">),</span>
+                              <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="n">nested_scope</span><span class="p">)],</span>
+                <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubit_indices</span>
+            <span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_condition</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_add_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check for a condition (self.creg) and add fields if necessary.</span>
+
+<span class="sd">        Fields are added to the last operation in the circuit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">cbit</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order_internal</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">cbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">creg</span><span class="p">:</span>
+                    <span class="n">mask</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">index</span><span class="p">)</span>
+                <span class="c1"># Would be nicer to zero pad the mask, but we</span>
+                <span class="c1"># need to know the total number of cbits.</span>
+                <span class="c1"># format_spec = &quot;{0:#0{%d}X}&quot; % number_of_clbits</span>
+                <span class="c1"># format_spec.format(mask)</span>
+                <span class="n">conditional</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s2">&quot;equals&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;mask&#39;</span><span class="p">:</span> <span class="s2">&quot;0x</span><span class="si">%X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mask</span><span class="p">,</span>
+                    <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="s2">&quot;0x</span><span class="si">%X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cval</span>
+                <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;conditional&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">conditional</span>
+
+<div class="viewcode-block" id="JsonBackend.cx"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.cx">[Doku]</a>    <span class="k">def</span> <span class="nf">cx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fundamental two-qubit gate.</span>
+
+<span class="sd">        qubit0 is (regname, idx) tuple for the control qubit.</span>
+<span class="sd">        qubit1 is (regname, idx) tuple for the target qubit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;CX&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CX&quot;</span><span class="p">)</span>
+            <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit0</span><span class="p">),</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit1</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;CX&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubit_indices</span><span class="p">,</span>
+            <span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_condition</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JsonBackend.measure"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.measure">[Doku]</a>    <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">bit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Measurement operation.</span>
+
+<span class="sd">        qubit is (regname, idx) tuple for the input qubit.</span>
+<span class="sd">        bit is (regname, idx) tuple for the output bit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;measure&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">)</span>
+        <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit</span><span class="p">)]</span>
+        <span class="n">clbit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cbit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">bit</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;measure&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubit_indices</span><span class="p">,</span>
+            <span class="s1">&#39;clbits&#39;</span><span class="p">:</span> <span class="n">clbit_indices</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_condition</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JsonBackend.barrier"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.barrier">[Doku]</a>    <span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubitlists</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Barrier instruction.</span>
+
+<span class="sd">        qubitlists is a list of lists of (regname, idx) tuples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;barrier&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">)</span>
+            <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">qubitlist</span> <span class="ow">in</span> <span class="n">qubitlists</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">qubits</span> <span class="ow">in</span> <span class="n">qubitlist</span><span class="p">:</span>
+                    <span class="n">qubit_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubits</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;barrier&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubit_indices</span><span class="p">,</span>
+            <span class="p">})</span></div>
+            <span class="c1"># no conditions on barrier, even when it appears</span>
+            <span class="c1"># in body of conditioned gate</span>
+
+<div class="viewcode-block" id="JsonBackend.reset"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.reset">[Doku]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset instruction.</span>
+
+<span class="sd">        qubit is a (regname, idx) tuple.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;reset&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;reset&quot;</span><span class="p">)</span>
+        <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubit_indices</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_condition</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JsonBackend.set_condition"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.set_condition">[Doku]</a>    <span class="k">def</span> <span class="nf">set_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">creg</span><span class="p">,</span> <span class="n">cval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attach a current condition.</span>
+
+<span class="sd">        creg is a name string.</span>
+<span class="sd">        cval is the integer value for the test.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="n">creg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="n">cval</span></div>
+
+<div class="viewcode-block" id="JsonBackend.drop_condition"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.drop_condition">[Doku]</a>    <span class="k">def</span> <span class="nf">drop_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Drop the current condition.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cval</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="JsonBackend.start_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.start_gate">[Doku]</a>    <span class="k">def</span> <span class="nf">start_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Begin a custom gate.</span>
+
+<span class="sd">        name is name string.</span>
+<span class="sd">        args is list of Node expression objects.</span>
+<span class="sd">        qubits is list of (regname, idx) tuples.</span>
+<span class="sd">        nested_scope is a list of dictionaries mapping expression variables</span>
+<span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> \
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">BackendError</span><span class="p">(</span><span class="s2">&quot;opaque gate </span><span class="si">%s</span><span class="s2"> not in basis&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_order_internal</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="c1"># TODO: keep these real for now, until a later time</span>
+                <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nested_scope</span><span class="p">)),</span>
+                                   <span class="n">args</span><span class="p">)),</span>
+                <span class="s1">&#39;texparams&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+                                      <span class="n">x</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                              <span class="n">nested_scope</span><span class="o">=</span><span class="n">nested_scope</span><span class="p">),</span>
+                                      <span class="n">args</span><span class="p">)),</span>
+                <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubit_indices</span><span class="p">,</span>
+            <span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_condition</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JsonBackend.end_gate"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.end_gate">[Doku]</a>    <span class="k">def</span> <span class="nf">end_gate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">nested_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;End a custom gate.</span>
+
+<span class="sd">        name is name string.</span>
+<span class="sd">        args is list of Node expression objects.</span>
+<span class="sd">        qubits is list of (regname, idx) tuples.</span>
+<span class="sd">        nested_scope is a list of dictionaries mapping expression variables</span>
+<span class="sd">        to Node expression objects in order of increasing nesting depth.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">in_gate</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listen</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="JsonBackend.get_output"><a class="viewcode-back" href="../../../_autodoc/qiskit.unroll.JsonBackend.html#qiskit.unroll.JsonBackend.get_output">[Doku]</a>    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the generated circuit.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_circuit_valid</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Invalid circuit! Please check the syntax of your circuit.&quot;</span>
+                              <span class="s2">&quot;Has the Qasm parsing been called?. e.g: unroller.execute().&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span></div>
+
+    <span class="k">def</span> <span class="nf">_is_circuit_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the circuit object is a valid one or not.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="Stichwortverzeichnis"
+             >Index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python-Modulindex"
+             >Module</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 Dokumentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Modul-Quellcode</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM Research.
+      Zuletzt aktualisiert am 2018/07/03.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+    </div>
+  </body>
+</html>
