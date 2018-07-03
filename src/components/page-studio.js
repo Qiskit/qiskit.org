@@ -32,7 +32,8 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           --app-section-color: #222222;
         }
 
-        .feature-image .image img {
+        .feature-image .image img,
+        .feature-image .image video {
           max-width: 100%;
         }
 
@@ -52,7 +53,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
 
           .feature-image .description {
             margin-bottom: 0;
-            flex: 2;
+            flex: 5;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -67,7 +68,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           }
 
           .feature-image .image {
-            flex: 3;
+            flex: 6;
           }
         }
       </style>
@@ -106,7 +107,10 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.autocompleteDescription')}</p>
           </div>
           <div class="image">
-            <img src="images/studio/qiskit-studio-autocomplete.gif" alt="${i18next.t('pages.studio.autocompleteAltImage')}">
+            <video autoplay loop muted playsinline disableRemotePlayback>
+              <source src="videos/qiskit-studio-autocomplete.webm" type="video/webm">
+              <source src="videos/qiskit-studio-autocomplete.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </section>
@@ -118,7 +122,10 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.documentationDescription')}</p>
           </div>
           <div class="image">
-            <img src="images/studio/qiskit-studio-documentation.gif" alt="${i18next.t('pages.studio.documentationAltImage')}">
+            <video autoplay loop muted playsinline disableRemotePlayback>
+              <source src="videos/qiskit-studio-documentation.webm" type="video/webm">
+              <source src="videos/qiskit-studio-documentation.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </section>
@@ -130,7 +137,10 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.linterDescription')}</p>
           </div>
           <div class="image">
-            <img src="images/studio/qiskit-studio-linter.gif" alt="${i18next.t('pages.studio.linterAltImage')}">
+            <video autoplay loop muted playsinline disableRemotePlayback>
+              <source src="videos/qiskit-studio-linter.webm" type="video/webm">
+              <source src="videos/qiskit-studio-linter.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </section>
@@ -142,7 +152,10 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.snippetsDescription')}</p>
           </div>
           <div class="image">
-            <img src="images/studio/qiskit-studio-snippet.gif" alt="${i18next.t('pages.studio.snippetsAltImage')}">
+            <video autoplay loop muted playsinline disableRemotePlayback>
+              <source src="videos/qiskit-studio-snippet.webm" type="video/webm">
+              <source src="videos/qiskit-studio-snippet.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </section>
@@ -154,7 +167,10 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.integratedToolsDescription')}</p>
           </div>
           <div class="image">
-            <img src="images/studio/qiskit-studio-ibmq-tools.gif" alt="${i18next.t('pages.studio.integratedToolsAltImage')}">
+            <video autoplay loop muted playsinline disableRemotePlayback>
+              <source src="videos/qiskit-studio-integrated-tools.webm" type="video/webm">
+              <source src="videos/qiskit-studio-integrated-tools.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </section>
