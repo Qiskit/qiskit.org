@@ -151,6 +151,10 @@ class PageHome extends localize(i18next)(PageViewElement) {
           display: inline-flex;
         }
 
+        .social-networks-list li a svg {
+          fill: var(--app-light-primary-color);
+        }
+
         .social-networks-list li .social-network {
           display: inline-flex;
           align-items: center;

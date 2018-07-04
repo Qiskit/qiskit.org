@@ -15,10 +15,6 @@ export const SharedStyles = html`<style>
     text-decoration: none;
   }
 
-  a svg {
-    fill: var(--app-light-primary-color);
-  }
-
   a:hover {
     text-decoration: underline;
   }

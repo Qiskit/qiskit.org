@@ -17,18 +17,10 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
   <style>
     :host {
       --ibmq-font-family-base: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-      --primary-color: #3d70b2;
-      --light-primary-color: #5596e6;
-      --dark-primary-color: #234066;
-      --error-color: #e71d32;
-      --disabled-text-color: #8c9ba5;
-    }
-
-    :host {
-      display: inline-block;
-
-      --ibmq-button-focus-border-color: #f5f7fa;
-      --ibmq-button-focus-color: #ffffff;
+      --ibmq-primary-color: #3d70b2;
+      --ibmq-light-primary-color: #5596e6;
+      --ibmq-dark-primary-color: #234066;
+      --ibmq-primary-text-color: #ffffff;
     }
 
     :host {
@@ -40,26 +32,35 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       border: 0;
     }
 
+    [part] ::slotted(svg) {
+      position: relative;
+      vertical-align: middle;
+      top: -1px;
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      [part] ::slotted(svg) {
+        top: 0;
+      }
+    }
+
     :host {
       font-family: var(--ibmq-font-family-base);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      letter-spacing: .5px;
+      letter-spacing: 0;
       cursor: pointer;
-      display: -webkit-inline-box;
       display: -ms-inline-flexbox;
       display: inline-flex;
-      -webkit-box-align: center;
       -ms-flex-align: center;
-      align-items: center;
-      -webkit-box-pack: center;
+          align-items: center;
       -ms-flex-pack: center;
-      justify-content: center;
+          justify-content: center;
       -ms-flex-negative: 0;
-      flex-shrink: 0;
+          flex-shrink: 0;
       font-size: 0.875rem;
-      font-weight: 700;
-      height: var(--ibmq-button-height, 2.5rem);
+      font-weight: 600;
+      height: 2.5rem;
       padding: 0 1rem;
       border-radius: 0;
       text-align: center;
@@ -75,35 +76,46 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       opacity: .5;
     }
 
+    [part] ::slotted(svg) {
+      width: 1rem;
+      height: 1rem;
+      transition-duration: 250ms;
+      transition-timing-function: ease-in;
+    }
+
     /*
      * Selector for applying primary button styles.
      */
 
     :host([theme~="primary"]) {
-      background-color: var(--ibmq-button-primary-background-color, var(--primary-color));
+      background-color: var(--ibmq-button-primary-background-color, var(--ibmq-primary-color));
       border-width: 2px;
       border-style: solid;
       border-color: transparent;
-      color: var(--ibmq-button-primary-color, var(--ibmq-button-focus-color));
+      color: var(--ibmq-button-primary-color, var(--ibmq-primary-text-color));
     }
 
     :host([theme~="primary"][focused]),
     :host([theme~="primary"]:hover) {
-      background-color: var(--ibmq-button-primary-focus-background-color, var(--light-primary-color));
+      background-color: var(--ibmq-button-primary-focused-background-color, var(--ibmq-light-primary-color));
     }
 
     :host([theme~="primary"][focused]) {
-      border: 2px solid var(--ibmq-button-primary-focus-border-color, var(--ibmq-button-focus-border-color));
-      outline: 2px solid var(--ibmq-button-primary-focus-background-color, var(--light-primary-color));
+      border: 2px solid #f5f7fa;
+      outline: 2px solid var(--ibmq-button-primary-focused-background-color, var(--ibmq-light-primary-color));
     }
 
-    :host([theme~="primary"][disabled][focused]),
-    :host([theme~="primary"][disabled]:hover) {
-      background-color: var(--ibmq-button-primary-background-color, var(--primary-color));
+    :host([theme~="primary"][disabled]:hover),
+    :host([theme~="primary"][disabled][focused]) {
+      background-color: var(--ibmq-button-primary-background-color, var(--ibmq-primary-color));
     }
 
     :host([theme~="primary"][active]) {
-      background-color: var(--ibmq-button-primary-active-background-color, var(--dark-primary-color));
+      background-color: var(--ibmq-button-primary-active-background-color, var(--ibmq-dark-primary-color));
+    }
+
+    :host([theme~="primary"]) ::slotted(svg) {
+      fill: var(--ibmq-button-primary-color, var(--ibmq-primary-text-color));
     }
 
     /*
@@ -114,63 +126,83 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       background-color: transparent;
       border-width: 2px;
       border-style: solid;
-      border-color: var(--ibmq-button-secondary-color, var(--primary-color));
-      color: var(--ibmq-button-secondary-color, var(--primary-color));
+      border-color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
+      color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
     :host([theme~="secondary"][focused]),
     :host([theme~="secondary"]:hover) {
-      background-color: var(--ibmq-button-secondary-color, var(--primary-color));
-      color: var(--ibmq-button-secondary-focus-color, var(--ibmq-button-focus-color));
+      background-color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
     :host([theme~="secondary"][focused]) {
-      border: 2px solid var(--ibmq-button-secondary-focus-border-color, var(--ibmq-button-focus-border-color));
-      outline: 2px solid var(--ibmq-button-secondary-color, var(--primary-color));
+      border: 2px solid #f5f7fa;
+      outline: 2px solid var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
-    :host([theme~="secondary"][disabled][focused]),
-    :host([theme~="secondary"][disabled]:hover) {
+    :host([theme~="secondary"][disabled]:hover),
+    :host([theme~="secondary"][disabled][focused]) {
       background-color: transparent;
-      color: var(--ibmq-button-secondary-color, var(--primary-color));
     }
 
     :host([theme~="secondary"][active]) {
       background-color: transparent;
-      color: var(--ibmq-button-secondary-color, var(--primary-color));
+    }
+
+    :host([theme~="secondary"]) ::slotted(svg) {
+      fill: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
+    }
+
+    :host([theme~="secondary"]:hover),
+    :host([theme~="secondary"][focused]) {
+      color: var(--ibmq-button-secondary-focus-color, var(--ibmq-primary-text-color));
+    }
+
+    :host([theme~="secondary"][active]) {
+      color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
+    }
+
+    :host([theme~="secondary"]:hover) ::slotted(svg),
+    :host([theme~="secondary"][focused]) ::slotted(svg) {
+      fill: var(--ibmq-button-secondary-focus-color, var(--ibmq-primary-text-color));
+    }
+
+    :host([theme~="secondary"]:hover[disabled]),
+    :host([theme~="secondary"][focused][disabled]) {
+      color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
+    }
+
+    :host([theme~="secondary"][active]) ::slotted(svg) {
+      fill: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
     /*
-     * Selector for applying ghost button styles.
+     * Prefix & suffix
      */
 
-    :host([theme~="ghost"]) {
-      background-color: transparent;
-      border-width: 2px;
-      border-style: solid;
-      border-color: transparent;
-      color: var(--ibmq-button-ghost-color, var(--primary-color));
+    [part="prefix"] {
+      margin-left: -0.5em;
+      margin-right: 0.5em;
     }
 
-    :host([theme~="ghost"][focused]),
-    :host([theme~="ghost"]:hover) {
-      background-color: var(--ibmq-button-ghost-color, var(--primary-color));
-      color: var(--ibmq-button-ghost-focus-color, var(--ibmq-button-focus-color));
+    [part="suffix"] {
+      margin-left: 0.5em;
+      margin-right: -0.5em;
     }
 
-    :host([theme~="ghost"][focused]) {
-      border: 2px solid var(--ibmq-button-ghost-focus-border-color, var(--ibmq-button-focus-border-color));
-      outline: 2px solid var(--ibmq-button-ghost-color, var(--primary-color));
+    /*
+     * Small
+     */
+
+    :host([theme~="small"]) {
+      letter-spacing: 0;
+      height: 2rem;
+      padding: 0 0.5rem;
     }
 
-    :host([theme~="ghost"][disabled][focused]),
-    :host([theme~="ghost"][disabled]:hover) {
-      background-color: transparent;
-      color: var(--ibmq-button-ghost-color, var(--primary-color));
-    }
-
-    :host([theme~="ghost"][active]) {
-      background-color: transparent;
+    :host([theme~="small"]) ::slotted(svg) {
+      width: .8rem;
+      height: .8rem;
     }
   </style>
 </template>
