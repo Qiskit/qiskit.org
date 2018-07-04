@@ -80,6 +80,7 @@ export const HeaderStyles = html`<style>
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
   }
 
   header .badges > * + * {
@@ -110,6 +111,10 @@ export const HeaderStyles = html`<style>
       height: 200px;
       margin-bottom: 0;
       margin-right: 3em;
+    }
+
+    header .badges {
+      justify-content: flex-start;
     }
   }
 </style>`;
