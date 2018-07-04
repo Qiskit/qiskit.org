@@ -18,6 +18,8 @@ import {
   HeaderStyles,
   SectionStyles,
 } from './app-shared-styles.js';
+import { githubIcon, pythonIcon } from './app-icons.js';
+import './vaadin-ibmq-styles/vaadin-button.js';
 
 class PageAcqua extends localize(i18next)(PageViewElement) {
   _render(props) {
@@ -38,24 +40,28 @@ class PageAcqua extends localize(i18next)(PageViewElement) {
           <h1>${i18next.t('pages.acqua.headerTitle')}</h1>
           <h2>${i18next.t('pages.acqua.headerSubTitle')}</h2>
           <p>${i18next.t('pages.acqua.headerDescription')}</p>
-          <iframe
-              src="https://ghbtns.com/github-btn.html?user=Qiskit&repo=qiskit-acqua&type=star&count=true"
-              frameborder="0"
-              scrolling="0"
-              width="100px"
-              height="20px">
-          </iframe>
-          <a
-              href="https://pypi.python.org/pypi/qiskit-acqua"
-              target="_blank"
-              rel="noopener"
-              class="badge-link">
-            <img
-                src="https://img.shields.io/pypi/v/qiskit-acqua.svg"
-                alt="Qiskit Acqua version badge"
-                width="78px"
-                height="20px">
-          </a>
+          <div class="badges">
+            <a
+                href="https://github.com/Qiskit/qiskit-acqua"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${githubIcon}
+                GitHub
+              </vaadin-button>
+            </a>
+            <a
+                href="https://pypi.python.org/pypi/qiskit-acqua"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${pythonIcon}
+                PyPI
+              </vaadin-button>
+            </a>
+          </div>
         </div>
       </header>
 

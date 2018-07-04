@@ -18,6 +18,8 @@ import {
   HeaderStyles,
   SectionStyles,
 } from './app-shared-styles.js';
+import { githubIcon, visualstudiocodeIcon } from './app-icons.js';
+import './vaadin-ibmq-styles/vaadin-button.js';
 
 class PageStudio extends localize(i18next)(PageViewElement) {
   _render(props) {
@@ -79,24 +81,28 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           <h1>${i18next.t('pages.studio.headerTitle')}</h1>
           <h2>${i18next.t('pages.studio.headerSubTitle')}</h2>
           <p>${i18next.t('pages.studio.headerDescription')}</p>
-          <iframe
-              src="https://ghbtns.com/github-btn.html?user=Qiskit&repo=qiskit-studio&type=star&count=true"
-              frameborder="0"
-              scrolling="0"
-              width="100px"
-              height="20px">
-          </iframe>
-          <a
-              href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-studio"
-              target="_blank"
-              rel="noopener"
-              class="badge-link">
-            <img
-                src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-studio.svg"
-                alt="Qiskit Studio version badge"
-                width="198px"
-                height="20px">
-          </a>
+          <div class="badges">
+            <a
+                href="https://github.com/Qiskit/qiskit-studio"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${githubIcon}
+                GitHub
+              </vaadin-button>
+            </a>
+            <a
+                href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-studio"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${visualstudiocodeIcon}
+                Visual Studio marketplace
+              </vaadin-button>
+            </a>
+          </div>
         </div>
       </header>
 

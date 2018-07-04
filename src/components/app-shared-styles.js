@@ -76,8 +76,23 @@ export const HeaderStyles = html`<style>
     line-height: 1.6em;
   }
 
-  header .badge-link {
-    display: inline-flex;
+  header .badges {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  header .badges > * + * {
+    margin-left: .5em;
+  }
+
+  header .badges vaadin-button {
+    --ibmq-button-secondary-color: #FFFFFF;
+    --ibmq-button-secondary-focus-color: #292C35;
+  }
+
+  header .badges vaadin-button svg {
+    margin-right: .2em;
   }
 
   @media (min-width: 768px) {
