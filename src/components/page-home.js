@@ -293,6 +293,18 @@ class PageHome extends localize(i18next)(PageViewElement) {
           <h1>${i18next.t('pages.home.headerTitle')}</h1>
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
           <p>${i18next.t('pages.home.headerDescription')}</p>
+          <div class="badges">
+            <a
+                href="https://github.com/Qiskit"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${githubIcon}
+                GitHub
+              </vaadin-button>
+            </a>
+          </div>
         </div>
       </header>
 
