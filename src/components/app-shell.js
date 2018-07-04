@@ -157,7 +157,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <div class="limited-width">
           <div class="language-selector">
             <select
-                on-change="${(event) => i18next.changeLanguage(event.target.value)}"
+                on-change="${event => i18next.changeLanguage(event.target.value)}"
                 aria-label="Language">
               <option value="en">English</option>
               <option value="de">German</option>

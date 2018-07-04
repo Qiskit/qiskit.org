@@ -114,7 +114,9 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.autocompleteDescription')}</p>
           </div>
           <div class="representation">
-            <video autoplay loop muted playsinline disableRemotePlayback>
+            <video autoplay loop muted playsinline disableRemotePlayback
+                poster=""
+                on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-autocomplete.webm" type="video/webm">
               <source src="videos/qiskit-studio-autocomplete.mp4" type="video/mp4">
             </video>
@@ -129,7 +131,9 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.documentationDescription')}</p>
           </div>
           <div class="representation">
-            <video autoplay loop muted playsinline disableRemotePlayback>
+            <video autoplay loop muted playsinline disableRemotePlayback
+                poster=""
+                on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-documentation.webm" type="video/webm">
               <source src="videos/qiskit-studio-documentation.mp4" type="video/mp4">
             </video>
@@ -144,7 +148,9 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.linterDescription')}</p>
           </div>
           <div class="representation">
-            <video autoplay loop muted playsinline disableRemotePlayback>
+            <video autoplay loop muted playsinline disableRemotePlayback
+                poster=""
+                on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-linter.webm" type="video/webm">
               <source src="videos/qiskit-studio-linter.mp4" type="video/mp4">
             </video>
@@ -159,7 +165,9 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.snippetsDescription')}</p>
           </div>
           <div class="representation">
-            <video autoplay loop muted playsinline disableRemotePlayback>
+            <video autoplay loop muted playsinline disableRemotePlayback
+                poster=""
+                on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-snippet.webm" type="video/webm">
               <source src="videos/qiskit-studio-snippet.mp4" type="video/mp4">
             </video>
@@ -174,7 +182,9 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.studio.integratedToolsDescription')}</p>
           </div>
           <div class="representation">
-            <video autoplay loop muted playsinline disableRemotePlayback>
+            <video autoplay loop muted playsinline disableRemotePlayback
+                poster=""
+                on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-integrated-tools.webm" type="video/webm">
               <source src="videos/qiskit-studio-integrated-tools.mp4" type="video/mp4">
             </video>
@@ -182,6 +192,16 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
     `;
+  }
+
+  _tooglePausedVideo(event) {
+    const video = event.target;
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
   }
 }
 
