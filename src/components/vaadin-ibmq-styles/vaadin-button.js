@@ -114,7 +114,7 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       background-color: var(--ibmq-button-primary-active-background-color, var(--ibmq-dark-primary-color));
     }
 
-    :host([theme~="primary"]) ::slotted(svg) {
+    :host([theme~="primary"]) [part] ::slotted(svg) {
       fill: var(--ibmq-button-primary-color, var(--ibmq-primary-text-color));
     }
 
@@ -149,7 +149,7 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       background-color: transparent;
     }
 
-    :host([theme~="secondary"]) ::slotted(svg) {
+    :host([theme~="secondary"]) [part] ::slotted(svg) {
       fill: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
@@ -162,8 +162,8 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
-    :host([theme~="secondary"]:hover) ::slotted(svg),
-    :host([theme~="secondary"][focused]) ::slotted(svg) {
+    :host([theme~="secondary"]:hover) [part] ::slotted(svg),
+    :host([theme~="secondary"][focused]) [part] ::slotted(svg) {
       fill: var(--ibmq-button-secondary-focus-color, var(--ibmq-primary-text-color));
     }
 
@@ -172,7 +172,7 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
-    :host([theme~="secondary"][active]) ::slotted(svg) {
+    :host([theme~="secondary"][active]) [part] ::slotted(svg) {
       fill: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
@@ -200,7 +200,7 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       padding: 0 0.5rem;
     }
 
-    :host([theme~="small"]) ::slotted(svg) {
+    :host([theme~="small"]) [part] ::slotted(svg) {
       width: .8rem;
       height: .8rem;
     }

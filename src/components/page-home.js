@@ -109,6 +109,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
         .description-and-image .description .actions a {
           display: inline-flex;
+          text-decoration: none;
         }
 
         .description-and-image .description .actions a + a {
