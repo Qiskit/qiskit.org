@@ -45,32 +45,33 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         }
 
         @media (min-width: 768px) {
-          .feature.right {
+          .feature {
             flex-direction: row;
           }
 
-          .feature.left {
+          .feature.reverse {
             flex-direction: row-reverse;
           }
 
           .feature .description {
             margin-bottom: 0;
-            flex: 5;
+            flex: 7;
             display: flex;
             flex-direction: column;
             justify-content: center;
           }
 
-          .feature.right .description {
+          .feature .description {
             margin-right: 2em;
           }
 
-          .feature.left .description {
+          .feature.reverse .description {
+            margin-right: 0;
             margin-left: 2em;
           }
 
           .feature .representation {
-            flex: 6;
+            flex: 8;
           }
         }
       </style>
@@ -106,7 +107,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </header>
 
-      <section class="feature right colored">
+      <section class="feature colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.autocompleteTitle')}</h3>
@@ -121,7 +122,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature left">
+      <section class="feature reverse">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.documentationTitle')}</h3>
@@ -136,7 +137,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature right colored">
+      <section class="feature colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.linterTitle')}</h3>
@@ -151,7 +152,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature left">
+      <section class="feature reverse">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.snippetsTitle')}</h3>
@@ -166,7 +167,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature right colored">
+      <section class="feature colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.integratedToolsTitle')}</h3>
