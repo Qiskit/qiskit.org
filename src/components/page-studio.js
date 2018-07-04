@@ -34,26 +34,26 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           --app-section-color: #222222;
         }
 
-        .feature-image .image img,
-        .feature-image .image video {
+        .feature .representation img,
+        .feature .representation video {
           max-width: 100%;
         }
 
-        .feature-image .description {
+        .feature .description {
           font-size: 1.1em;
           margin-bottom: 2em;
         }
 
         @media (min-width: 768px) {
-          .feature-image.right {
+          .feature.right {
             flex-direction: row;
           }
 
-          .feature-image.left {
+          .feature.left {
             flex-direction: row-reverse;
           }
 
-          .feature-image .description {
+          .feature .description {
             margin-bottom: 0;
             flex: 5;
             display: flex;
@@ -61,15 +61,15 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             justify-content: center;
           }
 
-          .feature-image.right .description {
+          .feature.right .description {
             margin-right: 2em;
           }
 
-          .feature-image.left .description {
+          .feature.left .description {
             margin-left: 2em;
           }
 
-          .feature-image .image {
+          .feature .representation {
             flex: 6;
           }
         }
@@ -106,13 +106,13 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </header>
 
-      <section class="feature-image right colored">
+      <section class="feature right colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.autocompleteTitle')}</h3>
             <p>${i18next.t('pages.studio.autocompleteDescription')}</p>
           </div>
-          <div class="image">
+          <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback>
               <source src="videos/qiskit-studio-autocomplete.webm" type="video/webm">
               <source src="videos/qiskit-studio-autocomplete.mp4" type="video/mp4">
@@ -121,13 +121,13 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature-image left">
+      <section class="feature left">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.documentationTitle')}</h3>
             <p>${i18next.t('pages.studio.documentationDescription')}</p>
           </div>
-          <div class="image">
+          <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback>
               <source src="videos/qiskit-studio-documentation.webm" type="video/webm">
               <source src="videos/qiskit-studio-documentation.mp4" type="video/mp4">
@@ -136,13 +136,13 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature-image right colored">
+      <section class="feature right colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.linterTitle')}</h3>
             <p>${i18next.t('pages.studio.linterDescription')}</p>
           </div>
-          <div class="image">
+          <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback>
               <source src="videos/qiskit-studio-linter.webm" type="video/webm">
               <source src="videos/qiskit-studio-linter.mp4" type="video/mp4">
@@ -151,13 +151,13 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature-image left">
+      <section class="feature left">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.snippetsTitle')}</h3>
             <p>${i18next.t('pages.studio.snippetsDescription')}</p>
           </div>
-          <div class="image">
+          <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback>
               <source src="videos/qiskit-studio-snippet.webm" type="video/webm">
               <source src="videos/qiskit-studio-snippet.mp4" type="video/mp4">
@@ -166,13 +166,13 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="feature-image right colored">
+      <section class="feature right colored">
         <div class="limited-width">
           <div class="description">
             <h3>${i18next.t('pages.studio.integratedToolsTitle')}</h3>
             <p>${i18next.t('pages.studio.integratedToolsDescription')}</p>
           </div>
-          <div class="image">
+          <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback>
               <source src="videos/qiskit-studio-integrated-tools.webm" type="video/webm">
               <source src="videos/qiskit-studio-integrated-tools.mp4" type="video/mp4">
