@@ -78,60 +78,13 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         .architecture {
-          display: flex;
-          flex-direction: column;
           background-color: #292C35;
           color: #FFFFFF;
         }
 
-        .architecture .representation {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-bottom: 2em;
-        }
-
-        .architecture .representation img.qiskit-and-ibm-q {
-          height: 256px;
-          border-bottom: 2px dashed #999999;
-          margin-bottom: 2em;
-          padding: 0 2em 2em;
-        }
-
-        .architecture .representation img.qiskit-architecture {
-          width: 256px;
-          height: 256px;
-        }
-
-        .description-and-image .description {
-          margin-bottom: 2em;
-        }
-
-        .description-and-image .description .actions a {
-          display: inline-flex;
-          text-decoration: none;
-        }
-
-        .description-and-image .description .actions a + a {
-          margin-left: 1em;
-        }
-
-        .description-and-image .description .actions vaadin-button {
-          --ibmq-button-secondary-color: #FFFFFF;
-          --ibmq-button-secondary-focus-color: var(--app-primary-color);
-        }
-
-        .description-and-image .image img {
-          max-width: 100%;
-        }
-
-        .community {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .community .description {
-          margin-bottom: 2em;
+        .architecture .illustration img {
+          width: 300px;
+          height: 300px;
         }
 
         .social-networks-list {
@@ -199,19 +152,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         @media (min-width: 500px) {
-          .architecture .representation {
-            flex-direction: row;
-            justify-content: center;
-          }
-
-          .architecture .representation img.qiskit-and-ibm-q {
-            border-bottom: 0;
-            margin-bottom: 0;
-            border-right: 2px dashed #999999;
-            margin-right: 2em;
-            padding: .5em 2em .5em 0;
-          }
-
           .supporters-list {
             column-count: 2;
             column-gap: 1em;
@@ -219,69 +159,12 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         @media (min-width: 768px) {
-          .architecture {
-            flex-direction: row;
-          }
-
-          .architecture .representation {
-            margin-bottom: 0;
-          }
-
-          .architecture .description {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-            margin-left: 2em;
-          }
-
-          .description-and-image {
-            flex-direction: row;
-          }
-
-          .description-and-image .description {
-            margin-bottom: 0;
-            flex: 3;
-            margin-right: 2em;
-          }
-
-          .description-and-image .image {
-            flex: 2;
-          }
-
-          .community {
-            flex-direction: row;
-          }
-
-          .community .description {
-            margin-bottom: 0;
-            flex: 3;
-            margin-right: 2em;
-          }
-
-          .community .social-networks {
-            flex: 2;
-          }
-
-          .social-networks-list {
-            margin: 0;
-          }
-
           .supporters-list {
             column-count: 3;
           }
         }
 
         @media (min-width: 1024px) {
-          .architecture .representation img.qiskit-and-ibm-q {
-            margin-right: 4em;
-            padding: .5em 4em .5em 0;
-          }
-
-          .architecture .description {
-            margin-left: 4em;
-          }
-
           .supporters-list {
             column-count: 4;
           }
@@ -315,21 +198,20 @@ class PageHome extends localize(i18next)(PageViewElement) {
       </section>
 
       <section class="architecture">
-        <div class="limited-width">
-          <div class="representation">
-            <img src="images/qiskit-and-ibm-q.png" alt="" class="qiskit-and-ibm-q">
-            <!-- TODO: Change image to HTML -->
-            <img src="images/qiskit-architecture.png" alt="" class="qiskit-architecture">
-          </div>
+        <div class="row reverse limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.architectureTitle')}</h3>
             <p>${i18next.t('pages.home.architectureDescription')}</p>
           </div>
+          <div class="illustration">
+            <!-- TODO: Change image to HTML -->
+            <img src="images/qiskit-architecture.png" alt="" class="qiskit-architecture">
+          </div>
         </div>
       </section>
 
-      <section class="learn description-and-image colored">
-        <div class="limited-width">
+      <section class="colored">
+        <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.learnTitle')}</h3>
             <p>${i18next.t('pages.home.learnDescription')}</p>
@@ -352,19 +234,19 @@ class PageHome extends localize(i18next)(PageViewElement) {
               </a>
             </div>
           </div>
-          <div class="image">
+          <div class="illustration">
             <img src="images/qiskit-learn.png" alt="${i18next.t('pages.home.learnAltImage')}">
           </div>
         </div>
       </section>
 
-      <section class="community">
-        <div class="limited-width">
+      <section>
+        <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.communityTitle')}</h3>
             <p>${i18next.t('pages.home.communityDescription')}</p>
           </div>
-          <div class="social-networks">
+          <div class="illustration">
             <ul class="social-networks-list">
               <li>
                 <a
@@ -455,8 +337,8 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="imb-q-experience description-and-image colored">
-        <div class="limited-width">
+      <section class="colored">
+        <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
             <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
@@ -471,7 +353,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
               </a>
             </div>
           </div>
-          <div class="image">
+          <div class="illustration">
             <img src="images/ibm-q-experience.png" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
           </div>
         </div>

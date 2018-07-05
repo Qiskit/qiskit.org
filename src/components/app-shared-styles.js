@@ -152,10 +152,68 @@ export const SectionStyles = html`<style>
     margin-bottom: 0;
   }
 
+  section .row .description {
+    margin-bottom: 2em;
+  }
+
+  section .row .description .actions a {
+    display: inline-flex;
+    text-decoration: none;
+  }
+
+  section .row .description .actions a + a {
+    margin-left: 1em;
+  }
+
+  section .row .illustration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section .row .illustration img,
+  section .row .illustration video {
+    display: block;
+    max-width: 100%;
+  }
+
+  section.colored .row .description .actions vaadin-button {
+    --ibmq-button-secondary-color: #FFFFFF;
+    --ibmq-button-secondary-focus-color: var(--app-primary-color);
+  }
+
   @media (min-width: 768px) {
     section .limited-width {
       padding-top: 3em;
       padding-bottom: 3em;
+    }
+
+    section .row {
+      flex-direction: row;
+    }
+
+    section .row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    section .row .description {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 3;
+      margin-right: 3em;
+    }
+
+    section .row.reverse .description {
+      margin-right: 0;
+      margin-left: 3em;
+    }
+
+    section .row .illustration {
+      align-items: flex-start;
+      justify-content: center;
+      flex: 2;
     }
   }
 </style>`;
