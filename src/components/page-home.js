@@ -215,7 +215,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
           </div>
           <div class="illustration">
             <!-- TODO: Change image to HTML -->
-            <img src="images/qiskit-architecture.png" alt="" class="qiskit-architecture">
+            <img src="images/qiskit-architecture.png" alt="Qiskit architecture">
           </div>
         </div>
       </section>
