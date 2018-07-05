@@ -195,7 +195,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
                 tabindex="-1">
               <vaadin-button theme="secondary small">
                 ${slackIcon}
-                Join Slack community
+                ${i18next.t('joinSlack')}
               </vaadin-button>
             </a>
           </div>
