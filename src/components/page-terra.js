@@ -61,6 +61,24 @@ class PageTerra extends localize(i18next)(PageViewElement) {
                 PyPI
               </vaadin-button>
             </a>
+            <a
+                href="/documentation/"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${i18next.t('documentation')}
+              </vaadin-button>
+            </a>
+            <a
+                href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${i18next.t('tutorials')}
+              </vaadin-button>
+            </a>
           </div>
         </div>
       </header>

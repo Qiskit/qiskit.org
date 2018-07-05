@@ -79,6 +79,7 @@ export const HeaderStyles = html`<style>
   header .badges {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
   }
