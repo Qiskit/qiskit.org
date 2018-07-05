@@ -334,7 +334,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
             </div>
           </div>
           <div class="illustration">
-            <img src="images/ibm-q-experience.png" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
+            <img src="images/ibm-q-experience.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
           </div>
         </div>
       </section>
