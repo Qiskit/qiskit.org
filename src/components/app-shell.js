@@ -41,6 +41,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           flex-direction: column;
           flex-grow: 1;
           min-height: 100vh;
+          max-width: 100vw;
         }
 
         header {

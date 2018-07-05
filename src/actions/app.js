@@ -11,14 +11,16 @@ export const UPDATE_PAGE = 'UPDATE_PAGE';
 
 export const navigate = path => dispatch => {
   // Extract the page name from path.
-  const page = path === '/' ? 'home' : path.slice(1);
+  const splittedPath = (path || '').slice(1).split('/');
+  const page = splittedPath[0] || 'home';
+  const subPage = splittedPath[1] ? splittedPath[1] : undefined;
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
-  dispatch(loadPage(page));
+  dispatch(loadPage(page, subPage));
 };
 
-const loadPage = page => dispatch => {
+const loadPage = (page, subPage) => dispatch => {
   switch (page) {
     case 'home':
       import('../components/page-home.js');
@@ -37,10 +39,11 @@ const loadPage = page => dispatch => {
       import('../components/page-not-found.js');
   }
 
-  dispatch(updatePage(page));
+  dispatch(updatePage(page, subPage));
 };
 
-const updatePage = page => ({
+const updatePage = (page, subPage) => ({
   type: UPDATE_PAGE,
   page,
+  subPage,
 });
