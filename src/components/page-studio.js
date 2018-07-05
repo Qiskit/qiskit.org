@@ -115,7 +115,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           </div>
           <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster=""
+                poster="images/studio/qiskit-studio-autocomplete.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-autocomplete.webm" type="video/webm">
               <source src="videos/qiskit-studio-autocomplete.mp4" type="video/mp4">
@@ -132,7 +132,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           </div>
           <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster=""
+                poster="images/studio/qiskit-studio-documentation.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-documentation.webm" type="video/webm">
               <source src="videos/qiskit-studio-documentation.mp4" type="video/mp4">
@@ -149,7 +149,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           </div>
           <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster=""
+                poster="images/studio/qiskit-studio-linter.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-linter.webm" type="video/webm">
               <source src="videos/qiskit-studio-linter.mp4" type="video/mp4">
@@ -166,7 +166,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           </div>
           <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster=""
+                poster="images/studio/qiskit-studio-snippet.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-snippet.webm" type="video/webm">
               <source src="videos/qiskit-studio-snippet.mp4" type="video/mp4">
@@ -183,7 +183,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           </div>
           <div class="representation">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster=""
+                poster="images/studio/qiskit-studio-integrated-tools.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
               <source src="videos/qiskit-studio-integrated-tools.webm" type="video/webm">
               <source src="videos/qiskit-studio-integrated-tools.mp4" type="video/mp4">
