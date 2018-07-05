@@ -188,6 +188,16 @@ class PageHome extends localize(i18next)(PageViewElement) {
                 GitHub
               </vaadin-button>
             </a>
+            <a
+                href="https://join.slack.com/t/qiskit/shared_invite/enQtMzYyMjY5Nzg2ODk4LTNkMWNmMjc3N2E0ZTdlNzg1Mzk4MDY4YjFlNWZmNTdmZTFkMDFmMjVjZTIxZThjMTlhMjA2MmQxYTViMzhiNzE"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${slackIcon}
+                Join Slack community
+              </vaadin-button>
+            </a>
           </div>
         </div>
       </header>
