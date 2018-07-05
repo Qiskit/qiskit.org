@@ -220,36 +220,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section class="colored">
-        <div class="row limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.learnTitle')}</h3>
-            <p>${i18next.t('pages.home.learnDescription')}</p>
-            <div class="actions">
-              <a
-                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
-                  title="${i18next.t('pages.home.learnTutorialsButton')}"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.learnTutorialsButton')}</vaadin-button>
-              </a>
-              <a
-                  href="/documentation/"
-                  title="${i18next.t('pages.home.learnDocumentationButton')}"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.learnDocumentationButton')}</vaadin-button>
-              </a>
-            </div>
-          </div>
-          <div class="illustration">
-            <img src="images/qiskit-learn.png" alt="${i18next.t('pages.home.learnAltImage')}">
-          </div>
-        </div>
-      </section>
-
       <section>
         <div class="row limited-width">
           <div class="description">
