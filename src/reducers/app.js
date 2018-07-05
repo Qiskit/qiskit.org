@@ -15,6 +15,7 @@ const app = (state = {}, action) => {
       return {
         ...state,
         page: action.page,
+        subPage: action.subPage,
       };
     default:
       return state;

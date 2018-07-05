@@ -20,6 +20,7 @@ import {
 } from './app-shared-styles.js';
 import { githubIcon, pythonIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
+import '@kuscamara/code-sample/code-sample.js';
 
 class PageTerra extends localize(i18next)(PageViewElement) {
   _render(props) {
@@ -31,6 +32,19 @@ class PageTerra extends localize(i18next)(PageViewElement) {
       <style>
         :host {
           --app-section-background-color: var(--qiskit-terra-color);
+          --app-section-color: #000000;
+        }
+
+        section .limited-width {
+          max-width: 630px;
+        }
+
+        .note {
+          font-size: .9em;
+        }
+
+        code-sample[type="bash"] {
+          margin-bottom: 2em;
         }
       </style>
 
@@ -86,7 +100,35 @@ class PageTerra extends localize(i18next)(PageViewElement) {
       <section class="colored">
         <div class="limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.terra.howToUseitTitle')}</h3>
+            <h3>${i18next.t('pages.terra.installTitle')}</h3>
+            <p class="note">${i18next.t('pages.terra.pythonIsRequired')}</p>
+            <code-sample type="bash">
+              <template>
+                [python3] $ pip install qiskit
+              </template>
+            </code-sample>
+            <h3>${i18next.t('pages.terra.exampleTitle')}</h3>
+            <code-sample type="python">
+              <!-- htmlmin:ignore -->
+              <template>
+                from qiskit import ClassicalRegister, QuantumRegister
+                from qiskit import QuantumCircuit, execute
+
+                q = QuantumRegister(2)
+                c = ClassicalRegister(2)
+                qc = QuantumCircuit(q, c)
+
+                qc.h(q[0])
+                qc.cx(q[0], q[1])
+                qc.measure(q, c)
+
+                job_sim = execute(qc, "local_qasm_simulator")
+                sim_result = job_sim.result()
+
+                print(sim_result.get_counts(qc))
+              </template>
+              <!-- htmlmin:ignore -->
+            </code-sample>
           </div>
         </div>
       </section>

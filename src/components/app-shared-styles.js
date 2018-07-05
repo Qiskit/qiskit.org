@@ -105,7 +105,7 @@ export const HeaderStyles = html`<style>
       text-align: left;
       padding-top: 0;
       padding-bottom: 0;
-      min-height: 340px;
+      min-height: 400px;
     }
 
     header > img {
@@ -117,6 +117,12 @@ export const HeaderStyles = html`<style>
 
     header .badges {
       justify-content: flex-start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    header {
+      min-height: 340px;
     }
   }
 </style>`;
