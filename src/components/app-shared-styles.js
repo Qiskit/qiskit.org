@@ -64,6 +64,7 @@ export const HeaderStyles = html`<style>
     font-size: 2.6em;
     font-weight: 600;
     margin: 0;
+    font-family: "IBM Plex Mono", "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
   }
 
   header h2 {
@@ -139,6 +140,7 @@ export const SectionStyles = html`<style>
     margin: 0 0 1em;
     font-size: 1.7em;
     font-weight: 400;
+    font-family: "IBM Plex Mono", "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
   }
 
   section .description {
