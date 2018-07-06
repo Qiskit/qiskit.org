@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.BaseProvider &#8212; QISKit SDK 0.5.5 documentation</title>
+    <title>qiskit.backends.BaseProvider &#8212; QISKit SDK 0.5.6 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.5',
+        VERSION:     '0.5.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -64,7 +64,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" accesskey="U">qiskit.backends package</a> &#187;</li> 
@@ -164,7 +164,7 @@
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.BaseProvider.aliased_backend_names" title="qiskit.backends.BaseProvider.aliased_backend_names"><code class="xref py py-obj docutils literal"><span class="pre">aliased_backend_names</span></code></a>()</td>
-<td>Returns dict that defines alias names, usually shorter names for referring to the backends.</td>
+<td>Dict that stores possible aliases for a given backend name.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.BaseProvider.available_backends" title="qiskit.backends.BaseProvider.available_backends"><code class="xref py py-obj docutils literal"><span class="pre">available_backends</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
@@ -183,20 +183,22 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.backends.BaseProvider.get_backend" title="qiskit.backends.BaseProvider.get_backend"><code class="xref py py-obj docutils literal"><span class="pre">get_backend</span></code></a>(name)</td>
 <td>Return a backend instance.</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.backends.BaseProvider.grouped_backend_names" title="qiskit.backends.BaseProvider.grouped_backend_names"><code class="xref py py-obj docutils literal"><span class="pre">grouped_backend_names</span></code></a>()</td>
+<td>Returns dict that defines group names, usually shorter names for referring to the backends.</td>
+</tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="qiskit.backends.BaseProvider.aliased_backend_names">
 <code class="descname">aliased_backend_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/baseprovider.html#BaseProvider.aliased_backend_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.BaseProvider.aliased_backend_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns dict that defines alias names, usually shorter names
-for referring to the backends.</p>
-<p>If an alias key is used, the corresponding backend will be chosen
-in order of priority from the value list, depending on availability.</p>
+<dd><p>Dict that stores possible aliases for a given backend name.
+Either the name itself or an alias can be used to connect to that
+backend.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list[str]]: {alias_name: list(backend_name)}</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list[str]]: {backend_name: list(alias_name)}</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str</td>
 </tr>
@@ -259,6 +261,25 @@ from this provider.</td>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="qiskit.backends.BaseProvider.grouped_backend_names">
+<code class="descname">grouped_backend_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/baseprovider.html#BaseProvider.grouped_backend_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.backends.BaseProvider.grouped_backend_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict that defines group names, usually shorter names
+for referring to the backends.</p>
+<p>If a group name is used, the corresponding backend will be chosen
+in order of priority from the value list, depending on availability.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list[str]]: {group_name: list(backend_name)}</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -290,7 +311,7 @@ from this provider.</td>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li> 
@@ -298,7 +319,7 @@ from this provider.</td>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/07/03.
+      Last updated on 2018/07/06.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
