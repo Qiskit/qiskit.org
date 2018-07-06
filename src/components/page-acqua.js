@@ -92,12 +92,12 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <a
                 href="https://pypi.python.org/pypi/qiskit-acqua"
                 target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${pythonIcon}
-                PyPI
-              </vaadin-button>
+                rel="noopener">
+              <img
+                  src="https://img.shields.io/pypi/v/qiskit-acqua.svg"
+                  alt="Qiskit Acqua version badge"
+                  width="78px"
+                  height="20px">
             </a>
           </div>
         </div>

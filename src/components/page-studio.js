@@ -69,12 +69,12 @@ class PageStudio extends localize(i18next)(PageViewElement) {
             <a
                 href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-studio"
                 target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${visualstudiocodeIcon}
-                Visual Studio marketplace
-              </vaadin-button>
+                rel="noopener">
+              <img
+                  src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-studio.svg"
+                  alt="Qiskit Studio version badge"
+                  width="198px"
+                  height="20px">
             </a>
           </div>
         </div>

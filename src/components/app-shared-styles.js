@@ -85,8 +85,12 @@ export const HeaderStyles = html`<style>
     justify-content: center;
   }
 
+  header .badges > a {
+    display: inline-flex;
+  }
+
   header .badges > * + * {
-    margin-left: .5em;
+    margin-left: 1em;
   }
 
   header .badges vaadin-button {
