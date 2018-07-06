@@ -19,6 +19,7 @@ import {
   SharedStyles,
   HeaderStyles,
   SectionStyles,
+  SectionElementStyles,
 } from './app-shared-styles.js';
 import { githubIcon, pythonIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
@@ -31,6 +32,7 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
       ${SharedStyles}
       ${HeaderStyles}
       ${SectionStyles}
+      ${SectionElementStyles}
       <style>
         :host {
           --app-section-background-color: var(--qiskit-acqua-color);
@@ -51,44 +53,6 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
 
         .acqua-section[active] {
           display: flex;
-        }
-
-        section .row .illustration {
-          align-items: initial;
-        }
-
-        .note {
-          font-size: .9em;
-        }
-
-        vaadin-button {
-          --ibmq-button-secondary-color: #2a2c36;
-          --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
-        }
-
-        vaadin-button[selected] {
-          background-color: #2a2c36;
-          color: var(--qiskit-acqua-color);
-        }
-
-        code-sample[type="bash"] {
-          margin-bottom: 2em;
-        }
-
-        @media (min-width: 768px) {
-          section .row .description,
-          section .row .illustration {
-            justify-content: flex-start;
-          }
-
-          section .row .description {
-            flex: 2;
-          }
-
-          section .row .illustration {
-            flex: 3;
-            min-width: 0;
-          }
         }
       </style>
 

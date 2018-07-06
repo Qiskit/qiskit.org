@@ -17,6 +17,7 @@ import {
   SharedStyles,
   HeaderStyles,
   SectionStyles,
+  SectionElementStyles,
 } from './app-shared-styles.js';
 import { githubIcon, pythonIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
@@ -29,22 +30,11 @@ class PageTerra extends localize(i18next)(PageViewElement) {
       ${SharedStyles}
       ${HeaderStyles}
       ${SectionStyles}
+      ${SectionElementStyles}
       <style>
         :host {
           --app-section-background-color: var(--qiskit-terra-color);
           --app-section-color: #000000;
-        }
-
-        section .limited-width {
-          max-width: 630px;
-        }
-
-        .note {
-          font-size: .9em;
-        }
-
-        code-sample[type="bash"] {
-          margin-bottom: 2em;
         }
       </style>
 
@@ -98,8 +88,12 @@ class PageTerra extends localize(i18next)(PageViewElement) {
       </header>
 
       <section class="colored">
-        <div class="limited-width">
+        <div class="row limited-width">
           <div class="description">
+            <h3>${i18next.t('pages.terra.aboutTitle')}</h3>
+            <p>${i18next.t('pages.terra.aboutDescription')}</p>
+          </div>
+          <div class="illustration">
             <h3>${i18next.t('pages.terra.installTitle')}</h3>
             <p class="note">${i18next.t('pages.terra.pythonIsRequired')}</p>
             <code-sample type="bash">
