@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.5 ドキュメント</title>
+    <title>qiskit.wrapper._wrapper &#8212; QISKit SDK 0.5.6 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.5.5',
+        VERSION:     '0.5.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -57,7 +57,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -129,17 +129,18 @@
 <span class="sd">        args (tuple): positional arguments passed to provider class initialization</span>
 <span class="sd">        provider_class (BaseProvider): provider class</span>
 <span class="sd">        kwargs (dict): keyword arguments passed to provider class initialization.</span>
-<span class="sd">            For the IBMQProvider default this can include things such as;</span>
-<span class="sd">            token (str): The token used to register on the online backend such</span>
-<span class="sd">                as the quantum experience.</span>
-<span class="sd">            url (str): The url used for online backend such as the quantum</span>
-<span class="sd">                experience.</span>
-<span class="sd">            hub (str): The hub used for online backend.</span>
-<span class="sd">            group (str): The group used for online backend.</span>
-<span class="sd">            project (str): The project used for online backend.</span>
-<span class="sd">            proxies (dict): Proxy configuration for the API, as a dict with</span>
-<span class="sd">                &#39;urls&#39; and credential keys.</span>
-<span class="sd">            verify (bool): If False, ignores SSL certificates errors.</span>
+<span class="sd">            For the IBMQProvider default this can include things such as:</span>
+
+<span class="sd">                * token (str): The token used to register on the online backend such</span>
+<span class="sd">                    as the quantum experience.</span>
+<span class="sd">                * url (str): The url used for online backend such as the quantum</span>
+<span class="sd">                    experience.</span>
+<span class="sd">                * hub (str): The hub used for online backend.</span>
+<span class="sd">                * group (str): The group used for online backend.</span>
+<span class="sd">                * project (str): The project used for online backend.</span>
+<span class="sd">                * proxies (dict): Proxy configuration for the API, as a dict with</span>
+<span class="sd">                    &#39;urls&#39; and credential keys.</span>
+<span class="sd">                * verify (bool): If False, ignores SSL certificates errors.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        BaseProvider: the provider instance that was just registered.</span>
@@ -151,7 +152,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">provider</span> <span class="o">=</span> <span class="n">provider_class</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t instance provider!. Error: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t instantiate provider! Error: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
 
     <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">provider</span></div>
@@ -213,19 +214,22 @@
     <span class="n">backend_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
                      <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">available_backends</span><span class="p">(</span><span class="n">filters</span><span class="p">)]</span>
 
-    <span class="k">if</span> <span class="n">compact</span><span class="p">:</span>
-        <span class="n">alias_dict</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">aliased_backend_names</span><span class="p">()</span>
-        <span class="n">aliases</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">backend_names</span><span class="p">:</span>
-            <span class="n">backend_alias</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">alias_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_alias</span><span class="p">:</span>
-                <span class="n">aliases</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">backend_alias</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="p">(</span><span class="n">alias</span><span class="p">,)</span> <span class="o">=</span> <span class="n">backend_alias</span>
-                <span class="n">aliases</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span>
-        <span class="n">backend_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">aliases</span><span class="p">)</span>
+    <span class="n">alias_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">aliased_backend_names</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">backend_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">alias_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">alias_dict</span> <span class="k">else</span> <span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">backend_names</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">backend_names</span></div>
+    <span class="k">if</span> <span class="n">compact</span><span class="p">:</span>
+        <span class="n">group_dict</span> <span class="o">=</span> <span class="n">_DEFAULT_PROVIDER</span><span class="o">.</span><span class="n">grouped_backend_names</span><span class="p">()</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">backend_names</span><span class="p">:</span>
+            <span class="n">backend_group</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">group_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_group</span><span class="p">:</span>
+                <span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">backend_group</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">group</span><span class="p">,)</span> <span class="o">=</span> <span class="n">backend_group</span>
+                <span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">backend_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">backend_names</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="local_backends"><a class="viewcode-back" href="../../../_autodoc/qiskit.wrapper.local_backends.html#qiskit.local_backends">[ドキュメント]</a><span class="k">def</span> <span class="nf">local_backends</span><span class="p">(</span><span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -434,14 +438,14 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.5 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/03
+      最終更新: 2018/07/06
       このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
     </div>
   </body>
