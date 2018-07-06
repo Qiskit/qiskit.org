@@ -36,6 +36,11 @@ class PageTerra extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--qiskit-terra-color);
           --app-section-color: #000000;
         }
+
+        section.colored .row .description .actions vaadin-button {
+          --ibmq-button-secondary-color: #000000;
+          --ibmq-button-secondary-focus-color: var(--qiskit-terra-color);
+        }
       </style>
 
       <header>
@@ -65,24 +70,6 @@ class PageTerra extends localize(i18next)(PageViewElement) {
                 PyPI
               </vaadin-button>
             </a>
-            <a
-                href="/documentation/"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${i18next.t('documentation')}
-              </vaadin-button>
-            </a>
-            <a
-                href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${i18next.t('tutorials')}
-              </vaadin-button>
-            </a>
           </div>
         </div>
       </header>
@@ -92,6 +79,26 @@ class PageTerra extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>${i18next.t('pages.terra.aboutTitle')}</h3>
             <p>${i18next.t('pages.terra.aboutDescription')}</p>
+            <div class="actions">
+              <a
+                  href="/documentation/"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('documentation')}
+                </vaadin-button>
+              </a>
+              <a
+                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('tutorials')}
+                </vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="illustration">
             <h3>${i18next.t('pages.terra.installTitle')}</h3>
