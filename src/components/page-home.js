@@ -127,6 +127,10 @@ class PageHome extends localize(i18next)(PageViewElement) {
           margin-bottom: 2em;
         }
 
+        .supporting .description p {
+          max-width: 576px;
+        }
+
         .supporters-list {
           list-style: none;
           padding: 0;
