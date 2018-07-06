@@ -87,6 +87,11 @@ class PageHome extends localize(i18next)(PageViewElement) {
           color: #FFFFFF;
         }
 
+        section.architecture .row .description .actions vaadin-button {
+          --ibmq-button-secondary-color: #FFFFFF;
+          --ibmq-button-secondary-focus-color: #292C35;
+        }
+
         .architecture .illustration img {
           width: 300px;
           height: 300px;
@@ -239,6 +244,17 @@ class PageHome extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>${i18next.t('pages.home.architectureTitle')}</h3>
             <p>${i18next.t('pages.home.architectureDescription')}</p>
+            <div class="actions">
+              <a
+                  href="https://medium.com/qiskit/post-id"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('pages.home.architectureButton')}
+                </vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="illustration">
             <!-- TODO: Change image to HTML -->
