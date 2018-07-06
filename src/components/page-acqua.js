@@ -207,6 +207,28 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
         <div class="row acqua-section limited-width" active?="${props._subPage === 'chemistry'}">
           <div class="description">
             <h3>${i18next.t('pages.acqua.aboutTitle')}</h3>
+            <div class="actions">
+              <a
+                  href="https://github.com/Qiskit/qiskit-acqua"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary small">
+                  ${githubIcon}
+                  GitHub
+                </vaadin-button>
+              </a>
+              <a
+                  href="https://pypi.python.org/pypi/qiskit-acqua"
+                  target="_blank"
+                  rel="noopener">
+                <img
+                    src="https://img.shields.io/pypi/v/qiskit-acqua.svg"
+                    alt="Qiskit Acqua version badge"
+                    width="78px"
+                    height="20px">
+              </a>
+            </div>
             <p>${i18next.t('pages.acqua.aboutChemistryDescription')}</p>
             <dl>
               <dt>${i18next.t('pages.acqua.aboutInputGeneration')}:</dt>
@@ -216,6 +238,26 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
               <dt>${i18next.t('pages.acqua.aboutLibrary')}:</dt>
               <dd>VQE, QPE, IQPE</dd>
             </dl>
+            <div class="actions">
+              <a
+                  href="/documentation/acqua/"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('documentation')}
+                </vaadin-button>
+              </a>
+              <a
+                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-acqua-tutorials/blob/master/index.ipynb#2.-QISKit-ACQUA-Chemistry"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('tutorials')}
+                </vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="illustration">
             <h3>${i18next.t('pages.acqua.installTitle')}</h3>
@@ -278,6 +320,26 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
               <dt>${i18next.t('pages.acqua.aboutLibrary')}:</dt>
               <dd>SVM Q Kernel, SVM Variational</dd>
             </dl>
+            <div class="actions">
+              <a
+                  href="/documentation/acqua/"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('documentation')}
+                </vaadin-button>
+              </a>
+              <a
+                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-acqua-tutorials/blob/master/index.ipynb#3.-QISKit-ACQUA-Artificial-Intelligence"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('tutorials')}
+                </vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="illustration">
             <h3>${i18next.t('pages.acqua.installTitle')}</h3>
@@ -334,6 +396,26 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
               <dt>${i18next.t('pages.acqua.aboutLibrary')}:</dt>
               <dd>VQE, Grover</dd>
             </dl>
+            <div class="actions">
+              <a
+                  href="/documentation/acqua/"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('documentation')}
+                </vaadin-button>
+              </a>
+              <a
+                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-acqua-tutorials/blob/master/index.ipynb#4.-QISKit-ACQUA-Optimization"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('tutorials')}
+                </vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="illustration">
             <h3>${i18next.t('pages.acqua.installTitle')}</h3>
