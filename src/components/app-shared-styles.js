@@ -87,6 +87,7 @@ export const HeaderStyles = html`<style>
 
   header .badges > a {
     display: inline-flex;
+    text-decoration: none;
   }
 
   header .badges > * + * {
