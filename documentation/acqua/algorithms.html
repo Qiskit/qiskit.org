@@ -1,0 +1,621 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Algorithms &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Optimizers" href="optimizers.html" />
+    <link rel="prev" title="Installation and Setup" href="install.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="optimizers.html" title="Optimizers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation and Setup"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quantum-algorithms">Quantum Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#variational-quantum-eigensolver-vqe">Variational Quantum Eigensolver (VQE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quantum-dynamics">Quantum Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quantum-phase-estimation-qpe">Quantum Phase Estimation (QPE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterative-quantum-phase-estimation-iqpe">Iterative Quantum Phase Estimation (IQPE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quantum-grover-search">Quantum Grover Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-vector-machine-quantum-kernel-svm-q-kernel">Support Vector Machine Quantum Kernel (SVM Q Kernel)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-vector-machine-variational-svm-variational">Support Vector Machine Variational (SVM Variational)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#classical-algorithms">Classical Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exact-eigensolver">Exact Eigensolver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cplex">CPLEX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-vector-machine-radial-basis-function-kernel-svm-rbf-kernel">Support Vector Machine Radial Basis Function Kernel (SVM RBF Kernel)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation and Setup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optimizers.html"
+                        title="next chapter">Optimizers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/algorithms.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="algorithms">
+<h1>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h1>
+<p>QISKit Algorithms and Circuits for QUantum Applications (QISKit ACQUA)
+is an extensible collection of algorithms and utilities for use with quantum computers to
+carry out research and investigate how to solve problems using near-term
+quantum applications on short depth circuits. The applications can span
+different domains  QISKit ACQUA uses
+<a class="reference external" href="https://www.qiskit.org/">QISKit</a> for its quantum computation.</p>
+<p>The following <a class="reference internal" href="qiskit-acqua.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a> are part of QISKit ACQUA:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#variational-quantum-eigensolver-vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a></li>
+<li><a class="reference internal" href="#quantum-dynamics"><span class="std std-ref">Quantum Dynamics</span></a></li>
+<li><a class="reference internal" href="#quantum-phase-estimation-qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a></li>
+<li><a class="reference internal" href="#iterative-quantum-phase-estimation-iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a></li>
+<li><a class="reference internal" href="#quantum-grover-search"><span class="std std-ref">Quantum Grover Search</span></a></li>
+<li><a class="reference internal" href="#support-vector-machine-quantum-kernel-svm-q-kernel"><span class="std std-ref">Support Vector Machine Quantum Kernel (SVM Q Kernel)</span></a></li>
+<li><a class="reference internal" href="#support-vector-machine-variational-svm-variational"><span class="std std-ref">Support Vector Machine Variational (SVM Variational)</span></a></li>
+</ul>
+<p>QISKit ACQUA includes  also some <a class="reference internal" href="#classical-algorithms"><span class="std std-ref">Classical Algorithms</span></a>, which may be
+useful to compare and contrast results in the near term while experimenting with, developing and testing
+quantum algorithms:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#exact-eigensolver"><span class="std std-ref">Exact Eigensolver</span></a></li>
+<li><a class="reference internal" href="#cplex"><span class="std std-ref">CPLEX</span></a></li>
+<li><a class="reference internal" href="#support-vector-machine-radial-basis-function-kernel-svm-rbf-kernel"><span class="std std-ref">Support Vector Machine Radial Basis Function Kernel (SVM RBF Kernel)</span></a></li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Extending the Algorithm Library</p>
+<p>Algorithms and many of the components they used have been designed to be
+pluggable. A new algorithm may be developed according to the specific API
+provided by QISKit ACQUA, and by simply adding its code to the collection of existing
+algorithms, that new algorithm  will be immediately recognized via dynamic lookup, and made available for use
+within the framework of QISKit ACQUA.</p>
+<p>To develop and deploy any new algorithm, the new algorithm class should derive from the <code class="docutils literal"><span class="pre">QuantumAlgorithm</span></code> class.
+Along with any supporting  module, the new algorithm class
+should be installed under its own folder in the <code class="docutils literal"><span class="pre">qiskit_acqua</span></code> directory, just like  the
+existing algorithms.</p>
+</div>
+<div class="section" id="quantum-algorithms">
+<h2>Quantum Algorithms<a class="headerlink" href="#quantum-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we describe the quantum algorithms currently available in QISKit ACQUA.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">QISKit ACQUA requires associating a quantum device or simulator to any experiment that uses a quantum
+algorithm.  This is done by configuring the <code class="docutils literal"><span class="pre">backend</span></code> section of the experiment to be run.</p>
+</div>
+<div class="section" id="variational-quantum-eigensolver-vqe">
+<h3>Variational Quantum Eigensolver (VQE)<a class="headerlink" href="#variational-quantum-eigensolver-vqe" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://arxiv.org/abs/1304.3061">VQE</a> uses a variational approach
+to find the minimum eigenvalue of a Hamiltonian energy problem. It is
+configured with a trial wavefunction, supplied by a <a class="reference external" href="./variational_forms.html">variational
+form</a>, and an
+<a class="reference external" href="./optimizers.html">optimizer</a>. An <a class="reference external" href="./initial_states.html">initial
+state</a> may be supplied too.</p>
+<p>Additionally, VQE can be configured with the following parameters:</p>
+<ul>
+<li><p class="first">A <code class="docutils literal"><span class="pre">string</span></code> indicating the mode used by the <code class="docutils literal"><span class="pre">Operator</span></code> class for the computation:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">operator_mode</span> <span class="p">:</span> <span class="s2">&quot;matrix&quot;</span> <span class="o">|</span> <span class="s2">&quot;paulis&quot;</span> <span class="o">|</span> <span class="s2">&quot;group_paulis&quot;</span>
+</pre></div>
+</div>
+<p>If no value for <code class="docutils literal"><span class="pre">operator_mode</span></code> ia specified, the default is <code class="docutils literal"><span class="pre">&quot;matrix&quot;</span></code>.</p>
+</li>
+<li><p class="first">The initial point for the search of the minimum eigenvalue:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">initial_point</span> <span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>An optional list of <code class="docutils literal"><span class="pre">float</span></code> values  may be provided as the starting point
+for the variational form.
+The length of this list must match the number of the parameters expected by the variational form being used.
+If such list is not provided, VQE will create a random starting point for the
+optimizer, with values randomly chosen to lie within the
+bounds of the variational form. If the variational form provides no lower bound, the VQE
+will default it to <span class="math">\(-2\pi\)</span>; if the upper bound is missing, the default value is <span class="math">\(2\pi\)</span>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to VQE declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">VQE</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, VQE supports the <code class="docutils literal"><span class="pre">energy</span></code> and <code class="docutils literal"><span class="pre">ising</span></code> problema.</p>
+</div>
+</div>
+<div class="section" id="quantum-dynamics">
+<h3>Quantum Dynamics<a class="headerlink" href="#quantum-dynamics" title="Permalink to this headline">¶</a></h3>
+<p>Dynamics provides the lower-level building blocks for simulating
+universal quantum systems. For any given quantum system that can be
+decomposed into local interactions (for example, a global hamiltonian <em>H</em> as
+the weighted sum of several pauli spin operators), the local
+interactions can then be used to approximate the global quantum system
+via, for example, Lloyd’s method or Trotter-Suzuki decomposition.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This algorithm <strong>only</strong> supports the <code class="docutils literal"><span class="pre">local_state_vector</span></code> simulator.</p>
+</div>
+<p>Dynamics can be configured with the following parameter settings:</p>
+<ul>
+<li><p class="first">Evolution time:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">evo_time</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>A number is expected.  The minimum value is <code class="docutils literal"><span class="pre">0.0</span></code>.  The default value is <code class="docutils literal"><span class="pre">1.0</span></code>.</p>
+</li>
+<li><p class="first">The evolution mode of the computation:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">evo_mode</span> <span class="o">=</span> <span class="s2">&quot;matrix&quot;</span> <span class="o">|</span> <span class="s2">&quot;circuit&quot;</span>
+</pre></div>
+</div>
+<p>Two <code class="docutils literal"><span class="pre">string</span></code> values are permitted: <code class="docutils literal"><span class="pre">&quot;matrix&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;circuit&quot;</span></code>, with <code class="docutils literal"><span class="pre">&quot;circuit&quot;</span></code> being the default.</p>
+</li>
+<li><p class="first">The number of time slices:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">num_time_slices</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This has to be a non-negative <code class="docutils literal"><span class="pre">int</span></code> value.  The default is <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">Paulis grouping mode:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">paulis_grouping</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span> <span class="o">|</span> <span class="s2">&quot;random&quot;</span>
+</pre></div>
+</div>
+<p>Two <code class="docutils literal"><span class="pre">string</span></code> values are permitted: <code class="docutils literal"><span class="pre">&quot;default&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>, with <code class="docutils literal"><span class="pre">&quot;default&quot;</span></code> being the default and indicating
+that the paulis should be grouped.</p>
+</li>
+<li><p class="first">The expansion mode:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">expansion_mode</span> <span class="o">=</span> <span class="s2">&quot;trotter&quot;</span> <span class="o">|</span> <span class="s2">&quot;suzuki&quot;</span>
+</pre></div>
+</div>
+<p>Two <code class="docutils literal"><span class="pre">string</span></code> values are permitted: <code class="docutils literal"><span class="pre">&quot;trotter&quot;</span></code> (Lloyd’s method) or <code class="docutils literal"><span class="pre">&quot;suzuki&quot;</span></code> (for Trotter-Suzuki expansion),
+with  <code class="docutils literal"><span class="pre">&quot;trotter&quot;</span></code> being the default one.</p>
+</li>
+<li><p class="first">The expansion order:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">expansion_order</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter sets the Trotter-Suzuki expansion order.  A positive <code class="docutils literal"><span class="pre">int</span></code> value is expected.  The default value is <code class="docutils literal"><span class="pre">2</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Quantum Dynamics declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">Dynamics</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, Quantum Dynamics supports the <code class="docutils literal"><span class="pre">dynamics</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="quantum-phase-estimation-qpe">
+<h3>Quantum Phase Estimation (QPE)<a class="headerlink" href="#quantum-phase-estimation-qpe" title="Permalink to this headline">¶</a></h3>
+<p>QPE (also sometimes abbreviated
+as PEA, for <strong>Phase Estimation Algorithm</strong>), takes two quantum registers, <strong>control</strong> and <strong>target</strong>, where the
+control consists of several qubits initially put in uniform
+superposition, and the target a set of qubits prepared in an eigenstate
+(or, oftentimes, a guess of the eigenstate) of the unitary operator of
+a quantum system. QPE then evolves the target under the control using
+<span class="xref std std-ref">Dynamics</span> of the unitary operator. The information of the
+corresponding eigenvalue is then <em>kicked-back</em> into the phases of the
+control register, which can then be deconvoluted by an <a class="reference external" href="./iqfts.html">Inverse Quantum
+Fourier Transform (IQFT)</a>, and measured for read-out in binary decimal
+format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This algorithm <strong>does not</strong> support the <code class="docutils literal"><span class="pre">local_state_vector</span></code> simulator.</p>
+</div>
+<p>QPE is configured with an <a class="reference external" href="initial_states.html">initial
+state</a> and an <a class="reference external" href="./iqfts.html">IQFT</a>.</p>
+<p>QPE is also configured with the following parameter settings:</p>
+<ul>
+<li><p class="first">The number of time slices:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">num_time_slices</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This has to be a non-negative <code class="docutils literal"><span class="pre">int</span></code> value.  The default value is <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">Paulis grouping mode:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">paulis_grouping</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span> <span class="o">|</span> <span class="s2">&quot;random&quot;</span>
+</pre></div>
+</div>
+<p>Two string values are permitted: <code class="docutils literal"><span class="pre">&quot;default&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;random&quot;</span></code>, with <code class="docutils literal"><span class="pre">&quot;default&quot;</span></code>
+being the default and indicating that the paulis should be grouped.</p>
+</li>
+<li><p class="first">The expansion mode:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">expansion_mode</span> <span class="o">=</span> <span class="s2">&quot;trotter&quot;</span> <span class="o">|</span> <span class="s2">&quot;suzuki&quot;</span>
+</pre></div>
+</div>
+<p>Two <code class="docutils literal"><span class="pre">string</span></code> values are permitted: <code class="docutils literal"><span class="pre">&quot;trotter&quot;</span></code> (Lloyd’s method) or <code class="docutils literal"><span class="pre">&quot;suzuki&quot;</span></code> (for Trotter-Suzuki expansion),
+with  <code class="docutils literal"><span class="pre">&quot;trotter&quot;</span></code> being the default one.</p>
+</li>
+<li><p class="first">The expansion order:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">expansion_order</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter sets the Trotter-Suzuki expansion order.  A positive <code class="docutils literal"><span class="pre">int</span></code> value is expected.  The default value is <code class="docutils literal"><span class="pre">2</span></code>.</p>
+</li>
+<li><p class="first">The number of ancillae:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">num_ancillae</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter sets the number of ancillary qubits to be used by QPE.  A positive <code class="docutils literal"><span class="pre">int</span></code> value is expected.
+The default value is <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to QPE declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">QPE</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, QPE supports the <code class="docutils literal"><span class="pre">energy</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="iterative-quantum-phase-estimation-iqpe">
+<h3>Iterative Quantum Phase Estimation (IQPE)<a class="headerlink" href="#iterative-quantum-phase-estimation-iqpe" title="Permalink to this headline">¶</a></h3>
+<p>IQPE, as its name
+suggests, iteratively computes the phase so as to require less qubits.
+It takes in the same set of parameters as <a class="reference internal" href="#quantum-phase-estimation-qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>, except for the number of
+ancillary qubits <code class="docutils literal"><span class="pre">num_ancillae</span></code>, which is replaced by
+<code class="docutils literal"><span class="pre">num_iterations</span></code> (a positive <code class="docutils literal"><span class="pre">int</span></code>, also defaulted to <code class="docutils literal"><span class="pre">1</span></code>), and for the fact that an <a class="reference external" href="./iqfts.html">IQFT</a> is not
+used for IQPE.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This algorithm <strong>does not</strong> support the <code class="docutils literal"><span class="pre">local_state_vector</span></code> simulator.</p>
+</div>
+<p>For more details, please see <a class="reference external" href="https://arxiv.org/abs/quant-ph/0610214">arXiv:quant-ph/0610214</a>.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to IQPE declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">IQPE</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, IQPE supports the <code class="docutils literal"><span class="pre">energy</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="quantum-grover-search">
+<h3>Quantum Grover Search<a class="headerlink" href="#quantum-grover-search" title="Permalink to this headline">¶</a></h3>
+<p>Grover’s Search is a well known quantum algorithm for searching through
+unstructured collection of records for particular targets with quadratic
+speedups. All that is needed for carrying out a search is an <a class="reference external" href="./oracles.html">oracle</a> for
+specifying the search criterion, which basically indicates a hit or miss
+for any given record. Currently the satisfiability (SAT) oracle
+implementation is provided, which takes as input a SAT problem in
+<a class="reference external" href="http://www.satcompetition.org/2009/format-benchmarks2009.html">DIMACS CNF
+format</a>
+and constructs the corresponding quantum circuit.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Quantum Grover Search declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">Grover</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, Grover supports the <code class="docutils literal"><span class="pre">search</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="support-vector-machine-quantum-kernel-svm-q-kernel">
+<h3>Support Vector Machine Quantum Kernel (SVM Q Kernel)<a class="headerlink" href="#support-vector-machine-quantum-kernel-svm-q-kernel" title="Permalink to this headline">¶</a></h3>
+<p>Classification algorithms and methods for machine learning are essential
+for pattern recognition and data mining applications. Well known
+techniques, such as support vector machines or neural networks, have
+blossomed over the last two decades as a result of the spectacular
+advances in classical hardware computational capabilities and speed.
+This progress in computer power made it possible to apply techniques
+theoretically developed towards the middle of the XX century on
+classification problems that soon became increasingly challenging.</p>
+<p>A key concept in classification methods is that of a kernel. Data cannot
+typically be separated by a hyperplane in its original space. A common
+technique used to find such a hyperplane consists on applying a
+non-linear transformation function to the data. This function is called
+a <em>feature map</em>, as it transforms the raw features, or measurable
+properties, of the phenomenon or subject under study. Classifying in
+this new feature space – and, as a matter of fact, also in any other
+space, including the raw original one – is nothing more than seeing how
+close data points are to each other. This is the same as computing the
+inner product for each pair of data in the set. In fact we do not need
+to compute the non-linear feature map for each datum, but only the inner
+product of each pair of data points in the new feature space. This
+collection of inner products is called the <em>kernel</em> and it is perfectly
+possible to have feature maps that are hard to compute but whose kernels
+are not.</p>
+<p>The SVM Q Kernel algorithm applies to classification problems that
+require a feature map for which computing the kernel is not efficient
+classically. This means that the required computational resources are
+expected to scale exponentially with the size of the problem.
+SVM_QKernel uses a Quantum processor to solve this problem by a direct
+estimation of the kernel in the feature space. The method used falls in
+the category of what is called <em>supervised learning</em>, consisting of a
+<em>training phase</em> (where the kernel is calculated and the support vectors
+obtained) and a <em>test or classification phase</em> (where new labeless data
+is classified according to the solution found in the training phase).</p>
+<p>SVM Q Kernel can be configured with the following parameter:</p>
+<ul>
+<li><p class="first">A Boolean indicating whether or not to print additional information when the algorithm is running:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">print_info</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>A Boolean value is expected.  The default is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SVM Q Kernel declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">SVM_QKernel</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, SVM Q Kernel  supports the <code class="docutils literal"><span class="pre">svm_classification</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="support-vector-machine-variational-svm-variational">
+<h3>Support Vector Machine Variational (SVM Variational)<a class="headerlink" href="#support-vector-machine-variational-svm-variational" title="Permalink to this headline">¶</a></h3>
+<p>Just like SVM_Kernel, the SVM_Variational algorithm applies to
+classification problems that require a feature map for which computing
+the kernel is not efficient classically. SVM_Variational solves such
+problems in a quantum processor by variational method that optimizes a
+parameterized quantum circuit to provide a solution that cleanly
+separates the data.</p>
+<p>SVM_Variational can be configured with the following parameters:</p>
+<ul>
+<li><p class="first">The depth of the variational circuit to be optimized:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">circuit_depth</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>An integer value greater than or equal to <code class="docutils literal"><span class="pre">3</span></code> is expected.  The default is <code class="docutils literal"><span class="pre">3</span></code>.</p>
+</li>
+<li><p class="first">A Boolean indicating whether or not to print additional information when the algorithm is running:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">print_info</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>A Boolean value is expected.  The default is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SVM Variational declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">SVM_Variational</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, SVM Variational  supports the <code class="docutils literal"><span class="pre">svm_classification</span></code> problem.</p>
+</div>
+</div>
+</div>
+<div class="section" id="classical-algorithms">
+<h2>Classical Algorithms<a class="headerlink" href="#classical-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we describe the classical algorithms currently available in QISKit ACQUA.
+While these algorithm do not use a quantum device or simulator, and rely on
+purely classical approaches, they may be useful in the
+near term while experimenting with, developing and testing quantum
+algorithms.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">QISKit ACQUA prevents associating a quantum device or simulator to any experiment that uses a classical
+algorithm.  The <code class="docutils literal"><span class="pre">backend</span></code> section of an experiment to be conducted via a classical algorithm is
+disabled.</p>
+</div>
+<div class="section" id="exact-eigensolver">
+<h3>Exact Eigensolver<a class="headerlink" href="#exact-eigensolver" title="Permalink to this headline">¶</a></h3>
+<p>Exact Eigensolver computes up to the first <code class="docutils literal"><span class="pre">k</span></code> eigenvalues of a complex square matrix of dimension <code class="docutils literal"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">n</span></code>,
+with <code class="docutils literal"><span class="pre">k</span></code> <span class="math">\(leq\)</span> <code class="docutils literal"><span class="pre">n</span></code>.
+It can be configured with the following parameter:</p>
+<ul>
+<li><p class="first">The number of eigenvalues to compute:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>An <code class="docutils literal"><span class="pre">int</span></code> value <code class="docutils literal"><span class="pre">k</span></code> in the range <span class="math">\([1,n]\)</span> is expected. The default is <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Exact Eigensolver declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">ExactEigensolver</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, Exact Eigensolver supports the <code class="docutils literal"><span class="pre">energy</span></code>, <code class="docutils literal"><span class="pre">ising</span></code> and <code class="docutils literal"><span class="pre">excited_states</span></code>  problems.</p>
+</div>
+</div>
+<div class="section" id="cplex">
+<h3>CPLEX<a class="headerlink" href="#cplex" title="Permalink to this headline">¶</a></h3>
+<p>This algorithm uses the <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.studio.help/Optimization_Studio/topics/COS_home.html">IBM ILOG CPLEX Optimization
+Studio</a>
+which should be installed along with its <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.cplex.help/CPLEX/GettingStarted/topics/set_up/Python_setup.html">Python
+API</a>
+setup, for this algorithm to be operational. This algorithm currently
+supports computing the energy of an Ising model Hamiltonian.</p>
+<p>CPLEX can be configured with the following parameters:</p>
+<ul>
+<li><p class="first">A time limit in seconds for the execution:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">timelimit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal"><span class="pre">int</span></code> val;ue is expected.  The default value is <cite>600</cite>.</p>
+</li>
+<li><p class="first">The number of threads that CPLEX uses:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">thread</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A non-negative <code class="docutils literal"><span class="pre">int</span></code> value is expected. Setting <code class="docutils literal"><span class="pre">thread</span></code> to <code class="docutils literal"><span class="pre">0</span></code> lets CPLEX decide the number of threads to allocate, but this may
+not be ideal for small problems.  Any value
+greater than <code class="docutils literal"><span class="pre">0</span></code> specifically sets the thread count.  The default value is <code class="docutils literal"><span class="pre">1</span></code>, which is ideal for small problems.</p>
+</li>
+<li><p class="first">Decides what CPLEX reports to the screen and records in a log during mixed integer optimization (MIP).</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">display</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>An <code class="docutils literal"><span class="pre">int</span></code> value between <code class="docutils literal"><span class="pre">0</span></code> and <code class="docutils literal"><span class="pre">5</span></code> is expected.
+The amount of information displayed increases with increasing values of this parameter.
+By default, this value is set to <code class="docutils literal"><span class="pre">2</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to CPLEX declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">CPLEX</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, CPLEX supports the <code class="docutils literal"><span class="pre">ising</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="support-vector-machine-radial-basis-function-kernel-svm-rbf-kernel">
+<h3>Support Vector Machine Radial Basis Function Kernel (SVM RBF Kernel)<a class="headerlink" href="#support-vector-machine-radial-basis-function-kernel-svm-rbf-kernel" title="Permalink to this headline">¶</a></h3>
+<p>This algorithm uses a classical approach to experiment with feature map classification
+problems.
+SVM RBF Kernel can be configured with the following parameter:</p>
+<ul>
+<li><p class="first">A Boolean indicating whether or not to print additional information when the algorithm is running:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">print_info</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>A Boolean value is expected.  The default is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SVM RBF Kernel declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which
+QISKit ACQUA dynamically discovers and loads it, is <code class="docutils literal"><span class="pre">SVM_RBF_Kernel</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In QISKit ACQUA, SVM RBF Kernel  supports the <code class="docutils literal"><span class="pre">svm_classification</span></code> problem.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="optimizers.html" title="Optimizers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation and Setup"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
