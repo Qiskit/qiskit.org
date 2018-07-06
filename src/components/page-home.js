@@ -77,6 +77,11 @@ class PageHome extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--app-primary-color);
         }
 
+        .news .row .illustration img {
+          width: 180px;
+          height: 180px;
+        }
+
         .architecture {
           background-color: #292C35;
           color: #FFFFFF;
@@ -159,6 +164,10 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         @media (min-width: 768px) {
+          .news .row .illustration {
+            align-items: center;
+          }
+
           .supporters-list {
             column-count: 3;
           }
@@ -203,7 +212,21 @@ class PageHome extends localize(i18next)(PageViewElement) {
       </header>
 
       <section class="news colored">
-        <div class="limited-width">
+        <div class="row limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.home.newsTitle')}</h3>
+            <p>${i18next.t('pages.home.newsDescription')}</p>
+            <div class="actions">
+              <a href="/acqua" tabindex="-1">
+                <vaadin-button theme="secondary">
+                  ${i18next.t('pages.home.newsButton')}
+                </vaadin-button>
+              </a>
+            </div>
+          </div>
+          <div class="illustration">
+            <img src="images/qiskit-acqua-logo.png" alt="${i18next.t('pages.acqua.altLogo')}">
+          </div>
         </div>
       </section>
 
