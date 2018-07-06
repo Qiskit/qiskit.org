@@ -91,7 +91,7 @@ export const HeaderStyles = html`<style>
   }
 
   header .badges > * + * {
-    margin-left: 1em;
+    margin-left: 1.5em;
   }
 
   header .badges vaadin-button {
