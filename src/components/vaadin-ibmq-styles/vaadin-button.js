@@ -95,18 +95,18 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       color: var(--ibmq-button-primary-color, var(--ibmq-primary-text-color));
     }
 
-    :host([theme~="primary"][focused]),
+    :host([theme~="primary"][focus-ring]),
     :host([theme~="primary"]:hover) {
       background-color: var(--ibmq-button-primary-focused-background-color, var(--ibmq-light-primary-color));
     }
 
-    :host([theme~="primary"][focused]) {
+    :host([theme~="primary"][focus-ring]) {
       border: 2px solid #f5f7fa;
       outline: 2px solid var(--ibmq-button-primary-focused-background-color, var(--ibmq-light-primary-color));
     }
 
     :host([theme~="primary"][disabled]:hover),
-    :host([theme~="primary"][disabled][focused]) {
+    :host([theme~="primary"][disabled][focus-ring]) {
       background-color: var(--ibmq-button-primary-background-color, var(--ibmq-primary-color));
     }
 
@@ -130,18 +130,18 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
       color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
-    :host([theme~="secondary"][focused]),
+    :host([theme~="secondary"][focus-ring]),
     :host([theme~="secondary"]:hover) {
       background-color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
-    :host([theme~="secondary"][focused]) {
+    :host([theme~="secondary"][focus-ring]) {
       border: 2px solid #f5f7fa;
       outline: 2px solid var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
     :host([theme~="secondary"][disabled]:hover),
-    :host([theme~="secondary"][disabled][focused]) {
+    :host([theme~="secondary"][disabled][focus-ring]) {
       background-color: transparent;
     }
 
@@ -154,7 +154,7 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
     }
 
     :host([theme~="secondary"]:hover),
-    :host([theme~="secondary"][focused]) {
+    :host([theme~="secondary"][focus-ring]) {
       color: var(--ibmq-button-secondary-focus-color, var(--ibmq-primary-text-color));
     }
 
@@ -163,12 +163,12 @@ $_documentContainer.innerHTML = `<dom-module id="ibmq-button" theme-for="vaadin-
     }
 
     :host([theme~="secondary"]:hover) [part] ::slotted(svg),
-    :host([theme~="secondary"][focused]) [part] ::slotted(svg) {
+    :host([theme~="secondary"][focus-ring]) [part] ::slotted(svg) {
       fill: var(--ibmq-button-secondary-focus-color, var(--ibmq-primary-text-color));
     }
 
     :host([theme~="secondary"]:hover[disabled]),
-    :host([theme~="secondary"][focused][disabled]) {
+    :host([theme~="secondary"][focus-ring][disabled]) {
       color: var(--ibmq-button-secondary-color, var(--ibmq-primary-color));
     }
 
