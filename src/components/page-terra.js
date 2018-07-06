@@ -109,7 +109,7 @@ class PageTerra extends localize(i18next)(PageViewElement) {
               </template>
             </code-sample>
             <h3>${i18next.t('pages.terra.exampleTitle')}</h3>
-            <code-sample type="python">
+            <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import ClassicalRegister, QuantumRegister
