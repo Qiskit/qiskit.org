@@ -64,7 +64,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           <p>${i18next.t('pages.studio.headerDescription')}</p>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit/qiskit-studio"
+                href="https://github.com/Qiskit/qiskit-vscode"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
