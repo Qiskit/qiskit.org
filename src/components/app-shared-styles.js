@@ -236,16 +236,6 @@ export const SectionElementStyles = html`<style>
     font-size: .9em;
   }
 
-  vaadin-button {
-    --ibmq-button-secondary-color: #2a2c36;
-    --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
-  }
-
-  vaadin-button[selected] {
-    background-color: #2a2c36;
-    color: var(--qiskit-acqua-color);
-  }
-
   code-sample[type="bash"] {
     margin-bottom: 2em;
   }

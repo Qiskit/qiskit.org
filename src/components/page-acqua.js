@@ -45,6 +45,17 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
 
         section .menu nav > a {
           display: inline-flex;
+          text-decoration: none;
+        }
+
+        section .menu nav vaadin-button {
+          --ibmq-button-secondary-color: #2a2c36;
+          --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
+        }
+
+        section .menu nav vaadin-button[selected] {
+          background-color: #2a2c36;
+          color: var(--qiskit-acqua-color);
         }
 
         .acqua-section {
