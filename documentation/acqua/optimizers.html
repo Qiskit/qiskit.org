@@ -1,0 +1,618 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Optimizers &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Extending QISKit ACQUA" href="extending.html" />
+    <link rel="prev" title="Algorithms" href="algorithms.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extending.html" title="Extending QISKit ACQUA"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="algorithms.html" title="Algorithms"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Optimizers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#local-optimizers">Local Optimizers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conjugate-gradient-cg-method">Conjugate Gradient (CG) Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constrained-optimization-by-linear-approximation-cobyla">Constrained Optimization BY Linear Approximation (COBYLA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b">Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nelder-mead">Nelder-Mead</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-broyden-fletcher-goldfarb-shann-p-bfgs">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#powell">Powell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sequential-least-squares-programming-slsqp">Sequential Least SQuares Programming (SLSQP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simultaneous-perturbation-stochastic-approximation-spsa">Simultaneous Perturbation Stochastic Approximation (SPSA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#truncated-newton-tnc">Truncated Newton (TNC)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="algorithms.html"
+                        title="previous chapter">Algorithms</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="extending.html"
+                        title="next chapter">Extending QISKit ACQUA</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/optimizers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="optimizers">
+<h1>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this headline">¶</a></h1>
+<p>QISKit ACQUA  contains a variety of different optimizers for
+use by quantum variational algorithms, such as <a class="reference external" href="./algorithms.html#variational-quantum-eigensolver-vqe">VQE</a>.  We can logically divide
+optimizers into two categories:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#local-optimizers"><span class="std std-ref">Local Optimizers</span></a>: Given an optimization problem, a <em>local optimizer</em> is a function that attempts to find an optimal value</li>
+</ul>
+<p>within the neighboring set of a candidate solution.</p>
+<ul class="simple">
+<li><span class="xref std std-ref">Global Optimizers</span>: Given an optimization problem, a <em>global optimizer</em> is a function that attempts to find an optimal value</li>
+</ul>
+<p>among all possible solutions.</p>
+<div class="section" id="local-optimizers">
+<h2>Local Optimizers<a class="headerlink" href="#local-optimizers" title="Permalink to this headline">¶</a></h2>
+<p>This section presents the local optimizers made available in QISKit ACQUA, and meant to be used in conjunction with a quantum variational
+algorithms.  Except for <a class="reference internal" href="#parallel-broyden-fletcher-goldfarb-shann-p-bfgs"><span class="std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span></a>, all hese optimizers are directly based on the <code class="docutils literal"><span class="pre">scipy.optimize.minimize</span></code> optimization function in
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">SciPy.org</a>.
+They all have a common pattern for parameters. Specifically, the <code class="docutils literal"><span class="pre">tol</span></code> parameter, whose value
+must be a <code class="docutils literal"><span class="pre">float</span></code> indicating <em>tolerance for termination</em>,
+is from the <code class="docutils literal"><span class="pre">scipy.optimize.minimize</span></code>  method itself, while the remaining parameters are
+from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.show_options.html">options
+dictionary</a>,
+which may be referred to for further information.</p>
+<div class="section" id="conjugate-gradient-cg-method">
+<h3>Conjugate Gradient (CG) Method<a class="headerlink" href="#conjugate-gradient-cg-method" title="Permalink to this headline">¶</a></h3>
+<p>CG is an algorithm for the numerical solution of systems of linear equations whose matrices are symmetric and positive-definite.
+It is an <em>iterative algorithm</em> in that it uses an initial guess to generate a sequence of improving approximate solutions for a problems, in whicheach approximation is derived from the previous ones.  It is often used to solve unconstrained optimization problems, such as energy minimization.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations to perform:</p>
+<p>The default is <code class="docutils literal"><span class="pre">20</span></code>.</p>
+</li>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value that must be greater than the gradient norm before successful termination.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">1e-05</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a number, otherwise, it is  <code class="docutils literal"><span class="pre">Nonw</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to CG declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">CG</span></code>.</p>
+</div>
+</div>
+<div class="section" id="constrained-optimization-by-linear-approximation-cobyla">
+<h3>Constrained Optimization BY Linear Approximation (COBYLA)<a class="headerlink" href="#constrained-optimization-by-linear-approximation-cobyla" title="Permalink to this headline">¶</a></h3>
+<p>COBYLA is a numerical optimization method for constrained problems where the derivative of the objective function is not known.
+COBYLA supports the following parameters:</p>
+<ul>
+<li><p class="first">The maximum number of iterations to perform:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">Reasonable initial changes to the variable:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">rhobeg</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">1.0</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal"><span class="pre">None</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to COBYLA declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">COBYLA</span></code>.</p>
+</div>
+</div>
+<div class="section" id="limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b">
+<h3>Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)<a class="headerlink" href="#limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b" title="Permalink to this headline">¶</a></h3>
+<p>The target goal of L-BFGS-B is to minimize the value of a differentiable scalar function <span class="math">\(f\)</span>.
+This optimizer is a <em>quasi-Newton method</em>, meaning tha, in contrast to <em>Newtons’s method</em>, it
+does not require :math:f’s <em>Hessian</em> (the matrix of <span class="math">\(f\)</span>‘s second derivatives)
+when attempting to compute <span class="math">\(f\)</span>‘s minimum value.
+Like BFGS, L-BFGS is an iterative method for solving unconstrained, non-linear optimization problems, but approximates
+BFGS using a limited amount of computer memory.
+L-BFGS starts with an initial estimate of the optimal value, and proceeds iteratively
+to refine that estimate with a sequence of better estimates.
+The derivatives of <span class="math">\(f\)</span> are used to identify the direction of steepest descent,
+and also to form an estimate of the Hessian matrix (second derivative) of <span class="math">\(f\)</span>.
+L-BFGS-B extends L-BFGS to handle simple, per-variable bound constraints.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of function evaluations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxfun</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of function evaluations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxfun</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">factr</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">10</span></code>.</p>
+</li>
+<li><p class="first">An <code class="docutils literal"><span class="pre">int</span></code> value controlling the frequency of the printed output showing the  optimizer’s
+operations.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">iprint</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">-1</span></code>.</p>
+</li>
+</ul>
+<p>Further detailed information on <em>factr</em> and <em>iprint</em> may be found at
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">scipy.optimize.fmin_l_bfgs_b</a>.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to L-BFGS-B declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">L_BFGS_B</span></code>.</p>
+</div>
+</div>
+<div class="section" id="nelder-mead">
+<h3>Nelder-Mead<a class="headerlink" href="#nelder-mead" title="Permalink to this headline">¶</a></h3>
+<p>The Nelder-Mead algorithm performs unnconstrained optimization; it ignores bounds
+or constraints.  It is used to find the minimum or maximum of an objective function
+in a multidimensional space.  It is based on the Simplex algorithm. Nelder-Mead
+is robust in many applications, especially when the first and second derivativerds of the
+objective function are not known. However, if numerical
+computation of the derivatives can be trusted to be accurate, other algorithms using the
+first and/or second derivatives information might be preferred for their
+better performance in the general case, especially in consideration of the fact that
+the Nelder–Mead technique is a heuristic search method that can converge to non-stationary points.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal"><span class="pre">int</span></code>, otherwise, it is  <code class="docutils literal"><span class="pre">None</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of functional evaluations to perform:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxfev</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">A <code class="docutils literal"><span class="pre">bool</span></code> value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance parameter indicating the absolute error in <code class="docutils literal"><span class="pre">xopt</span></code> between iterations that will be considered acceptable
+for convergence.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">xatol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">0.0001</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal"><span class="pre">None</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Nelder-Mead declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">NELDER_MEAD</span></code>.</p>
+</div>
+</div>
+<div class="section" id="parallel-broyden-fletcher-goldfarb-shann-p-bfgs">
+<h3>Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)<a class="headerlink" href="#parallel-broyden-fletcher-goldfarb-shann-p-bfgs" title="Permalink to this headline">¶</a></h3>
+<p>P-BFGS is a parallellized version of  <a class="reference internal" href="#limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b"><span class="std std-ref">Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</span></a>,
+with which it shares the same parameters.
+P-BFGS can be useful when the target hardware is a quantum simulator running on a classical
+machine. This allows the multiple processes to use simulation to
+potentially reach a minimum faster. The parallelization may help the optimizer avoid getting stuck
+at local mimima.  In addition to the parameters of
+L-BFGS-B, P-BFGS supports the following parameter:</p>
+<ul>
+<li><p class="first">The maximum numer of processes spawned by P-BFGS:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">max_processes</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>By default, P-BFGS runs one optimization in the current process
+and spawns additional processes up to the number of processor cores.
+An <code class="docutils literal"><span class="pre">int</span></code> value may be specified to limit the total number of processes
+(or cores) used.  This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal"><span class="pre">int</span></code>,
+otherwise, it is <code class="docutils literal"><span class="pre">None</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The parallel processes do not currently work for this optimizer
+on the Microsoft Windows platform. There, P-BFGS will just run the one
+optimization in the main process, without spawning new processes.
+Therefore, the resulting behavior
+will be the same as the L-BFGS-B optimizer.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to P-BFGS declaratively inside QISKit ACQUA,
+its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">P_BFGS</span></code>.</p>
+</div>
+</div>
+<div class="section" id="powell">
+<h3>Powell<a class="headerlink" href="#powell" title="Permalink to this headline">¶</a></h3>
+<p>The Powell algorithm performs unconstrained optimization; it ignores bounds or
+constraints. Powell is
+a <em>conjugate direction method</em>: it performs sequential one-dimensional
+minimization along each directional vector, which is updated at
+each iteration of the main minimization loop. The function being minimized need not be
+differentiable, and no derivatives are taken.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal"><span class="pre">int</span></code>, otherwise, it is  <code class="docutils literal"><span class="pre">None</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of functional evaluations to perform:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxfev</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">A <code class="docutils literal"><span class="pre">bool</span></code> value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance parameter indicating the absolute error in <code class="docutils literal"><span class="pre">xopt</span></code> between iterations that will be considered acceptable
+for convergence.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">xtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">0.0001</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal"><span class="pre">None</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Powell declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">POWELL</span></code>.</p>
+</div>
+</div>
+<div class="section" id="sequential-least-squares-programming-slsqp">
+<h3>Sequential Least SQuares Programming (SLSQP)<a class="headerlink" href="#sequential-least-squares-programming-slsqp" title="Permalink to this headline">¶</a></h3>
+<p>SLSQP minimizes a
+function of several variables with any combination of bounds, equality
+and inequality constraints. The method wraps the SLSQP Optimization
+subroutine originally implemented by Dieter Kraft.
+SLSQP is ideal for  mathematical problems for which the objective function and the constraints are twice continuously differentiable.
+Note that the wrapper
+handles infinite values in bounds by converting them into large floating
+values.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">100</span></code>.</p>
+</li>
+<li><p class="first">A <code class="docutils literal"><span class="pre">bool</span></code> value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating precision goal for the value of the objective function in the stopping criterion.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">1e-06</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="n">number</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a number, otherwise, it is  <code class="docutils literal"><span class="pre">Nonw</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SLSQP declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">SLSQP</span></code>.</p>
+</div>
+</div>
+<div class="section" id="simultaneous-perturbation-stochastic-approximation-spsa">
+<h3>Simultaneous Perturbation Stochastic Approximation (SPSA)<a class="headerlink" href="#simultaneous-perturbation-stochastic-approximation-spsa" title="Permalink to this headline">¶</a></h3>
+<p>SPSA is an algorithmic method for optimizing systems with multiple unknown parameters.
+As an optimization method, it is appropriately suited to large-scale population models, adaptive modeling,and simulation optimization. Many examples are presented at the <a class="reference external" href="http://www.jhuapl.edu/SPSA">SPSA Web site</a>.
+SPSA is a descent method capable of finding global minima,
+sharing this property with other methods as simulated annealing.
+Its main feature is the gradient approximation, which requires only two
+measurements of the objective function, regardless of the dimension of the optimization problem.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">SPSA can be used in the presence of noise, and it is therefore indicated in situations
+involving measurement uncertainty on a quantum computation when finding a minimum. If you are
+executing a variational algorithm using a Quantum ASseMbly Language (QASM) simulator or a real device,
+SPSA would be the most  recommended choice among the optimizers provided here.</p>
+</div>
+<p>The optimization process includes a calibration phase, which requires additional
+functional evaluations.  Overall, the following parameters are supported:</p>
+<ul>
+<li><p class="first">Maximum number of trial steps for to be taken for the optimization.
+There are two function evaluations per trial:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">max_trials</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">An <code class="docutils literal"><span class="pre">int</span></code> value determining how often optimization outcomes should be stored during execution:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">save_steps</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>SPSA will store optimization outcomes every <code class="docutils literal"><span class="pre">save_steps</span></code> trial steps.  The default value is <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">The number of last updates of the variables to average on for the
+final objective function:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">last_avg</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">Control parameters for SPSA:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">parameters</span> <span class="o">=</span> <span class="n">list_of_5_numbers</span>
+</pre></div>
+</div>
+<p>This is an optional parameter, consisting of a list of 5 <code class="docutils literal"><span class="pre">float</span></code> elements.  The default value is <code class="docutils literal"><span class="pre">None</span></code>.
+SPSA updates the parameters (<code class="docutils literal"><span class="pre">theta</span></code>)
+for the objective function (<code class="docutils literal"><span class="pre">J</span></code>) through the following equation at
+iteration <code class="docutils literal"><span class="pre">k</span></code>:</p>
+<p><code class="docutils literal"><span class="pre">J(theta)</span></code> is the  objective value of <code class="docutils literal"><span class="pre">theta</span></code>. <code class="docutils literal"><span class="pre">c0</span></code>, <code class="docutils literal"><span class="pre">c1</span></code>, <code class="docutils literal"><span class="pre">c2</span></code>, <code class="docutils literal"><span class="pre">c3</span></code> and <code class="docutils literal"><span class="pre">c4</span></code> are the five control parameters.
+By default, <code class="docutils literal"><span class="pre">c0</span></code> is calibrated through a few evaluations on the
+objective function with the initial <code class="docutils literal"><span class="pre">theta</span></code>. <code class="docutils literal"><span class="pre">c1</span></code>, <code class="docutils literal"><span class="pre">c2</span></code>, <code class="docutils literal"><span class="pre">c3</span></code> and <code class="docutils literal"><span class="pre">c4</span></code> are set as <code class="docutils literal"><span class="pre">0.1</span></code>,
+<code class="docutils literal"><span class="pre">0.602</span></code>, <code class="docutils literal"><span class="pre">0.101</span></code>, <code class="docutils literal"><span class="pre">0.0</span></code>, respectively.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SPSA declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">SPSA</span></code>.</p>
+</div>
+</div>
+<div class="section" id="truncated-newton-tnc">
+<h3>Truncated Newton (TNC)<a class="headerlink" href="#truncated-newton-tnc" title="Permalink to this headline">¶</a></h3>
+<p>TNC uses a truncated Newton algorithm to minimize a function with
+variables subject to bounds. This algorithm uses gradient information;
+it is also called Newton Conjugate-Gradient. It differs from the
+<a class="reference internal" href="#conjugate-gradient-cg-method"><span class="std std-ref">Conjugate Gradient (CG) Method</span></a> method as it wraps a C implementation and
+allows each variable to be given upper and lower bounds.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal"><span class="pre">100</span></code>.</p>
+</li>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">Relative precision for finite difference calculations:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">0.0</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating the precision goal for the value of the objective function <code class="docutils literal"><span class="pre">f</span></code> in the stopping criterion.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ftol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating precision goal for the value of <code class="docutils literal"><span class="pre">x</span></code> in the stopping criterion, after applying <code class="docutils literal"><span class="pre">x</span></code> scaling factors.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">xtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating precision goal for the value of the projected gradient <code class="docutils literal"><span class="pre">g</span></code> in the stopping criterion,
+after applying <code class="docutils literal"><span class="pre">x</span></code> scaling factors.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="n">number</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a number, otherwise, it is  <code class="docutils literal"><span class="pre">Nonw</span></code>.
+The default is <code class="docutils literal"><span class="pre">None</span></code></p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to TNC declaratively inside QISKit ACQUA, its code <code class="docutils literal"><span class="pre">name</span></code>, by which QISKit ACQUA dynamically discovers and loads it,
+is <code class="docutils literal"><span class="pre">TNC</span></code>.</p>
+</div>
+<p>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extending.html" title="Extending QISKit ACQUA"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="algorithms.html" title="Algorithms"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

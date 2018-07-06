@@ -1,0 +1,972 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit_acqua.ising package &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/qiskit_acqua.ising.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-acqua-ising-package">
+<h1>qiskit_acqua.ising package<a class="headerlink" href="#qiskit-acqua-ising-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-qiskit_acqua.ising.ising">
+<span id="qiskit-acqua-ising-ising-module"></span><h2>qiskit_acqua.ising.ising module<a class="headerlink" href="#module-qiskit_acqua.ising.ising" title="Permalink to this headline">¶</a></h2>
+<p>CPLEX algorithm; uses IBM CPLEX backend for Ising Hamiltonian solution</p>
+<dl class="class">
+<dt id="qiskit_acqua.ising.ising.CPLEX">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.ising.ising.</code><code class="descname">CPLEX</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#CPLEX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit_acqua.html#qiskit_acqua.quantumalgorithm.QuantumAlgorithm" title="qiskit_acqua.quantumalgorithm.QuantumAlgorithm"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.quantumalgorithm.QuantumAlgorithm</span></code></a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.CPLEX_CONFIGURATION">
+<code class="descname">CPLEX_CONFIGURATION</code><em class="property"> = {'classical': True, 'description': 'CPLEX backend for Ising Hamiltonian', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'CPLEX_schema', 'type': 'object', 'properties': {'timelimit': {'type': 'integer', 'default': 600, 'minimum': 1}, 'thread': {'type': 'integer', 'default': 1, 'minimum': 0}, 'display': {'type': 'integer', 'default': 2, 'minimum': 0, 'maximum': 5}}, 'additionalProperties': False}, 'name': 'CPLEX', 'problems': ['ising']}</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.CPLEX_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.EQUIVALENT_BACKENDS">
+<code class="descname">EQUIVALENT_BACKENDS</code><em class="property"> = {'local_qasm_simulator_cpp': 'local_qasm_simulator', 'local_qasm_simulator_projectq': 'local_qasm_simulator', 'local_qasm_simulator_py': 'local_qasm_simulator', 'local_statevector_simulator_cpp': 'local_statevector_simulator', 'local_statevector_simulator_projectq': 'local_statevector_simulator', 'local_statevector_simulator_py': 'local_statevector_simulator', 'local_statevector_simulator_sympy': 'local_statevector_simulator'}</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.EQUIVALENT_BACKENDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_ALGORITHM">
+<code class="descname">SECTION_KEY_ALGORITHM</code><em class="property"> = 'algorithm'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_ALGORITHM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_INITIAL_STATE">
+<code class="descname">SECTION_KEY_INITIAL_STATE</code><em class="property"> = 'initial_state'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_INITIAL_STATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_IQFT">
+<code class="descname">SECTION_KEY_IQFT</code><em class="property"> = 'iqft'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_IQFT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_OPTIMIZER">
+<code class="descname">SECTION_KEY_OPTIMIZER</code><em class="property"> = 'optimizer'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_OPTIMIZER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_ORACLE">
+<code class="descname">SECTION_KEY_ORACLE</code><em class="property"> = 'oracle'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_ORACLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_VAR_FORM">
+<code class="descname">SECTION_KEY_VAR_FORM</code><em class="property"> = 'variational_form'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.SECTION_KEY_VAR_FORM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.UNSUPPORTED_BACKENDS">
+<code class="descname">UNSUPPORTED_BACKENDS</code><em class="property"> = ['local_unitary_simulator', 'local_clifford_simulator']</em><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.UNSUPPORTED_BACKENDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return algorithm configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.CPLEX.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>circuits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for all algorithms to interface with quantum backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>circuits</strong> (<em>QuantumCircuit</em><em> or </em><em>list</em><em>[</em><em>QuantumCircuit</em><em>]</em>) – circuits to execute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.CPLEX.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em>, <em>algo_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#CPLEX.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.init_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.qconfig">
+<code class="descname">qconfig</code><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.qconfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Qconfig configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.random">
+<code class="descname">random</code><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a numpy random</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.random_seed">
+<code class="descname">random_seed</code><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.random_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random seed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.CPLEX.register_and_get_operational_backends">
+<code class="descname">register_and_get_operational_backends</code><span class="sig-paren">(</span><em>qconfig</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.register_and_get_operational_backends" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.CPLEX.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#CPLEX.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.CPLEX.setup_quantum_backend">
+<code class="descname">setup_quantum_backend</code><span class="sig-paren">(</span><em>backend='local_statevector_simulator'</em>, <em>shots=1024</em>, <em>skip_transpiler=False</em>, <em>timeout=None</em>, <em>wait=5</em>, <em>noise_params=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.setup_quantum_backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup the quantum backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>backend</strong> (<em>str</em>) – name of selected backend</li>
+<li><strong>shots</strong> (<em>int</em>) – number of shots for the backend</li>
+<li><strong>skip_transpiler</strong> (<em>bool</em>) – flag of skipping gate mapping, be aware that only
+basis gates of the backend are executed others are skipped.</li>
+<li><strong>timeout</strong> (<em>float</em><em> or </em><em>None</em>) – seconds to wait for job. If None, wait indefinitely.</li>
+<li><strong>wait</strong> (<em>float</em>) – seconds between queries</li>
+<li><strong>noise_params</strong> (<em>dict</em>) – the noise setting for simulator</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">AlgorithmError</span></code> – set backend with invalid Qconfig</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.CPLEX.solution">
+<code class="descname">solution</code><a class="headerlink" href="#qiskit_acqua.ising.ising.CPLEX.solution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.ising.ising.IsingInstance">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.ising.ising.</code><code class="descname">IsingInstance</code><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingInstance.constant">
+<code class="descname">constant</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingInstance.constant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingInstance.linear_coef">
+<code class="descname">linear_coef</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingInstance.linear_coef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingInstance.num_vars">
+<code class="descname">num_vars</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingInstance.num_vars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.IsingInstance.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>pauli_list: typing.List[typing.Dict[str, typing.Any]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingInstance.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingInstance.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingInstance.quad_coef">
+<code class="descname">quad_coef</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingInstance.quad_coef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.ising.ising.IsingModel">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.ising.ising.</code><code class="descname">IsingModel</code><span class="sig-paren">(</span><em>instance: qiskit_acqua.ising.ising.IsingInstance</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingModel.linear_coef">
+<code class="descname">linear_coef</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingModel.linear_coef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingModel.quad_coef">
+<code class="descname">quad_coef</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingModel.quad_coef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.IsingModel.solve">
+<code class="descname">solve</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingModel.solve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingModel.solve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.ising.ising.IsingSolution">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.ising.ising.</code><code class="descname">IsingSolution</code><span class="sig-paren">(</span><em>ins: qiskit_acqua.ising.ising.IsingInstance, sol: typing.Dict[int, int], elapsed: float, obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingSolution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.delimiter">
+<code class="descname">delimiter</code><em class="property"> = '\t'</em><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.delimiter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.dump">
+<code class="descname">dump</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingSolution.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.dump" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.feasible">
+<code class="descname">feasible</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#IsingSolution.feasible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.feasible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.objective">
+<code class="descname">objective</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.objective" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.time">
+<code class="descname">time</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.x_sol">
+<code class="descname">x_sol</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.x_sol" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.ising.IsingSolution.z_sol">
+<code class="descname">z_sol</code><a class="headerlink" href="#qiskit_acqua.ising.ising.IsingSolution.z_sol" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.ising.new_cplex">
+<code class="descclassname">qiskit_acqua.ising.ising.</code><code class="descname">new_cplex</code><span class="sig-paren">(</span><em>timelimit=600</em>, <em>thread=1</em>, <em>display=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/ising.html#new_cplex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.ising.new_cplex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.ising.maxcut">
+<span id="qiskit-acqua-ising-maxcut-module"></span><h2>qiskit_acqua.ising.maxcut module<a class="headerlink" href="#module-qiskit_acqua.ising.maxcut" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.get_graph_solution">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">get_graph_solution</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#get_graph_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.get_graph_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get graph solution from binary string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numpy.ndarray</em>) – binary string as numpy array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">graph solution as binary numpy array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.get_gset_result">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">get_gset_result</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#get_gset_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.get_gset_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get graph solution in Gset format from binary string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numpy.ndarray</em>) – binary string as numpy array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">graph solution in Gset format.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Dict[int, int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.get_maxcut_qubitops">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">get_maxcut_qubitops</code><span class="sig-paren">(</span><em>weight_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#get_maxcut_qubitops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.get_maxcut_qubitops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Hamiltonian for the maximum stableset in a graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>weight_matrix</strong> (<em>numpy.ndarray</em>) – adjacency matrix.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">operator for the Hamiltonian and a
+constant shift for the obj function.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit_acqua.html#qiskit_acqua.operator.Operator" title="qiskit_acqua.operator.Operator">operator.Operator</a>, float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.maxcut_value">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">maxcut_value</code><span class="sig-paren">(</span><em>x</em>, <em>w</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#maxcut_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.maxcut_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the value of a cut.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numpy.ndarray</em>) – binary string as numpy array.</li>
+<li><strong>w</strong> (<em>numpy.ndarray</em>) – adjacency matrix.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value of the cut.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.parse_gset_format">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">parse_gset_format</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#parse_gset_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.parse_gset_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read graph in Gset format from file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – name of the file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">adjacency matrix as a 2D numpy array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.random_graph">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">random_graph</code><span class="sig-paren">(</span><em>n</em>, <em>weight_range=10</em>, <em>edge_prob=0.3</em>, <em>savefile=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#random_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.random_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random Erdos-Renyi graph for MaxCut.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – number of nodes.</li>
+<li><strong>weight_range</strong> (<em>int</em>) – weights will be smaller than this value,
+in absolute value.</li>
+<li><strong>edge_prob</strong> (<em>float</em>) – probability of edge appearing.</li>
+<li><strong>savefile</strong> (<em>str</em><em> or </em><em>None</em>) – name of file where to save graph.</li>
+<li><strong>seed</strong> (<em>int</em><em> or </em><em>None</em>) – random seed - if None, will not initialize.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">adjacency matrix (with weights).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.maxcut.sample_most_likely">
+<code class="descclassname">qiskit_acqua.ising.maxcut.</code><code class="descname">sample_most_likely</code><span class="sig-paren">(</span><em>n</em>, <em>state_vector</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/maxcut.html#sample_most_likely"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.maxcut.sample_most_likely" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the most likely binary string from state vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – number of  qubits.</li>
+<li><strong>state_vector</strong> (<em>numpy.ndarray</em><em> or </em><em>dict</em>) – state vector or counts.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">binary string as numpy.ndarray of ints.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.ising.partition">
+<span id="qiskit-acqua-ising-partition-module"></span><h2>qiskit_acqua.ising.partition module<a class="headerlink" href="#module-qiskit_acqua.ising.partition" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qiskit_acqua.ising.partition.get_partition_qubitops">
+<code class="descclassname">qiskit_acqua.ising.partition.</code><code class="descname">get_partition_qubitops</code><span class="sig-paren">(</span><em>values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/partition.html#get_partition_qubitops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.partition.get_partition_qubitops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the Hamiltonian for a given Partition instance.</p>
+<p>Given a list of numbers for the Number Partitioning problem, we
+construct the Hamiltonian described as a list of Pauli gates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>values</strong> (<em>numpy.ndarray</em>) – array of values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">operator for the Hamiltonian and a
+constant shift for the obj function.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit_acqua.html#qiskit_acqua.operator.Operator" title="qiskit_acqua.operator.Operator">operator.Operator</a>, float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.partition.partition_value">
+<code class="descclassname">qiskit_acqua.ising.partition.</code><code class="descname">partition_value</code><span class="sig-paren">(</span><em>x</em>, <em>number_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/partition.html#partition_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.partition.partition_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the value of a partition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numpy.ndarray</em>) – binary string as numpy array.</li>
+<li><strong>number_list</strong> (<em>numpy.ndarray</em>) – list of numbers in the instance.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>difference squared between the two sides of the number</dt>
+<dd><p class="first last">partition.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.partition.random_number_list">
+<code class="descclassname">qiskit_acqua.ising.partition.</code><code class="descname">random_number_list</code><span class="sig-paren">(</span><em>n</em>, <em>weight_range=100</em>, <em>savefile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/partition.html#random_number_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.partition.random_number_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a set of positive integers within the given range.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – size of the set of numbers.</li>
+<li><strong>weight_range</strong> (<em>int</em>) – maximum absolute value of the numbers.</li>
+<li><strong>savefile</strong> (<em>str</em><em> or </em><em>None</em>) – write numbers to this file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the list of integer numbers.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.partition.read_numbers_from_file">
+<code class="descclassname">qiskit_acqua.ising.partition.</code><code class="descname">read_numbers_from_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/partition.html#read_numbers_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.partition.read_numbers_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read numbers from a file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – name of the file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of numbers as a numpy.ndarray.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.partition.sample_most_likely">
+<code class="descclassname">qiskit_acqua.ising.partition.</code><code class="descname">sample_most_likely</code><span class="sig-paren">(</span><em>n</em>, <em>state_vector</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/partition.html#sample_most_likely"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.partition.sample_most_likely" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the most likely binary string from state vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – number of  qubits.</li>
+<li><strong>state_vector</strong> (<em>numpy.ndarray</em><em> or </em><em>dict</em>) – state vector or counts.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">binary string as numpy.ndarray of ints.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.ising.simple_cplex">
+<span id="qiskit-acqua-ising-simple-cplex-module"></span><h2>qiskit_acqua.ising.simple_cplex module<a class="headerlink" href="#module-qiskit_acqua.ising.simple_cplex" title="Permalink to this headline">¶</a></h2>
+<p>Simple Python Wrapper for CPLEX</p>
+<dl class="class">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.ising.simple_cplex.</code><code class="descname">SimpleCPLEX</code><span class="sig-paren">(</span><em>cplex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_indicator_constraint">
+<code class="descname">add_indicator_constraint</code><span class="sig-paren">(</span><em>indvar</em>, <em>complemented</em>, <em>coef</em>, <em>sense</em>, <em>rhs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.add_indicator_constraint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_indicator_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_linear_constraint">
+<code class="descname">add_linear_constraint</code><span class="sig-paren">(</span><em>coef</em>, <em>sense</em>, <em>rhs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.add_linear_constraint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_linear_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_quadratic_constraint">
+<code class="descname">add_quadratic_constraint</code><span class="sig-paren">(</span><em>lin</em>, <em>quad</em>, <em>sense</em>, <em>rhs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.add_quadratic_constraint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_quadratic_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_sos">
+<code class="descname">add_sos</code><span class="sig-paren">(</span><em>coef</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.add_sos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.add_sos" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.build_model">
+<code class="descname">build_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.build_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.build_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.get_objective_value">
+<code class="descname">get_objective_value</code><span class="sig-paren">(</span><em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.get_objective_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.get_objective_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.get_values">
+<code class="descname">get_values</code><span class="sig-paren">(</span><em>lst</em>, <em>idx=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.get_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.get_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.maximize">
+<code class="descname">maximize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.maximize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.maximize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.minimize">
+<code class="descname">minimize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.minimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.minimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.model">
+<code class="descname">model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.num_solutions">
+<code class="descname">num_solutions</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.num_solutions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.objective">
+<code class="descname">objective</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.objective" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.parameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.populate">
+<code class="descname">populate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.populate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.populate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.problem_type">
+<code class="descname">problem_type</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.problem_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.register_variables">
+<code class="descname">register_variables</code><span class="sig-paren">(</span><em>prefix</em>, <em>ranges</em>, <em>var_type</em>, <em>lb=None</em>, <em>ub=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.register_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.register_variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.set_objective">
+<code class="descname">set_objective</code><span class="sig-paren">(</span><em>lst</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.set_objective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.set_objective" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.set_problem_type">
+<code class="descname">set_problem_type</code><span class="sig-paren">(</span><em>problem_type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.set_problem_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.set_problem_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.solution">
+<code class="descname">solution</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.solution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.solve">
+<code class="descname">solve</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.solve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.solve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.tune_problem">
+<code class="descname">tune_problem</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.tune_problem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.tune_problem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.variable">
+<code class="descname">variable</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.variable" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – variable name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">variable index in CPLEX model</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.variables">
+<code class="descname">variables</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.version">
+<code class="descname">version</code><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.ising.simple_cplex.SimpleCPLEX.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>filename</em>, <em>filetype=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/simple_cplex.html#SimpleCPLEX.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.simple_cplex.SimpleCPLEX.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.ising.stableset">
+<span id="qiskit-acqua-ising-stableset-module"></span><h2>qiskit_acqua.ising.stableset module<a class="headerlink" href="#module-qiskit_acqua.ising.stableset" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qiskit_acqua.ising.stableset.get_graph_solution">
+<code class="descclassname">qiskit_acqua.ising.stableset.</code><code class="descname">get_graph_solution</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/stableset.html#get_graph_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.stableset.get_graph_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get graph solution from binary string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numpy.ndarray</em>) – binary string as numpy array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">graph solution as binary numpy array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.stableset.get_stableset_qubitops">
+<code class="descclassname">qiskit_acqua.ising.stableset.</code><code class="descname">get_stableset_qubitops</code><span class="sig-paren">(</span><em>w</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/stableset.html#get_stableset_qubitops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.stableset.get_stableset_qubitops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Hamiltonian for the maximum stableset in a graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>w</strong> (<em>numpy.ndarray</em>) – adjacency matrix.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">operator for the Hamiltonian and a
+constant shift for the obj function.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit_acqua.html#qiskit_acqua.operator.Operator" title="qiskit_acqua.operator.Operator">operator.Operator</a>, float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.stableset.parse_gset_format">
+<code class="descclassname">qiskit_acqua.ising.stableset.</code><code class="descname">parse_gset_format</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/stableset.html#parse_gset_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.stableset.parse_gset_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read graph in Gset format from file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – name of the file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">adjacency matrix as a 2D numpy array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.stableset.random_graph">
+<code class="descclassname">qiskit_acqua.ising.stableset.</code><code class="descname">random_graph</code><span class="sig-paren">(</span><em>n</em>, <em>edge_prob=0.5</em>, <em>savefile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/stableset.html#random_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.stableset.random_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random Erdos-Renyi graph on n nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – number of nodes.</li>
+<li><strong>edge_prob</strong> (<em>float</em>) – probability of edge appearing.</li>
+<li><strong>savefile</strong> (<em>str</em><em> or </em><em>None</em>) – write graph to this file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">adjacency matrix (with weights).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.stableset.sample_most_likely">
+<code class="descclassname">qiskit_acqua.ising.stableset.</code><code class="descname">sample_most_likely</code><span class="sig-paren">(</span><em>n</em>, <em>state_vector</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/stableset.html#sample_most_likely"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.stableset.sample_most_likely" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the most likely binary string from state vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – number of  qubits.</li>
+<li><strong>state_vector</strong> (<em>numpy.ndarray</em><em> or </em><em>dict</em>) – state vector or counts.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">binary string as numpy.ndarray of ints.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_acqua.ising.stableset.stableset_value">
+<code class="descclassname">qiskit_acqua.ising.stableset.</code><code class="descname">stableset_value</code><span class="sig-paren">(</span><em>x</em>, <em>w</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/ising/stableset.html#stableset_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.ising.stableset.stableset_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the value of a stable set, and its feasibility.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numpy.ndarray</em>) – binary string in original format – not
+graph solution!.</li>
+<li><strong>w</strong> (<em>numpy.ndarray</em>) – adjacency matrix.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>size of the stable set, and Boolean indicating</dt>
+<dd><p class="first last">feasibility.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float, bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.ising">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qiskit_acqua.ising" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
