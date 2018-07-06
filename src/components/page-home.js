@@ -185,7 +185,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-logo.gif" alt="${i18next.t('pages.home.altLogo')}">
+        <img src="images/qiskit-logo.png" alt="${i18next.t('pages.home.altLogo')}">
         <div>
           <h1>${i18next.t('pages.home.headerTitle')}</h1>
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
