@@ -16,6 +16,7 @@ const app = (state = {}, action) => {
         ...state,
         page: action.page,
         subPage: action.subPage,
+        previousPage: action.previousPage,
       };
     default:
       return state;
