@@ -169,6 +169,13 @@ export const SectionStyles = html`<style>
     margin-bottom: 2em;
   }
 
+  section .row .description .actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
   section .row .description .actions a {
     display: inline-flex;
     text-decoration: none;
