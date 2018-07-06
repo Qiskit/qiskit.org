@@ -20,7 +20,7 @@ export const navigate = path => dispatch => {
   dispatch(loadPage(page, subPage));
 };
 
-const loadPage = (page, subPage) => dispatch => {
+const loadPage = (page, subPage) => (dispatch, getState) => {
   switch (page) {
     case 'home':
       import('../components/page-home.js');
@@ -39,11 +39,12 @@ const loadPage = (page, subPage) => dispatch => {
       import('../components/page-not-found.js');
   }
 
-  dispatch(updatePage(page, subPage));
+  dispatch(updatePage(page, subPage, getState().app.page));
 };
 
-const updatePage = (page, subPage) => ({
+const updatePage = (page, subPage, previousPage) => ({
   type: UPDATE_PAGE,
   page,
   subPage,
+  previousPage,
 });
