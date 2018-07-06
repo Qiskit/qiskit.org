@@ -1,0 +1,887 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit_acqua.utils.variational_forms package &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/qiskit_acqua.utils.variational_forms.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-acqua-utils-variational-forms-package">
+<h1>qiskit_acqua.utils.variational_forms package<a class="headerlink" href="#qiskit-acqua-utils-variational-forms-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-qiskit_acqua.utils.variational_forms.ry">
+<span id="qiskit-acqua-utils-variational-forms-ry-module"></span><h2>qiskit_acqua.utils.variational_forms.ry module<a class="headerlink" href="#module-qiskit_acqua.utils.variational_forms.ry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.variational_forms.ry.</code><code class="descname">VarFormRY</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/ry.html#VarFormRY"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm" title="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.variational_forms.variational_form.VariationalForm</span></code></a></p>
+<p>Layers of Y rotations followed by entangling gates.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.RY_CONFIGURATION">
+<code class="descname">RY_CONFIGURATION</code><em class="property"> = {'description': 'RY Variational Form', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'ry_schema', 'type': 'object', 'properties': {'depth': {'type': 'integer', 'default': 3, 'minimum': 1}, 'entanglement': {'type': 'string', 'default': 'full', 'oneOf': [{'enum': ['full', 'linear']}]}, 'entangler_map': {'type': ['object', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'RY'}</em><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.RY_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variational form configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.construct_circuit">
+<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/ry.html#VarFormRY.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the variational form, given its parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>numpy.ndarray</em>) – circuit parameters.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a quantum circuit with given <cite>parameters</cite></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">QuantumCircuit</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – the number of parameters is incorrect.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.get_entangler_map">
+<code class="descname">get_entangler_map</code><span class="sig-paren">(</span><em>map_type</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.get_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method to get an entangler map among qubits</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – ‘full’ entangles each qubit with all the subsequent ones
+‘linear’ entangles each qubit with the next</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits for which the map is needed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A map of qubit index to an array of indexes to which this should be entangled</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>num_qubits</em>, <em>depth</em>, <em>entangler_map=None</em>, <em>entanglement='full'</em>, <em>initial_state=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/ry.html#VarFormRY.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>num_qubits</strong> (<em>int</em>) – number of qubits</li>
+<li><strong>depth</strong> (<em>int</em>) – number of rotation layers</li>
+<li><strong>entangler_map</strong> (<em>dict</em>) – dictionary of entangling gates, in the format
+{ source : [list of targets] },
+or None for full entanglement.</li>
+<li><strong>entanglement</strong> (<em>str</em>) – ‘full’ or ‘linear’</li>
+<li><strong>initial_state</strong> (<a class="reference internal" href="qiskit_acqua.utils.initial_states.html#qiskit_acqua.utils.initial_states.initial_state.InitialState" title="qiskit_acqua.utils.initial_states.initial_state.InitialState"><em>InitialState</em></a>) – an initial state object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.init_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.num_parameters">
+<code class="descname">num_parameters</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.num_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parameters of the variational form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An integer indicating the number of parameters.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.parameter_bounds">
+<code class="descname">parameter_bounds</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.parameter_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameter bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs indicating the bounds, as (lower,
+upper). None indicates an unbounded parameter in the
+corresponding direction. If None is returned, problem is
+fully unbounded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.preferred_init_points">
+<code class="descname">preferred_init_points</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.preferred_init_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ry.VarFormRY.validate_entangler_map">
+<code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em>, <em>allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ry.VarFormRY.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a user supplied entangler map and converts entries to ints</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entangler_map</strong> (<em>dict</em>) – An entangler map, keys are source qubit index (int), value is array
+of target qubit index(es) (int)</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
+<li><strong>allow_double_entanglement</strong> – If we allow in list x entangled to y and vice-versa or not</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Validated/converted map</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.variational_forms.ryrz">
+<span id="qiskit-acqua-utils-variational-forms-ryrz-module"></span><h2>qiskit_acqua.utils.variational_forms.ryrz module<a class="headerlink" href="#module-qiskit_acqua.utils.variational_forms.ryrz" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.variational_forms.ryrz.</code><code class="descname">VarFormRYRZ</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/ryrz.html#VarFormRYRZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm" title="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.variational_forms.variational_form.VariationalForm</span></code></a></p>
+<p>Layers of Y+Z rotations followed by entangling gates.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.RYRZ_CONFIGURATION">
+<code class="descname">RYRZ_CONFIGURATION</code><em class="property"> = {'description': 'RYRZ Variational Form', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'ryrz_schema', 'type': 'object', 'properties': {'depth': {'type': 'integer', 'default': 3, 'minimum': 1}, 'entanglement': {'type': 'string', 'default': 'full', 'oneOf': [{'enum': ['full', 'linear']}]}, 'entangler_map': {'type': ['object', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'RYRZ'}</em><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.RYRZ_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variational form configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.construct_circuit">
+<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/ryrz.html#VarFormRYRZ.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the variational form, given its parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>numpy.ndarray</em>) – circuit parameters</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a quantum circuit with given <cite>parameters</cite></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">QuantumCircuit</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – the number of parameters is incorrect.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.get_entangler_map">
+<code class="descname">get_entangler_map</code><span class="sig-paren">(</span><em>map_type</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.get_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method to get an entangler map among qubits</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – ‘full’ entangles each qubit with all the subsequent ones
+‘linear’ entangles each qubit with the next</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits for which the map is needed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A map of qubit index to an array of indexes to which this should be entangled</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>num_qubits</em>, <em>depth</em>, <em>entangler_map=None</em>, <em>entanglement='full'</em>, <em>initial_state=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/ryrz.html#VarFormRYRZ.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>num_qubits</strong> (<em>int</em>) – number of qubits</li>
+<li><strong>depth</strong> (<em>int</em>) – number of rotation layers</li>
+<li><strong>entangler_map</strong> (<em>dict</em>) – dictionary of entangling gates, in the format
+{ source : [list of targets] },
+or None for full entanglement.</li>
+<li><strong>entanglement</strong> (<em>str</em>) – ‘full’ or ‘linear’</li>
+<li><strong>initial_state</strong> (<a class="reference internal" href="qiskit_acqua.utils.initial_states.html#qiskit_acqua.utils.initial_states.initial_state.InitialState" title="qiskit_acqua.utils.initial_states.initial_state.InitialState"><em>InitialState</em></a>) – an initial state object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.init_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.num_parameters">
+<code class="descname">num_parameters</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.num_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parameters of the variational form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An integer indicating the number of parameters.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.parameter_bounds">
+<code class="descname">parameter_bounds</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.parameter_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameter bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs indicating the bounds, as (lower,
+upper). None indicates an unbounded parameter in the
+corresponding direction. If None is returned, problem is
+fully unbounded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.preferred_init_points">
+<code class="descname">preferred_init_points</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.preferred_init_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.validate_entangler_map">
+<code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em>, <em>allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.ryrz.VarFormRYRZ.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a user supplied entangler map and converts entries to ints</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entangler_map</strong> (<em>dict</em>) – An entangler map, keys are source qubit index (int), value is array
+of target qubit index(es) (int)</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
+<li><strong>allow_double_entanglement</strong> – If we allow in list x entangled to y and vice-versa or not</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Validated/converted map</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.variational_forms.swaprz">
+<span id="qiskit-acqua-utils-variational-forms-swaprz-module"></span><h2>qiskit_acqua.utils.variational_forms.swaprz module<a class="headerlink" href="#module-qiskit_acqua.utils.variational_forms.swaprz" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.variational_forms.swaprz.</code><code class="descname">VarFormSwapRZ</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/swaprz.html#VarFormSwapRZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm" title="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.variational_forms.variational_form.VariationalForm</span></code></a></p>
+<p>Layers of Swap+Z rotations followed by entangling gates.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.SWAPRZ_CONFIGURATION">
+<code class="descname">SWAPRZ_CONFIGURATION</code><em class="property"> = {'description': 'SWAPRZ Variational Form', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'swaprz_schema', 'type': 'object', 'properties': {'depth': {'type': 'integer', 'default': 3, 'minimum': 1}, 'entanglement': {'type': 'string', 'default': 'full', 'oneOf': [{'enum': ['full', 'linear']}]}, 'entangler_map': {'type': ['object', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'SWAPRZ'}</em><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.SWAPRZ_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variational form configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.construct_circuit">
+<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/swaprz.html#VarFormSwapRZ.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the variational form, given its parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>numpy.ndarray</em>) – circuit parameters</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a quantum circuit with given <cite>parameters</cite></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">QuantumCircuit</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – the number of parameters is incorrect.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.get_entangler_map">
+<code class="descname">get_entangler_map</code><span class="sig-paren">(</span><em>map_type</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.get_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method to get an entangler map among qubits</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – ‘full’ entangles each qubit with all the subsequent ones
+‘linear’ entangles each qubit with the next</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits for which the map is needed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A map of qubit index to an array of indexes to which this should be entangled</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>num_qubits</em>, <em>depth</em>, <em>entangler_map=None</em>, <em>entanglement='full'</em>, <em>initial_state=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/swaprz.html#VarFormSwapRZ.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>num_qubits</strong> (<em>int</em>) – number of qubits</li>
+<li><strong>depth</strong> (<em>int</em>) – number of rotation layers</li>
+<li><strong>entangler_map</strong> (<em>dict</em>) – dictionary of entangling gates, in the format
+{ source : [list of targets] },
+or None for full entanglement.</li>
+<li><strong>entanglement</strong> (<em>str</em>) – ‘full’ or ‘linear’</li>
+<li><strong>initial_state</strong> (<a class="reference internal" href="qiskit_acqua.utils.initial_states.html#qiskit_acqua.utils.initial_states.initial_state.InitialState" title="qiskit_acqua.utils.initial_states.initial_state.InitialState"><em>InitialState</em></a>) – an initial state object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.init_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.num_parameters">
+<code class="descname">num_parameters</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.num_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parameters of the variational form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An integer indicating the number of parameters.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.parameter_bounds">
+<code class="descname">parameter_bounds</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.parameter_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameter bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs indicating the bounds, as (lower,
+upper). None indicates an unbounded parameter in the
+corresponding direction. If None is returned, problem is
+fully unbounded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.preferred_init_points">
+<code class="descname">preferred_init_points</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.preferred_init_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.validate_entangler_map">
+<code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em>, <em>allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.swaprz.VarFormSwapRZ.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a user supplied entangler map and converts entries to ints</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entangler_map</strong> (<em>dict</em>) – An entangler map, keys are source qubit index (int), value is array
+of target qubit index(es) (int)</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
+<li><strong>allow_double_entanglement</strong> – If we allow in list x entangled to y and vice-versa or not</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Validated/converted map</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="qiskit-acqua-utils-variational-forms-uccsd-module">
+<h2>qiskit_acqua.utils.variational_forms.uccsd module<a class="headerlink" href="#qiskit-acqua-utils-variational-forms-uccsd-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-qiskit_acqua.utils.variational_forms.variational_form">
+<span id="qiskit-acqua-utils-variational-forms-variational-form-module"></span><h2>qiskit_acqua.utils.variational_forms.variational_form module<a class="headerlink" href="#module-qiskit_acqua.utils.variational_forms.variational_form" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the definition of a base class for
+variational forms. Several types of commonly used ansatz.</p>
+<dl class="class">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.variational_forms.variational_form.</code><code class="descname">VariationalForm</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for VariationalForms.</p>
+<p>This method should initialize the module and its configuration, and
+use an exception if a component of the module is
+available.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>configuration</strong> (<em>dict</em>) – configuration dictionary</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variational form configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.construct_circuit">
+<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the variational form, given its parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>numpy.ndarray</em><em>[</em><em>float</em><em>]</em>) – circuit parameters.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A quantum circuit.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.get_entangler_map">
+<em class="property">static </em><code class="descname">get_entangler_map</code><span class="sig-paren">(</span><em>map_type</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.get_entangler_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.get_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method to get an entangler map among qubits</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – ‘full’ entangles each qubit with all the subsequent ones
+‘linear’ entangles each qubit with the next</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits for which the map is needed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A map of qubit index to an array of indexes to which this should be entangled</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the var form with its parameters according to schema</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.init_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.num_parameters">
+<code class="descname">num_parameters</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.num_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parameters of the variational form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An integer indicating the number of parameters.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.parameter_bounds">
+<code class="descname">parameter_bounds</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.parameter_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameter bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs indicating the bounds, as (lower,
+upper). None indicates an unbounded parameter in the
+corresponding direction. If None is returned, problem is
+fully unbounded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.preferred_init_points">
+<code class="descname">preferred_init_points</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.preferred_init_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.validate_entangler_map">
+<em class="property">static </em><code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em>, <em>allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.validate_entangler_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.variational_form.VariationalForm.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a user supplied entangler map and converts entries to ints</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entangler_map</strong> (<em>dict</em>) – An entangler map, keys are source qubit index (int), value is array
+of target qubit index(es) (int)</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
+<li><strong>allow_double_entanglement</strong> – If we allow in list x entangled to y and vice-versa or not</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Validated/converted map</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.variational_forms">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qiskit_acqua.utils.variational_forms" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.variational_forms.</code><code class="descname">VariationalForm</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for VariationalForms.</p>
+<p>This method should initialize the module and its configuration, and
+use an exception if a component of the module is
+available.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>configuration</strong> (<em>dict</em>) – configuration dictionary</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variational form configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.construct_circuit">
+<code class="descname">construct_circuit</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.construct_circuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.construct_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the variational form, given its parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>numpy.ndarray</em><em>[</em><em>float</em><em>]</em>) – circuit parameters.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A quantum circuit.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.get_entangler_map">
+<em class="property">static </em><code class="descname">get_entangler_map</code><span class="sig-paren">(</span><em>map_type</em>, <em>num_qubits</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.get_entangler_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.get_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method to get an entangler map among qubits</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – ‘full’ entangles each qubit with all the subsequent ones
+‘linear’ entangles each qubit with the next</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits for which the map is needed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A map of qubit index to an array of indexes to which this should be entangled</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the var form with its parameters according to schema</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.init_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.num_parameters">
+<code class="descname">num_parameters</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.num_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parameters of the variational form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An integer indicating the number of parameters.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.parameter_bounds">
+<code class="descname">parameter_bounds</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.parameter_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameter bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs indicating the bounds, as (lower,
+upper). None indicates an unbounded parameter in the
+corresponding direction. If None is returned, problem is
+fully unbounded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.preferred_init_points">
+<code class="descname">preferred_init_points</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.preferred_init_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_acqua.utils.variational_forms.VariationalForm.validate_entangler_map">
+<em class="property">static </em><code class="descname">validate_entangler_map</code><span class="sig-paren">(</span><em>entangler_map</em>, <em>num_qubits</em>, <em>allow_double_entanglement=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/variational_forms/variational_form.html#VariationalForm.validate_entangler_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.variational_forms.VariationalForm.validate_entangler_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a user supplied entangler map and converts entries to ints</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entangler_map</strong> (<em>dict</em>) – An entangler map, keys are source qubit index (int), value is array
+of target qubit index(es) (int)</li>
+<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
+<li><strong>allow_double_entanglement</strong> – If we allow in list x entangled to y and vice-versa or not</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Validated/converted map</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2072 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit_acqua.utils.optimizers package &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending QISKit ACQUA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/qiskit_acqua.utils.optimizers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-acqua-utils-optimizers-package">
+<h1>qiskit_acqua.utils.optimizers package<a class="headerlink" href="#qiskit-acqua-utils-optimizers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html">qiskit_acqua.utils.optimizers.nlopts package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#module-qiskit_acqua.utils.optimizers.nlopts.crs">qiskit_acqua.utils.optimizers.nlopts.crs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#module-qiskit_acqua.utils.optimizers.nlopts.direct_l">qiskit_acqua.utils.optimizers.nlopts.direct_l module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#module-qiskit_acqua.utils.optimizers.nlopts.direct_l_rand">qiskit_acqua.utils.optimizers.nlopts.direct_l_rand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#module-qiskit_acqua.utils.optimizers.nlopts.esch">qiskit_acqua.utils.optimizers.nlopts.esch module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#module-qiskit_acqua.utils.optimizers.nlopts.isres">qiskit_acqua.utils.optimizers.nlopts.isres module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit_acqua.utils.optimizers.nlopts.html#module-qiskit_acqua.utils.optimizers.nlopts">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.cg">
+<span id="qiskit-acqua-utils-optimizers-cg-module"></span><h2>qiskit_acqua.utils.optimizers.cg module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.cg" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.cg.</code><code class="descname">CG</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/cg.html#CG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Conjugate Gradient algorithm.</p>
+<p>Uses scipy.optimize.minimize CG
+See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.CG_CONFIGURATION">
+<code class="descname">CG_CONFIGURATION</code><em class="property"> = {'description': 'CG Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'cg_schema', 'type': 'object', 'properties': {'maxiter': {'type': 'integer', 'default': 20}, 'disp': {'type': 'boolean', 'default': False}, 'gtol': {'type': 'number', 'default': 1e-05}, 'tol': {'type': ['number', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'CG', 'optimizer': ['local'], 'options': ['maxiter', 'disp', 'gtol'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.ignored: 1&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.CG_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/cg.html#CG.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/cg.html#CG.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cg.CG.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cg.CG.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.cobyla">
+<span id="qiskit-acqua-utils-optimizers-cobyla-module"></span><h2>qiskit_acqua.utils.optimizers.cobyla module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.cobyla" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.cobyla.</code><code class="descname">COBYLA</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/cobyla.html#COBYLA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Constrained Optimization By Linear Approximation algorithm.</p>
+<p>Uses scipy.optimize.minimize COBYLA
+See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.COBYLA_CONFIGURATION">
+<code class="descname">COBYLA_CONFIGURATION</code><em class="property"> = {'description': 'COBYLA Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'cobyla_schema', 'type': 'object', 'properties': {'maxiter': {'type': 'integer', 'default': 1000}, 'disp': {'type': 'boolean', 'default': False}, 'rhobeg': {'type': 'number', 'default': 1.0}, 'tol': {'type': ['number', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'COBYLA', 'optimizer': ['local'], 'options': ['maxiter', 'disp', 'rhobeg'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.ignored: 1&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.COBYLA_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/cobyla.html#COBYLA.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/cobyla.html#COBYLA.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.cobyla.COBYLA.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.cobyla.COBYLA.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.l_bfgs_b">
+<span id="qiskit-acqua-utils-optimizers-l-bfgs-b-module"></span><h2>qiskit_acqua.utils.optimizers.l_bfgs_b module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.l_bfgs_b" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.l_bfgs_b.</code><code class="descname">L_BFGS_B</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/l_bfgs_b.html#L_BFGS_B"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Limited-memory BFGS algorithm.</p>
+<p>Uses scipy.optimize.fmin_l_bfgs_b
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.L_BFGS_B_CONFIGURATION">
+<code class="descname">L_BFGS_B_CONFIGURATION</code><em class="property"> = {'description': 'L_BFGS_B Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'l_bfgs_b_schema', 'type': 'object', 'properties': {'maxfun': {'type': 'integer', 'default': 1000}, 'factr': {'type': 'integer', 'default': 10}, 'iprint': {'type': 'integer', 'default': -1}}, 'additionalProperties': False}, 'name': 'L_BFGS_B', 'optimizer': ['local'], 'options': ['maxfun', 'factr', 'iprint'], 'support_level': {'gradient': &lt;SupportLevel.supported: 2&gt;, 'bounds': &lt;SupportLevel.supported: 2&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.L_BFGS_B_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/l_bfgs_b.html#L_BFGS_B.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/l_bfgs_b.html#L_BFGS_B.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.l_bfgs_b.L_BFGS_B.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.nelder_mead">
+<span id="qiskit-acqua-utils-optimizers-nelder-mead-module"></span><h2>qiskit_acqua.utils.optimizers.nelder_mead module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.nelder_mead" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.nelder_mead.</code><code class="descname">NELDER_MEAD</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/nelder_mead.html#NELDER_MEAD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Nelder-Mead algorithm.</p>
+<p>Uses scipy.optimize.minimize Nelder-Mead
+See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.NELDER_MEAD_CONFIGURATION">
+<code class="descname">NELDER_MEAD_CONFIGURATION</code><em class="property"> = {'description': 'NELDER_MEAD Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'nelder_mead_schema', 'type': 'object', 'properties': {'maxiter': {'type': ['integer', 'null'], 'default': None}, 'maxfev': {'type': ['integer', 'null'], 'default': 1000}, 'disp': {'type': 'boolean', 'default': False}, 'xatol': {'type': 'number', 'default': 0.0001}, 'tol': {'type': ['number', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'NELDER_MEAD', 'optimizer': ['local'], 'options': ['maxiter', 'maxfev', 'disp', 'xatol'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.ignored: 1&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.NELDER_MEAD_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/nelder_mead.html#NELDER_MEAD.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/nelder_mead.html#NELDER_MEAD.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.nelder_mead.NELDER_MEAD.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.optimizer">
+<span id="qiskit-acqua-utils-optimizers-optimizer-module"></span><h2>qiskit_acqua.utils.optimizers.optimizer module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.optimizer" title="Permalink to this headline">¶</a></h2>
+<p>Optimizer interface</p>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.optimizer.</code><code class="descname">Optimizer</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for optimization algorithm.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.SupportLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<p>Initialize the optimization algorithm, setting the support
+level for _gradient_support_level, _bound_support_level,
+_initial_point_support_level, and empty options.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the optimizer with its parameters according to schema</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform optimization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>num_vars</strong> (<em>int</em>) – number of parameters to be optimized.</li>
+<li><strong>objective_function</strong> (<em>callable</em>) – handle to a function that
+computes the objective function.</li>
+<li><strong>gradient_function</strong> (<em>callable</em>) – handle to a function that
+computes the gradient of the objective function, or
+None if not available.</li>
+<li><strong>variable_bounds</strong> (<em>list</em><em>[</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>]</em>) – list of variable
+bounds, given as pairs (lower, upper). None means
+unbounded.</li>
+<li><strong>initial_point</strong> (<em>numpy.ndarray</em><em>[</em><em>float</em><em>]</em>) – initial point.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><dl class="docutils">
+<dt>point, value, nfev</dt>
+<dd><p class="first last">point: is a 1D numpy.ndarray[float] containing the solution
+value: is a float with the objective function value
+nfev: number of objective function calls made if available or None</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.print_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.optimizer.Optimizer.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.p_bfgs">
+<span id="qiskit-acqua-utils-optimizers-p-bfgs-module"></span><h2>qiskit_acqua.utils.optimizers.p_bfgs module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.p_bfgs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.p_bfgs.</code><code class="descname">P_BFGS</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/p_bfgs.html#P_BFGS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Limited-memory BFGS algorithm. Parallel instantiations.</p>
+<p>Uses scipy.optimize.fmin_l_bfgs_b
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.P_BFGS_CONFIGURATION">
+<code class="descname">P_BFGS_CONFIGURATION</code><em class="property"> = {'description': 'Parallelized l_bfgs_b Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'p_bfgs_b_schema', 'type': 'object', 'properties': {'maxfun': {'type': 'integer', 'default': 1000}, 'factr': {'type': 'integer', 'default': 10}, 'iprint': {'type': 'integer', 'default': -1}, 'max_processes': {'type': ['integer', 'null'], 'minimum': 1, 'default': None}}, 'additionalProperties': False}, 'name': 'P_BFGS', 'optimizer': ['local', 'parallel'], 'options': ['maxfun', 'factr', 'iprint'], 'support_level': {'gradient': &lt;SupportLevel.supported: 2&gt;, 'bounds': &lt;SupportLevel.supported: 2&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.P_BFGS_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>max_processes=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/p_bfgs.html#P_BFGS.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/p_bfgs.html#P_BFGS.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.p_bfgs.P_BFGS.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.powell">
+<span id="qiskit-acqua-utils-optimizers-powell-module"></span><h2>qiskit_acqua.utils.optimizers.powell module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.powell" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.powell.</code><code class="descname">POWELL</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/powell.html#POWELL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Powell algorithm.</p>
+<p>Uses scipy.optimize.minimize Powell
+See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.POWELL_CONFIGURATION">
+<code class="descname">POWELL_CONFIGURATION</code><em class="property"> = {'description': 'POWELL Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'powell_schema', 'type': 'object', 'properties': {'maxiter': {'type': ['integer', 'null'], 'default': None}, 'maxfev': {'type': ['integer', 'null'], 'default': 1000}, 'disp': {'type': 'boolean', 'default': False}, 'xtol': {'type': 'number', 'default': 0.0001}, 'tol': {'type': ['number', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'POWELL', 'optimizer': ['local'], 'options': ['maxiter', 'maxfev', 'disp', 'xtol'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.ignored: 1&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.POWELL_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/powell.html#POWELL.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/powell.html#POWELL.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.powell.POWELL.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.powell.POWELL.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.slsqp">
+<span id="qiskit-acqua-utils-optimizers-slsqp-module"></span><h2>qiskit_acqua.utils.optimizers.slsqp module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.slsqp" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.slsqp.</code><code class="descname">SLSQP</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/slsqp.html#SLSQP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Sequential Least SQuares Programming algorithm</p>
+<p>Uses scipy.optimize.minimize SLSQP
+See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.SLSQP_CONFIGURATION">
+<code class="descname">SLSQP_CONFIGURATION</code><em class="property"> = {'description': 'SLSQP Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'cobyla_schema', 'type': 'object', 'properties': {'maxiter': {'type': 'integer', 'default': 100}, 'disp': {'type': 'boolean', 'default': False}, 'ftol': {'type': 'number', 'default': 1e-06}, 'tol': {'type': ['number', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'SLSQP', 'optimizer': ['local'], 'options': ['maxiter', 'disp', 'ftol'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.supported: 2&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.SLSQP_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/slsqp.html#SLSQP.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/slsqp.html#SLSQP.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.slsqp.SLSQP.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.slsqp.SLSQP.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.spsa">
+<span id="qiskit-acqua-utils-optimizers-spsa-module"></span><h2>qiskit_acqua.utils.optimizers.spsa module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.spsa" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.spsa.</code><code class="descname">SPSA</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/spsa.html#SPSA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Simultaneous Perturbation Stochastic Approximation algorithm.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.SPSA_CONFIGURATION">
+<code class="descname">SPSA_CONFIGURATION</code><em class="property"> = {'description': 'SPSA Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'spsa_schema', 'type': 'object', 'properties': {'max_trials': {'type': 'integer', 'default': 1000}, 'save_steps': {'type': 'integer', 'default': 1, 'minimum': 1}, 'last_avg': {'type': 'integer', 'default': 1, 'minimum': 1}, 'parameters': {'type': ['array', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'SPSA', 'optimizer': ['local', 'noise'], 'options': ['save_steps', 'last_avg'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.ignored: 1&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.SPSA_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>max_trials=1000</em>, <em>parameters=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/spsa.html#SPSA.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/spsa.html#SPSA.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.spsa.SPSA.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.spsa.SPSA.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers.tnc">
+<span id="qiskit-acqua-utils-optimizers-tnc-module"></span><h2>qiskit_acqua.utils.optimizers.tnc module<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers.tnc" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.tnc.</code><code class="descname">TNC</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/tnc.html#TNC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit_acqua.utils.optimizers.optimizer.Optimizer" title="qiskit_acqua.utils.optimizers.optimizer.Optimizer"><code class="xref py py-class docutils literal"><span class="pre">qiskit_acqua.utils.optimizers.optimizer.Optimizer</span></code></a></p>
+<p>Truncated Newton (TNC) algorithm.</p>
+<p>Uses scipy.optimize.minimize TNC
+See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html</a></p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.TNC_CONFIGURATION">
+<code class="descname">TNC_CONFIGURATION</code><em class="property"> = {'description': 'TNC Optimizer', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'id': 'tnc_schema', 'type': 'object', 'properties': {'maxiter': {'type': 'integer', 'default': 100}, 'disp': {'type': 'boolean', 'default': False}, 'accuracy': {'type': 'number', 'default': 0}, 'ftol': {'type': 'number', 'default': -1}, 'xtol': {'type': 'number', 'default': -1}, 'gtol': {'type': 'number', 'default': -1}, 'tol': {'type': ['number', 'null'], 'default': None}}, 'additionalProperties': False}, 'name': 'TNC', 'optimizer': ['local'], 'options': ['maxiter', 'disp', 'accuracy', 'ftol', 'xtol', 'gtol'], 'support_level': {'gradient': &lt;SupportLevel.ignored: 1&gt;, 'bounds': &lt;SupportLevel.supported: 2&gt;, 'initial_point': &lt;SupportLevel.required: 3&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.TNC_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/tnc.html#TNC.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.init_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/tnc.html#TNC.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.tnc.TNC.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.tnc.TNC.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_acqua.utils.optimizers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qiskit_acqua.utils.optimizers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer">
+<em class="property">class </em><code class="descclassname">qiskit_acqua.utils.optimizers.</code><code class="descname">Optimizer</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for optimization algorithm.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.DEFAULT_CONFIGURATION">
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'options': [], 'support_level': {'gradient': &lt;SupportLevel.not_supported: 0&gt;, 'bounds': &lt;SupportLevel.not_supported: 0&gt;, 'initial_point': &lt;SupportLevel.not_supported: 0&gt;}}</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.SupportLevel">
+<em class="property">class </em><code class="descname">SupportLevel</code><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.SupportLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.SupportLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.ignored">
+<code class="descname">ignored</code><em class="property"> = 1</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.not_supported">
+<code class="descname">not_supported</code><em class="property"> = 0</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.required">
+<code class="descname">required</code><em class="property"> = 3</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.supported">
+<code class="descname">supported</code><em class="property"> = 2</em><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.SupportLevel.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>configuration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+<p>Initialize the optimization algorithm, setting the support
+level for _gradient_support_level, _bound_support_level,
+_initial_point_support_level, and empty options.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.bounds_support_level">
+<code class="descname">bounds_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.bounds_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.configuration">
+<code class="descname">configuration</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return optimizer configuration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.gradient_support_level">
+<code class="descname">gradient_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.gradient_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.init_args">
+<code class="descname">init_args</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.init_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.init_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the optimizer with its parameters according to schema</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.init_params">
+<code class="descname">init_params</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.init_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.init_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize with a params dictionary</p>
+<p>A dictionary of config params as per the configuration object. Some of these params get
+passed to scipy optimizers in an options dictionary. We can specify an options array of
+names in config dictionary to have the options dictionary automatically populated. All
+other config items, excluding name, will be passed to init_args</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> (<em>dict</em>) – configuration dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.initial_point_support_level">
+<code class="descname">initial_point_support_level</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.initial_point_support_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_bounds_ignored">
+<code class="descname">is_bounds_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_bounds_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_bounds_required">
+<code class="descname">is_bounds_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_bounds_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_bounds_supported">
+<code class="descname">is_bounds_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_bounds_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_gradient_ignored">
+<code class="descname">is_gradient_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_gradient_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_gradient_required">
+<code class="descname">is_gradient_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_gradient_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_gradient_supported">
+<code class="descname">is_gradient_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_gradient_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_initial_point_ignored">
+<code class="descname">is_initial_point_ignored</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_initial_point_ignored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_initial_point_required">
+<code class="descname">is_initial_point_required</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_initial_point_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.is_initial_point_supported">
+<code class="descname">is_initial_point_supported</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.is_initial_point_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>num_vars</em>, <em>objective_function</em>, <em>gradient_function=None</em>, <em>variable_bounds=None</em>, <em>initial_point=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform optimization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>num_vars</strong> (<em>int</em>) – number of parameters to be optimized.</li>
+<li><strong>objective_function</strong> (<em>callable</em>) – handle to a function that
+computes the objective function.</li>
+<li><strong>gradient_function</strong> (<em>callable</em>) – handle to a function that
+computes the gradient of the objective function, or
+None if not available.</li>
+<li><strong>variable_bounds</strong> (<em>list</em><em>[</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>]</em>) – list of variable
+bounds, given as pairs (lower, upper). None means
+unbounded.</li>
+<li><strong>initial_point</strong> (<em>numpy.ndarray</em><em>[</em><em>float</em><em>]</em>) – initial point.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><dl class="docutils">
+<dt>point, value, nfev</dt>
+<dd><p class="first last">point: is a 1D numpy.ndarray[float] containing the solution
+value: is a float with the objective function value
+nfev: number of objective function calls made if available or None</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.print_options">
+<code class="descname">print_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.print_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print algorithm-specific options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.set_options">
+<code class="descname">set_options</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_acqua/utils/optimizers/optimizer.html#Optimizer.set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an options dictionary that may be used by call to the optimizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) – options, given as name=value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_acqua.utils.optimizers.Optimizer.setting">
+<code class="descname">setting</code><a class="headerlink" href="#qiskit_acqua.utils.optimizers.Optimizer.setting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

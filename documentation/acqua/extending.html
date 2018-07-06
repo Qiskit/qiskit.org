@@ -1,0 +1,216 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Extending QISKit ACQUA &#8212; QISKit ACQUA 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Additional Configuration" href="additional.html" />
+    <link rel="prev" title="Optimizers" href="optimizers.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div id="head" class="head">
+    <a href="/">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="additional.html" title="Additional Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="optimizers.html" title="Optimizers"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">QISKit ACQUA</p>
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qiskit-acqua.html">QISKit ACQUA Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Extending QISKit ACQUA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optimizers">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variational-forms">Variational Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-states">Initial States</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inverse-quantum-fourier-transforms-iqfts">Inverse Quantum Fourier Transforms (IQFTs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#oracles">Oracles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="additional.html">Additional Configuration</a></li>
+</ul>
+
+<p class="spacer"/>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optimizers.html"
+                        title="previous chapter">Optimizers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="additional.html"
+                        title="next chapter">Additional Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/extending.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="extending-qiskit-acqua">
+<h1>Extending QISKit ACQUA<a class="headerlink" href="#extending-qiskit-acqua" title="Permalink to this headline">¶</a></h1>
+<p>QISKit ACQUA has a modular and extensible architecture.
+Algorithms and their supporting objects are have been designed to be
+pluggable modules.  This was done in order to encourage
+researchers and developers interested in contributiong to, and experimenting with,
+new quantum algorithms to extend the QISKit ACQUA framework with their novel
+research contributions.</p>
+<div class="section" id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
+<p>A new <a class="reference external" href="./algorithms.html">algorithm</a> may be developed according to the specific API provided by QISKit ACQUA.
+By simply adding its code to the collection of existing algorithms, that new algorithm
+will be immediately recognized via dynamic lookup, and made available for use within the framework of QISKit ACQUA.
+To develop and deploy any new algorithm, the new algorithm class should derive from the <code class="docutils literal"><span class="pre">QuantumAlgorithm</span></code> class.
+Along with all of its supporting modules, the new algorithm class should be installed under its own folder in the
+<code class="docutils literal"><span class="pre">qiskit_acqua</span></code> directory, just like the existing algorithms.</p>
+</div>
+<div class="section" id="optimizers">
+<h2>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this headline">¶</a></h2>
+<p>New <a class="reference external" href="./optimizers.html">optimizers</a> for quantum variational algorithms
+should be installed in the <code class="docutils literal"><span class="pre">qiskit_acqua/utils/optimizers</span></code> folder  and derive from
+the <code class="docutils literal"><span class="pre">Optimizer</span></code> class.</p>
+</div>
+<div class="section" id="variational-forms">
+<h2>Variational Forms<a class="headerlink" href="#variational-forms" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="./variational_forms.html">Trial wavefunctions</a> for quantum variational algorithms, such as
+<a class="reference external" href="./algorithms.html#variational-quantum-eigensolver-vqe">VQE</a>
+should go under the <code class="docutils literal"><span class="pre">qiskit_acqua/utils/variational_forms</span></code> folder
+and derive from the <code class="docutils literal"><span class="pre">VariationalForm</span></code> class.</p>
+</div>
+<div class="section" id="initial-states">
+<h2>Initial States<a class="headerlink" href="#initial-states" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="./initial_states.html">Initial states</a>, for algorithms such as <a class="reference external" href="./algorithms.html#variational-quantum-eigensolver-vqe">VQE</a>,
+<a class="reference external" href="./algorithms.html#quantum-phase-estimation-qpe">QPE</a>
+and <a class="reference external" href="./algorithms.html#iterative-quantum-phase-estimation-iqpe">IQPE</a>, should go under the <code class="docutils literal"><span class="pre">qiskit_acqua/utils/initial_states</span></code> folder and
+derive from the <code class="docutils literal"><span class="pre">InitialState</span></code> class.</p>
+</div>
+<div class="section" id="inverse-quantum-fourier-transforms-iqfts">
+<h2>Inverse Quantum Fourier Transforms (IQFTs)<a class="headerlink" href="#inverse-quantum-fourier-transforms-iqfts" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="./iqfts.html">IQFTs</a>, for use for example for <a class="reference external" href="./algorithms.html#quantum-phase-estimation-qpe">QPE</a>, should be installed  under the
+<code class="docutils literal"><span class="pre">qiskit_acqua/utils/iqfts</span></code> folder and derive from the <code class="docutils literal"><span class="pre">IQFT</span></code> class.</p>
+</div>
+<div class="section" id="oracles">
+<h2>Oracles<a class="headerlink" href="#oracles" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="./oracles.html">Oracles</a>, for use with algorithms such as <a class="reference external" href="./algorithms.html#quantum-grover-search">Grover’s search</a>,
+should go under the
+<code class="docutils literal"><span class="pre">qiskit_acqua/utils/oracles</span></code> folder  and derive from the <code class="docutils literal"><span class="pre">Oracle</span></code> class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the classes implementing the algorithms and their supporting components listed above
+should have a configuration dictionary including <code class="docutils literal"><span class="pre">name</span></code>, <code class="docutils literal"><span class="pre">description</span></code> and <code class="docutils literal"><span class="pre">input_schema</span></code> properties.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="additional.html" title="Additional Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="optimizers.html" title="Optimizers"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit ACQUA 0.1.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/06/13.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
