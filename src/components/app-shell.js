@@ -75,11 +75,15 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           display: flex;
         }
 
-        .toolbar nav::before {
+        .toolbar nav.first::before {
           content: '';
           width: 2px;
           background-color: rgba(255, 255, 255, 0.3);
           margin: 12px 10px;
+        }
+
+        .toolbar nav.second {
+          margin-left: auto;
         }
 
         .toolbar nav a {
@@ -139,9 +143,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       <header>
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
-          <nav>
+          <nav class="first">
             <a href="/terra" selected?="${props._page === 'terra'}">Terra</a>
             <a href="/acqua" selected?="${props._page === 'acqua'}">Acqua</a>
+          </nav>
+          <nav class="second">
+            <a href="/studio" selected?="${props._page === 'studio'}">Tools</a>
           </nav>
         </div>
       </header>
