@@ -60,16 +60,16 @@ class PageTerra extends localize(i18next)(PageViewElement) {
                 GitHub
               </vaadin-button>
             </a>
-            <a
-                href="https://pypi.python.org/pypi/qiskit"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${pythonIcon}
-                PyPI
-              </vaadin-button>
-            </a>
+              <a
+                  href="https://pypi.python.org/pypi/qiskit"
+                  target="_blank"
+                  rel="noopener">
+                <img
+                    src="https://img.shields.io/pypi/v/qiskit.svg"
+                    alt="Qiskit version badge"
+                    width="78px"
+                    height="20px">
+              </a>
           </div>
         </div>
       </header>
