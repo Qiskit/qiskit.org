@@ -34,6 +34,13 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           --app-section-color: #222222;
         }
 
+        header > img {
+          background-color: #FFFFFF;
+          padding: 1.5em;
+          box-sizing: border-box;
+          border-radius: 50%;
+        }
+
         section .row .description {
           font-size: 1.1em;
         }
