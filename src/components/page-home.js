@@ -321,7 +321,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
               </li>
               <li>
                 <a
-                    href="https://medium.com/@Qiskit"
+                    href="https://medium.com/Qiskit"
                     title="Medium profile"
                     target="_blank"
                     rel="noopener">
