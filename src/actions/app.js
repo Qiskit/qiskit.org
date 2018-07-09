@@ -32,6 +32,9 @@ const loadPage = page => dispatch => {
     case 'studio':
       import('../components/page-studio.js');
       break;
+    case 'fun':
+      import('../components/page-fun.js');
+      break;
     default:
       page = 'notFound';
       import('../components/page-not-found.js');
