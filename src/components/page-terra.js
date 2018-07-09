@@ -60,7 +60,6 @@ class PageTerra extends localize(i18next)(PageViewElement) {
             </a>
           </h1>
           <h2>${i18next.t('pages.terra.headerSubTitle')}</h2>
-          <p>${i18next.t('pages.terra.headerDescription')}</p>
           <div class="badges">
             <a
                 href="https://github.com/Qiskit/qiskit-terra"
