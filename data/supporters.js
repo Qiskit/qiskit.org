@@ -48,6 +48,11 @@ export const collaborators = [
     url: 'http://www.math.cm.is.nagoya-u.ac.jp/Staff/buscemi-en.html',
   },
   {
+    name: 'Fred Chong',
+    institution: 'University of Chicago',
+    url: 'http://people.cs.uchicago.edu/~ftchong/',
+  },
+  {
     name: 'Harumichi Nishimura',
     institution: 'Nagoya University',
     url: 'http://www.math.cm.is.nagoya-u.ac.jp/~hnishimura/list.html',
