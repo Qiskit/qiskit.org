@@ -149,6 +149,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           </nav>
           <nav class="second">
             <a href="/studio" selected?="${props._page === 'studio'}">Tools</a>
+            <a href="/fun" selected?="${props._page === 'fun'}">Fun</a>
           </nav>
         </div>
       </header>
@@ -158,6 +159,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <page-terra active?="${props._page === 'terra'}"></page-terra>
         <page-acqua active?="${props._page === 'acqua'}"></page-acqua>
         <page-studio active?="${props._page === 'studio'}"></page-studio>
+        <page-fun active?="${props._page === 'fun'}"></page-fun>
         <page-not-found active?="${props._page === 'notFound'}"></page-not-found>
       </main>
 

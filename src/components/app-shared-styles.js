@@ -199,6 +199,11 @@ export const SectionStyles = html`<style>
     max-width: 100%;
   }
 
+  section .row .description .actions vaadin-button {
+    --ibmq-button-secondary-color: var(--app-primary-color);
+    --ibmq-button-secondary-focus-color: #FFFFFF;
+  }
+
   section.colored .row .description .actions vaadin-button {
     --ibmq-button-secondary-color: #FFFFFF;
     --ibmq-button-secondary-focus-color: var(--app-primary-color);
