@@ -34,10 +34,6 @@ class PageStudio extends localize(i18next)(PageViewElement) {
           --app-section-color: #222222;
         }
 
-        section .row .description {
-          font-size: 1.1em;
-        }
-
         @media (min-width: 768px) {
           section .row .description {
             flex: 6;
