@@ -168,6 +168,7 @@ export const SectionStyles = html`<style>
 
   section .row .description {
     margin-bottom: 2em;
+    font-size: 1.1em;
   }
 
   section .row .description .actions {

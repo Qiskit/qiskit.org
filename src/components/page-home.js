@@ -130,6 +130,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
         .supporting .description {
           margin-bottom: 2em;
+          font-size: 1.1em;
         }
 
         .supporting .description p {
