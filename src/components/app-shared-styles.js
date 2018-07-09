@@ -70,7 +70,7 @@ export const HeaderStyles = html`<style>
   header h2 {
     font-size: 1.5em;
     font-weight: 300;
-    margin: .5em 0 0;
+    margin: .5em 0 1em;
   }
 
   header p {

@@ -50,7 +50,6 @@ class PageStudio extends localize(i18next)(PageViewElement) {
         <div>
           <h1>${i18next.t('pages.studio.headerTitle')}</h1>
           <h2>${i18next.t('pages.studio.headerSubTitle')}</h2>
-          <p>${i18next.t('pages.studio.headerDescription')}</p>
           <div class="badges">
             <a
                 href="https://github.com/Qiskit/qiskit-vscode"
