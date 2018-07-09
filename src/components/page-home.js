@@ -97,6 +97,10 @@ class PageHome extends localize(i18next)(PageViewElement) {
           height: 300px;
         }
 
+        .community .row .illustration {
+          align-items: flex-start;
+        }
+
         .social-networks-list {
           list-style: none;
           padding: 0;
@@ -108,7 +112,9 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
         .social-networks-list li {
           display: inline-flex;
-          margin: 1em;
+          padding: 1em;
+          box-sizing: border-box;
+          width: 100%;
         }
 
         .social-networks-list li a {
@@ -143,12 +149,8 @@ class PageHome extends localize(i18next)(PageViewElement) {
           margin: 0;
         }
 
-        .supporters-list li {
+        .supporters-list li + li {
           margin-top: 1em;
-        }
-
-        .supporters-list li:first-of-type {
-          margin-top: 0;
         }
 
         .supporters-list li a {
@@ -166,6 +168,12 @@ class PageHome extends localize(i18next)(PageViewElement) {
           font-weight: 300;
         }
 
+        @media (min-width: 400px) {
+          .social-networks-list li {
+            width: 50%;
+          }
+        }
+
         @media (min-width: 500px) {
           .supporters-list {
             column-count: 2;
@@ -173,9 +181,19 @@ class PageHome extends localize(i18next)(PageViewElement) {
           }
         }
 
+        @media (min-width: 560px) {
+          .social-networks-list li {
+            width: 33.333%;
+          }
+        }
+
         @media (min-width: 768px) {
           .news .row .illustration {
             align-items: center;
+          }
+
+          .social-networks-list li {
+            width: 50%;
           }
 
           .supporters-list {
@@ -264,7 +282,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
-      <section>
+      <section class="community">
         <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.communityTitle')}</h3>
