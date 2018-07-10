@@ -154,6 +154,10 @@ export const SectionStyles = html`<style>
     font-family: "IBM Plex Mono", "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
   }
 
+  section h3 ~ h3 {
+    margin-top: 1em;
+  }
+
   section .description {
     line-height: 1.9em;
   }
