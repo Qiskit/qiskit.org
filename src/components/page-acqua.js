@@ -39,33 +39,6 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
           --app-section-color: #000000;
         }
 
-        section .menu {
-          padding-bottom: 0;
-        }
-
-        section .menu nav > a {
-          display: inline-flex;
-          text-decoration: none;
-        }
-
-        section .menu nav vaadin-button {
-          --ibmq-button-secondary-color: #2a2c36;
-          --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
-        }
-
-        section .menu nav vaadin-button[selected] {
-          background-color: #2a2c36;
-          color: var(--qiskit-acqua-color);
-        }
-
-        .acqua-section {
-          display: none;
-        }
-
-        .acqua-section[active] {
-          display: flex;
-        }
-
         section.colored .row .description .actions vaadin-button {
           --ibmq-button-secondary-color: #000000;
           --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
