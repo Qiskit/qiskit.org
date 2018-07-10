@@ -274,3 +274,69 @@ export const SectionElementStyles = html`<style>
     }
   }
 </style>`;
+
+export const StackListStyles = html`<style>
+  .stack-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1.136em;
+    position: relative;
+  }
+
+  .stack-list::before {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    background-color: currentColor;
+    position: absolute;
+    top: .3em;
+    left: 0;
+    bottom: 1.6em;
+  }
+
+  .stack-list .stack-list {
+    margin-top: 1.136em;
+  }
+
+  .stack-list .stack-list::before {
+    bottom: 1.6em;
+  }
+
+  .stack-list > * + * {
+    margin-top: 1.136em;
+  }
+
+  .stack-list .element {
+    line-height: 1.3em;
+    position: relative;
+  }
+
+  .stack-list .element::before {
+    content: '';
+    display: inline-block;
+    width: 0.341em;
+    height: 0.682em;
+    background-color: currentColor;
+    position: absolute;
+    top: .3em;
+    left: -1.15em;
+  }
+
+  .stack-list .element .title {
+    font-weight: 500;
+  }
+
+  .stack-list .element .subtitle {
+    font-weight: 300;
+    font-size: .8em;
+  }
+
+  .stack-list .element.group {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .stack-list .element.group .separator {
+    margin: 0 .5em;
+  }
+</style>`;

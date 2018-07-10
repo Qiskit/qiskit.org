@@ -20,6 +20,7 @@ import {
   HeaderStyles,
   SectionStyles,
   SectionElementStyles,
+  StackListStyles,
 } from './app-shared-styles.js';
 import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
@@ -33,6 +34,7 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
       ${HeaderStyles}
       ${SectionStyles}
       ${SectionElementStyles}
+      ${StackListStyles}
       <style>
         :host {
           --app-section-background-color: var(--qiskit-acqua-color);
@@ -44,64 +46,13 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
           --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
         }
 
-        .acqua-stack {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .acqua-stack > * + * {
-          margin-top: .5em;
-        }
-
-        .acqua-stack .group-of-elements {
-          display: flex;
-          flex-direction: row;
-        }
-
-        .acqua-stack .group-of-elements .element {
-          flex: 1;
-        }
-
-        .acqua-stack .group-of-elements .element:first-of-type {
-          margin-right: .5em;
-        }
-
-        .acqua-stack .element {
-          border: 2px dotted #EEEEEE;
-          color: #FFFFFF;
-          padding: .5em;
-          box-sizing: border-box;
-        }
-
-        .acqua-stack a {
-          text-decoration: none;
-        }
-
-        .acqua-stack .element.terra,
-        .acqua-stack .element.ibm-q-devices {
-          border: none;
-        }
-
-        .acqua-stack .element.terra {
-          background-color: var(--qiskit-terra-color);
-        }
-
-        .acqua-stack .element.ibm-q-devices {
-          background-color: #011589;
-        }
-
-        .acqua-stack .element .title,
-        .acqua-stack .element .subtitle {
-          text-align: center;
-        }
-
-        .acqua-stack .element .subtitle {
-          font-weight: 300;
-          font-size: .6em;
+        .stack-list .stack-list::before {
+          bottom: 0;
+          height: 110px;
         }
       </style>
 
-      <header>
+      <header style="display: none;">
         <img src="images/qiskit-acqua-logo.png" alt="${i18next.t('pages.acqua.altLogo')}">
         <div>
           <h1>
@@ -157,40 +108,38 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <h3>${i18next.t('pages.acqua.aboutTitle')}</h3>
             <p>${i18next.t('pages.acqua.aboutDescription')}</p>
             <h3>${i18next.t('pages.acqua.stackTitle')}</h3>
-            <div class="acqua-stack">
+            <div class="stack-list">
               <div class="element">
-                <div class="title">Chemistry | AI | Optimization</div>
+                <div class="title">Acqua components</div>
+                <div class="subtitle">Chemistry, AI, Optimization</div>
+                <div class="stack-list">
+                  <div class="element">
+                    <div class="title">Translators</div>
+                    <div class="subtitle">Jordan Wigner, Bravyi-Kitaev</div>
+                  </div>
+                  <div class="element">
+                    <div class="title">Hybrid controllers</div>
+                  </div>
+                  <div class="element group">
+                    <div>
+                      <div class="title">Quantum algorithms</div>
+                      <div class="subtitle">VQE, Q-SVM, QPE</div>
+                    </div>
+                    <span class="separator">+</span>
+                    <div>
+                      <div class="title">Classical algorithms</div>
+                      <div class="subtitle">Variational forms, Optimizers</div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="element">
-                <div class="title">Translators</div>
-                <div class="subtitle">Jordan Wigner | Bravyi-Kitaev</div>
+                <div class="title">Qiskit Terra</div>
               </div>
               <div class="element">
-                <div class="title">Hybrid controllers</div>
+                <div class="title">Backend (from provider)</div>
+                <div class="subtitle">Local, IBM Q, third party</div>
               </div>
-              <div class="group-of-elements">
-                <div class="element">
-                  <div class="title">Quantum algorithms</div>
-                  <div class="subtitle">VQE | Q-SVM | QPE</div>
-                </div>
-                <div class="element">
-                  <div class="title">Classical algorithms</div>
-                  <div class="subtitle">Variational forms | Optimizers</div>
-                </div>
-              </div>
-              <a href="/terra">
-                <div class="element terra">
-                  <div class="title">Qiskit Terra</div>
-                </div>
-              </a>
-              <a
-                  href="https://quantumexperience.ng.bluemix.net/qx/devices"
-                  target="_blank"
-                  rel="noopener">
-                <div class="element ibm-q-devices">
-                  <div class="title">IBM Q devices</div>
-                </div>
-              </a>
             </div>
           </div>
           <div class="illustration">
