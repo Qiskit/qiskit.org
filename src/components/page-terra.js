@@ -112,16 +112,14 @@ class PageTerra extends localize(i18next)(PageViewElement) {
               <div class="element">
                 <div class="title">Terra components</div>
                 <div class="subtitle">Quantum circuit, Pulse scheduler</div>
-                <div class="stack-list">
-                  <div class="element">
-                    <div class="title">Transpiler</div>
-                    <div class="subtitle">Optimization passes, PassManager</div>
-                  </div>
-                  <div class="element">
-                    <div class="title">QObj</div>
-                    <div class="subtitle">OpenQASM, OpenPulse</div>
-                  </div>
-                </div>
+              </div>
+              <div class="element">
+                <div class="title">Transpiler</div>
+                <div class="subtitle">Optimization passes, PassManager</div>
+              </div>
+              <div class="element">
+                <div class="title">QObj</div>
+                <div class="subtitle">OpenQASM, OpenPulse</div>
               </div>
               <div class="element">
                 <div class="title">Backend (from provider)</div>
