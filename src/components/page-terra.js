@@ -18,6 +18,7 @@ import {
   HeaderStyles,
   SectionStyles,
   SectionElementStyles,
+  StackListStyles,
 } from './app-shared-styles.js';
 import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
@@ -31,6 +32,7 @@ class PageTerra extends localize(i18next)(PageViewElement) {
       ${HeaderStyles}
       ${SectionStyles}
       ${SectionElementStyles}
+      ${StackListStyles}
       <style>
         :host {
           --app-section-background-color: var(--qiskit-terra-color);
@@ -40,6 +42,13 @@ class PageTerra extends localize(i18next)(PageViewElement) {
         section.colored .row .description .actions vaadin-button {
           --ibmq-button-secondary-color: #000000;
           --ibmq-button-secondary-focus-color: var(--qiskit-terra-color);
+        }
+
+        .stack-list .element.dot::before {
+          width: 0.682em;
+          height: 0.682em;
+          border-radius: 50%;
+          left: -1.4em;
         }
       </style>
 
@@ -98,6 +107,34 @@ class PageTerra extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>${i18next.t('pages.terra.aboutTitle')}</h3>
             <p>${i18next.t('pages.terra.aboutDescription')}</p>
+            <h3>${i18next.t('pages.terra.stackTitle')}</h3>
+            <div class="stack-list">
+              <div class="element">
+                <div class="title">Terra components</div>
+                <div class="subtitle">Quantum circuit, Pulse scheduler</div>
+                <div class="stack-list">
+                  <div class="element">
+                    <div class="title">Transpiler</div>
+                    <div class="subtitle">Optimization passes, PassManager</div>
+                  </div>
+                  <div class="element">
+                    <div class="title">QObj</div>
+                    <div class="subtitle">OpenQASM, OpenPulse</div>
+                  </div>
+                </div>
+              </div>
+              <div class="element">
+                <div class="title">Backend (from provider)</div>
+                <div class="subtitle">Local, IBM Q, third party</div>
+              </div>
+              <div class="element">
+                <div class="title">Job</div>
+              </div>
+              <div class="element dot">
+                <div class="title">Result</div>
+                <div class="subtitle">Counts, Statevector, Unitary</div>
+              </div>
+            </div>
           </div>
           <div class="illustration">
             <h3>${i18next.t('pages.terra.installTitle')}</h3>
