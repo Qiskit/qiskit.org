@@ -54,12 +54,16 @@ class PageHome extends localize(i18next)(PageViewElement) {
             ${collaborator.url
               ? html`
                 <a href="${collaborator.url}" target="_blank" rel="noopener">
-                  <span class="name">${collaborator.name}</span>
-                  <span class="institution">${collaborator.institution}</span>
+                  <div class="supporter">
+                    <span class="name">${collaborator.name}</span>
+                    <span class="institution">${collaborator.institution}</span>
+                  </div>
                 </a>
               ` : html`
-                <span class="name">${collaborator.name}</span>
-                <span class="institution">${collaborator.institution}</span>
+                <div class="supporter">
+                  <span class="name">${collaborator.name}</span>
+                  <span class="institution">${collaborator.institution}</span>
+                </div>
               `
             }
           </li>
@@ -147,6 +151,11 @@ class PageHome extends localize(i18next)(PageViewElement) {
           list-style: none;
           padding: 0;
           margin: 0;
+        }
+
+        .supporters-list li .supporter {
+          display: inline-flex;
+          flex-direction: column;
         }
 
         .supporters-list li + li {
