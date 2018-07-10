@@ -21,7 +21,7 @@ import {
   SectionStyles,
   SectionElementStyles,
 } from './app-shared-styles.js';
-import { githubIcon, pythonIcon } from './app-icons.js';
+import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
