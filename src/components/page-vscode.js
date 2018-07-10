@@ -18,10 +18,10 @@ import {
   HeaderStyles,
   SectionStyles,
 } from './app-shared-styles.js';
-import { githubIcon, visualstudiocodeIcon } from './app-icons.js';
+import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 
-class PageStudio extends localize(i18next)(PageViewElement) {
+class PageVscode extends localize(i18next)(PageViewElement) {
   _render(props) {
     // prettier-ignore
     return html`
@@ -30,7 +30,7 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       ${SectionStyles}
       <style>
         :host {
-          --app-section-background-color: var(--qiskit-studio-color);
+          --app-section-background-color: var(--qiskit-vscode-color);
           --app-section-color: #222222;
         }
 
@@ -48,8 +48,8 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       <header>
         <img src="images/qiskit-logo.png" alt="${i18next.t('pages.home.altLogo')}">
         <div>
-          <h1>${i18next.t('pages.studio.headerTitle')}</h1>
-          <h2>${i18next.t('pages.studio.headerSubTitle')}</h2>
+          <h1>${i18next.t('pages.vscode.headerTitle')}</h1>
+          <h2>${i18next.t('pages.vscode.headerSubTitle')}</h2>
           <div class="badges">
             <a
                 href="https://github.com/Qiskit/qiskit-vscode"
@@ -62,11 +62,11 @@ class PageStudio extends localize(i18next)(PageViewElement) {
               </vaadin-button>
             </a>
             <a
-                href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-studio"
+                href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-vscode"
                 target="_blank"
                 rel="noopener">
               <img
-                  src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-studio.svg"
+                  src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-vscode.svg"
                   alt="Qiskit Studio version badge"
                   width="198px"
                   height="20px">
@@ -78,15 +78,15 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       <section class="colored">
         <div class="row limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.studio.autocompleteTitle')}</h3>
-            <p>${i18next.t('pages.studio.autocompleteDescription')}</p>
+            <h3>${i18next.t('pages.vscode.autocompleteTitle')}</h3>
+            <p>${i18next.t('pages.vscode.autocompleteDescription')}</p>
           </div>
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster="images/studio/qiskit-studio-autocomplete.jpg"
+                poster="images/vscode/qiskit-vscode-autocomplete.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
-              <source src="videos/qiskit-studio-autocomplete.webm" type="video/webm">
-              <source src="videos/qiskit-studio-autocomplete.mp4" type="video/mp4">
+              <source src="videos/qiskit-vscode-autocomplete.webm" type="video/webm">
+              <source src="videos/qiskit-vscode-autocomplete.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -95,15 +95,15 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       <section>
         <div class="row reverse limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.studio.documentationTitle')}</h3>
-            <p>${i18next.t('pages.studio.documentationDescription')}</p>
+            <h3>${i18next.t('pages.vscode.documentationTitle')}</h3>
+            <p>${i18next.t('pages.vscode.documentationDescription')}</p>
           </div>
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster="images/studio/qiskit-studio-documentation.jpg"
+                poster="images/vscode/qiskit-vscode-documentation.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
-              <source src="videos/qiskit-studio-documentation.webm" type="video/webm">
-              <source src="videos/qiskit-studio-documentation.mp4" type="video/mp4">
+              <source src="videos/qiskit-vscode-documentation.webm" type="video/webm">
+              <source src="videos/qiskit-vscode-documentation.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -112,15 +112,15 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       <section class="colored">
         <div class="row limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.studio.linterTitle')}</h3>
-            <p>${i18next.t('pages.studio.linterDescription')}</p>
+            <h3>${i18next.t('pages.vscode.linterTitle')}</h3>
+            <p>${i18next.t('pages.vscode.linterDescription')}</p>
           </div>
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster="images/studio/qiskit-studio-linter.jpg"
+                poster="images/vscode/qiskit-vscode-linter.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
-              <source src="videos/qiskit-studio-linter.webm" type="video/webm">
-              <source src="videos/qiskit-studio-linter.mp4" type="video/mp4">
+              <source src="videos/qiskit-vscode-linter.webm" type="video/webm">
+              <source src="videos/qiskit-vscode-linter.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -129,15 +129,15 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       <section>
         <div class="row reverse limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.studio.snippetsTitle')}</h3>
-            <p>${i18next.t('pages.studio.snippetsDescription')}</p>
+            <h3>${i18next.t('pages.vscode.snippetsTitle')}</h3>
+            <p>${i18next.t('pages.vscode.snippetsDescription')}</p>
           </div>
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster="images/studio/qiskit-studio-snippet.jpg"
+                poster="images/vscode/qiskit-vscode-snippet.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
-              <source src="videos/qiskit-studio-snippet.webm" type="video/webm">
-              <source src="videos/qiskit-studio-snippet.mp4" type="video/mp4">
+              <source src="videos/qiskit-vscode-snippet.webm" type="video/webm">
+              <source src="videos/qiskit-vscode-snippet.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -146,15 +146,15 @@ class PageStudio extends localize(i18next)(PageViewElement) {
       <section class="colored">
         <div class="row limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.studio.integratedToolsTitle')}</h3>
-            <p>${i18next.t('pages.studio.integratedToolsDescription')}</p>
+            <h3>${i18next.t('pages.vscode.integratedToolsTitle')}</h3>
+            <p>${i18next.t('pages.vscode.integratedToolsDescription')}</p>
           </div>
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
-                poster="images/studio/qiskit-studio-integrated-tools.jpg"
+                poster="images/vscode/qiskit-vscode-integrated-tools.jpg"
                 on-click="${event => this._tooglePausedVideo(event)}">
-              <source src="videos/qiskit-studio-integrated-tools.webm" type="video/webm">
-              <source src="videos/qiskit-studio-integrated-tools.mp4" type="video/mp4">
+              <source src="videos/qiskit-vscode-integrated-tools.webm" type="video/webm">
+              <source src="videos/qiskit-vscode-integrated-tools.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -173,4 +173,4 @@ class PageStudio extends localize(i18next)(PageViewElement) {
   }
 }
 
-window.customElements.define('page-studio', PageStudio);
+window.customElements.define('page-vscode', PageVscode);

@@ -35,7 +35,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
           --qiskit-terra-color: #59991C;
           --qiskit-acqua-color: #00CCFF;
-          --qiskit-studio-color: #F5F5F5;
+          --qiskit-vscode-color: #F5F5F5;
 
           display: flex;
           flex-direction: column;
@@ -148,7 +148,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/acqua" selected?="${props._page === 'acqua'}">Acqua</a>
           </nav>
           <nav class="second">
-            <a href="/studio" selected?="${props._page === 'studio'}">Tools</a>
+            <a href="/vscode" selected?="${props._page === 'vscode'}">Tools</a>
             <a href="/fun" selected?="${props._page === 'fun'}">Fun</a>
           </nav>
         </div>
@@ -158,7 +158,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <page-home active?="${props._page === 'home'}"></page-home>
         <page-terra active?="${props._page === 'terra'}"></page-terra>
         <page-acqua active?="${props._page === 'acqua'}"></page-acqua>
-        <page-studio active?="${props._page === 'studio'}"></page-studio>
+        <page-vscode active?="${props._page === 'vscode'}"></page-vscode>
         <page-fun active?="${props._page === 'fun'}"></page-fun>
         <page-not-found active?="${props._page === 'notFound'}"></page-not-found>
       </main>
