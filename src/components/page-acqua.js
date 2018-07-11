@@ -52,7 +52,7 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
         }
       </style>
 
-      <header style="display: none;">
+      <header>
         <img src="images/qiskit-acqua-logo.png" alt="${i18next.t('pages.acqua.altLogo')}">
         <div>
           <h1>
