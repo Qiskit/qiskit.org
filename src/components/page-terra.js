@@ -110,20 +110,27 @@ class PageTerra extends localize(i18next)(PageViewElement) {
             <h3>${i18next.t('pages.terra.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Terra components</div>
-                <div class="subtitle">Quantum circuit, Pulse scheduler</div>
+                <div class="title">Terra inputs</div>
+                <div class="subtitle">Quantum circuit, pulse scheduler</div>
               </div>
               <div class="element">
                 <div class="title">Transpiler</div>
-                <div class="subtitle">Optimization passes, PassManager</div>
+                <div class="subtitle">Optimization passes, pass manager</div>
               </div>
               <div class="element">
                 <div class="title">QObj</div>
                 <div class="subtitle">OpenQASM, OpenPulse</div>
               </div>
-              <div class="element">
-                <div class="title">Backend (from provider)</div>
-                <div class="subtitle">Local, IBM Q, third party</div>
+              <div class="group">
+                <div class="element">
+                  <div class="title">Backend</div>
+                  <div class="subtitle">Device, simulator</div>
+                </div>
+                <span class="separator"></span>
+                <div class="element">
+                  <div class="title">Provider</div>
+                  <div class="subtitle">Local, IBM Q, third party</div>
+                </div>
               </div>
               <div class="element">
                 <div class="title">Job</div>

@@ -315,7 +315,8 @@ export const StackListStyles = html`<style>
     position: relative;
   }
 
-  .stack-list .element::before {
+  .stack-list .element::before,
+  .stack-list .group::before {
     content: '';
     display: inline-block;
     width: 0.341em;
@@ -335,12 +336,18 @@ export const StackListStyles = html`<style>
     font-size: .8em;
   }
 
-  .stack-list .element.group {
+  .stack-list .group {
     display: flex;
     flex-direction: row;
+    position: relative;
   }
 
-  .stack-list .element.group .separator {
+  .stack-list .group > .element::before {
+    content: '';
+    display: none;
+  }
+
+  .stack-list .group .separator {
     margin: 0 .5em;
   }
 </style>`;

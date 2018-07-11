@@ -110,7 +110,7 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <h3>${i18next.t('pages.acqua.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Acqua components</div>
+                <div class="title">Acqua domains</div>
                 <div class="subtitle">Chemistry, AI, Optimization</div>
                 <div class="stack-list">
                   <div class="element">
@@ -120,13 +120,13 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
                   <div class="element">
                     <div class="title">Hybrid controllers</div>
                   </div>
-                  <div class="element group">
-                    <div>
+                  <div class="group">
+                    <div class="element">
                       <div class="title">Quantum algorithms</div>
                       <div class="subtitle">VQE, Q-SVM, QPE</div>
                     </div>
                     <span class="separator">+</span>
-                    <div>
+                    <div class="element">
                       <div class="title">Classical algorithms</div>
                       <div class="subtitle">Variational forms, Optimizers</div>
                     </div>
@@ -136,9 +136,16 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
               <div class="element">
                 <div class="title">Qiskit Terra</div>
               </div>
-              <div class="element">
-                <div class="title">Backend (from provider)</div>
-                <div class="subtitle">Local, IBM Q, third party</div>
+              <div class="group">
+                <div class="element">
+                  <div class="title">Backend</div>
+                  <div class="subtitle">Device, simulator</div>
+                </div>
+                <span class="separator"></span>
+                <div class="element">
+                  <div class="title">Provider</div>
+                  <div class="subtitle">Local, IBM Q, third party</div>
+                </div>
               </div>
             </div>
           </div>
