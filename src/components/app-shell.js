@@ -171,7 +171,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
                 aria-label="Language"
                 value="${i18next.languages[0]}">
               <option value="en">English</option>
-              <!-- <option value="de">German</option> -->
+              <option value="de">German</option>
               <!-- <option value="ja">Japanese</option> -->
             </select>
           </div>
