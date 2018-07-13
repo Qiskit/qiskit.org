@@ -9,10 +9,13 @@
 
 import { html } from '@polymer/lit-element';
 import { PageViewElement } from './page-view-element.js';
+import { localize } from '../pwa-helpers/localize-mixin.js';
+
+import { i18next } from '../i18next.js';
 
 import { SharedStyles } from './app-shared-styles.js';
 
-class PageNotFound extends PageViewElement {
+class PageNotFound extends localize(i18next)(PageViewElement) {
   _render(props) {
     return html`
       ${SharedStyles}
