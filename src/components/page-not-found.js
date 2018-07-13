@@ -26,9 +26,9 @@ class PageNotFound extends PageViewElement {
 
       <section>
         <div class="limited-width">
-          <h2>Sorry, that page doesn't exist!</h2>
+          <h2>${i18next.t('pages.notFound.headerTitle')}</h2>
           <p>
-            <a href="/">Return to the home page</a>
+            <a href="/">${i18next.t('pages.notFound.headerSubTitle')}</a>
           </p>
         </div>
       </section>
