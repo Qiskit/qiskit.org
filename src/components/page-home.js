@@ -273,7 +273,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.home.architectureDescription')}</p>
             <div class="actions">
               <a
-                  href="https://medium.com/qiskit/post-id"
+                  href="https://medium.com/@qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
