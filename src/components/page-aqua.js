@@ -26,7 +26,7 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
-class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
+class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
   _render(props) {
     // prettier-ignore
     return html`
@@ -37,13 +37,13 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
       ${StackListStyles}
       <style>
         :host {
-          --app-section-background-color: var(--qiskit-acqua-color);
+          --app-section-background-color: var(--qiskit-aqua-color);
           --app-section-color: #000000;
         }
 
         section.colored .row .description .actions vaadin-button {
           --ibmq-button-secondary-color: #000000;
-          --ibmq-button-secondary-focus-color: var(--qiskit-acqua-color);
+          --ibmq-button-secondary-focus-color: var(--qiskit-aqua-color);
         }
 
         .stack-list .stack-list::before {
@@ -53,25 +53,25 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
       </style>
 
       <header>
-        <img src="images/qiskit-acqua-logo.png" alt="${i18next.t('pages.acqua.altLogo')}">
+        <img src="images/qiskit-aqua-logo.png" alt="${i18next.t('pages.aqua.altLogo')}">
         <div>
           <h1>
-            ${i18next.t('pages.acqua.headerTitle')}
+            ${i18next.t('pages.aqua.headerTitle')}
             <a
-                href="https://pypi.python.org/pypi/qiskit-acqua"
+                href="https://pypi.python.org/pypi/qiskit-aqua"
                 target="_blank"
                 rel="noopener">
               <img
-                  src="https://img.shields.io/pypi/v/qiskit-acqua.svg"
-                  alt="Qiskit Acqua version badge"
+                  src="https://img.shields.io/pypi/v/qiskit-aqua.svg"
+                  alt="Qiskit Aqua version badge"
                   width="78px"
                   height="20px">
             </a>
           </h1>
-          <h2>${i18next.t('pages.acqua.headerSubTitle')}</h2>
+          <h2>${i18next.t('pages.aqua.headerSubTitle')}</h2>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit/qiskit-acqua"
+                href="https://github.com/Qiskit/qiskit-aqua"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
@@ -81,7 +81,7 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
               </vaadin-button>
             </a>
             <a
-                href="/documentation/acqua/"
+                href="/documentation/aqua/"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
@@ -105,12 +105,12 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
       <section class="colored">
         <div class="row limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.acqua.aboutTitle')}</h3>
-            <p>${i18next.t('pages.acqua.aboutDescription')}</p>
-            <h3>${i18next.t('pages.acqua.stackTitle')}</h3>
+            <h3>${i18next.t('pages.aqua.aboutTitle')}</h3>
+            <p>${i18next.t('pages.aqua.aboutDescription')}</p>
+            <h3>${i18next.t('pages.aqua.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Acqua domains</div>
+                <div class="title">Aqua domains</div>
                 <div class="subtitle">Chemistry, AI, Optimization</div>
                 <div class="stack-list">
                   <div class="element">
@@ -150,19 +150,19 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
             </div>
           </div>
           <div class="illustration">
-            <h3>${i18next.t('pages.acqua.installTitle')}</h3>
-            <p class="note">${i18next.t('pages.acqua.pythonIsRequired')}</p>
+            <h3>${i18next.t('pages.aqua.installTitle')}</h3>
+            <p class="note">${i18next.t('pages.aqua.pythonIsRequired')}</p>
             <code-sample type="bash">
               <template>
-                [python3] $ pip install qiskit-acqua qiskit-acqua-chemistry
+                [python3] $ pip install qiskit-aqua qiskit-aqua-chemistry
               </template>
             </code-sample>
-            <h3>${i18next.t('pages.acqua.exampleTitle')}</h3>
+            <h3>${i18next.t('pages.aqua.exampleTitle')}</h3>
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit_acqua import Operator, run_algorithm
-                from qiskit_acqua.input import get_input_instance
+                from qiskit_aqua import Operator, run_algorithm
+                from qiskit_aqua.input import get_input_instance
 
                 pauli_dict = {
                   'paulis': [
@@ -204,4 +204,4 @@ class PageAcqua extends localize(i18next)(connect(store)(PageViewElement)) {
   }
 }
 
-window.customElements.define('page-acqua', PageAcqua);
+window.customElements.define('page-aqua', PageAqua);

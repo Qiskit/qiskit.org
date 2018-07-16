@@ -26,8 +26,8 @@ const loadPage = page => dispatch => {
     case 'terra':
       import('../components/page-terra.js');
       break;
-    case 'acqua':
-      import('../components/page-acqua.js');
+    case 'aqua':
+      import('../components/page-aqua.js');
       break;
     case 'vscode':
       import('../components/page-vscode.js');
