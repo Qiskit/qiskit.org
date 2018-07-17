@@ -96,11 +96,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
           --ibmq-button-secondary-focus-color: #292C35;
         }
 
-        .architecture .illustration img {
-          width: 300px;
-          height: 300px;
-        }
-
         .community .row .illustration {
           align-items: flex-start;
         }
