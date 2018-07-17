@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>qiskit.transpiler._passmanager &#8212; QISKit SDK 0.5.6 documentation</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '0.5.6',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
@@ -31,8 +23,7 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
@@ -68,7 +59,6 @@
               <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="../../../index.html">Table Of Contents</a></h3>
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation and setup</a></li>
@@ -79,15 +69,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../releases.html">Release history</a></li>
 </ul>
 
-<p class="spacer"/>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -111,7 +102,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="PassManager"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager">[docs]</a><span class="k">class</span> <span class="nc">PassManager</span><span class="p">():</span>
+<div class="viewcode-block" id="PassManager"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager">[docs]</a><span class="k">class</span> <span class="nc">PassManager</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;PassManager class for the transpiler.</span>
 
 <span class="sd">    A PassManager instance is responsible for launching the requisite</span>
@@ -119,17 +110,17 @@
 <span class="sd">    do this correctly &amp; efficiently</span>
 <span class="sd">    (i.e. keep track of dependencies between passes)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="PassManager.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PassManager.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize an empty PassManager object</span>
 <span class="sd">        (with no passes scheduled).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_passes</span> <span class="o">=</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="PassManager.add_pass"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.add_pass">[docs]</a>    <span class="k">def</span> <span class="nf">add_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_</span><span class="p">):</span>
+<div class="viewcode-block" id="PassManager.add_pass"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager.add_pass">[docs]</a>    <span class="k">def</span> <span class="nf">add_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Schedule a pass in the passmanager.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_passes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PassManager.passes"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.passes">[docs]</a>    <span class="k">def</span> <span class="nf">passes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PassManager.passes"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager.passes">[docs]</a>    <span class="k">def</span> <span class="nf">passes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return list of passes scheduled.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_passes</span></div></div>
 </pre></div>
@@ -161,8 +152,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/07/06.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Last updated on 2018/07/17.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>
