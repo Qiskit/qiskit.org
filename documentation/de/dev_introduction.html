@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Aufbau &#8212; QISKit SDK 0.5.6 Dokumentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.5.6',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +26,7 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
@@ -76,7 +67,6 @@
               <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="index.html">Inhalt</a></h3>
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
@@ -92,7 +82,6 @@
 <li class="toctree-l1"><a class="reference internal" href="_autodoc/qiskit.html">SDK Referenz</a></li>
 </ul>
 
-<p class="spacer"/>
   <h4>Vorheriges Thema</h4>
   <p class="topless"><a href="qiskit.html"
                         title="vorheriges Kapitel">QISKit Überblick</a></p>
@@ -108,12 +97,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Schnellsuche</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Los" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -130,10 +121,10 @@
 <h2>Programmierschnittstelle<a class="headerlink" href="#programmierschnittstelle" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Der <em>qiskit</em> Ordner stellt das Python Hauptmodul dar und beinhaltet die
 Objekte für die Programmierschnittstelle
-<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a>,
-<a class="reference internal" href="_autodoc/qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-class docutils literal"><span class="pre">QuantumRegister</span></code></a>,
-<a class="reference internal" href="_autodoc/qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister"><code class="xref py py-class docutils literal"><span class="pre">ClassicalRegister</span></code></a>,
-und <a class="reference internal" href="_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-class docutils literal"><span class="pre">QuantumCircuit</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumProgram</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumRegister</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>,
+und <code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>.</p>
 <p>Der Anwender erzeugt auf höchster Ebene ein <em>QuantumProgram</em> zum Erstellen,
 Übersetzen und Ausführen von Quantum Circuits. Jeder <em>QuantumCircuit</em>
 umfasst einen Satz an Datenregistern, vom Typ <em>QuantumRegister</em> oder
@@ -141,30 +132,30 @@ umfasst einen Satz an Datenregistern, vom Typ <em>QuantumRegister</em> oder
 Instruktionen die Circuits zu definieren. Ein <em>QuantumCircuit</em> kann dann
 <strong>OpenQASM</strong> Code generieren, der durch andere Komponenten im <em>qiskit</em>
 Ordner verarbeitet werden kann.</p>
-<p>Der Ordner <a class="reference internal" href="_autodoc/qiskit.extensions.html#module-qiskit.extensions" title="qiskit.extensions"><code class="xref py py-mod docutils literal"><span class="pre">Erweiterungen</span></code></a> erweitert
+<p>Der Ordner <a class="reference internal" href="_autodoc/qiskit.extensions.html#module-qiskit.extensions" title="qiskit.extensions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Erweiterungen</span></code></a> erweitert
 Quantum Circuits bei Bedarf, um andere Menge von Gattern und Algorithmen zu
 unterstützen. Zur Zeit definiert die Erweiterung
-<a class="reference internal" href="_autodoc/qiskit.extensions.standard.html#module-qiskit.extensions.standard" title="qiskit.extensions.standard"><code class="xref py py-mod docutils literal"><span class="pre">standard</span></code></a> typische Quantengatter und es
+<a class="reference internal" href="_autodoc/qiskit.extensions.standard.html#module-qiskit.extensions.standard" title="qiskit.extensions.standard"><code class="xref py py-mod docutils literal notranslate"><span class="pre">standard</span></code></a> typische Quantengatter und es
 existieren die beiden zusätzlichen Erweiterungen
-<a class="reference internal" href="_autodoc/qiskit.extensions.simulator.html#module-qiskit.extensions.simulator" title="qiskit.extensions.simulator"><code class="xref py py-mod docutils literal"><span class="pre">qasm_simulator_cpp</span></code></a> und
-<a class="reference internal" href="_autodoc/qiskit.extensions.quantum_initializer.html#module-qiskit.extensions.quantum_initializer" title="qiskit.extensions.quantum_initializer"><code class="xref py py-mod docutils literal"><span class="pre">quantum_initializer</span></code></a>.</p>
+<a class="reference internal" href="_autodoc/qiskit.extensions.simulator.html#module-qiskit.extensions.simulator" title="qiskit.extensions.simulator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qasm_simulator_cpp</span></code></a> und
+<a class="reference internal" href="_autodoc/qiskit.extensions.quantum_initializer.html#module-qiskit.extensions.quantum_initializer" title="qiskit.extensions.quantum_initializer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">quantum_initializer</span></code></a>.</p>
 </div>
 <div class="section" id="interne-module">
 <h2>Interne Module<a class="headerlink" href="#interne-module" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Der <em>qiskit</em> Ordner beinhaltet auch interne Module, die noch in Entwicklung
 sind:</p>
 <ul class="simple">
-<li>ein <a class="reference internal" href="_autodoc/qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-mod docutils literal"><span class="pre">qasm</span></code></a> Modul zum Parsen von <strong>OpenQASM</strong>
+<li>ein <a class="reference internal" href="_autodoc/qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qasm</span></code></a> Modul zum Parsen von <strong>OpenQASM</strong>
 Circuits</li>
-<li>ein <a class="reference internal" href="_autodoc/qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-mod docutils literal"><span class="pre">unroll</span></code></a> Modul zum Interpretieren und “Ausrollen”
+<li>ein <a class="reference internal" href="_autodoc/qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unroll</span></code></a> Modul zum Interpretieren und “Ausrollen”
 <strong>OpenQASM</strong> in eine Menge von Basisgattern (zum Erweitern von Gattern,
 Unterroutinen und Schleifen)</li>
-<li>ein <a class="reference internal" href="_autodoc/qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-mod docutils literal"><span class="pre">dagcircuit</span></code></a> Modul zum Arbeiten mit
+<li>ein <a class="reference internal" href="_autodoc/qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dagcircuit</span></code></a> Modul zum Arbeiten mit
 Cirucits als Graphen</li>
-<li>ein <a class="reference internal" href="_autodoc/qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-mod docutils literal"><span class="pre">mapper</span></code></a> Modul zum Mappen von Circuits
+<li>ein <a class="reference internal" href="_autodoc/qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mapper</span></code></a> Modul zum Mappen von Circuits
 mit jeder-zu-jeder Verbindungen, um auf Geräten mit fixen Verbindungen
 lauffähigen Code zu generieren</li>
-<li>ein <a class="reference internal" href="_autodoc/qiskit.backends.html#module-qiskit.backends" title="qiskit.backends"><code class="xref py py-mod docutils literal"><span class="pre">backends</span></code></a> Modul, das die Quantum Circuit
+<li>ein <a class="reference internal" href="_autodoc/qiskit.backends.html#module-qiskit.backends" title="qiskit.backends"><code class="xref py py-mod docutils literal notranslate"><span class="pre">backends</span></code></a> Modul, das die Quantum Circuit
 Simulatoren enthält</li>
 <li>einen Ordner <em>tools</em>, der Methoden für Applikationen, Analyse und
 Visualisierung beinhaltet</li>
@@ -210,28 +201,28 @@ an die Konventionen von Logging Level:</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">DEBUG</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></td>
 <td>Detaillierte Informationen, typischerweise
 nur bei der Diagnose von Problemen von
 Interesse.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">INFO</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">INFO</span></code></td>
 <td>Bestätigung, dass alles wie erwartet
 funktioniert.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">WARNING</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">WARNING</span></code></td>
 <td>Hinweis, dass etwas Unerwartetes passiert
 ist oder als Anzeige von irgendeinem Problem
 in naher Zukunft (z.B. ‚disk space low‘).
 Die Software funktioniert weiterhin wie
 erwartet.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ERROR</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">ERROR</span></code></td>
 <td>Aufgrund eines schwerwiegenderen Problems
 konnte die Software eine bestimmte Funktion
 nicht durchführen.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">CRITICAL</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code></td>
 <td>Ein schwerwiegender Fehler ist aufgetreten,
 das Programm selbst kann unter Umständen
 nicht weiter laufen.</td>
@@ -239,9 +230,9 @@ nicht weiter laufen.</td>
 </tbody>
 </table>
 <p>Zur bequemeren Verwendung bietet
-<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a> zwei Methoden an
-(<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.enable_logs" title="qiskit.QuantumProgram.enable_logs"><code class="xref py py-func docutils literal"><span class="pre">enable_logs()</span></code></a> und
-<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram.disable_logs" title="qiskit.QuantumProgram.disable_logs"><code class="xref py py-func docutils literal"><span class="pre">disable_logs()</span></code></a>), die den
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumProgram</span></code> zwei Methoden an
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">enable_logs()</span></code> und
+<code class="xref py py-func docutils literal notranslate"><span class="pre">disable_logs()</span></code>), die den
 Handler und den Level vom <cite>qiskit</cite> Logger modifizieren. Das Verwenden dieser
 Methoden kann Konflikte mit den globalen Einstellungen des Logging Setups Ihrer
 Python Umgebung erzeugen. Bitte beachten Sie dies, wenn Sie eine
@@ -251,7 +242,7 @@ eine globale Variable mit Namen <strong>logger</strong> zu deklarieren, die den 
 dem Namen des Moduls <strong>__name__</strong> beinhaltet. Dieses Objekt soll dann zum
 Absenden von Nachrichten verwendet werden. Zum Beispiel für das Modul
 <cite>qiskit/some/module.py</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># logger for &quot;qiskit.some.module&quot;</span>
 <span class="o">...</span>
@@ -267,14 +258,14 @@ verschiednen Komponenten und Funktionalitäten.</p>
 „out-of-source“ Build vor dem Ausführen der Tests durchgeführt werden. Dies
 bedeutet einfach, dass folgende Befehle ausgeführt werden müssen:</p>
 <p>Linux und Mac:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ mkdir out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir out
 $ <span class="nb">cd</span> out
 out$ cmake ..
 out$ make
 </pre></div>
 </div>
 <p>Windows:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>C:<span class="se">\.</span>.<span class="se">\&gt;</span> mkdir out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>C:<span class="se">\.</span>.<span class="se">\&gt;</span> mkdir out
 C:<span class="se">\.</span>.<span class="se">\&gt;</span> <span class="nb">cd</span> out
 C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; cmake -DUSER_LIB_PATH<span class="o">=</span>C:<span class="se">\p</span>ath<span class="se">\t</span>o<span class="se">\m</span>ingw64<span class="se">\l</span>ib<span class="se">\l</span>ibpthreads.a -G <span class="s2">&quot;MinGW Makefiles&quot;</span> ..
 C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; make
@@ -282,39 +273,39 @@ C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; make
 </div>
 <p>Dies wird alle notwendigen Binärdateien für Ihre spezifische Platform
 generieren.</p>
-<p>Um die Tests auszuführen, ist ein <code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code> Ziel definiert. Die
+<p>Um die Tests auszuführen, ist ein <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> Ziel definiert. Die
 Ausführung der Tests (durch das make Ziel genauso wie beim manuellen Aufruf)
-berücksichtigt die <code class="docutils literal"><span class="pre">LOG_LEVEL</span></code> Umgebungsvariable. Wenn vorhanden, wird
-eine <code class="docutils literal"><span class="pre">.log</span></code> Datei im Test Ordner erzeugt mit der Ausgabe der Logging
+berücksichtigt die <code class="docutils literal notranslate"><span class="pre">LOG_LEVEL</span></code> Umgebungsvariable. Wenn vorhanden, wird
+eine <code class="docutils literal notranslate"><span class="pre">.log</span></code> Datei im Test Ordner erzeugt mit der Ausgabe der Logging
 Aufrufe, die auch auf stdout ausgegeben werden. Sie können die Verbosität
 über den Inhalt der Variable einstellen, zum Beispiel:</p>
 <p>Linux und Mac:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> out
 out$ <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span> <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;-V&quot;</span> make <span class="nb">test</span>
 </pre></div>
 </div>
 <p>Windows:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> out
 C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; <span class="nb">set</span> <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;DEBUG&quot;</span>
 C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; <span class="nb">set</span> <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;-V&quot;</span>
 C:<span class="se">\.</span>.<span class="se">\o</span>ut&gt; make <span class="nb">test</span>
 </pre></div>
 </div>
 <p>Zum händischen Ausführen eines einfachen Python Tests muss der Ordner nicht
-auf <code class="docutils literal"><span class="pre">out</span></code> gewechselt werden. Es reicht folgender Befehl:</p>
+auf <code class="docutils literal notranslate"><span class="pre">out</span></code> gewechselt werden. Es reicht folgender Befehl:</p>
 <p>Linux und Mac:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO python -m unittest test/python/test_apps.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO python -m unittest test/python/test_apps.py
 </pre></div>
 </div>
 <p>Windows:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>C:<span class="se">\.</span>.<span class="se">\&gt;</span> <span class="nb">set</span> <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>C:<span class="se">\.</span>.<span class="se">\&gt;</span> <span class="nb">set</span> <span class="nv">LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
 C:<span class="se">\.</span>.<span class="se">\&gt;</span> python -m unittest test/python/test_apps.py
 </pre></div>
 </div>
-<p>Zusätzlich kann die Umgebungsvariable <code class="docutils literal"><span class="pre">SKIP_ONLINE_TESTS</span></code> verwendet werden
+<p>Zusätzlich kann die Umgebungsvariable <code class="docutils literal notranslate"><span class="pre">SKIP_ONLINE_TESTS</span></code> verwendet werden
 zum An- und Ausschalten der Ausführung der Tests, die Netzwerk Zugang für die
-API benötigen, und <code class="docutils literal"><span class="pre">SKIP_SLOW_TESTS</span></code> zum An- und Ausschalten von Test, die
-besonders langsam sind (standardmäßig auf <code class="docutils literal"><span class="pre">True</span></code> gesetzt).</p>
+API benötigen, und <code class="docutils literal notranslate"><span class="pre">SKIP_SLOW_TESTS</span></code> zum An- und Ausschalten von Test, die
+besonders langsam sind (standardmäßig auf <code class="docutils literal notranslate"><span class="pre">True</span></code> gesetzt).</p>
 </div>
 </div>
 
@@ -351,8 +342,8 @@ besonders langsam sind (standardmäßig auf <code class="docutils literal"><span
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Zuletzt aktualisiert am 2018/07/06.
-      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+      Zuletzt aktualisiert am 2018/07/17.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 erstellt.
     </div>
   </body>
 </html>

@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>qiskit.mapper._compiling &#8212; QISKit SDK 0.5.6 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '0.5.6',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
@@ -32,8 +24,7 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
@@ -69,7 +60,6 @@
               <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="../../../index.html">目次</a></h3>
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">インストール</a></li>
@@ -79,15 +69,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDKリファレンス</a></li>
 </ul>
 
-<p class="spacer"/>
 <div id="searchbox" style="display: none" role="search">
   <h3>クイック検索</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="検索" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -119,7 +110,7 @@
 <span class="kn">from</span> <span class="nn">._mappererror</span> <span class="k">import</span> <span class="n">MapperError</span>
 
 
-<div class="viewcode-block" id="euler_angles_1q"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.euler_angles_1q.html#qiskit.mapper.euler_angles_1q">[ドキュメント]</a><span class="k">def</span> <span class="nf">euler_angles_1q</span><span class="p">(</span><span class="n">unitary_matrix</span><span class="p">):</span>
+<div class="viewcode-block" id="euler_angles_1q"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._compiling.html#qiskit.mapper._compiling.euler_angles_1q">[ドキュメント]</a><span class="k">def</span> <span class="nf">euler_angles_1q</span><span class="p">(</span><span class="n">unitary_matrix</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Euler angles for a single-qubit gate.</span>
 
 <span class="sd">    Find angles (theta, phi, lambda) such that</span>
@@ -175,7 +166,7 @@
     <span class="k">return</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="s2">&quot;U(</span><span class="si">%.15f</span><span class="s2">,</span><span class="si">%.15f</span><span class="s2">,</span><span class="si">%.15f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">simplify_U</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
+<div class="viewcode-block" id="simplify_U"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._compiling.html#qiskit.mapper._compiling.simplify_U">[ドキュメント]</a><span class="k">def</span> <span class="nf">simplify_U</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the gate u1, u2, or u3 implementing U with the fewest pulses.</span>
 
 <span class="sd">    U(theta, phi, lam) is the input gate.</span>
@@ -214,19 +205,19 @@
         <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
         <span class="n">qasm</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
-    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qasm</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qasm</span></div>
 
 
-<span class="k">def</span> <span class="nf">rz_array</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<div class="viewcode-block" id="rz_array"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._compiling.html#qiskit.mapper._compiling.rz_array">[ドキュメント]</a><span class="k">def</span> <span class="nf">rz_array</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return numpy array for Rz(theta).</span>
 
 <span class="sd">    Rz(theta) = diag(exp(-i*theta/2),exp(i*theta/2))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
-                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">ry_array</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<div class="viewcode-block" id="ry_array"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._compiling.html#qiskit.mapper._compiling.ry_array">[ドキュメント]</a><span class="k">def</span> <span class="nf">ry_array</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return numpy array for Ry(theta).</span>
 
 <span class="sd">    Ry(theta) = [[cos(theta/2), -sin(theta/2)],</span>
@@ -234,10 +225,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">),</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)],</span>
                      <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)]],</span>
-                    <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="two_qubit_kak"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper.two_qubit_kak.html#qiskit.mapper.two_qubit_kak">[ドキュメント]</a><span class="k">def</span> <span class="nf">two_qubit_kak</span><span class="p">(</span><span class="n">unitary_matrix</span><span class="p">):</span>
+<div class="viewcode-block" id="two_qubit_kak"><a class="viewcode-back" href="../../../_autodoc/qiskit.mapper._compiling.html#qiskit.mapper._compiling.two_qubit_kak">[ドキュメント]</a><span class="k">def</span> <span class="nf">two_qubit_kak</span><span class="p">(</span><span class="n">unitary_matrix</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Decompose a two-qubit gate over CNOT + SU(2) using the KAK decomposition.</span>
 
 <span class="sd">    Based on MATLAB implementation by David Gosset.</span>
@@ -517,8 +508,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/06
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+      最終更新: 2018/07/17
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
     </div>
   </body>
 </html>

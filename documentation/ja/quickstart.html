@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>QISKit入門 &#8212; QISKit SDK 0.5.6 ドキュメント</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.5.6',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +26,7 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
@@ -76,7 +67,6 @@
               <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="index.html">目次</a></h3>
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">インストール</a></li>
@@ -93,7 +83,6 @@
 <li class="toctree-l1"><a class="reference internal" href="_autodoc/qiskit.html">SDKリファレンス</a></li>
 </ul>
 
-<p class="spacer"/>
   <h4>前のトピックへ</h4>
   <p class="topless"><a href="install.html"
                         title="前の章へ">インストールとセットアップ</a></p>
@@ -109,12 +98,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>クイック検索</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="検索" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -127,13 +118,13 @@
             
   <div class="section" id="qiskit">
 <h1>QISKit入門<a class="headerlink" href="#qiskit" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p><a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a> オブジェクトがコードを書く際の起点になります。
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumProgram</span></code> オブジェクトがコードを書く際の起点になります。
 QuantumProgramは量子回路と量子レジスターと古典レジスターで構成されます。
 IBM Q Experienceを使ったことがある人にとって、量子回路はComposerの画面で設計するもののことです。
 QuantumProgramのメソッドは量子回路を実機やシミュレーターのバックエンドに転送し、実行の結果を得て、
 さらなる分析を行うことができます。</p>
 <p>シミュレーター上で量子回路を設計して実行するには、以下のようにします。</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
 <span class="n">qp</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
 
 <span class="n">qr</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">create_quantum_register</span><span class="p">(</span><span class="s1">&#39;qr&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -149,9 +140,9 @@ QuantumProgramのメソッドは量子回路を実機やシミュレーターの
 <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;Bell&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><code class="code docutils literal"><span class="pre">get_counts</span></code> メソッドは {計算基底:出現回数} の辞書オブジェクトを出力します。
+<p><code class="code docutils literal notranslate"><span class="pre">get_counts</span></code> メソッドは {計算基底:出現回数} の辞書オブジェクトを出力します。
 計算基底とは従来のビット列のことです。</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">531</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">493</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">531</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">493</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="section" id="id1">
@@ -169,7 +160,7 @@ QuantumProgramのメソッドは量子回路を実機やシミュレーターの
 <a class="reference external" href="https://github.com/QISKit/ibmqx-backend-information">IBM Q Experience バックエンド情報</a> を参照してください。</p>
 <div class="section" id="id2">
 <h3>実機バックエンドの例<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumProgram</span>
 
 <span class="c1"># 初めてのQuantumProgramオブジェクトのインスタンス生成</span>
 <span class="n">Q_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
@@ -248,8 +239,8 @@ QuantumProgramのメソッドは量子回路を実機やシミュレーターの
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/06
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+      最終更新: 2018/07/17
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
     </div>
   </body>
 </html>
