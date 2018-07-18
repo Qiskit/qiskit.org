@@ -29,12 +29,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       ${SharedStyles}
       <style>
         :host {
-          --app-primary-color: #7B34A1;
-          --app-light-primary-color: #913DBE;
-          --app-dark-primary-color: #6D2E8E;
+          --app-primary-color: #673AB7;
+          --app-light-primary-color: #7A56BB;
+          --app-dark-primary-color: #551FB5;
 
-          --qiskit-terra-color: #59991C;
-          --qiskit-aqua-color: #00CCFF;
+          --qiskit-terra-color: #4CAF50;
+          --qiskit-aqua-color: #03A9F4;
           --qiskit-vscode-color: #F5F5F5;
 
           display: flex;
