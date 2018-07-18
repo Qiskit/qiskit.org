@@ -285,6 +285,41 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </section>
 
+      <section class="colored">
+        <div class="row limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.home.tryAndLearnTitle')}</h3>
+            <p>${i18next.t('pages.home.tryAndLearnDescription')}</p>
+            <div class="actions">
+              <a
+                  href="https://mybinder.org/v2/gh/QISKit/qiskit-tutorial/master?filepath=index.ipynb"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.tryButton')}</vaadin-button>
+              </a>
+              <a
+                  href="https://quantumexperience.ng.bluemix.net/qx/tutorial?sectionId=full-user-guide"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.learnButton')}</vaadin-button>
+              </a>
+              <a
+                  href="/documentation/"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.documentationButton')}</vaadin-button>
+              </a>
+            </div>
+          </div>
+          <div class="illustration">
+            <img src="images/try-and-learn.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
+          </div>
+        </div>
+      </section>
+
       <section class="community">
         <div class="row limited-width">
           <div class="description">
