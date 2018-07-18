@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Installation and setup &#8212; QISKit SDK 0.5.4 documentation</title>
+    <title>Installation and setup &#8212; QISKit SDK 0.5.6 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.5.4',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -33,12 +25,12 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/install.html">english</a> /
+        <a href="/documentation/de/install.html">german</a> /
         <a href="/documentation/ja/install.html">japanese</a>
     </div>
 </div>
@@ -63,7 +55,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.6 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -74,7 +66,6 @@
               <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation and setup</a><ul>
@@ -95,7 +86,6 @@
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release history</a></li>
 </ul>
 
-<p class="spacer"/>
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">QISKit Documentation</a></p>
@@ -111,12 +101,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -145,14 +137,10 @@ python distribution, which already comes with all these dependencies pre-install
 <h3>2. Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The recommended way to install QISKit is by using the PIP tool (Python
 package manager):</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span>
 </pre></div>
 </div>
 <p>This will install the latest stable release along with all the dependencies.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Some packages may be downgraded to meet requirements.</p>
-</div>
 </div>
 <div class="section" id="configure-your-api-token-and-qe-credentials">
 <span id="qconfig-setup"></span><h3>3. Configure your API token and QE credentials<a class="headerlink" href="#configure-your-api-token-and-qe-credentials" title="Permalink to this headline">¶</a></h3>
@@ -162,22 +150,22 @@ experience</a> account if
 you haven’t already done so</li>
 <li>Get an API token from the IBM Q experience website under “My
 Account” &gt; “Personal Access Token”</li>
-<li>The API token needs to be placed in a file called <code class="docutils literal"><span class="pre">Qconfig.py</span></code>. For
+<li>The API token needs to be placed in a file called <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code>. For
 convenience, we provide a default version of this file that you
-can use as a reference: <a class="reference external" href="https://github.com/QISKit/qiskit-core/blob/stable/Qconfig.py.default">Qconfig.py.default</a>. After downloading that
+can use as a reference: <a class="reference external" href="https://github.com/QISKit/qiskit-terra/blob/stable/Qconfig.py.default">Qconfig.py.default</a>. After downloading that
 file, copy it into the folder where you will be invoking the SDK (on
-Windows, replace <code class="docutils literal"><span class="pre">cp</span></code> with <code class="docutils literal"><span class="pre">copy</span></code>):</li>
+Windows, replace <code class="docutils literal notranslate"><span class="pre">cp</span></code> with <code class="docutils literal notranslate"><span class="pre">copy</span></code>):</li>
 </ul>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">Qconfig</span><span class="o">.</span><span class="n">py</span><span class="o">.</span><span class="n">default</span> <span class="n">Qconfig</span><span class="o">.</span><span class="n">py</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">Qconfig</span><span class="o">.</span><span class="n">py</span><span class="o">.</span><span class="n">default</span> <span class="n">Qconfig</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Open your <code class="docutils literal"><span class="pre">Qconfig.py</span></code>, remove the <code class="docutils literal"><span class="pre">#</span></code> from the beginning of the API
+<li>Open your <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code>, remove the <code class="docutils literal notranslate"><span class="pre">#</span></code> from the beginning of the API
 token line, and copy/paste your API token into the space between the
 quotation marks on that line. Save and close the file.</li>
 </ul>
-<p>For example, a valid and fully configured <code class="docutils literal"><span class="pre">Qconfig.py</span></code> file would look like:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">APItoken</span> <span class="o">=</span> <span class="s1">&#39;123456789abc...&#39;</span>
+<p>For example, a valid and fully configured <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file would look like:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">APItoken</span> <span class="o">=</span> <span class="s1">&#39;123456789abc...&#39;</span>
 
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span>
@@ -187,12 +175,12 @@ quotation marks on that line. Save and close the file.</li>
 <ul class="simple">
 <li>If you have access to the IBM Q features, you also need to setup the
 values for your hub, group, and project. You can do so by filling the
-<code class="docutils literal"><span class="pre">config</span></code> variable with the values you can find on your IBM Q account
+<code class="docutils literal notranslate"><span class="pre">config</span></code> variable with the values you can find on your IBM Q account
 page.</li>
 </ul>
-<p>For example, a valid and fully configured <code class="docutils literal"><span class="pre">Qconfig.py</span></code> file for IBM Q
+<p>For example, a valid and fully configured <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file for IBM Q
 users would look like:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">APItoken</span> <span class="o">=</span> <span class="s1">&#39;123456789abc...&#39;</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">APItoken</span> <span class="o">=</span> <span class="s1">&#39;123456789abc...&#39;</span>
 
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span><span class="p">,</span>
@@ -215,15 +203,15 @@ instructions.</p>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
 <p>The installation steps described on this document assume familiarity with the
-Python environment on your setup (for example, standard Python, <code class="docutils literal"><span class="pre">virtualenv</span></code>
+Python environment on your setup (for example, standard Python, <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>
 or Anaconda). Please consult the relevant documentation for instructions
 tailored to your environment.</p>
 <p>Depending on the system and setup, appending “sudo -H” before the
-<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span></code> command could be needed:</p>
-<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="nb">dir</span> <span class="n">qiskit</span>
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> command could be needed:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="nb">dir</span> <span class="n">qiskit</span>
 </pre></div>
 </div>
-<p>For additional troubleshooting tips, see the <a class="reference external" href="https://github.com/QISKit/qiskit-core/wiki/QISKit-Troubleshooting">QISKit troubleshooting page</a>
+<p>For additional troubleshooting tips, see the <a class="reference external" href="https://github.com/QISKit/qiskit-terra/wiki/QISKit-Troubleshooting">QISKit troubleshooting page</a>
 on the project’s GitHub wiki.</p>
 </div>
 </div>
@@ -255,14 +243,14 @@ on the project’s GitHub wiki.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">QISKit SDK 0.5.6 documentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Last updated on 2018/06/11.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Last updated on 2018/07/17.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

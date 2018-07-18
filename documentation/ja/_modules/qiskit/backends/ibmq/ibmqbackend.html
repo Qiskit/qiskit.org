@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.ibmq.ibmqbackend &#8212; QISKit SDK 0.5.4 ドキュメント</title>
+    <title>qiskit.backends.ibmq.ibmqbackend &#8212; QISKit SDK 0.5.6 ドキュメント</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../../',
-        VERSION:     '0.5.4',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
@@ -32,12 +24,12 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
         <a href="/documentation/_modules/qiskit/backends/ibmq/ibmqbackend.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/backends/ibmq/ibmqbackend.html">german</a> /
         <a href="/documentation/ja/_modules/qiskit/backends/ibmq/ibmqbackend.html">japanese</a>
     </div>
 </div>
@@ -56,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -68,7 +60,6 @@
               <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="../../../../index.html">目次</a></h3>
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../install.html">インストール</a></li>
@@ -78,15 +69,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDKリファレンス</a></li>
 </ul>
 
-<p class="spacer"/>
 <div id="searchbox" style="display: none" role="search">
   <h3>クイック検索</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="検索" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -111,18 +103,20 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">_camel_case_to_snake_case</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QISKitError</span>
+<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">_camel_case_to_snake_case</span><span class="p">,</span> <span class="n">AvailableToOperationalDict</span>
 <span class="kn">from</span> <span class="nn">qiskit.backends</span> <span class="k">import</span> <span class="n">BaseBackend</span>
 <span class="kn">from</span> <span class="nn">qiskit.backends.ibmq.ibmqjob</span> <span class="k">import</span> <span class="n">IBMQJob</span>
+<span class="kn">from</span> <span class="nn">qiskit.backends</span> <span class="k">import</span> <span class="n">JobStatus</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="IBMQBackend"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQBackend.html#qiskit.backends.ibmq.IBMQBackend">[ドキュメント]</a><span class="k">class</span> <span class="nc">IBMQBackend</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQBackend"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackend">[ドキュメント]</a><span class="k">class</span> <span class="nc">IBMQBackend</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Backend class interfacing with the Quantum Experience remotely.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="IBMQBackend.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQBackend.html#qiskit.backends.ibmq.IBMQBackend.__init__">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQBackend.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackend.__init__">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize remote backend for IBM Quantum Experience.</span>
 
 <span class="sd">        Args:</span>
@@ -142,16 +136,16 @@
             <span class="c1"># local : False is added to the online device</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="IBMQBackend.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.IBMQBackend.html#qiskit.backends.ibmq.IBMQBackend.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q_job</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run q_job asynchronously.</span>
+<div class="viewcode-block" id="IBMQBackend.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackend.run">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run qobj asynchronously.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            q_job (QuantumJob): description of job</span>
+<span class="sd">            qobj (dict): description of job</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            IBMQJob: an instance derived from BaseJob</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="n">q_job</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">])</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">calibration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -170,7 +164,7 @@
             <span class="n">calibrations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">backend_calibration</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
             <span class="c1"># FIXME a hack to remove calibration data that is none.</span>
             <span class="c1"># Needs to be fixed in api</span>
-            <span class="k">if</span> <span class="n">backend_name</span> <span class="o">==</span> <span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">backend_name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span> <span class="s1">&#39;ibmqx_qasm_simulator&#39;</span><span class="p">):</span>
                 <span class="n">calibrations</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span>
@@ -235,10 +229,117 @@
             <span class="k">if</span> <span class="n">status</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ibmqx_hpc_qasm_simulator&#39;</span><span class="p">:</span>
                 <span class="n">status</span><span class="p">[</span><span class="s1">&#39;available&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
+            <span class="c1"># FIXME: this needs to be replaced at the API level - eventually</span>
+            <span class="c1"># it will.</span>
+            <span class="k">if</span> <span class="s1">&#39;available&#39;</span> <span class="ow">in</span> <span class="n">status</span><span class="p">:</span>
+                <span class="n">status</span><span class="p">[</span><span class="s1">&#39;operational&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span><span class="p">[</span><span class="s1">&#39;available&#39;</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">status</span><span class="p">[</span><span class="s1">&#39;available&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span>
                 <span class="s2">&quot;Couldn&#39;t get backend status: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">status</span></div>
+        <span class="k">return</span> <span class="n">AvailableToOperationalDict</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IBMQBackend.jobs"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackend.jobs">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">db_filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attempt to get the jobs submitted to the backend.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            limit (int): number of jobs to retrieve</span>
+<span class="sd">            skip (int): starting index of retrieval</span>
+<span class="sd">            status (None or JobStatus or str): only get jobs with this status,</span>
+<span class="sd">                where status is e.g. `JobStatus.RUNNING` or `&#39;RUNNING&#39;`</span>
+<span class="sd">            db_filter (dict): `loopback-based filter</span>
+<span class="sd">                &lt;https://loopback.io/doc/en/lb2/Querying-data.html&gt;`_.</span>
+<span class="sd">                This is an interface to a database ``where`` filter. Some</span>
+<span class="sd">                examples of its usage are:</span>
+
+<span class="sd">                Filter last five jobs with errors::</span>
+
+<span class="sd">                   job_list = backend.jobs(limit=5, status=JobStatus.ERROR)</span>
+
+<span class="sd">                Filter last five jobs with counts=1024, and counts for</span>
+<span class="sd">                states ``00`` and ``11`` each exceeding 400::</span>
+
+<span class="sd">                  cnts_filter = {&#39;shots&#39;: 1024,</span>
+<span class="sd">                                 &#39;qasms.result.data.counts.00&#39;: {&#39;gt&#39;: 400},</span>
+<span class="sd">                                 &#39;qasms.result.data.counts.11&#39;: {&#39;gt&#39;: 400}}</span>
+<span class="sd">                  job_list = backend.jobs(limit=5, db_filter=cnts_filter)</span>
+
+<span class="sd">                Filter last five jobs from 30 days ago::</span>
+
+<span class="sd">                   past_date = datetime.datetime.now() - datetime.timedelta(days=30)</span>
+<span class="sd">                   date_filter = {&#39;creationDate&#39;: {&#39;lt&#39;: past_date.isoformat()}}</span>
+<span class="sd">                   job_list = backend.jobs(limit=5, db_filter=date_filter)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list(IBMQJob): list of IBMQJob instances</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQBackendValueError: status keyword value unrecognized</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">backend_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">api_filter</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">status</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="p">[</span><span class="n">status</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+                <span class="n">this_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;RUNNING&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;infoQueue&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;exists&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}}</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">QUEUED</span><span class="p">:</span>
+                <span class="n">this_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;RUNNING&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;infoQueue.status&#39;</span><span class="p">:</span> <span class="s1">&#39;PENDING_IN_QUEUE&#39;</span><span class="p">}</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">CANCELLED</span><span class="p">:</span>
+                <span class="n">this_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;CANCELLED&#39;</span><span class="p">}</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span><span class="p">:</span>
+                <span class="n">this_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">}</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+                <span class="n">this_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;regexp&#39;</span><span class="p">:</span> <span class="s1">&#39;^ERROR&#39;</span><span class="p">}}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">IBMQBackendValueError</span><span class="p">(</span><span class="s1">&#39;unrecongized value for &quot;status&quot; keyword &#39;</span>
+                                            <span class="s1">&#39;in job filter&#39;</span><span class="p">)</span>
+            <span class="n">api_filter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">this_filter</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">db_filter</span><span class="p">:</span>
+            <span class="c1"># filter ignores backend_name filter so we need to set it</span>
+            <span class="n">api_filter</span><span class="p">[</span><span class="s1">&#39;backend.name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">backend_name</span>
+            <span class="c1"># status takes precendence over db_filter for same keys</span>
+            <span class="n">api_filter</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">db_filter</span><span class="p">,</span> <span class="o">**</span><span class="n">api_filter</span><span class="p">}</span>
+        <span class="n">job_info_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="n">skip</span><span class="p">,</span>
+                                           <span class="n">backend</span><span class="o">=</span><span class="n">backend_name</span><span class="p">,</span>
+                                           <span class="nb">filter</span><span class="o">=</span><span class="n">api_filter</span><span class="p">)</span>
+        <span class="n">job_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">job_info</span> <span class="ow">in</span> <span class="n">job_info_list</span><span class="p">:</span>
+            <span class="n">is_device</span> <span class="o">=</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;simulator&#39;</span><span class="p">))</span>
+            <span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="o">.</span><span class="n">from_api</span><span class="p">(</span><span class="n">job_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">is_device</span><span class="p">)</span>
+            <span class="n">job_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">job_list</span></div>
+
+<div class="viewcode-block" id="IBMQBackend.retrieve_job"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackend.retrieve_job">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">retrieve_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attempt to get the specified job by job_id</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the job id of the job to retrieve</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            IBMQJob: class instance</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQBackendError: if retrieval failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">job_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">job_info</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQBackendError</span><span class="p">(</span><span class="s1">&#39;failed to get job id &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
+        <span class="n">is_device</span> <span class="o">=</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;simulator&#39;</span><span class="p">))</span>
+        <span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="o">.</span><span class="n">from_api</span><span class="p">(</span><span class="n">job_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">is_device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">job</span></div></div>
+
+
+<div class="viewcode-block" id="IBMQBackendError"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackendError">[ドキュメント]</a><span class="k">class</span> <span class="nc">IBMQBackendError</span><span class="p">(</span><span class="n">QISKitError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;IBM Q Backend Errors&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="IBMQBackendValueError"><a class="viewcode-back" href="../../../../_autodoc/qiskit.backends.ibmq.ibmqbackend.html#qiskit.backends.ibmq.ibmqbackend.IBMQBackendValueError">[ドキュメント]</a><span class="k">class</span> <span class="nc">IBMQBackendValueError</span><span class="p">(</span><span class="n">IBMQBackendError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Value errors thrown within IBMQBackend &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
 </pre></div>
 
           </div>
@@ -261,15 +362,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.4 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/06/11
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+      最終更新: 2018/07/17
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
     </div>
   </body>
 </html>
