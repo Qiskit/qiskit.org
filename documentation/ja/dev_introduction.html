@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>ライブラリの構成 &#8212; QISKit SDK 0.5.6 ドキュメント</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.5.6',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +26,7 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
@@ -76,7 +67,6 @@
               <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="index.html">目次</a></h3>
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">インストール</a></li>
@@ -90,7 +80,6 @@
 <li class="toctree-l1"><a class="reference internal" href="_autodoc/qiskit.html">SDKリファレンス</a></li>
 </ul>
 
-<p class="spacer"/>
   <h4>前のトピックへ</h4>
   <p class="topless"><a href="qiskit.html"
                         title="前の章へ">QISKit 概要</a></p>
@@ -106,12 +95,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>クイック検索</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="検索" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -127,10 +118,10 @@
 <div class="section" id="id2">
 <h2>プログラミング インターフェース<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p><em>qiskit</em> ディレクトリがメインのPythonモジュールで
-<a class="reference internal" href="_autodoc/qiskit.QuantumProgram.html#qiskit.QuantumProgram" title="qiskit.QuantumProgram"><code class="xref py py-class docutils literal"><span class="pre">QuantumProgram</span></code></a>,
-<a class="reference internal" href="_autodoc/qiskit.QuantumRegister.html#qiskit.QuantumRegister" title="qiskit.QuantumRegister"><code class="xref py py-class docutils literal"><span class="pre">QuantumRegister</span></code></a>,
-<a class="reference internal" href="_autodoc/qiskit.ClassicalRegister.html#qiskit.ClassicalRegister" title="qiskit.ClassicalRegister"><code class="xref py py-class docutils literal"><span class="pre">ClassicalRegister</span></code></a>,
-<a class="reference internal" href="_autodoc/qiskit.QuantumCircuit.html#qiskit.QuantumCircuit" title="qiskit.QuantumCircuit"><code class="xref py py-class docutils literal"><span class="pre">QuantumCircuit</span></code></a> のインターフェースを含みます。</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumProgram</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumRegister</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> のインターフェースを含みます。</p>
 <p>実行手順は次の通りです。ユーザーは <em>QuantumProgram</em> （量子プログラム）を作成しそれに
 複数の量子回路の生成、変更、コンパイル、と実行ができます。
 各 <em>QuantumCircuit</em> （量子回路）には <em>QuantumRegister</em> （量子レジスター）か
@@ -138,20 +129,20 @@
 これらのオブジェクトのメソッドを通じて、量子ゲートを適用して量子回路を定義します。
 <em>QuantumCircuit</em> は <strong>OpenQASM</strong> コードを出力することができます。
 このコードは <em>qiskit</em> ディレクトリの他のコンポーネントに流すことができます。</p>
-<p><a class="reference internal" href="_autodoc/qiskit.extensions.html#module-qiskit.extensions" title="qiskit.extensions"><code class="xref py py-mod docutils literal"><span class="pre">extensions</span></code></a> ディレクトリは他の量子ゲートやアルゴリズムのサポートに必要な
+<p><a class="reference internal" href="_autodoc/qiskit.extensions.html#module-qiskit.extensions" title="qiskit.extensions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">extensions</span></code></a> ディレクトリは他の量子ゲートやアルゴリズムのサポートに必要な
 量子回路の拡張のモジュールを含みます。
-現在は典型的な量子ゲートを定義した <a class="reference internal" href="_autodoc/qiskit.extensions.standard.html#module-qiskit.extensions.standard" title="qiskit.extensions.standard"><code class="xref py py-mod docutils literal"><span class="pre">standard</span></code></a> 拡張が存在します。</p>
+現在は典型的な量子ゲートを定義した <a class="reference internal" href="_autodoc/qiskit.extensions.standard.html#module-qiskit.extensions.standard" title="qiskit.extensions.standard"><code class="xref py py-mod docutils literal notranslate"><span class="pre">standard</span></code></a> 拡張が存在します。</p>
 </div>
 <div class="section" id="id3">
 <h2>内部モジュール<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>以下のディレクトリは開発中の内部モジュールを含みます:</p>
 <ul class="simple">
-<li><a class="reference internal" href="_autodoc/qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-mod docutils literal"><span class="pre">qasm</span></code></a> モジュールは <strong>OpenQASM</strong> ファイルを解析します。</li>
-<li><a class="reference internal" href="_autodoc/qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-mod docutils literal"><span class="pre">unroll</span></code></a> モジュールはターゲットのゲートに応じて <strong>OpenQASM</strong> の翻訳と展開(unroll)を行います。
+<li><a class="reference internal" href="_autodoc/qiskit.qasm.html#module-qiskit.qasm" title="qiskit.qasm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qasm</span></code></a> モジュールは <strong>OpenQASM</strong> ファイルを解析します。</li>
+<li><a class="reference internal" href="_autodoc/qiskit.unroll.html#module-qiskit.unroll" title="qiskit.unroll"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unroll</span></code></a> モジュールはターゲットのゲートに応じて <strong>OpenQASM</strong> の翻訳と展開(unroll)を行います。
 (ゲート文のサブルーチンやループの展開も必要に応じて行います)</li>
-<li><a class="reference internal" href="_autodoc/qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-mod docutils literal"><span class="pre">dagcircuit</span></code></a> モジュールは量子回路をグラフとして処理します。</li>
-<li><a class="reference internal" href="_autodoc/qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-mod docutils literal"><span class="pre">mapper</span></code></a> モジュールは、量子回路をカップリング（直接操作可能な量子ビットのペア）の制限がないバックエンドから制限のある実機で実行するために量子回路の変換を行います。</li>
-<li><a class="reference internal" href="_autodoc/qiskit.backends.html#module-qiskit.backends" title="qiskit.backends"><code class="xref py py-mod docutils literal"><span class="pre">backends</span></code></a> モジュールは量子回路のシミュレーターを含みます。</li>
+<li><a class="reference internal" href="_autodoc/qiskit.dagcircuit.html#module-qiskit.dagcircuit" title="qiskit.dagcircuit"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dagcircuit</span></code></a> モジュールは量子回路をグラフとして処理します。</li>
+<li><a class="reference internal" href="_autodoc/qiskit.mapper.html#module-qiskit.mapper" title="qiskit.mapper"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mapper</span></code></a> モジュールは、量子回路をカップリング（直接操作可能な量子ビットのペア）の制限がないバックエンドから制限のある実機で実行するために量子回路の変換を行います。</li>
+<li><a class="reference internal" href="_autodoc/qiskit.backends.html#module-qiskit.backends" title="qiskit.backends"><code class="xref py py-mod docutils literal notranslate"><span class="pre">backends</span></code></a> モジュールは量子回路のシミュレーターを含みます。</li>
 <li><em>tools</em> ディレクトリはアプリケーション、分析、可視化のメソッドを含みます。</li>
 </ul>
 <p>量子回路は以下の様にコンポーネントの間を流れます。
@@ -205,8 +196,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/06
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 で生成しました。
+      最終更新: 2018/07/17
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
     </div>
   </body>
 </html>

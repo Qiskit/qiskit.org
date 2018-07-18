@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>qiskit.extensions.quantum_initializer._initializer &#8212; QISKit SDK 0.5.6 Dokumentation</title>
     <link rel="stylesheet" href="../../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../../',
-        VERSION:     '0.5.6',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
@@ -32,8 +24,7 @@
 <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
 <div id="head" class="head">
     <a href="/">QISKit</a>
     <div class="langbox">
@@ -69,7 +60,6 @@
               <img class="logo" src="../../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
             </a></p>
 <p class="logo-description">Quantum Information Science Kit</p>
-
   <h3><a href="../../../../index.html">Inhalt</a></h3>
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
@@ -79,15 +69,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">SDK Referenz</a></li>
 </ul>
 
-<p class="spacer"/>
 <div id="searchbox" style="display: none" role="search">
   <h3>Schnellsuche</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Los" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -125,7 +116,7 @@
 <span class="n">_EPS</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># global variable used to chop very small numbers to zero</span>
 
 
-<div class="viewcode-block" id="InitializeGate"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate">[Doku]</a><span class="k">class</span> <span class="nc">InitializeGate</span><span class="p">(</span><span class="n">CompositeGate</span><span class="p">):</span>
+<div class="viewcode-block" id="InitializeGate"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.InitializeGate">[Doku]</a><span class="k">class</span> <span class="nc">InitializeGate</span><span class="p">(</span><span class="n">CompositeGate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Complex amplitude initialization.</span>
 
 <span class="sd">    Class that implements the (complex amplitude) initialization of some</span>
@@ -147,7 +138,7 @@
 <span class="sd">    arg = list of qubits</span>
 <span class="sd">    circ = QuantumCircuit or CompositeGate containing this gate</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="InitializeGate.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.__init__">[Doku]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="InitializeGate.__init__"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.InitializeGate.__init__">[Doku]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new initialize composite gate.&quot;&quot;&quot;</span>
         <span class="n">num_qubits</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
 
@@ -180,7 +171,7 @@
         <span class="c1"># we just used inverse() as a method to obtain it</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span> <span class="o">=</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="InitializeGate.nth_qubit_from_least_sig_qubit"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.nth_qubit_from_least_sig_qubit">[Doku]</a>    <span class="k">def</span> <span class="nf">nth_qubit_from_least_sig_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nth</span><span class="p">):</span>
+<div class="viewcode-block" id="InitializeGate.nth_qubit_from_least_sig_qubit"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.InitializeGate.nth_qubit_from_least_sig_qubit">[Doku]</a>    <span class="k">def</span> <span class="nf">nth_qubit_from_least_sig_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nth</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the qubit that is nth away from the least significant qubit</span>
 <span class="sd">        (LSB), so n=0 corresponds to the LSB.</span>
@@ -193,11 +184,11 @@
         <span class="c1"># to generalize any mapping could be placed here or even taken from</span>
         <span class="c1"># the user</span>
 
-<div class="viewcode-block" id="InitializeGate.reapply"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.reapply">[Doku]</a>    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
+<div class="viewcode-block" id="InitializeGate.reapply"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.InitializeGate.reapply">[Doku]</a>    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reapply this gate to the corresponding qubits in circ.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_modifiers</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="InitializeGate.gates_to_uncompute"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.gates_to_uncompute">[Doku]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InitializeGate.gates_to_uncompute"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.InitializeGate.gates_to_uncompute">[Doku]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call to populate the self.data list with gates that takes the</span>
 <span class="sd">        desired vector to zero.</span>
@@ -344,7 +335,7 @@
 
         <span class="k">return</span> <span class="n">combine_composite_gates</span>
 
-<div class="viewcode-block" id="InitializeGate.chop_num"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer.InitializeGate.html#qiskit.InitializeGate.chop_num">[Doku]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="InitializeGate.chop_num"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.InitializeGate.chop_num">[Doku]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">chop_num</span><span class="p">(</span><span class="n">numb</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set very small numbers (as defined by global variable _EPS) to zero.</span>
@@ -359,7 +350,7 @@
 <span class="c1">#  TODO: multiple inheritance might be better?)</span>
 
 
-<span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="reverse"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.reverse">[Doku]</a><span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reverse (recursively) the sub-gates of this CompositeGate. Note this does</span>
 <span class="sd">    not invert the gates!</span>
@@ -375,25 +366,25 @@
     <span class="c1"># not just a high-level reverse:</span>
     <span class="c1"># self.data = [gate for gate in reversed(self.data)]</span>
 
-    <span class="k">return</span> <span class="bp">self</span>
+    <span class="k">return</span> <span class="bp">self</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span>
 
 
-<span class="k">def</span> <span class="nf">optimize_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="optimize_gates"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.optimize_gates">[Doku]</a><span class="k">def</span> <span class="nf">optimize_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Remove Zero rotations and Double CNOTS.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">remove_zero_rotations</span><span class="p">()</span>
     <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_double_cnots_once</span><span class="p">():</span>
-        <span class="k">pass</span>
+        <span class="k">pass</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">optimize_gates</span> <span class="o">=</span> <span class="n">optimize_gates</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">optimize_gates</span> <span class="o">=</span> <span class="n">optimize_gates</span>
 
 
-<span class="k">def</span> <span class="nf">remove_zero_rotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="remove_zero_rotations"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.remove_zero_rotations">[Doku]</a><span class="k">def</span> <span class="nf">remove_zero_rotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Remove Zero Rotations by looking (recursively) at rotation gates at the</span>
 <span class="sd">    leaf ends.</span>
@@ -417,14 +408,14 @@
 
     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">new_data</span>
 
-    <span class="k">return</span> <span class="n">zero_rotation_removed</span>
+    <span class="k">return</span> <span class="n">zero_rotation_removed</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">remove_zero_rotations</span> <span class="o">=</span> <span class="n">remove_zero_rotations</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">remove_zero_rotations</span> <span class="o">=</span> <span class="n">remove_zero_rotations</span>
 
 
-<span class="k">def</span> <span class="nf">number_atomic_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="number_atomic_gates"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.number_atomic_gates">[Doku]</a><span class="k">def</span> <span class="nf">number_atomic_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Count the number of leaf gates. &quot;&quot;&quot;</span>
     <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
@@ -433,14 +424,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">Gate</span><span class="p">):</span>
                 <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">num</span>
+    <span class="k">return</span> <span class="n">num</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">number_atomic_gates</span> <span class="o">=</span> <span class="n">number_atomic_gates</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">number_atomic_gates</span> <span class="o">=</span> <span class="n">number_atomic_gates</span>
 
 
-<span class="k">def</span> <span class="nf">remove_double_cnots_once</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="remove_double_cnots_once"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.remove_double_cnots_once">[Doku]</a><span class="k">def</span> <span class="nf">remove_double_cnots_once</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Remove Double CNOTS paying attention that gates may be neighbours across</span>
 <span class="sd">    Composite Gate boundaries.</span>
@@ -495,42 +486,42 @@
                 <span class="k">del</span> <span class="n">left_gate_host</span><span class="p">[</span><span class="n">left_gate_index</span><span class="p">]</span>
                 <span class="n">double_cnot_removed</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">return</span> <span class="n">double_cnot_removed</span>
+    <span class="k">return</span> <span class="n">double_cnot_removed</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">remove_double_cnots_once</span> <span class="o">=</span> <span class="n">remove_double_cnots_once</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">remove_double_cnots_once</span> <span class="o">=</span> <span class="n">remove_double_cnots_once</span>
 
 
-<span class="k">def</span> <span class="nf">first_atomic_gate_host</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="first_atomic_gate_host"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.first_atomic_gate_host">[Doku]</a><span class="k">def</span> <span class="nf">first_atomic_gate_host</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the host list of the leaf gate on the left edge.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">first_atomic_gate_host</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
 
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">first_atomic_gate_host</span> <span class="o">=</span> <span class="n">first_atomic_gate_host</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">first_atomic_gate_host</span> <span class="o">=</span> <span class="n">first_atomic_gate_host</span>
 
 
-<span class="k">def</span> <span class="nf">last_atomic_gate_host</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="last_atomic_gate_host"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.last_atomic_gate_host">[Doku]</a><span class="k">def</span> <span class="nf">last_atomic_gate_host</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the host list of the leaf gate on the right edge.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">CompositeGate</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">last_atomic_gate_host</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
 
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">last_atomic_gate_host</span> <span class="o">=</span> <span class="n">last_atomic_gate_host</span>
 <span class="n">CompositeGate</span><span class="o">.</span><span class="n">last_atomic_gate_host</span> <span class="o">=</span> <span class="n">last_atomic_gate_host</span>
 
 
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+<div class="viewcode-block" id="initialize"><a class="viewcode-back" href="../../../../_autodoc/qiskit.extensions.quantum_initializer._initializer.html#qiskit._compositegate.initialize">[Doku]</a><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply initialize to circuit.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_check_dups</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
@@ -538,7 +529,7 @@
         <span class="c1"># TODO: make initialize an Instruction, and insert reset</span>
         <span class="c1"># TODO: avoid explicit reset if compiler determines a |0&gt; state</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">InitializeGate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">InitializeGate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">initialize</span> <span class="o">=</span> <span class="n">initialize</span>
@@ -572,8 +563,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017-2018 IBM Research.
-      Zuletzt aktualisiert am 2018/07/06.
-      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7 erstellt.
+      Zuletzt aktualisiert am 2018/07/17.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 erstellt.
     </div>
   </body>
 </html>
