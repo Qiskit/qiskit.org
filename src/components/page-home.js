@@ -87,7 +87,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         .architecture {
-          background-color: #000000;
+          background-color: #292C35;
           color: #FFFFFF;
         }
 
