@@ -1,48 +1,48 @@
+<!--
+@license
+
+Copyright (c) 2018, IBM.
+
+This source code is licensed under the Apache License, Version 2.0 found in the
+LICENSE.txt file in the root directory of this source tree.
+-->
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>QISKit ™ - Quantum Information Science Kit</title>
-    <meta name="description" content="QISKit is an open source software development kit (SDK) for working with OpenQASM and the IBM Q quantum processors. Create quantum computing programs, compile, and execute them online in a real quantum processors.">
+    <title>Qiskit | Quantum Information Science Kit</title>
+    <meta name="generator" content="PWA Starter Kit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Qiskit is an open source software development kit (SDK) for working with OpenQASM and the IBM Q quantum processors. Create quantum computing programs, compile, and execute them online in a real quantum processors.">
 
+    <!--
+      The `<base>` tag below is present to support two advanced deployment options:
+      1) Differential serving. 2) Serving from a non-root path.
+
+      Instead of manually editing the `<base>` tag yourself, you should generally either:
+      a) Add a `basePath` property to the build configuration in your `polymer.json`.
+      b) Use the `--base-path` command-line option for `polymer build`.
+    -->
     <base href="/">
-
-    <meta name="keywords" content="quantum, sdk, computing, science, software, qiskit, open, source, qasm, information, kit, open source, ibm q, ibm quantum expeterience, qubits, gates, qprocesor, ibmq">
-
-    <link rel="canonical" href="https://qiskit.org">
-    <link rel="alternate" href="https://qiskit.org?language=ja" hreflang="ja">
-
-    <meta property="og:url" content="https://qiskit.org">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="QISKit, Quantum Information Science Kit">
-    <meta property="og:description" content="QISKit is an open source software development kit (SDK) for working with OpenQASM and the IBM Q quantum processors.">
-    <meta property="og:image" content="https://qiskit.org/images/open-graph/qiskit-logo.png">
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="ja_JA" />
-
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@QISKit">
-    <meta name="twitter:title" content="QISKit, Quantum Information Science Kit">
-    <meta name="twitter:description" content="QISKit is an open source software development kit (SDK) for working with OpenQASM and the IBM Q quantum processors.">
-    <meta name="twitter:image" content="https://qiskit.org/images/open-graph/qiskit-logo.png">
-    <meta name="twitter:image:alt" content="QISKit logo">
 
     <link rel="icon" href="images/favicon.ico">
 
+    <!-- See https://goo.gl/OOhYW5 -->
     <link rel="manifest" href="manifest.json">
 
-    <meta name="theme-color" content="#ffffff">
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#FFFFFF">
 
     <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="QISKit">
+    <meta name="application-name" content="Qiskit">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="QISKit">
+    <meta name="apple-mobile-web-app-title" content="Qiskit">
 
     <!-- Homescreen icons -->
     <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
@@ -53,32 +53,63 @@
 
     <!-- Tile icon for Windows 8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
     <meta name="msapplication-tap-highlight" content="no">
 
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://qiskit.org">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Qiskit | Quantum Information Science Kit">
+    <meta property="og:description" content="Qiskit is an open source software development kit (SDK) for working with OpenQASM and the IBM Q quantum processors.">
+    <meta property="og:image" content="https://qiskit.org/images/open-graph/qiskit-logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Qiskit">
+    <meta name="twitter:title" content="Qiskit | Quantum Information Science Kit">
+    <meta name="twitter:description" content="Qiskit is an open source software development kit (SDK) for working with OpenQASM and the IBM Q quantum processors.">
+    <meta name="twitter:image" content="https://qiskit.org/images/open-graph/qiskit-logo.png">
+    <meta name="twitter:image:alt" content="Qiskit logo">
+
     <script>
-      window.Polymer = { rootPath: '/' };
+      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+      // https://github.com/reactjs/redux/issues/2907
+      window.process = { env: { NODE_ENV: 'production' } };
     </script>
 
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
-    <!-- Load your application shell -->
-    <link rel="import" href="src/app-shell.html">
-
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,600" rel="stylesheet">
-
+    <!-- Add any global styles for body, document, etc. -->
     <style>
+      @import url("node_modules/@ibm/plex/css/ibm-plex.css");
+
       body {
+        display: flex;
         margin: 0;
-        line-height: 1.5;
-        font-family: 'IBM Plex Sans', sans-serif;
-        background-color: #eeeeee;
+        font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+        background-color: #21252B;
+        color: #FFFFFF;
+      }
+
+      app-shell {
+        background-color: #FFFFFF;
+        color: #000000;
+      }
+
+      noscript {
+        margin: 1em;
       }
     </style>
   </head>
   <body>
     <app-shell></app-shell>
+
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
+
+    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!-- Built with love using PWA Starter Kit -->
+    <script type="module" src="src/components/app-shell.js" crossorigin></script>
 
     <script type = "text/javascript">
       /* Define digital data object based on _appInfo object */
@@ -96,9 +127,5 @@
       };
     </script>
     <script src="//1.www.s81c.com/common/stats/ida_stats.js" type="text/javascript"></script>
-
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
   </body>
 </html>
