@@ -1,26 +1,40 @@
 {
-  "name": "qiskit-website",
-  "homepage": "https://www.qiskit.org",
-  "license": "UNLICENSED",
-  "repository": "QISKit/qiskit.github.io",
-  "devDependencies": {
-    "bower": "^1.8.4",
-    "eslint": "^4.11.0",
-    "eslint-config-ibmresearch": "^0.9.0",
-    "eslint-plugin-html": "^4.0.0",
-    "polymer-cli": "^1.7.0"
-  },
+  "name": "qiskit.org",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "repository": "Qiskit/qiskit.org",
   "scripts": {
-    "postinstall": "bower install",
-    "lint": "eslint . --ext js,html --ignore-path .eslintignore",
     "start": "polymer serve",
-    "build:landing": "polymer build && mv build/es5-bundled/* build/ && rm -r build/polymer.json build/es5-bundled/",
-    "copy:modelq": "cp -r modelq/ build/modelq/",
-    "copy:documentation": "cp -r documentation/ build/documentation/",
-    "build": "npm run build:landing && npm run copy:modelq && npm run copy:documentation"
+    "precommit": "pretty-quick --staged",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:static": "polymer build",
+    "serve:static": "polymer serve --port 5000 build/es5-bundled",
+    "build": "npm run build:static && gulp copy"
+  },
+  "dependencies": {
+    "@ibm/plex": "^1.0.0",
+    "@kuscamara/code-sample": "^2.0.0",
+    "@polymer/lit-element": "0.5.2",
+    "@vaadin/vaadin-button": "^2.1.0-alpha3",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "i18next": "^11.3.0",
+    "i18next-browser-languagedetector": "^2.2.0",
+    "i18next-xhr-backend": "^1.5.0",
+    "pwa-helpers": "0.8.3",
+    "redux": "^3.7.0",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.0"
+  },
+  "devDependencies": {
+    "husky": "^0.14.0",
+    "gulp": "^4.0.0",
+    "polymer-cli": "^1.7.0",
+    "polyserve": "^0.27.0",
+    "prettier": "1.13.7",
+    "pretty-quick": "^1.6.0"
   },
   "engines": {
-    "node": ">=6.0"
+    "node": ">=8.0"
   },
   "private": true
 }
