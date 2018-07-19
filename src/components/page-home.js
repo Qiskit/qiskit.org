@@ -87,13 +87,17 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         .architecture {
-          background-color: #292C35;
+          background-color: #000000;
           color: #FFFFFF;
         }
 
         section.architecture .row .description .actions vaadin-button {
           --ibmq-button-secondary-color: #FFFFFF;
           --ibmq-button-secondary-focus-color: #292C35;
+        }
+
+        .architecture .row .illustration {
+          flex: 3;
         }
 
         .community .row .illustration {
