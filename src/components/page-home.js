@@ -81,6 +81,16 @@ class PageHome extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--app-primary-color);
         }
 
+        section.news.colored {
+          background-color: var(--qiskit-aqua-color);
+          color: #FFFFFF;
+        }
+
+        section.news.colored .row .description .actions vaadin-button {
+          --ibmq-button-secondary-color: #FFFFFF;
+          --ibmq-button-secondary-focus-color: var(--qiskit-aqua-color);
+        }
+
         .news .row .illustration img {
           width: 180px;
           height: 180px;

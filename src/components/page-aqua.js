@@ -115,7 +115,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                 <div class="stack-list">
                   <div class="element">
                     <div class="title">Translators</div>
-                    <div class="subtitle">Jordan Wigner, Bravyi-Kitaev</div>
+                    <div class="subtitle">Jordan-Wigner, Bravyi-Kitaev, Parity mapping</div>
                   </div>
                   <div class="element">
                     <div class="title">Hybrid controllers</div>
@@ -123,11 +123,11 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                   <div class="group">
                     <div class="element">
                       <div class="title">Quantum algorithms</div>
-                      <div class="subtitle">VQE, Q-SVM, QPE</div>
+                      <div class="subtitle">VQE, QPE, SVM Variational, SVM Q Kernel, IQPE, QAOA, Grover, Dynamics</div>
                     </div>
                     <span class="separator">+</span>
                     <div class="element">
-                      <div class="title">Classical algorithms</div>
+                      <div class="title">Classical methods</div>
                       <div class="subtitle">Variational forms, Optimizers</div>
                     </div>
                   </div>
