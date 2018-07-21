@@ -165,25 +165,25 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                 from qiskit_acqua.input import get_input_instance
 
                 pauli_dict = {
-                  'paulis': [
-                    { coeff: { imag: 0.0, real: -1.052373245772859 }, label: "II" },
-                    { coeff: { imag: 0.0, real: 0.39793742484318045 }, label: "ZI" },
-                    { coeff: { imag: 0.0, real: -0.39793742484318045 }, label: "ZZ" },
-                    { coeff: { imag: 0.0, real: 0.18093119978423156 }, label: "XX" }
+                  "paulis": [
+                    { "coeff": { "imag": 0.0, "real": -1.052373245772859 }, "label": "II" },
+                    { "coeff": { "imag": 0.0, "real": 0.39793742484318045 }, "label": "ZI" },
+                    { "coeff": { "imag": 0.0, "real": -0.39793742484318045 }, "label": "ZZ" },
+                    { "coeff": { "imag": 0.0, "real": 0.18093119978423156 }, "label": "XX" }
                   ]
                 }
-                algo_input = get_input_instance('EnergyInput')
+                algo_input = get_input_instance("EnergyInput")
                 algo_input.qubit_op = Operator.load_from_dict(pauli_dict)
                 params = {
-                  'algorithm': { 'name': 'VQE' },
-                  'optimizer': { 'name': 'SPSA' },
-                  'variational_form': { 'name': 'RY', 'depth': 5 },
-                  'backend': { 'name': 'local_qasm_simulator' }
+                  "algorithm": { "name": "VQE" },
+                  "optimizer": { "name": "SPSA" },
+                  "variational_form": { "name": "RY", "depth": 5 },
+                  "backend": { "name": "local_qasm_simulator" }
                 }
 
                 result = run_algorithm(params, algo_input)
 
-                print(result['energy'])
+                print(result["energy"])
               </template>
               <!-- htmlmin:ignore -->
             </code-sample>
