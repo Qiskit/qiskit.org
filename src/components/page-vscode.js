@@ -51,7 +51,26 @@ class PageVscode extends localize(i18next)(PageViewElement) {
           <h1>${i18next.t('pages.vscode.headerTitle')}</h1>
           <h2>${i18next.t('pages.vscode.headerSubTitle')}</h2>
           <div class="badges">
-            <span>Open source coming soon...</span>
+            <a
+                href="https://github.com/Qiskit/qiskit-vscode"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${githubIcon}
+                GitHub
+              </vaadin-button>
+            </a>
+            <a
+                href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-vscode"
+                target="_blank"
+                rel="noopener">
+              <img
+                  src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-vscode.svg"
+                  alt="Qiskit Studio version badge"
+                  width="198px"
+                  height="20px">
+            </a>
           </div>
         </div>
       </header>
