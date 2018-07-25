@@ -418,7 +418,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
               </li>
               <li>
                 <a
-                    href="https://www.youtube.com/channel/UCPng8PUDVMAukVKeFppFMzw"
+                    href="https://www.youtube.com/Qiskit"
                     title="YouTube channel"
                     target="_blank"
                     rel="noopener">
