@@ -110,7 +110,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <h3>${i18next.t('pages.aqua.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Aqua domains</div>
+                <div class="title">Aqua applications domains</div>
                 <div class="subtitle">Chemistry, AI, Optimization</div>
                 <div class="stack-list">
                   <div class="element">
@@ -123,7 +123,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                   <div class="group">
                     <div class="element">
                       <div class="title">Quantum algorithms</div>
-                      <div class="subtitle">VQE, QPE, SVM Variational, SVM Q Kernel, IQPE, QAOA, Grover, Dynamics</div>
+                      <div class="subtitle">Variational (VQE, QAOA), sampling (QSVM), phase-estimation (iterative, dynamics), amplitude amplification</div>
                     </div>
                     <span class="separator">+</span>
                     <div class="element">
