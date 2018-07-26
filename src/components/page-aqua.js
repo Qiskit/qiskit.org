@@ -58,11 +58,11 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
           <h1>
             ${i18next.t('pages.aqua.headerTitle')}
             <a
-                href="https://pypi.python.org/pypi/qiskit-acqua"
+                href="https://pypi.python.org/pypi/qiskit-aqua"
                 target="_blank"
                 rel="noopener">
               <img
-                  src="https://img.shields.io/pypi/v/qiskit-acqua.svg"
+                  src="https://img.shields.io/pypi/v/qiskit-aqua.svg"
                   alt="Qiskit Aqua version badge"
                   width="78px"
                   height="20px">
@@ -71,7 +71,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
           <h2>${i18next.t('pages.aqua.headerSubTitle')}</h2>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit/qiskit-acqua"
+                href="https://github.com/Qiskit/qiskit-aqua"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
@@ -81,7 +81,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
               </vaadin-button>
             </a>
             <a
-                href="/documentation/acqua/"
+                href="/documentation/aqua/"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
@@ -154,15 +154,15 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <p class="note">${i18next.t('pages.aqua.pythonIsRequired')}</p>
             <code-sample type="bash">
               <template>
-                [python3] $ pip install qiskit-acqua qiskit-acqua-chemistry
+                [python3] $ pip install qiskit-aqua qiskit-aqua-chemistry
               </template>
             </code-sample>
             <h3>${i18next.t('pages.aqua.exampleTitle')}</h3>
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit_acqua import Operator, run_algorithm
-                from qiskit_acqua.input import get_input_instance
+                from qiskit_aqua import Operator, run_algorithm
+                from qiskit_aqua.input import get_input_instance
 
                 pauli_dict = {
                   "paulis": [
