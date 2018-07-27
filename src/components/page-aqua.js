@@ -71,7 +71,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
           <h2>${i18next.t('pages.aqua.headerSubTitle')}</h2>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit/qiskit-aqua"
+                href="https://github.com/Qiskit/aqua"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
