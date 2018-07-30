@@ -46,9 +46,12 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
           --ibmq-button-secondary-focus-color: var(--qiskit-aqua-color);
         }
 
-        .stack-list .stack-list::before {
-          bottom: 0;
-          height: 110px;
+        .stack-list.aqua-applications-domains::before {
+          height: 75px;
+        }
+
+        .stack-list.quantum-algorithms::before {
+          bottom: .4em;
         }
       </style>
 
@@ -112,23 +115,29 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
               <div class="element">
                 <div class="title">Aqua applications domains</div>
                 <div class="subtitle">Chemistry, AI, Optimization</div>
-                <div class="stack-list">
+                <div class="stack-list aqua-applications-domains">
                   <div class="element">
                     <div class="title">Translators</div>
                     <div class="subtitle">Jordan-Wigner, Bravyi-Kitaev, Parity mapping</div>
                   </div>
                   <div class="element">
-                    <div class="title">Hybrid controllers</div>
-                  </div>
-                  <div class="group">
-                    <div class="element">
-                      <div class="title">Quantum algorithms</div>
-                      <div class="subtitle">Variational (VQE, QAOA), sampling (QSVM), phase-estimation (iterative, dynamics), amplitude amplification</div>
-                    </div>
-                    <span class="separator">+</span>
-                    <div class="element">
-                      <div class="title">Classical methods</div>
-                      <div class="subtitle">Variational forms, Optimizers</div>
+                    <div class="title">Quantum algorithms</div>
+                    <div class="stack-list quantum-algorithms">
+                      <div class="element">
+                        <div class="title">Variational</div>
+                        <div class="subtitle">VQE, QAOA, QSVM.Variational</div>
+                      </div>
+                      <div class="element">
+                        <div class="title">Sampling</div>
+                        <div class="subtitle">Dynamics, QSVM.Sampling</div>
+                      </div>
+                      <div class="element">
+                        <div class="title">Phase estimation</div>
+                        <div class="subtitle">QPE, IQPE</div>
+                      </div>
+                      <div class="element">
+                        <div class="title">Amplitude amplification</div>
+                      </div>
                     </div>
                   </div>
                 </div>
