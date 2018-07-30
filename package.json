@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "build:static": "polymer build",
     "serve:static": "polymer serve --port 5000 build/es5-bundled",
-    "build": "npm run build:static && gulp copy"
+    "build": "npm run build:static && gulp add-ibm-stats-script && gulp copy"
   },
   "dependencies": {
     "@ibm/plex": "^1.0.0",
@@ -25,8 +25,9 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "husky": "^0.14.0",
     "gulp": "^4.0.0",
+    "gulp-inject-string": "^1.1.0",
+    "husky": "^0.14.0",
     "polymer-cli": "^1.7.0",
     "polyserve": "^0.27.0",
     "prettier": "1.13.7",
