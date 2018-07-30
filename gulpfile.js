@@ -8,8 +8,35 @@
  */
 
 const gulp = require('gulp');
+const inject = require('gulp-inject-string');
 
 const buildPath = 'build/es5-bundled/';
+
+gulp.task('add-ibm-stats-script', () => {
+  const script = `
+      <script>
+        /* Define digital data object based on _appInfo object */
+        window.digitalData = {
+          page: {
+            category: {
+              primaryCategory: 'ibm-research'
+            },
+            pageInfo: {
+              ibm: {
+                siteID: 'qiskit'
+              }
+            }
+          }
+        };
+      </script>
+      <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
+    `;
+
+  return gulp
+    .src(`${buildPath}index.html`)
+    .pipe(inject.before('</body>', script))
+    .pipe(gulp.dest(buildPath));
+});
 
 function moveFolderToBuildPath(folderPath) {
   return gulp
