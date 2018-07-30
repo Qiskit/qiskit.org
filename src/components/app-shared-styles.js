@@ -83,15 +83,16 @@ export const HeaderStyles = html`<style>
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin: -0.8em;
+  }
+
+  header .badges > * {
+    margin: .8em;
   }
 
   header .badges > a {
     display: inline-flex;
     text-decoration: none;
-  }
-
-  header .badges > * + * {
-    margin-left: 1.5em;
   }
 
   header .badges vaadin-button {
@@ -180,15 +181,13 @@ export const SectionStyles = html`<style>
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    margin: -0.8em;
   }
 
   section .row .description .actions a {
     display: inline-flex;
     text-decoration: none;
-  }
-
-  section .row .description .actions a + a {
-    margin-left: 1em;
+    margin: .8em;
   }
 
   section .row .illustration {
