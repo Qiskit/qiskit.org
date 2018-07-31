@@ -81,6 +81,31 @@ class PageFun extends localize(i18next)(PageViewElement) {
           </div>
         </div>
       </section>
+
+      <section>
+        <div class="row limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.fun.entanglionTitle')}</h3>
+            <p>${i18next.t('pages.fun.entanglionDescription')}</p>
+            <div class="actions">
+              <a
+                  href="https://entanglion.github.io"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t(
+                  'pages.fun.entanglionButton',
+                )}</vaadin-button>
+              </a>
+            </div>
+          </div>
+          <div class="illustration">
+            <img src="images/fun/entanglion.png" alt="${i18next.t(
+              'pages.fun.entanglionAltImage',
+            )}">
+          </div>
+        </div>
+      </section>
     `;
   }
 }
