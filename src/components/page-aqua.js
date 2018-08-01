@@ -49,10 +49,6 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
         .stack-list.aqua-applications-domains::before {
           height: 75px;
         }
-
-        .stack-list.quantum-algorithms::before {
-          bottom: .4em;
-        }
       </style>
 
       <header>
@@ -137,6 +133,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                       </div>
                       <div class="element">
                         <div class="title">Amplitude amplification</div>
+                        <div class="subtitle">Grover</div>
                       </div>
                     </div>
                   </div>
