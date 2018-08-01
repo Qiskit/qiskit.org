@@ -47,7 +47,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
         }
 
         .stack-list.aqua-applications-domains::before {
-          height: 75px;
+          height: 50px;
         }
       </style>
 
@@ -114,7 +114,6 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                 <div class="stack-list aqua-applications-domains">
                   <div class="element">
                     <div class="title">Translators</div>
-                    <div class="subtitle">Jordan-Wigner, Bravyi-Kitaev, Parity mapping</div>
                   </div>
                   <div class="element">
                     <div class="title">Quantum algorithms</div>
