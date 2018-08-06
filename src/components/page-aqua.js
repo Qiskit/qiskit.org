@@ -119,11 +119,11 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                     <div class="title">Quantum algorithms</div>
                     <div class="stack-list quantum-algorithms">
                       <div class="element">
-                        <div class="title">Variational</div>
+                        <div class="title">Adaptive algorithms</div>
                         <div class="subtitle">VQE, QAOA, QSVM.Variational</div>
                       </div>
                       <div class="element">
-                        <div class="title">Sampling</div>
+                        <div class="title">Direct algorithms</div>
                         <div class="subtitle">Dynamics, QSVM.Sampling</div>
                       </div>
                       <div class="element">
