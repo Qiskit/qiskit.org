@@ -126,23 +126,23 @@ class PageVscode extends localize(i18next)(PageViewElement) {
           <div class="step">
             <p>
               <span class="number">1</span>
-              <span class="title">Get Visual Studio Code</span>
+              <span class="title">${i18next.t('pages.vscode.stepOneTitle')}</span>
             </p>
             <a
                 href="https://code.visualstudio.com"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">Download</vaadin-button>
+              <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepOneButton')}</vaadin-button>
             </a>
           </div>
           <div class="step">
             <p>
               <span class="number">2</span>
-              <span class="title">Get Qiskit VSCode extension</span>
+              <span class="title">${i18next.t('pages.vscode.stepTwoTitle')}</span>
             </p>
             <a href="vscode:extension/qiskit.qiskit-vscode" tabindex="-1">
-              <vaadin-button theme="secondary small">Install</vaadin-button>
+              <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepTwoButton')}</vaadin-button>
             </a>
           </div>
         </div>
