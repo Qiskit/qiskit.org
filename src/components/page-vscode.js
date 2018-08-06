@@ -34,6 +34,52 @@ class PageVscode extends localize(i18next)(PageViewElement) {
           --app-section-color: #222222;
         }
 
+        .install .row .step {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex: 1;
+        }
+
+        .install .row .step:nth-child(n+2) {
+          margin-top: 1em;
+        }
+
+        .install .row .step .number {
+          background-color: var(--qiskit-vscode-color);
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: .8em;
+        }
+
+        .install .row .step .title {
+          font-size: 1.1em;
+        }
+
+        section.install vaadin-button {
+          --ibmq-button-secondary-color: #222222;
+        }
+
+        @media (min-width: 600px) {
+          .install .row .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .install .row .step:nth-child(n+2) {
+            margin-top: 0;
+          }
+
+          section.install .row {
+            flex-direction: row;
+          }
+        }
+
         @media (min-width: 768px) {
           section .row .description {
             flex: 6;
@@ -74,6 +120,33 @@ class PageVscode extends localize(i18next)(PageViewElement) {
           </div>
         </div>
       </header>
+
+      <section class="install">
+        <div class="row limited-width">
+          <div class="step">
+            <p>
+              <span class="number">1</span>
+              <span class="title">Get Visual Studio Code</span>
+            </p>
+            <a
+                href="https://code.visualstudio.com"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">Download</vaadin-button>
+            </a>
+          </div>
+          <div class="step">
+            <p>
+              <span class="number">2</span>
+              <span class="title">Get Qiskit VSCode extension</span>
+            </p>
+            <a href="vscode:extension/qiskit.qiskit-vscode" tabindex="-1">
+              <vaadin-button theme="secondary small">Install</vaadin-button>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <section class="colored">
         <div class="row limited-width">
