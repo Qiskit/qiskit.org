@@ -7,48 +7,66 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-const gulp = require('gulp');
+const { dest, parallel, series, src, task } = require('gulp');
+const del = require('del');
 const inject = require('gulp-inject-string');
 
-const buildPath = 'build/es5-bundled/';
+const buildPath = 'build/';
 
-gulp.task('add-ibm-stats-script', () => {
-  const script = `
-      <script>
-        /* Define digital data object based on _appInfo object */
-        window.digitalData = {
-          page: {
-            category: {
-              primaryCategory: 'ibm-research'
-            },
-            pageInfo: {
-              ibm: {
-                siteID: 'qiskit'
-              }
-            }
-          }
-        };
-      </script>
-      <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
-    `;
+const serverPath = 'server/prpl/';
+const serverBuildPath = `${serverPath}${buildPath}`;
 
-  return gulp
-    .src(`${buildPath}index.html`)
-    .pipe(inject.before('</body>', script))
-    .pipe(gulp.dest(buildPath));
-});
-
-function moveFolderToBuildPath(folderPath) {
-  return gulp
-    .src(`${folderPath}**`)
-    .pipe(gulp.dest(`${buildPath}${folderPath}`));
+function clean() {
+  return del(serverBuildPath);
 }
 
-gulp.task('copy:license', () => moveFolderToBuildPath('license/'));
-gulp.task('copy:documentation', () => moveFolderToBuildPath('documentation/'));
-gulp.task('copy:modelq', () => moveFolderToBuildPath('modelq/'));
+function addIbmStatsScript() {
+  const script = `
+    <script>
+      /* Define digital data object based on _appInfo object */
+      window.digitalData = {
+        page: {
+          category: {
+            primaryCategory: 'ibm-research'
+          },
+          pageInfo: {
+            ibm: {
+              siteID: 'qiskit'
+            }
+          }
+        }
+      };
+    </script>
+    <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
+  `;
 
-gulp.task(
-  'copy',
-  gulp.series('copy:documentation', 'copy:license', 'copy:modelq'),
+  return src(`${buildPath}**/index.html`)
+    .pipe(inject.before('</body>', script))
+    .pipe(dest(buildPath));
+}
+
+function copyStaticFiles() {
+  return src('license/**')
+    .pipe(dest(`${buildPath}esm-bundled/license`))
+    .pipe(dest(`${buildPath}es6-bundled/license`))
+    .pipe(dest(`${buildPath}es5-bundled/license`))
+    .pipe(src('documentation/**'))
+    .pipe(dest(`${buildPath}esm-bundled/documentation`))
+    .pipe(dest(`${buildPath}es6-bundled/documentation`))
+    .pipe(dest(`${buildPath}es5-bundled/documentation`))
+    .pipe(src('modelq/**'))
+    .pipe(dest(`${buildPath}esm-bundled/modelq`))
+    .pipe(dest(`${buildPath}es6-bundled/modelq`))
+    .pipe(dest(`${buildPath}es5-bundled/modelq`));
+}
+
+function copyBuildFolder() {
+  return src(`${buildPath}**`).pipe(dest(serverBuildPath));
+}
+
+exports['setup:prpl-server'] = series(
+  clean,
+  addIbmStatsScript,
+  copyStaticFiles,
+  copyBuildFolder,
 );
