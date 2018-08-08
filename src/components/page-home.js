@@ -81,21 +81,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--app-primary-color);
         }
 
-        section.news.colored {
-          background-color: var(--qiskit-aqua-color);
-          color: #FFFFFF;
-        }
-
-        section.news.colored .row .description .actions vaadin-button {
-          --ibmq-button-secondary-color: #FFFFFF;
-          --ibmq-button-secondary-focus-color: var(--qiskit-aqua-color);
-        }
-
-        .news .row .illustration img {
-          width: 180px;
-          height: 180px;
-        }
-
         .architecture {
           background-color: #292C35;
           color: #FFFFFF;
@@ -263,21 +248,33 @@ class PageHome extends localize(i18next)(PageViewElement) {
         </div>
       </header>
 
-      <section class="news colored">
+      <section class="news">
         <div class="row limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.newsTitle')}</h3>
-            <p>${i18next.t('pages.home.newsDescription')}</p>
-            <div class="actions">
-              <a href="/aqua" tabindex="-1">
-                <vaadin-button theme="secondary">
-                  ${i18next.t('pages.home.newsButton')}
-                </vaadin-button>
-              </a>
+          <div class="column vscode">
+            <div class="description">
+              <h3>${i18next.t('pages.home.newsVscodeTitle')}</h3>
+              <p>${i18next.t('pages.home.newsVscodeDescription')}</p>
+              <div class="actions">
+                <a href="/vscode" tabindex="-1">
+                  <vaadin-button theme="secondary">
+                    ${i18next.t('pages.home.newsVscodeButton')}
+                  </vaadin-button>
+                </a>
+              </div>
             </div>
           </div>
-          <div class="illustration">
-            <img src="images/qiskit-aqua-logo.png" alt="${i18next.t('pages.aqua.altLogo')}">
+          <div class="column video">
+            <div class="description">
+              <h3>${i18next.t('pages.home.newsVideoTitle')}</h3>
+              <p>${i18next.t('pages.home.newsVideoDescription')}</p>
+              <div class="actions">
+                <a href="https://www.youtube.com/watch?v=V3hXSftZuoc" tabindex="-1">
+                  <vaadin-button theme="secondary">
+                    ${i18next.t('pages.home.newsVideoButton')}
+                  </vaadin-button>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -171,6 +171,10 @@ export const SectionStyles = html`<style>
     margin-bottom: 0;
   }
 
+  section .row .column {
+    flex: 1;
+  }
+
   section .row .description {
     margin-bottom: 2em;
     font-size: 1.1em;
