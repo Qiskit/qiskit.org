@@ -1,0 +1,1437 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit_aqua_chemistry package &#8212; Qiskit Aqua 0.2.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Aqua Artificial Intelligence" href="aqua_ai.html" />
+    <link rel="prev" title="Contributing to Aqua Chemistry" href="aqua_chemistry_extending.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+<div id="head" class="head">
+    <a href="https://qiskit.org/acqua">QISKit Acqua</a>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="aqua_ai.html" title="Aqua Artificial Intelligence"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="aqua_chemistry_extending.html" title="Contributing to Aqua Chemistry"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">Qiskit Aqua 0.2.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="aqua.html" >Qiskit Aqua</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="aqua_chemistry.html" accesskey="U">Aqua Chemistry</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Qiskit Aqua</p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="aqua.html">Qiskit Aqua</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="aqua_chemistry.html">Aqua Chemistry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aqua_chemistry_overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua_chemistry_installation.html">Installation and Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua_chemistry_drivers.html">Drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua_chemistry_translators.html">Translators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua_chemistry_execution.html">Running an Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua_chemistry_extending.html">Contributing to Aqua Chemistry</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Aqua Chemistry SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.aqua_chemistry">qiskit_aqua_chemistry.aqua_chemistry module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.aqua_chemistry_error">qiskit_aqua_chemistry.aqua_chemistry_error module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.command_line">qiskit_aqua_chemistry.command_line module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.fermionic_operator">qiskit_aqua_chemistry.fermionic_operator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.particle_hole">qiskit_aqua_chemistry.particle_hole module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.preferences">qiskit_aqua_chemistry.preferences module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry.qmolecule">qiskit_aqua_chemistry.qmolecule module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-qiskit_aqua_chemistry">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua_ai.html">Aqua Artificial Intelligence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqua_optimization.html">Aqua Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqua_tutorials.html">Aqua Tutorials</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="aqua_chemistry_extending.html"
+                        title="previous chapter">Contributing to Aqua Chemistry</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="aqua_ai.html"
+                        title="next chapter">Aqua Artificial Intelligence</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/qiskit_aqua_chemistry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qiskit-aqua-chemistry-package">
+<h1>qiskit_aqua_chemistry package<a class="headerlink" href="#qiskit-aqua-chemistry-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.aqua_chemistry">
+<span id="qiskit-aqua-chemistry-aqua-chemistry-module"></span><h2>qiskit_aqua_chemistry.aqua_chemistry module<a class="headerlink" href="#module-qiskit_aqua_chemistry.aqua_chemistry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.aqua_chemistry.</code><code class="descname">AquaChemistry</code><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Main entry point.</p>
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.KEY_HDF5_OUTPUT">
+<code class="descname">KEY_HDF5_OUTPUT</code><em class="property"> = 'hdf5_output'</em><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.KEY_HDF5_OUTPUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an AquaChemistry object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.get_effective_logging_level">
+<code class="descname">get_effective_logging_level</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.get_effective_logging_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.get_effective_logging_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the logging level being used by Aqua Chemistry</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>input</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_algorithm_from_json">
+<code class="descname">run_algorithm_from_json</code><span class="sig-paren">(</span><em>params</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_algorithm_from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_algorithm_from_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_algorithm_from_jsonfile">
+<code class="descname">run_algorithm_from_jsonfile</code><span class="sig-paren">(</span><em>jsonfile</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_algorithm_from_jsonfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_algorithm_from_jsonfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_drive">
+<code class="descname">run_drive</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_drive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_drive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_drive_to_jsonfile">
+<code class="descname">run_drive_to_jsonfile</code><span class="sig-paren">(</span><em>input</em>, <em>jsonfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_drive_to_jsonfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.run_drive_to_jsonfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.save_input">
+<code class="descname">save_input</code><span class="sig-paren">(</span><em>input_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.save_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.save_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the input of a run to a file.
+Params:</p>
+<blockquote>
+<div>input_file (string): file path</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.set_logging">
+<code class="descname">set_logging</code><span class="sig-paren">(</span><em>level=20</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.set_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry.AquaChemistry.set_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets logging output of the logging messages.
+Sets the output of logging messages (above level <cite>level</cite>) by
+configuring the logger accordingly.
+Disables logging if set to logging.NOTSET
+Params:</p>
+<blockquote>
+<div>level (int): minimum severity of the messages that are displayed.</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.aqua_chemistry_error">
+<span id="qiskit-aqua-chemistry-aqua-chemistry-error-module"></span><h2>qiskit_aqua_chemistry.aqua_chemistry_error module<a class="headerlink" href="#module-qiskit_aqua_chemistry.aqua_chemistry_error" title="Permalink to this headline">¶</a></h2>
+<p>Exception for errors raised by the AquaChemistry SDK.</p>
+<dl class="exception">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError">
+<em class="property">exception </em><code class="descclassname">qiskit_aqua_chemistry.aqua_chemistry_error.</code><code class="descname">AquaChemistryError</code><span class="sig-paren">(</span><em>*message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry_error.html#AquaChemistryError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base class for errors raised by the AquaChemistry SDK.</p>
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry_error.html#AquaChemistryError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the error message.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError.args">
+<code class="descname">args</code><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_aqua_chemistry.aqua_chemistry_error.AquaChemistryError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.command_line">
+<span id="qiskit-aqua-chemistry-command-line-module"></span><h2>qiskit_aqua_chemistry.command_line module<a class="headerlink" href="#module-qiskit_aqua_chemistry.command_line" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qiskit_aqua_chemistry.command_line.main">
+<code class="descclassname">qiskit_aqua_chemistry.command_line.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/command_line.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.command_line.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.fermionic_operator">
+<span id="qiskit-aqua-chemistry-fermionic-operator-module"></span><h2>qiskit_aqua_chemistry.fermionic_operator module<a class="headerlink" href="#module-qiskit_aqua_chemistry.fermionic_operator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.fermionic_operator.</code><code class="descname">FermionicOperator</code><span class="sig-paren">(</span><em>h1</em>, <em>h2=None</em>, <em>ph_trans_shift=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A set of functions to map fermionic Hamiltonians to qubit Hamiltonians.</p>
+<p>References:
+- E. Wigner and P. Jordan., Über das Paulische Äguivalenzverbot,</p>
+<blockquote>
+<div><ol class="upperalpha simple" start="26">
+<li>Phys., 47:631 (1928).</li>
+</ol>
+</div></blockquote>
+<ul>
+<li><ol class="first upperalpha simple" start="19">
+<li>Bravyi and A. Kitaev. Fermionic quantum computation,</li>
+</ol>
+<blockquote>
+<div><p>Ann. of Phys., 298(1):210–226 (2002).</p>
+</div></blockquote>
+</li>
+<li><ol class="first upperalpha simple">
+<li>Tranter, S. Sofia, J. Seeley, M. Kaicher, J. McClean, R. Babbush,</li>
+</ol>
+<blockquote>
+<div><p>P. Coveney, F. Mintert, F. Wilhelm, and P. Love. The Bravyi–Kitaev
+transformation: Properties and applications. Int. Journal of Quantum
+Chemistry, 115(19):1431–1441 (2015).</p>
+</div></blockquote>
+</li>
+<li><ol class="first upperalpha simple" start="19">
+<li>Bravyi, J. M. Gambetta, A. Mezzacapo, and K. Temme,</li>
+</ol>
+<blockquote>
+<div><p>arXiv e-print arXiv:1701.08213 (2017).</p>
+</div></blockquote>
+</li>
+</ul>
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>h1</em>, <em>h2=None</em>, <em>ph_trans_shift=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>h1</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic one-body operator, a 2-D (NxN) tensor</li>
+<li><strong>h2</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic two-body operator, a 4-D (NxNxNxN) tensor</li>
+<li><strong>ph_trans_shift</strong> (<em>float</em>) – energy shift caused by particle hole transformation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.fermion_mode_elimination">
+<code class="descname">fermion_mode_elimination</code><span class="sig-paren">(</span><em>fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_elimination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.fermion_mode_elimination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a new fermionic operator with the modes in fermion_mode_array deleted</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for elimination</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.fermion_mode_freezing">
+<code class="descname">fermion_mode_freezing</code><span class="sig-paren">(</span><em>fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_freezing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.fermion_mode_freezing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a fermionic operator with the modes in fermion_mode_array deleted and
+provide the shifted energy after freezing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for freezing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.h1">
+<code class="descname">h1</code><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.h1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter of one body integral tensor</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.h2">
+<code class="descname">h2</code><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.h2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter of two body integral tensor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.mapping">
+<code class="descname">mapping</code><span class="sig-paren">(</span><em>map_type</em>, <em>threshold=1e-08</em>, <em>num_workers=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Using multiprocess to speedup the mapping, the improvement can be
+observed when h2 is a non-sparse matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – case-insensitive mapping type. “jordan_wigner”, “parity”, “bravyi_kitaev”</li>
+<li><strong>threshold</strong> (<em>float</em>) – threshold for Pauli simplification</li>
+<li><strong>num_workers</strong> (<em>int</em>) – number of processes used to map.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">create an Operator object in Paulis form.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit_aqua.html#qiskit_aqua.operator.Operator" title="qiskit_aqua.operator.Operator">Operator</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AquaChemistryError</span></code> – if the <cite>map_type</cite> can not be recognized.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.particle_hole_transformation">
+<code class="descname">particle_hole_transformation</code><span class="sig-paren">(</span><em>num_particles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.particle_hole_transformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.particle_hole_transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ‘standard’ second quantized Hamiltonian can be transformed in the
+particle-hole (p/h) picture, which makes the expansion of the trail wavefunction
+from the HF reference state more natural. In fact, for both trail wavefunctions
+implemented in q-lib (‘heuristic’ hardware efficient and UCCSD) the p/h Hamiltonian
+improves the speed of convergence of the VQE algorithm for the calculation of
+the electronic ground state properties.
+For more information on the p/h formalism see:
+P. Barkoutsos, arXiv:1805.04340(https://arxiv.org/abs/1805.04340).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num_particles</strong> (<em>int</em>) – number of particles</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.total_angular_momentum">
+<code class="descname">total_angular_momentum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.total_angular_momentum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.total_angular_momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data_preprocess_helper fermionic operator which can be used to evaluate the total
+angular momentum of the given eigenstate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.total_magnetization">
+<code class="descname">total_magnetization</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.total_magnetization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.total_magnetization" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>A data_preprocess_helper fermionic operator which can be used to evaluate the magnetization</dt>
+<dd>of the given eigenstate.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.total_particle_number">
+<code class="descname">total_particle_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.total_particle_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.total_particle_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data_preprocess_helper fermionic operator which can be used to evaluate the number of
+particle of the given eigenstate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.particle_hole">
+<span id="qiskit-aqua-chemistry-particle-hole-module"></span><h2>qiskit_aqua_chemistry.particle_hole module<a class="headerlink" href="#module-qiskit_aqua_chemistry.particle_hole" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qiskit_aqua_chemistry.particle_hole.last_two_indices_swap">
+<code class="descclassname">qiskit_aqua_chemistry.particle_hole.</code><code class="descname">last_two_indices_swap</code><span class="sig-paren">(</span><em>array_ind_two_body_term</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/particle_hole.html#last_two_indices_swap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.particle_hole.last_two_indices_swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swap 2 last indices of an array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>array_ind_two_body_term</strong> (<em>list</em>) – TBD</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TBD</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_aqua_chemistry.particle_hole.normal_order_integrals">
+<code class="descclassname">qiskit_aqua_chemistry.particle_hole.</code><code class="descname">normal_order_integrals</code><span class="sig-paren">(</span><em>n_qubits</em>, <em>n_occupied</em>, <em>array_to_normal_order</em>, <em>array_mapping</em>, <em>h1_old</em>, <em>h2_old</em>, <em>h1_new</em>, <em>h2_new</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/particle_hole.html#normal_order_integrals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.particle_hole.normal_order_integrals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an operator and the rFs and rsgtu from Gaussian it produces new
+h1,h2,id_terms usable for the generation of the Hamiltonian in Pauli strings form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n_qubits</strong> (<em>int</em>) – number of qubits</li>
+<li><strong>n_occupied</strong> (<em>int</em>) – number of electrons (occupied orbitals)</li>
+<li><strong>array_to_normal_order</strong> (<em>list</em>) – e.g. [i,j,k,l] indices of the term to normal order</li>
+<li><strong>array_mapping</strong> (<em>list</em>) – e.g. two body terms list  [‘adag’, ‘adag’, ‘a’, ‘a’],</li>
+<li><strong>body terms list</strong> (<em>single</em>) – [‘adag’, ‘a’]</li>
+<li><strong>h1_old</strong> (<em>numpy.ndarray</em>) – e.g. rFs.dat (dim(rsgtu) = [n_qubits,n_qubits,n_qubits,n_qubits])
+loaded with QuTip function (qutip.fileio.qload) or numpy.array</li>
+<li><strong>h2_old</strong> (<em>numpy.ndarray</em>) – e.g. rsgtu.dat (dim(rsgtu) = [n_qubits,n_qubits])</li>
+<li><strong>h1_new</strong> (<em>numpy.ndarray</em>) – e.g. numpy.zeros([n_qubits, n_qubits])</li>
+<li><strong>h2_new</strong> (<em>numpy.ndarray</em>) – e.g. numpy.zeros([n_qubits, n_qubits, n_qubits, n_qubits])</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">h1_new, h2_new, id_term</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray, numpy.ndarray, float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_aqua_chemistry.particle_hole.particle_hole_transformation">
+<code class="descclassname">qiskit_aqua_chemistry.particle_hole.</code><code class="descname">particle_hole_transformation</code><span class="sig-paren">(</span><em>n_qubits</em>, <em>n_occupied</em>, <em>h1_old_matrix</em>, <em>h2_old_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/particle_hole.html#particle_hole_transformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.particle_hole.particle_hole_transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function produces the necessary h1, h2, identity for work with Fermionic Operators script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n_qubits</strong> (<em>int</em>) – number of qubits</li>
+<li><strong>n_occupied</strong> (<em>int</em>) – number of electrons</li>
+<li><strong>h1_old_matrix</strong> (<em>numpy.ndarray</em>) – rFs terms from Gaussian</li>
+<li><strong>h2_old_matrix</strong> (<em>numpy.ndarray</em>) – rsgtu terms from Gaussian</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">h1_prime, h2_prime, identities</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray, numpy.ndarray, float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit_aqua_chemistry.particle_hole.sort">
+<code class="descclassname">qiskit_aqua_chemistry.particle_hole.</code><code class="descname">sort</code><span class="sig-paren">(</span><em>seq</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/particle_hole.html#sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.particle_hole.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tool function for normal order, should not be used separately</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seq</strong> (<em>list</em>) – array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">integer e.g. swapped array, number of swaps</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.preferences">
+<span id="qiskit-aqua-chemistry-preferences-module"></span><h2>qiskit_aqua_chemistry.preferences module<a class="headerlink" href="#module-qiskit_aqua_chemistry.preferences" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.preferences.</code><code class="descname">Preferences</code><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.PACKAGE_TYPE_CHEMISTRY">
+<code class="descname">PACKAGE_TYPE_CHEMISTRY</code><em class="property"> = 'chemistry'</em><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.PACKAGE_TYPE_CHEMISTRY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.PACKAGE_TYPE_DRIVERS">
+<code class="descname">PACKAGE_TYPE_DRIVERS</code><em class="property"> = 'drivers'</em><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.PACKAGE_TYPE_DRIVERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.URL">
+<code class="descname">URL</code><em class="property"> = 'https://quantumexperience.ng.bluemix.net/api'</em><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.VERIFY">
+<code class="descname">VERIFY</code><em class="property"> = True</em><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.VERIFY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Preferences object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.add_package">
+<code class="descname">add_package</code><span class="sig-paren">(</span><em>package_type</em>, <em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.add_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.add_package" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.change_package">
+<code class="descname">change_package</code><span class="sig-paren">(</span><em>package_type</em>, <em>old_package</em>, <em>new_package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.change_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.change_package" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_group">
+<code class="descname">get_group</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_hub">
+<code class="descname">get_hub</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_hub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_hub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_logging_config">
+<code class="descname">get_logging_config</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_logging_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_logging_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_packages">
+<code class="descname">get_packages</code><span class="sig-paren">(</span><em>package_type</em>, <em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_packages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_project">
+<code class="descname">get_project</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_proxy_urls">
+<code class="descname">get_proxy_urls</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_proxy_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_proxy_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_qconfig_path">
+<code class="descname">get_qconfig_path</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_qconfig_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_qconfig_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_token">
+<code class="descname">get_token</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_url">
+<code class="descname">get_url</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_verify">
+<code class="descname">get_verify</code><span class="sig-paren">(</span><em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_verify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_verify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.get_version">
+<code class="descname">get_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.get_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.get_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.remove_package">
+<code class="descname">remove_package</code><span class="sig-paren">(</span><em>package_type</em>, <em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.remove_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.remove_package" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.save">
+<code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_group">
+<code class="descname">set_group</code><span class="sig-paren">(</span><em>group</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_hub">
+<code class="descname">set_hub</code><span class="sig-paren">(</span><em>hub</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_hub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_hub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_logging_config">
+<code class="descname">set_logging_config</code><span class="sig-paren">(</span><em>logging_config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_logging_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_logging_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_packages">
+<code class="descname">set_packages</code><span class="sig-paren">(</span><em>package_type</em>, <em>packages</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_packages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_project">
+<code class="descname">set_project</code><span class="sig-paren">(</span><em>project</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_proxy_urls">
+<code class="descname">set_proxy_urls</code><span class="sig-paren">(</span><em>proxy_urls</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_proxy_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_proxy_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_token">
+<code class="descname">set_token</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_url">
+<code class="descname">set_url</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.preferences.Preferences.set_verify">
+<code class="descname">set_verify</code><span class="sig-paren">(</span><em>verify</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/preferences.html#Preferences.set_verify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.preferences.Preferences.set_verify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry.qmolecule">
+<span id="qiskit-aqua-chemistry-qmolecule-module"></span><h2>qiskit_aqua_chemistry.qmolecule module<a class="headerlink" href="#module-qiskit_aqua_chemistry.qmolecule" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.qmolecule.</code><code class="descname">QMolecule</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Molecule data class with driver information.</p>
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.BOHR">
+<code class="descname">BOHR</code><em class="property"> = 0.52917721092</em><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.BOHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.DEBYE">
+<code class="descname">DEBYE</code><em class="property"> = 0.393430307</em><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.DEBYE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.Z">
+<code class="descname">Z</code><span class="sig-paren">(</span><em>natom</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.Z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.Z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.core_orbitals">
+<code class="descname">core_orbitals</code><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.core_orbitals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.filename">
+<code class="descname">filename</code><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.has_dipole_integrals">
+<code class="descname">has_dipole_integrals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.has_dipole_integrals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.has_dipole_integrals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads info saved.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.log">
+<code class="descname">log</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.mo_to_spin">
+<em class="property">static </em><code class="descname">mo_to_spin</code><span class="sig-paren">(</span><em>mohij</em>, <em>mohijkl</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.mo_to_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.mo_to_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert one and two-body MO integrals to spin orbital basis</p>
+<p>Takes one and two body integrals in molecular orbital basis and returns
+integrals in spin orbitals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mohij</strong> – One body orbitals in molecular basis</li>
+<li><strong>mohijkl</strong> – Two body orbitals in molecular basis</li>
+<li><strong>threshold</strong> – Threshold value for assignments</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">One and two body integrals in spin orbitals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.onee_to_spin">
+<em class="property">static </em><code class="descname">onee_to_spin</code><span class="sig-paren">(</span><em>mohij</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.onee_to_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.onee_to_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert one-body MO integrals to spin orbital basis</p>
+<p>Takes one body integrals in molecular orbital basis and returns
+integrals in spin orbitals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mohij</strong> – One body orbitals in molecular basis</li>
+<li><strong>threshold</strong> – Threshold value for assignments</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">One body integrals in spin orbitals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.oneeints2mo">
+<em class="property">static </em><code class="descname">oneeints2mo</code><span class="sig-paren">(</span><em>ints</em>, <em>moc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.oneeints2mo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.oneeints2mo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts one-body integrals from AO to MO basis</p>
+<p>Returns one electron integrals in AO basis converted to given MO basis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ints</strong> – N^2 one electron integrals in AO basis</li>
+<li><strong>moc</strong> – Molecular orbital coefficients</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">integrals in MO basis</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.remove_file">
+<code class="descname">remove_file</code><span class="sig-paren">(</span><em>file_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.remove_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.remove_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>file_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the info from the driver.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.symbols">
+<code class="descname">symbols</code><em class="property"> = ['_', 'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc', 'Lv', 'Ts', 'Og']</em><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.symbols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.twoe_to_spin">
+<em class="property">static </em><code class="descname">twoe_to_spin</code><span class="sig-paren">(</span><em>mohijkl</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.twoe_to_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.twoe_to_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert two-body MO integrals to spin orbital basis</p>
+<p>Takes two body integrals in molecular orbital basis and returns
+integrals in spin orbitals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mohijkl</strong> – Two body orbitals in molecular basis</li>
+<li><strong>threshold</strong> – Threshold value for assignments</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Two body integrals in spin orbitals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.qmolecule.QMolecule.twoeints2mo">
+<em class="property">static </em><code class="descname">twoeints2mo</code><span class="sig-paren">(</span><em>ints</em>, <em>moc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.twoeints2mo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.qmolecule.QMolecule.twoeints2mo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts two-body integrals from AO to MO basis</p>
+<p>Returns two electron integrals in AO basis converted to given MO basis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ints</strong> – N^2 two electron integrals in AO basis</li>
+<li><strong>moc</strong> – Molecular orbital coefficients</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">integrals in MO basis</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-qiskit_aqua_chemistry">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qiskit_aqua_chemistry" title="Permalink to this headline">¶</a></h2>
+<p>Main qiskit_aqua_chemistry public functionality.</p>
+<dl class="exception">
+<dt id="qiskit_aqua_chemistry.AquaChemistryError">
+<em class="property">exception </em><code class="descclassname">qiskit_aqua_chemistry.</code><code class="descname">AquaChemistryError</code><span class="sig-paren">(</span><em>*message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry_error.html#AquaChemistryError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistryError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base class for errors raised by the AquaChemistry SDK.</p>
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistryError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry_error.html#AquaChemistryError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistryError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the error message.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.AquaChemistryError.args">
+<code class="descname">args</code><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistryError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistryError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistryError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.QMolecule">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.</code><code class="descname">QMolecule</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Molecule data class with driver information.</p>
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.QMolecule.BOHR">
+<code class="descname">BOHR</code><em class="property"> = 0.52917721092</em><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.BOHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.QMolecule.DEBYE">
+<code class="descname">DEBYE</code><em class="property"> = 0.393430307</em><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.DEBYE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.QMolecule.Z">
+<code class="descname">Z</code><span class="sig-paren">(</span><em>natom</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.Z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.Z" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.QMolecule.core_orbitals">
+<code class="descname">core_orbitals</code><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.core_orbitals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.QMolecule.filename">
+<code class="descname">filename</code><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.QMolecule.has_dipole_integrals">
+<code class="descname">has_dipole_integrals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.has_dipole_integrals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.has_dipole_integrals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.QMolecule.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads info saved.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.QMolecule.log">
+<code class="descname">log</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.QMolecule.mo_to_spin">
+<em class="property">static </em><code class="descname">mo_to_spin</code><span class="sig-paren">(</span><em>mohij</em>, <em>mohijkl</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.mo_to_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.mo_to_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert one and two-body MO integrals to spin orbital basis</p>
+<p>Takes one and two body integrals in molecular orbital basis and returns
+integrals in spin orbitals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mohij</strong> – One body orbitals in molecular basis</li>
+<li><strong>mohijkl</strong> – Two body orbitals in molecular basis</li>
+<li><strong>threshold</strong> – Threshold value for assignments</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">One and two body integrals in spin orbitals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.QMolecule.onee_to_spin">
+<em class="property">static </em><code class="descname">onee_to_spin</code><span class="sig-paren">(</span><em>mohij</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.onee_to_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.onee_to_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert one-body MO integrals to spin orbital basis</p>
+<p>Takes one body integrals in molecular orbital basis and returns
+integrals in spin orbitals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mohij</strong> – One body orbitals in molecular basis</li>
+<li><strong>threshold</strong> – Threshold value for assignments</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">One body integrals in spin orbitals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.QMolecule.oneeints2mo">
+<em class="property">static </em><code class="descname">oneeints2mo</code><span class="sig-paren">(</span><em>ints</em>, <em>moc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.oneeints2mo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.oneeints2mo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts one-body integrals from AO to MO basis</p>
+<p>Returns one electron integrals in AO basis converted to given MO basis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ints</strong> – N^2 one electron integrals in AO basis</li>
+<li><strong>moc</strong> – Molecular orbital coefficients</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">integrals in MO basis</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.QMolecule.remove_file">
+<code class="descname">remove_file</code><span class="sig-paren">(</span><em>file_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.remove_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.remove_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.QMolecule.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>file_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the info from the driver.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.QMolecule.symbols">
+<code class="descname">symbols</code><em class="property"> = ['_', 'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc', 'Lv', 'Ts', 'Og']</em><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.symbols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.QMolecule.twoe_to_spin">
+<em class="property">static </em><code class="descname">twoe_to_spin</code><span class="sig-paren">(</span><em>mohijkl</em>, <em>threshold=1e-12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.twoe_to_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.twoe_to_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert two-body MO integrals to spin orbital basis</p>
+<p>Takes two body integrals in molecular orbital basis and returns
+integrals in spin orbitals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mohijkl</strong> – Two body orbitals in molecular basis</li>
+<li><strong>threshold</strong> – Threshold value for assignments</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Two body integrals in spin orbitals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit_aqua_chemistry.QMolecule.twoeints2mo">
+<em class="property">static </em><code class="descname">twoeints2mo</code><span class="sig-paren">(</span><em>ints</em>, <em>moc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/qmolecule.html#QMolecule.twoeints2mo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.QMolecule.twoeints2mo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts two-body integrals from AO to MO basis</p>
+<p>Returns two electron integrals in AO basis converted to given MO basis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ints</strong> – N^2 two electron integrals in AO basis</li>
+<li><strong>moc</strong> – Molecular orbital coefficients</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">integrals in MO basis</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.AquaChemistry">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.</code><code class="descname">AquaChemistry</code><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Main entry point.</p>
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.KEY_HDF5_OUTPUT">
+<code class="descname">KEY_HDF5_OUTPUT</code><em class="property"> = 'hdf5_output'</em><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.KEY_HDF5_OUTPUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an AquaChemistry object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.get_effective_logging_level">
+<code class="descname">get_effective_logging_level</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.get_effective_logging_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.get_effective_logging_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the logging level being used by Aqua Chemistry</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>input</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.run_algorithm_from_json">
+<code class="descname">run_algorithm_from_json</code><span class="sig-paren">(</span><em>params</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_algorithm_from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.run_algorithm_from_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.run_algorithm_from_jsonfile">
+<code class="descname">run_algorithm_from_jsonfile</code><span class="sig-paren">(</span><em>jsonfile</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_algorithm_from_jsonfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.run_algorithm_from_jsonfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.run_drive">
+<code class="descname">run_drive</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_drive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.run_drive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.run_drive_to_jsonfile">
+<code class="descname">run_drive_to_jsonfile</code><span class="sig-paren">(</span><em>input</em>, <em>jsonfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.run_drive_to_jsonfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.run_drive_to_jsonfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.save_input">
+<code class="descname">save_input</code><span class="sig-paren">(</span><em>input_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.save_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.save_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the input of a run to a file.
+Params:</p>
+<blockquote>
+<div>input_file (string): file path</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.AquaChemistry.set_logging">
+<code class="descname">set_logging</code><span class="sig-paren">(</span><em>level=20</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/aqua_chemistry.html#AquaChemistry.set_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.AquaChemistry.set_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets logging output of the logging messages.
+Sets the output of logging messages (above level <cite>level</cite>) by
+configuring the logger accordingly.
+Disables logging if set to logging.NOTSET
+Params:</p>
+<blockquote>
+<div>level (int): minimum severity of the messages that are displayed.</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit_aqua_chemistry.FermionicOperator">
+<em class="property">class </em><code class="descclassname">qiskit_aqua_chemistry.</code><code class="descname">FermionicOperator</code><span class="sig-paren">(</span><em>h1</em>, <em>h2=None</em>, <em>ph_trans_shift=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A set of functions to map fermionic Hamiltonians to qubit Hamiltonians.</p>
+<p>References:
+- E. Wigner and P. Jordan., Über das Paulische Äguivalenzverbot,</p>
+<blockquote>
+<div><ol class="upperalpha simple" start="26">
+<li>Phys., 47:631 (1928).</li>
+</ol>
+</div></blockquote>
+<ul>
+<li><ol class="first upperalpha simple" start="19">
+<li>Bravyi and A. Kitaev. Fermionic quantum computation,</li>
+</ol>
+<blockquote>
+<div><p>Ann. of Phys., 298(1):210–226 (2002).</p>
+</div></blockquote>
+</li>
+<li><ol class="first upperalpha simple">
+<li>Tranter, S. Sofia, J. Seeley, M. Kaicher, J. McClean, R. Babbush,</li>
+</ol>
+<blockquote>
+<div><p>P. Coveney, F. Mintert, F. Wilhelm, and P. Love. The Bravyi–Kitaev
+transformation: Properties and applications. Int. Journal of Quantum
+Chemistry, 115(19):1431–1441 (2015).</p>
+</div></blockquote>
+</li>
+<li><ol class="first upperalpha simple" start="19">
+<li>Bravyi, J. M. Gambetta, A. Mezzacapo, and K. Temme,</li>
+</ol>
+<blockquote>
+<div><p>arXiv e-print arXiv:1701.08213 (2017).</p>
+</div></blockquote>
+</li>
+</ul>
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>h1</em>, <em>h2=None</em>, <em>ph_trans_shift=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>h1</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic one-body operator, a 2-D (NxN) tensor</li>
+<li><strong>h2</strong> (<em>numpy.ndarray</em>) – second-quantized fermionic two-body operator, a 4-D (NxNxNxN) tensor</li>
+<li><strong>ph_trans_shift</strong> (<em>float</em>) – energy shift caused by particle hole transformation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.fermion_mode_elimination">
+<code class="descname">fermion_mode_elimination</code><span class="sig-paren">(</span><em>fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_elimination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.fermion_mode_elimination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a new fermionic operator with the modes in fermion_mode_array deleted</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for elimination</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.fermion_mode_freezing">
+<code class="descname">fermion_mode_freezing</code><span class="sig-paren">(</span><em>fermion_mode_array</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.fermion_mode_freezing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.fermion_mode_freezing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a fermionic operator with the modes in fermion_mode_array deleted and
+provide the shifted energy after freezing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fermion_mode_array</strong> (<em>list</em>) – orbital index for freezing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.h1">
+<code class="descname">h1</code><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.h1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter of one body integral tensor</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.h2">
+<code class="descname">h2</code><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.h2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter of two body integral tensor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.mapping">
+<code class="descname">mapping</code><span class="sig-paren">(</span><em>map_type</em>, <em>threshold=1e-08</em>, <em>num_workers=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Using multiprocess to speedup the mapping, the improvement can be
+observed when h2 is a non-sparse matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_type</strong> (<em>str</em>) – case-insensitive mapping type. “jordan_wigner”, “parity”, “bravyi_kitaev”</li>
+<li><strong>threshold</strong> (<em>float</em>) – threshold for Pauli simplification</li>
+<li><strong>num_workers</strong> (<em>int</em>) – number of processes used to map.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">create an Operator object in Paulis form.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit_aqua.html#qiskit_aqua.operator.Operator" title="qiskit_aqua.operator.Operator">Operator</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#qiskit_aqua_chemistry.AquaChemistryError" title="qiskit_aqua_chemistry.AquaChemistryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AquaChemistryError</span></code></a> – if the <cite>map_type</cite> can not be recognized.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.particle_hole_transformation">
+<code class="descname">particle_hole_transformation</code><span class="sig-paren">(</span><em>num_particles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.particle_hole_transformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.particle_hole_transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ‘standard’ second quantized Hamiltonian can be transformed in the
+particle-hole (p/h) picture, which makes the expansion of the trail wavefunction
+from the HF reference state more natural. In fact, for both trail wavefunctions
+implemented in q-lib (‘heuristic’ hardware efficient and UCCSD) the p/h Hamiltonian
+improves the speed of convergence of the VQE algorithm for the calculation of
+the electronic ground state properties.
+For more information on the p/h formalism see:
+P. Barkoutsos, arXiv:1805.04340(https://arxiv.org/abs/1805.04340).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num_particles</strong> (<em>int</em>) – number of particles</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.total_angular_momentum">
+<code class="descname">total_angular_momentum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.total_angular_momentum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.total_angular_momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data_preprocess_helper fermionic operator which can be used to evaluate the total
+angular momentum of the given eigenstate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.total_magnetization">
+<code class="descname">total_magnetization</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.total_magnetization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.total_magnetization" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>A data_preprocess_helper fermionic operator which can be used to evaluate the magnetization</dt>
+<dd>of the given eigenstate.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.total_particle_number">
+<code class="descname">total_particle_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.total_particle_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.total_particle_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data_preprocess_helper fermionic operator which can be used to evaluate the number of
+particle of the given eigenstate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Fermionic Hamiltonian</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit_aqua_chemistry.fermionic_operator.FermionicOperator" title="qiskit_aqua_chemistry.fermionic_operator.FermionicOperator">FermionicOperator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit_aqua_chemistry.FermionicOperator.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qiskit_aqua_chemistry/fermionic_operator.html#FermionicOperator.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit_aqua_chemistry.FermionicOperator.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="aqua_ai.html" title="Aqua Artificial Intelligence"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="aqua_chemistry_extending.html" title="Contributing to Aqua Chemistry"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="index.html">Qiskit Aqua 0.2.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="aqua.html" >Qiskit Aqua</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="aqua_chemistry.html" >Aqua Chemistry</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018 IBM.
+      Last updated on 2018/08/08.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>
