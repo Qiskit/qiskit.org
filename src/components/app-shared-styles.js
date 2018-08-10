@@ -305,10 +305,6 @@ export const StackListStyles = html`<style>
     margin-top: 1.136em;
   }
 
-  .stack-list .stack-list::before {
-    bottom: 1.6em;
-  }
-
   .stack-list > * + * {
     margin-top: 1.136em;
   }
