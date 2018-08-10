@@ -27,7 +27,7 @@
     <![endif]-->
   </head><body>
 <div id="head" class="head">
-    <a href="https://qiskit.org/acqua">QISKit Acqua</a>
+    <a href="https://qiskit.org/aqua">Qiskit Aqua</a>
 </div>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -69,9 +69,14 @@
 <li class="toctree-l2"><a class="reference internal" href="aqua_chemistry.html">Aqua Chemistry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aqua_ai.html">Aqua Artificial Intelligence</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Aqua Optimization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#optimization-specific-algorithms">Optimization-specific Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aqua-optimization-problems">Aqua Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#contributing-to-aqua-optimization">Contributing to Aqua Optimization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#optimization-problems">Optimization Problems</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="aqua_tutorials.html">Aqua Tutorials</a></li>
@@ -124,29 +129,8 @@ quantum simulator or a real quantum hardware device.</p>
 experiments and contribute to the quantum computing optimization software stack.
 Users with a pure optimization background or interests can continue to configure
 optimization problems without having to learn the details of quantum computing.</p>
-<div class="section" id="optimization-specific-algorithms">
-<h2>Optimization-specific Algorithms<a class="headerlink" href="#optimization-specific-algorithms" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="library.html#aqua-library"><span class="std std-ref">Aqua: A Library of Quantum Algorithms</span></a> includes numerous quantum algorithms
-that can be used to experiment with optimization problems,
-such as <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>, <a class="reference internal" href="algorithms.html#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a>, <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>, <a class="reference internal" href="algorithms.html#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a> and <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a>.</p>
-<p>Research and developers interested in <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> with new optimization-specific
-capabilities can take advantage
-of the modular architecture of Aqua and easily extend Aqua with more algorithms
-and algorithm components, such as new <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a> for the <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a> algorithm,
-new <a class="reference internal" href="optimizers.html#optimizers"><span class="std std-ref">Optimizers</span></a> and <a class="reference internal" href="variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a> for <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a> and <a class="reference internal" href="algorithms.html#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a>,
-and new <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Inverse Quantum Fourier Transforms</span></a> for <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a> and <a class="reference internal" href="algorithms.html#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a>.</p>
-<p>To produce reference values and compare and contrast results during experimentation,
-the Aqua library of <a class="reference internal" href="algorithms.html#classical-reference-algorithms"><span class="std std-ref">Classical Reference Algorithms</span></a> also includes the
-<a class="reference internal" href="algorithms.html#exact-eigensolver"><span class="std std-ref">Exact Eigensolver</span></a> and <a class="reference internal" href="algorithms.html#cplex"><span class="std std-ref">CPLEX</span></a> classical algorithms.</p>
-</div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">optimization</span></code> folder of the <a class="reference external" href="https://github.com/Qiskit/aqua-tutorials">Aqua Tutorials GitHub Repository</a> contains numerous
-<a class="reference external" href="http://jupyter.org/">Jupyter Notebooks</a>
-explaining how to use Aqua Optimization.</p>
-</div>
-<div class="section" id="optimization-problems">
-<h2>Optimization Problems<a class="headerlink" href="#optimization-problems" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="aqua-optimization-problems">
+<h2>Aqua Optimization Problems<a class="headerlink" href="#aqua-optimization-problems" title="Permalink to this headline">¶</a></h2>
 <p>Aqua Optimization can already be used to experiment with numerous well known optimization
 problems, such as:</p>
 <ol class="arabic simple">
@@ -155,6 +139,37 @@ problems, such as:</p>
 <li><a class="reference external" href="https://github.com/Qiskit/aqua-tutorials/blob/master/optimization/partition.ipynb">Partition</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/aqua-tutorials/blob/master/optimization/grover.ipynb">3 Satisfiability (3-SAT)</a></li>
 </ol>
+</div>
+<div class="section" id="aqua-algorithms-for-optimization">
+<h2>Aqua Algorithms for Optimization<a class="headerlink" href="#aqua-algorithms-for-optimization" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="library.html#aqua-library"><span class="std std-ref">Aqua: A Library of Quantum Algorithms</span></a> includes numerous algorithms
+that can be used to experiment with optimization problems.</p>
+<div class="section" id="general-quantum-algorithms-for-optimization">
+<h3>General Quantum Algorithms for Optimization<a class="headerlink" href="#general-quantum-algorithms-for-optimization" title="Permalink to this headline">¶</a></h3>
+<p>The following quantum algorithms are suitable to optimization problems:
+<a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>, <a class="reference internal" href="algorithms.html#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a>, <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>, <a class="reference internal" href="algorithms.html#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a> and <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a>.</p>
+</div>
+<div class="section" id="classical-reference-algorithms-for-optimization">
+<h3>Classical Reference Algorithms for Optimization<a class="headerlink" href="#classical-reference-algorithms-for-optimization" title="Permalink to this headline">¶</a></h3>
+<p>To produce reference values and compare and contrast results during experimentation,
+the Aqua library of <a class="reference internal" href="algorithms.html#classical-reference-algorithms"><span class="std std-ref">Classical Reference Algorithms</span></a> includes the
+<a class="reference internal" href="algorithms.html#exact-eigensolver"><span class="std std-ref">Exact Eigensolver</span></a> and <a class="reference internal" href="algorithms.html#cplex"><span class="std std-ref">CPLEX</span></a> classical algorithms.</p>
+</div>
+</div>
+<div class="section" id="contributing-to-aqua-optimization">
+<h2>Contributing to Aqua Optimization<a class="headerlink" href="#contributing-to-aqua-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Research and developers interested in <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> with new optimization-specific
+capabilities can take advantage
+of the modular architecture of Aqua and easily extend Aqua with more algorithms
+and algorithm components, such as new <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a> for the <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a> algorithm,
+new <a class="reference internal" href="optimizers.html#optimizers"><span class="std std-ref">Optimizers</span></a> and <a class="reference internal" href="variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a> for <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a> and <a class="reference internal" href="algorithms.html#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a>,
+and new <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Inverse Quantum Fourier Transforms</span></a> for <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a> and <a class="reference internal" href="algorithms.html#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a>.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">optimization</span></code> folder of the <a class="reference external" href="https://github.com/Qiskit/aqua-tutorials">Aqua Tutorials GitHub Repository</a> contains numerous
+<a class="reference external" href="http://jupyter.org/">Jupyter Notebooks</a> and sample input data files
+explaining how to use Aqua Optimization.</p>
 </div>
 </div>
 
@@ -192,7 +207,7 @@ problems, such as:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018 IBM.
-      Last updated on 2018/08/08.
+      Last updated on 2018/08/09.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>

@@ -27,7 +27,7 @@
     <![endif]-->
   </head><body>
 <div id="head" class="head">
-    <a href="https://qiskit.org/acqua">QISKit Acqua</a>
+    <a href="https://qiskit.org/aqua">Qiskit Aqua</a>
 </div>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,7 +68,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aqua_chemistry.html">Aqua Chemistry</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Aqua Artificial Intelligence</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ai-specific-algorithms">AI-specific Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#contributing-to-aqua-ai">Contributing to Aqua AI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
@@ -123,8 +129,12 @@ quantum simulator or a real quantum hardware device.</p>
 experiments and contribute to the quantum computing AI software stack.
 Users with a pure AI background or interests can continue to configure AI problems
 without having to learn the details of quantum computing.</p>
-<div class="section" id="ai-specific-algorithms">
-<h2>AI-specific Algorithms<a class="headerlink" href="#ai-specific-algorithms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="applicable-algorithms">
+<h2>Applicable Algorithms<a class="headerlink" href="#applicable-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>There are numerous algorithms from <a class="reference internal" href="library.html#aqua-library"><span class="std std-ref">Aqua: A Library of Quantum Algorithms</span></a> that can be applied
+to AI problems.</p>
+<div class="section" id="ai-specific-quantum-algorithms">
+<h3>AI-specific Quantum Algorithms<a class="headerlink" href="#ai-specific-quantum-algorithms" title="Permalink to this headline">¶</a></h3>
 <p>Aqua AI comes with two quantum Support Vector Machine (SVM) algorithms
 already integrated into the Aqua library:</p>
 <ol class="arabic simple">
@@ -145,23 +155,33 @@ method to solve such problems in a quantum processor.  Specifically, it optimize
 a parameterized quantum circuit to provide a solution that cleanly
 separates the data.</li>
 </ol>
+</div>
+<div class="section" id="general-quantum-algorithms-for-ai">
+<h3>General Quantum Algorithms for AI<a class="headerlink" href="#general-quantum-algorithms-for-ai" title="Permalink to this headline">¶</a></h3>
 <p>Other quantum algorithms available in Aqua
 that can be used to experiment with AI problems
 include <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>, <a class="reference internal" href="algorithms.html#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a>, <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>, <a class="reference internal" href="algorithms.html#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a> and <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a>.</p>
+</div>
+<div class="section" id="classical-reference-algorithms-for-ai">
+<h3>Classical Reference Algorithms for AI<a class="headerlink" href="#classical-reference-algorithms-for-ai" title="Permalink to this headline">¶</a></h3>
+<p>To produce reference values and compare and contrast results during experimentation,
+the Aqua library of <a class="reference internal" href="algorithms.html#classical-reference-algorithms"><span class="std std-ref">Classical Reference Algorithms</span></a> also includes the
+<a class="reference internal" href="algorithms.html#avm-rbf-kernel"><span class="std std-ref">Support Vector Machine Radial Basis Function Kernel (SVM RBF Kernel)</span></a> classical algorithm.</p>
+</div>
+</div>
+<div class="section" id="contributing-to-aqua-ai">
+<h2>Contributing to Aqua AI<a class="headerlink" href="#contributing-to-aqua-ai" title="Permalink to this headline">¶</a></h2>
 <p>Research and developers interested in <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> with new AI-specific
 capabilities can take advantage
 of the modular architecture of Aqua and easily extend Aqua with more algorithms
 or algorithm components, such as new <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a> for the <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a> algorithm,
 new <a class="reference internal" href="optimizers.html#optimizers"><span class="std std-ref">Optimizers</span></a> and <a class="reference internal" href="variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a> for <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a> and <a class="reference internal" href="algorithms.html#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a>,
 and new <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Inverse Quantum Fourier Transforms</span></a> for <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a> and <a class="reference internal" href="algorithms.html#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a>.</p>
-<p>To produce reference values and compare and contrast results during experimentation,
-the Aqua library of <a class="reference internal" href="algorithms.html#classical-reference-algorithms"><span class="std std-ref">Classical Reference Algorithms</span></a> also includes the
-<a class="reference internal" href="algorithms.html#avm-rbf-kernel"><span class="std std-ref">Support Vector Machine Radial Basis Function Kernel (SVM RBF Kernel)</span></a> classical algorithm.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">artificial_intelligence</span></code> folder of the <a class="reference external" href="https://github.com/Qiskit/aqua-tutorials">Aqua Tutorials GitHub Repository</a> contains numerous
-<a class="reference external" href="http://jupyter.org/">Jupyter Notebooks</a>
+<a class="reference external" href="http://jupyter.org/">Jupyter Notebooks</a> and input data files
 explaining how to use Aqua AI.</p>
 </div>
 </div>
@@ -200,7 +220,7 @@ explaining how to use Aqua AI.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018 IBM.
-      Last updated on 2018/08/08.
+      Last updated on 2018/08/09.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
