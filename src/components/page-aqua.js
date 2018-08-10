@@ -46,9 +46,8 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
           --ibmq-button-secondary-focus-color: var(--qiskit-aqua-color);
         }
 
-        .stack-list .stack-list::before {
-          bottom: 0;
-          height: 110px;
+        .stack-list.aqua-applications-domains::before {
+          height: 50px;
         }
       </style>
 
@@ -110,25 +109,27 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <h3>${i18next.t('pages.aqua.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Aqua domains</div>
+                <div class="title">Aqua applications domains</div>
                 <div class="subtitle">Chemistry, AI, Optimization</div>
-                <div class="stack-list">
+                <div class="stack-list aqua-applications-domains">
                   <div class="element">
                     <div class="title">Translators</div>
-                    <div class="subtitle">Jordan-Wigner, Bravyi-Kitaev, Parity mapping</div>
                   </div>
                   <div class="element">
-                    <div class="title">Hybrid controllers</div>
-                  </div>
-                  <div class="group">
-                    <div class="element">
-                      <div class="title">Quantum algorithms</div>
-                      <div class="subtitle">VQE, QPE, SVM Variational, SVM Q Kernel, IQPE, QAOA, Grover, Dynamics</div>
-                    </div>
-                    <span class="separator">+</span>
-                    <div class="element">
-                      <div class="title">Classical methods</div>
-                      <div class="subtitle">Variational forms, Optimizers</div>
+                    <div class="title">Quantum algorithms</div>
+                    <div class="stack-list quantum-algorithms">
+                      <div class="element">
+                        <div class="title">Adaptive</div>
+                        <div class="subtitle">VQE, QAOA.Variational, QSVM.Variational, VQE2QPE</div>
+                      </div>
+                      <div class="element">
+                        <div class="title">Many-sample algorithms</div>
+                        <div class="subtitle">Evolution of Operator under Hamiltonian (EOH), QSVM.Kernel</div>
+                      </div>
+                      <div class="element">
+                        <div class="title">Single-sample algorithms</div>
+                        <div class="subtitle">QPE, IQPE, Grover</div>
+                      </div>
                     </div>
                   </div>
                 </div>
