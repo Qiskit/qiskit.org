@@ -119,20 +119,16 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                     <div class="title">Quantum algorithms</div>
                     <div class="stack-list quantum-algorithms">
                       <div class="element">
-                        <div class="title">Adaptive algorithms</div>
-                        <div class="subtitle">VQE, QAOA, QSVM.Variational</div>
+                        <div class="title">Adaptive</div>
+                        <div class="subtitle">VQE, QAOA.Variational, QSVM.Variational, VQE2QPE</div>
                       </div>
                       <div class="element">
-                        <div class="title">Direct algorithms</div>
-                        <div class="subtitle">Dynamics, QSVM.Sampling</div>
+                        <div class="title">Many-sample Algorithms</div>
+                        <div class="subtitle">Evolution of Operator under Hamiltonian (EOH), QSVM.Kernel</div>
                       </div>
                       <div class="element">
-                        <div class="title">Phase estimation</div>
-                        <div class="subtitle">QPE, IQPE</div>
-                      </div>
-                      <div class="element">
-                        <div class="title">Amplitude amplification</div>
-                        <div class="subtitle">Grover</div>
+                        <div class="title">Single-sample Algorithms</div>
+                        <div class="subtitle">QPE, IQPE, Grover</div>
                       </div>
                     </div>
                   </div>
