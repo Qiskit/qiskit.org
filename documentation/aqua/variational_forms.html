@@ -27,7 +27,7 @@
     <![endif]-->
   </head><body>
 <div id="head" class="head">
-    <a href="https://qiskit.org/acqua">QISKit Acqua</a>
+    <a href="https://qiskit.org/aqua">Qiskit Aqua</a>
 </div>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -69,7 +69,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installation.html">Installation and Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="execution.html">Running an Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="execution.html">Configuring and Running an Experiment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="extending.html">Contributing to Aqua</a></li>
 <li class="toctree-l3"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
@@ -238,17 +238,27 @@ where <span class="math notranslate nohighlight">\(q\)</span> is the total numbe
 from full or linear is desired.
 As explained more generally above, the form of the map is a dictionary; each entry in the dictionary has a source qubit
 index as the key, with the corresponding value being a list of target qubit indexes to which the source qubit should
-be entangled.  The source qubit index is excluded from the list of its corresponding target qubit indexes.
-Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">q</span> <span class="pre">-</span> <span class="pre">1</span></code>, where <code class="docutils literal notranslate"><span class="pre">q</span></code> is the total number of qubits,
+be entangled.
+Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits,
 as in the following example:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
+<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.  In other words,
+qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <cite>:math:D(i)</cite> of qubits mapped to qubit <span class="math notranslate nohighlight">\(i\)</span> itself.</p>
+<p class="last">Furthermore, by default, if
+the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>, where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it cannot also specify
+<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.  This
+restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code> boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside the
+<code class="docutils literal notranslate"><span class="pre">validate_entangler_map</span></code> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> Application Programming Interface (API).</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
 <p class="last">When configured declaratively,
 Aqua and its domain specific applications
-(<a class="reference internal" href="aqua_chemistry_overview.html#aqua-chemistry"><span class="std std-ref">Overview</span></a>, <a class="reference internal" href="aqua_ai.html#aqua-ai"><span class="std std-ref">Aqua Artificial Intelligence</span></a>, and <a class="reference internal" href="aqua_optimization.html#aqua-optimization"><span class="std std-ref">Aqua Optimization</span></a>) do not expose a configuration parameter in
+(<a class="reference internal" href="aqua_chemistry.html#aqua-chemistry"><span class="std std-ref">Aqua Chemistry</span></a>, <a class="reference internal" href="aqua_ai.html#aqua-ai"><span class="std std-ref">Aqua Artificial Intelligence</span></a>, and <a class="reference internal" href="aqua_optimization.html#aqua-optimization"><span class="std std-ref">Aqua Optimization</span></a>) do not expose a configuration parameter in
 a <code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> object to set
 the number of qubits that will be used in an experiment.  This is because, when it is used as a tool to execute experiments,
 Aqua is working at a higher, more abstract level.  In such cases, the number of qubits
@@ -285,7 +295,7 @@ is <code class="docutils literal notranslate"><span class="pre">RYRZ</span></cod
 <div class="section" id="unitary-coupled-cluster-singles-and-doubles-uccsd">
 <span id="uccsd"></span><h2>Unitary Coupled Cluster Singles and Doubles (UCCSD)<a class="headerlink" href="#unitary-coupled-cluster-singles-and-doubles-uccsd" title="Permalink to this headline">¶</a></h2>
 <p>UCCSD lends itself to chemistry experiments and it is, therefore, suitable for use in
-<a class="reference internal" href="aqua_chemistry_overview.html#aqua-chemistry"><span class="std std-ref">Overview</span></a>.
+<a class="reference internal" href="aqua_chemistry.html#aqua-chemistry"><span class="std std-ref">Aqua Chemistry</span></a>.
 However, it is still a general variational form which can theoretically be used also in
 more general experiments.</p>
 <div class="admonition seealso">
@@ -485,7 +495,7 @@ is <code class="docutils literal notranslate"><span class="pre">UCCSD</span></co
 <span id="id4"></span><h2>SwapRz<a class="headerlink" href="#swaprz" title="Permalink to this headline">¶</a></h2>
 <p>This trial wave function is layers of swap plus <span class="math notranslate nohighlight">\(z\)</span> rotations with entanglements.
 It was designed principally to be a particle-preserving variational form for
-<a class="reference internal" href="aqua_chemistry_overview.html#aqua-chemistry"><span class="std std-ref">Overview</span></a>.</p>
+<a class="reference internal" href="aqua_chemistry.html#aqua-chemistry"><span class="std std-ref">Aqua Chemistry</span></a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Particle preservation with SwapRz is not guaranteed unless SwapRz is used in conjunction with
@@ -497,7 +507,7 @@ the <a class="reference internal" href="aqua_chemistry_translators.html#jordan-w
 as those of <a class="reference internal" href="#ry"><span class="std std-ref">Ry</span></a>.</p>
 <p>Based on the notation introduced above for the entangler map associated with a variational form,
 the number of optimizer parameters SwapRz creates and uses is given by
-<span class="math notranslate nohighlight">\(q + d \times \left(q + \sum_{k=1}^{q}|D(k)|\right)\)</span>, where <span class="math notranslate nohighlight">\(|D(k)|\)</span> denotes the <em>cardinality</em> of
+<span class="math notranslate nohighlight">\(q + d \times \left(q + \sum_{k=0}^{q-1}|D(k)|\right)\)</span>, where <span class="math notranslate nohighlight">\(|D(k)|\)</span> denotes the <em>cardinality</em> of
 <span class="math notranslate nohighlight">\(D(k)\)</span> or, more precisely, the <em>length</em> of <span class="math notranslate nohighlight">\(D(k)\)</span> (since <span class="math notranslate nohighlight">\(D(k)\)</span> is not
 just a set, but a list).</p>
 <div class="topic">
@@ -551,7 +561,7 @@ is <code class="docutils literal notranslate"><span class="pre">SWAPRZ</span></c
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018 IBM.
-      Last updated on 2018/08/08.
+      Last updated on 2018/08/09.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
