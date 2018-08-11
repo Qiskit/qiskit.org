@@ -123,11 +123,11 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
                         <div class="subtitle">VQE, QAOA.Variational, QSVM.Variational, VQE2QPE</div>
                       </div>
                       <div class="element">
-                        <div class="title">Many-sample algorithms</div>
-                        <div class="subtitle">Evolution of Operator under Hamiltonian (EOH), QSVM.Kernel</div>
+                        <div class="title">Many-sample</div>
+                        <div class="subtitle">EOH, QSVM.Kernel</div>
                       </div>
                       <div class="element">
-                        <div class="title">Single-sample algorithms</div>
+                        <div class="title">Single-sample</div>
                         <div class="subtitle">QPE, IQPE, Grover</div>
                       </div>
                     </div>
