@@ -162,29 +162,29 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit_aqua import Operator, run_algorithm
                 from qiskit_aqua.input import get_input_instance
+                from qiskit_aqua import run_algorithm
 
-                pauli_dict = {
-                  "paulis": [
-                    { "coeff": { "imag": 0.0, "real": -1.052373245772859 }, "label": "II" },
-                    { "coeff": { "imag": 0.0, "real": 0.39793742484318045 }, "label": "ZI" },
-                    { "coeff": { "imag": 0.0, "real": -0.39793742484318045 }, "label": "ZZ" },
-                    { "coeff": { "imag": 0.0, "real": 0.18093119978423156 }, "label": "XX" }
-                  ]
-                }
-                algo_input = get_input_instance("EnergyInput")
-                algo_input.qubit_op = Operator.load_from_dict(pauli_dict)
+                sat_cnf = """
+                c Example DIMACS 3-sat
+                p cnf 3 5
+                -1 -2 -3 0
+                1 -2 3 0
+                1 2 -3 0
+                1 -2 -3 0
+                -1 2 3 0
+                """
+
                 params = {
-                  "algorithm": { "name": "VQE" },
-                  "optimizer": { "name": "SPSA" },
-                  "variational_form": { "name": "RY", "depth": 5 },
+                  "problem": { "name": "search" },
+                  "algorithm": { "name": "Grover" },
+                  "oracle": { "name": "SAT", "cnf": sat_cnf },
                   "backend": { "name": "local_qasm_simulator" }
                 }
 
-                result = run_algorithm(params, algo_input)
+                result = run_algorithm(params)
 
-                print(result["energy"])
+                print(result["result"])
               </template>
               <!-- htmlmin:ignore -->
             </code-sample>
