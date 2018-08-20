@@ -163,6 +163,10 @@ export const SectionStyles = html`<style>
     line-height: 1.9em;
   }
 
+  section .description img {
+    max-width: 100%;
+  }
+
   section .description p:first-child {
     margin-top: 0;
   }
