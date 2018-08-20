@@ -7,9 +7,9 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { default as originalI18next } from 'i18next/dist/es/index.js';
-import Backend from 'i18next-xhr-backend/dist/es/index.js';
-import Browser from 'i18next-browser-languagedetector/dist/es/index.js';
+import { default as originalI18next } from 'i18next';
+import Backend from 'i18next-xhr-backend';
+import Browser from 'i18next-browser-languagedetector';
 
 export const i18next = originalI18next
   .use(Backend)
