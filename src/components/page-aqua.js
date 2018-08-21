@@ -268,7 +268,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
               <!-- htmlmin:ignore -->
               <template>
                 import numpy as np
-                from qiskit_aqua_chemistry import AquaChemistry
+                from qiskit_aqua_chemistry import AQUAChemistry
 
                 aqua_chemistry_dict = {
                   "driver": { "name": "PYSCF" },
@@ -296,7 +296,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
 
                 for i, d in enumerate(pts):
                   aqua_chemistry_dict["PYSCF"]["atom"] = molecule.format(d/2)
-                  solver = AquaChemistry()
+                  solver = AQUAChemistry()
                   result = solver.run(aqua_chemistry_dict)
                   energies[i] = result["energy"]
                   dipoles[i] = result["total_dipole_moment"] / 0.393430307
