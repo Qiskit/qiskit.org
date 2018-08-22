@@ -316,6 +316,12 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
         <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.aqua.chemistryGui')}</h3>
+            <code-sample type="bash">
+              <template>
+                [python3] $ qiskit_aqua_ui
+                [python3] $ qiskit_aqua_chemistry_ui
+              </template>
+            </code-sample>
             <p>${i18next.t('pages.aqua.chemistryGuiDescription1')}</p>
             <p>${i18next.t('pages.aqua.chemistryGuiDescription2')}</p>
             <p>${i18next.t('pages.aqua.chemistryGuiDescription3')}</p>
