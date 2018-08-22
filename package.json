@@ -7,9 +7,9 @@
     "start": "polymer serve",
     "precommit": "pretty-quick --staged",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build:static": "polymer build",
-    "serve:static": "polymer serve --port 5000 build/es5-bundled",
-    "build": "npm run build:static && gulp add-ibm-stats-script && gulp copy"
+    "build:prpl-server": "polymer build --auto-base-path && gulp setup:prpl-server",
+    "serve:prpl": "prpl-server --root server/prpl/build/",
+    "build": "npm run build:prpl-server"
   },
   "dependencies": {
     "@ibm/plex": "^1.1.0",
@@ -25,13 +25,15 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-inject-string": "^1.1.0",
     "husky": "^0.14.0",
     "polymer-cli": "^1.8.0",
     "polyserve": "^0.27.0",
     "prettier": "1.14.0",
-    "pretty-quick": "^1.6.0"
+    "pretty-quick": "^1.6.0",
+    "prpl-server": "^1.2.0"
   },
   "engines": {
     "node": ">=8.0"

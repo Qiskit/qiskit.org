@@ -1,5 +1,5 @@
 language: node_js
-node_js: "8"
+node_js: '8'
 cache:
   directories:
     - node_modules
@@ -7,6 +7,7 @@ script:
   - npm run test
 before_deploy:
   - npm run build
+  - cd server/prpl/
 deploy:
   - provider: cloudfoundry
     username: apikey
