@@ -264,6 +264,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
               </template>
             </code-sample>
             <h3>${i18next.t('pages.aqua.exampleTitle')}</h3>
+            <p class="note">${i18next.t('pages.aqua.pyscfIsRequired')}</p>
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
