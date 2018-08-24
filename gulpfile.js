@@ -47,17 +47,11 @@ function addIbmStatsScript() {
 
 function copyStaticFiles() {
   return src('license/**')
-    .pipe(dest(`${buildPath}esm-bundled/license`))
-    .pipe(dest(`${buildPath}es6-bundled/license`))
-    .pipe(dest(`${buildPath}es5-bundled/license`))
+    .pipe(dest(`${buildPath}license`))
     .pipe(src('documentation/**'))
-    .pipe(dest(`${buildPath}esm-bundled/documentation`))
-    .pipe(dest(`${buildPath}es6-bundled/documentation`))
-    .pipe(dest(`${buildPath}es5-bundled/documentation`))
+    .pipe(dest(`${buildPath}documentation`))
     .pipe(src('modelq/**'))
-    .pipe(dest(`${buildPath}esm-bundled/modelq`))
-    .pipe(dest(`${buildPath}es6-bundled/modelq`))
-    .pipe(dest(`${buildPath}es5-bundled/modelq`));
+    .pipe(dest(`${buildPath}modelq`));
 }
 
 function copyBuildFolder() {
