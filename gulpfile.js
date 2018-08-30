@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-const { dest, parallel, series, src, task } = require('gulp');
+const { dest, series, src } = require('gulp');
 const del = require('del');
 const inject = require('gulp-inject-string');
 
