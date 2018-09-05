@@ -11,10 +11,10 @@ let _i18nextInitialized = false;
 
 export const localize = i18next => baseElement =>
   class extends baseElement {
-    _shouldRender(props, changedProps, old) {
+    shouldUpdate(changedProperties) {
       // Also check active property used by PageViewElement
-      return changedProps && changedProps.active
-        ? props.active && _i18nextInitialized
+      return changedProperties.has('active')
+        ? this.active && _i18nextInitialized
         : _i18nextInitialized;
     }
 
@@ -22,12 +22,12 @@ export const localize = i18next => baseElement =>
       if (!_i18nextInitialized) {
         i18next.on('initialized', () => {
           _i18nextInitialized = true;
-          this.requestRender();
+          this.requestUpdate();
         });
       }
 
       i18next.on('languageChanged', () => {
-        this.requestRender();
+        this.requestUpdate();
       });
 
       if (super.connectedCallback) {

@@ -16,7 +16,7 @@ import { i18next } from '../i18next.js';
 import { SharedStyles } from './app-shared-styles.js';
 
 class PageNotFound extends localize(i18next)(PageViewElement) {
-  _render(props) {
+  render() {
     return html`
       ${SharedStyles}
       <style>

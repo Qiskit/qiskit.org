@@ -32,11 +32,11 @@ import './vaadin-ibmq-styles/vaadin-button.js';
 import { organizations, collaborators } from '../../data/supporters.js';
 
 class PageHome extends localize(i18next)(PageViewElement) {
-  _render(props) {
+  render() {
     // prettier-ignore
     const supportersListTemplate = html`
       <ul class="supporters-list">
-        ${props._organizations.map(organization => html`
+        ${this._organizations.map(organization => html`
           <li>
             ${organization.url
               ? html`
@@ -49,7 +49,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
             }
           </li>
         `)}
-        ${props._collaborators.map(collaborator => html`
+        ${this._collaborators.map(collaborator => html`
           <li>
             ${collaborator.url
               ? html`
@@ -482,8 +482,8 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
   static get properties() {
     return {
-      _organizations: Array,
-      _collaborators: Array,
+      _organizations: { type: Array },
+      _collaborators: { type: Array },
     };
   }
 
