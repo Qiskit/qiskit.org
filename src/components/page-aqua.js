@@ -27,7 +27,7 @@ import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
 class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
-  _render(props) {
+  render() {
     // prettier-ignore
     return html`
       ${SharedStyles}
@@ -336,7 +336,7 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
 
   static get properties() {
     return {
-      _subPage: String,
+      _subPage: { type: String },
     };
   }
 
