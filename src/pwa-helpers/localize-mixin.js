@@ -20,7 +20,7 @@ export const localize = i18next => baseElement =>
 
     connectedCallback() {
       if (!_i18nextInitialized) {
-        i18next.on('initialized', options => {
+        i18next.on('initialized', () => {
           _i18nextInitialized = true;
           this.requestRender();
         });
