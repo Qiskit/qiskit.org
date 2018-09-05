@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { default as originalI18next } from 'i18next';
+import originalI18next from 'i18next';
 import Backend from 'i18next-xhr-backend';
 import Browser from 'i18next-browser-languagedetector';
 
