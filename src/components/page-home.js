@@ -252,12 +252,16 @@ class PageHome extends localize(i18next)(PageViewElement) {
         <div class="row limited-width">
           <div class="column vscode">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsVscodeTitle')}</h3>
-              <p>${i18next.t('pages.home.newsVscodeDescription')}</p>
+              <h3>${i18next.t('pages.home.newsTechcrunchTitle')}</h3>
+              <p>${i18next.t('pages.home.newsTechcrunchDescription')}</p>
               <div class="actions">
-                <a href="/vscode" tabindex="-1">
+                <a
+                    href="https://github.com/Qiskit/presentations/tree/master/2018-09-07_TechCrunch"
+                    target="_blank"
+                    rel="noopener"
+                    tabindex="-1">
                   <vaadin-button theme="secondary">
-                    ${i18next.t('pages.home.newsVscodeButton')}
+                    ${i18next.t('pages.home.newsTechcrunchButton')}
                   </vaadin-button>
                 </a>
               </div>
