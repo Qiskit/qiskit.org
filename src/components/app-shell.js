@@ -144,23 +144,23 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
           <nav class="first">
-            <a href="/terra" ?selected="${this._page === 'terra'}">Terra</a>
-            <a href="/aqua" ?selected="${this._page === 'aqua'}">Aqua</a>
+            <a href="/terra" ?selected="${this.page === 'terra'}">Terra</a>
+            <a href="/aqua" ?selected="${this.page === 'aqua'}">Aqua</a>
           </nav>
           <nav class="second">
-            <a href="/vscode" ?selected="${this._page === 'vscode'}">${i18next.t('tools')}</a>
-            <a href="/fun" ?selected="${this._page === 'fun'}">${i18next.t('fun')}</a>
+            <a href="/vscode" ?selected="${this.page === 'vscode'}">${i18next.t('tools')}</a>
+            <a href="/fun" ?selected="${this.page === 'fun'}">${i18next.t('fun')}</a>
           </nav>
         </div>
       </header>
 
       <main role="main">
-        <page-home ?active="${this._page === 'home'}"></page-home>
-        <page-terra ?active="${this._page === 'terra'}"></page-terra>
-        <page-aqua ?active="${this._page === 'aqua'}"></page-aqua>
-        <page-vscode ?active="${this._page === 'vscode'}"></page-vscode>
-        <page-fun ?active="${this._page === 'fun'}"></page-fun>
-        <page-not-found ?active="${this._page === 'notFound'}"></page-not-found>
+        <page-home ?active="${this.page === 'home'}"></page-home>
+        <page-terra ?active="${this.page === 'terra'}"></page-terra>
+        <page-aqua ?active="${this.page === 'aqua'}"></page-aqua>
+        <page-vscode ?active="${this.page === 'vscode'}"></page-vscode>
+        <page-fun ?active="${this.page === 'fun'}"></page-fun>
+        <page-not-found ?active="${this.page === 'notFound'}"></page-not-found>
       </main>
 
       <footer>
@@ -183,7 +183,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   static get properties() {
     return {
-      _page: { type: String },
+      page: { type: String },
     };
   }
 
@@ -207,16 +207,16 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('_page')) {
+    if (changedProperties.has('page')) {
       updateMetadata({
-        title: i18next.t(`pages.${this._page}.metaTitle`),
-        description: i18next.t(`pages.${this._page}.metaDescription`),
+        title: i18next.t(`pages.${this.page}.metaTitle`),
+        description: i18next.t(`pages.${this.page}.metaDescription`),
       });
     }
   }
 
   _stateChanged(state) {
-    this._page = state.app.page;
+    this.page = state.app.page;
   }
 }
 

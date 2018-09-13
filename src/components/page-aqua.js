@@ -8,12 +8,10 @@
  */
 
 import { html } from '@polymer/lit-element';
-import { connect } from 'pwa-helpers/connect-mixin.js';
 import { PageViewElement } from './page-view-element.js';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
-import { store } from '../store.js';
 
 import {
   SharedStyles,
@@ -26,7 +24,7 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
-class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
+class PageAqua extends localize(i18next)(PageViewElement) {
   render() {
     // prettier-ignore
     return html`
@@ -332,16 +330,6 @@ class PageAqua extends localize(i18next)(connect(store)(PageViewElement)) {
         </div>
       </section>
     `;
-  }
-
-  static get properties() {
-    return {
-      _subPage: { type: String },
-    };
-  }
-
-  _stateChanged(state) {
-    this._subPage = state.app.subPage;
   }
 }
 

@@ -20,6 +20,7 @@ import app from './reducers/app.js';
 
 // Sets up a Chrome extension for time travel debugging.
 // See https://github.com/zalmoxisus/redux-devtools-extension for more information.
+// eslint-disable-next-line no-underscore-dangle
 const compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || origCompose;
 
 // Initializes the Redux store with a lazyReducerEnhancer (so that you can
@@ -28,6 +29,7 @@ const compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || origCompose;
 // section of the wiki for more details:
 // https://github.com/Polymer/pwa-starter-kit/wiki/4.-Redux-and-state-management
 export const store = createStore(
+  // eslint-disable-next-line no-unused-vars
   (state, action) => state,
   compose(
     lazyReducerEnhancer(combineReducers),

@@ -36,7 +36,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
     // prettier-ignore
     const supportersListTemplate = html`
       <ul class="supporters-list">
-        ${this._organizations.map(organization => html`
+        ${this.organizations.map(organization => html`
           <li>
             ${organization.url
               ? html`
@@ -49,7 +49,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
             }
           </li>
         `)}
-        ${this._collaborators.map(collaborator => html`
+        ${this.collaborators.map(collaborator => html`
           <li>
             ${collaborator.url
               ? html`
@@ -482,16 +482,16 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
   static get properties() {
     return {
-      _organizations: { type: Array },
-      _collaborators: { type: Array },
+      organizations: { type: Array },
+      collaborators: { type: Array },
     };
   }
 
   constructor() {
     super();
 
-    this._organizations = organizations;
-    this._collaborators = collaborators;
+    this.organizations = organizations;
+    this.collaborators = collaborators;
   }
 }
 
