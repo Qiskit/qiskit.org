@@ -10,7 +10,7 @@
 import { html } from '@polymer/lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { PageViewElement } from './page-view-element.js';
-import { localize } from '../pwa-helpers/localize-mixin.js';
+import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
 import { store } from '../store.js';

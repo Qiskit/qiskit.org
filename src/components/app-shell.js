@@ -12,7 +12,7 @@ import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js'
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
-import { localize } from '../pwa-helpers/localize-mixin.js';
+import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
 import { store } from '../store.js';
