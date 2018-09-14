@@ -25,7 +25,7 @@ import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
 class PageTerra extends localize(i18next)(PageViewElement) {
-  _render(props) {
+  render() {
     // prettier-ignore
     return html`
       ${SharedStyles}

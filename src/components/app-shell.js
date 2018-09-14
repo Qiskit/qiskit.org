@@ -23,7 +23,7 @@ import { navigate } from '../actions/app.js';
 import { SharedStyles } from './app-shared-styles.js';
 
 class AppShell extends localize(i18next)(connect(store)(LitElement)) {
-  _render(props) {
+  render() {
     // prettier-ignore
     return html`
       ${SharedStyles}
@@ -144,30 +144,30 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
           <nav class="first">
-            <a href="/terra" selected?="${props._page === 'terra'}">Terra</a>
-            <a href="/aqua" selected?="${props._page === 'aqua'}">Aqua</a>
+            <a href="/terra" ?selected="${this._page === 'terra'}">Terra</a>
+            <a href="/aqua" ?selected="${this._page === 'aqua'}">Aqua</a>
           </nav>
           <nav class="second">
-            <a href="/vscode" selected?="${props._page === 'vscode'}">${i18next.t('tools')}</a>
-            <a href="/fun" selected?="${props._page === 'fun'}">${i18next.t('fun')}</a>
+            <a href="/vscode" ?selected="${this._page === 'vscode'}">${i18next.t('tools')}</a>
+            <a href="/fun" ?selected="${this._page === 'fun'}">${i18next.t('fun')}</a>
           </nav>
         </div>
       </header>
 
       <main role="main">
-        <page-home active?="${props._page === 'home'}"></page-home>
-        <page-terra active?="${props._page === 'terra'}"></page-terra>
-        <page-aqua active?="${props._page === 'aqua'}"></page-aqua>
-        <page-vscode active?="${props._page === 'vscode'}"></page-vscode>
-        <page-fun active?="${props._page === 'fun'}"></page-fun>
-        <page-not-found active?="${props._page === 'notFound'}"></page-not-found>
+        <page-home ?active="${this._page === 'home'}"></page-home>
+        <page-terra ?active="${this._page === 'terra'}"></page-terra>
+        <page-aqua ?active="${this._page === 'aqua'}"></page-aqua>
+        <page-vscode ?active="${this._page === 'vscode'}"></page-vscode>
+        <page-fun ?active="${this._page === 'fun'}"></page-fun>
+        <page-not-found ?active="${this._page === 'notFound'}"></page-not-found>
       </main>
 
       <footer>
         <div class="limited-width">
           <div class="language-selector">
             <select
-                on-change="${event => i18next.changeLanguage(event.target.value)}"
+                @change="${event => i18next.changeLanguage(event.target.value)}"
                 aria-label="Language"
                 value="${i18next.languages[0]}">
               <option value="en">English</option>
@@ -183,7 +183,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   static get properties() {
     return {
-      _page: String,
+      _page: { type: String },
     };
   }
 
@@ -195,7 +195,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     setPassiveTouchGestures(true);
   }
 
-  _firstRendered() {
+  firstUpdated() {
     installRouter((location, event) => {
       // Only scroll to top on link clicks, not popstate events.
       if (event && event.type === 'click') {
@@ -206,11 +206,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     });
   }
 
-  _didRender(properties, changeList) {
-    if (changeList && '_page' in changeList) {
+  updated(changedProperties) {
+    if (changedProperties.has('_page')) {
       updateMetadata({
-        title: i18next.t(`pages.${changeList._page}.metaTitle`),
-        description: i18next.t(`pages.${changeList._page}.metaDescription`),
+        title: i18next.t(`pages.${this._page}.metaTitle`),
+        description: i18next.t(`pages.${this._page}.metaDescription`),
       });
     }
   }

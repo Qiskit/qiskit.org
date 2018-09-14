@@ -21,7 +21,7 @@ import {
 import './vaadin-ibmq-styles/vaadin-button.js';
 
 class PageFun extends localize(i18next)(PageViewElement) {
-  _render(props) {
+  render() {
     return html`
       ${SharedStyles}
       ${HeaderStyles}
