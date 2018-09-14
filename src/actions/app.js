@@ -9,14 +9,10 @@
 
 export const UPDATE_PAGE = 'UPDATE_PAGE';
 
-export const navigate = path => dispatch => {
-  // Extract the page name from path.
-  const page = path === '/' ? 'home' : path.slice(1);
-
-  // Any other info you might want to extract from the path (like page type),
-  // you can do here
-  dispatch(loadPage(page));
-};
+const updatePage = page => ({
+  type: UPDATE_PAGE,
+  page,
+});
 
 const loadPage = page => dispatch => {
   switch (page) {
@@ -36,6 +32,7 @@ const loadPage = page => dispatch => {
       import('../components/page-fun.js');
       break;
     default:
+      // eslint-disable-next-line no-param-reassign
       page = 'notFound';
       import('../components/page-not-found.js');
   }
@@ -43,7 +40,11 @@ const loadPage = page => dispatch => {
   dispatch(updatePage(page));
 };
 
-const updatePage = page => ({
-  type: UPDATE_PAGE,
-  page,
-});
+export const navigate = path => dispatch => {
+  // Extract the page name from path.
+  const page = path === '/' ? 'home' : path.slice(1);
+
+  // Any other info you might want to extract from the path (like page type),
+  // you can do here
+  dispatch(loadPage(page));
+};
