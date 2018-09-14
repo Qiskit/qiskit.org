@@ -7,21 +7,21 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-let _i18nextInitialized = false;
+let i18nextInitialized = false;
 
 export const localize = i18next => baseElement =>
   class extends baseElement {
     shouldUpdate(changedProperties) {
       // Also check active property used by PageViewElement
       return changedProperties.has('active')
-        ? this.active && _i18nextInitialized
-        : _i18nextInitialized;
+        ? this.active && i18nextInitialized
+        : i18nextInitialized;
     }
 
     connectedCallback() {
-      if (!_i18nextInitialized) {
+      if (!i18nextInitialized) {
         i18next.on('initialized', () => {
-          _i18nextInitialized = true;
+          i18nextInitialized = true;
           this.requestUpdate();
         });
       }
