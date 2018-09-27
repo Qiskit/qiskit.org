@@ -93,6 +93,11 @@ export const collaborators = [
     url: 'http://gicc.fis.ucm.es/people/mamd.html',
   },
   {
+    name: 'Olaf Cames',
+    institution: 'University of Liverpool (UK)',
+    url: 'https://www.researchgate.net/profile/Olaf_Cames',
+  },
+  {
     name: 'Robin Blume Kohout',
     institution: 'Sandia',
     url: 'https://cfwebprod.sandia.gov/cfdocs/CompResearch/index.cfm',
@@ -135,10 +140,5 @@ export const collaborators = [
     name: 'Vincent Dwyer',
     institution: 'Loughborough University',
     url: 'http://www.lboro.ac.uk/departments/meme/staff/vincent-m-dwyer/',
-  },
-   {
-    name: 'Olaf Cames',
-    institution: 'University of Liverpool (UK)',
-    url: 'https://www.researchgate.net/profile/Olaf_Cames',
   },
 ];
