@@ -5,15 +5,21 @@
   "repository": "Qiskit/qiskit.org",
   "scripts": {
     "start": "polymer serve",
-    "precommit": "lint-staged",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 0",
     "build": "polymer build --auto-base-path && gulp setup:prpl-server",
     "serve": "prpl-server --root server/prpl/build/"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
     "*": [
-      "eslint --fix",
       "prettier --write",
       "git add"
     ]
@@ -33,16 +39,16 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
+    "babel-eslint": "^10.0.0",
     "del": "^3.0.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.0.0",
+    "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
     "gulp": "^4.0.0",
     "gulp-inject-string": "^1.1.0",
-    "husky": "^0.14.0",
-    "lint-staged": "^7.2.0",
+    "husky": "^1.0.0",
+    "lint-staged": "^7.3.0",
     "polymer-cli": "^1.8.0",
     "prettier": "1.14.3",
     "prpl-server": "^1.2.0"
