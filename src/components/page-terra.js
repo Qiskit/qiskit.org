@@ -153,8 +153,8 @@ class PageTerra extends localize(i18next)(PageViewElement) {
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit import ClassicalRegister, QuantumRegister
-                from qiskit import QuantumCircuit, execute
+                from qiskit import QuantumRegister, ClassicalRegister
+                from qiskit import QuantumCircuit, Aer, execute
 
                 q = QuantumRegister(2)
                 c = ClassicalRegister(2)
@@ -164,7 +164,8 @@ class PageTerra extends localize(i18next)(PageViewElement) {
                 qc.cx(q[0], q[1])
                 qc.measure(q, c)
 
-                job_sim = execute(qc, "local_qasm_simulator")
+                backend = Aer.get_backend('qasm_simulator')
+                job_sim = execute(qc, backend)
                 sim_result = job_sim.result()
 
                 print(sim_result.get_counts(qc))
