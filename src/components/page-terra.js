@@ -154,7 +154,7 @@ class PageTerra extends localize(i18next)(PageViewElement) {
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import QuantumRegister, ClassicalRegister
-                from qiskit import QuantumCircuit, Aer, execute    
+                from qiskit import QuantumCircuit, Aer, execute
 
                 q = QuantumRegister(2)
                 c = ClassicalRegister(2)
