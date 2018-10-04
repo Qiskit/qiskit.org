@@ -1,0 +1,612 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.transpiler._transpiler &#8212; Qiskit Terra 0.6.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_modules/qiskit/transpiler/_transpiler.html">english</a> /
+        <a href="/documentation/de/_modules/qiskit/transpiler/_transpiler.html">german</a> /
+        <a href="/documentation/ja/_modules/qiskit/transpiler/_transpiler.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Qiskit Terra 0.6.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">Qiskit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">Software reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases.html">Release history</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qiskit.transpiler._transpiler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="sd">&quot;&quot;&quot;Tools for compiling a batch of quantum circuits.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse.csgraph</span> <span class="k">as</span> <span class="nn">cs</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.transpiler._transpilererror</span> <span class="k">import</span> <span class="n">TranspilerError</span>
+<span class="kn">from</span> <span class="nn">qiskit._qiskiterror</span> <span class="k">import</span> <span class="n">QISKitError</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.unroll</span> <span class="k">import</span> <span class="n">DagUnroller</span><span class="p">,</span> <span class="n">DAGBackend</span><span class="p">,</span> <span class="n">JsonBackend</span>
+<span class="kn">from</span> <span class="nn">qiskit.mapper</span> <span class="k">import</span> <span class="p">(</span><span class="n">Coupling</span><span class="p">,</span> <span class="n">optimize_1q_gates</span><span class="p">,</span> <span class="n">coupling_list2dict</span><span class="p">,</span> <span class="n">swap_mapper</span><span class="p">,</span>
+                           <span class="n">cx_cancellation</span><span class="p">,</span> <span class="n">direction_mapper</span><span class="p">,</span>
+                           <span class="n">remove_last_measurements</span><span class="p">,</span> <span class="n">return_last_measurements</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">Qobj</span><span class="p">,</span> <span class="n">QobjConfig</span><span class="p">,</span> <span class="n">QobjExperiment</span><span class="p">,</span> <span class="n">QobjItem</span><span class="p">,</span> <span class="n">QobjHeader</span>
+<span class="kn">from</span> <span class="nn">._parallel</span> <span class="k">import</span> <span class="n">parallel_map</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="c1"># pylint: disable=redefined-builtin</span>
+<div class="viewcode-block" id="compile"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler.compile">[docs]</a><span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compile a list of circuits into a qobj.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuits (QuantumCircuit or list[QuantumCircuit]): circuits to compile</span>
+<span class="sd">        backend (BaseBackend): a backend to compile for</span>
+<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
+<span class="sd">        basis_gates (str): comma-separated basis gate set to compile to</span>
+<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
+<span class="sd">        initial_layout (list): initial layout of qubits in mapping</span>
+<span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
+<span class="sd">        max_credits (int): maximum credits to use</span>
+<span class="sd">        seed (int): random seed for simulators</span>
+<span class="sd">        qobj_id (int): identifier for the generated qobj</span>
+<span class="sd">        hpc (dict): HPC simulator parameters</span>
+<span class="sd">        pass_manager (PassManager): a pass_manager for the transpiler stage</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        QobjExperiment: Experiment to be wrapped in a Qobj.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TranspilerError: in case of bad compile options, e.g. the hpc options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
+        <span class="n">circuits</span> <span class="o">=</span> <span class="p">[</span><span class="n">circuits</span><span class="p">]</span>
+
+    <span class="c1"># FIXME: THIS NEEDS TO BE CLEANED UP -- some things to decide for list of circuits:</span>
+    <span class="c1"># 1. do all circuits have same coupling map?</span>
+    <span class="c1"># 2. do all circuit have the same basis set?</span>
+    <span class="c1"># 3. do they all have same registers etc?</span>
+    <span class="n">backend_conf</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span>
+    <span class="n">backend_name</span> <span class="o">=</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="c1"># Check for valid parameters for the experiments.</span>
+    <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+            <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">hpc</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;multi_shot_optimization&#39;</span><span class="p">,</span> <span class="s1">&#39;omp_num_threads&#39;</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;Unknown HPC parameter format!&#39;</span><span class="p">)</span>
+    <span class="n">basis_gates</span> <span class="o">=</span> <span class="n">basis_gates</span> <span class="ow">or</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">]</span>
+    <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span> <span class="ow">or</span> <span class="n">backend_conf</span><span class="p">[</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">]</span>
+
+    <span class="c1"># step 1: Making the list of dag circuits</span>
+    <span class="n">dags</span> <span class="o">=</span> <span class="n">_circuits_2_dags</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span>
+
+    <span class="c1"># step 2: Transpile all the dags</span>
+
+    <span class="c1"># FIXME: Work-around for transpiling multiple circuits with different qreg names.</span>
+    <span class="c1"># Make compile take a list of initial_layouts.</span>
+    <span class="n">_initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
+
+    <span class="c1"># Pick a good initial layout if coupling_map is not already satisfied</span>
+    <span class="c1"># otherwise keep it as q[i]-&gt;q[i].</span>
+    <span class="c1"># TODO: move this inside mapper pass.</span>
+    <span class="n">initial_layouts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">dag</span> <span class="ow">in</span> <span class="n">dags</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">initial_layout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="ow">not</span> <span class="n">_matches_coupling_map</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">)):</span>
+            <span class="n">_initial_layout</span> <span class="o">=</span> <span class="n">_pick_best_layout</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+        <span class="n">initial_layouts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_initial_layout</span><span class="p">)</span>
+    <span class="n">dags</span> <span class="o">=</span> <span class="n">_transpile_dags</span><span class="p">(</span><span class="n">dags</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
+                           <span class="n">initial_layouts</span><span class="o">=</span><span class="n">initial_layouts</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+                           <span class="n">pass_manager</span><span class="o">=</span><span class="n">pass_manager</span><span class="p">)</span>
+
+    <span class="c1"># step 3: Making a qobj</span>
+    <span class="n">qobj</span> <span class="o">=</span> <span class="n">_dags_2_qobj</span><span class="p">(</span><span class="n">dags</span><span class="p">,</span> <span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">,</span>
+                        <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span>
+                        <span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
+                        <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qobj</span></div>
+
+
+<div class="viewcode-block" id="_circuits_2_dags"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._circuits_2_dags">[docs]</a><span class="k">def</span> <span class="nf">_circuits_2_dags</span><span class="p">(</span><span class="n">circuits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a list of circuits into a list of dags.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuits (list[QuantumCircuit]): circuit to compile</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[DAGCircuit]: the dag representation of the circuits</span>
+<span class="sd">        to be used in the transpiler</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dags</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">DAGCircuit</span><span class="o">.</span><span class="n">fromQuantumCircuit</span><span class="p">,</span> <span class="n">circuits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dags</span></div>
+
+
+<div class="viewcode-block" id="_transpile_dags"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._transpile_dags">[docs]</a><span class="k">def</span> <span class="nf">_transpile_dags</span><span class="p">(</span><span class="n">dags</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="s1">&#39;u1,u2,u3,cx,id&#39;</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">initial_layouts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transform multiple dags through a sequence of passes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dags (list[DAGCircuit]): dag circuits to transform</span>
+<span class="sd">        basis_gates (str): a comma seperated string for the target basis gates</span>
+<span class="sd">        coupling_map (list): A graph of coupling</span>
+<span class="sd">        initial_layouts (list[dict]): A mapping of qubit to qubit for each dag</span>
+<span class="sd">        seed (int): random seed for the swap mapper</span>
+<span class="sd">        pass_manager (PassManager): pass manager instance for the tranpilation process</span>
+<span class="sd">            If None, a default set of passes are run.</span>
+<span class="sd">            Otherwise, the passes defined in it will run.</span>
+<span class="sd">            If contains no passes in it, no dag transformations occur.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[DAGCircuit]: the dag circuits after going through transpilation</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TranspilerError: if the format is not valid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dags</span><span class="p">)))</span>
+    <span class="n">final_dags</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">_transpile_dags_parallel</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
+                              <span class="n">task_args</span><span class="o">=</span><span class="p">(</span><span class="n">dags</span><span class="p">,</span> <span class="n">initial_layouts</span><span class="p">),</span>
+                              <span class="n">task_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="n">basis_gates</span><span class="p">,</span>
+                                           <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="n">coupling_map</span><span class="p">,</span>
+                                           <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
+                                           <span class="s1">&#39;pass_manager&#39;</span><span class="p">:</span> <span class="n">pass_manager</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">final_dags</span></div>
+
+
+<div class="viewcode-block" id="_transpile_dags_parallel"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._transpile_dags_parallel">[docs]</a><span class="k">def</span> <span class="nf">_transpile_dags_parallel</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">dags</span><span class="p">,</span> <span class="n">initial_layouts</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="s1">&#39;u1,u2,u3,cx,id&#39;</span><span class="p">,</span>
+                             <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for transpiling in parallel (if available).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        idx (int): Index for dag of interest</span>
+<span class="sd">        dags (list): List of dags</span>
+<span class="sd">        initial_layouts (list): List of initial layouts</span>
+<span class="sd">        basis_gates (str): a comma seperated string for the target basis gates</span>
+<span class="sd">        coupling_map (list): A graph of coupling</span>
+<span class="sd">        seed (int): random seed for the swap mapper</span>
+<span class="sd">        pass_manager (PassManager): pass manager instance for the tranpilation process</span>
+<span class="sd">            If None, a default set of passes are run.</span>
+<span class="sd">            Otherwise, the passes defined in it will run.</span>
+<span class="sd">            If contains no passes in it, no dag transformations occur.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        DAGCircuit: DAG circuit after going through transpilation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="n">dags</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layouts</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">final_dag</span><span class="p">,</span> <span class="n">final_layout</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span>
+        <span class="n">dag</span><span class="p">,</span>
+        <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
+        <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
+        <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span>
+        <span class="n">get_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+        <span class="n">pass_manager</span><span class="o">=</span><span class="n">pass_manager</span><span class="p">)</span>
+    <span class="n">final_dag</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">final_layout</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="k">if</span> <span class="n">final_layout</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">final_dag</span></div>
+
+
+<div class="viewcode-block" id="_dags_2_qobj"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._dags_2_qobj">[docs]</a><span class="k">def</span> <span class="nf">_dags_2_qobj</span><span class="p">(</span><span class="n">dags</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">max_credits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a list of dags into a qobj.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dags (list[DAGCircuit]): dags to compile</span>
+<span class="sd">        backend_name (str): name of runner backend</span>
+<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
+<span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
+<span class="sd">        max_credits (int): maximum credits to use</span>
+<span class="sd">        qobj_id (int): identifier for the generated qobj</span>
+<span class="sd">        basis_gates (list[str])): basis gates for the experiment</span>
+<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
+<span class="sd">        seed (int): random seed for simulators</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Qobj: the Qobj to be run on the backends</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: the following will be removed from qobj and thus removed here:</span>
+    <span class="c1"># `basis_gates`, `coupling_map`</span>
+
+    <span class="c1"># Step 1: create the Qobj, with empty experiments.</span>
+    <span class="c1"># Copy the configuration: the values in `config` have preference</span>
+    <span class="n">qobj_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span> <span class="ow">or</span> <span class="p">{})</span>
+    <span class="c1"># TODO: &quot;memory_slots&quot; is required by the qobj schema in the top-level</span>
+    <span class="c1"># qobj.config, and is user-defined. At the moment is set to the maximum</span>
+    <span class="c1"># number of *register* slots for the circuits, in order to have `measure`</span>
+    <span class="c1"># behave properly until the transition is over; and each circuit stores</span>
+    <span class="c1"># its memory_slots in its configuration.</span>
+    <span class="n">qobj_config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="n">shots</span><span class="p">,</span>
+                        <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">max_credits</span><span class="p">,</span>
+                        <span class="s1">&#39;memory_slots&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+
+    <span class="n">qobj</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()),</span>
+                <span class="n">config</span><span class="o">=</span><span class="n">QobjConfig</span><span class="p">(</span><span class="o">**</span><span class="n">qobj_config</span><span class="p">),</span>
+                <span class="n">experiments</span><span class="o">=</span><span class="p">[],</span>
+                <span class="n">header</span><span class="o">=</span><span class="n">QobjHeader</span><span class="p">(</span><span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">seed</span><span class="p">:</span>
+        <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+
+    <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">_dags_2_qobj_parallel</span><span class="p">,</span> <span class="n">dags</span><span class="p">,</span>
+                                    <span class="n">task_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="n">basis_gates</span><span class="p">,</span>
+                                                 <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+                                                 <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="n">coupling_map</span><span class="p">})</span>
+
+    <span class="c1"># Update the `memory_slots` value.</span>
+    <span class="c1"># TODO: remove when `memory_slots` can be provided by the user.</span>
+    <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="k">for</span>
+                                   <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">)</span>
+
+    <span class="c1"># Update the `n_qubits` global value.</span>
+    <span class="c1"># TODO: num_qubits is not part of the qobj specification, but needed</span>
+    <span class="c1"># for the simulator.</span>
+    <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span> <span class="k">for</span>
+                               <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qobj</span></div>
+
+
+<div class="viewcode-block" id="_dags_2_qobj_parallel"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._dags_2_qobj_parallel">[docs]</a><span class="k">def</span> <span class="nf">_dags_2_qobj_parallel</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for dags to qobj in parallel (if available).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dag (DAGCircuit): DAG to compile</span>
+<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
+<span class="sd">        basis_gates (list[str])): basis gates for the experiment</span>
+<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Qobj: Qobj to be run on the backends</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">json_circuit</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">JsonBackend</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">basis</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+    <span class="c1"># Step 3a: create the Experiment based on json_circuit</span>
+    <span class="n">experiment</span> <span class="o">=</span> <span class="n">QobjExperiment</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">json_circuit</span><span class="p">)</span>
+    <span class="c1"># Step 3b: populate the Experiment configuration and header</span>
+    <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">name</span>
+    <span class="c1"># TODO: place in header or config?</span>
+    <span class="n">experiment_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span> <span class="ow">or</span> <span class="p">{})</span>
+    <span class="n">experiment_config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="n">coupling_map</span><span class="p">,</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="n">basis_gates</span><span class="p">,</span>
+        <span class="s1">&#39;layout&#39;</span><span class="p">:</span> <span class="n">dag</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span>
+        <span class="s1">&#39;memory_slots&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+        <span class="c1"># TODO: `n_qubits` is not part of the qobj spec, but needed for the simulator.</span>
+        <span class="s1">&#39;n_qubits&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())})</span>
+    <span class="n">experiment</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">QobjItem</span><span class="p">(</span><span class="o">**</span><span class="n">experiment_config</span><span class="p">)</span>
+
+    <span class="c1"># set eval_symbols=True to evaluate each symbolic expression</span>
+    <span class="c1"># TODO: after transition to qobj, we can drop this</span>
+    <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">compiled_circuit_qasm</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
+        <span class="n">qeflag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eval_symbols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Step 3c: add the Experiment to the Qobj</span>
+    <span class="k">return</span> <span class="n">experiment</span></div>
+
+
+<div class="viewcode-block" id="transpile"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler.transpile">[docs]</a><span class="k">def</span> <span class="nf">transpile</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="s1">&#39;u1,u2,u3,cx,id&#39;</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">get_layout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;dag&#39;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transform a dag circuit into another dag circuit (transpile), through</span>
+<span class="sd">    consecutive passes on the dag.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dag (DAGCircuit): dag circuit to transform via transpilation</span>
+<span class="sd">        basis_gates (str): a comma seperated string for the target basis gates</span>
+<span class="sd">        coupling_map (list): A graph of coupling::</span>
+
+<span class="sd">            [</span>
+<span class="sd">             [control0(int), target0(int)],</span>
+<span class="sd">             [control1(int), target1(int)],</span>
+<span class="sd">            ]</span>
+
+<span class="sd">            eg. [[0, 2], [1, 2], [1, 3], [3, 4]}</span>
+
+<span class="sd">        initial_layout (dict): A mapping of qubit to qubit::</span>
+
+<span class="sd">                              {</span>
+<span class="sd">                                (&quot;q&quot;, start(int)): (&quot;q&quot;, final(int)),</span>
+<span class="sd">                                ...</span>
+<span class="sd">                              }</span>
+<span class="sd">                              eg.</span>
+<span class="sd">                              {</span>
+<span class="sd">                                (&quot;q&quot;, 0): (&quot;q&quot;, 0),</span>
+<span class="sd">                                (&quot;q&quot;, 1): (&quot;q&quot;, 1),</span>
+<span class="sd">                                (&quot;q&quot;, 2): (&quot;q&quot;, 2),</span>
+<span class="sd">                                (&quot;q&quot;, 3): (&quot;q&quot;, 3)</span>
+<span class="sd">                              }</span>
+<span class="sd">        get_layout (bool): flag for returning the final layout after mapping</span>
+<span class="sd">        format (str): The target format of the compilation:</span>
+<span class="sd">            {&#39;dag&#39;, &#39;json&#39;, &#39;qasm&#39;}</span>
+<span class="sd">        seed (int): random seed for the swap mapper</span>
+<span class="sd">        pass_manager (PassManager): pass manager instance for the tranpilation process</span>
+<span class="sd">            If None, a default set of passes are run.</span>
+<span class="sd">            Otherwise, the passes defined in it will run.</span>
+<span class="sd">            If contains no passes in it, no dag transformations occur.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DAGCircuit: transformed dag</span>
+<span class="sd">        DAGCircuit, dict: transformed dag along with the final layout on backend qubits</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TranspilerError: if the format is not valid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: `basis_gates` will be removed after we have the unroller pass.</span>
+    <span class="c1"># TODO: `coupling_map`, `initial_layout`, `get_layout`, `seed` removed after mapper pass.</span>
+
+    <span class="c1"># TODO: move this to the mapper pass</span>
+    <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">coupling_map</span> <span class="o">==</span> <span class="s2">&quot;all-to-all&quot;</span><span class="p">:</span>
+        <span class="n">coupling_map</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">final_layout</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">pass_manager</span><span class="p">:</span>
+        <span class="c1"># run the passes specified by the pass manager</span>
+        <span class="k">for</span> <span class="n">pass_</span> <span class="ow">in</span> <span class="n">pass_manager</span><span class="o">.</span><span class="n">passes</span><span class="p">():</span>
+            <span class="n">pass_</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># default set of passes</span>
+        <span class="c1"># TODO: move each step here to a pass, and use a default passmanager below</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="n">basis_gates</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">basis_gates</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">dag_unroller</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">DAGBackend</span><span class="p">(</span><span class="n">basis</span><span class="p">))</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">dag_unroller</span><span class="o">.</span><span class="n">expand_gates</span><span class="p">()</span>
+        <span class="c1"># if a coupling map is given compile to the map</span>
+        <span class="k">if</span> <span class="n">coupling_map</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;pre-mapping properties: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">dag</span><span class="o">.</span><span class="n">property_summary</span><span class="p">())</span>
+            <span class="c1"># Insert swap gates</span>
+            <span class="n">coupling</span> <span class="o">=</span> <span class="n">Coupling</span><span class="p">(</span><span class="n">coupling_list2dict</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">))</span>
+            <span class="n">removed_meas</span> <span class="o">=</span> <span class="n">remove_last_measurements</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;measurements moved: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">removed_meas</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;initial layout: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">)</span>
+            <span class="n">dag</span><span class="p">,</span> <span class="n">final_layout</span><span class="p">,</span> <span class="n">last_layout</span> <span class="o">=</span> <span class="n">swap_mapper</span><span class="p">(</span>
+                <span class="n">dag</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;final layout: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">final_layout</span><span class="p">)</span>
+            <span class="c1"># Expand swaps</span>
+            <span class="n">dag_unroller</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">DAGBackend</span><span class="p">(</span><span class="n">basis</span><span class="p">))</span>
+            <span class="n">dag</span> <span class="o">=</span> <span class="n">dag_unroller</span><span class="o">.</span><span class="n">expand_gates</span><span class="p">()</span>
+            <span class="c1"># Change cx directions</span>
+            <span class="n">dag</span> <span class="o">=</span> <span class="n">direction_mapper</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">coupling</span><span class="p">)</span>
+            <span class="c1"># Simplify cx gates</span>
+            <span class="n">cx_cancellation</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+            <span class="c1"># Simplify single qubit gates</span>
+            <span class="n">dag</span> <span class="o">=</span> <span class="n">optimize_1q_gates</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+            <span class="n">return_last_measurements</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">removed_meas</span><span class="p">,</span>
+                                     <span class="n">last_layout</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;post-mapping properties: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">dag</span><span class="o">.</span><span class="n">property_summary</span><span class="p">())</span>
+
+    <span class="c1"># choose output format</span>
+    <span class="c1"># TODO: do we need all of these formats, or just the dag?</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;dag&#39;</span><span class="p">:</span>
+        <span class="n">compiled_circuit</span> <span class="o">=</span> <span class="n">dag</span>
+    <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
+        <span class="c1"># FIXME: JsonBackend is wrongly taking an ordered dict as basis, not list</span>
+        <span class="n">dag_unroller</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">JsonBackend</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">basis</span><span class="p">))</span>
+        <span class="n">compiled_circuit</span> <span class="o">=</span> <span class="n">dag_unroller</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;qasm&#39;</span><span class="p">:</span>
+        <span class="n">compiled_circuit</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;unrecognized circuit format&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">get_layout</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">compiled_circuit</span><span class="p">,</span> <span class="n">final_layout</span>
+    <span class="k">return</span> <span class="n">compiled_circuit</span></div>
+
+
+<div class="viewcode-block" id="_best_subset"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._best_subset">[docs]</a><span class="k">def</span> <span class="nf">_best_subset</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the qubit mapping with the best</span>
+<span class="sd">    connectivity.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        backend (Qiskit.BaseBackend): A QISKit backend instance.</span>
+<span class="sd">        n_qubits (int): Number of subset qubits to consider.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Array of qubits to use for best</span>
+<span class="sd">                connectivity mapping.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QISKitError: Wrong number of qubits given.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">n_qubits</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Number of qubits &lt;= 0.&#39;</span><span class="p">)</span>
+
+    <span class="n">device_qubits</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()[</span><span class="s1">&#39;n_qubits&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="n">device_qubits</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QISKitError</span><span class="p">(</span><span class="s1">&#39;Number of qubits greater than device.&#39;</span><span class="p">)</span>
+
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()[</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">cmap</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">sp_cmap</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">cmap</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])),</span>
+                            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">device_qubits</span><span class="p">,</span> <span class="n">device_qubits</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">best_map</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># do bfs with each node as starting point</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sp_cmap</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">bfs</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">breadth_first_order</span><span class="p">(</span><span class="n">sp_cmap</span><span class="p">,</span> <span class="n">i_start</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                     <span class="n">return_predecessors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">connection_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+            <span class="n">node_idx</span> <span class="o">=</span> <span class="n">bfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sp_cmap</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">node_idx</span><span class="p">],</span>
+                           <span class="n">sp_cmap</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">node_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">sp_cmap</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">bfs</span><span class="p">[</span><span class="n">counter</span><span class="p">]:</span>
+                        <span class="n">connection_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">connection_count</span> <span class="o">&gt;</span> <span class="n">best</span><span class="p">:</span>
+            <span class="n">best</span> <span class="o">=</span> <span class="n">connection_count</span>
+            <span class="n">best_map</span> <span class="o">=</span> <span class="n">bfs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_qubits</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">best_map</span></div>
+
+
+<div class="viewcode-block" id="_matches_coupling_map"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._matches_coupling_map">[docs]</a><span class="k">def</span> <span class="nf">_matches_coupling_map</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Iterate over circuit gates to check if all multi-qubit couplings</span>
+<span class="sd">    match the qubit coupling graph in the backend.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">            dag (DAGCircuit): DAG representation of circuit.</span>
+<span class="sd">            coupling_map (list): Backend coupling map, represented as an adjacency list.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">            bool: True if all gates readily fit the backend coupling graph.</span>
+<span class="sd">                  False if there&#39;s at least one gate that uses multiple qubits</span>
+<span class="sd">                  which does not match the backend couplings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span><span class="p">:</span>
+            <span class="n">gate_map</span> <span class="o">=</span> <span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">qr</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;qargs&#39;</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_map</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">gate_map</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coupling_map</span><span class="p">:</span>
+                    <span class="n">match</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+    <span class="k">return</span> <span class="n">match</span></div>
+
+
+<div class="viewcode-block" id="_pick_best_layout"><a class="viewcode-back" href="../../../_autodoc/qiskit.transpiler._transpiler.html#qiskit.transpiler._transpiler._pick_best_layout">[docs]</a><span class="k">def</span> <span class="nf">_pick_best_layout</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pick a convenient layout depending on the best matching qubit connectivity</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dag (DAGCircuit): DAG representation of circuit.</span>
+<span class="sd">        backend (BaseBackend) : The backend with the coupling_map for searching</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A special ordered initial_layout</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">best_sub</span> <span class="o">=</span> <span class="n">_best_subset</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">map_iter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="n">layout</span><span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="n">best_sub</span><span class="p">[</span><span class="n">map_iter</span><span class="p">])</span>
+            <span class="n">map_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">layout</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Qiskit Terra 0.6.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM.
+      Last updated on 2018/10/04.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

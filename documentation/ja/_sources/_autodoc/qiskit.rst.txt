@@ -29,8 +29,6 @@ qiskit package
        
        
        
-       
-       
 
     Subpackages
     -----------
@@ -43,6 +41,8 @@ qiskit package
        qiskit.extensions
        qiskit.mapper
        qiskit.qasm
+       qiskit.qobj
+       qiskit.result
        qiskit.transpiler
        qiskit.unroll
        qiskit.wrapper
@@ -55,6 +55,8 @@ qiskit package
     
        * - :exc:`QISKitError <qiskit._qiskiterror.QISKitError>`
          - Base class for errors raised by the QISKit SDK.
+       * - :exc:`SchemaValidationError <qiskit._schema_validation.SchemaValidationError>`
+         - Represents an error during JSON Schema validation.
     
 
     Classes
@@ -77,14 +79,12 @@ qiskit package
          - Quantum measurement in the computational basis.
        * - :class:`QuantumCircuit <qiskit._quantumcircuit.QuantumCircuit>`
          - Quantum circuit.
-       * - :class:`QuantumProgram <qiskit._quantumprogram.QuantumProgram>`
-         - Quantum Program Class.
        * - :class:`QuantumRegister <qiskit._quantumregister.QuantumRegister>`
          - Implement a quantum register.
        * - :class:`Reset <qiskit._reset.Reset>`
          - Qubit reset.
-       * - :class:`Result <qiskit._result.Result>`
-         - Result Class.
+       * - :class:`Result <qiskit.result._result.Result>`
+         - Results for a collection of experiments sent in a ``Qobj`` instance.
     
 
 
@@ -112,14 +112,14 @@ qiskit package
          - Construct a quantum circuit from a qasm representation (file).
        * - :func:`load_qasm_string <qiskit.wrapper._wrapper.load_qasm_string>`
          - Construct a quantum circuit from a qasm representation (string).
-       * - :func:`local_backends <qiskit.wrapper._wrapper.local_backends>`
-         - Return the available local backends.
+       * - :func:`qobj_to_circuits <qiskit.wrapper._wrapper.qobj_to_circuits>`
+         - Return a list of QuantumCircuit object(s) from a qobj
        * - :func:`register <qiskit.wrapper._wrapper.register>`
          - Authenticate against an online backend provider.
        * - :func:`registered_providers <qiskit.wrapper._wrapper.registered_providers>`
          - Return the currently registered providers.
-       * - :func:`remote_backends <qiskit.wrapper._wrapper.remote_backends>`
-         - Return the available remote backends.
        * - :func:`unregister <qiskit.wrapper._wrapper.unregister>`
          - Removes a provider from list of registered providers.
+       * - :func:`validate_json_against_schema <qiskit._schema_validation.validate_json_against_schema>`
+         - Validates JSON dict against a schema.
     

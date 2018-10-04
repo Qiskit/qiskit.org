@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._register &#8212; QISKit SDK 0.5.6 ドキュメント</title>
+    <title>qiskit._register &#8212; Qiskit Terra 0.6.0 ドキュメント</title>
     <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -48,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -64,7 +64,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">インストール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qiskit.html">Qiskit概要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autodoc/qiskit.html">SDKリファレンス</a></li>
 </ul>
@@ -103,7 +103,6 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">._qiskiterror</span> <span class="k">import</span> <span class="n">QISKitError</span><span class="p">,</span> <span class="n">QISKitIndexError</span>
 
@@ -120,20 +119,7 @@
 
 <div class="viewcode-block" id="Register.__init__"><a class="viewcode-back" href="../../_autodoc/qiskit._register.html#qiskit._register.Register.__init__">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new generic register.</span>
-
-<span class="sd">        .. deprecated:: 0.5</span>
-<span class="sd">            The `name` parameter will be optional in upcoming versions (&gt;0.5.0)</span>
-<span class="sd">            and the order of the parameters will change (`size`, `name`)</span>
-<span class="sd">            instead of (`name`, `size`).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s2">&quot;name will be optional in upcoming versions (&gt;0.5.0) &quot;</span>
-                <span class="s2">&quot;and order will be size, name.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="n">name_temp</span> <span class="o">=</span> <span class="n">size</span>
-            <span class="n">size</span> <span class="o">=</span> <span class="n">name</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">name_temp</span>
 
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instances_counter</span><span class="p">))</span>
@@ -212,15 +198,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/17
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
+        &#169; Copyright 2017-2018 IBM.
+      最終更新: 2018/10/04
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 で生成しました。
     </div>
   </body>
 </html>

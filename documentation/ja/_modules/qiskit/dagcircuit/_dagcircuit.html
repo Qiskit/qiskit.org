@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.dagcircuit._dagcircuit &#8212; QISKit SDK 0.5.6 ドキュメント</title>
+    <title>qiskit.dagcircuit._dagcircuit &#8212; Qiskit Terra 0.6.0 ドキュメント</title>
     <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -48,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">モジュールコード</a> &#187;</li> 
       </ul>
@@ -64,7 +64,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">インストール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">Qiskit概要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDKリファレンス</a></li>
 </ul>
@@ -133,6 +133,10 @@
 
 <div class="viewcode-block" id="DAGCircuit.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit.__init__">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an empty circuit.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Circuit name.  Generally, this corresponds to the name</span>
+        <span class="c1"># of the QuantumCircuit from which the DAG was generated.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1"># Map from a wire&#39;s name (reg,idx) to a Bool that is True if the</span>
         <span class="c1"># wire is a classical bit and False if the wire is a qubit.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wire_type</span> <span class="o">=</span> <span class="p">{}</span>
@@ -162,16 +166,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">multi_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
 
         <span class="c1"># Map of qregs to sizes</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
         <span class="c1"># Map of cregs to sizes</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
         <span class="c1"># Map of user defined gates to ast nodes defining them</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gates</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="c1"># Output precision for printing floats</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">10</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">10</span>
+
+        <span class="c1"># layout of dag quantum registers on the chip</span>
+        <span class="c1"># TODO: rethink this. doesn&#39;t seem related to concept of DAG,</span>
+        <span class="c1"># but if we want to be able to generate qobj</span>
+        <span class="c1"># directly from a dag, we need it.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="p">[]</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.get_qubits"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit.get_qubits">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a list of qubits as (qreg, index) pairs.&quot;&quot;&quot;</span>
@@ -1412,13 +1422,20 @@
         <span class="k">return</span> <span class="n">summary</span></div>
 
 <div class="viewcode-block" id="DAGCircuit.fromQuantumCircuit"><a class="viewcode-back" href="../../../_autodoc/qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit.fromQuantumCircuit">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">fromQuantumCircuit</span><span class="p">(</span><span class="n">circuit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a DAGCircuit object from a QuantumCircuit</span>
+    <span class="k">def</span> <span class="nf">fromQuantumCircuit</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">expand_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build a ``DAGCircuit`` object from a ``QuantumCircuit``.</span>
 
-<span class="sd">        None of the gates are expanded, i.e. the gates that are defined in the</span>
-<span class="sd">        circuit are included in the gate basis.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            circuit (QuantumCircuit): the input circuit.</span>
+<span class="sd">            expand_gates (bool): if ``False``, none of the gates are expanded,</span>
+<span class="sd">                i.e. the gates that are defined in the circuit are included in</span>
+<span class="sd">                the DAG basis.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            DAGCircuit: the DAG representing the input circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dagcircuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+        <span class="n">dagcircuit</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">name</span>
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">regs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
                 <span class="n">dagcircuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">register</span><span class="p">))</span>
@@ -1448,10 +1465,12 @@
             <span class="c1"># TODO: generate definitions and nodes for CompositeGates,</span>
             <span class="c1"># for now simply drop their instructions into the DAG</span>
             <span class="n">instruction_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">main_instruction</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">):</span>
+            <span class="n">is_composite</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">main_instruction</span><span class="p">,</span> <span class="n">CompositeGate</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">is_composite</span> <span class="ow">and</span> <span class="n">expand_gates</span><span class="p">:</span>
                 <span class="n">instruction_list</span> <span class="o">=</span> <span class="n">main_instruction</span><span class="o">.</span><span class="n">instruction_list</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">instruction_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">main_instruction</span><span class="p">)</span>
+
             <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">instruction_list</span><span class="p">:</span>
                 <span class="c1"># Add OpenQASM built-in gates on demand</span>
                 <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">builtins</span><span class="p">:</span>
@@ -1471,7 +1490,15 @@
                     <span class="n">control</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">control</span> <span class="o">=</span> <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">instruction</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">dagcircuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span>
+
+                <span class="k">if</span> <span class="n">is_composite</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">expand_gates</span><span class="p">:</span>
+                    <span class="n">is_inverse</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">inverse_flag</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_inverse</span> <span class="k">else</span> <span class="n">instruction</span><span class="o">.</span><span class="n">inverse_name</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span>
+
+                <span class="n">dagcircuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span>
                                                 <span class="n">instruction</span><span class="o">.</span><span class="n">param</span><span class="p">,</span>
                                                 <span class="n">control</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dagcircuit</span></div></div>
@@ -1497,15 +1524,15 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../../../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >モジュールコード</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/17
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
+        &#169; Copyright 2017-2018 IBM.
+      最終更新: 2018/10/04
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 で生成しました。
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.transpiler._transpiler module &#8212; QISKit SDK 0.5.6 Dokumentation</title>
+    <title>qiskit.transpiler._transpiler module &#8212; Qiskit Terra 0.6.0 Dokumentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -48,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 Dokumentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 Dokumentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -63,7 +63,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit Überblick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qiskit.html">SDK Referenz</a></li>
 </ul>
@@ -111,16 +111,31 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._best_subset" title="qiskit.transpiler._transpiler._best_subset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_best_subset</span></code></a></td>
 <td>Computes the qubit mapping with the best connectivity.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._matches_coupling_map" title="qiskit.transpiler._transpiler._matches_coupling_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_matches_coupling_map</span></code></a></td>
-<td>Iterate over circuit instructions to check if all multi-qubit couplings match the qubit coupling graph in the backend.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._circuits_2_dags" title="qiskit.transpiler._transpiler._circuits_2_dags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_circuits_2_dags</span></code></a></td>
+<td>Convert a list of circuits into a list of dags.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._pick_best_layout" title="qiskit.transpiler._transpiler._pick_best_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pick_best_layout</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._dags_2_qobj" title="qiskit.transpiler._transpiler._dags_2_qobj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_dags_2_qobj</span></code></a></td>
+<td>Convert a list of dags into a qobj.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._dags_2_qobj_parallel" title="qiskit.transpiler._transpiler._dags_2_qobj_parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_dags_2_qobj_parallel</span></code></a></td>
+<td>Helper function for dags to qobj in parallel (if available).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._matches_coupling_map" title="qiskit.transpiler._transpiler._matches_coupling_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_matches_coupling_map</span></code></a></td>
+<td>Iterate over circuit gates to check if all multi-qubit couplings match the qubit coupling graph in the backend.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._pick_best_layout" title="qiskit.transpiler._transpiler._pick_best_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pick_best_layout</span></code></a></td>
 <td>Pick a convenient layout depending on the best matching qubit connectivity</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler.compile" title="qiskit.transpiler._transpiler.compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._transpile_dags" title="qiskit.transpiler._transpiler._transpile_dags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_transpile_dags</span></code></a></td>
+<td>Transform multiple dags through a sequence of passes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler._transpile_dags_parallel" title="qiskit.transpiler._transpiler._transpile_dags_parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_transpile_dags_parallel</span></code></a></td>
+<td>Helper function for transpiling in parallel (if available).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler.compile" title="qiskit.transpiler._transpiler.compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code></a></td>
 <td>Compile a list of circuits into a qobj.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.transpiler._transpiler.transpile" title="qiskit.transpiler._transpiler.transpile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpile</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.transpiler._transpiler.transpile" title="qiskit.transpiler._transpiler.transpile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpile</span></code></a></td>
 <td>Transform a dag circuit into another dag circuit (transpile), through consecutive passes on the dag.</td>
 </tr>
 </tbody>
@@ -163,30 +178,106 @@ connectivity.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="qiskit.transpiler._transpiler._circuits_2_dags">
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_circuits_2_dags</code><span class="sig-paren">(</span><em>circuits</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_circuits_2_dags"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._circuits_2_dags" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Convert a list of circuits into a list of dags.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>circuits</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit._quantumcircuit.html#qiskit._quantumcircuit.QuantumCircuit" title="qiskit._quantumcircuit.QuantumCircuit"><em>QuantumCircuit</em></a><em>]</em>) – circuit to compile</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">the dag representation of the circuits
+to be used in the transpiler</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">list[<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit">DAGCircuit</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.transpiler._transpiler._dags_2_qobj">
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_dags_2_qobj</code><span class="sig-paren">(</span><em>dags</em>, <em>backend_name</em>, <em>config=None</em>, <em>shots=None</em>, <em>max_credits=None</em>, <em>qobj_id=None</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_dags_2_qobj"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._dags_2_qobj" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Convert a list of dags into a qobj.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>dags</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a><em>]</em>) – dags to compile</li>
+<li><strong>backend_name</strong> (<em>str</em>) – name of runner backend</li>
+<li><strong>config</strong> (<em>dict</em>) – dictionary of parameters (e.g. noise) used by runner</li>
+<li><strong>shots</strong> (<em>int</em>) – number of repetitions of each circuit, for sampling</li>
+<li><strong>max_credits</strong> (<em>int</em>) – maximum credits to use</li>
+<li><strong>qobj_id</strong> (<em>int</em>) – identifier for the generated qobj</li>
+<li><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>)</em>) – basis gates for the experiment</li>
+<li><strong>coupling_map</strong> (<em>list</em>) – coupling map (perhaps custom) to target in mapping</li>
+<li><strong>seed</strong> (<em>int</em>) – random seed for simulators</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">the Qobj to be run on the backends</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj">Qobj</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.transpiler._transpiler._dags_2_qobj_parallel">
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_dags_2_qobj_parallel</code><span class="sig-paren">(</span><em>dag</em>, <em>config=None</em>, <em>basis_gates=None</em>, <em>coupling_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_dags_2_qobj_parallel"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._dags_2_qobj_parallel" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Helper function for dags to qobj in parallel (if available).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – DAG to compile</li>
+<li><strong>config</strong> (<em>dict</em>) – dictionary of parameters (e.g. noise) used by runner</li>
+<li><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>)</em>) – basis gates for the experiment</li>
+<li><strong>coupling_map</strong> (<em>list</em>) – coupling map (perhaps custom) to target in mapping</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">Qobj to be run on the backends</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj">Qobj</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="qiskit.transpiler._transpiler._matches_coupling_map">
-<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_matches_coupling_map</code><span class="sig-paren">(</span><em>instructions</em>, <em>coupling_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_matches_coupling_map"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._matches_coupling_map" title="Link zu dieser Definition">¶</a></dt>
-<dd><p>Iterate over circuit instructions to check if all multi-qubit couplings
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_matches_coupling_map</code><span class="sig-paren">(</span><em>dag</em>, <em>coupling_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_matches_coupling_map"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._matches_coupling_map" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Iterate over circuit gates to check if all multi-qubit couplings
 match the qubit coupling graph in the backend.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>instructions</strong> (<em>list</em>) – List of circuit instructions.</li>
+<li><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – DAG representation of circuit.</li>
 <li><strong>coupling_map</strong> (<em>list</em>) – Backend coupling map, represented as an adjacency list.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><p>If all instructions readily fit the backend coupling graph.</p>
-<dl class="docutils">
-<dt>False: If there’s at least one instruction that uses multiple qubits</dt>
-<dd><p class="first last">which does not match the backend couplings.</p>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>True if all gates readily fit the backend coupling graph.</dt>
+<dd><p class="first last">False if there’s at least one gate that uses multiple qubits
+which does not match the backend couplings.</p>
 </dd>
 </dl>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">True</p>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">bool</p>
 </td>
 </tr>
 </tbody>
@@ -195,23 +286,88 @@ match the qubit coupling graph in the backend.</p>
 
 <dl class="function">
 <dt id="qiskit.transpiler._transpiler._pick_best_layout">
-<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_pick_best_layout</code><span class="sig-paren">(</span><em>backend</em>, <em>num_qubits</em>, <em>qregs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_pick_best_layout"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._pick_best_layout" title="Link zu dieser Definition">¶</a></dt>
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_pick_best_layout</code><span class="sig-paren">(</span><em>dag</em>, <em>backend</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_pick_best_layout"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._pick_best_layout" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Pick a convenient layout depending on the best matching qubit connectivity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – DAG representation of circuit.</li>
 <li><strong>backend</strong> (<a class="reference internal" href="qiskit.backends.basebackend.html#qiskit.backends.basebackend.BaseBackend" title="qiskit.backends.basebackend.BaseBackend"><em>BaseBackend</em></a>) – The backend with the coupling_map for searching</li>
-<li><strong>num_qubits</strong> (<em>int</em>) – Number of qubits</li>
-<li><strong>qregs</strong> (<em>list</em>) – The list of quantum registers</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">A special ordered layout</p>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">A special ordered initial_layout</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">initial_layout</p>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.transpiler._transpiler._transpile_dags">
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_transpile_dags</code><span class="sig-paren">(</span><em>dags</em>, <em>basis_gates='u1</em>, <em>u2</em>, <em>u3</em>, <em>cx</em>, <em>id'</em>, <em>coupling_map=None</em>, <em>initial_layouts=None</em>, <em>seed=None</em>, <em>pass_manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_transpile_dags"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._transpile_dags" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Transform multiple dags through a sequence of passes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>dags</strong> (<em>list</em><em>[</em><a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a><em>]</em>) – dag circuits to transform</li>
+<li><strong>basis_gates</strong> (<em>str</em>) – a comma seperated string for the target basis gates</li>
+<li><strong>coupling_map</strong> (<em>list</em>) – A graph of coupling</li>
+<li><strong>initial_layouts</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – A mapping of qubit to qubit for each dag</li>
+<li><strong>seed</strong> (<em>int</em>) – random seed for the swap mapper</li>
+<li><strong>pass_manager</strong> (<a class="reference internal" href="qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager" title="qiskit.transpiler._passmanager.PassManager"><em>PassManager</em></a>) – pass manager instance for the tranpilation process
+If None, a default set of passes are run.
+Otherwise, the passes defined in it will run.
+If contains no passes in it, no dag transformations occur.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">the dag circuits after going through transpilation</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first">list[<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit">DAGCircuit</a>]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TranspilerError</span></code> – if the format is not valid.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.transpiler._transpiler._transpile_dags_parallel">
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">_transpile_dags_parallel</code><span class="sig-paren">(</span><em>idx</em>, <em>dags</em>, <em>initial_layouts</em>, <em>basis_gates='u1</em>, <em>u2</em>, <em>u3</em>, <em>cx</em>, <em>id'</em>, <em>coupling_map=None</em>, <em>seed=None</em>, <em>pass_manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#_transpile_dags_parallel"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler._transpile_dags_parallel" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Helper function for transpiling in parallel (if available).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>idx</strong> (<em>int</em>) – Index for dag of interest</li>
+<li><strong>dags</strong> (<em>list</em>) – List of dags</li>
+<li><strong>initial_layouts</strong> (<em>list</em>) – List of initial layouts</li>
+<li><strong>basis_gates</strong> (<em>str</em>) – a comma seperated string for the target basis gates</li>
+<li><strong>coupling_map</strong> (<em>list</em>) – A graph of coupling</li>
+<li><strong>seed</strong> (<em>int</em>) – random seed for the swap mapper</li>
+<li><strong>pass_manager</strong> (<a class="reference internal" href="qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager" title="qiskit.transpiler._passmanager.PassManager"><em>PassManager</em></a>) – pass manager instance for the tranpilation process
+If None, a default set of passes are run.
+Otherwise, the passes defined in it will run.
+If contains no passes in it, no dag transformations occur.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">DAG circuit after going through transpilation.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit">DAGCircuit</a></p>
 </td>
 </tr>
 </tbody>
@@ -242,10 +398,10 @@ match the qubit coupling graph in the backend.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">the qobj to be run on the backends</p>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">Experiment to be wrapped in a Qobj.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first">obj</p>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.QobjExperiment" title="qiskit.qobj._qobj.QobjExperiment">QobjExperiment</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TranspilerError</span></code> – in case of bad compile options, e.g. the hpc options.</p>
@@ -257,7 +413,7 @@ match the qubit coupling graph in the backend.</p>
 
 <dl class="function">
 <dt id="qiskit.transpiler._transpiler.transpile">
-<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">transpile</code><span class="sig-paren">(</span><em>dag_circuit</em>, <em>basis_gates='u1</em>, <em>u2</em>, <em>u3</em>, <em>cx</em>, <em>id'</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>get_layout=False</em>, <em>format='dag'</em>, <em>seed=None</em>, <em>pass_manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#transpile"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler.transpile" title="Link zu dieser Definition">¶</a></dt>
+<code class="descclassname">qiskit.transpiler._transpiler.</code><code class="descname">transpile</code><span class="sig-paren">(</span><em>dag</em>, <em>basis_gates='u1</em>, <em>u2</em>, <em>u3</em>, <em>cx</em>, <em>id'</em>, <em>coupling_map=None</em>, <em>initial_layout=None</em>, <em>get_layout=False</em>, <em>format='dag'</em>, <em>seed=None</em>, <em>pass_manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/_transpiler.html#transpile"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.transpiler._transpiler.transpile" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Transform a dag circuit into another dag circuit (transpile), through
 consecutive passes on the dag.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -265,7 +421,7 @@ consecutive passes on the dag.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
-<li><strong>dag_circuit</strong> (<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – dag circuit to transform via transpilation</li>
+<li><strong>dag</strong> (<a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit"><em>DAGCircuit</em></a>) – dag circuit to transform via transpilation</li>
 <li><strong>basis_gates</strong> (<em>str</em>) – a comma seperated string for the target basis gates</li>
 <li><strong>coupling_map</strong> (<em>list</em>) – <p>A graph of coupling:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
@@ -292,10 +448,10 @@ consecutive passes on the dag.</p>
 </pre></div>
 </div>
 </li>
-<li><strong>get_layout</strong> (<em>bool</em>) – flag for returning the layout</li>
+<li><strong>get_layout</strong> (<em>bool</em>) – flag for returning the final layout after mapping</li>
 <li><strong>format</strong> (<em>str</em>) – The target format of the compilation:
 {‚dag‘, ‚json‘, ‚qasm‘}</li>
-<li><strong>seed</strong> (<em>int</em>) – random seed for simulators</li>
+<li><strong>seed</strong> (<em>int</em>) – random seed for the swap mapper</li>
 <li><strong>pass_manager</strong> (<a class="reference internal" href="qiskit.transpiler._passmanager.html#qiskit.transpiler._passmanager.PassManager" title="qiskit.transpiler._passmanager.PassManager"><em>PassManager</em></a>) – pass manager instance for the tranpilation process
 If None, a default set of passes are run.
 Otherwise, the passes defined in it will run.
@@ -303,16 +459,11 @@ If contains no passes in it, no dag transformations occur.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>If get_layout == False, the compiled circuit in the specified</dt>
-<dd><p class="first last">format. If get_layout == True, a tuple is returned, with the
-second element being the layout.</p>
-</dd>
-</dl>
-</p>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">transformed dag
+DAGCircuit, dict: transformed dag along with the final layout on backend qubits</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first">object</p>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.dagcircuit._dagcircuit.html#qiskit.dagcircuit._dagcircuit.DAGCircuit" title="qiskit.dagcircuit._dagcircuit.DAGCircuit">DAGCircuit</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TranspilerError</span></code> – if the format is not valid.</p>
@@ -346,14 +497,14 @@ second element being the layout.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 Dokumentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 Dokumentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      Zuletzt aktualisiert am 2018/07/17.
-      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 erstellt.
+        &#169; Copyright 2017-2018 IBM.
+      Zuletzt aktualisiert am 2018/10/04.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 erstellt.
     </div>
   </body>
 </html>
