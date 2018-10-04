@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.mapper._compiling module &#8212; QISKit SDK 0.5.6 ドキュメント</title>
+    <title>qiskit.mapper._compiling module &#8212; Qiskit Terra 0.6.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -48,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
  
       </ul>
     </div>
@@ -63,7 +63,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qiskit.html">SDKリファレンス</a></li>
 </ul>
@@ -170,14 +170,35 @@ OpenQASM string is the name of the gate with parameters substituted.</p>
 
 <dl class="function">
 <dt id="qiskit.mapper._compiling.two_qubit_kak">
-<code class="descclassname">qiskit.mapper._compiling.</code><code class="descname">two_qubit_kak</code><span class="sig-paren">(</span><em>unitary_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_compiling.html#two_qubit_kak"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.mapper._compiling.two_qubit_kak" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descclassname">qiskit.mapper._compiling.</code><code class="descname">two_qubit_kak</code><span class="sig-paren">(</span><em>unitary_matrix</em>, <em>verify_gate_sequence=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/mapper/_compiling.html#two_qubit_kak"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.mapper._compiling.two_qubit_kak" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Decompose a two-qubit gate over CNOT + SU(2) using the KAK decomposition.</p>
 <p>Based on MATLAB implementation by David Gosset.</p>
 <p>Computes a sequence of 10 single and two qubit gates, including 3 CNOTs,
 which multiply to U, including global phase. Uses Vatan and Williams
 optimal two-qubit circuit (quant-ph/0308006v3). The decomposition algorithm
 which achieves this is explained well in Drury and Love, 0806.4015.</p>
-<p>unitary_matrix = numpy 4x4 unitary matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>unitary_matrix</strong> (<em>ndaray</em>) -- 4x4 unitary matrix.</li>
+<li><strong>verify_gate_sequence</strong> (<em>bool</em>) -- Verify the decomposition via circuit
+gate sequence, optional.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">List of gates corresponding to decomposition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first">list</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MapperError</span></code> -- Error in KAK decomposition.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -204,14 +225,14 @@ which achieves this is explained well in Drury and Love, 0806.4015.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/17
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
+        &#169; Copyright 2017-2018 IBM.
+      最終更新: 2018/10/04
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 で生成しました。
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.wrapper._wrapper module &#8212; QISKit SDK 0.5.6 ドキュメント</title>
+    <title>qiskit.wrapper._wrapper module &#8212; Qiskit Terra 0.6.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -48,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
  
       </ul>
     </div>
@@ -63,7 +63,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qiskit.html">SDKリファレンス</a></li>
 </ul>
@@ -129,8 +129,8 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.load_qasm_string" title="qiskit.wrapper._wrapper.load_qasm_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_qasm_string</span></code></a></td>
 <td>Construct a quantum circuit from a qasm representation (string).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.local_backends" title="qiskit.wrapper._wrapper.local_backends"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_backends</span></code></a></td>
-<td>Return the available local backends.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.qobj_to_circuits" title="qiskit.wrapper._wrapper.qobj_to_circuits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qobj_to_circuits</span></code></a></td>
+<td>Return a list of QuantumCircuit object(s) from a qobj</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.register" title="qiskit.wrapper._wrapper.register"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register</span></code></a></td>
 <td>Authenticate against an online backend provider.</td>
@@ -138,10 +138,7 @@
 <tr class="row-even"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.registered_providers" title="qiskit.wrapper._wrapper.registered_providers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registered_providers</span></code></a></td>
 <td>Return the currently registered providers.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.remote_backends" title="qiskit.wrapper._wrapper.remote_backends"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remote_backends</span></code></a></td>
-<td>Return the available remote backends.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.unregister" title="qiskit.wrapper._wrapper.unregister"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unregister</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.wrapper._wrapper.unregister" title="qiskit.wrapper._wrapper.unregister"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unregister</span></code></a></td>
 <td>Removes a provider from list of registered providers.</td>
 </tr>
 </tbody>
@@ -192,6 +189,11 @@ specific provider, get the backend from that specific provider.</p>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, this function is deprecated. Please use the methods in
+<cite>qiskit.IBMQ</cite> and <cite>qiskit.backends.local.Aer</cite> instead
+(<cite>backends()</cite>).</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -214,19 +216,24 @@ specific provider, get the backend from that specific provider.</p>
 <li><strong>seed</strong> (<em>int</em>) -- random seed for simulators</li>
 <li><strong>qobj_id</strong> (<em>int</em>) -- identifier for the generated qobj</li>
 <li><strong>hpc</strong> (<em>dict</em>) -- HPC simulator parameters</li>
-<li><strong>skip_transpiler</strong> (<em>bool</em>) -- If True, bypass most of the compilation process and
-creates a qobj with minimal check nor translation</li>
+<li><strong>skip_transpiler</strong> (<em>bool</em>) -- skip most of the compile steps and produce qobj directly</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the qobj to be run on the backends</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">obj</p>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj">Qobj</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TranspilerError</span></code> -- in case of bad compile options, e.g. the hpc options.</p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, compile will only take a backend object.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -261,6 +268,9 @@ creates a qobj with minimal check nor translation</li>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, execute will only take a backend object, not string.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -279,6 +289,11 @@ creates a qobj with minimal check nor translation</li>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, this function is deprecated. Please use the methods in
+<cite>qiskit.IBMQ</cite> and <cite>qiskit.Aer</cite> instead
+(<cite>backends()</cite>).</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -303,6 +318,11 @@ either empty or none have attribute <code class="docutils literal notranslate"><
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, this function is deprecated. Please use the methods in
+<cite>qiskit.IBMQ</cite> instead
+(<cite>backends()</cite>).</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -365,24 +385,18 @@ text into it. If no name given, assign automatically.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="qiskit.wrapper._wrapper.local_backends">
-<code class="descclassname">qiskit.wrapper._wrapper.</code><code class="descname">local_backends</code><span class="sig-paren">(</span><em>compact=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#local_backends"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper._wrapper.local_backends" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return the available local backends.</p>
+<dt id="qiskit.wrapper._wrapper.qobj_to_circuits">
+<code class="descclassname">qiskit.wrapper._wrapper.</code><code class="descname">qobj_to_circuits</code><span class="sig-paren">(</span><em>qobj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#qobj_to_circuits"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper._wrapper.qobj_to_circuits" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return a list of QuantumCircuit object(s) from a qobj</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>compact</strong> (<em>bool</em>) -- only report alias names. this is usually shorter, any several</li>
-<li><strong>usually share the same alias.</strong> (<em>backends</em>) -- </li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>qobj</strong> (<a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj"><em>Qobj</em></a>) -- The Qobj object to convert to QuantumCircuits</td>
 </tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the names of the available remote backends.</p>
-</td>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body">A list of QuantumCircuit objects from the qobj</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">list[str]</p>
-</td>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -390,7 +404,7 @@ text into it. If no name given, assign automatically.</li>
 
 <dl class="function">
 <dt id="qiskit.wrapper._wrapper.register">
-<code class="descclassname">qiskit.wrapper._wrapper.</code><code class="descname">register</code><span class="sig-paren">(</span><em>*args</em>, <em>provider_class=&lt;class 'qiskit.backends.ibmq.ibmqprovider.IBMQProvider'&gt;</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper._wrapper.register" title="この定義へのパーマリンク">¶</a></dt>
+<code class="descclassname">qiskit.wrapper._wrapper.</code><code class="descname">register</code><span class="sig-paren">(</span><em>*args</em>, <em>provider_class=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#register"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper._wrapper.register" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Authenticate against an online backend provider.
 This is a factory method that returns the provider that gets registered.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -401,7 +415,7 @@ This is a factory method that returns the provider that gets registered.</p>
 <li><strong>args</strong> (<em>tuple</em>) -- positional arguments passed to provider class initialization</li>
 <li><strong>provider_class</strong> (<a class="reference internal" href="qiskit.backends.baseprovider.html#qiskit.backends.baseprovider.BaseProvider" title="qiskit.backends.baseprovider.BaseProvider"><em>BaseProvider</em></a>) -- provider class</li>
 <li><strong>kwargs</strong> (<em>dict</em>) -- <p>keyword arguments passed to provider class initialization.
-For the IBMQProvider default this can include things such as:</p>
+For the IBMQSingleProvider default this can include things such as:</p>
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
@@ -435,44 +449,26 @@ For the IBMQProvider default this can include things such as:</p>
 <tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.backends.baseprovider.html#qiskit.backends.baseprovider.BaseProvider" title="qiskit.backends.baseprovider.BaseProvider">BaseProvider</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">QISKitError</span></code> -- if the provider could not be registered</li>
-<li>(e.g. due to conflict)</li>
-</ul>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QISKitError</span></code> -- if the provider could not be registered</p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, this function is deprecated. Please use the methods in
+<cite>qiskit.IBMQ</cite> instead (<cite>enable_account()</cite>) for using IBMQ
+accounts. For custom <cite>Providers</cite>, please instantiate them directly.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="qiskit.wrapper._wrapper.registered_providers">
 <code class="descclassname">qiskit.wrapper._wrapper.</code><code class="descname">registered_providers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#registered_providers"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper._wrapper.registered_providers" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Return the currently registered providers.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="qiskit.wrapper._wrapper.remote_backends">
-<code class="descclassname">qiskit.wrapper._wrapper.</code><code class="descname">remote_backends</code><span class="sig-paren">(</span><em>compact=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/wrapper/_wrapper.html#remote_backends"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.wrapper._wrapper.remote_backends" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Return the available remote backends.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
-<li><strong>compact</strong> (<em>bool</em>) -- only report alias names. this is usually shorter, any several</li>
-<li><strong>usually share the same alias.</strong> (<em>backends</em>) -- </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">the names of the available remote backends.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">list[str]</p>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, this function is deprecated. Please use the methods in
+<cite>qiskit.IBMQ</cite> instead (<cite>active_accounts()</cite>).</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -495,6 +491,10 @@ from provider2 available.</p>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">バージョン 0.6+ で非推奨: </span>After 0.6, this function is deprecated. Please use the methods in
+<cite>qiskit.IBMQ</cite> instead (<cite>disable_account()</cite>).</p>
+</div>
 </dd></dl>
 
 </div>
@@ -521,14 +521,14 @@ from provider2 available.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/17
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
+        &#169; Copyright 2017-2018 IBM.
+      最終更新: 2018/10/04
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 で生成しました。
     </div>
   </body>
 </html>

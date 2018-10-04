@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit.backends.basejob module &#8212; QISKit SDK 0.5.6 ドキュメント</title>
+    <title>qiskit.backends.basejob module &#8212; Qiskit Terra 0.6.0 ドキュメント</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -56,7 +56,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" accesskey="U">qiskit.backends package</a> &#187;</li> 
@@ -73,7 +73,7 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a></li>
@@ -90,10 +90,14 @@
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.baseprovider.html">qiskit.backends.baseprovider module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.joberror.html">qiskit.backends.joberror module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="qiskit.backends.jobstatus.html">qiskit.backends.jobstatus module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.jobtimeouterror.html">qiskit.backends.jobtimeouterror module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.providerutils.html">qiskit.backends.providerutils module</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#exceptions">Exceptions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#classes">Classes</a></li>
 </ul>
 </li>
@@ -101,6 +105,8 @@
 <li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
@@ -172,14 +178,46 @@ job interface.</p>
 <h2>Reference<a class="headerlink" href="#reference" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="class">
 <dt id="qiskit.backends.basejob.BaseJob">
-<em class="property">class </em><code class="descclassname">qiskit.backends.basejob.</code><code class="descname">BaseJob</code><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="descclassname">qiskit.backends.basejob.</code><code class="descname">BaseJob</code><span class="sig-paren">(</span><em>backend</em>, <em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Class to handle asynchronous jobs</p>
-<p>Initializes the asynchronous job</p>
+<p>Initializes the asynchronous job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>backend</strong> (<a class="reference internal" href="qiskit.backends.basebackend.html#qiskit.backends.basebackend.BaseBackend" title="qiskit.backends.basebackend.BaseBackend"><em>BaseBackend</em></a>) -- the backend used to run the job.</li>
+<li><strong>job_id</strong> (<em>str</em>) -- a unique id in the context of the backend used to run
+the job.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="qiskit.backends.basejob.BaseJob.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.__init__" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Initializes the asynchronous job</p>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>backend</em>, <em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Initializes the asynchronous job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>backend</strong> (<a class="reference internal" href="qiskit.backends.basebackend.html#qiskit.backends.basebackend.BaseBackend" title="qiskit.backends.basebackend.BaseBackend"><em>BaseBackend</em></a>) -- the backend used to run the job.</li>
+<li><strong>job_id</strong> (<em>str</em>) -- a unique id in the context of the backend used to run
+the job.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.backends.basejob.BaseJob.backend">
+<code class="descname">backend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob.backend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.backend" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return the backend for this job.</p>
 </dd></dl>
 
 <dl class="method">
@@ -188,16 +226,10 @@ job interface.</p>
 <dd><p>Attempt to cancel job.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="qiskit.backends.basejob.BaseJob.cancelled">
-<code class="descname">cancelled</code><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.cancelled" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>True if call was successfully cancelled</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.backends.basejob.BaseJob.done">
-<code class="descname">done</code><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.done" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>True if call was successfully finished.</p>
+<dl class="method">
+<dt id="qiskit.backends.basejob.BaseJob.job_id">
+<code class="descname">job_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob.job_id"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.job_id" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return a unique id identifying the job.</p>
 </dd></dl>
 
 <dl class="method">
@@ -206,16 +238,16 @@ job interface.</p>
 <dd><p>Return backend result</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="qiskit.backends.basejob.BaseJob.running">
-<code class="descname">running</code><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.running" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>True if job is currently running.</p>
+<dl class="method">
+<dt id="qiskit.backends.basejob.BaseJob.status">
+<code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob.status"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.status" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Return one of the values of <code class="docutils literal notranslate"><span class="pre">JobStatus</span></code></p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="qiskit.backends.basejob.BaseJob.status">
-<code class="descname">status</code><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.status" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Get backend status dictionary</p>
+<dl class="method">
+<dt id="qiskit.backends.basejob.BaseJob.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/backends/basejob.html#BaseJob.submit"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.backends.basejob.BaseJob.submit" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Submit the job to the backend.</p>
 </dd></dl>
 
 </dd></dl>
@@ -250,16 +282,16 @@ job interface.</p>
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 ドキュメント</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 ドキュメント</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      最終更新: 2018/07/17
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 で生成しました。
+        &#169; Copyright 2017-2018 IBM.
+      最終更新: 2018/10/04
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 で生成しました。
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>qiskit._util module &#8212; QISKit SDK 0.5.6 Dokumentation</title>
+    <title>qiskit._util module &#8212; Qiskit Terra 0.6.0 Dokumentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -48,7 +48,7 @@
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 Dokumentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 Dokumentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -63,7 +63,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">QISKit Überblick</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit Überblick</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qiskit.html">SDK Referenz</a></li>
 </ul>
@@ -131,8 +131,20 @@
 <tr class="row-odd"><td><a class="reference internal" href="#qiskit._util._check_python_version" title="qiskit._util._check_python_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_check_python_version</span></code></a></td>
 <td>Check for Python version 3.5+</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit._util._enable_deprecation_warnings" title="qiskit._util._enable_deprecation_warnings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_enable_deprecation_warnings</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit._util._dict_merge" title="qiskit._util._dict_merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_dict_merge</span></code></a></td>
+<td>TEMPORARY method for merging backend.calibration &amp; backend.parameters into backend.properties.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit._util._enable_deprecation_warnings" title="qiskit._util._enable_deprecation_warnings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_enable_deprecation_warnings</span></code></a></td>
 <td>Force the <cite>DeprecationWarning</cite> warnings to be displayed for the qiskit module, overriding the system configuration as they are ignored by default [1] for end-users.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit._util._has_connection" title="qiskit._util._has_connection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_has_connection</span></code></a></td>
+<td>Checks to see if internet connection exists to host via specified port</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit._util._parse_ibmq_credentials" title="qiskit._util._parse_ibmq_credentials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_parse_ibmq_credentials</span></code></a></td>
+<td>Converts old Q network credentials to new url only format, if needed.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit._util.local_hardware_info" title="qiskit._util.local_hardware_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_hardware_info</span></code></a></td>
+<td>Basic hardware information about the local machine.</td>
 </tr>
 </tbody>
 </table>
@@ -188,6 +200,29 @@ version required by the package, emitting a warning if it is not present.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="qiskit._util._dict_merge">
+<code class="descclassname">qiskit._util.</code><code class="descname">_dict_merge</code><span class="sig-paren">(</span><em>dct</em>, <em>merge_dct</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_util.html#_dict_merge"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit._util._dict_merge" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>TEMPORARY method for merging backend.calibration &amp; backend.parameters
+into backend.properties.</p>
+<p>Recursive dict merge. Inspired by :meth:<code class="docutils literal notranslate"><span class="pre">dict.update()</span></code>, instead of
+updating only top-level keys, dict_merge recurses down into dicts nested
+to an arbitrary depth, updating keys. The <code class="docutils literal notranslate"><span class="pre">merge_dct</span></code> is merged into
+<code class="docutils literal notranslate"><span class="pre">dct</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dct</strong> (<em>dict</em>) – the dictionary to merge into</li>
+<li><strong>merge_dct</strong> (<em>dict</em>) – the dictionary to merge</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="qiskit._util._enable_deprecation_warnings">
 <code class="descclassname">qiskit._util.</code><code class="descname">_enable_deprecation_warnings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_util.html#_enable_deprecation_warnings"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit._util._enable_deprecation_warnings" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Force the <cite>DeprecationWarning</cite> warnings to be displayed for the qiskit
@@ -196,6 +231,59 @@ module, overriding the system configuration as they are ignored by default
 <p>TODO: on Python 3.7, this might not be needed due to PEP-0565 [2].</p>
 <p>[1] <a class="reference external" href="https://docs.python.org/3/library/warnings.html#default-warning-filters">https://docs.python.org/3/library/warnings.html#default-warning-filters</a>
 [2] <a class="reference external" href="https://www.python.org/dev/peps/pep-0565/">https://www.python.org/dev/peps/pep-0565/</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit._util._has_connection">
+<code class="descclassname">qiskit._util.</code><code class="descname">_has_connection</code><span class="sig-paren">(</span><em>hostname</em>, <em>port</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_util.html#_has_connection"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit._util._has_connection" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Checks to see if internet connection exists to host
+via specified port</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>hostname</strong> (<em>str</em>) – Hostname to connect to.</li>
+<li><strong>port</strong> (<em>int</em>) – Port to connect to</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">Has connection or not</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first">bool</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">gaierror</span></code> – No connection established.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit._util._parse_ibmq_credentials">
+<code class="descclassname">qiskit._util.</code><code class="descname">_parse_ibmq_credentials</code><span class="sig-paren">(</span><em>url</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_util.html#_parse_ibmq_credentials"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit._util._parse_ibmq_credentials" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Converts old Q network credentials to new url only
+format, if needed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit._util.local_hardware_info">
+<code class="descclassname">qiskit._util.</code><code class="descname">local_hardware_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/_util.html#local_hardware_info"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit._util.local_hardware_info" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Basic hardware information about the local machine.</p>
+<p>Gives actual number of CPU’s in the machine, even when hyperthreading is
+turned on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">The hardware information.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -222,14 +310,14 @@ module, overriding the system configuration as they are ignored by default
   TOC</a> |
 </li>
 
-        <li class="nav-item nav-item-0"><a href="../index.html">QISKit SDK 0.5.6 Dokumentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.0 Dokumentation</a> &#187;</li>
  
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017-2018 IBM Research.
-      Zuletzt aktualisiert am 2018/07/17.
-      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6 erstellt.
+        &#169; Copyright 2017-2018 IBM.
+      Zuletzt aktualisiert am 2018/10/04.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9 erstellt.
     </div>
   </body>
 </html>
