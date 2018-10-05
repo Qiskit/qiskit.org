@@ -190,7 +190,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                   "problem": { "name": "search" },
                   "algorithm": { "name": "Grover" },
                   "oracle": { "name": "SAT", "cnf": sat_cnf },
-                  "backend": { "name": "local_qasm_simulator" }
+                  "backend": { "name": "qasm_simulator" }
                 }
 
                 result = run_algorithm(params)
@@ -267,7 +267,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
               <!-- htmlmin:ignore -->
               <template>
                 import numpy as np
-                from qiskit_aqua_chemistry import AQUAChemistry
+                from qiskit_aqua_chemistry import AquaChemistry
 
                 aqua_chemistry_dict = {
                   "driver": { "name": "PYSCF" },
@@ -295,7 +295,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
 
                 for i, d in enumerate(pts):
                   aqua_chemistry_dict["PYSCF"]["atom"] = molecule.format(d/2)
-                  solver = AQUAChemistry()
+                  solver = AquaChemistry()
                   result = solver.run(aqua_chemistry_dict)
                   energies[i] = result["energy"]
                   dipoles[i] = result["total_dipole_moment"] / 0.393430307
