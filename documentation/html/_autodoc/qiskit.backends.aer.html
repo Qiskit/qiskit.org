@@ -1,0 +1,249 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qiskit.backends.aer package &#8212; Qiskit Terra 0.6.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.backends.aer.aerjob module" href="qiskit.backends.aer.aerjob.html" />
+    <link rel="prev" title="qiskit.backends.providerutils module" href="qiskit.backends.providerutils.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+<div id="head" class="head">
+    <a href="/">QISKit</a>
+    <div class="langbox">
+        <a href="/documentation/_autodoc/qiskit.backends.aer.html">english</a> /
+        <a href="/documentation/de/_autodoc/qiskit.backends.aer.html">german</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.backends.aer.html">japanese</a>
+    </div>
+</div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.aer.aerjob.html" title="qiskit.backends.aer.aerjob module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.providerutils.html" title="qiskit.backends.providerutils module"
+             accesskey="P">previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.1 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" accesskey="U">qiskit.backends package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Logo"/>
+            </a></p>
+<p class="logo-description">Quantum Information Science Kit</p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Developer documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">Software reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.backends.html">qiskit.backends package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#submodules">Submodules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.backends.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">qiskit.backends.aer package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.aerjob.html">qiskit.backends.aer.aerjob module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.aerprovider.html">qiskit.backends.aer.aerprovider module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.qasm_simulator.html">qiskit.backends.aer.qasm_simulator module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.qasm_simulator_py.html">qiskit.backends.aer.qasm_simulator_py module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.statevector_simulator.html">qiskit.backends.aer.statevector_simulator module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.statevector_simulator_py.html">qiskit.backends.aer.statevector_simulator_py module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="qiskit.backends.aer.unitary_simulator.html">qiskit.backends.aer.unitary_simulator module</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="qiskit.backends.ibmq.html">qiskit.backends.ibmq package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.backends.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release history</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qiskit.backends.providerutils.html"
+                        title="previous chapter">qiskit.backends.providerutils module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qiskit.backends.aer.aerjob.html"
+                        title="next chapter">qiskit.backends.aer.aerjob module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autodoc/qiskit.backends.aer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qiskit.backends.aer">
+<span id="qiskit-backends-aer-package"></span><h1>qiskit.backends.aer package<a class="headerlink" href="#module-qiskit.backends.aer" title="Permalink to this headline">¶</a></h1>
+<p>Aer Backends.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.aerjob.html">qiskit.backends.aer.aerjob module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.aerprovider.html">qiskit.backends.aer.aerprovider module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.qasm_simulator.html">qiskit.backends.aer.qasm_simulator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.qasm_simulator_py.html">qiskit.backends.aer.qasm_simulator_py module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.statevector_simulator.html">qiskit.backends.aer.statevector_simulator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.statevector_simulator_py.html">qiskit.backends.aer.statevector_simulator_py module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qiskit.backends.aer.unitary_simulator.html">qiskit.backends.aer.unitary_simulator module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.backends.aer.aerjob.html#qiskit.backends.aer.aerjob.AerJob" title="qiskit.backends.aer.aerjob.AerJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">AerJob</span></code></a></td>
+<td>Aer Job class.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.backends.aer.aerprovider.html#qiskit.backends.aer.aerprovider.AerProvider" title="qiskit.backends.aer.aerprovider.AerProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">AerProvider</span></code></a></td>
+<td>Provider for aer backends.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.backends.aer.qasm_simulator.html#qiskit.backends.aer.qasm_simulator.CliffordSimulator" title="qiskit.backends.aer.qasm_simulator.CliffordSimulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">CliffordSimulator</span></code></a></td>
+<td>“C++ Clifford circuit simulator with realistic noise.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.backends.aer.qasm_simulator.html#qiskit.backends.aer.qasm_simulator.QasmSimulator" title="qiskit.backends.aer.qasm_simulator.QasmSimulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">QasmSimulator</span></code></a></td>
+<td>C++ quantum circuit simulator with realistic noise</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.backends.aer.qasm_simulator_py.html#qiskit.backends.aer.qasm_simulator_py.QasmSimulatorPy" title="qiskit.backends.aer.qasm_simulator_py.QasmSimulatorPy"><code class="xref py py-class docutils literal notranslate"><span class="pre">QasmSimulatorPy</span></code></a></td>
+<td>Python implementation of a qasm simulator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.backends.aer.statevector_simulator.html#qiskit.backends.aer.statevector_simulator.StatevectorSimulator" title="qiskit.backends.aer.statevector_simulator.StatevectorSimulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatevectorSimulator</span></code></a></td>
+<td>C++ statevector simulator</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="qiskit.backends.aer.statevector_simulator_py.html#qiskit.backends.aer.statevector_simulator_py.StatevectorSimulatorPy" title="qiskit.backends.aer.statevector_simulator_py.StatevectorSimulatorPy"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatevectorSimulatorPy</span></code></a></td>
+<td>Python statevector simulator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="qiskit.backends.aer.unitary_simulator.html#qiskit.backends.aer.unitary_simulator.UnitarySimulator" title="qiskit.backends.aer.unitary_simulator.UnitarySimulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitarySimulator</span></code></a></td>
+<td>Python implementation of a unitary simulator.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.aer.aerjob.html" title="qiskit.backends.aer.aerjob module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qiskit.backends.providerutils.html" title="qiskit.backends.providerutils module"
+             >previous</a> |</li>
+<li id="toc-toggle">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+   href=".sphinxsidebar" aria-expanded="false" aria-controls="collapseExample">
+  TOC</a> |
+</li>
+
+        <li class="nav-item nav-item-0"><a href="../index.html">Qiskit Terra 0.6.1 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="qiskit.html" >qiskit package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="qiskit.backends.html" >qiskit.backends package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017-2018 IBM.
+      Last updated on 2018/10/05.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>
