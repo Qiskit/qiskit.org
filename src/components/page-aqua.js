@@ -100,7 +100,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
               </vaadin-button>
             </a>
             <a
-                href="https://nbviewer.jupyter.org/github/QISKit/qiskit-tutorial/blob/master/index.ipynb#2.4-Working-with-QISKit-ACQUA-on-near-term-devices"
+                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb#2.4-Working-with-QISKit-ACQUA-on-near-term-devices"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
@@ -240,7 +240,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                 </vaadin-button>
               </a>
               <a
-                  href="https://nbviewer.jupyter.org/github/QISKit/qiskit-acqua-tutorials/tree/master/chemistry/"
+                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-acqua-tutorials/tree/master/chemistry/"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
