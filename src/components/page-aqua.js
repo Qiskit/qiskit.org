@@ -121,7 +121,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
             <div class="stack-list">
               <div class="element">
                 <div class="title">Aqua applications domains</div>
-                <div class="subtitle">Chemistry, AI, Optimization</div>
+                <div class="subtitle">Chemistry, AI, Optimization, Finance</div>
                 <div class="stack-list aqua-applications-domains">
                   <div class="element">
                     <div class="title">Translators</div>
