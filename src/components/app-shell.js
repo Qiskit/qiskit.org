@@ -215,7 +215,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     }
   }
 
-  _stateChanged(state) {
+  stateChanged(state) {
     this.page = state.app.page;
   }
 
