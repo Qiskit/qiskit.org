@@ -228,7 +228,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
               </vaadin-button>
             </a>
             <a
-                href="https://join.slack.com/t/qiskit/shared_invite/enQtMzYyMjY5Nzg2ODk4LTNkMWNmMjc3N2E0ZTdlNzg1Mzk4MDY4YjFlNWZmNTdmZTFkMDFmMjVjZTIxZThjMTlhMjA2MmQxYTViMzhiNzE"
+                href="https://join.slack.com/t/qiskit/shared_invite/enQtNDc2NjUzMjE4Mzc0LTMwZmE0YTM4ZThiNGJmODkzN2Y2NTNlMDIwYWNjYzA2ZmM1YTRlZGQ3OGM0NjcwMjZkZGE0MTA4MGQ1ZTVmYzk"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
