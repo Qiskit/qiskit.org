@@ -38,6 +38,17 @@ function addIbmStatsScript() {
       };
     </script>
     <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
+    <!-- Hotjar Tracking Code for ibm.com -->
+    <script>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:42920,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
   `;
 
   return src(`${buildPath}**/index.html`)
