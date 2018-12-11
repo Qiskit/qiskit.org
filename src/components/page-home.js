@@ -250,18 +250,18 @@ class PageHome extends localize(i18next)(PageViewElement) {
 
       <section class="news">
         <div class="row limited-width">
-          <div class="column vscode">
+          <div class="column">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsTerraVersionTitle')}</h3>
-              <p>${i18next.t('pages.home.newsTerraVersionDescription')}</p>
+              <h3>${i18next.t('pages.home.newsQCampTitle')}</h3>
+              <p>${i18next.t('pages.home.newsQCampDescription')}</p>
               <div class="actions">
                 <a
-                    href="https://github.com/Qiskit/qiskit-terra/releases/tag/0.6.0"
+                    href="https://qiskit.camp"
                     target="_blank"
                     rel="noopener"
                     tabindex="-1">
                   <vaadin-button theme="secondary">
-                    ${i18next.t('pages.home.newsTerraVersionButton')}
+                    ${i18next.t('pages.home.newsQCampButton')}
                   </vaadin-button>
                 </a>
               </div>
