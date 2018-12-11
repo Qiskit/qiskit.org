@@ -252,6 +252,23 @@ class PageHome extends localize(i18next)(PageViewElement) {
         <div class="row limited-width">
           <div class="column vscode">
             <div class="description">
+              <h3>Q Camp ’19</h3>
+              <p>Announcing our first community event! Join us Feb 26 - Mar 1 for an immersive three day experience of training sessions and deep technical talks at IBM Research HQ followed by a a 24-hour hackathon at a mountain resort in Vermont.</p>
+              <div class="actions">
+                <a
+                    href="https://qiskit.camp"
+                    target="_blank"
+                    rel="noopener"
+                    tabindex="-1">
+                  <vaadin-button theme="secondary">
+                    Learn more
+                  </vaadin-button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="column vscode" style="display:none;">
+            <div class="description">
               <h3>${i18next.t('pages.home.newsTerraVersionTitle')}</h3>
               <p>${i18next.t('pages.home.newsTerraVersionDescription')}</p>
               <div class="actions">
