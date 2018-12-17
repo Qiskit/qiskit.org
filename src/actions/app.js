@@ -20,6 +20,7 @@ const loadPage = page => dispatch => {
       import('../components/page-home.js').then(() => {
         import('../components/page-terra.js');
         import('../components/page-aqua.js');
+        import('../components/page-aer.js');
         import('../components/page-vscode.js');
         import('../components/page-fun.js');
       });
@@ -28,6 +29,7 @@ const loadPage = page => dispatch => {
       import('../components/page-terra.js').then(() => {
         import('../components/page-home.js');
         import('../components/page-aqua.js');
+        import('../components/page-aer.js');
         import('../components/page-vscode.js');
         import('../components/page-fun.js');
       });
@@ -36,6 +38,16 @@ const loadPage = page => dispatch => {
       import('../components/page-aqua.js').then(() => {
         import('../components/page-home.js');
         import('../components/page-terra.js');
+        import('../components/page-aer.js');
+        import('../components/page-vscode.js');
+        import('../components/page-fun.js');
+      });
+      break;
+    case 'aer':
+      import('../components/page-aer.js').then(() => {
+        import('../components/page-home.js');
+        import('../components/page-terra.js');
+        import('../components/page-aqua.js');
         import('../components/page-vscode.js');
         import('../components/page-fun.js');
       });
@@ -45,6 +57,7 @@ const loadPage = page => dispatch => {
         import('../components/page-home.js');
         import('../components/page-terra.js');
         import('../components/page-aqua.js');
+        import('../components/page-aer.js');
         import('../components/page-fun.js');
       });
       break;
@@ -53,6 +66,7 @@ const loadPage = page => dispatch => {
         import('../components/page-home.js');
         import('../components/page-terra.js');
         import('../components/page-aqua.js');
+        import('../components/page-aer.js');
         import('../components/page-vscode.js');
       });
       break;
