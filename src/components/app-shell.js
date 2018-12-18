@@ -56,6 +56,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           display: flex;
           flex-grow: 1;
           box-sizing: border-box;
+          position: relative;
         }
 
         .toolbar a {
@@ -65,6 +66,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           padding: 0 1em;
           font-weight: 300;
           color: #FFFFFF;
+          flex: none;
         }
 
         .toolbar > a.home {
@@ -138,6 +140,15 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
         footer .limited-width .language-selector span:hover {
           text-decoration: underline;
+        }
+
+        @media (max-width: 440px) {
+          .toolbar nav.second {
+            position: absolute;
+            right: 5px;
+            bottom: -30px;
+            font-size: 0.9em;
+          }
         }
       </style>
 
