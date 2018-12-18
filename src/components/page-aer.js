@@ -102,11 +102,7 @@ class PageAer extends localize(i18next)(PageViewElement) {
             <div class="stack-list">
               <div class="element">
                 <div class="title">Qobj</div>
-                <div class="stack-list">
-                  <div class="element">
-                    <div class="title">OpenQASM</div>
-                  </div>
-                </div>
+                <div class="subtitle">OpenQASM</div>
               </div>
               <div class="element">
                 <div class="title">Noise model</div>
@@ -122,13 +118,16 @@ class PageAer extends localize(i18next)(PageViewElement) {
                   </div>
                 </div>
               </div>
-              <div class="element">
-                <div class="title">Backend</div>
-                <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator</div>
-              </div>
-              <div class="element">
-                <div class="title">Provider</div>
-                <div class="subtitle">Aer</div>
+              <div class="group">
+                <div class="element">
+                  <div class="title">Backend</div>
+                  <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator</div>
+                </div>
+                <span class="separator"></span>
+                <div class="element">
+                  <div class="title">Provider</div>
+                  <div class="subtitle">Aer</div>
+                </div>
               </div>
               <div class="element">
                 <div class="title">Job</div>
