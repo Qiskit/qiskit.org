@@ -35,7 +35,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
           --qiskit-terra-color: #4CAF50;
           --qiskit-aqua-color: #03A9F4;
-          --qiskit-aer-color: #FFF59D;
+          --qiskit-aer-color: #E1F5FE;
           --qiskit-vscode-color: #F5F5F5;
 
           display: flex;
