@@ -80,6 +80,15 @@ class PageAer extends localize(i18next)(PageViewElement) {
                 GitHub
               </vaadin-button>
             </a>
+            <a
+                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb#1.3-Qiskit-Aer"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1">
+              <vaadin-button theme="secondary small">
+                ${i18next.t('tutorials')}
+              </vaadin-button>
+            </a>
           </div>
         </div>
       </header>
