@@ -9,6 +9,8 @@
 
 import { LitElement } from '@polymer/lit-element';
 
+import { i18next } from '../i18next.js';
+
 export class PageViewElement extends LitElement {
   // Only render this page if it's actually visible.
   shouldUpdate() {
@@ -19,5 +21,16 @@ export class PageViewElement extends LitElement {
     return {
       active: { type: Boolean },
     };
+  }
+
+  getDocumentationLink() {
+    const documentationLink = '/documentation';
+    const language = i18next.languages[0];
+
+    if (language && language !== 'en') {
+      return `${documentationLink}/${language}`;
+    }
+
+    return documentationLink;
   }
 }

@@ -328,7 +328,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
                 <vaadin-button theme="secondary">${i18next.t('pages.home.learnButton')}</vaadin-button>
               </a>
               <a
-                  href="/documentation/"
+                  href="${this.getDocumentationLink()}/"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
