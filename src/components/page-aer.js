@@ -80,15 +80,6 @@ class PageAer extends localize(i18next)(PageViewElement) {
                 GitHub
               </vaadin-button>
             </a>
-            <a
-                href="/documentation/aer/"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${i18next.t('documentation')}
-              </vaadin-button>
-            </a>
           </div>
         </div>
       </header>
@@ -143,7 +134,7 @@ class PageAer extends localize(i18next)(PageViewElement) {
             <p class="note">${i18next.t('pages.aer.pythonIsRequired')}</p>
             <code-sample type="bash">
               <template>
-                [python3] $ pip install qiskit-aer
+                [python3] $ pip install qiskit
               </template>
             </code-sample>
             <h3>${i18next.t('pages.aer.exampleTitle')}</h3>
