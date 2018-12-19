@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../../_static/theme.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.providers.legacysimulators.qasm_simulator &#8212; Qiskit Terra 0.7.0 documentation</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../_static/themeExt.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+        <a href="https://qiskit.org/" class="home">Qiskit Terra ™</a>
+        <nav class="first">
+        <a href="https://qiskit.org/terra">Terra</a>
+        <a href="https://qiskit.org/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a href="/documentation/_modules/qiskit/providers/legacysimulators/qasm_simulator.html">English</a> /
+        <a href="/documentation/de/_modules/qiskit/providers/legacysimulators/qasm_simulator.html">German</a> /
+        <a href="/documentation/ja/_modules/qiskit/providers/legacysimulators/qasm_simulator.html">Japanese</a>
+        <a class="external" href="https://qiskit.org/vscode">Tools</a>
+        <a class="external" href="https://qiskit.org/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <img class="logo" src="../../../../_static/qiskit-terra-logo.png" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#tools">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation and Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#setup-with-an-environment">Setup with an environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#setup-a-standalone-version">Setup a standalone version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#building-the-c-libraries">Building the C++ libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#automatically-loading-credentials">Automatically loading credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#store-api-credentials-locally">Store API credentials locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#manually-loading-credentials">Manually loading credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html">Getting Started with Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#simulating-circuits-using-qiskit-aer">Simulating circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#running-circuits-using-the-ibmq-provider">Running circuits using the IBMQ provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../the_ibmq_provider.html">The IBM Q Provider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#the-provider">The Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#filtering-the-backends">Filtering the backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#the-backend">The backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#the-job-object">The Job object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html">Plotting Data in Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#plot-histogram">Plot histogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#using-the-output-from-plot-histogram">Using the output from plot_histogram()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#interactive-histogram-plots-for-jupyter-notebooks">Interactive histogram plots for Jupyter Notebooks.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#plot-state">Plot State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#interactive-state-plots-for-jupyter-notebooks">Interactive State Plots for Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#plot-bloch-vector">Plot Bloch Vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#options-for-plot-bloch-vector">Options for plot_bloch_vector()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#adjusting-the-output-from-plot-bloch-vector">Adjusting the output from plot_bloch_vector()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quantum_circuits.html">The Quantum Circuit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#id1">Quantum Circuits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#pauli-gates">Pauli gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#bit-flip-gate"><span class="math notranslate nohighlight">\(X\)</span>: bit-flip gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#bit-and-phase-flip-gate"><span class="math notranslate nohighlight">\(Y\)</span>: bit- and phase-flip gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#phase-flip-gate"><span class="math notranslate nohighlight">\(Z\)</span>: phase-flip gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#clifford-gates">Clifford gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#hadamard-gate">Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#or-phase-gate"><span class="math notranslate nohighlight">\(S\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#or-conjugate-of-phase-gate"><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#id1"><span class="math notranslate nohighlight">\(T\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#id2"><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#rotation-around-x-axis">Rotation around X-axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#rotation-around-y-axis">Rotation around Y-axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#rotation-around-z-axis">Rotation around Z-axis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-x-or-controlled-not-gate">Controlled-X (or, controlled-NOT) gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-gate">Controlled <span class="math notranslate nohighlight">\(Y\)</span> gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-or-controlled-phase-gate">Controlled <span class="math notranslate nohighlight">\(Z\)</span> (or, controlled Phase) gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-rotation-around-z-axis">Controlled rotation around Z-axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#toffoli-gate-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#further-details">Further details:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../terra_jupyter_tools.html">Jupyter Tools for Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_jupyter_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_jupyter_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../terra_jupyter_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../terra_jupyter_tools.html#monitoring-many-jobs-simultaneously">Monitoring many jobs simultaneously</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../terra_jupyter_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_jupyter_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing to Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#contributing-to-the-project">Contributing to the project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#issue-reporting">Issue reporting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#doubts-solving">Doubts solving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#improvement-proposal">Improvement proposal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#contributor-license-agreement">Contributor License Agreement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#good-first-contributions">Good first contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#doc">Doc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#pull-requests">Pull requests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../CONTRIBUTING.html#pull-request-checklist">Pull request checklist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../CONTRIBUTING.html#commit-messages">Commit messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#code">Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#useful-cmake-flags">Useful CMake flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#test">Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#development-cycle">Development cycle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#branch-model">Branch model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#release-cycle">Release cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#what-version-should-i-use-development-or-stable">What version should I use: development or stable?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release_history.html">Release history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../release_history.html#release-notes">Release notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#qiskit-terra-0-7-0">Qiskit Terra 0.7.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#upgrading-to-0-7-0">Upgrading to 0.7.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#deprecations">Deprecations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#qiskit-terra-0-6-0">Qiskit Terra 0.6.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#upgrading-to-0-6-0">Upgrading to 0.6.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#qiskit-terra-0-5-0">Qiskit Terra 0.5.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#upgrading-to-0-5-0">Upgrading to 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../release_history.html#changelog">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id1">0.7.0 - 2018-12-19</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#added">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#changed">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#deprecated">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#fixed">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#removed">Removed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id2">0.6.0 - 2018-10-04</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id3">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id4">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id5">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id6">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id7">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id8">0.5.7 - 2018-07-19</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id9">Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id10">0.5.6 - 2018-07-06</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id11">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id12">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id13">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id14">0.5.5 - 2018-07-02</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id15">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id16">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id17">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id18">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id19">0.5.4 - 2018-06-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id20">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id21">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id22">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id23">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id24">0.5.3 - 2018-05-29</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id25">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id26">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id27">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id28">0.5.2 - 2018-05-21</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id29">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id30">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id31">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id32">0.5.1 - 2018-05-15</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id33">0.5.0 - 2018-05-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#improvements">Improvements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id34">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id35">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id36">0.4.15 - 2018-05-07</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id37">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id38">0.4.14 - 2018-04-18</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id39">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id40">0.4.13 - 2018-04-16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id41">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id42">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id43">0.4.12 - 2018-03-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id44">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id45">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id46">0.4.11 - 2018-03-13</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id47">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id48">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id49">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id50">0.4.10 - 2018-03-06</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id51">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id52">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id53">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id54">0.4.9 - 2018-02-12</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id55">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id56">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id57">0.4.8 - 2018-01-29</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id58">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id59">0.4.7 - 2018-01-26</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id60">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id61">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id62">0.4.6 - 2018-01-22</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id63">Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id64">0.4.4 - 2018-01-09</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id65">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id66">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id67">0.4.3 - 2018-01-08</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id68">Removed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id69">0.4.2 - 2018-01-08</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id70">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id71">0.4.0 - 2018-01-08</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id72">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id73">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id74">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id75">Fixed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">Terra SDK Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <img class="logo" src="../../../../_static/qiskit-terra-logo.png" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#tools">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation and Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#setup-with-an-environment">Setup with an environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#setup-a-standalone-version">Setup a standalone version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#building-the-c-libraries">Building the C++ libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#automatically-loading-credentials">Automatically loading credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#store-api-credentials-locally">Store API credentials locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../install.html#manually-loading-credentials">Manually loading credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html">Getting Started with Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#simulating-circuits-using-qiskit-aer">Simulating circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#running-circuits-using-the-ibmq-provider">Running circuits using the IBMQ provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../getting_started_with_qiskit_terra.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../the_ibmq_provider.html">The IBM Q Provider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#the-provider">The Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#filtering-the-backends">Filtering the backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#the-backend">The backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../the_ibmq_provider.html#the-job-object">The Job object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html">Plotting Data in Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#plot-histogram">Plot histogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#using-the-output-from-plot-histogram">Using the output from plot_histogram()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#interactive-histogram-plots-for-jupyter-notebooks">Interactive histogram plots for Jupyter Notebooks.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#plot-state">Plot State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#interactive-state-plots-for-jupyter-notebooks">Interactive State Plots for Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#plot-bloch-vector">Plot Bloch Vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#options-for-plot-bloch-vector">Options for plot_bloch_vector()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../plotting_data_in_qiskit.html#adjusting-the-output-from-plot-bloch-vector">Adjusting the output from plot_bloch_vector()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quantum_circuits.html">The Quantum Circuit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#id1">Quantum Circuits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#pauli-gates">Pauli gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#bit-flip-gate"><span class="math notranslate nohighlight">\(X\)</span>: bit-flip gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#bit-and-phase-flip-gate"><span class="math notranslate nohighlight">\(Y\)</span>: bit- and phase-flip gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#phase-flip-gate"><span class="math notranslate nohighlight">\(Z\)</span>: phase-flip gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#clifford-gates">Clifford gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#hadamard-gate">Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#or-phase-gate"><span class="math notranslate nohighlight">\(S\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#or-conjugate-of-phase-gate"><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#id1"><span class="math notranslate nohighlight">\(T\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#id2"><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#rotation-around-x-axis">Rotation around X-axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#rotation-around-y-axis">Rotation around Y-axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#rotation-around-z-axis">Rotation around Z-axis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-x-or-controlled-not-gate">Controlled-X (or, controlled-NOT) gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-gate">Controlled <span class="math notranslate nohighlight">\(Y\)</span> gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-or-controlled-phase-gate">Controlled <span class="math notranslate nohighlight">\(Z\)</span> (or, controlled Phase) gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-rotation-around-z-axis">Controlled rotation around Z-axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#toffoli-gate-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../summary_of_quantum_operations.html#further-details">Further details:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../terra_jupyter_tools.html">Jupyter Tools for Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_jupyter_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_jupyter_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../terra_jupyter_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../terra_jupyter_tools.html#monitoring-many-jobs-simultaneously">Monitoring many jobs simultaneously</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../terra_jupyter_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_jupyter_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing to Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#contributing-to-the-project">Contributing to the project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#issue-reporting">Issue reporting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#doubts-solving">Doubts solving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#improvement-proposal">Improvement proposal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#contributor-license-agreement">Contributor License Agreement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#good-first-contributions">Good first contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#doc">Doc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#pull-requests">Pull requests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../CONTRIBUTING.html#pull-request-checklist">Pull request checklist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../CONTRIBUTING.html#commit-messages">Commit messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#code">Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#useful-cmake-flags">Useful CMake flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#test">Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#development-cycle">Development cycle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#branch-model">Branch model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#release-cycle">Release cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../CONTRIBUTING.html#what-version-should-i-use-development-or-stable">What version should I use: development or stable?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../CONTRIBUTING.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release_history.html">Release history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../release_history.html#release-notes">Release notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#qiskit-terra-0-7-0">Qiskit Terra 0.7.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#upgrading-to-0-7-0">Upgrading to 0.7.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#deprecations">Deprecations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#qiskit-terra-0-6-0">Qiskit Terra 0.6.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#upgrading-to-0-6-0">Upgrading to 0.6.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#qiskit-terra-0-5-0">Qiskit Terra 0.5.0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#upgrading-to-0-5-0">Upgrading to 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../release_history.html#changelog">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id1">0.7.0 - 2018-12-19</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#added">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#changed">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#deprecated">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#fixed">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#removed">Removed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id2">0.6.0 - 2018-10-04</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id3">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id4">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id5">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id6">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id7">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id8">0.5.7 - 2018-07-19</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id9">Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id10">0.5.6 - 2018-07-06</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id11">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id12">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id13">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id14">0.5.5 - 2018-07-02</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id15">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id16">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id17">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id18">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id19">0.5.4 - 2018-06-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id20">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id21">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id22">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id23">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id24">0.5.3 - 2018-05-29</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id25">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id26">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id27">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id28">0.5.2 - 2018-05-21</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id29">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id30">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id31">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id32">0.5.1 - 2018-05-15</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id33">0.5.0 - 2018-05-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#improvements">Improvements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id34">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id35">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id36">0.4.15 - 2018-05-07</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id37">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id38">0.4.14 - 2018-04-18</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id39">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id40">0.4.13 - 2018-04-16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id41">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id42">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id43">0.4.12 - 2018-03-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id44">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id45">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id46">0.4.11 - 2018-03-13</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id47">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id48">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id49">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id50">0.4.10 - 2018-03-06</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id51">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id52">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id53">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id54">0.4.9 - 2018-02-12</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id55">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id56">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id57">0.4.8 - 2018-01-29</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id58">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id59">0.4.7 - 2018-01-26</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id60">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id61">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id62">0.4.6 - 2018-01-22</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id63">Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id64">0.4.4 - 2018-01-09</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id65">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id66">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id67">0.4.3 - 2018-01-08</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id68">Removed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id69">0.4.2 - 2018-01-08</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id70">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../release_history.html#id71">0.4.0 - 2018-01-08</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id72">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id73">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id74">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../release_history.html#id75">Fixed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../_autodoc/qiskit.html">Terra SDK Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../_autodoc/qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../_autodoc/qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../_autodoc/qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.providers.legacysimulators.qasm_simulator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Interface to C++ quantum circuit simulator with realistic noise.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">PIPE</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseBackend</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.builtinsimulators.simulatorsjob</span> <span class="k">import</span> <span class="n">SimulatorsJob</span>
+<span class="kn">from</span> <span class="nn">qiskit.result</span> <span class="k">import</span> <span class="n">Result</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">EXTENSION</span> <span class="o">=</span> <span class="s1">&#39;.exe&#39;</span> <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># Add path to compiled qasm simulator</span>
+<span class="n">DEFAULT_SIMULATOR_PATHS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># This is the path where Makefile creates the simulator by default</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span>
+                                 <span class="s1">&#39;../../../out/src/qasm-simulator-cpp/qasm_simulator_cpp&#39;</span>
+                                 <span class="o">+</span> <span class="n">EXTENSION</span><span class="p">)),</span>
+    <span class="c1"># This is the path where PIP installs the simulator</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span>
+                                 <span class="s1">&#39;qasm_simulator_cpp&#39;</span> <span class="o">+</span> <span class="n">EXTENSION</span><span class="p">)),</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="QasmSimulator"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.QasmSimulator">[docs]</a><span class="k">class</span> <span class="nc">QasmSimulator</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;C++ quantum circuit simulator with realistic noise&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULT_CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;backend_name&#39;</span><span class="p">:</span> <span class="s1">&#39;qasm_simulator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;backend_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;n_qubits&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">local_hardware_info</span><span class="p">()[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">16</span><span class="p">)),</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/Qiskit/qiskit-terra/src/qasm-simulator-cpp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;conditional&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;open_pulse&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;max_shots&#39;</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A C++ realistic noise simulator for qasm experiments&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;u0&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;tdg&#39;</span><span class="p">,</span> <span class="s1">&#39;rzz&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="s1">&#39;wait&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;noise&#39;</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u0&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gamma&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u0(gamma) q { U(0,0,0) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u1(lambda) q { U(0,0,lambda) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u3(theta,phi,lambda) q { U(theta,phi,lambda) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate cx c,t { CX c,t; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;cz&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate cz a,b { h b; cx a,b; h b; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate id a { U(0,0,0) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate x a { u3(pi,0,pi) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate y a { u3(pi,pi/2,pi/2) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate z a { u1(pi) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate h a { u2(0,pi) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate s a { u1(pi/2) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate sdg a { u1(-pi/2) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate t a { u1(pi/4) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;tdg&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate tdg a { u1(-pi/4) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;rzz&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate rzz(theta) a,b { cx a,b; u1(theta) b; cx a,b; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;slot&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate snapshot(slot) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;wait&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate wait(t) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;noise&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;switch&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate noise(switch) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;slot&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate save(slot) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;slot&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate load(slot) q { TODO }&#39;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="p">(</span><span class="n">configuration</span> <span class="ow">or</span>
+                                        <span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">)),</span>
+                         <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
+
+        <span class="c1"># Try to use the default executable if not specified.</span>
+        <span class="k">if</span> <span class="s1">&#39;exe&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">:</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">exe</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="n">DEFAULT_SIMULATOR_PATHS</span>
+
+        <span class="c1"># Ensure that the executable is available.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">exe</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+                <span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span> <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span>
+                                           <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Simulator executable not found (using </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span>
+                                    <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">,</span> <span class="s1">&#39;exe&#39;</span><span class="p">,</span> <span class="s1">&#39;default locations&#39;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="QasmSimulator.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.QasmSimulator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a qobj on the backend.&quot;&quot;&quot;</span>
+        <span class="n">job_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="n">job</span> <span class="o">=</span> <span class="n">SimulatorsJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span>
+        <span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">job</span></div>
+
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a Qobj on the backend.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+        <span class="n">qobj_dict</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">qobj_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">exe</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;job_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job_id</span>
+
+        <span class="c1"># Ensure that the required results fields are present, even if the</span>
+        <span class="c1"># job failed.</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;qobj_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;qobj_id&#39;</span><span class="p">,</span> <span class="s1">&#39;unavailable&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;backend_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend_name&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;backend_version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend_version&#39;</span><span class="p">,</span>
+                                               <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">backend_version</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;measure&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span>
+                                 <span class="n">op</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;no measurements in circuit &#39;</span><span class="si">%s</span><span class="s2">&#39;, &quot;</span>
+                               <span class="s2">&quot;classical register will remain all zeros.&quot;</span><span class="p">,</span>
+                               <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CliffordSimulator"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.CliffordSimulator">[docs]</a><span class="k">class</span> <span class="nc">CliffordSimulator</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;C++ Clifford circuit simulator with realistic noise.&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULT_CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;backend_name&#39;</span><span class="p">:</span> <span class="s1">&#39;clifford_simulator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;backend_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;n_qubits&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">local_hardware_info</span><span class="p">()[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">16</span><span class="p">)),</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/Qiskit/qiskit-terra/src/qasm-simulator-cpp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;conditional&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;open_pulse&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;max_shots&#39;</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A C++ Clifford simulator with approximate noise&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;wait&#39;</span><span class="p">,</span> <span class="s1">&#39;noise&#39;</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate cx c,t { CX c,t; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate id a { U(0,0,0) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate x a { u3(pi,0,pi) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate y a { u3(pi,pi/2,pi/2) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate z a { u1(pi) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate h a { u2(0,pi) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate s a { u1(pi/2) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate sdg a { u1(-pi/2) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;slot&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate snapshot(slot) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;wait&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate wait(t) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;noise&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;switch&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate noise(switch) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;slot&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate save(slot) q { TODO }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;slot&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate load(slot) q { TODO }&#39;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="p">(</span><span class="n">configuration</span> <span class="ow">or</span>
+                                        <span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">)),</span>
+                         <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
+
+        <span class="c1"># Try to use the default executable if not specified.</span>
+        <span class="k">if</span> <span class="s1">&#39;exe&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">:</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">exe</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="n">DEFAULT_SIMULATOR_PATHS</span>
+
+        <span class="c1"># Ensure that the executable is available.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">exe</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+                <span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span> <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span>
+                                           <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Simulator executable not found (using </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span>
+                                    <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">,</span> <span class="s1">&#39;exe&#39;</span><span class="p">,</span> <span class="s1">&#39;default locations&#39;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="CliffordSimulator.run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.CliffordSimulator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run a Qobj on the backend.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qobj (dict): job description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            SimulatorsJob: derived from BaseJob</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">job_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="n">job</span> <span class="o">=</span> <span class="n">SimulatorsJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span>
+        <span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">job</span></div>
+
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="n">qobj_dict</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+        <span class="c1"># set backend to Clifford simulator</span>
+        <span class="k">if</span> <span class="s1">&#39;config&#39;</span> <span class="ow">in</span> <span class="n">qobj_dict</span><span class="p">:</span>
+            <span class="n">qobj_dict</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">][</span><span class="s1">&#39;simulator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;clifford&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">qobj_dict</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="s1">&#39;clifford&#39;</span><span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">qobj_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">exe</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;job_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job_id</span>
+
+        <span class="c1"># Ensure that the required results fields are present, even if the</span>
+        <span class="c1"># job failed.</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;qobj_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;qobj_id&#39;</span><span class="p">,</span> <span class="s1">&#39;unavailable&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;backend_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend_name&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;backend_version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend_version&#39;</span><span class="p">,</span>
+                                               <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">backend_version</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">executable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run simulation on C++ simulator inside a subprocess.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        qobj (Qobj): qobj dictionary defining the simulation to run</span>
+<span class="sd">        executable (string): filename (with path) of the simulator executable</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dict of simulation results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Open subprocess and execute external command</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="n">executable</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">],</span>
+                              <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
+            <span class="n">cin</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+            <span class="n">cout</span><span class="p">,</span> <span class="n">cerr</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">cin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cerr</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;ERROR: Simulator encountered a runtime error: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                         <span class="n">cerr</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+        <span class="n">sim_output</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">sim_output</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;ERROR: Simulator exe not found at: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">executable</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">msg</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="cx_error_matrix"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.cx_error_matrix">[docs]</a><span class="k">def</span> <span class="nf">cx_error_matrix</span><span class="p">(</span><span class="n">cal_error</span><span class="p">,</span> <span class="n">zz_error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the coherent error matrix for CR error model of a CNOT gate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cal_error (double): calibration error of rotation</span>
+<span class="sd">        zz_error (double): ZZ interaction term error</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: A coherent error matrix U_error for the CNOT gate.</span>
+
+<span class="sd">    Details:</span>
+
+<span class="sd">    The ideal cross-resonsance (CR) gate corresponds to a 2-qubit rotation</span>
+<span class="sd">        U_CR_ideal = exp(-1j * (pi/2) * XZ/2)</span>
+
+<span class="sd">    where qubit-0 is the control, and qubit-1 is the target. This can be</span>
+<span class="sd">    converted to a CNOT gate by single-qubit rotations::</span>
+
+<span class="sd">        U_CX = U_L * U_CR_ideal * U_R</span>
+
+<span class="sd">    The noisy rotation is implemented as</span>
+<span class="sd">        U_CR_noise = exp(-1j * (pi/2 + cal_error) * (XZ + zz_error ZZ)/2)</span>
+
+<span class="sd">    The retured error matrix is given by</span>
+<span class="sd">        U_error = U_L * U_CR_noise * U_R * U_CX^dagger</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">if</span> <span class="n">cal_error</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">zz_error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">cx_ideal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">zz_error</span> <span class="o">*</span> <span class="n">zz_error</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">cal_error</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">zz_error</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="n">sm</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">zz_error</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">cx_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span> <span class="o">+</span> <span class="n">sm</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">sm</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">sm</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">sm</span><span class="p">],</span>
+                         <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">sp</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">sp</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">sp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">sp</span><span class="p">)]])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cx_noise</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cx_ideal</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="x90_error_matrix"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator.x90_error_matrix">[docs]</a><span class="k">def</span> <span class="nf">x90_error_matrix</span><span class="p">(</span><span class="n">cal_error</span><span class="p">,</span> <span class="n">detuning_error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the coherent error matrix for a X90 rotation gate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cal_error (double): calibration error of rotation</span>
+<span class="sd">        detuning_error (double): detuning amount for rotation axis error</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: A coherent error matrix U_error for the X90 gate.</span>
+
+<span class="sd">    Details:</span>
+
+<span class="sd">    The ideal X90 rotation is a pi/2 rotation about the X-axis:</span>
+<span class="sd">        U_X90_ideal = exp(-1j (pi/2) X/2)</span>
+
+<span class="sd">    The noisy rotation is implemented as</span>
+<span class="sd">        U_X90_noise = exp(-1j (pi/2 + cal_error) (cos(d) X + sin(d) Y)/2)</span>
+
+<span class="sd">    where d is the detuning_error.</span>
+
+<span class="sd">    The retured error matrix is given by</span>
+<span class="sd">        U_error = U_X90_noise * U_X90_ideal^dagger</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">if</span> <span class="n">cal_error</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">detuning_error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x90_ideal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">cal_error</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">cal_error</span><span class="p">)</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">detuning_error</span><span class="p">)</span>
+        <span class="n">x90_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span> <span class="o">-</span> <span class="n">s</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">],</span>
+                              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">gamma</span><span class="p">),</span> <span class="n">c</span> <span class="o">-</span> <span class="n">s</span><span class="p">]])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x90_noise</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x90_ideal</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_generate_coherent_error_matrix"><a class="viewcode-back" href="../../../../_autodoc/qiskit.providers.legacysimulators.qasm_simulator.html#qiskit.providers.legacysimulators.qasm_simulator._generate_coherent_error_matrix">[docs]</a><span class="k">def</span> <span class="nf">_generate_coherent_error_matrix</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate U_error matrix for CX and X90 gates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (dict): the config of a qobj circuit</span>
+
+<span class="sd">    This parses the config for the following noise parameter keys and returns a</span>
+<span class="sd">    coherent error matrix for simulation coherent noise::</span>
+
+<span class="sd">        * &#39;CX&#39; gate: &#39;calibration_error&#39;, &#39;zz_error&#39;</span>
+<span class="sd">        * &#39;X90&#39; gate: &#39;calibration_error&#39;, &#39;detuning_error&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">if</span> <span class="s1">&#39;noise_params&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+        <span class="c1"># Check for CR coherent error parameters</span>
+        <span class="k">if</span> <span class="s1">&#39;CX&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_params&#39;</span><span class="p">]:</span>
+            <span class="n">noise_cx</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_params&#39;</span><span class="p">][</span><span class="s1">&#39;CX&#39;</span><span class="p">]</span>
+            <span class="n">cal_error</span> <span class="o">=</span> <span class="n">noise_cx</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;calibration_error&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">zz_error</span> <span class="o">=</span> <span class="n">noise_cx</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;zz_error&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># Add to current coherent error matrix</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">cal_error</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">zz_error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">u_error</span> <span class="o">=</span> <span class="n">noise_cx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;U_error&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+                <span class="n">u_error</span> <span class="o">=</span> <span class="n">u_error</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cx_error_matrix</span><span class="p">(</span><span class="n">cal_error</span><span class="p">,</span> <span class="n">zz_error</span><span class="p">))</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_params&#39;</span><span class="p">][</span><span class="s1">&#39;CX&#39;</span><span class="p">][</span><span class="s1">&#39;U_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_error</span>
+        <span class="c1"># Check for X90 coherent error parameters</span>
+        <span class="k">if</span> <span class="s1">&#39;X90&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_params&#39;</span><span class="p">]:</span>
+            <span class="n">noise_x90</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_params&#39;</span><span class="p">][</span><span class="s1">&#39;X90&#39;</span><span class="p">]</span>
+            <span class="n">cal_error</span> <span class="o">=</span> <span class="n">noise_x90</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;calibration_error&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">detuning_error</span> <span class="o">=</span> <span class="n">noise_x90</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;detuning_error&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># Add to current coherent error matrix</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">cal_error</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">detuning_error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">u_error</span> <span class="o">=</span> <span class="n">noise_x90</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;U_error&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="n">u_error</span> <span class="o">=</span> <span class="n">u_error</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x90_error_matrix</span><span class="p">(</span><span class="n">cal_error</span><span class="p">,</span>
+                                                       <span class="n">detuning_error</span><span class="p">))</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_params&#39;</span><span class="p">][</span><span class="s1">&#39;X90&#39;</span><span class="p">][</span><span class="s1">&#39;U_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_error</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

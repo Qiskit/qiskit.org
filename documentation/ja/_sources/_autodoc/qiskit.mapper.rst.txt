@@ -26,6 +26,8 @@ qiskit.mapper package
 
     .. list-table::
     
+       * - :exc:`CouplingError <qiskit.mapper._couplingerror.CouplingError>`
+         - Base class for errors raised by the coupling graph object.
        * - :exc:`MapperError <qiskit.mapper._mappererror.MapperError>`
          - Base class for errors raised by mapper module.
     
@@ -36,8 +38,10 @@ qiskit.mapper package
 
     .. list-table::
     
-       * - :class:`Coupling <qiskit.mapper._coupling.Coupling>`
+       * - :class:`CouplingMap <qiskit.mapper._coupling.CouplingMap>`
          - Directed graph specifying fixed coupling.
+       * - :class:`Layout <qiskit.mapper._layout.Layout>`
+         - Two-ways dict to represent a Layout.
     
 
 
@@ -49,22 +53,8 @@ qiskit.mapper package
 
     .. list-table::
     
-       * - :func:`coupling_dict2list <qiskit.mapper._coupling.coupling_dict2list>`
-         - Convert coupling map dictionary into list.
-       * - :func:`coupling_list2dict <qiskit.mapper._coupling.coupling_list2dict>`
-         - Convert coupling map list into dictionary.
-       * - :func:`cx_cancellation <qiskit.mapper._mapping.cx_cancellation>`
-         - Cancel back-to-back "cx" gates in circuit.
-       * - :func:`direction_mapper <qiskit.mapper._mapping.direction_mapper>`
-         - Change the direction of CNOT gates to conform to CouplingGraph.
        * - :func:`euler_angles_1q <qiskit.mapper._compiling.euler_angles_1q>`
          - Compute Euler angles for a single-qubit gate.
-       * - :func:`optimize_1q_gates <qiskit.mapper._mapping.optimize_1q_gates>`
-         - Simplify runs of single qubit gates in the QX basis.
-       * - :func:`remove_last_measurements <qiskit.mapper._mapping.remove_last_measurements>`
-         - Removes all measurements that occur as the last operation on a given qubit for a DAG circuit.
-       * - :func:`return_last_measurements <qiskit.mapper._mapping.return_last_measurements>`
-         - Returns the measurements to a quantum circuit, removed by `remove_last_measurements` after the swap mapper is finished.
        * - :func:`swap_mapper <qiskit.mapper._mapping.swap_mapper>`
          - Map a DAGCircuit onto a CouplingGraph using swap gates.
        * - :func:`two_qubit_kak <qiskit.mapper._compiling.two_qubit_kak>`

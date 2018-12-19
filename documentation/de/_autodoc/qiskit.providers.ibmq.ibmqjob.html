@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.providers.ibmq.ibmqjob module &#8212; Qiskit Terra 0.7.0 Dokumentation</title>
+
+    <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/themeExt.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="qiskit.providers.ibmq.ibmqprovider module" href="qiskit.providers.ibmq.ibmqprovider.html" />
+    <link rel="prev" title="qiskit.providers.ibmq.ibmqbackend module" href="qiskit.providers.ibmq.ibmqbackend.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+        <a href="https://qiskit.org/" class="home">Qiskit Terra ™</a>
+        <nav class="first">
+        <a href="https://qiskit.org/terra">Terra</a>
+        <a href="https://qiskit.org/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a href="/documentation/_autodoc/qiskit.providers.ibmq.ibmqjob.html">English</a> /
+        <a href="/documentation/de/_autodoc/qiskit.providers.ibmq.ibmqjob.html">German</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.providers.ibmq.ibmqjob.html">Japanese</a>
+        <a class="external" href="https://qiskit.org/vscode">Tools</a>
+        <a class="external" href="https://qiskit.org/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Inhalt</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#abhangigkeiten">1. Abhängigkeiten</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id1">2. Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#api-token-und-qe-anmeldedaten-konfigurieren">3. API Token und QE Anmeldedaten konfigurieren</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#jupyter-basierte-tutorials-installieren">Jupyter basierte Tutorials installieren</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#problembehebung">Problembehebung</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#quantum-chips">Quantum Chips</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#beispiel-fur-ein-reales-chip-backend">Beispiel für ein reales Chip Backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#beispiel-fur-ein-reales-chip-backend-uber-ibmq">Beispiel für ein reales Chip Backend über IBMQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#verwenden-des-hpc-online-backends">Verwenden des HPC Online Backends</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#projekt-organisation">Projekt Organisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit Überblick</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#philosophie">Philosophie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#projekt-ubersicht">Projekt Übersicht</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#programmierschnittstelle">Programmierschnittstelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#interne-module">Interne Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#protokollierung">Protokollierung</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#testen">Testen</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK Referenz</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Inhalt</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#abhangigkeiten">1. Abhängigkeiten</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id1">2. Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#api-token-und-qe-anmeldedaten-konfigurieren">3. API Token und QE Anmeldedaten konfigurieren</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#jupyter-basierte-tutorials-installieren">Jupyter basierte Tutorials installieren</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#problembehebung">Problembehebung</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Erste Schritte</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#quantum-chips">Quantum Chips</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#beispiel-fur-ein-reales-chip-backend">Beispiel für ein reales Chip Backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#beispiel-fur-ein-reales-chip-backend-uber-ibmq">Beispiel für ein reales Chip Backend über IBMQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#verwenden-des-hpc-online-backends">Verwenden des HPC Online Backends</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#projekt-organisation">Projekt Organisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit Überblick</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#philosophie">Philosophie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#projekt-ubersicht">Projekt Übersicht</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">Entwickler Dokumentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#programmierschnittstelle">Programmierschnittstelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#interne-module">Interne Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#protokollierung">Protokollierung</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#testen">Testen</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDK Referenz</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="module-qiskit.providers.ibmq.ibmqjob">
+<span id="qiskit-providers-ibmq-ibmqjob-module"></span><h1>qiskit.providers.ibmq.ibmqjob module<a class="headerlink" href="#module-qiskit.providers.ibmq.ibmqjob" title="Link zu dieser Überschrift">¶</a></h1>
+<p>IBMQJob module</p>
+<p>This module is used for creating asynchronous job objects for the
+IBM Q Experience.</p>
+<div class="section" id="members">
+<h2>Members<a class="headerlink" href="#members" title="Link zu dieser Überschrift">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link zu dieser Überschrift">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.ibmqjob.IBMQJob"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMQJob</span></code></a></td>
+<td>Represent the jobs that will be executed on IBM-Q simulators and real devices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob.IBMQJobPreQobj" title="qiskit.providers.ibmq.ibmqjob.IBMQJobPreQobj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMQJobPreQobj</span></code></a></td>
+<td>Subclass of IBMQJob for handling pre-qobj jobs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link zu dieser Überschrift">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob._create_api_job_from_circuit" title="qiskit.providers.ibmq.ibmqjob._create_api_job_from_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_create_api_job_from_circuit</span></code></a></td>
+<td>Helper function that creates a special job required by the API, from a circuit.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob._format_hpc_parameters" title="qiskit.providers.ibmq.ibmqjob._format_hpc_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_format_hpc_parameters</span></code></a></td>
+<td>Helper function to get HPC parameters with the correct format</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob._is_job_queued" title="qiskit.providers.ibmq.ibmqjob._is_job_queued"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_is_job_queued</span></code></a></td>
+<td>Checks whether a job has been queued or not.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob._numpy_type_converter" title="qiskit.providers.ibmq.ibmqjob._numpy_type_converter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_numpy_type_converter</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob._reorder_bits" title="qiskit.providers.ibmq.ibmqjob._reorder_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_reorder_bits</span></code></a></td>
+<td>Temporary fix for ibmq backends.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link zu dieser Überschrift">¶</a></h2>
+<dl class="class">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob">
+<em class="property">class </em><code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">IBMQJob</code><span class="sig-paren">(</span><em>backend</em>, <em>job_id</em>, <em>api</em>, <em>is_device</em>, <em>qobj=None</em>, <em>creation_date=None</em>, <em>api_status=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.providers.basejob.html#qiskit.providers.basejob.BaseJob" title="qiskit.providers.basejob.BaseJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.basejob.BaseJob</span></code></a></p>
+<p>Represent the jobs that will be executed on IBM-Q simulators and real
+devices. Jobs are intended to be created calling <code class="docutils literal notranslate"><span class="pre">run()</span></code> on a particular
+backend.</p>
+<p>Creating a <code class="docutils literal notranslate"><span class="pre">Job</span></code> instance does not imply running it. You need to do it in
+separate steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span> <span class="c1"># It won&#39;t block.</span>
+</pre></div>
+</div>
+<p>An error while submitting a job will cause the next call to <code class="docutils literal notranslate"><span class="pre">status()</span></code> to
+raise. If submitting the job successes, you can inspect the job’s status by
+using <code class="docutils literal notranslate"><span class="pre">status()</span></code>. Status can be one of <code class="docutils literal notranslate"><span class="pre">JobStatus</span></code> members:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.backends.jobstatus</span> <span class="k">import</span> <span class="n">JobStatus</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">job_status</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="c1"># It won&#39;t block. It will query the backend API.</span>
+    <span class="k">if</span> <span class="n">job_status</span> <span class="ow">is</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The job is still running&#39;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">JobError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something wrong happened!: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>A call to <code class="docutils literal notranslate"><span class="pre">status()</span></code> can raise if something happens at the API level that
+prevents Qiskit from determining the status of the job. An example of this
+is a temporary connection lose or a network failure.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">submit()</span></code> and <code class="docutils literal notranslate"><span class="pre">status()</span></code> methods are examples of non-blocking API.
+<code class="docutils literal notranslate"><span class="pre">Job</span></code> instances also have <cite>id()</cite> and <code class="docutils literal notranslate"><span class="pre">result()</span></code> methods which will
+block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">job_id</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="c1"># It will block until completing submission.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The job </span><span class="si">{}</span><span class="s1"> was successfully submitted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
+
+    <span class="n">job_result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="c1"># It will block until finishing.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The job finished with result </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_result</span><span class="p">))</span>
+
+<span class="k">except</span> <span class="n">JobError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something wrong happened!: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Both methods can raise if something ath the API level happens that prevent
+Qiskit from determining the status of the job.</p>
+<div class="admonition note">
+<p class="first admonition-title">Bemerkung</p>
+<p>When querying the API for getting the status, two kinds of errors are
+possible. The most severe is the one preventing Qiskit from getting a
+response from the backend. This can be caused by a network failure or a
+temporary system break. In these cases, calling <code class="docutils literal notranslate"><span class="pre">status()</span></code> will raise.</p>
+<p class="last">If Qiskit successfully retrieves the status of a job, it could be it
+finished with errors. In that case, <code class="docutils literal notranslate"><span class="pre">status()</span></code> will simply return
+<code class="docutils literal notranslate"><span class="pre">JobStatus.ERROR</span></code> and you can call <code class="docutils literal notranslate"><span class="pre">error_message()</span></code> to get more
+info.</p>
+</div>
+<dl class="attribute">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob._executor">
+<code class="descname">_executor</code><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob._executor" title="Link zu dieser Definition">¶</a></dt>
+<dd><p><em>futures.Executor</em> – executor to handle asynchronous jobs</p>
+</dd></dl>
+
+<p>IBMQJob init function.</p>
+<p>We can instantiate jobs from two sources: A QObj, and an already submitted job returned by
+the API servers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
+<li><strong>backend</strong> (<em>str</em>) – The backend instance used to run this job.</li>
+<li><strong>job_id</strong> (<em>str</em>) – The job ID of an already submitted job. Pass <cite>None</cite>
+if you are creating a new one.</li>
+<li><strong>api</strong> (<a class="reference internal" href="qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector" title="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector"><em>IBMQConnector</em></a>) – IBMQ connector.</li>
+<li><strong>is_device</strong> (<em>bool</em>) – whether backend is a real device  # TODO: remove this after Qobj</li>
+<li><strong>qobj</strong> (<a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj"><em>Qobj</em></a>) – The Quantum Object. See notes below</li>
+<li><strong>creation_date</strong> (<em>str</em>) – When the job was run.</li>
+<li><strong>api_status</strong> (<em>str</em>) – <cite>status</cite> field directly from the API response.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>It is mandatory to pass either <code class="docutils literal notranslate"><span class="pre">qobj</span></code> or <code class="docutils literal notranslate"><span class="pre">job_id</span></code>. Passing a <code class="docutils literal notranslate"><span class="pre">qobj</span></code>
+will ignore <code class="docutils literal notranslate"><span class="pre">job_id</span></code> and will create an instance to be submitted to the
+API server for job creation. Passing only a <cite>job_id</cite> will create an instance
+representing an already-created job retrieved from the API server.</p>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>backend</em>, <em>job_id</em>, <em>api</em>, <em>is_device</em>, <em>qobj=None</em>, <em>creation_date=None</em>, <em>api_status=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.__init__"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.__init__" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>IBMQJob init function.</p>
+<p>We can instantiate jobs from two sources: A QObj, and an already submitted job returned by
+the API servers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
+<li><strong>backend</strong> (<em>str</em>) – The backend instance used to run this job.</li>
+<li><strong>job_id</strong> (<em>str</em>) – The job ID of an already submitted job. Pass <cite>None</cite>
+if you are creating a new one.</li>
+<li><strong>api</strong> (<a class="reference internal" href="qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector" title="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector"><em>IBMQConnector</em></a>) – IBMQ connector.</li>
+<li><strong>is_device</strong> (<em>bool</em>) – whether backend is a real device  # TODO: remove this after Qobj</li>
+<li><strong>qobj</strong> (<a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj"><em>Qobj</em></a>) – The Quantum Object. See notes below</li>
+<li><strong>creation_date</strong> (<em>str</em>) – When the job was run.</li>
+<li><strong>api_status</strong> (<em>str</em>) – <cite>status</cite> field directly from the API response.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>It is mandatory to pass either <code class="docutils literal notranslate"><span class="pre">qobj</span></code> or <code class="docutils literal notranslate"><span class="pre">job_id</span></code>. Passing a <code class="docutils literal notranslate"><span class="pre">qobj</span></code>
+will ignore <code class="docutils literal notranslate"><span class="pre">job_id</span></code> and will create an instance to be submitted to the
+API server for job creation. Passing only a <cite>job_id</cite> will create an instance
+representing an already-created job retrieved from the API server.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.cancel">
+<code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.cancel"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.cancel" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Attempt to cancel a job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">True if job can be cancelled, else False. Currently this is
+only possible on commercial systems.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – if there was some unexpected failure in the server</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.creation_date">
+<code class="descname">creation_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.creation_date"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.creation_date" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return creation date.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.error_message">
+<code class="descname">error_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.error_message"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.error_message" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the error message returned from the API server response.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.job_id">
+<code class="descname">job_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.job_id"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.job_id" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return backend determined id.</p>
+<p>If the Id is not set because the job is already initializing, this call
+will block until we have an Id.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.qobj">
+<code class="descname">qobj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.qobj"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.qobj" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the Qobj submitted for this job.</p>
+<p>Note that this method might involve querying the API for results if the
+Job has been created in a previous Qiskit session.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">the Qobj submitted for this job.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj">Qobj</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.queue_position">
+<code class="descname">queue_position</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.queue_position"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.queue_position" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the position in the server queue.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">Position in the queue.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><a class="reference internal" href="qiskit.validation.fields.html#qiskit.validation.fields.Number" title="qiskit.validation.fields.Number">Number</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.result">
+<code class="descname">result</code><span class="sig-paren">(</span><em>timeout=None</em>, <em>wait=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.result"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.result" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the result from the job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>timeout</strong> (<em>int</em>) – number of seconds to wait for job</li>
+<li><strong>wait</strong> (<em>int</em>) – time between queries to IBM Q server</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">Result object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first">qiskit.Result</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – exception raised during job initialization</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.status">
+<code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.status"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.status" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Query the API to update the status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">The status of the job, once updated.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">qiskit.providers.JobStatus</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – if there was an exception in the future being executed
+or the server sent an unknown answer.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.submit"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.submit" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Submit job to IBM-Q.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – If we have already submitted the job.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJobPreQobj">
+<em class="property">class </em><code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">IBMQJobPreQobj</code><span class="sig-paren">(</span><em>backend</em>, <em>job_id</em>, <em>api</em>, <em>is_device</em>, <em>qobj=None</em>, <em>creation_date=None</em>, <em>api_status=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJobPreQobj"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJobPreQobj" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.ibmqjob.IBMQJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.ibmqjob.IBMQJob</span></code></a></p>
+<p>Subclass of IBMQJob for handling pre-qobj jobs.</p>
+<p>IBMQJob init function.</p>
+<p>We can instantiate jobs from two sources: A QObj, and an already submitted job returned by
+the API servers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first last simple">
+<li><strong>backend</strong> (<em>str</em>) – The backend instance used to run this job.</li>
+<li><strong>job_id</strong> (<em>str</em>) – The job ID of an already submitted job. Pass <cite>None</cite>
+if you are creating a new one.</li>
+<li><strong>api</strong> (<a class="reference internal" href="qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector" title="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector"><em>IBMQConnector</em></a>) – IBMQ connector.</li>
+<li><strong>is_device</strong> (<em>bool</em>) – whether backend is a real device  # TODO: remove this after Qobj</li>
+<li><strong>qobj</strong> (<a class="reference internal" href="qiskit.qobj._qobj.html#qiskit.qobj._qobj.Qobj" title="qiskit.qobj._qobj.Qobj"><em>Qobj</em></a>) – The Quantum Object. See notes below</li>
+<li><strong>creation_date</strong> (<em>str</em>) – When the job was run.</li>
+<li><strong>api_status</strong> (<em>str</em>) – <cite>status</cite> field directly from the API response.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>It is mandatory to pass either <code class="docutils literal notranslate"><span class="pre">qobj</span></code> or <code class="docutils literal notranslate"><span class="pre">job_id</span></code>. Passing a <code class="docutils literal notranslate"><span class="pre">qobj</span></code>
+will ignore <code class="docutils literal notranslate"><span class="pre">job_id</span></code> and will create an instance to be submitted to the
+API server for job creation. Passing only a <cite>job_id</cite> will create an instance
+representing an already-created job retrieved from the API server.</p>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJobPreQobj.qobj">
+<code class="descname">qobj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJobPreQobj.qobj"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJobPreQobj.qobj" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Return the Qobj submitted for this job.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.ibmqjob._create_api_job_from_circuit">
+<code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">_create_api_job_from_circuit</code><span class="sig-paren">(</span><em>circuit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#_create_api_job_from_circuit"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob._create_api_job_from_circuit" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Helper function that creates a special job required by the API, from a circuit.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.ibmqjob._format_hpc_parameters">
+<code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">_format_hpc_parameters</code><span class="sig-paren">(</span><em>hpc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#_format_hpc_parameters"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob._format_hpc_parameters" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Helper function to get HPC parameters with the correct format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.ibmqjob._is_job_queued">
+<code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">_is_job_queued</code><span class="sig-paren">(</span><em>api_job_response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#_is_job_queued"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob._is_job_queued" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Checks whether a job has been queued or not.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.ibmqjob._numpy_type_converter">
+<code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">_numpy_type_converter</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#_numpy_type_converter"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob._numpy_type_converter" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.ibmqjob._reorder_bits">
+<code class="descclassname">qiskit.providers.ibmq.ibmqjob.</code><code class="descname">_reorder_bits</code><span class="sig-paren">(</span><em>job_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#_reorder_bits"><span class="viewcode-link">[Quellcode]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob._reorder_bits" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Temporary fix for ibmq backends.</p>
+<p>For every ran circuit, get reordering information from qobj
+and apply reordering on result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>job_data</strong> (<em>dict</em>) – dict with the bare contents of the API.get_job request.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – raised if the creg sizes don’t add up in result header.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="qiskit.providers.ibmq.ibmqbackend.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>qiskit.providers.ibmq.ibmqbackend module</div>
+         </div>
+     </a>
+     <a id="button-next" href="qiskit.providers.ibmq.ibmqprovider.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>qiskit.providers.ibmq.ibmqprovider module</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+  </body>
+</html>
