@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.circuit.quantumcircuit &#8212; Qiskit Terra 0.7.0 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/themeExt.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+        <a href="https://qiskit.org/" class="home">Qiskit Terra ™</a>
+        <nav class="first">
+        <a href="https://qiskit.org/terra">Terra</a>
+        <a href="https://qiskit.org/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a href="/documentation/_modules/qiskit/circuit/quantumcircuit.html">English</a> /
+        <a href="/documentation/de/_modules/qiskit/circuit/quantumcircuit.html">German</a> /
+        <a href="/documentation/ja/_modules/qiskit/circuit/quantumcircuit.html">Japanese</a>
+        <a class="external" href="https://qiskit.org/vscode">Tools</a>
+        <a class="external" href="https://qiskit.org/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">目次</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#id2">インストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#id3">1. ツールの入手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#pip">2. PIP インストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#id4">3. レポジトリのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../install.html#id5">3.1 環境の設定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#api">4. APIトークンの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#jupyter">Jupyterのチュートリアルのインストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#id6">1.1 インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#id1">量子プロセッサー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../quickstart.html#id2">実機バックエンドの例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#id3">プロジェクト構成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">Qiskit概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../qiskit.html#id1">設計思想</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../qiskit.html#id2">プロジェクト概要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">開発マニュアル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev_introduction.html#id2">プログラミング インターフェース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev_introduction.html#id3">内部モジュール</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDKリファレンス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <img class="logo" src="../../../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">目次</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#id2">インストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#id3">1. ツールの入手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#pip">2. PIP インストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#id4">3. レポジトリのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../install.html#id5">3.1 環境の設定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#api">4. APIトークンの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#jupyter">Jupyterのチュートリアルのインストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../install.html#id6">1.1 インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#id1">量子プロセッサー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../quickstart.html#id2">実機バックエンドの例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#id3">プロジェクト構成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../qiskit.html">Qiskit概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../qiskit.html#id1">設計思想</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../qiskit.html#id2">プロジェクト概要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_introduction.html">開発マニュアル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev_introduction.html#id2">プログラミング インターフェース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev_introduction.html#id3">内部モジュール</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autodoc/qiskit.html">SDKリファレンス</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autodoc/qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autodoc/qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autodoc/qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.circuit.quantumcircuit のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="c1"># pylint: disable=cyclic-import,invalid-name</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Quantum circuit object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.qasm</span> <span class="k">import</span> <span class="n">_qasm</span>
+<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">.classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+
+
+<div class="viewcode-block" id="QuantumCircuit"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit">[ドキュメント]</a><span class="k">class</span> <span class="nc">QuantumCircuit</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Quantum circuit.&quot;&quot;&quot;</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;circuit&#39;</span>
+
+    <span class="c1"># Class variable OPENQASM header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;OPENQASM 2.0;&quot;</span>
+
+    <span class="c1"># Class variable with gate definitions</span>
+    <span class="c1"># This is a dict whose values are dicts with the</span>
+    <span class="c1"># following keys:</span>
+    <span class="c1">#   &quot;print&quot; = True or False</span>
+    <span class="c1">#   &quot;opaque&quot; = True or False</span>
+    <span class="c1">#   &quot;n_args&quot; = number of real parameters</span>
+    <span class="c1">#   &quot;n_bits&quot; = number of qubits</span>
+    <span class="c1">#   &quot;args&quot;   = list of parameter names</span>
+    <span class="c1">#   &quot;bits&quot;   = list of qubit names</span>
+    <span class="c1">#   &quot;body&quot;   = GateBody AST node</span>
+    <span class="n">definitions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QuantumCircuit.__init__"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.__init__">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new circuit.</span>
+
+<span class="sd">        A circuit is a list of instructions bound to some registers.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *regs (Registers): registers to include in the circuit.</span>
+<span class="sd">            name (str or None): the name of the quantum circuit. If</span>
+<span class="sd">                None, an automatically generated string will be assigned.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if the circuit name, if given, is not valid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cls_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cls_instances</span><span class="p">())</span>
+            <span class="c1"># pylint: disable=not-callable</span>
+            <span class="c1"># (known pylint bug: https://github.com/PyCQA/pylint/issues/1699)</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s2">&quot;win32&quot;</span> <span class="ow">and</span> \
+               <span class="nb">isinstance</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">mp</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ForkProcess</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_increment_instances</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;The circuit name should be a string &quot;</span>
+                              <span class="s2">&quot;(or None to auto-generate a name).&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c1"># Data contains a list of instructions in the order they were applied.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># This is a map of registers bound to this circuit, by name.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="o">*</span><span class="n">regs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># TODO: removed the DAG from this function</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="k">return</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_increment_instances</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">instances</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="QuantumCircuit.cls_instances"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.cls_instances">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">cls_instances</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the current number of instances of this class,</span>
+<span class="sd">        useful for auto naming.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">instances</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.cls_prefix"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.cls_prefix">[ドキュメント]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">cls_prefix</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the prefix to use for auto naming.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">prefix</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.has_register"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.has_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">has_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if this circuit has the register r.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            register (Register): a quantum or classical register.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the register is contained in this circuit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">has_reg</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">):</span>
+            <span class="n">has_reg</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="ow">and</span>
+              <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">):</span>
+            <span class="n">has_reg</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">has_reg</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.combine"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.combine">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append rhs to self if self contains compatible registers.</span>
+
+<span class="sd">        Two circuits are compatible if they contain the same registers</span>
+<span class="sd">        or if they contain different registers with unique names. The</span>
+<span class="sd">        returned circuit will contain all unique registers between both</span>
+<span class="sd">        circuits.</span>
+
+<span class="sd">        Return self + rhs as a new object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check registers in LHS are compatible with RHS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_compatible_regs</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+        <span class="c1"># Make new circuit with combined registers</span>
+        <span class="n">combined_qregs</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">)</span>
+        <span class="n">combined_cregs</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
+                <span class="n">combined_qregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+                <span class="n">combined_cregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">combined_qregs</span><span class="p">,</span> <span class="o">*</span><span class="n">combined_cregs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+            <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">circuit</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.extend"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.extend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append rhs to self if self contains compatible registers.</span>
+
+<span class="sd">        Two circuits are compatible if they contain the same registers</span>
+<span class="sd">        or if they contain different registers with unique names. The</span>
+<span class="sd">        returned circuit will contain all unique registers between both</span>
+<span class="sd">        circuits.</span>
+
+<span class="sd">        Modify and return self.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check registers in LHS are compatible with RHS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_compatible_regs</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+        <span class="c1"># Add new registers</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+        <span class="c1"># Add new gates</span>
+        <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">rhs</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overload + to implement self.concatenate.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overload += to implement self.extend.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return number of operations in circuit.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return indexed operation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attach an instruction.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instruction</span>
+
+<div class="viewcode-block" id="QuantumCircuit.add_register"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.add_register">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add registers.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">regs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="ow">or</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;register name </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> already exists&quot;</span>
+                                  <span class="o">%</span> <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;expected a register&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.add"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.add">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add registers.&quot;&quot;&quot;</span>
+
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The add() function is deprecated and will be &#39;</span>
+                      <span class="s1">&#39;removed in a future release. Instead use &#39;</span>
+                      <span class="s1">&#39;QuantumCircuit.add_register().&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="o">*</span><span class="n">regs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_check_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if r is not in this circuit or not qreg.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;expected quantum register&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s2">&quot;register &#39;</span><span class="si">%s</span><span class="s2">&#39; not in this circuit&quot;</span> <span class="o">%</span>
+                <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if qubit is not in this circuit or bad format.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not a tuple.&quot;</span>
+                              <span class="s2">&quot;A qubit should be formated as a tuple.&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">qubit</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not a tuple with two elements, but </span><span class="si">%i</span><span class="s2"> instead&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;The second element of a tuple defining a qubit should be an int:&quot;</span>
+                              <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> was found instead&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qreg</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_check_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if r is not in this circuit or not creg.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Expected ClassicalRegister, but </span><span class="si">%s</span><span class="s2"> given&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">register</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s2">&quot;register &#39;</span><span class="si">%s</span><span class="s2">&#39; not in this circuit&quot;</span> <span class="o">%</span>
+                <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_dups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if list of qubits contains duplicates.&quot;&quot;&quot;</span>
+        <span class="n">squbits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">squbits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;duplicate qubit arguments&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_compatible_regs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise exception if the circuits are defined on incompatible registers&quot;&quot;&quot;</span>
+
+        <span class="n">list1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span>
+        <span class="n">list2</span> <span class="o">=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">qregs</span> <span class="o">+</span> <span class="n">rhs</span><span class="o">.</span><span class="n">cregs</span>
+        <span class="k">for</span> <span class="n">element1</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">element2</span> <span class="ow">in</span> <span class="n">list2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">element2</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">element1</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">element1</span> <span class="o">!=</span> <span class="n">element2</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;circuits are not compatible&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_gate_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a QASM string for the named gate.&quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;opaque &quot;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s2">&quot;gate &quot;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;n_args&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;args&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;bits&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;opaque&quot;</span><span class="p">]:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">{</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+<div class="viewcode-block" id="QuantumCircuit.qasm"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.qasm">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return OPENQASM string.&quot;&quot;&quot;</span>
+        <span class="n">string_temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">gate_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="n">gate_name</span><span class="p">][</span><span class="s2">&quot;print&quot;</span><span class="p">]:</span>
+                <span class="n">string_temp</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gate_string</span><span class="p">(</span><span class="n">gate_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
+            <span class="n">string_temp</span> <span class="o">+=</span> <span class="n">register</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+            <span class="n">string_temp</span> <span class="o">+=</span> <span class="n">register</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">string_temp</span> <span class="o">+=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">string_temp</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.draw"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.draw">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
+             <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw the quantum circuit</span>
+
+<span class="sd">        Using the output parameter you can specify the format. The choices are:</span>
+<span class="sd">        0. text: ASCII art string</span>
+<span class="sd">        1. latex: high-quality images, but heavy external software dependencies</span>
+<span class="sd">        2. matplotlib: purely in Python with no external dependencies</span>
+
+<span class="sd">        Defaults to an overcomplete basis, in order to not alter gates.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            scale (float): scale of image to draw (shrink if &lt; 1)</span>
+<span class="sd">            filename (str): file path to save image to</span>
+<span class="sd">            style (dict or str): dictionary of style or file name of style</span>
+<span class="sd">                file. You can refer to the</span>
+<span class="sd">                :ref:`Style Dict Doc &lt;style-dict-doc&gt;` for more information</span>
+<span class="sd">                on the contents.</span>
+<span class="sd">            output (str): Select the output method to use for drawing the</span>
+<span class="sd">                circuit. Valid choices are `text`, `latex`, `latex_source`,</span>
+<span class="sd">                `mpl`.</span>
+<span class="sd">            interactive (bool): when set true show the circuit in a new window</span>
+<span class="sd">                (for `mpl` this depends on the matplotlib backend being used</span>
+<span class="sd">                supporting this). Note when used with either the `text` or the</span>
+<span class="sd">                `latex_source` output type this has no effect and will be</span>
+<span class="sd">                silently ignored.</span>
+<span class="sd">            line_length (int): sets the length of the lines generated by `text`</span>
+<span class="sd">            reverse_bits (bool): When set to True reverse the bit order inside</span>
+<span class="sd">                registers for the output visualization.</span>
+<span class="sd">            plot_barriers (bool): Enable/disable drawing barriers in the output</span>
+<span class="sd">                circuit. Defaults to True.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            PIL.Image or matplotlib.figure or str or TextDrawing:</span>
+<span class="sd">                * PIL.Image: (output `latex`) an in-memory representation of the</span>
+<span class="sd">                  image of the circuit diagram.</span>
+<span class="sd">                * matplotlib.figure: (output `mpl`) a matplotlib figure object</span>
+<span class="sd">                  for the circuit diagram.</span>
+<span class="sd">                * str: (output `latex_source`). The LaTeX source code.</span>
+<span class="sd">                * TextDrawing: (output `text`). A drawing that can be printed as</span>
+<span class="sd">                  ascii art</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            VisualizationError: when an invalid output method is selected</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.tools</span> <span class="k">import</span> <span class="n">visualization</span>
+        <span class="k">return</span> <span class="n">visualization</span><span class="o">.</span><span class="n">circuit_drawer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                                            <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                                            <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+                                            <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">,</span>
+                                            <span class="n">line_length</span><span class="o">=</span><span class="n">line_length</span><span class="p">,</span>
+                                            <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                            <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.size"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.size">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return total number of operations in circuit.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: removed the DAG from this function</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dag</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.depth"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.depth">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return circuit depth (i.e. length of critical path).&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dag</span><span class="o">.</span><span class="n">depth</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.width"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.width">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return number of qubits in circuit.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dag</span><span class="o">.</span><span class="n">width</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.count_ops"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.count_ops">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">count_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Count each operation kind in the circuit.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: a breakdown of how many operations of each kind.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dag</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.num_tensor_factors"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.num_tensor_factors">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">num_tensor_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;How many non-entangled subcircuits can the circuit be factored to.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dag</span><span class="o">.</span><span class="n">num_tensor_factors</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.from_qasm_file"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.from_qasm_file">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_qasm_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Take in a QASM file and generate a QuantumCircuit object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          path (str): Path to the file for a QASM program</span>
+<span class="sd">        Return:</span>
+<span class="sd">          QuantumCircuit: The QuantumCircuit object for the input QASM</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qasm</span> <span class="o">=</span> <span class="n">_qasm</span><span class="o">.</span><span class="n">Qasm</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_circuit_from_qasm</span><span class="p">(</span><span class="n">qasm</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.from_qasm_str"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit.QuantumCircuit.from_qasm_str">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_qasm_str</span><span class="p">(</span><span class="n">qasm_str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Take in a QASM string and generate a QuantumCircuit object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          qasm_str (str): A QASM program string</span>
+<span class="sd">        Return:</span>
+<span class="sd">          QuantumCircuit: The QuantumCircuit object for the input QASM</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qasm</span> <span class="o">=</span> <span class="n">_qasm</span><span class="o">.</span><span class="n">Qasm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">qasm_str</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_circuit_from_qasm</span><span class="p">(</span><span class="n">qasm</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="_circuit_from_qasm"><a class="viewcode-back" href="../../../_autodoc/qiskit.circuit.quantumcircuit.html#qiskit.circuit.quantumcircuit._circuit_from_qasm">[ドキュメント]</a><span class="k">def</span> <span class="nf">_circuit_from_qasm</span><span class="p">(</span><span class="n">qasm</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">ast_to_dag</span>
+    <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">dag_to_circuit</span>
+    <span class="n">ast</span> <span class="o">=</span> <span class="n">qasm</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="n">ast_to_dag</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dag_to_circuit</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

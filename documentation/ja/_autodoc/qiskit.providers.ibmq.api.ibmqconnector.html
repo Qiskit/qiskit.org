@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.providers.ibmq.api.ibmqconnector module &#8212; Qiskit Terra 0.7.0 ドキュメント</title>
+
+    <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/themeExt.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.providers.ibmq.credentials package" href="qiskit.providers.ibmq.credentials.html" />
+    <link rel="prev" title="qiskit.providers.ibmq.api package" href="qiskit.providers.ibmq.api.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+        <a href="https://qiskit.org/" class="home">Qiskit Terra ™</a>
+        <nav class="first">
+        <a href="https://qiskit.org/terra">Terra</a>
+        <a href="https://qiskit.org/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a href="/documentation/_autodoc/qiskit.providers.ibmq.api.ibmqconnector.html">English</a> /
+        <a href="/documentation/de/_autodoc/qiskit.providers.ibmq.api.ibmqconnector.html">German</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.providers.ibmq.api.ibmqconnector.html">Japanese</a>
+        <a class="external" href="https://qiskit.org/vscode">Tools</a>
+        <a class="external" href="https://qiskit.org/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">目次</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id2">インストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id3">1. ツールの入手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#pip">2. PIP インストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id4">3. レポジトリのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install.html#id5">3.1 環境の設定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#api">4. APIトークンの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#jupyter">Jupyterのチュートリアルのインストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id6">1.1 インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id1">量子プロセッサー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#id2">実機バックエンドの例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id3">プロジェクト構成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id1">設計思想</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id2">プロジェクト概要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id2">プログラミング インターフェース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id3">内部モジュール</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">目次</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id2">インストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id3">1. ツールの入手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#pip">2. PIP インストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id4">3. レポジトリのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install.html#id5">3.1 環境の設定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#api">4. APIトークンの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#jupyter">Jupyterのチュートリアルのインストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id6">1.1 インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id1">量子プロセッサー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#id2">実機バックエンドの例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id3">プロジェクト構成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id1">設計思想</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id2">プロジェクト概要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id2">プログラミング インターフェース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id3">内部モジュール</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="module-qiskit.providers.ibmq.api.ibmqconnector">
+<span id="qiskit-providers-ibmq-api-ibmqconnector-module"></span><h1>qiskit.providers.ibmq.api.ibmqconnector module<a class="headerlink" href="#module-qiskit.providers.ibmq.api.ibmqconnector" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>IBM Q API connector.</p>
+<div class="section" id="members">
+<h2>Members<a class="headerlink" href="#members" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError" title="qiskit.providers.ibmq.api.ibmqconnector.ApiError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ApiError</span></code></a></td>
+<td>IBMQConnector API error handling base class.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.BadBackendError" title="qiskit.providers.ibmq.api.ibmqconnector.BadBackendError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BadBackendError</span></code></a></td>
+<td>Unavailable backend error.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.CredentialsError" title="qiskit.providers.ibmq.api.ibmqconnector.CredentialsError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CredentialsError</span></code></a></td>
+<td>Exception associated with bad server credentials.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.RegisterSizeError" title="qiskit.providers.ibmq.api.ibmqconnector.RegisterSizeError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterSizeError</span></code></a></td>
+<td>Exception due to exceeding the maximum number of allowed qubits.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector" title="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMQConnector</span></code></a></td>
+<td>The Connector Class to do request to QX Platform</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials" title="qiskit.providers.ibmq.api.ibmqconnector._Credentials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_Credentials</span></code></a></td>
+<td>The Credential class to manage the tokens</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector._Request" title="qiskit.providers.ibmq.api.ibmqconnector._Request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_Request</span></code></a></td>
+<td>The Request class to manage the methods</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.get_backend_properties_url" title="qiskit.providers.ibmq.api.ibmqconnector.get_backend_properties_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_backend_properties_url</span></code></a></td>
+<td>Util method to get backend properties url</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.get_backends_url" title="qiskit.providers.ibmq.api.ibmqconnector.get_backends_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_backends_url</span></code></a></td>
+<td>Util method to get backends url</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.get_job_url" title="qiskit.providers.ibmq.api.ibmqconnector.get_job_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_job_url</span></code></a></td>
+<td>Util method to get job url</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.ApiError">
+<em class="property">exception </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">ApiError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#ApiError"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>IBMQConnector API error handling base class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>usr_msg</strong> (<em>str</em>) -- Short user facing message describing error.</li>
+<li><strong>dev_msg</strong> (<em>str</em><em> or </em><em>None</em>) -- More detailed message to assist
+developer with resolving issue.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.ApiError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#ApiError.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>usr_msg</strong> (<em>str</em>) -- Short user facing message describing error.</li>
+<li><strong>dev_msg</strong> (<em>str</em><em> or </em><em>None</em>) -- More detailed message to assist
+developer with resolving issue.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.BadBackendError">
+<em class="property">exception </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">BadBackendError</code><span class="sig-paren">(</span><em>backend</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#BadBackendError"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.BadBackendError" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError" title="qiskit.providers.ibmq.api.ibmqconnector.ApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api.ibmqconnector.ApiError</span></code></a></p>
+<p>Unavailable backend error.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>backend</strong> (<em>str</em>) -- name of backend.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.BadBackendError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>backend</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#BadBackendError.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.BadBackendError.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><strong>backend</strong> (<em>str</em>) -- name of backend.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.CredentialsError">
+<em class="property">exception </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">CredentialsError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#CredentialsError"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.CredentialsError" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError" title="qiskit.providers.ibmq.api.ibmqconnector.ApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api.ibmqconnector.ApiError</span></code></a></p>
+<p>Exception associated with bad server credentials.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>usr_msg</strong> (<em>str</em>) -- Short user facing message describing error.</li>
+<li><strong>dev_msg</strong> (<em>str</em><em> or </em><em>None</em>) -- More detailed message to assist
+developer with resolving issue.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector">
+<em class="property">class </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">IBMQConnector</code><span class="sig-paren">(</span><em>token=None</em>, <em>config=None</em>, <em>verify=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Connector Class to do request to QX Platform</p>
+<p>If verify is set to false, ignore SSL certificate errors</p>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>token=None</em>, <em>config=None</em>, <em>verify=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.__init__"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.__init__" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>If verify is set to false, ignore SSL certificate errors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.api_version">
+<code class="descname">api_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.api_version"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.api_version" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the API Version of the QX Platform</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.available_backends">
+<code class="descname">available_backends</code><span class="sig-paren">(</span><em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.available_backends"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.available_backends" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the backends available to use in the QX Platform</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.backend_properties">
+<code class="descname">backend_properties</code><span class="sig-paren">(</span><em>backend='ibmqx4'</em>, <em>hub=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.backend_properties"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.backend_properties" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the parameters of calibration of a real chip</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.backend_status">
+<code class="descname">backend_status</code><span class="sig-paren">(</span><em>backend='ibmqx4'</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.backend_status"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.backend_status" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the status of a chip</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.cancel_job">
+<code class="descname">cancel_job</code><span class="sig-paren">(</span><em>id_job</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.cancel_job"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.cancel_job" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Cancel the information about a job, by its id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.check_credentials">
+<code class="descname">check_credentials</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.check_credentials"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.check_credentials" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Check if the user has permission in QX platform</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_job">
+<code class="descname">get_job</code><span class="sig-paren">(</span><em>id_job</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.get_job"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_job" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the information about a job, by its id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_jobs">
+<code class="descname">get_jobs</code><span class="sig-paren">(</span><em>limit=10</em>, <em>skip=0</em>, <em>backend=None</em>, <em>only_completed=False</em>, <em>filter=None</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.get_jobs"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_jobs" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the information about the user jobs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_status_job">
+<code class="descname">get_status_job</code><span class="sig-paren">(</span><em>id_job</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.get_status_job"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_status_job" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the status about a job, by its id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_status_jobs">
+<code class="descname">get_status_jobs</code><span class="sig-paren">(</span><em>limit=10</em>, <em>skip=0</em>, <em>backend=None</em>, <em>filter=None</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.get_status_jobs"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.get_status_jobs" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get the information about the user jobs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.run_job">
+<code class="descname">run_job</code><span class="sig-paren">(</span><em>job</em>, <em>backend='simulator'</em>, <em>shots=1</em>, <em>max_credits=None</em>, <em>seed=None</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em>, <em>hpc=None</em>, <em>access_token=None</em>, <em>user_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#IBMQConnector.run_job"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.run_job" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Execute a job</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.RegisterSizeError">
+<em class="property">exception </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">RegisterSizeError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#RegisterSizeError"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.RegisterSizeError" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError" title="qiskit.providers.ibmq.api.ibmqconnector.ApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api.ibmqconnector.ApiError</span></code></a></p>
+<p>Exception due to exceeding the maximum number of allowed qubits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first last simple">
+<li><strong>usr_msg</strong> (<em>str</em>) -- Short user facing message describing error.</li>
+<li><strong>dev_msg</strong> (<em>str</em><em> or </em><em>None</em>) -- More detailed message to assist
+developer with resolving issue.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials">
+<em class="property">class </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">_Credentials</code><span class="sig-paren">(</span><em>token</em>, <em>config=None</em>, <em>verify=True</em>, <em>proxy_urls=None</em>, <em>ntlm_credentials=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Credential class to manage the tokens</p>
+<dl class="attribute">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.config_base">
+<code class="descname">config_base</code><em class="property"> = {'url': 'https://quantumexperience.ng.bluemix.net/api'}</em><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.config_base" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.get_config">
+<code class="descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials.get_config"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.get_config" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get Configuration setted to connect with QX Platform</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.get_token">
+<code class="descname">get_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials.get_token"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.get_token" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get Authenticated Token to connect with QX Platform</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.get_user_id">
+<code class="descname">get_user_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials.get_user_id"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.get_user_id" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get User Id in QX Platform</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.obtain_token">
+<code class="descname">obtain_token</code><span class="sig-paren">(</span><em>config=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials.obtain_token"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.obtain_token" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Obtain the token to access to QX Platform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.CredentialsError" title="qiskit.providers.ibmq.api.ibmqconnector.CredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CredentialsError</span></code></a> -- when token is invalid or the user has not
+accepted the license.</li>
+<li><a class="reference internal" href="#qiskit.providers.ibmq.api.ibmqconnector.ApiError" title="qiskit.providers.ibmq.api.ibmqconnector.ApiError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ApiError</span></code></a> -- when the response from the server couldn't be parsed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.set_token">
+<code class="descname">set_token</code><span class="sig-paren">(</span><em>access_token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials.set_token"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.set_token" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set Access Token to connect with QX Platform API</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Credentials.set_user_id">
+<code class="descname">set_user_id</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Credentials.set_user_id"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Credentials.set_user_id" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set Access Token to connect with QX Platform API</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Request">
+<em class="property">class </em><code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">_Request</code><span class="sig-paren">(</span><em>token</em>, <em>config=None</em>, <em>verify=True</em>, <em>retries=5</em>, <em>timeout_interval=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Request"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Request" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Request class to manage the methods</p>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Request.check_token">
+<code class="descname">check_token</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Request.check_token"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Request.check_token" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Check is the user's token is valid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Request.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>path</em>, <em>params=''</em>, <em>with_token=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Request.get"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Request.get" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>GET Method Wrapper of the REST API</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Request.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>params=''</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Request.post"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Request.post" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>POST Method Wrapper of the REST API</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector._Request.put">
+<code class="descname">put</code><span class="sig-paren">(</span><em>path</em>, <em>params=''</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#_Request.put"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector._Request.put" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>PUT Method Wrapper of the REST API</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.get_backend_properties_url">
+<code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">get_backend_properties_url</code><span class="sig-paren">(</span><em>config</em>, <em>backend_type</em>, <em>hub=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#get_backend_properties_url"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.get_backend_properties_url" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Util method to get backend properties url</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.get_backends_url">
+<code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">get_backends_url</code><span class="sig-paren">(</span><em>config</em>, <em>hub</em>, <em>group</em>, <em>project</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#get_backends_url"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.get_backends_url" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Util method to get backends url</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.ibmq.api.ibmqconnector.get_job_url">
+<code class="descclassname">qiskit.providers.ibmq.api.ibmqconnector.</code><code class="descname">get_job_url</code><span class="sig-paren">(</span><em>config</em>, <em>hub=None</em>, <em>group=None</em>, <em>project=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/ibmqconnector.html#get_job_url"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.ibmqconnector.get_job_url" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Util method to get job url</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="qiskit.providers.ibmq.api.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>qiskit.providers.ibmq.api package</div>
+         </div>
+     </a>
+     <a id="button-next" href="qiskit.providers.ibmq.credentials.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>qiskit.providers.ibmq.credentials package</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+  </body>
+</html>

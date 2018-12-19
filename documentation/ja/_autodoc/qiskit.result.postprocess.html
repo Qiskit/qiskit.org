@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.result.postprocess module &#8212; Qiskit Terra 0.7.0 ドキュメント</title>
+
+    <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/themeExt.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="qiskit.result.result module" href="qiskit.result.result.html" />
+    <link rel="prev" title="qiskit.result.models module" href="qiskit.result.models.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+        <a href="https://qiskit.org/" class="home">Qiskit Terra ™</a>
+        <nav class="first">
+        <a href="https://qiskit.org/terra">Terra</a>
+        <a href="https://qiskit.org/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a href="/documentation/_autodoc/qiskit.result.postprocess.html">English</a> /
+        <a href="/documentation/de/_autodoc/qiskit.result.postprocess.html">German</a> /
+        <a href="/documentation/ja/_autodoc/qiskit.result.postprocess.html">Japanese</a>
+        <a class="external" href="https://qiskit.org/vscode">Tools</a>
+        <a class="external" href="https://qiskit.org/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">目次</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id2">インストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id3">1. ツールの入手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#pip">2. PIP インストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id4">3. レポジトリのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install.html#id5">3.1 環境の設定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#api">4. APIトークンの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#jupyter">Jupyterのチュートリアルのインストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id6">1.1 インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id1">量子プロセッサー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#id2">実機バックエンドの例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id3">プロジェクト構成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id1">設計思想</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id2">プロジェクト概要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id2">プログラミング インターフェース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id3">内部モジュール</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/qiskit-logo-white-no-margin.gif" alt="Qiskit Terra"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">目次</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id2">インストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id3">1. ツールの入手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#pip">2. PIP インストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id4">3. レポジトリのインストール</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install.html#id5">3.1 環境の設定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#api">4. APIトークンの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#jupyter">Jupyterのチュートリアルのインストール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#id6">1.1 インストール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id1">量子プロセッサー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#id2">実機バックエンドの例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#id3">プロジェクト構成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qiskit.html">Qiskit概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id1">設計思想</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qiskit.html#id2">プロジェクト概要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_introduction.html">開発マニュアル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id2">プログラミング インターフェース</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_introduction.html#id3">内部モジュール</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">SDKリファレンス</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#members">Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qiskiterror.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.unrollers.html">qiskit.unrollers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.unrollers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#exceptions">Exceptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.wrapper.html">qiskit.wrapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.wrapper.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="module-qiskit.result.postprocess">
+<span id="qiskit-result-postprocess-module"></span><h1>qiskit.result.postprocess module<a class="headerlink" href="#module-qiskit.result.postprocess" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Post-processing of raw result.</p>
+<div class="section" id="members">
+<h2>Members<a class="headerlink" href="#members" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.result.postprocess._hex_to_bin" title="qiskit.result.postprocess._hex_to_bin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_hex_to_bin</span></code></a></td>
+<td>Convert hexadecimal readouts (memory) to binary readouts.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.result.postprocess._pad_zeros" title="qiskit.result.postprocess._pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pad_zeros</span></code></a></td>
+<td>If the bitstring is truncated, pad extra zeros to make its length equal to memory_slots</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.result.postprocess._separate_bitstring" title="qiskit.result.postprocess._separate_bitstring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_separate_bitstring</span></code></a></td>
+<td>Separate a bitstring according to the registers defined in the result header.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.result.postprocess.format_counts" title="qiskit.result.postprocess.format_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_counts</span></code></a></td>
+<td>Format a single experiment result coming from backend to present to the Qiskit user.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.result.postprocess.format_memory" title="qiskit.result.postprocess.format_memory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_memory</span></code></a></td>
+<td>Format a single bitstring (memory) from a single shot experiment.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.result.postprocess.format_statevector" title="qiskit.result.postprocess.format_statevector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_statevector</span></code></a></td>
+<td>Format statevector coming from the backend to present to the Qiskit user.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.result.postprocess.format_unitary" title="qiskit.result.postprocess.format_unitary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_unitary</span></code></a></td>
+<td>Format unitary coming from the backend to present to the Qiskit user.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="function">
+<dt id="qiskit.result.postprocess._hex_to_bin">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">_hex_to_bin</code><span class="sig-paren">(</span><em>hexstring</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#_hex_to_bin"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess._hex_to_bin" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Convert hexadecimal readouts (memory) to binary readouts.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.result.postprocess._pad_zeros">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">_pad_zeros</code><span class="sig-paren">(</span><em>bitstring</em>, <em>memory_slots</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#_pad_zeros"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess._pad_zeros" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>If the bitstring is truncated, pad extra zeros to make its
+length equal to memory_slots</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.result.postprocess._separate_bitstring">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">_separate_bitstring</code><span class="sig-paren">(</span><em>bitstring</em>, <em>creg_sizes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#_separate_bitstring"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess._separate_bitstring" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Separate a bitstring according to the registers defined in the result header.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.result.postprocess.format_counts">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">format_counts</code><span class="sig-paren">(</span><em>counts</em>, <em>header</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#format_counts"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess.format_counts" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Format a single experiment result coming from backend to present
+to the Qiskit user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>counts</strong> (<em>dict</em>) -- counts histogram of multiple shots</li>
+<li><strong>header</strong> (<em>dict</em>) -- the experiment header dictionary containing
+useful information for postprocessing.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">a formatted counts</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.result.postprocess.format_memory">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">format_memory</code><span class="sig-paren">(</span><em>memory</em>, <em>header</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#format_memory"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess.format_memory" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Format a single bitstring (memory) from a single shot experiment.</p>
+<ul class="simple">
+<li>The hexadecimals are expanded to bitstrings</li>
+<li>Spaces are inserted at register divisions.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>memory</strong> (<em>str</em>) -- result of a single experiment.</li>
+<li><strong>header</strong> (<em>dict</em>) -- the experiment header dictionary containing
+useful information for postprocessing.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">a formatted memory</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.result.postprocess.format_statevector">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">format_statevector</code><span class="sig-paren">(</span><em>vec</em>, <em>decimals=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#format_statevector"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess.format_statevector" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Format statevector coming from the backend to present to the Qiskit user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>vec</strong> (<em>list</em>) -- a list of [re, im] complex numbers.</li>
+<li><strong>decimals</strong> (<em>int</em>) -- the number of decimals in the statevector.
+If None, no rounding is done.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">a list of python complex numbers.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">list[complex]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.result.postprocess.format_unitary">
+<code class="descclassname">qiskit.result.postprocess.</code><code class="descname">format_unitary</code><span class="sig-paren">(</span><em>mat</em>, <em>decimals=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/result/postprocess.html#format_unitary"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#qiskit.result.postprocess.format_unitary" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Format unitary coming from the backend to present to the Qiskit user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">パラメータ:</th><td class="field-body"><ul class="first simple">
+<li><strong>mat</strong> (<em>list</em><em>[</em><em>list</em><em>]</em>) -- a list of list of [re, im] complex numbers</li>
+<li><strong>decimals</strong> (<em>int</em>) -- the number of decimals in the statevector.
+If None, no rounding is done.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">戻り値:</th><td class="field-body"><p class="first">a matrix of complex numbers</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">戻り値の型:</th><td class="field-body"><p class="first last">list[list[complex]]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="qiskit.result.models.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>qiskit.result.models module</div>
+         </div>
+     </a>
+     <a id="button-next" href="qiskit.result.result.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>qiskit.result.result module</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+  </body>
+</html>
