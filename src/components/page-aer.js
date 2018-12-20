@@ -150,8 +150,7 @@ class PageAer extends localize(i18next)(PageViewElement) {
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit import QuantumRegister, ClassicalRegister
-                from qiskit import QuantumCircuit, execute, Aer, IBMQ
+                from qiskit import *
                 from qiskit.providers.aer import noise
 
                 # Choose a real device to simulate

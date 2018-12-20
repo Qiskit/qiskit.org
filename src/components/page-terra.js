@@ -153,8 +153,7 @@ class PageTerra extends localize(i18next)(PageViewElement) {
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit import QuantumRegister, ClassicalRegister
-                from qiskit import QuantumCircuit, Aer, execute
+                from qiskit import *
 
                 q = QuantumRegister(2)
                 c = ClassicalRegister(2)
