@@ -60,7 +60,7 @@ export const HeaderStyles = html`
 
     header > div {
       flex-grow: 1;
-      max-width: 660px;
+      max-width: 670px;
     }
 
     header h1 {
