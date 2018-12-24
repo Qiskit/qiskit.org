@@ -3,7 +3,7 @@
 
 # qiskit.org
 
-> Qiskit is an open source framework for quantum computing. It allows users to create, compile, and execute quantum computing programs online, either in a simulator, or in a real IBM Q quantum processor.
+This repo is for the website for qiskit.org.
 
 ## Install the dependencies
 
