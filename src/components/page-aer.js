@@ -57,16 +57,6 @@ class PageAer extends localize(i18next)(PageViewElement) {
         <div>
           <h1>
             ${i18next.t('pages.aer.headerTitle')}
-            <a
-                href="https://pypi.python.org/pypi/qiskit-aer"
-                target="_blank"
-                rel="noopener">
-              <img
-                  src="https://img.shields.io/pypi/v/qiskit-aer.svg"
-                  alt="Qiskit Aer version badge"
-                  width="78px"
-                  height="20px">
-            </a>
           </h1>
           <h2>${i18next.t('pages.aer.headerSubTitle')}</h2>
           <div class="badges">

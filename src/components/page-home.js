@@ -81,6 +81,10 @@ class PageHome extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--app-primary-color);
         }
 
+        .news {
+          background-color: #F5F5F5;
+        }
+
         .architecture {
           background-color: #292C35;
           color: #FFFFFF;
@@ -214,7 +218,19 @@ class PageHome extends localize(i18next)(PageViewElement) {
       <header>
         <img src="images/qiskit-logo.png" alt="${i18next.t('pages.home.altLogo')}">
         <div>
-          <h1>${i18next.t('pages.home.headerTitle')}</h1>
+          <h1>
+            ${i18next.t('pages.home.headerTitle')}
+            <a
+                href="https://pypi.python.org/pypi/qiskit"
+                target="_blank"
+                rel="noopener">
+              <img
+                  src="https://img.shields.io/pypi/v/qiskit.svg"
+                  alt="Qiskit version badge"
+                  width="78px"
+                  height="20px">
+            </a>
+          </h1>
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
           <div class="badges">
             <a
@@ -236,13 +252,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
                 ${slackIcon}
                 ${i18next.t('joinSlack')}
               </vaadin-button>
-            </a>
-            <a
-                href="https://mybinder.org/v2/gh/QISKit/qiskit-tutorial/master?filepath=index.ipynb"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">${i18next.t('pages.home.tryButton')}</vaadin-button>
             </a>
           </div>
         </div>
@@ -279,72 +288,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="architecture">
-        <div class="row reverse limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.architectureTitle')}</h3>
-            <p>${i18next.t('pages.home.architectureDescription')}</p>
-            <div class="actions">
-              <a
-                  href="https://medium.com/qiskit/qiskit-and-its-fundamental-elements-bcd7ead80492"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">
-                  ${i18next.t('pages.home.architectureButton')}
-                </vaadin-button>
-              </a>
-            </div>
-          </div>
-          <div class="illustration">
-            <!-- TODO: Change image to HTML -->
-            <img src="images/qiskit-architecture.png" alt="Qiskit architecture">
-          </div>
-        </div>
-      </section>
-
-      <section class="colored">
-        <div class="row limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.tryAndLearnTitle')}</h3>
-            <p>${i18next.t('pages.home.tryAndLearnDescription')}</p>
-            <div class="actions">
-              <a
-                  href="https://mybinder.org/v2/gh/QISKit/qiskit-tutorial/master?filepath=index.ipynb"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.tryButton')}</vaadin-button>
-              </a>
-              <a
-                  href="https://quantumexperience.ng.bluemix.net/qx/tutorial?sectionId=full-user-guide"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.learnButton')}</vaadin-button>
-              </a>
-              <a
-                  href="${this.getDocumentationLink()}/"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.documentationButton')}</vaadin-button>
-              </a>
-              <a
-                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.tutorialButton')}</vaadin-button>
-              </a>
-            </div>
-          </div>
-          <div class="illustration">
-            <img src="images/try-and-learn.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
           </div>
         </div>
       </section>
