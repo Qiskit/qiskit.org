@@ -57,16 +57,6 @@ class PageTerra extends localize(i18next)(PageViewElement) {
         <div>
           <h1>
             ${i18next.t('pages.terra.headerTitle')}
-            <a
-                href="https://pypi.python.org/pypi/qiskit"
-                target="_blank"
-                rel="noopener">
-              <img
-                  src="https://img.shields.io/pypi/v/qiskit.svg"
-                  alt="Qiskit version badge"
-                  width="78px"
-                  height="20px">
-            </a>
           </h1>
           <h2>${i18next.t('pages.terra.headerSubTitle')}</h2>
           <div class="badges">
