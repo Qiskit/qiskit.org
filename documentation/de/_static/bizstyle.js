@@ -39,7 +39,7 @@ $(window).resize(function(){
         $("div.related:last  ul li:not(.right, #toc-toggle):first a").text("Top");
     }
     else {
-        $("div.related:first ul li:not(.right, #toc-toggle):first a").text("Qiskit Terra 0.8.0 Dokumentation");
-        $("div.related:last  ul li:not(.right, #toc-toggle):first a").text("Qiskit Terra 0.8.0 Dokumentation");
+        $("div.related:first ul li:not(.right, #toc-toggle):first a").text("Qiskit Terra 0.7.0 Dokumentation");
+        $("div.related:last  ul li:not(.right, #toc-toggle):first a").text("Qiskit Terra 0.7.0 Dokumentation");
     }
 });
