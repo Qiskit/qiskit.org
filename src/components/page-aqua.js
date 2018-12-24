@@ -67,16 +67,6 @@ class PageAqua extends localize(i18next)(PageViewElement) {
         <div>
           <h1>
             ${i18next.t('pages.aqua.headerTitle')}
-            <a
-                href="https://pypi.python.org/pypi/qiskit-aqua"
-                target="_blank"
-                rel="noopener">
-              <img
-                  src="https://img.shields.io/pypi/v/qiskit-aqua.svg"
-                  alt="Qiskit Aqua version badge"
-                  width="78px"
-                  height="20px">
-            </a>
           </h1>
           <h2>${i18next.t('pages.aqua.headerSubTitle')}</h2>
           <div class="badges">
@@ -208,16 +198,6 @@ class PageAqua extends localize(i18next)(PageViewElement) {
           <div class="description">
             <h3>
               ${i18next.t('pages.aqua.chemistryTitle')}
-              <a
-                  href="https://pypi.python.org/pypi/qiskit-aqua-chemistry"
-                  target="_blank"
-                  rel="noopener">
-                <img
-                    src="https://img.shields.io/pypi/v/qiskit-aqua-chemistry.svg"
-                    alt="Qiskit Aqua version badge"
-                    width="78px"
-                    height="20px">
-              </a>
             </h3>
             <div class="badges">
               <a
@@ -258,7 +238,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
             <p class="note">${i18next.t('pages.aqua.pythonIsRequired')}</p>
             <code-sample type="bash">
               <template>
-                [python3] $ pip install qiskit-aqua-chemistry
+                [python3] $ pip install qiskit-chemistry
               </template>
             </code-sample>
             <h3>${i18next.t('pages.aqua.exampleTitle')}</h3>
