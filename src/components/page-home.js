@@ -81,24 +81,6 @@ class PageHome extends localize(i18next)(PageViewElement) {
           --app-section-background-color: var(--app-primary-color);
         }
 
-        .news {
-          background-color: #F5F5F5;
-        }
-
-        .architecture {
-          background-color: #292C35;
-          color: #FFFFFF;
-        }
-
-        section.architecture .row .description .actions vaadin-button {
-          --ibmq-button-secondary-color: #FFFFFF;
-          --ibmq-button-secondary-focus-color: #292C35;
-        }
-
-        .architecture .row .illustration {
-          flex: 3;
-        }
-
         .community .row .illustration {
           align-items: flex-start;
         }
@@ -288,6 +270,27 @@ class PageHome extends localize(i18next)(PageViewElement) {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="colored">
+        <div class="row limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.home.tryTitle')}</h3>
+            <p>${i18next.t('pages.home.tryDescription')}</p>
+            <div class="actions">
+              <a
+                  href="https://mybinder.org/v2/gh/QISKit/qiskit-tutorial/master?filepath=index.ipynb"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">${i18next.t('pages.home.tryButton')}</vaadin-button>
+              </a>
+            </div>
+          </div>
+          <div class="illustration">
+            <img src="images/try-and-learn.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
           </div>
         </div>
       </section>
