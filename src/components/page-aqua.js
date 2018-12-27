@@ -129,7 +129,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                       </div>
                       <div class="element">
                         <div class="title">Single-sample</div>
-                        <div class="subtitle">QPE, IQPE, Grover</div>
+                        <div class="subtitle">QPE, IQPE, Grover, Amplitude Estimation</div>
                       </div>
                     </div>
                   </div>
@@ -163,8 +163,9 @@ class PageAqua extends localize(i18next)(PageViewElement) {
             <code-sample type="python" copy-clipboard-button>
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit_aqua.input import get_input_instance
-                from qiskit_aqua import run_algorithm
+                from qiskit import Aer
+                from qiskit_aqua.components.oracles import SAT
+                from qiskit_aqua.algorithms import Grover
 
                 sat_cnf = """
                 c Example DIMACS 3-sat
@@ -176,14 +177,10 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                 -1 2 3 0
                 """
 
-                params = {
-                  "problem": { "name": "search" },
-                  "algorithm": { "name": "Grover" },
-                  "oracle": { "name": "SAT", "cnf": sat_cnf },
-                  "backend": { "name": "qasm_simulator" }
-                }
-
-                result = run_algorithm(params)
+                backend = Aer.get_backend('qasm_simulator')
+                oracle = SAT(sat_cnf)
+                algorithm = Grover(oracle)
+                result = algorithm.run(backend)
 
                 print(result["result"])
               </template>
@@ -201,7 +198,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
             </h3>
             <div class="badges">
               <a
-                  href="https://github.com/Qiskit/aqua-chemistry"
+                  href="https://github.com/Qiskit/qiskit-chemistry"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
@@ -220,7 +217,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                 </vaadin-button>
               </a>
               <a
-                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-acqua-tutorials/tree/master/chemistry/"
+                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/aqua/chemistry/index.ipynb"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
@@ -247,9 +244,9 @@ class PageAqua extends localize(i18next)(PageViewElement) {
               <!-- htmlmin:ignore -->
               <template>
                 import numpy as np
-                from qiskit_aqua_chemistry import AquaChemistry
+                from qiskit_chemistry import QiskitChemistry
 
-                aqua_chemistry_dict = {
+                qiskit_chemistry_dict = {
                   "driver": { "name": "PYSCF" },
                   "PYSCF": { "atom": "", "basis": "sto3g" },
                   "operator": {
@@ -274,9 +271,9 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                 dipoles = np.empty(len(pts))
 
                 for i, d in enumerate(pts):
-                  aqua_chemistry_dict["PYSCF"]["atom"] = molecule.format(d/2)
-                  solver = AquaChemistry()
-                  result = solver.run(aqua_chemistry_dict)
+                  qiskit_chemistry_dict["PYSCF"]["atom"] = molecule.format(d/2)
+                  solver = QiskitChemistry()
+                  result = solver.run(qiskit_chemistry_dict)
                   energies[i] = result["energy"]
                   dipoles[i] = result["total_dipole_moment"] / 0.393430307
                   distances[i] = d
