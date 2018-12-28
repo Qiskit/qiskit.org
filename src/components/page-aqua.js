@@ -294,7 +294,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
             <code-sample type="bash">
               <template>
                 [python3] $ qiskit_aqua_ui
-                [python3] $ qiskit_aqua_chemistry_ui
+                [python3] $ qiskit_chemistry_ui
               </template>
             </code-sample>
             <p>${i18next.t('pages.aqua.chemistryGuiDescription1')}</p>
