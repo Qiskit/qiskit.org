@@ -30,6 +30,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       <style>
         :host {
           --app-primary-color: #8a3ffc;
+          --app-secondary-color: #242a2e;
 
           --qiskit-terra-color: #20d5d2;
           --qiskit-aqua-color: #30b0ff;
