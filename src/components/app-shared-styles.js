@@ -12,7 +12,7 @@ import { html } from '@polymer/lit-element';
 export const SharedStyles = html`
   <style>
     a {
-      color: var(--app-light-primary-color);
+      color: var(--app-primary-color);
       text-decoration: none;
     }
 

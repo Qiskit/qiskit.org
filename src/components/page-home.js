@@ -106,7 +106,7 @@ class PageHome extends localize(i18next)(PageViewElement) {
         }
 
         .social-networks-list li a svg {
-          fill: var(--app-light-primary-color);
+          fill: var(--app-primary-color);
         }
 
         .social-networks-list li .social-network {
