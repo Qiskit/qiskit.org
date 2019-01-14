@@ -12,7 +12,7 @@ import { html } from '@polymer/lit-element';
 export const SharedStyles = html`
   <style>
     a {
-      color: var(--app-light-primary-color);
+      color: var(--app-primary-color);
       text-decoration: none;
     }
 
@@ -48,7 +48,10 @@ export const HeaderStyles = html`
       align-items: center;
       text-align: center;
       padding: 2em 1.2em;
-      background-color: var(--app-header-background-color, #292c35);
+      background-color: var(
+        --app-header-background-color,
+        var(--app-secondary-color)
+      );
       color: #ffffff;
     }
 
