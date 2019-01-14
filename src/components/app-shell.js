@@ -32,9 +32,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           --app-primary-color: #8a3ffc;
           --app-secondary-color: #242a2e;
 
-          --qiskit-terra-color: #20d5d2;
+          --qiskit-terra-color: #8c8c8c;
           --qiskit-aqua-color: #30b0ff;
           --qiskit-aer-color: #b3e6ff;
+          --qiskit-ignis-color: #20d5d2;
+
           --qiskit-vscode-color: #F5F5F5;
 
           display: flex;
