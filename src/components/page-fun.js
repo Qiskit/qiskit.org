@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
@@ -23,9 +23,7 @@ import './vaadin-ibmq-styles/vaadin-button.js';
 class PageFun extends localize(i18next)(PageViewElement) {
   render() {
     return html`
-      ${SharedStyles}
-      ${HeaderStyles}
-      ${SectionStyles}
+      ${SharedStyles} ${HeaderStyles} ${SectionStyles}
       <style>
         :host {
           --app-section-background-color: var(--app-primary-color);
@@ -38,21 +36,18 @@ class PageFun extends localize(i18next)(PageViewElement) {
             <h3>${i18next.t('pages.fun.modelQTitle')}</h3>
             <p>${i18next.t('pages.fun.modelQDescription')}</p>
             <div class="actions">
-              <a
-                  href="/modelq/"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t(
-                  'pages.fun.modelQButton',
-                )}</vaadin-button>
+              <a href="/modelq/" target="_blank" rel="noopener" tabindex="-1">
+                <vaadin-button theme="secondary"
+                  >${i18next.t('pages.fun.modelQButton')}</vaadin-button
+                >
               </a>
             </div>
           </div>
           <div class="illustration">
-            <img src="images/fun/model-q.jpg" alt="${i18next.t(
-              'pages.fun.modelQAltImage',
-            )}">
+            <img
+              src="images/fun/model-q.jpg"
+              alt="${i18next.t('pages.fun.modelQAltImage')}"
+            />
           </div>
         </div>
       </section>
@@ -64,20 +59,22 @@ class PageFun extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.fun.helloQuantumDescription')}</p>
             <div class="actions">
               <a
-                  href="https://helloquantum.mybluemix.net"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t(
-                  'pages.fun.helloQuantumButton',
-                )}</vaadin-button>
+                href="https://helloquantum.mybluemix.net"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+              >
+                <vaadin-button theme="secondary"
+                  >${i18next.t('pages.fun.helloQuantumButton')}</vaadin-button
+                >
               </a>
             </div>
           </div>
           <div class="illustration">
-            <img src="images/fun/hello-quantum.png" alt="${i18next.t(
-              'pages.fun.helloQuantumAltImage',
-            )}">
+            <img
+              src="images/fun/hello-quantum.png"
+              alt="${i18next.t('pages.fun.helloQuantumAltImage')}"
+            />
           </div>
         </div>
       </section>
@@ -89,20 +86,22 @@ class PageFun extends localize(i18next)(PageViewElement) {
             <p>${i18next.t('pages.fun.entanglionDescription')}</p>
             <div class="actions">
               <a
-                  href="https://entanglion.github.io"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t(
-                  'pages.fun.entanglionButton',
-                )}</vaadin-button>
+                href="https://entanglion.github.io"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+              >
+                <vaadin-button theme="secondary"
+                  >${i18next.t('pages.fun.entanglionButton')}</vaadin-button
+                >
               </a>
             </div>
           </div>
           <div class="illustration">
-            <img src="images/fun/entanglion.png" alt="${i18next.t(
-              'pages.fun.entanglionAltImage',
-            )}">
+            <img
+              src="images/fun/entanglion.png"
+              alt="${i18next.t('pages.fun.entanglionAltImage')}"
+            />
           </div>
         </div>
       </section>

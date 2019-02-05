@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element';
 
 import { i18next } from '../i18next.js';
 
