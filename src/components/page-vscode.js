@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
