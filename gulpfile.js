@@ -7,20 +7,26 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-const { dest, series, src } = require('gulp');
-const del = require('del');
+const { dest, parallel, series, src, task } = require('gulp');
 const inject = require('gulp-inject-string');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const del = require('del');
 
 const buildPath = 'build/';
+const serverBuildPath = 'server/build/';
 
-const serverPath = 'server/prpl/';
-const serverBuildPath = `${serverPath}${buildPath}`;
-
-function clean() {
+/**
+ * Cleans the prpl-server build in the server directory.
+ */
+task('prpl-server:clean', () => {
   return del(serverBuildPath);
-}
+});
 
-function addIbmStatsScript() {
+/**
+ * Add IBM Stats script.
+ */
+task('add-ibm-stats-script', () => {
   const script = `
     <script>
       /* Define digital data object based on _appInfo object */
@@ -54,24 +60,46 @@ function addIbmStatsScript() {
   return src(`${buildPath}**/index.html`)
     .pipe(inject.before('</body>', script))
     .pipe(dest(buildPath));
-}
+});
 
-function copyStaticFiles() {
-  return src('license/**')
-    .pipe(dest(`${buildPath}license`))
-    .pipe(src('documentation/**'))
-    .pipe(dest(`${buildPath}documentation`))
-    .pipe(src('modelq/**'))
-    .pipe(dest(`${buildPath}modelq`));
-}
+/**
+ * Copy static files.
+ */
+task('copy-license', () => src('license/**').pipe(dest(`${buildPath}license`)));
+task('copy-documentation', () =>
+  src('documentation/**').pipe(dest(`${buildPath}documentation`)),
+);
+task('copy-modelq', () => src('modelq/**').pipe(dest(`${buildPath}modelq`)));
+task('copy-robots', () => src('robots.txt').pipe(dest(`${buildPath}`)));
+task(
+  'copy-static-files',
+  parallel('copy-license', 'copy-documentation', 'copy-modelq', 'copy-robots'),
+);
 
-function copyBuildFolder() {
-  return src(`${buildPath}**`).pipe(dest(serverBuildPath));
-}
+/**
+ * Copies the prpl-server build to the server directory while renaming the
+ * node_modules directory so services like App Engine will upload it.
+ */
+task('prpl-server:build', () => {
+  const pattern = 'node_modules';
+  const replacement = 'node_assets';
+
+  return src(`${buildPath}**`)
+    .pipe(
+      rename(path => {
+        // eslint-disable-next-line
+        path.basename = path.basename.replace(pattern, replacement);
+        // eslint-disable-next-line
+        path.dirname = path.dirname.replace(pattern, replacement);
+      }),
+    )
+    .pipe(replace(pattern, replacement))
+    .pipe(dest(serverBuildPath));
+});
 
 exports['setup:prpl-server'] = series(
-  clean,
-  addIbmStatsScript,
-  copyStaticFiles,
-  copyBuildFolder,
+  'prpl-server:clean',
+  'add-ibm-stats-script',
+  'copy-static-files',
+  'prpl-server:build',
 );
