@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>Optimizers &#8212; Qiskit 0.7 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Variational Forms" href="variational_forms.html" />
+    <link rel="prev" title="Algorithms" href="algorithms.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-elements">Qiskit Elements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-aqua">Qiskit Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-components">Qiskit Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-with-environment">Installation with environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#setup-a-standalone-version">Setup a standalone version</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#automatically-loading-credentials">Automatically loading credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#store-api-credentials-locally">Store API credentials locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#manually-loading-credentials">Manually loading credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_with_qiskit.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#simulating-circuits-using-qiskit-aer">Simulating circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#running-circuits-using-the-ibmq-provider">Running circuits using the IBMQ provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../the_ibmq_provider.html">Running on IBMQ Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#the-provider">The Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#filtering-the-backends">Filtering the backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#the-backend">The backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#the-job-object">The Job object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting_data_in_qiskit.html">Visualization in Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#plot-histogram">Plot histogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#using-the-output-from-plot-histogram">Using the output from plot_histogram()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#interactive-histogram-plots-for-jupyter-notebooks">Interactive histogram plots for Jupyter Notebooks.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#plot-state">Plot State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#interactive-state-plots-for-jupyter-notebooks">Interactive State Plots for Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#plot-bloch-vector">Plot Bloch Vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#options-for-plot-bloch-vector">Options for plot_bloch_vector()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#adjusting-the-output-from-plot-bloch-vector">Adjusting the output from plot_bloch_vector()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../terra/index.html">Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../terra/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#tools">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/quantum_circuits.html">The Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#id1">Quantum Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#pauli-gates">Pauli gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#clifford-gates">Clifford gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#c3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-u3-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#toffoli-gate-ccx-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/backend_monitoring_tools.html">Tools for Monitoring Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/release_history.html#release-notes">Release notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/release_history.html#qiskit-terra-0-7-0">Qiskit Terra 0.7.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/release_history.html#qiskit-terra-0-6-0">Qiskit Terra 0.6.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/release_history.html#qiskit-terra-0-5-0">Qiskit Terra 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/index.html#authors">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="aqua.html">Qiskit Aqua</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="installation.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="execution.html#input-file">Input File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extending.html">Contributing to Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#aqua-extension-points">Aqua Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#aqua-documentation-ui">Aqua Documentation UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#aqua-unit-tests">Aqua Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="algorithms.html">Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="algorithms.html#quantum-algorithms">Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms.html#classical-reference-algorithms">Classical Reference Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#local-optimizers">Local Optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#global-optimizers">Global Optimizers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="variational_forms.html">Variational Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#ry">Ry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#ryrz">RyRz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#unitary-coupled-cluster-singles-and-doubles-uccsd">Unitary Coupled Cluster Singles and Doubles (UCCSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#swaprz">SwapRz</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="oracles.html">Oracles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#satisfiability-grover-oracle-sat">SATisfiability Grover Oracle (SAT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#deutsch-jozsa-oracle">Deutsch-Jozsa Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#bernstein-vazirani-oracle">Bernstein-Vazirani Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#simon-oracle">Simon Oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="iqfts.html#standard-iqft">Standard IQFT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iqfts.html#approximate-iqft">Approximate IQFT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="initial_states.html">Initial States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="initial_states.html#zero">Zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="initial_states.html#id2">Hartree-Fock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="initial_states.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="feature_maps.html">Feature Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#first-order-expansion">First Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="multiclass_extensions.html">Multiclass Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="multiclass_extensions.html#one-against-rest">One Against Rest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiclass_extensions.html#all-pairs">All Pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiclass_extensions.html#error-correcting-code">Error Correcting Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="random_distributions.html">Random Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="random_distributions.html#univariate-distributions">Univariate Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="random_distributions.html#multivariate-distributions">Multivariate Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uncertainty_problems.html">Uncertainty Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uncertainty_problems.html#european-call-option">European Call Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit_aqua.html">Aqua SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html">Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#gaussian-16">Gaussian™ 16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#psi4">PSI4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#pyscf">PySCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#pyquante">PyQuante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#hdf5">HDF5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html">Translators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#jordan-wigner">Jordan-Wigner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#parity">Parity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#bravyi-kitaev">Bravyi-Kitaev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#bravyi-kitaev-superfast">Bravyi-Kitaev Superfast</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#input-file">Input File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation">Input File for Direct Algorithm Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html">Contributing to Qiskit Chemistry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html#extension-points">Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html#unit-tests">Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit_chemistry.html">Qiskit Chemistry SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/release_history.html">Release history</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/release_history.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ai/qiskit_ai.html">Qiskit AI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ai/qiskit_ai.html#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ai/qiskit_ai.html#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ai/qiskit_ai.html#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ai/qiskit_ai.html#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ai/qiskit_ai.html#contributing-to-qiskit-ai">Contributing to Qiskit AI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ai/qiskit_ai.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="optimization/qiskit_optimization.html">Qiskit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#qiskit-optimization-problems">Qiskit Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="optimization/qiskit_optimization.html#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="optimization/qiskit_optimization.html#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#contributing-to-qiskit-optimization">Contributing to Qiskit Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="finance/qiskit_finance.html">Qiskit Finance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="finance/qiskit_finance.html#qiskit-finance-problems">Qiskit Finance Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="finance/qiskit_finance.html#contributing-to-qiskit-finance">Contributing to Qiskit Finance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="finance/qiskit_finance.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/aqua_tutorials.html">Aqua Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="release_history.html#release-notes">Release Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="release_history.html#qiskit-aqua-0-4-0">Qiskit Aqua 0.4.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Qiskit 2019 Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../roadmap.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autodoc/qiskit.html">Qiskit Module reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.qobj.html">qiskit.qobj package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.unrollers.html">qiskit.unrollers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-elements">Qiskit Elements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-aqua">Qiskit Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-components">Qiskit Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-with-environment">Installation with environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#setup-a-standalone-version">Setup a standalone version</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#automatically-loading-credentials">Automatically loading credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#store-api-credentials-locally">Store API credentials locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#manually-loading-credentials">Manually loading credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_with_qiskit.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#simulating-circuits-using-qiskit-aer">Simulating circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_with_qiskit.html#running-circuits-using-the-ibmq-provider">Running circuits using the IBMQ provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started_with_qiskit.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../the_ibmq_provider.html">Running on IBMQ Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#the-provider">The Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#filtering-the-backends">Filtering the backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#the-backend">The backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_ibmq_provider.html#the-job-object">The Job object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting_data_in_qiskit.html">Visualization in Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#plot-histogram">Plot histogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#using-the-output-from-plot-histogram">Using the output from plot_histogram()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#interactive-histogram-plots-for-jupyter-notebooks">Interactive histogram plots for Jupyter Notebooks.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#plot-state">Plot State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#interactive-state-plots-for-jupyter-notebooks">Interactive State Plots for Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_data_in_qiskit.html#plot-bloch-vector">Plot Bloch Vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#options-for-plot-bloch-vector">Options for plot_bloch_vector()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting_data_in_qiskit.html#adjusting-the-output-from-plot-bloch-vector">Adjusting the output from plot_bloch_vector()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../terra/index.html">Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../terra/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#tools">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/quantum_circuits.html">The Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#id1">Quantum Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#pauli-gates">Pauli gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#clifford-gates">Clifford gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#c3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-u3-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#toffoli-gate-ccx-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/backend_monitoring_tools.html">Tools for Monitoring Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/release_history.html#release-notes">Release notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/release_history.html#qiskit-terra-0-7-0">Qiskit Terra 0.7.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/release_history.html#qiskit-terra-0-6-0">Qiskit Terra 0.6.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/release_history.html#qiskit-terra-0-5-0">Qiskit Terra 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/index.html#authors">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="aqua.html">Qiskit Aqua</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="installation.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="execution.html#input-file">Input File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extending.html">Contributing to Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#aqua-extension-points">Aqua Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#aqua-documentation-ui">Aqua Documentation UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extending.html#aqua-unit-tests">Aqua Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="algorithms.html">Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="algorithms.html#quantum-algorithms">Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms.html#classical-reference-algorithms">Classical Reference Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#local-optimizers">Local Optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#global-optimizers">Global Optimizers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="variational_forms.html">Variational Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#ry">Ry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#ryrz">RyRz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#unitary-coupled-cluster-singles-and-doubles-uccsd">Unitary Coupled Cluster Singles and Doubles (UCCSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variational_forms.html#swaprz">SwapRz</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="oracles.html">Oracles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#satisfiability-grover-oracle-sat">SATisfiability Grover Oracle (SAT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#deutsch-jozsa-oracle">Deutsch-Jozsa Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#bernstein-vazirani-oracle">Bernstein-Vazirani Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#simon-oracle">Simon Oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="iqfts.html#standard-iqft">Standard IQFT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="iqfts.html#approximate-iqft">Approximate IQFT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="initial_states.html">Initial States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="initial_states.html#zero">Zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="initial_states.html#id2">Hartree-Fock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="initial_states.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="feature_maps.html">Feature Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#first-order-expansion">First Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="multiclass_extensions.html">Multiclass Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="multiclass_extensions.html#one-against-rest">One Against Rest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiclass_extensions.html#all-pairs">All Pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiclass_extensions.html#error-correcting-code">Error Correcting Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="random_distributions.html">Random Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="random_distributions.html#univariate-distributions">Univariate Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="random_distributions.html#multivariate-distributions">Multivariate Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uncertainty_problems.html">Uncertainty Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uncertainty_problems.html#european-call-option">European Call Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit_aqua.html">Aqua SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html">Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#gaussian-16">Gaussian™ 16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#psi4">PSI4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#pyscf">PySCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#pyquante">PyQuante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_drivers.html#hdf5">HDF5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html">Translators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#jordan-wigner">Jordan-Wigner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#parity">Parity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#bravyi-kitaev">Bravyi-Kitaev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#bravyi-kitaev-superfast">Bravyi-Kitaev Superfast</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#input-file">Input File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation">Input File for Direct Algorithm Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html">Contributing to Qiskit Chemistry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html#extension-points">Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_extending.html#unit-tests">Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit_chemistry.html">Qiskit Chemistry SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chemistry/release_history.html">Release history</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemistry/release_history.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ai/qiskit_ai.html">Qiskit AI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ai/qiskit_ai.html#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ai/qiskit_ai.html#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ai/qiskit_ai.html#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ai/qiskit_ai.html#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ai/qiskit_ai.html#contributing-to-qiskit-ai">Contributing to Qiskit AI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ai/qiskit_ai.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="optimization/qiskit_optimization.html">Qiskit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#qiskit-optimization-problems">Qiskit Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="optimization/qiskit_optimization.html#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="optimization/qiskit_optimization.html#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#contributing-to-qiskit-optimization">Contributing to Qiskit Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimization/qiskit_optimization.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="finance/qiskit_finance.html">Qiskit Finance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="finance/qiskit_finance.html#qiskit-finance-problems">Qiskit Finance Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="finance/qiskit_finance.html#contributing-to-qiskit-finance">Contributing to Qiskit Finance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="finance/qiskit_finance.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/aqua_tutorials.html">Aqua Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="release_history.html#release-notes">Release Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="release_history.html#qiskit-aqua-0-4-0">Qiskit Aqua 0.4.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Qiskit 2019 Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../roadmap.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../roadmap.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autodoc/qiskit.html">Qiskit Module reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.qobj.html">qiskit.qobj package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.unrollers.html">qiskit.unrollers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="optimizers">
+<span id="id1"></span><h1>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this headline">¶</a></h1>
+<p>Aqua  contains a variety of classical optimizers for
+use by quantum variational algorithms, such as <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>.
+Logically, these optimizers can be divided into two categories:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">Local Optimizers</span>: Given an optimization problem, a <em>local optimizer</em> is a function that attempts to find an optimal value
+within the neighboring set of a candidate solution.</li>
+<li><span class="xref std std-ref">Global Optimizers</span>: Given an optimization problem, a <em>global optimizer</em> is a function that attempts to find an optimal value
+among all possible solutions.</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Extending the Optimizer Library</p>
+<p>Consistent with its unique  design, Aqua has a modular and
+extensible architecture. Algorithms and their supporting objects, such as optimizers for quantum variational algorithms,
+are pluggable modules in Aqua.
+New optimizers for quantum variational algorithms are typically installed in the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua/utils/optimizers</span></code> folder and derive from
+the <code class="docutils literal notranslate"><span class="pre">Optimizer</span></code> class.  Aqua also allows for
+<a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new optimizers can register themselves
+as Aqua extensions and be dynamically discovered at run time independent of their
+location in the file system.
+This is done in order to encourage researchers and
+developers interested in
+<a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> to extend the Aqua framework with their novel research contributions.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><cite>Section :ref:`aqua-extending</cite> provides more
+details on how to extend Aqua with new components.</p>
+</div>
+<div class="section" id="local-optimizers">
+<span id="id2"></span><h2>Local Optimizers<a class="headerlink" href="#local-optimizers" title="Permalink to this headline">¶</a></h2>
+<p>This section presents the classical local optimizers made available in Aqua.
+These optimizers are meant to be used in conjunction with quantum variational
+algorithms:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">Conjugate Gradient (CG) Method</span></li>
+<li><span class="xref std std-ref">Constrained Optimization BY Linear Approximation (COBYLA)</span></li>
+<li><span class="xref std std-ref">Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</span></li>
+<li><a class="reference internal" href="#nelder-mead"><span class="std std-ref">Nelder-Mead</span></a></li>
+<li><span class="xref std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span></li>
+<li><a class="reference internal" href="#powell"><span class="std std-ref">Powell</span></a></li>
+<li><span class="xref std std-ref">Sequential Least SQuares Programming (SLSQP)</span></li>
+<li><span class="xref std std-ref">Simultaneous Perturbation Stochastic Approximation (SPSA)</span></li>
+<li><span class="xref std std-ref">Truncated Newton (TNC)</span></li>
+</ul>
+<p>Except for <span class="xref std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span>, all these optimizers are directly based on the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> optimization function in the
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">SciPy</a> Python library.
+They all have a common pattern for parameters. Specifically, the <code class="docutils literal notranslate"><span class="pre">tol</span></code> parameter, whose value
+must be a <code class="docutils literal notranslate"><span class="pre">float</span></code> indicating <em>tolerance for termination</em>,
+is from the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>  method itself, while the remaining parameters are
+from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.show_options.html">options
+dictionary</a>,
+which may be referred to for further information.</p>
+<p>Aqua comes with a large collection of adaptive algorithms, such as the
+<a class="reference external" href="https://www.nature.com/articles/ncomms5213">Variational Quantum Eigensolver (VQE) algorithm</a>,
+<a class="reference external" href="https://arxiv.org/abs/1411.4028">Quantum Approximate Optimization
+Algorithm (QAOA)</a>, the <a class="reference external" href="https://arxiv.org/abs/1804.11326">Quantum
+Support Vector Machine (SVM) Variational
+Algorithm</a> for AI. All these
+algorithms interleave quantum and classical computations, making use of
+classical optimizers. Aqua includes nine local and five global
+optimizers to choose from. By profiling the execution of the adaptive
+algorithms, we have detected that a large portion of the execution time
+is taken by the optimization phase, which runs classically. Among the
+most widely used optimizers are the <em>gradient-based</em> ones; these
+optimizers attempt to compute the absolute minimum (or maximum) of a
+function <span class="math notranslate nohighlight">\(f\)</span> through its gradient.</p>
+<p>Five local optimizers among those integrated into Aqua are
+gradient-based: the four local optimizers <em>Limited-memory
+Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</em>, <em>Sequential Least SQuares Programming (SLSQP)</em>, <em>Conjugate
+Gradient (CG)</em>, and <em>Truncated Newton (TNC)</em> from
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">SciPy</a>,
+as well as <a class="reference external" href="https://www.jhuapl.edu/SPSA/">Simultaneous Perturbation Stochastic Approximation
+(SPSA)</a>. Aqua contains a
+methodology that parallelizes the classical computation of the partial
+derivatives in the gradient-based local optimizers listed above. This
+parallelization takes place <em>transparently</em>, in the sense that Aqua
+intercepts the computation of the partial derivatives and parallelizes
+it without making any change to the actual source code of the
+optimizers.</p>
+<p>In order to activate the parallelization mechanism for an adaptive
+algorithm included in Aqua, it is sufficient to construct it with
+parameter <code class="docutils literal notranslate"><span class="pre">batch_mode</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Our experiments have proven
+empirically that parallelizing the process of a gradient-based local
+optimizer achieves a 30% speedup in the execution time of an adaptive algorithms on
+a simulator.</p>
+<div class="section" id="conjugate-gradient-cg-method">
+<span id="cg"></span><h3>Conjugate Gradient (CG) Method<a class="headerlink" href="#conjugate-gradient-cg-method" title="Permalink to this headline">¶</a></h3>
+<p>CG is an algorithm for the numerical solution of systems of linear equations whose matrices are symmetric and positive-definite.
+It is an <em>iterative algorithm</em> in that it uses an initial guess to generate a sequence of improving approximate solutions for a problem,
+in which each approximation is derived from the previous ones.  It is often used to solve unconstrained optimization problems, such as energy minimization.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations to perform:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameters takes a positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value.  The default is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p>
+</li>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value that must be greater than the gradient norm before successful termination.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-05</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code> value,
+otherwise, it is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.  The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">Step size used for numerical approximation of the Jacobian.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">1.4901161193847656e-08</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to CG declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">CG</span></code>.</p>
+</div>
+</div>
+<div class="section" id="constrained-optimization-by-linear-approximation-cobyla">
+<span id="cobyla"></span><h3>Constrained Optimization BY Linear Approximation (COBYLA)<a class="headerlink" href="#constrained-optimization-by-linear-approximation-cobyla" title="Permalink to this headline">¶</a></h3>
+<p>COBYLA is a numerical optimization method for constrained problems
+where the derivative of the objective function is not known.
+COBYLA supports the following parameters:</p>
+<ul>
+<li><p class="first">The maximum number of iterations to perform:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">Reasonable initial changes to the variable:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rhobeg</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to COBYLA declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">COBYLA</span></code>.</p>
+</div>
+</div>
+<div class="section" id="limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b">
+<span id="l-bfgs-b"></span><h3>Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)<a class="headerlink" href="#limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b" title="Permalink to this headline">¶</a></h3>
+<p>The target goal of L-BFGS-B is to minimize the value of a differentiable scalar function <span class="math notranslate nohighlight">\(f\)</span>.
+This optimizer is a <em>quasi-Newton method</em>, meaning that, in contrast to <em>Newtons’s method</em>, it
+does not require <span class="math notranslate nohighlight">\(f\)</span>’s <em>Hessian</em> (the matrix of <span class="math notranslate nohighlight">\(f\)</span>’s second derivatives)
+when attempting to compute <span class="math notranslate nohighlight">\(f\)</span>’s minimum value.
+Like BFGS, L-BFGS is an iterative method for solving unconstrained, non-linear optimization problems, but approximates
+BFGS using a limited amount of computer memory.
+L-BFGS starts with an initial estimate of the optimal value, and proceeds iteratively
+to refine that estimate with a sequence of better estimates.
+The derivatives of <span class="math notranslate nohighlight">\(f\)</span> are used to identify the direction of steepest descent,
+and also to form an estimate of the Hessian matrix (second derivative) of <span class="math notranslate nohighlight">\(f\)</span>.
+L-BFGS-B extends L-BFGS to handle simple, per-variable bound constraints.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of function evaluations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxfun</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">factr</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p>
+</li>
+<li><p class="first">An <code class="docutils literal notranslate"><span class="pre">int</span></code> value controlling the frequency of the printed output showing the  optimizer’s
+operations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">iprint</span> <span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">Step size used if numerically calculating the gradient.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-08</span></code>.</p>
+</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Further detailed information on <code class="docutils literal notranslate"><span class="pre">factr</span></code> and <code class="docutils literal notranslate"><span class="pre">iprint</span></code> may be found at
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">scipy.optimize.fmin_l_bfgs_b</a>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to L-BFGS-B declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">L_BFGS_B</span></code>.</p>
+</div>
+</div>
+<div class="section" id="nelder-mead">
+<span id="id3"></span><h3>Nelder-Mead<a class="headerlink" href="#nelder-mead" title="Permalink to this headline">¶</a></h3>
+<p>The Nelder-Mead algorithm performs unnconstrained optimization; it ignores bounds
+or constraints.  It is used to find the minimum or maximum of an objective function
+in a multidimensional space.  It is based on the Simplex algorithm. Nelder-Mead
+is robust in many applications, especially when the first and second derivatives of the
+objective function are not known. However, if the numerical
+computation of the derivatives can be trusted to be accurate, other algorithms using the
+first and/or second derivatives information might be preferred to Nelder-Mead for their
+better performance in the general case, especially in consideration of the fact that
+the Nelder–Mead technique is a heuristic search method that can converge to non-stationary points.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a positive <code class="docutils literal notranslate"><span class="pre">int</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of functional evaluations to perform:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxfev</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance parameter indicating the absolute error in <code class="docutils literal notranslate"><span class="pre">xopt</span></code> between iterations that will be considered acceptable
+for convergence.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xatol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">0.0001</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adaptive</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">If true will adapt algorithm to dimensionality of problem.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Nelder-Mead declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">NELDER_MEAD</span></code>.</p>
+</div>
+</div>
+<div class="section" id="parallel-broyden-fletcher-goldfarb-shann-p-bfgs">
+<span id="p-bfgs"></span><h3>Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)<a class="headerlink" href="#parallel-broyden-fletcher-goldfarb-shann-p-bfgs" title="Permalink to this headline">¶</a></h3>
+<p>P-BFGS is a parallellized version of  <a class="reference external" href="#limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b">L-BFGS-B</a>,
+with which it shares the same parameters.
+P-BFGS can be useful when the target hardware is a quantum simulator running on a classical
+machine. This allows the multiple processes to use simulation to
+potentially reach a minimum faster. The parallelization may help the optimizer avoid getting stuck
+at local optima.  In addition to the parameters of
+L-BFGS-B, P-BFGS supports an following parameter — the maximum number of processes spawned by P-BFGS:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_processes</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>By default, P-BFGS runs one optimization in the current process
+and spawns additional processes up to the number of processor cores.
+An <code class="docutils literal notranslate"><span class="pre">int</span></code> value may be specified to limit the total number of processes
+(or cores) used.  This parameter is optional.  If specified, the value of this parameter must be
+a positive <code class="docutils literal notranslate"><span class="pre">int</span></code>, otherwise, it is <code class="docutils literal notranslate"><span class="pre">None</span></code>.  The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The parallel processes do not currently work for this optimizer
+on the Microsoft Windows platform. There, P-BFGS will just run the one
+optimization in the main process, without spawning new processes.
+Therefore, the resulting behavior
+will be the same as the L-BFGS-B optimizer.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to P-BFGS declaratively inside Aqua,
+its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">P_BFGS</span></code>.</p>
+</div>
+</div>
+<div class="section" id="powell">
+<span id="id4"></span><h3>Powell<a class="headerlink" href="#powell" title="Permalink to this headline">¶</a></h3>
+<p>The Powell algorithm performs unconstrained optimization; it ignores bounds or
+constraints. Powell is
+a <em>conjugate direction method</em>: it performs sequential one-dimensional
+minimization along each directional vector, which is updated at
+each iteration of the main minimization loop. The function being minimized need not be
+differentiable, and no derivatives are taken.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a positive <code class="docutils literal notranslate"><span class="pre">int</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">The maximum number of functional evaluations to perform:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxfev</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default value is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance parameter indicating the absolute error in <code class="docutils literal notranslate"><span class="pre">xopt</span></code> between iterations that will be considered acceptable
+for convergence.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">0.0001</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Powell declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">POWELL</span></code>.</p>
+</div>
+</div>
+<div class="section" id="sequential-least-squares-programming-slsqp">
+<span id="slsqp"></span><h3>Sequential Least SQuares Programming (SLSQP)<a class="headerlink" href="#sequential-least-squares-programming-slsqp" title="Permalink to this headline">¶</a></h3>
+<p>SLSQP minimizes a
+function of several variables with any combination of bounds, equality
+and inequality constraints. The method wraps the SLSQP Optimization
+subroutine originally implemented by Dieter Kraft.
+SLSQP is ideal for  mathematical problems for which the objective function and the constraints are twice continuously differentiable.
+Note that the wrapper
+handles infinite values in bounds by converting them into large floating
+values.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
+</li>
+<li><p class="first">A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating precision goal for the value of the objective function in the stopping criterion.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">float</span></code> value is expected.  The default value is <code class="docutils literal notranslate"><span class="pre">1e-06</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">Step size used for numerical approximation of the Jacobian.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-08</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SLSQP declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">SLSQP</span></code>.</p>
+</div>
+</div>
+<div class="section" id="simultaneous-perturbation-stochastic-approximation-spsa">
+<span id="spsa"></span><h3>Simultaneous Perturbation Stochastic Approximation (SPSA)<a class="headerlink" href="#simultaneous-perturbation-stochastic-approximation-spsa" title="Permalink to this headline">¶</a></h3>
+<p>SPSA is an algorithmic method for optimizing systems with multiple unknown parameters.
+As an optimization method, it is appropriately suited to large-scale population models, adaptive modeling, and simulation optimization.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Many examples are presented at the <a class="reference external" href="http://www.jhuapl.edu/SPSA">SPSA Web site</a>.</p>
+</div>
+<p>SPSA is a descent method capable of finding global minima,
+sharing this property with other methods as simulated annealing.
+Its main feature is the gradient approximation, which requires only two
+measurements of the objective function, regardless of the dimension of the optimization problem.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">SPSA can be used in the presence of noise, and it is therefore indicated in situations
+involving measurement uncertainty on a quantum computation when finding a minimum. If you are
+executing a variational algorithm using a Quantum ASseMbly Language (QASM) simulator or a real device,
+SPSA would be the most recommended choice among the optimizers provided here.</p>
+</div>
+<p>The optimization process includes a calibration phase, which requires additional
+functional evaluations.  Overall, the following parameters are supported:</p>
+<ul>
+<li><p class="first">Maximum number of trial steps to be taken for the optimization.
+There are two function evaluations per trial:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_trials</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default value is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+</li>
+<li><p class="first">An <code class="docutils literal notranslate"><span class="pre">int</span></code> value determining how often optimization outcomes should be stored during execution:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">save_steps</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.
+SPSA will store optimization outcomes every <code class="docutils literal notranslate"><span class="pre">save_steps</span></code> trial steps.  The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">The number of last updates of the variables to average on for the
+final objective function:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">last_avg</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">Control parameters for SPSA:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c0</span> <span class="p">:</span> <span class="nb">float</span><span class="p">;</span> <span class="n">default</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">0.62831853071796</span> <span class="p">(</span><span class="n">which</span> <span class="ow">is</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">PI</span><span class="p">)</span>
+<span class="n">c1</span> <span class="p">:</span> <span class="nb">float</span><span class="p">;</span> <span class="n">default</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">0.1</span>
+<span class="n">c2</span> <span class="p">:</span> <span class="nb">float</span><span class="p">;</span> <span class="n">default</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">0.602</span>
+<span class="n">c3</span> <span class="p">:</span> <span class="nb">float</span><span class="p">;</span> <span class="n">default</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">0.101</span>
+<span class="n">c4</span> <span class="p">:</span> <span class="nb">float</span><span class="p">;</span> <span class="n">default</span> <span class="n">value</span> <span class="ow">is</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>These are the SPSA control parameters, consisting of 5 <code class="docutils literal notranslate"><span class="pre">float</span></code> values, and are used as described below.</p>
+<p>SPSA updates the parameters (<code class="docutils literal notranslate"><span class="pre">theta</span></code>)
+for the objective function (<code class="docutils literal notranslate"><span class="pre">J</span></code>) through the following equation at
+iteration <code class="docutils literal notranslate"><span class="pre">k</span></code>:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span> <span class="o">=</span> <span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span> <span class="o">+</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">gradient</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">c4</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">c2</span><span class="p">)</span>
+<span class="n">gradient</span> <span class="o">=</span> <span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span><span class="o">+</span><span class="p">)</span> <span class="o">-</span> <span class="n">J</span><span class="p">(</span><span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span><span class="o">-</span><span class="p">))</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">c3</span><span class="p">))</span>
+<span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span><span class="o">+</span> <span class="o">=</span> <span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="p">(</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">c3</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta</span>
+<span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span><span class="o">-</span> <span class="o">=</span> <span class="n">theta_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span> <span class="o">-</span> <span class="n">c1</span> <span class="o">*</span> <span class="p">(</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">c3</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">J(theta)</span></code> is the  objective value of <code class="docutils literal notranslate"><span class="pre">theta</span></code>. <code class="docutils literal notranslate"><span class="pre">c0</span></code>, <code class="docutils literal notranslate"><span class="pre">c1</span></code>, <code class="docutils literal notranslate"><span class="pre">c2</span></code>, <code class="docutils literal notranslate"><span class="pre">c3</span></code> and <code class="docutils literal notranslate"><span class="pre">c4</span></code> are the five control parameters.
+By default, <code class="docutils literal notranslate"><span class="pre">c0</span></code> is calibrated through a few evaluations on the
+objective function with the initial <code class="docutils literal notranslate"><span class="pre">theta</span></code>. <code class="docutils literal notranslate"><span class="pre">c1</span></code>, <code class="docutils literal notranslate"><span class="pre">c2</span></code>, <code class="docutils literal notranslate"><span class="pre">c3</span></code> and <code class="docutils literal notranslate"><span class="pre">c4</span></code> are set as <code class="docutils literal notranslate"><span class="pre">0.1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">0.602</span></code>, <code class="docutils literal notranslate"><span class="pre">0.101</span></code>, <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, respectively.</p>
+</li>
+<li><p class="first">Calibration step for SPSA.</p>
+<blockquote>
+<div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">skip_calibration</span><span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>. When calibration is done, i.e. when <code class="docutils literal notranslate"><span class="pre">skip_calibration</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> (by default) the
+control parameter <code class="docutils literal notranslate"><span class="pre">c0</span></code> as supplied is adjusted by the calibration step before optimization. If <code class="docutils literal notranslate"><span class="pre">skip_calibration</span></code>
+is <code class="docutils literal notranslate"><span class="pre">True</span></code> then the calibration step, which occurs ahead of optimization, is skipped and <code class="docutils literal notranslate"><span class="pre">c0</span></code> will be used unaltered.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to SPSA declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">SPSA</span></code>.</p>
+</div>
+</div>
+<div class="section" id="truncated-newton-tnc">
+<span id="tnc"></span><h3>Truncated Newton (TNC)<a class="headerlink" href="#truncated-newton-tnc" title="Permalink to this headline">¶</a></h3>
+<p>TNC uses a truncated Newton algorithm to minimize a function with
+variables subject to bounds. This algorithm uses gradient information;
+it is also called Newton Conjugate-Gradient. It differs from the
+<span class="xref std std-ref">Conjugate Gradient (CG) Method</span> method as it wraps a C implementation and
+allows each variable to be given upper and lower bounds.</p>
+<p>The following parameters are supported:</p>
+<ul>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
+</li>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">Relative precision for finite difference calculations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating the precision goal for the value of the objective function <code class="docutils literal notranslate"><span class="pre">f</span></code> in the stopping criterion.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ftol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating precision goal for the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> in the stopping criterion, after applying <code class="docutils literal notranslate"><span class="pre">x</span></code> scaling factors.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">A tolerance value indicating precision goal for the value of the projected gradient <code class="docutils literal notranslate"><span class="pre">g</span></code> in the stopping criterion,
+after applying <code class="docutils literal notranslate"><span class="pre">x</span></code> scaling factors.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+</li>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</li>
+<li><p class="first">Step size used for numerical approximation of the Jacobian.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">1.4901161193847656e-08</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to TNC declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">TNC</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="global-optimizers">
+<span id="id5"></span><h2>Global Optimizers<a class="headerlink" href="#global-optimizers" title="Permalink to this headline">¶</a></h2>
+<p>Aqua supports a number of classical global optimizers,
+all based on the open-source <a class="reference external" href="https://nlopt.readthedocs.io">NonLinear optimization (NLopt) library</a>.
+Each of these optimizers uses the corresponding named optimizer from NLopt.
+This package has native code implementations and must be
+installed locally for these global optimizers to be accessible by Aqua.
+Wrapper code allowing Aqua to interface these optimizers is installed
+in the <code class="docutils literal notranslate"><span class="pre">nlopt</span></code> subfolder of the <code class="docutils literal notranslate"><span class="pre">optimizers</span></code> folder.</p>
+<div class="topic">
+<p class="topic-title first">Installation of NLopt</p>
+<p>The <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/#download-and-installation">NLopt download and installation instructions</a>
+describe how to install NLopt.</p>
+<p>If you running Aqua on Windows, then you might want to refer to the specific <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/NLopt_on_Windows/">instructions for
+NLopt on Windows</a>.</p>
+<p>If you are running Aqua on a Unix-like system, first ensure that your environment is set
+to the Python executable for which the qiskit_aqua package is installed and running.
+Now, having downloaded and unpacked the NLopt archive file
+(for example, <code class="docutils literal notranslate"><span class="pre">nlopt-2.4.2.tar.gz</span></code> for version 2.4.2), enter the following commands:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">shared</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">python</span>
+<span class="n">make</span>
+<span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>The above makes and installs the shared libraries and Python interface in <cite>/usr/local</cite>. To have these be used
+by Aqua, the following commands can be entered to augment the dynamic library load path and python path respectively,
+assuming that you choose to leave these entities where they were built and installed as per above commands and that you
+are running Python 3.6:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span>export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64
+export PYTHONPATH=/usr/local/lib/python3.6/site-packages:${PYTHONPATH}
+</pre></div>
+</div>
+<p>The two <code class="docutils literal notranslate"><span class="pre">export</span></code> commands above can be pasted into the <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> file in the user’s home directory for
+automatic execution.  Now you can run Aqua and these optimizers should be available for you to use.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">The <code class="docutils literal notranslate"><span class="pre">max_evals</span></code> Parameter</p>
+<p>All the NLopt optimizers are supported by a common interface,
+allowing the optimizers to share the same common parameters.
+For quantum variational algorithms, it is necessary to assign a value
+to the following parameter:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_evals</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter takes a positive <code class="docutils literal notranslate"><span class="pre">int</span></code> as its value, indicating the maximum
+object function evaluation.  The default value is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+</div>
+<p>Currently, Aqua supplies the following global optimizers from NLOpt:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">Controller Random Search (CRS) with Local Mutation</span></li>
+<li><span class="xref std std-ref">DIviding RECTangles algorithm - Locally based (DIRECT-L)</span></li>
+<li><span class="xref std std-ref">DIviding RECTangles algorithm - Locally based - RANDomized (DIRECT-L-RAND)</span></li>
+<li><span class="xref std std-ref">Evolutionary Strategy algorithm with CaucHy distribution (ESCH)</span></li>
+<li><span class="xref std std-ref">Improved Stochastic Ranking Evolution Strategy (ISRES)</span></li>
+</ul>
+<div class="section" id="controller-random-search-crs-with-local-mutation">
+<span id="crs"></span><h3>Controller Random Search (CRS) with Local Mutation<a class="headerlink" href="#controller-random-search-crs-with-local-mutation" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#controlled-random-search-crs-with-local-mutation">CRS with local mutation</a>
+is part of the family of the CRS optimizers.
+The CRS optimizers start with a random population of points, and randomly evolve these points by heuristic rules.
+In the case of CRS with local mutation, the evolution is a randomized version of the
+<a class="reference internal" href="#nelder-mead"><span class="std std-ref">Nelder-Mead</span></a> local optimizer.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to CRS with local mutation declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">CRS</span></code>.</p>
+</div>
+</div>
+<div class="section" id="dividing-rectangles-algorithm-locally-based-direct-l">
+<span id="direct-l"></span><h3>DIviding RECTangles algorithm - Locally based (DIRECT-L)<a class="headerlink" href="#dividing-rectangles-algorithm-locally-based-direct-l" title="Permalink to this headline">¶</a></h3>
+<p>DIviding RECTangles (DIRECT) is a deterministic-search algorithms based on systematic division of the search domain
+into increasingly smaller hyperrectangles.
+The <a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#direct-and-direct-l">DIRECT-L</a> version
+is a variant of DIRECT that makes the algorithm more biased towards local search,
+so that it is more efficient for functions with few local minima.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to DIRECT-L declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">DIRECT_L</span></code>.</p>
+</div>
+</div>
+<div class="section" id="dividing-rectangles-algorithm-locally-based-randomized-direct-l-rand">
+<span id="direct-l-rand"></span><h3>DIviding RECTangles algorithm - Locally based - RANDomized (DIRECT-L-RAND)<a class="headerlink" href="#dividing-rectangles-algorithm-locally-based-randomized-direct-l-rand" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#direct-and-direct-l">DIRECT-L-RAND</a> is a variant of
+<span class="xref std std-ref">DIviding RECTangles algorithm - Locally based (DIRECT-L)</span>
+that uses some randomization to help decide which dimension to halve next in the case of near-ties.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to DIRECT-L-RAND declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">DIRECT_L_RAND</span></code>.</p>
+</div>
+</div>
+<div class="section" id="evolutionary-strategy-algorithm-with-cauchy-distribution-esch">
+<span id="esch"></span><h3>Evolutionary Strategy algorithm with CaucHy distribution (ESCH)<a class="headerlink" href="#evolutionary-strategy-algorithm-with-cauchy-distribution-esch" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#esch-evolutionary-algorithm">ESCH</a>
+is an evolutionary algorithm for global optimization that supports bound constraints only.
+Specifically, it does not support nonlinear constraints.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to ESCH declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">ESCH</span></code>.</p>
+</div>
+</div>
+<div class="section" id="improved-stochastic-ranking-evolution-strategy-isres">
+<span id="isres"></span><h3>Improved Stochastic Ranking Evolution Strategy (ISRES)<a class="headerlink" href="#improved-stochastic-ranking-evolution-strategy-isres" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#isres-improved-stochastic-ranking-evolution-strategy">ISRES</a>
+is an algorithm for nonlinearly-constrained global optimization.
+It has heuristics to escape local optima, even though convergence to a global optima is not guaranteed.
+The evolution strategy is based on a combination of a mutation rule and differential variation.
+The fitness ranking is simply via the objective function for problems without nonlinear constraints.
+When nonlinear constraints are included, the
+<a class="reference external" href="https://notendur.hi.is/^tpr/software/sres/Tec311r.pdf">stochastic ranking proposed by Runarsson and Yao</a> is employed.
+This method supports arbitrary nonlinear inequality and equality constraints, in addition to the bound constraints.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to ISRES declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">ISRES</span></code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="algorithms.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Algorithms</div>
+         </div>
+     </a>
+     <a id="button-next" href="variational_forms.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Variational Forms</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+  </body>
+</html>
