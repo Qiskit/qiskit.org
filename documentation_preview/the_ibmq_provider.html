@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>The IBM Q provider &#8212; Qiskit 0.7 documentation</title>
+
+    <link rel="stylesheet" href="_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ploting Data in Qiskit" href="plotting_data_in_qiskit.html" />
+    <link rel="prev" title="Getting Started with Qiskit" href="getting_started_with_qiskit.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aqua">Aqua</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#qiskit-elements">Qiskit Elements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-aqua">Qiskit Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#qiskit-components">Qiskit Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installation-with-environment">Installation with environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#setup-a-standalone-version">Setup a standalone version</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#automatically-loading-credentials">Automatically loading credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#store-api-credentials-locally">Store API credentials locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#manually-loading-credentials">Manually loading credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_with_qiskit.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#simulating-circuits-using-qiskit-aer">Simulating circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#running-circuits-using-the-ibmq-provider">Running circuits using the IBMQ provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on IBMQ Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-provider">The Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtering-the-backends">Filtering the backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-backend">The backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-job-object">The Job object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_data_in_qiskit.html">Visualization in Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#plot-histogram">Plot histogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#using-the-output-from-plot-histogram">Using the output from plot_histogram()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#interactive-histogram-plots-for-jupyter-notebooks">Interactive histogram plots for Jupyter Notebooks.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#plot-state">Plot State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#interactive-state-plots-for-jupyter-notebooks">Interactive State Plots for Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#plot-bloch-vector">Plot Bloch Vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#options-for-plot-bloch-vector">Options for plot_bloch_vector()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#adjusting-the-output-from-plot-bloch-vector">Adjusting the output from plot_bloch_vector()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="terra/index.html">Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="terra/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#tools">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/quantum_circuits.html">The Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#id1">Quantum Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#pauli-gates">Pauli gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#clifford-gates">Clifford gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#c3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-u3-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#toffoli-gate-ccx-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/backend_monitoring_tools.html">Tools for Monitoring Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/backend_monitoring_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/backend_monitoring_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/backend_monitoring_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/backend_monitoring_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/backend_monitoring_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/release_history.html#release-notes">Release notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/release_history.html#qiskit-terra-0-7-0">Qiskit Terra 0.7.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/release_history.html#qiskit-terra-0-6-0">Qiskit Terra 0.6.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/release_history.html#qiskit-terra-0-5-0">Qiskit Terra 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/index.html#authors">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aqua/aqua.html">Qiskit Aqua</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aqua/library.html">Aqua: A Library of Quantum Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/installation.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/execution.html#input-file">Input File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/extending.html">Contributing to Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#aqua-extension-points">Aqua Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#aqua-documentation-ui">Aqua Documentation UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#aqua-unit-tests">Aqua Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/algorithms.html">Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/algorithms.html#quantum-algorithms">Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/algorithms.html#classical-reference-algorithms">Classical Reference Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimizers.html">Optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimizers.html#local-optimizers">Local Optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimizers.html#global-optimizers">Global Optimizers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/variational_forms.html">Variational Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#ry">Ry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#ryrz">RyRz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#unitary-coupled-cluster-singles-and-doubles-uccsd">Unitary Coupled Cluster Singles and Doubles (UCCSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#swaprz">SwapRz</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/oracles.html">Oracles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#satisfiability-grover-oracle-sat">SATisfiability Grover Oracle (SAT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#deutsch-jozsa-oracle">Deutsch-Jozsa Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#bernstein-vazirani-oracle">Bernstein-Vazirani Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#simon-oracle">Simon Oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/iqfts.html#standard-iqft">Standard IQFT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/iqfts.html#approximate-iqft">Approximate IQFT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/initial_states.html">Initial States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/initial_states.html#zero">Zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/initial_states.html#id2">Hartree-Fock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/initial_states.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/feature_maps.html">Feature Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#first-order-expansion">First Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/multiclass_extensions.html">Multiclass Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/multiclass_extensions.html#one-against-rest">One Against Rest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/multiclass_extensions.html#all-pairs">All Pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/multiclass_extensions.html#error-correcting-code">Error Correcting Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/random_distributions.html">Random Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/random_distributions.html#univariate-distributions">Univariate Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/random_distributions.html#multivariate-distributions">Multivariate Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/uncertainty_problems.html">Uncertainty Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/uncertainty_problems.html#european-call-option">European Call Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit_aqua.html">Aqua SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html">Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#gaussian-16">Gaussian™ 16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#psi4">PSI4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#pyscf">PySCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#pyquante">PyQuante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#hdf5">HDF5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html">Translators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#jordan-wigner">Jordan-Wigner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#parity">Parity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev">Bravyi-Kitaev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev-superfast">Bravyi-Kitaev Superfast</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html#input-file">Input File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation">Input File for Direct Algorithm Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html">Contributing to Qiskit Chemistry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html#extension-points">Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html#unit-tests">Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit_chemistry.html">Qiskit Chemistry SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/release_history.html">Release history</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/release_history.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/ai/qiskit_ai.html">Qiskit AI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/ai/qiskit_ai.html#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/ai/qiskit_ai.html#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/ai/qiskit_ai.html#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/ai/qiskit_ai.html#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/ai/qiskit_ai.html#contributing-to-qiskit-ai">Contributing to Qiskit AI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/ai/qiskit_ai.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html">Qiskit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#qiskit-optimization-problems">Qiskit Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#contributing-to-qiskit-optimization">Contributing to Qiskit Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/finance/qiskit_finance.html">Qiskit Finance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/finance/qiskit_finance.html#qiskit-finance-problems">Qiskit Finance Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/finance/qiskit_finance.html#contributing-to-qiskit-finance">Contributing to Qiskit Finance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/finance/qiskit_finance.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/tutorials/aqua_tutorials.html">Aqua Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/release_history.html#release-notes">Release Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/release_history.html#qiskit-aqua-0-4-0">Qiskit Aqua 0.4.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Qiskit 2019 Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="roadmap.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/qiskit.html">Qiskit Module reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qobj.html">qiskit.qobj package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.unrollers.html">qiskit.unrollers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#qiskit-elements">Qiskit Elements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-aqua">Qiskit Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#qiskit-components">Qiskit Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installation-with-environment">Installation with environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#setup-a-standalone-version">Setup a standalone version</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#automatically-loading-credentials">Automatically loading credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#store-api-credentials-locally">Store API credentials locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#manually-loading-credentials">Manually loading credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_with_qiskit.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#simulating-circuits-using-qiskit-aer">Simulating circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_with_qiskit.html#running-circuits-using-the-ibmq-provider">Running circuits using the IBMQ provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_with_qiskit.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on IBMQ Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-provider">The Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtering-the-backends">Filtering the backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-backend">The backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-job-object">The Job object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_data_in_qiskit.html">Visualization in Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#plot-histogram">Plot histogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#using-the-output-from-plot-histogram">Using the output from plot_histogram()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#interactive-histogram-plots-for-jupyter-notebooks">Interactive histogram plots for Jupyter Notebooks.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#plot-state">Plot State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#interactive-state-plots-for-jupyter-notebooks">Interactive State Plots for Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting_data_in_qiskit.html#plot-bloch-vector">Plot Bloch Vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#options-for-plot-bloch-vector">Options for plot_bloch_vector()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plotting_data_in_qiskit.html#adjusting-the-output-from-plot-bloch-vector">Adjusting the output from plot_bloch_vector()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="terra/index.html">Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="terra/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#tools">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/quantum_circuits.html">The Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#id1">Quantum Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#pauli-gates">Pauli gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#clifford-gates">Clifford gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#c3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-u3-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#toffoli-gate-ccx-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/backend_monitoring_tools.html">Tools for Monitoring Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/backend_monitoring_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/backend_monitoring_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/backend_monitoring_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/backend_monitoring_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="terra/backend_monitoring_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/release_history.html#release-notes">Release notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="terra/release_history.html#qiskit-terra-0-7-0">Qiskit Terra 0.7.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/release_history.html#qiskit-terra-0-6-0">Qiskit Terra 0.6.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="terra/release_history.html#qiskit-terra-0-5-0">Qiskit Terra 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="terra/index.html#authors">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aqua/aqua.html">Qiskit Aqua</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aqua/library.html">Aqua: A Library of Quantum Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/installation.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/execution.html#input-file">Input File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/extending.html">Contributing to Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#aqua-extension-points">Aqua Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#aqua-documentation-ui">Aqua Documentation UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/extending.html#aqua-unit-tests">Aqua Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/algorithms.html">Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/algorithms.html#quantum-algorithms">Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/algorithms.html#classical-reference-algorithms">Classical Reference Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimizers.html">Optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimizers.html#local-optimizers">Local Optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimizers.html#global-optimizers">Global Optimizers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/variational_forms.html">Variational Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#ry">Ry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#ryrz">RyRz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#unitary-coupled-cluster-singles-and-doubles-uccsd">Unitary Coupled Cluster Singles and Doubles (UCCSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/variational_forms.html#swaprz">SwapRz</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/oracles.html">Oracles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#satisfiability-grover-oracle-sat">SATisfiability Grover Oracle (SAT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#deutsch-jozsa-oracle">Deutsch-Jozsa Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#bernstein-vazirani-oracle">Bernstein-Vazirani Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/oracles.html#simon-oracle">Simon Oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/iqfts.html#standard-iqft">Standard IQFT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/iqfts.html#approximate-iqft">Approximate IQFT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/initial_states.html">Initial States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/initial_states.html#zero">Zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/initial_states.html#id2">Hartree-Fock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/initial_states.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/feature_maps.html">Feature Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#first-order-expansion">First Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/multiclass_extensions.html">Multiclass Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/multiclass_extensions.html#one-against-rest">One Against Rest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/multiclass_extensions.html#all-pairs">All Pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/multiclass_extensions.html#error-correcting-code">Error Correcting Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/random_distributions.html">Random Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/random_distributions.html#univariate-distributions">Univariate Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/random_distributions.html#multivariate-distributions">Multivariate Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/uncertainty_problems.html">Uncertainty Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/uncertainty_problems.html#european-call-option">European Call Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit_aqua.html">Aqua SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html">Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#gaussian-16">Gaussian™ 16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#psi4">PSI4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#pyscf">PySCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#pyquante">PyQuante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_drivers.html#hdf5">HDF5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html">Translators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#jordan-wigner">Jordan-Wigner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#parity">Parity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev">Bravyi-Kitaev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev-superfast">Bravyi-Kitaev Superfast</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html#input-file">Input File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation">Input File for Direct Algorithm Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html">Contributing to Qiskit Chemistry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html#extension-points">Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/qiskit_chemistry_extending.html#unit-tests">Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit_chemistry.html">Qiskit Chemistry SDK Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit_chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/chemistry/release_history.html">Release history</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/chemistry/release_history.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/ai/qiskit_ai.html">Qiskit AI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/ai/qiskit_ai.html#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/ai/qiskit_ai.html#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/ai/qiskit_ai.html#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/ai/qiskit_ai.html#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/ai/qiskit_ai.html#contributing-to-qiskit-ai">Contributing to Qiskit AI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/ai/qiskit_ai.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html">Qiskit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#qiskit-optimization-problems">Qiskit Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#contributing-to-qiskit-optimization">Contributing to Qiskit Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/optimization/qiskit_optimization.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/finance/qiskit_finance.html">Qiskit Finance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/finance/qiskit_finance.html#qiskit-finance-problems">Qiskit Finance Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/finance/qiskit_finance.html#contributing-to-qiskit-finance">Contributing to Qiskit Finance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aqua/finance/qiskit_finance.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/tutorials/aqua_tutorials.html">Aqua Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqua/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aqua/release_history.html#release-notes">Release Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aqua/release_history.html#qiskit-aqua-0-4-0">Qiskit Aqua 0.4.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Qiskit 2019 Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="roadmap.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="roadmap.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/qiskit.html">Qiskit Module reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.mapper.html">qiskit.mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qasm.html">qiskit.qasm package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qobj.html">qiskit.qobj package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.unrollers.html">qiskit.unrollers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.wrapper.html">qiskit.wrapper package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.unroll.html">qiskit.unroll module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="the-ibm-q-provider">
+<h1>The IBM Q provider<a class="headerlink" href="#the-ibm-q-provider" title="Permalink to this headline">¶</a></h1>
+<p>In Qiskit we have an interface for backends and jobs that will be useful
+for running circuits and extending to third-party backends. In this
+section, we will review the core components of Qiskit’s base backend
+framework, using the IBM Q provider as an example.</p>
+<p>The interface has three parts: the provider, the backend, and the job:</p>
+<ul class="simple">
+<li>provider: accesses backends and provides backend objects</li>
+<li>backend: runs the quantum circuit</li>
+<li>job: keeps track of the submitted job</li>
+</ul>
+<div class="section" id="the-provider">
+<h2>The Provider<a class="headerlink" href="#the-provider" title="Permalink to this headline">¶</a></h2>
+<p>The IBMQ Provider is an entity that provides access to a group of
+different backends (for example, backends available through IBM Q
+Experience or IBM Q Network).</p>
+<p>The IBMQ provider inherits from BaseProvider and implements the methods:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">backends()</span></code>: returns all backend objects known to the provider.</li>
+<li><code class="docutils literal notranslate"><span class="pre">get_backend(name)</span></code>: returns the named backend.</li>
+</ul>
+<p>The IBM Q provider has some extra functions for handling administrative
+tasks. The credentials can be saved to disk or used in a session and
+never saved.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">enable_account(token,</span> <span class="pre">url)</span></code>: enable an account in the current
+session</li>
+<li><code class="docutils literal notranslate"><span class="pre">disable_accounts(**kwargs)</span></code>: disable one or more accounts from
+current session</li>
+<li><code class="docutils literal notranslate"><span class="pre">save_account(token,</span> <span class="pre">url)</span></code>: save an account to disk</li>
+<li><code class="docutils literal notranslate"><span class="pre">delete_accounts(**kwargs)</span></code>: delete the account or accounts from
+disk</li>
+<li><code class="docutils literal notranslate"><span class="pre">load_accounts(**kwargs)</span></code>: load previously-saved account or
+accounts into session</li>
+<li><code class="docutils literal notranslate"><span class="pre">active_accounts()</span></code>: list all accounts active in this session</li>
+<li><code class="docutils literal notranslate"><span class="pre">stored_accounts()</span></code>: list all accounts saved to disk</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>Here we see that there are no backends. This is because no accounts have
+been loaded.</p>
+<p>Let’s start fresh and delete any accounts on disk. If no accounts are on
+disk this will error</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">delete_accounts</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>verify that there are no accounts stored now</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">stored_accounts</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>To demonstrate that we can load multiple accounts using the IBMQ
+provider, here we use two files <code class="docutils literal notranslate"><span class="pre">Qconfig_IBMQ_experience.py</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Qconfig_IBMQ_network.py</span></code>, which are just containers of the
+<code class="docutils literal notranslate"><span class="pre">APItoken</span></code> and <code class="docutils literal notranslate"><span class="pre">URL</span></code>.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">APItoken</span> <span class="pre">=</span> <span class="pre">'MY_API_TOKEN'</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">URL</span> <span class="pre">=</span> <span class="pre">'THE_URL'</span></code></li>
+</ul>
+<p>For the IBM Q experience the URL is not needed and is loaded by default
+in <code class="docutils literal notranslate"><span class="pre">enable_account</span></code> and <code class="docutils literal notranslate"><span class="pre">save_account</span></code>. For the IBM Q Network the
+url is found on your q-console account page. We don’t recommend saving
+and using files like this. We recommend just inputting the <code class="docutils literal notranslate"><span class="pre">APItoken</span></code>
+and <code class="docutils literal notranslate"><span class="pre">URL</span></code> directly into the methods <code class="docutils literal notranslate"><span class="pre">enable_account</span></code> and
+<code class="docutils literal notranslate"><span class="pre">save_account</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Qconfig_IBMQ_experience</span>
+<span class="kn">import</span> <span class="nn">Qconfig_IBMQ_network</span>
+</pre></div>
+</div>
+<p>To enable an account (useful for one-off use, or if you don’t want to
+save to disk)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="n">Qconfig_IBMQ_experience</span><span class="o">.</span><span class="n">APItoken</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To see that accounts which are enabled for use</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment to print to screen (it will show your token and url)</span>
+<span class="c1"># IBMQ.active_accounts()</span>
+</pre></div>
+</div>
+<p>and backends which are available</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Disable that account (so we go back to no accounts active)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">disable_accounts</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">Qconfig_IBMQ_experience</span><span class="o">.</span><span class="n">APItoken</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now no backends are available</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>Save two accounts: a public (IBM Q experience) and a premium (IBM Q
+network)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="n">Qconfig_IBMQ_experience</span><span class="o">.</span><span class="n">APItoken</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="n">Qconfig_IBMQ_network</span><span class="o">.</span><span class="n">APItoken</span><span class="p">,</span> <span class="n">Qconfig_IBMQ_network</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now they should show up as present on disk</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment to print to screen (it will show your token and url)</span>
+<span class="c1"># IBMQ.stored_accounts()</span>
+</pre></div>
+</div>
+<p>but no account active in current session yet</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">active_accounts</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>so IBMQ can’t see any backends yet</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>now load up every account stored to disk</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>backends from two different accounts available for use</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_20_tokyo&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">(</span><span class="n">ibm</span><span class="o">-</span><span class="n">q</span><span class="o">-</span><span class="n">internal</span><span class="p">,</span> <span class="n">research</span><span class="p">,</span> <span class="n">yorktown</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">(</span><span class="n">ibm</span><span class="o">-</span><span class="n">q</span><span class="o">-</span><span class="n">internal</span><span class="p">,</span> <span class="n">research</span><span class="p">,</span> <span class="n">yorktown</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>now if you want to work with backends of a single account, you can do so
+via account filtering</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;ibm-q-internal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_20_tokyo&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">(</span><span class="n">ibm</span><span class="o">-</span><span class="n">q</span><span class="o">-</span><span class="n">internal</span><span class="p">,</span> <span class="n">research</span><span class="p">,</span> <span class="n">yorktown</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">(</span><span class="n">ibm</span><span class="o">-</span><span class="n">q</span><span class="o">-</span><span class="n">internal</span><span class="p">,</span> <span class="n">research</span><span class="p">,</span> <span class="n">yorktown</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>but you can also just disable account in the current session</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">disable_accounts</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;ibm-q-internal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>so now only one account is active</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment to print to screen (it will show your token and url)</span>
+<span class="c1"># IBMQ.active_accounts()</span>
+</pre></div>
+</div>
+<p>and only that account’s backends are available</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>or from the start use the filtering to just load up that account you’re
+interested in</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">disable_accounts</span><span class="p">()</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtering-the-backends">
+<h2>Filtering the backends<a class="headerlink" href="#filtering-the-backends" title="Permalink to this headline">¶</a></h2>
+<p>You may also optionally filter the set of returned backends, by passing
+arguments that query the backend’s <code class="docutils literal notranslate"><span class="pre">configuration</span></code> or <code class="docutils literal notranslate"><span class="pre">status</span></code> or
+<code class="docutils literal notranslate"><span class="pre">properties</span></code>. The filters are passed by conditions and for more
+general filters you can make advanced functions using the lambda
+function.</p>
+<p>As a first example: only return currently operational devices</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">operational</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>only return backends that are real devices, have more than 10 qubits and
+are operational</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="ow">and</span>
+              <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">operational</span><span class="o">==</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Filter: show the least busy device (in terms of pending jobs in the
+queue)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="k">import</span> <span class="n">least_busy</span>
+
+<span class="n">small_devices</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span>
+                                                       <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span><span class="p">)</span>
+<span class="n">least_busy</span><span class="p">(</span><span class="n">small_devices</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The above filters can be combined as desired.</p>
+<p>If you just want to get an instance of a particular backend, you can use
+the <code class="docutils literal notranslate"><span class="pre">get_backend()</span></code> method.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-backend">
+<h2>The backend<a class="headerlink" href="#the-backend" title="Permalink to this headline">¶</a></h2>
+<p>Backends represent either a simulator or a real quantum computer, and
+are responsible for running quantum circuits and returning results. They
+have a <code class="docutils literal notranslate"><span class="pre">run</span></code> method which takes in a <code class="docutils literal notranslate"><span class="pre">qobj</span></code> as input, which is a
+quantum object and the result of the compilation process, and returns a
+BaseJob object. This object allows asynchronous running of jobs for
+retrieving results from a backend when the job is completed.</p>
+<p>At a minimum, backends use the following methods, inherited from
+BaseBackend:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">provider</span></code> - returns the provider of the backend</li>
+<li><code class="docutils literal notranslate"><span class="pre">name()</span></code> - gets the name of the backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">status()</span></code> - gets the status of the backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">configuration()</span></code> - gets the configuration of the backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">properties()</span></code> - gets the properties of the backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">run()</span></code> - runs a qobj on the backend.</li>
+</ul>
+<p>For remote backends they must support the additional</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">jobs()</span></code> - returns a list of previous jobs executed by this user on
+this backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">retrieve_job()</span></code> - returns a job by a job_id.</li>
+</ul>
+<p>In future updates they will introduce the following commands</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">defaults()</span></code> - gives a data structure of typical default
+parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">schema()</span></code> - gets a schema for the backend</li>
+</ul>
+<p>There are some IBMQ only functions</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">hub</span></code> - returns the IBMQ hub for this backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">group</span></code> - returns the IBMQ group for this backend.</li>
+<li><code class="docutils literal notranslate"><span class="pre">project</span></code> - returns the IBMQ project for this backend.</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">small_devices</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s start with the <code class="docutils literal notranslate"><span class="pre">backend.provider</span></code>, which returns a provider
+object</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">provider</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">BaseBackend</span><span class="o">.</span><span class="n">provider</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Next is the <code class="docutils literal notranslate"><span class="pre">name()</span></code>, which returns the name of the backend</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;ibmqx4&#39;</span>
+</pre></div>
+</div>
+<p>Next let’s look at the <code class="docutils literal notranslate"><span class="pre">status()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">operational</span> <span class="n">lets</span> <span class="n">you</span> <span class="n">know</span> <span class="n">that</span> <span class="n">the</span> <span class="n">backend</span> <span class="ow">is</span> <span class="n">taking</span> <span class="n">jobs</span>
+<span class="n">pending_jobs</span> <span class="n">lets</span> <span class="n">you</span> <span class="n">know</span> <span class="n">how</span> <span class="n">many</span> <span class="n">jobs</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">queue</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BackendStatus</span><span class="p">(</span><span class="n">backend_name</span><span class="o">=</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">,</span> <span class="n">backend_version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span> <span class="n">operational</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pending_jobs</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">status_msg</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next is <code class="docutils literal notranslate"><span class="pre">configuration()</span></code></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BackendConfiguration</span><span class="p">(</span><span class="n">allow_q_object</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">backend_name</span><span class="o">=</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">,</span> <span class="n">backend_version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">conditional</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="n">credits_required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;5 qubit device&#39;</span><span class="p">,</span> <span class="n">gates</span><span class="o">=</span><span class="p">[</span><span class="n">GateConfig</span><span class="p">(</span><span class="n">coupling_map</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[],</span> <span class="n">qasm_def</span><span class="o">=</span><span class="s1">&#39;gate id q { U(0,0,0) q; }&#39;</span><span class="p">),</span> <span class="n">GateConfig</span><span class="p">(</span><span class="n">coupling_map</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">],</span> <span class="n">qasm_def</span><span class="o">=</span><span class="s1">&#39;gate u1(lambda) q { U(0,0,lambda) q; }&#39;</span><span class="p">),</span> <span class="n">GateConfig</span><span class="p">(</span><span class="n">coupling_map</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">],</span> <span class="n">qasm_def</span><span class="o">=</span><span class="s1">&#39;gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }&#39;</span><span class="p">),</span> <span class="n">GateConfig</span><span class="p">(</span><span class="n">coupling_map</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">],</span> <span class="n">qasm_def</span><span class="o">=</span><span class="s1">&#39;u3(theta,phi,lambda) q { U(theta,phi,lambda) q; }&#39;</span><span class="p">),</span> <span class="n">GateConfig</span><span class="p">(</span><span class="n">coupling_map</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[],</span> <span class="n">qasm_def</span><span class="o">=</span><span class="s1">&#39;gate cx q1,q2 { CX q1,q2; }&#39;</span><span class="p">)],</span> <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_experiments</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">max_shots</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_qubits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_registers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">online_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">open_pulse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">=</span><span class="s1">&#39;raven&#39;</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next is <code class="docutils literal notranslate"><span class="pre">properties()</span></code> method</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BackendProperties</span><span class="p">(</span><span class="n">backend_name</span><span class="o">=</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">,</span> <span class="n">backend_version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span> <span class="n">gates</span><span class="o">=</span><span class="p">[</span><span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0007726307293453583</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0015452614586907165</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.00197489316929661</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.00394978633859322</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.001631340796924452</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.003262681593848904</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.001889001411209068</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.003778002822418136</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0033494941004675316</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.006698988200935063</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CX1_0&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.03638715304639503</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CX2_0&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0260837887197298</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CX2_1&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.040748317062039324</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CX3_2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.06022428067792304</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CX3_4&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.04131394123324597</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">Gate</span><span class="p">(</span><span class="n">gate</span><span class="o">=</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CX4_2&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gate_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.061264181329610395</span><span class="p">)],</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span> <span class="n">general</span><span class="o">=</span><span class="p">[],</span> <span class="n">last_update_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">52.877964468812685</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">45.91461986614799</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;GHz&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">5.249846359615167</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;readout_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.060249999999999915</span><span class="p">)],</span> <span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">52.189109032554136</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">19.451959460737445</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;GHz&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">5.295776909561718</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;readout_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.07424999999999993</span><span class="p">)],</span> <span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">42.880247006778106</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">29.48085688756878</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;GHz&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">5.353246798006777</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;readout_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.029249999999999998</span><span class="p">)],</span> <span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">46.880348727946355</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">17.744486787296733</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;GHz&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">5.434943769576225</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;readout_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.02300000000000002</span><span class="p">)],</span> <span class="p">[</span><span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">41.224715178255046</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;µs&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">11.096548052083062</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;GHz&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">5.175820586522991</span><span class="p">),</span> <span class="n">Nduv</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;readout_error&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.07525000000000004</span><span class="p">)]])</span>
+</pre></div>
+</div>
+<p>The next is <code class="docutils literal notranslate"><span class="pre">hub</span></code>, <code class="docutils literal notranslate"><span class="pre">group</span></code>, and <code class="docutils literal notranslate"><span class="pre">project</span></code>. For the IBM Q
+experience these will return <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">hub</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">group</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span><span class="o">.</span><span class="n">project</span>
+</pre></div>
+</div>
+<p>To see your last 5 jobs ran on the backend use the <code class="docutils literal notranslate"><span class="pre">jobs()</span></code> method of
+that backend</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ran_job</span> <span class="ow">in</span> <span class="n">backend</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ran_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ran_job</span><span class="o">.</span><span class="n">status</span><span class="p">()))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span><span class="n">c1a2ff1a2eb3c005253e861</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+<span class="mi">5</span><span class="n">c1a2ff125765800555ba251</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+<span class="mi">5</span><span class="n">c1a2e4639c21300575b61b7</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+<span class="mi">5</span><span class="n">c1a2e4428983e0059e42864</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+<span class="mi">5</span><span class="n">c1a2e4228983e0059e42862</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+</pre></div>
+</div>
+<p>Then the job can be retreived using <code class="docutils literal notranslate"><span class="pre">retrieve_job(job_id())</span></code> method</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">retrieve_job</span><span class="p">(</span><span class="n">ran_job</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-job-object">
+<h2>The Job object<a class="headerlink" href="#the-job-object" title="Permalink to this headline">¶</a></h2>
+<p>Job instances can be thought of as the “ticket” for a submitted job.
+They find out the execution’s state at a given point in time (for
+example, if the job is queued, running, or has failed) and also allow
+control over the job. They have the following methods:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">status()</span></code> - returns the status of the job.</li>
+<li><code class="docutils literal notranslate"><span class="pre">backend()</span></code> - returns the backend the job was run on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">job_id()</span></code> - gets the job_id.</li>
+<li><code class="docutils literal notranslate"><span class="pre">cancel()</span></code> - cancels the job.</li>
+<li><code class="docutils literal notranslate"><span class="pre">result()</span></code> - gets the results from the circuit run.</li>
+</ul>
+<p>IBMQ only functions</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">creation_date()</span></code> - gives the date at which the job was created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">queue_position()</span></code> - gives the position of the job in the queue.</li>
+<li><code class="docutils literal notranslate"><span class="pre">error_message()</span></code> - gives the error message of failed jobs.</li>
+</ul>
+<p>Let’s start with the <code class="docutils literal notranslate"><span class="pre">status()</span></code>. This returns the job status and a
+message</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span><span class="p">:</span> <span class="s1">&#39;job has successfully run&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To get a backend object from the job use the <code class="docutils literal notranslate"><span class="pre">backend()</span></code> method</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend_temp</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">backend</span><span class="p">()</span>
+<span class="n">backend_temp</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To get the job_id use the <code class="docutils literal notranslate"><span class="pre">job_id()</span></code> method</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;5c1a2e4228983e0059e42862&#39;</span>
+</pre></div>
+</div>
+<p>To get the result from the job use the <code class="docutils literal notranslate"><span class="pre">result()</span></code> method</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;01&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">:</span> <span class="mi">87</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="mi">454</span><span class="p">,</span> <span class="s1">&#39;00&#39;</span><span class="p">:</span> <span class="mi">394</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to check the creation date use <code class="docutils literal notranslate"><span class="pre">creation_date()</span></code></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">creation_date</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;2018-12-19T11:40:50.890Z&#39;</span>
+</pre></div>
+</div>
+<p>Let’s make an active example</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="nb">compile</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">qiskit</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">instructionset</span><span class="o">.</span><span class="n">InstructionSet</span> <span class="n">at</span> <span class="mh">0xa16872080</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To compile this circuit for the backend use the compile function. It
+will make a qobj (quantum object) that can be run on the backend using
+the <code class="docutils literal notranslate"><span class="pre">run(qobj)</span></code> method.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qobj</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The status of this job can be checked with the <code class="docutils literal notranslate"><span class="pre">status()</span></code> method</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">JobStatus</span><span class="o">.</span><span class="n">INITIALIZING</span><span class="p">:</span> <span class="s1">&#39;job is being initialized&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If you made a mistake and need to cancel the job use the <code class="docutils literal notranslate"><span class="pre">cancel()</span></code>
+method.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="c1">#time.sleep(10)</span>
+
+<span class="n">job</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">False</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">status()</span></code> will show that the job cancelled.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">JobStatus</span><span class="o">.</span><span class="n">QUEUED</span><span class="p">:</span> <span class="s1">&#39;job is queued&#39;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To rerun the job and set up a loop to check the status and queue
+position you can use the <code class="docutils literal notranslate"><span class="pre">queue_position()</span></code> method.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="k">import</span> <span class="n">job_monitor</span>
+<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;&lt;p style=&#39;font-size:16px;&#39;&gt;Job Status: job is being initialized &lt;/p&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;111&#39;</span><span class="p">:</span> <span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;011&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="s1">&#39;000&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s1">&#39;101&#39;</span><span class="p">:</span> <span class="mi">556</span><span class="p">,</span> <span class="s1">&#39;010&#39;</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="s1">&#39;110&#39;</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span> <span class="s1">&#39;001&#39;</span><span class="p">:</span> <span class="mi">185</span><span class="p">,</span> <span class="s1">&#39;100&#39;</span><span class="p">:</span> <span class="mi">48</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="getting_started_with_qiskit.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Getting Started with Qiskit</div>
+         </div>
+     </a>
+     <a id="button-next" href="plotting_data_in_qiskit.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Ploting Data in Qiskit</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+  </body>
+</html>
