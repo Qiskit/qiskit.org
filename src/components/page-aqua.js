@@ -208,7 +208,7 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                 </vaadin-button>
               </a>
               <a
-                  href="${this.getDocumentationLink()}/aqua/aqua_chemistry.html"
+                  href="${this.getDocumentationLink()}/aqua/chemistry/qiskit_chemistry.html"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
