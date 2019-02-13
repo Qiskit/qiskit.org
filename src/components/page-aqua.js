@@ -81,15 +81,6 @@ class PageAqua extends localize(i18next)(PageViewElement) {
               </vaadin-button>
             </a>
             <a
-                href="${this.getDocumentationLink()}/aqua/"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${i18next.t('documentation')}
-              </vaadin-button>
-            </a>
-            <a
                 href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb#1.5-Qiskit-Aqua"
                 target="_blank"
                 rel="noopener"
@@ -205,15 +196,6 @@ class PageAqua extends localize(i18next)(PageViewElement) {
                 <vaadin-button theme="secondary small">
                   ${githubIcon}
                   GitHub
-                </vaadin-button>
-              </a>
-              <a
-                  href="${this.getDocumentationLink()}/aqua/chemistry/qiskit_chemistry.html"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary small">
-                  ${i18next.t('documentation')}
                 </vaadin-button>
               </a>
               <a

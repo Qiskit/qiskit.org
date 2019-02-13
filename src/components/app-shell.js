@@ -143,11 +143,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: underline;
         }
 
-        @media (max-width: 440px) {
+        @media (max-width: 600px) {
           .toolbar nav.second {
             position: absolute;
             right: 5px;
-            bottom: -30px;
+            bottom: -40px;
+            height: 40px;
             font-size: 0.9em;
           }
         }
@@ -158,10 +159,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <a href="/" class="home">Qiskit ™</a>
           <nav class="first">
             <a href="/terra" ?selected="${this.page === 'terra'}">Terra</a>
-            <a href="/aqua" ?selected="${this.page === 'aqua'}">Aqua</a>
             <a href="/aer" ?selected="${this.page === 'aer'}">Aer</a>
+            <a href="/aqua" ?selected="${this.page === 'aqua'}">Aqua</a>
           </nav>
           <nav class="second">
+            <a href="/documentation/">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected="${this.page === 'vscode'}">${i18next.t('tools')}</a>
             <a href="/fun" ?selected="${this.page === 'fun'}">${i18next.t('fun')}</a>
           </nav>
