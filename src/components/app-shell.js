@@ -163,7 +163,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/aqua" ?selected="${this.page === 'aqua'}">Aqua</a>
           </nav>
           <nav class="second">
-            <a href="/documentation/">${i18next.t('documentation')}</a>
+            <a href="/documentation/" target="_blank">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected="${this.page === 'vscode'}">${i18next.t('tools')}</a>
             <a href="/fun" ?selected="${this.page === 'fun'}">${i18next.t('fun')}</a>
           </nav>
