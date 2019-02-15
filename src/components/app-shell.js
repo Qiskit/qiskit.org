@@ -10,7 +10,6 @@
 import { LitElement, html } from 'lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
-import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
@@ -111,15 +110,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           flex-direction: column;
         }
 
-        main > * {
-          display: none;
-        }
-
-        main > *[active] {
-          display: flex;
-          flex-direction: column;
-        }
-
         footer {
           display: flex;
           background-color: #21252B;
@@ -171,13 +161,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       </header>
 
       <main role="main">
-        <page-home ?active="${this.page === 'home'}"></page-home>
-        <page-terra ?active="${this.page === 'terra'}"></page-terra>
-        <page-aqua ?active="${this.page === 'aqua'}"></page-aqua>
-        <page-aer ?active="${this.page === 'aer'}"></page-aer>
-        <page-vscode ?active="${this.page === 'vscode'}"></page-vscode>
-        <page-fun ?active="${this.page === 'fun'}"></page-fun>
-        <page-not-found ?active="${this.page === 'notFound'}"></page-not-found>
+        <!-- added / removed dynamically by the router -->
       </main>
 
       <footer>
@@ -213,13 +197,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   }
 
   firstUpdated() {
-    installRouter((location, event) => {
-      // Only scroll to top on link clicks, not popstate events.
-      if (event && event.type === 'click') {
-        window.scrollTo(0, 0);
-      }
+    window.addEventListener('vaadin-router-location-changed', event =>
+      store.dispatch(navigate(event.detail.location)),
+    );
 
-      store.dispatch(navigate(window.decodeURIComponent(location.pathname)));
+    // To have better first-load performance, defer loading all routing code
+    // until after the app shell is rendered.
+    import('../router.js').then(routing => {
+      routing.init(this.shadowRoot.querySelector('main'));
     });
   }
 
