@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>Qiskit Installation and setup &#8212; Qiskit 0.7 documentation</title>
+    <title>Installing Qiskit &#8212; Qiskit 0.7 documentation</title>
 
     <link rel="stylesheet" href="_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -79,18 +79,11 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Qiskit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-with-environment">Installation with environment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#setup-a-standalone-version">Setup a standalone version</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#automatically-loading-credentials">Automatically loading credentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#store-api-credentials-locally">Store API credentials locally</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manually-loading-credentials">Manually loading credentials</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices">Access IBM Q Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices-with-finer-control">Access IBM Q Devices with Finer Control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
@@ -601,18 +594,11 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Qiskit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-with-environment">Installation with environment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-with-visualization-dependencies">Install with visualization dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#setup-a-standalone-version">Setup a standalone version</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#configure-your-api-token-and-ibmq-credentials">Configure your API token and IBMQ credentials</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#automatically-loading-credentials">Automatically loading credentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#store-api-credentials-locally">Store API credentials locally</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manually-loading-credentials">Manually loading credentials</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices">Access IBM Q Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices-with-finer-control">Access IBM Q Devices with Finer Control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
@@ -1092,143 +1078,102 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="qiskit-installation-and-setup">
-<h1>Qiskit Installation and setup<a class="headerlink" href="#qiskit-installation-and-setup" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>To use Qiskit  you’ll need to have installed at least
-<a class="reference external" href="https://www.python.org/downloads/">Python 3.5 or later</a>.
-<a class="reference external" href="https://jupyter.readthedocs.io/en/latest/install.html">Jupyter Notebooks</a>
-is also recommended for interacting with
-<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorial">tutorials</a>.</p>
-<p>For this reason we recommend installing <a class="reference external" href="https://www.anaconda.com/download/">Anaconda 3</a>
-python distribution, which already comes with all these dependencies pre-installed.</p>
-<p>Windows users also need to install VC++ runtime components. We recommend one of the following links.</p>
+  <div class="section" id="installing-qiskit">
+<h1>Installing Qiskit<a class="headerlink" href="#installing-qiskit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>Qiskit is tested and supported on the following 64-bit systems:</p>
+<ul class="simple">
+<li>Ubuntu 16.04 or later</li>
+<li>macOS 10.12.6 or later</li>
+<li>Windows 7 or later</li>
+</ul>
+<p>Qiskit supports Python 3.5 or later.</p>
+<p>We recommend installing <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a>, a cross-platform Python distribution for scientific computing. Jupyter Notebook, included in Anaconda, is recommended for interacting with the <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorial">Qiskit tutorials</a>.</p>
+<p>Using Qiskit on Windows requires VC++ runtime components. We recommend one of the following:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://go.microsoft.com/fwlink/?LinkId=746572">Microsoft Visual C++ Redistributable for Visual Studio 2017</a></li>
 <li><a class="reference external" href="https://www.microsoft.com/en-US/download/details.aspx?id=48145">Microsoft Visual C++ Redistributable for Visual Studio 2015</a></li>
 </ul>
 </div>
-<div class="section" id="installation-with-environment">
-<h2>Installation with environment<a class="headerlink" href="#installation-with-environment" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We recommend using <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">Python virtual environments</a>
-to cleanly separate Qiskit from other applications and improve your experience.</p>
-</div>
-<p>The simplest way to use environments is by using Anaconda</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">y</span> <span class="o">-</span><span class="n">n</span> <span class="n">Qiskitenv</span> <span class="n">python</span><span class="o">=</span><span class="mi">3</span>
-<span class="n">activate</span> <span class="n">Qiskitenv</span>
+<div class="section" id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p>We recommend using Python virtual environments to cleanly separate Qiskit from other applications and improve your experience.</p>
+<p>The simplest way to use environments is by using the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command, included with Anaconda. A Conda environment allows you to specify a specific version of Python and set of libraries. Run the following commands from a terminal window:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">name_of_my_env</span> <span class="n">python</span><span class="o">=</span><span class="mi">3</span>
 </pre></div>
 </div>
-<p>The recommended way to install Qiskit is by using the PIP (Python
-package manager) tool:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span>
+<p>This will create a minimal environment with only Python installed in it. To put yourself inside this environment run:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">name_of_my_env</span>
 </pre></div>
 </div>
-<p>This will install the latest stable release, along with all the dependencies.</p>
-<div class="section" id="install-with-visualization-dependencies">
-<h3>Install with visualization dependencies<a class="headerlink" href="#install-with-visualization-dependencies" title="Permalink to this headline">¶</a></h3>
-<p>There are optional dependencies that are required to use all the visualization
-functions included in Qiskit. You can install these at the same time by
-running:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="p">[</span><span class="n">visualization</span><span class="p">]</span>
+<p>On Windows the command is:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">activate</span> <span class="n">name_of_my_env</span>
 </pre></div>
 </div>
-<p>which will install qiskit and all the visualization dependencies.</p>
+<p>The final step required is to install Qiskit with the following command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span>
+</pre></div>
 </div>
-<div class="section" id="setup-a-standalone-version">
-<h3>Setup a standalone version<a class="headerlink" href="#setup-a-standalone-version" title="Permalink to this headline">¶</a></h3>
-<p>The best way to install Qiskit when the goal is to extend its capabilities is by cloning
-the individual repositories</p>
+<p>There are optional dependencies that are required to use all the visualization functions available in Qiskit. You can install Qiskit along with these optional dependencies by running</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="p">[</span><span class="n">visualization</span><span class="p">]</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-from-source">
+<h2>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h2>
+<p>To get involved with the development of Qiskit, you can build any of the packages from source. See the contributing guide for each element of Qiskit for complete instructions:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit-terra">Terra repository</a>.</li>
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aer">Aer repository</a>.</li>
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aqua">Aqua repository</a>.</li>
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit-chemistry">Chemistry repository</a>.</li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-terra/blob/master/.github/CONTRIBUTING.rst">Qiskit Terra</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aer/blob/master/.github/CONTRIBUTING.rst">Qiskit Aer</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aqua/blob/master/.github/CONTRIBUTING.rst">Qiskit Aqua</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-chemistry/blob/master/.github/CONTRIBUTING.rst">Qiskit Chemistry</a></li>
 </ul>
-<p>and following the standalone install instructions in these repositories.</p>
 </div>
-</div>
-<div class="section" id="configure-your-api-token-and-ibmq-credentials">
-<h2>Configure your API token and IBMQ credentials<a class="headerlink" href="#configure-your-api-token-and-ibmq-credentials" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Create an <a class="reference external" href="https://quantumexperience.ng.bluemix.net">IBM Q</a> account if
-you haven’t already done so</li>
-<li>Get an API token from the IBM Q website under “My
-Account” &gt; “Advanced”</li>
-</ul>
-<div class="section" id="automatically-loading-credentials">
-<h3>Automatically loading credentials<a class="headerlink" href="#automatically-loading-credentials" title="Permalink to this headline">¶</a></h3>
-<p>The credentials for accessing the IBM Q quantum devices can be loaded
-automatically, thus streamlining the set up of the IBM Q
-authentication.  You can set or store your API credentials once after installation,
-and when you want to use them, you can simply run:</p>
+<div class="section" id="access-ibm-q-devices">
+<h2>Access IBM Q Devices<a class="headerlink" href="#access-ibm-q-devices" title="Permalink to this headline">¶</a></h2>
+<p>IBM Q offers several real quantum computers and high-performance classical computing simulators <a class="reference external" href="https://www.research.ibm.com/ibm-q/technology/devices/">accessible through the cloud</a> with Qiskit.</p>
+<p><a class="reference external" href="https://quantumexperience.ng.bluemix.net/qx/login">Create a free IBM Q account</a> to get an API token.</p>
+<p>After logging in, navigate to your account settings.</p>
+<img alt="_images/install_my_account.png" src="_images/install_my_account.png" />
+<p>Navigate to the Advanced tab and click the Generate button in the API Token section.</p>
+<img alt="_images/install_api_token.png" src="_images/install_api_token.png" />
+<p>Store your API token locally for later use in a configuration file called <code class="docutils literal notranslate"><span class="pre">qiskitrc</span></code> by running the following Python code:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>This <code class="docutils literal notranslate"><span class="pre">IBMQ.load_accounts()</span></code> call performs the automatic loading of the
-credentials from several sources (if needed), and authenticates against IBM Q,
-making the online devices available to your program. Please use one of the following
-methods for storing the credentials before calling the automatic registration:</p>
-</div>
-<div class="section" id="store-api-credentials-locally">
-<h3>Store API credentials locally<a class="headerlink" href="#store-api-credentials-locally" title="Permalink to this headline">¶</a></h3>
-<p>For most users, storing your API credentials is the most convenient approach.
-Your information is stored locally in a configuration file called <cite>qiskitrc</cite>,
-and once stored, you can use the credentials without explicitly passing them
-to your program.</p>
-<p>To store your information, simply run:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <cite>MY_API_TOKEN</cite> should be replaced with your token.</p>
-<p>If you are on the IBM Q network, you must also pass the <cite>url</cite>
-argument found on your q-console account page to <cite>IBMQ.save_account()</cite>,
-along with any other additional information required (e.g. proxy information):</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">MY_API_TOKEN</span></code> should be replaced with your token.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">IBM Q Network members must specify more than just an API token, as explained below.</p>
+</div>
+<p>If you are a member of the IBM Q Network, you must pass an additional argument to <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account()</span></code>. The <code class="docutils literal notranslate"><span class="pre">url</span></code> argument can be found on your q-console account page, along with any other additional information required, e.g. proxy information. Pass your API token and the <code class="docutils literal notranslate"><span class="pre">url</span></code> argument by running the following Python code:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://...&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="manually-loading-credentials">
-<h3>Manually loading credentials<a class="headerlink" href="#manually-loading-credentials" title="Permalink to this headline">¶</a></h3>
-<p>In more complex scenarios or for users that need finer control over multiple
-accounts, one can pass the API token, and the other parameters, directly to the
-<code class="docutils literal notranslate"><span class="pre">IBMQ.enable_account()</span></code> function, that will ignore the automatic
-loading of the credentials and use the arguments directly. For example:</p>
+<div class="section" id="access-ibm-q-devices-with-finer-control">
+<h2>Access IBM Q Devices with Finer Control<a class="headerlink" href="#access-ibm-q-devices-with-finer-control" title="Permalink to this headline">¶</a></h2>
+<p>In more complex scenarios or for users that need finer control over multiple accounts, one can pass the API token (and the other parameters) directly to the <code class="docutils literal notranslate"><span class="pre">IBMQ.enable_account()</span></code> function, which will ignore the automatic loading of the credentials and use the arguments directly. For example, consider the following Python code:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://my.url&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>will authenticate using <code class="docutils literal notranslate"><span class="pre">MY_API_TOKEN</span></code> and the specified URL,
-regardless of the configuration stored in the config file, the environment
-variables, or the <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file, if any.</p>
-<p>Manually loading from a <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file can also be done:</p>
+<p>This will authenticate using <code class="docutils literal notranslate"><span class="pre">MY_API_TOKEN</span></code> and the specified <code class="docutils literal notranslate"><span class="pre">url</span></code>, regardless of the configuration stored in the config file, the environment variables, or the <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file, if any.</p>
+<p>Credentials can also be manually loaded from a <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file as shown in the following Python code:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
 <span class="kn">import</span> <span class="nn">Qconfig</span>
-
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="n">Qconfig</span><span class="o">.</span><span class="n">APIToken</span><span class="p">,</span> <span class="o">**</span><span class="n">Qconfig</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Please refer to the <code class="docutils literal notranslate"><span class="pre">qiskit.IBMQ</span></code> documentation for more information about
-using multiple credentials.</p>
-</div>
+<p>Please refer to the <code class="docutils literal notranslate"><span class="pre">qiskit.IBMQ</span></code> documentation for more information about using multiple credentials.</p>
 </div>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<p>The installation steps described on this document assume familiarity with the
-Python environment on your setup (for example, standard Python, <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>
-or Anaconda). Please consult the relevant documentation for instructions
-tailored to your environment.</p>
-<p>Depending on the system and setup, appending “sudo -H” before the
-<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> command could be needed:</p>
+<p>The instructions above assume familiarity with the Python environment on your setup (for example, standard Python, <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> or Anaconda). Please consult the relevant documentation for instructions tailored to your environment.</p>
+<p>Depending on your system and setup, appending “sudo -H” before the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> command could be needed:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="nb">dir</span> <span class="n">qiskit</span>
 </pre></div>
 </div>
