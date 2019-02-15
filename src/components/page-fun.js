@@ -7,8 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
-import { PageViewElement } from './page-view-element.js';
+import { LitElement, html } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -20,7 +19,7 @@ import {
 } from './app-shared-styles.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 
-class PageFun extends localize(i18next)(PageViewElement) {
+class PageFun extends localize(i18next)(LitElement) {
   render() {
     return html`
       ${SharedStyles} ${HeaderStyles} ${SectionStyles}
