@@ -7,8 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
-import { PageViewElement } from './page-view-element.js';
+import { LitElement, html } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -24,7 +23,7 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
-class PageTerra extends localize(i18next)(PageViewElement) {
+class PageTerra extends localize(i18next)(LitElement) {
   render() {
     // prettier-ignore
     return html`
