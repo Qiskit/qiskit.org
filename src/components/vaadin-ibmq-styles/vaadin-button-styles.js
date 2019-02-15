@@ -7,9 +7,12 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+/* eslint-disable camelcase */
 
-// eslint-disable-next-line camelcase
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import '@polymer/polymer/lib/elements/dom-module.js';
+
+// prettier-ignore
 const $_documentContainer = html`<dom-module id="ibmq-button" theme-for="vaadin-button">
 <template>
   <style>
@@ -63,10 +66,16 @@ const $_documentContainer = html`<dom-module id="ibmq-button" theme-for="vaadin-
       border-radius: 0;
       text-align: center;
       text-decoration: none;
+      transition-property: background-color;
       transition-duration: 250ms;
       transition-timing-function: ease-in;
       white-space: nowrap;
       line-height: 16px;
+    }
+
+    :host([focused]),
+    :host(:hover) {
+      transition-property: background-color, color;
     }
 
     :host([disabled]) {
