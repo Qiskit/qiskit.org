@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -38,47 +38,12 @@ class PageHome extends localize(i18next)(LitElement) {
     };
   }
 
-  render() {
-    // prettier-ignore
-    const supportersListTemplate = html`
-      <ul class="supporters-list">
-        ${this.organizations.map(organization => html`
-          <li>
-            ${organization.url ? html`
-              <a href="${organization.url}" target="_blank" rel="noopener">
-                <span class="name">${organization.name}</span>
-              </a>
-            ` : html`
-              ${organization.name}
-            `}
-          </li>
-        `)}
-        ${this.collaborators.map(collaborator => html`
-          <li>
-            ${collaborator.url ? html`
-              <a href="${collaborator.url}" target="_blank" rel="noopener">
-                <div class="supporter">
-                  <span class="name">${collaborator.name}</span>
-                  <span class="institution">${collaborator.institution}</span>
-                </div>
-              </a>
-            ` : html`
-              <div class="supporter">
-                <span class="name">${collaborator.name}</span>
-                <span class="institution">${collaborator.institution}</span>
-              </div>
-            `}
-          </li>
-        `)}
-      </ul>
-    `;
-
-    // prettier-ignore
-    return html`
-      ${SharedStyles}
-      ${HeaderStyles}
-      ${SectionStyles}
-      <style>
+  static get styles() {
+    return [
+      SharedStyles,
+      HeaderStyles,
+      SectionStyles,
+      css`
         :host {
           --app-section-background-color: var(--app-primary-color);
         }
@@ -117,7 +82,7 @@ class PageHome extends localize(i18next)(LitElement) {
         }
 
         .social-networks-list li .social-network .name {
-          margin-left: .5em;
+          margin-left: 0.5em;
         }
 
         .supporting .description {
@@ -155,7 +120,7 @@ class PageHome extends localize(i18next)(LitElement) {
         }
 
         .supporters-list li .institution {
-          font-size: .9em;
+          font-size: 0.9em;
           font-weight: 300;
         }
 
@@ -197,8 +162,47 @@ class PageHome extends localize(i18next)(LitElement) {
             column-count: 4;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    // prettier-ignore
+    const supportersListTemplate = html`
+      <ul class="supporters-list">
+        ${this.organizations.map(organization => html`
+          <li>
+            ${organization.url ? html`
+              <a href="${organization.url}" target="_blank" rel="noopener">
+                <span class="name">${organization.name}</span>
+              </a>
+            ` : html`
+              ${organization.name}
+            `}
+          </li>
+        `)}
+        ${this.collaborators.map(collaborator => html`
+          <li>
+            ${collaborator.url ? html`
+              <a href="${collaborator.url}" target="_blank" rel="noopener">
+                <div class="supporter">
+                  <span class="name">${collaborator.name}</span>
+                  <span class="institution">${collaborator.institution}</span>
+                </div>
+              </a>
+            ` : html`
+              <div class="supporter">
+                <span class="name">${collaborator.name}</span>
+                <span class="institution">${collaborator.institution}</span>
+              </div>
+            `}
+          </li>
+        `)}
+      </ul>
+    `;
+
+    // prettier-ignore
+    return html`
       <header>
         <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
         <div>

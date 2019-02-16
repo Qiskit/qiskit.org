@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -15,18 +15,22 @@ import { i18next } from '../i18next.js';
 import { SharedStyles } from './app-shared-styles.js';
 
 class PageNotFound extends localize(i18next)(LitElement) {
-  render() {
-    // prettier-ignore
-    return html`
-      ${SharedStyles}
-      <style>
+  static get styles() {
+    return [
+      SharedStyles,
+      css`
         .limited-width {
           flex-direction: column;
           align-items: center;
           padding-top: 2em;
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    // prettier-ignore
+    return html`
       <section>
         <div class="limited-width">
           <h2>${i18next.t('pages.notFound.headerTitle')}</h2>

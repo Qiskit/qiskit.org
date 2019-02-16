@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -24,15 +24,14 @@ import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
 class PageAqua extends localize(i18next)(LitElement) {
-  render() {
-    // prettier-ignore
-    return html`
-      ${SharedStyles}
-      ${HeaderStyles}
-      ${SectionStyles}
-      ${SectionElementStyles}
-      ${StackListStyles}
-      <style>
+  static get styles() {
+    return [
+      SharedStyles,
+      HeaderStyles,
+      SectionStyles,
+      SectionElementStyles,
+      StackListStyles,
+      css`
         :host {
           --app-section-background-color: var(--qiskit-aqua-color);
           --app-section-color: #000000;
@@ -53,14 +52,19 @@ class PageAqua extends localize(i18next)(LitElement) {
 
         section .description .badges vaadin-button {
           --ibmq-button-secondary-color: #000000;
-          --ibmq-button-secondary-focus-color: #FFFFFF;
+          --ibmq-button-secondary-focus-color: #ffffff;
         }
 
         section .description img + img {
           margin-top: 1em;
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    // prettier-ignore
+    return html`
       <header>
         <img src="images/qiskit-aqua-logo.png" .alt=${i18next.t('pages.aqua.altLogo')}>
         <div>

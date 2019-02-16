@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -21,13 +21,12 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 
 class PageVscode extends localize(i18next)(LitElement) {
-  render() {
-    // prettier-ignore
-    return html`
-      ${SharedStyles}
-      ${HeaderStyles}
-      ${SectionStyles}
-      <style>
+  static get styles() {
+    return [
+      SharedStyles,
+      HeaderStyles,
+      SectionStyles,
+      css`
         :host {
           --app-section-background-color: var(--qiskit-vscode-color);
           --app-section-color: #222222;
@@ -40,7 +39,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           flex: 1;
         }
 
-        .install .row .step:nth-child(n+2) {
+        .install .row .step:nth-child(n + 2) {
           margin-top: 1em;
         }
 
@@ -52,7 +51,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          margin-right: .8em;
+          margin-right: 0.8em;
         }
 
         .install .row .step .title {
@@ -70,7 +69,7 @@ class PageVscode extends localize(i18next)(LitElement) {
             align-items: center;
           }
 
-          .install .row .step:nth-child(n+2) {
+          .install .row .step:nth-child(n + 2) {
             margin-top: 0;
           }
 
@@ -88,8 +87,13 @@ class PageVscode extends localize(i18next)(LitElement) {
             flex: 7;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    // prettier-ignore
+    return html`
       <header>
         <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
         <div>
