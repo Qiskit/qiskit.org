@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
@@ -20,18 +20,22 @@ import {
 import './vaadin-ibmq-styles/vaadin-button.js';
 
 class PageFun extends localize(i18next)(LitElement) {
-  render() {
-    // prettier-ignore
-    return html`
-      ${SharedStyles}
-      ${HeaderStyles}
-      ${SectionStyles}
-      <style>
+  static get styles() {
+    return [
+      SharedStyles,
+      HeaderStyles,
+      SectionStyles,
+      css`
         :host {
           --app-section-background-color: var(--app-primary-color);
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    // prettier-ignore
+    return html`
       <section>
         <div class="row limited-width">
           <div class="description">

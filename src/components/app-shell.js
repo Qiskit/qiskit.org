@@ -7,7 +7,7 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
@@ -28,11 +28,10 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     };
   }
 
-  render() {
-    // prettier-ignore
-    return html`
-      ${SharedStyles}
-      <style>
+  static get styles() {
+    return [
+      SharedStyles,
+      css`
         :host {
           --app-primary-color: #8a3ffc;
           --app-secondary-color: #242a2e;
@@ -42,7 +41,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           --qiskit-aer-color: #b3e6ff;
           --qiskit-ignis-color: #20d5d2;
 
-          --qiskit-vscode-color: #F5F5F5;
+          --qiskit-vscode-color: #f5f5f5;
 
           display: flex;
           flex-direction: column;
@@ -55,7 +54,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           display: flex;
           background-color: #21252b;
           height: 60px;
-          border-bottom: 1px solid #181B20;
+          border-bottom: 1px solid #181b20;
         }
 
         .toolbar {
@@ -71,7 +70,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: none;
           padding: 0 1em;
           font-weight: 300;
-          color: #FFFFFF;
+          color: #ffffff;
           flex: none;
         }
 
@@ -102,7 +101,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         .toolbar nav > a[selected]::after {
           content: '';
           height: 2px;
-          background-color: #FFFFFF;
+          background-color: #ffffff;
           position: absolute;
           bottom: 0;
           left: 0;
@@ -118,10 +117,10 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
         footer {
           display: flex;
-          background-color: #21252B;
-          color: #FFFFFF;
+          background-color: #21252b;
+          color: #ffffff;
           height: 80px;
-          border-top: 1px solid #181B20;
+          border-top: 1px solid #181b20;
         }
 
         footer .limited-width {
@@ -131,7 +130,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         }
 
         footer .limited-width .language-selector span {
-          padding: 0 .2em;
+          padding: 0 0.2em;
           cursor: pointer;
         }
 
@@ -148,8 +147,13 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             font-size: 0.9em;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    // prettier-ignore
+    return html`
       <header>
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
