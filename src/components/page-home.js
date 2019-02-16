@@ -197,7 +197,7 @@ class PageHome extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-logo.png" alt="${i18next.t('pages.home.altLogo')}">
+        <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.home.headerTitle')}
@@ -289,7 +289,7 @@ class PageHome extends localize(i18next)(LitElement) {
             </div>
           </div>
           <div class="illustration">
-            <img src="images/try-and-learn.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
+            <img src="images/try-and-learn.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
           </div>
         </div>
       </section>
@@ -408,7 +408,7 @@ class PageHome extends localize(i18next)(LitElement) {
             </div>
           </div>
           <div class="illustration">
-            <img src="images/ibm-q-experience.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
+            <img src="images/ibm-q-experience.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
           </div>
         </div>
       </section>

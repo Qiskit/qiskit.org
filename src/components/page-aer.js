@@ -52,7 +52,7 @@ class PageAer extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-aer-logo.png" alt="${i18next.t('pages.aer.altLogo')}">
+        <img src="images/qiskit-aer-logo.png" .alt=${i18next.t('pages.aer.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.aer.headerTitle')}

@@ -52,7 +52,7 @@ class PageTerra extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-terra-logo.png" alt="${i18next.t('pages.terra.altLogo')}">
+        <img src="images/qiskit-terra-logo.png" .alt=${i18next.t('pages.terra.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.terra.headerTitle')}

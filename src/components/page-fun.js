@@ -45,7 +45,7 @@ class PageFun extends localize(i18next)(LitElement) {
           <div class="illustration">
             <img
               src="images/fun/model-q.jpg"
-              alt="${i18next.t('pages.fun.modelQAltImage')}"
+              .alt=${i18next.t('pages.fun.modelQAltImage')}
             />
           </div>
         </div>
@@ -72,7 +72,7 @@ class PageFun extends localize(i18next)(LitElement) {
           <div class="illustration">
             <img
               src="images/fun/hello-quantum.png"
-              alt="${i18next.t('pages.fun.helloQuantumAltImage')}"
+              .alt=${i18next.t('pages.fun.helloQuantumAltImage')}
             />
           </div>
         </div>
@@ -99,7 +99,7 @@ class PageFun extends localize(i18next)(LitElement) {
           <div class="illustration">
             <img
               src="images/fun/entanglion.png"
-              alt="${i18next.t('pages.fun.entanglionAltImage')}"
+              .alt=${i18next.t('pages.fun.entanglionAltImage')}
             />
           </div>
         </div>
