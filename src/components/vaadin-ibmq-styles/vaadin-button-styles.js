@@ -66,16 +66,16 @@ const $_documentContainer = html`<dom-module id="ibmq-button" theme-for="vaadin-
       border-radius: 0;
       text-align: center;
       text-decoration: none;
-      transition-property: background-color;
-      transition-duration: 250ms;
-      transition-timing-function: ease-in;
       white-space: nowrap;
       line-height: 16px;
     }
 
     :host([focused]),
-    :host(:hover) {
-      transition-property: background-color, color;
+    :host(:hover),
+    :host([focused]) [part] ::slotted(svg),
+    :host(:hover) [part] ::slotted(svg) {
+      transition-duration: 250ms;
+      transition-timing-function: ease-in;
     }
 
     :host([disabled]) {
@@ -86,8 +86,6 @@ const $_documentContainer = html`<dom-module id="ibmq-button" theme-for="vaadin-
     [part] ::slotted(svg) {
       width: 1rem;
       height: 1rem;
-      transition-duration: 250ms;
-      transition-timing-function: ease-in;
     }
 
     /*
