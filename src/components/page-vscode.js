@@ -91,7 +91,7 @@ class PageVscode extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-logo.png" alt="${i18next.t('pages.home.altLogo')}">
+        <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
         <div>
           <h1>${i18next.t('pages.vscode.headerTitle')}</h1>
           <h2>${i18next.t('pages.vscode.headerSubTitle')}</h2>
@@ -156,7 +156,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
                 poster="images/vscode/qiskit-vscode-autocomplete.jpg"
-                @click="${event => this.tooglePausedVideo(event)}">
+                @click=${event => this.tooglePausedVideo(event)}>
               <source src="videos/qiskit-vscode-autocomplete.webm" type="video/webm">
               <source src="videos/qiskit-vscode-autocomplete.mp4" type="video/mp4">
             </video>
@@ -173,7 +173,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
                 poster="images/vscode/qiskit-vscode-documentation.jpg"
-                @click="${event => this.tooglePausedVideo(event)}">
+                @click=${event => this.tooglePausedVideo(event)}>
               <source src="videos/qiskit-vscode-documentation.webm" type="video/webm">
               <source src="videos/qiskit-vscode-documentation.mp4" type="video/mp4">
             </video>
@@ -190,7 +190,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
                 poster="images/vscode/qiskit-vscode-linter.jpg"
-                @click="${event => this.tooglePausedVideo(event)}">
+                @click=${event => this.tooglePausedVideo(event)}>
               <source src="videos/qiskit-vscode-linter.webm" type="video/webm">
               <source src="videos/qiskit-vscode-linter.mp4" type="video/mp4">
             </video>
@@ -207,7 +207,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
                 poster="images/vscode/qiskit-vscode-snippet.jpg"
-                @click="${event => this.tooglePausedVideo(event)}">
+                @click=${event => this.tooglePausedVideo(event)}>
               <source src="videos/qiskit-vscode-snippet.webm" type="video/webm">
               <source src="videos/qiskit-vscode-snippet.mp4" type="video/mp4">
             </video>
@@ -224,7 +224,7 @@ class PageVscode extends localize(i18next)(LitElement) {
           <div class="illustration">
             <video autoplay loop muted playsinline disableRemotePlayback
                 poster="images/vscode/qiskit-vscode-integrated-tools.jpg"
-                @click="${event => this.tooglePausedVideo(event)}">
+                @click=${event => this.tooglePausedVideo(event)}>
               <source src="videos/qiskit-vscode-integrated-tools.webm" type="video/webm">
               <source src="videos/qiskit-vscode-integrated-tools.mp4" type="video/mp4">
             </video>

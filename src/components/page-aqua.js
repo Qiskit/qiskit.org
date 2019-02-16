@@ -62,7 +62,7 @@ class PageAqua extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-aqua-logo.png" alt="${i18next.t('pages.aqua.altLogo')}">
+        <img src="images/qiskit-aqua-logo.png" .alt=${i18next.t('pages.aqua.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.aqua.headerTitle')}
@@ -208,8 +208,8 @@ class PageAqua extends localize(i18next)(LitElement) {
               </a>
             </div>
             <p>${i18next.t('pages.aqua.chemistryDescription')}</p>
-            <img src="images/aqua/aqua-chemistry-LiHEnergy.gif" alt="${i18next.t('pages.aqua.entanglionAltImage')}">
-            <img src="images/aqua/aqua-chemistry-LiHDipole.gif" alt="${i18next.t('pages.aqua.entanglionAltImage')}">
+            <img src="images/aqua/aqua-chemistry-LiHEnergy.gif" .alt=${i18next.t('pages.aqua.entanglionAltImage')}>
+            <img src="images/aqua/aqua-chemistry-LiHDipole.gif" .alt=${i18next.t('pages.aqua.entanglionAltImage')}>
           </div>
           <div class="illustration">
             <h3>${i18next.t('pages.aqua.installTitle')}</h3>
@@ -283,7 +283,7 @@ class PageAqua extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.aqua.chemistryGuiDescription3')}</p>
           </div>
           <div class="illustration">
-            <img src="images/aqua/aqua-chemistry-gui.gif" alt="${i18next.t('pages.aqua.chemistryGuiAltImage')}">
+            <img src="images/aqua/aqua-chemistry-gui.gif" .alt=${i18next.t('pages.aqua.chemistryGuiAltImage')}>
           </div>
         </div>
       </section>
