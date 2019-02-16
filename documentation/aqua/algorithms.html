@@ -355,6 +355,15 @@
 <li class="toctree-l4"><a class="reference internal" href="uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="eigs.html">Eigenvalues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eigs.html#eigsqpe">EigsQPE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reciprocals.html">Reciprocals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reciprocals.html#partial-table-look-up">Partial Table Look Up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit_aqua.html">Aqua SDK Reference</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#submodules">Submodules</a></li>
@@ -869,6 +878,15 @@
 <li class="toctree-l4"><a class="reference internal" href="uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="eigs.html">Eigenvalues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eigs.html#eigsqpe">EigsQPE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reciprocals.html">Reciprocals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reciprocals.html#partial-table-look-up">Partial Table Look Up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../autodoc/qiskit_aqua.html">Aqua SDK Reference</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../autodoc/qiskit_aqua.html#submodules">Submodules</a></li>
@@ -1098,6 +1116,7 @@ of the quantum circuits modeling the specific problems.</p>
 <li><span class="xref std std-ref">Simon</span></li>
 <li><span class="xref std std-ref">Support Vector Machine Quantum Kernel (QSVM Kernel)</span></li>
 <li><span class="xref std std-ref">Support Vector Machine Variational (QSVM Variational)</span></li>
+<li><span class="xref std std-ref">HHL algorithm for solving linear systems (HHL)</span></li>
 </ul>
 <p>Aqua includes  also some <a class="reference external" href="#classical-reference-algorithms">classical algorithms</a>
 for generating reference values. This feature of Aqua may be
@@ -1767,6 +1786,42 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
 <p>In Aqua, QSVM Variational  supports the <code class="docutils literal notranslate"><span class="pre">svm_classification</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="hhl-algorithm-for-solving-linear-systems-hhl">
+<span id="hhl"></span><h3>HHL algorithm for solving linear systems (HHL)<a class="headerlink" href="#hhl-algorithm-for-solving-linear-systems-hhl" title="Permalink to this headline">¶</a></h3>
+<p>The <em>HHL algorithm</em> (after the author’s surnames Harrow-Hassidim-Lloyd) is a
+quantum algorithm to solve systems of linear equations <span class="math notranslate nohighlight">\(A\overrightarrow{x}=\overrightarrow{b}\)</span>.
+Using the Quantum Phase Estimation algorithm (<a class="reference internal" href="#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>), the linear system
+is transformed into diagonal form in which the matrix <span class="math notranslate nohighlight">\(A\)</span> is easily
+invertible. The inversion is achieved by rotating an ancillary qubit by an angle
+<span class="math notranslate nohighlight">\(\arcsin{ \frac{C}{\lambda_\mathrm{i}}}\)</span> around the y-axis where
+<span class="math notranslate nohighlight">\(\lambda_\mathrm{i}\)</span> are the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span>. After
+uncomputing the register storing the eigenvalues using the inverse QPE,
+one measures the ancillary qubit. A measurement of 1 indicates that the matrix
+inversion succeeded. This leaves the system in a state proportional to the
+solution vector <span class="math notranslate nohighlight">\(|x\rangle\)</span>. In many cases one is not interested in the
+single vector elements of <span class="math notranslate nohighlight">\(|x\rangle\)</span> but only on certain properties.
+These are accessible by using problem-specific operators. Another use-case is
+the implementation in a larger quantum program.</p>
+<p>Currently only hermitian matrices with a dimension of <span class="math notranslate nohighlight">\(2^{n}\)</span> are
+supported.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Consult the documentation on <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Inverse Quantum Fourier Transforms</span></a>,  <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>, <a class="reference internal" href="eigs.html#eigs"><span class="std std-ref">Eigenvalues</span></a>, <a class="reference internal" href="reciprocals.html#reciprocals"><span class="std std-ref">Reciprocals</span></a>
+for more details. <a class="reference external" href="https://arxiv.org/abs/0811.3171">The original paper is accessible on arxiv.</a></p>
+</div>
+<p>HHL requires eigenvalue estimation using QPE (<a class="reference internal" href="eigs.html#eigs"><span class="std std-ref">Eigenvalues</span></a>), the eigenvalue
+inversion (<a class="reference internal" href="reciprocals.html#reciprocals"><span class="std std-ref">Reciprocals</span></a>), and a matrix and initial state as part of its
+configuration.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to HHL declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
+Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">HHL</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In Aqua, HHL supports the <code class="docutils literal notranslate"><span class="pre">linear_system</span></code> problem.</p>
 </div>
 </div>
 </div>
