@@ -22,6 +22,12 @@ import { navigate } from '../actions/app.js';
 import { SharedStyles } from './app-shared-styles.js';
 
 class AppShell extends localize(i18next)(connect(store)(LitElement)) {
+  static get properties() {
+    return {
+      page: { type: String },
+    };
+  }
+
   render() {
     // prettier-ignore
     return html`
@@ -180,12 +186,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         </div>
       </footer>
     `;
-  }
-
-  static get properties() {
-    return {
-      page: { type: String },
-    };
   }
 
   constructor() {
