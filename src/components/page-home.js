@@ -31,40 +31,43 @@ import './vaadin-ibmq-styles/vaadin-button.js';
 import { organizations, collaborators } from '../../data/supporters.js';
 
 class PageHome extends localize(i18next)(LitElement) {
+  static get properties() {
+    return {
+      organizations: { type: Array },
+      collaborators: { type: Array },
+    };
+  }
+
   render() {
     // prettier-ignore
     const supportersListTemplate = html`
       <ul class="supporters-list">
         ${this.organizations.map(organization => html`
           <li>
-            ${organization.url
-              ? html`
-                <a href="${organization.url}" target="_blank" rel="noopener">
-                  <span class="name">${organization.name}</span>
-                </a>
-              ` : html`
-                ${organization.name}
-              `
-            }
+            ${organization.url ? html`
+              <a href="${organization.url}" target="_blank" rel="noopener">
+                <span class="name">${organization.name}</span>
+              </a>
+            ` : html`
+              ${organization.name}
+            `}
           </li>
         `)}
         ${this.collaborators.map(collaborator => html`
           <li>
-            ${collaborator.url
-              ? html`
-                <a href="${collaborator.url}" target="_blank" rel="noopener">
-                  <div class="supporter">
-                    <span class="name">${collaborator.name}</span>
-                    <span class="institution">${collaborator.institution}</span>
-                  </div>
-                </a>
-              ` : html`
+            ${collaborator.url ? html`
+              <a href="${collaborator.url}" target="_blank" rel="noopener">
                 <div class="supporter">
                   <span class="name">${collaborator.name}</span>
                   <span class="institution">${collaborator.institution}</span>
                 </div>
-              `
-            }
+              </a>
+            ` : html`
+              <div class="supporter">
+                <span class="name">${collaborator.name}</span>
+                <span class="institution">${collaborator.institution}</span>
+              </div>
+            `}
           </li>
         `)}
       </ul>
@@ -197,7 +200,7 @@ class PageHome extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-logo.png" alt="${i18next.t('pages.home.altLogo')}">
+        <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.home.headerTitle')}
@@ -219,20 +222,14 @@ class PageHome extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${githubIcon}
-                GitHub
-              </vaadin-button>
+              <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
             <a
                 href="https://join.slack.com/t/qiskit/shared_invite/enQtNDc2NjUzMjE4Mzc0LTMwZmE0YTM4ZThiNGJmODkzN2Y2NTNlMDIwYWNjYzA2ZmM1YTRlZGQ3OGM0NjcwMjZkZGE0MTA4MGQ1ZTVmYzk"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${slackIcon}
-                ${i18next.t('joinSlack')}
-              </vaadin-button>
+              <vaadin-button theme="secondary small">${slackIcon} ${i18next.t('joinSlack')}</vaadin-button>
             </a>
           </div>
         </div>
@@ -250,9 +247,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     target="_blank"
                     rel="noopener"
                     tabindex="-1">
-                  <vaadin-button theme="secondary">
-                    ${i18next.t('pages.home.newsQCampButton')}
-                  </vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsQCampButton')}</vaadin-button>
                 </a>
               </div>
             </div>
@@ -263,9 +258,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsVideoDescription')}</p>
               <div class="actions">
                 <a href="https://www.youtube.com/watch?v=V3hXSftZuoc" tabindex="-1">
-                  <vaadin-button theme="secondary">
-                    ${i18next.t('pages.home.newsVideoButton')}
-                  </vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsVideoButton')}</vaadin-button>
                 </a>
               </div>
             </div>
@@ -289,7 +282,7 @@ class PageHome extends localize(i18next)(LitElement) {
             </div>
           </div>
           <div class="illustration">
-            <img src="images/try-and-learn.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
+            <img src="images/try-and-learn.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
           </div>
         </div>
       </section>
@@ -308,10 +301,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="Slack community"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${slackIcon}
-                    <span class="name">Slack</span>
-                  </div>
+                  <div class="social-network">${slackIcon} <span class="name">Slack</span></div>
                 </a>
               </li>
               <li>
@@ -320,10 +310,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="GitHub organization"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${githubIcon}
-                    <span class="name">GitHub</span>
-                  </div>
+                  <div class="social-network">${githubIcon} <span class="name">GitHub</span></div>
                 </a>
               </li>
               <li>
@@ -332,10 +319,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="Stack Exchange community"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${stackexchangeIcon}
-                    <span class="name">Stack Exchange</span>
-                  </div>
+                  <div class="social-network">${stackexchangeIcon} <span class="name">Stack Exchange</span></div>
                 </a>
               </li>
               <li>
@@ -344,10 +328,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="Twitter profile"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${twitterIcon}
-                    <span class="name">Twitter</span>
-                  </div>
+                  <div class="social-network">${twitterIcon} <span class="name">Twitter</span></div>
                 </a>
               </li>
               <li>
@@ -356,10 +337,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="Medium profile"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${mediumIcon}
-                    <span class="name">Medium</span>
-                  </div>
+                  <div class="social-network">${mediumIcon} <span class="name">Medium</span></div>
                 </a>
               </li>
               <li>
@@ -368,10 +346,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="YouTube channel"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${youtubeIcon}
-                    <span class="name">YouTube</span>
-                  </div>
+                  <div class="social-network">${youtubeIcon} <span class="name">YouTube</span></div>
                 </a>
               </li>
               <li>
@@ -380,10 +355,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     title="Facebook page"
                     target="_blank"
                     rel="noopener">
-                  <div class="social-network">
-                    ${facebookIcon}
-                    <span class="name">Facebook</span>
-                  </div>
+                  <div class="social-network">${facebookIcon} <span class="name">Facebook</span></div>
                 </a>
               </li>
             </ul>
@@ -408,7 +380,7 @@ class PageHome extends localize(i18next)(LitElement) {
             </div>
           </div>
           <div class="illustration">
-            <img src="images/ibm-q-experience.jpg" alt="${i18next.t('pages.home.ibmQExperienceAltImage')}">
+            <img src="images/ibm-q-experience.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
           </div>
         </div>
       </section>
@@ -423,13 +395,6 @@ class PageHome extends localize(i18next)(LitElement) {
         </div>
       </section>
     `;
-  }
-
-  static get properties() {
-    return {
-      organizations: { type: Array },
-      collaborators: { type: Array },
-    };
   }
 
   constructor() {
