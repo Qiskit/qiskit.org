@@ -52,7 +52,7 @@ class PageAer extends localize(i18next)(LitElement) {
       </style>
 
       <header>
-        <img src="images/qiskit-aer-logo.png" alt="${i18next.t('pages.aer.altLogo')}">
+        <img src="images/qiskit-aer-logo.png" .alt=${i18next.t('pages.aer.altLogo')}>
         <div>
           <h1>
             ${i18next.t('pages.aer.headerTitle')}
@@ -64,19 +64,14 @@ class PageAer extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${githubIcon}
-                GitHub
-              </vaadin-button>
+              <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
             <a
                 href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb#1.3-Qiskit-Aer"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${i18next.t('tutorials')}
-              </vaadin-button>
+              <vaadin-button theme="secondary small">${i18next.t('tutorials')}</vaadin-button>
             </a>
           </div>
         </div>

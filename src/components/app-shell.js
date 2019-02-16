@@ -22,6 +22,12 @@ import { navigate } from '../actions/app.js';
 import { SharedStyles } from './app-shared-styles.js';
 
 class AppShell extends localize(i18next)(connect(store)(LitElement)) {
+  static get properties() {
+    return {
+      page: { type: String },
+    };
+  }
+
   render() {
     // prettier-ignore
     return html`
@@ -148,14 +154,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
           <nav class="first">
-            <a href="/terra" ?selected="${this.page === 'terra'}">Terra</a>
-            <a href="/aer" ?selected="${this.page === 'aer'}">Aer</a>
-            <a href="/aqua" ?selected="${this.page === 'aqua'}">Aqua</a>
+            <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
+            <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
+            <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
           </nav>
           <nav class="second">
             <a href="/documentation/" target="_blank">${i18next.t('documentation')}</a>
-            <a href="/vscode" ?selected="${this.page === 'vscode'}">${i18next.t('tools')}</a>
-            <a href="/fun" ?selected="${this.page === 'fun'}">${i18next.t('fun')}</a>
+            <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
+            <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
         </div>
       </header>
@@ -168,24 +174,18 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         <div class="limited-width">
           <div class="language-selector">
             <select
-                @change="${this.changeLanguage}"
+                @change=${this.changeLanguage}
                 aria-label="Language"
-                value="${i18next.languages[0]}">
-              <option value="en" ?selected="${i18next.languages[0] === 'en'}">English</option>
-              <option value="de" ?selected="${i18next.languages[0] === 'de'}">German</option>
-              <!-- <option value="ja" ?selected="${i18next.languages[0] === 'ja'}">Japanese</option> -->
+                .value=${i18next.languages[0]}>
+              <option value="en" ?selected=${i18next.languages[0] === 'en'}>English</option>
+              <option value="de" ?selected=${i18next.languages[0] === 'de'}>German</option>
+              <!-- <option value="ja" ?selected=${i18next.languages[0] === 'ja'}>Japanese</option> -->
             </select>
           </div>
           <div class="copyright">© 2018 IBM</div>
         </div>
       </footer>
     `;
-  }
-
-  static get properties() {
-    return {
-      page: { type: String },
-    };
   }
 
   constructor() {
