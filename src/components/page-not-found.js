@@ -16,6 +16,7 @@ import { SharedStyles } from './app-shared-styles.js';
 
 class PageNotFound extends localize(i18next)(LitElement) {
   render() {
+    // prettier-ignore
     return html`
       ${SharedStyles}
       <style>

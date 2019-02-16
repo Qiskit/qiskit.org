@@ -74,19 +74,14 @@ class PageAqua extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${githubIcon}
-                GitHub
-              </vaadin-button>
+              <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
             <a
                 href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb#1.5-Qiskit-Aqua"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1">
-              <vaadin-button theme="secondary small">
-                ${i18next.t('tutorials')}
-              </vaadin-button>
+              <vaadin-button theme="secondary small">${i18next.t('tutorials')}</vaadin-button>
             </a>
           </div>
         </div>
@@ -192,19 +187,14 @@ class PageAqua extends localize(i18next)(LitElement) {
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
-                <vaadin-button theme="secondary small">
-                  ${githubIcon}
-                  GitHub
-                </vaadin-button>
+                <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
               </a>
               <a
                   href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/aqua/chemistry/index.ipynb"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
-                <vaadin-button theme="secondary small">
-                  ${i18next.t('tutorials')}
-                </vaadin-button>
+                <vaadin-button theme="secondary small">${i18next.t('tutorials')}</vaadin-button>
               </a>
             </div>
             <p>${i18next.t('pages.aqua.chemistryDescription')}</p>
