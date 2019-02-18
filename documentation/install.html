@@ -83,7 +83,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices">Access IBM Q Devices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices-with-finer-control">Access IBM Q Devices with Finer Control</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
@@ -625,7 +624,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices">Access IBM Q Devices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices-with-finer-control">Access IBM Q Devices with Finer Control</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
@@ -1207,22 +1205,7 @@
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://...&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="access-ibm-q-devices-with-finer-control">
-<h2>Access IBM Q Devices with Finer Control<a class="headerlink" href="#access-ibm-q-devices-with-finer-control" title="Permalink to this headline">¶</a></h2>
-<p>In more complex scenarios or for users that need finer control over multiple accounts, one can pass the API token (and the other parameters) directly to the <code class="docutils literal notranslate"><span class="pre">IBMQ.enable_account()</span></code> function, which will ignore the automatic loading of the credentials and use the arguments directly. For example, consider the following Python code:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://my.url&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This will authenticate using <code class="docutils literal notranslate"><span class="pre">MY_API_TOKEN</span></code> and the specified <code class="docutils literal notranslate"><span class="pre">url</span></code>, regardless of the configuration stored in the config file, the environment variables, or the <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file, if any.</p>
-<p>Credentials can also be manually loaded from a <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file as shown in the following Python code:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-<span class="kn">import</span> <span class="nn">Qconfig</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="n">Qconfig</span><span class="o">.</span><span class="n">APIToken</span><span class="p">,</span> <span class="o">**</span><span class="n">Qconfig</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Please refer to <a class="reference internal" href="advanced_use_of_ibm_q_devices.html#advanced-use-of-ibm-q-devices-label"><span class="std std-ref">Advanced Use of IBM Q Devices</span></a> for more information about using multiple credentials.</p>
+<p>Refer to <a class="reference internal" href="advanced_use_of_ibm_q_devices.html#advanced-use-of-ibm-q-devices-label"><span class="std std-ref">Advanced Use of IBM Q Devices</span></a> for more details, such as how to manage multiple IBM Q account credentials.</p>
 </div>
 </div>
 
