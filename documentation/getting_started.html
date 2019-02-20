@@ -1229,16 +1229,11 @@ below.</p>
 <h2>Visualize Circuit<a class="headerlink" href="#visualize-circuit" title="Permalink to this headline">¶</a></h2>
 <p>You can visualize your circuit using Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>,
 which plots circuit in the form found in many textbooks.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">        ┌───┐
-q_0: |0>┤ H ├──■────■──
-        └───┘┌─┴─┐  │
-q_1: |0>─────┤ X ├──┼──
-             └───┘┌─┴─┐
-q_2: |0>──────────┤ X ├
-                  └───┘</pre><p>In this circuit, the qubits are put in order with qubit zero at the top
+<img alt="_images/getting_started_with_qiskit_circuit_0.png" src="_images/getting_started_with_qiskit_circuit_0.png" />
+<p>In this circuit, the qubits are put in order with qubit zero at the top
 and qubit two at the bottom. The circuit is read left-to-right (meaning
 that gates which are applied earlier in the circuit show up further to
 the left).</p>
@@ -1299,7 +1294,7 @@ useful methods: <code class="docutils literal notranslate"><span class="pre">job
 status of the job and a result object respectively.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Note: Jobs run asynchronously but when the result method is called it
+<p class="last">Jobs run asynchronously but when the result method is called it
 switches to synchronous and waits for it to finish before moving on to
 another task.</p>
 </div>
@@ -1363,7 +1358,7 @@ Measurements cause the quantum system to collapse into classical bits.</p>
 <p>For example, suppose we make independent measurements on each qubit of
 the three-qubit GHZ state</p>
 <div class="math notranslate nohighlight">
-\[|\psi\rangle = |000\rangle +|111\rangle)/\sqrt{2},\]</div>
+\[|\psi\rangle = (|000\rangle +|111\rangle)/\sqrt{2},\]</div>
 <p>and let <span class="math notranslate nohighlight">\(xyz\)</span> denote the bitstring that results. Recall that,
 under the qubit labeling used by Qiskit, <span class="math notranslate nohighlight">\(x\)</span> would correspond to
 the outcome on qubit 2, <span class="math notranslate nohighlight">\(y\)</span> to the outcome on qubit 1, and
@@ -1402,22 +1397,11 @@ backend.</p>
 <span class="n">qc</span> <span class="o">=</span> <span class="n">circ</span><span class="o">+</span><span class="n">meas</span>
 
 <span class="c1">#drawing the circuit</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">        ┌───┐           ░ ┌─┐
-q_0: |0>┤ H ├──■────■───░─┤M├──────
-        └───┘┌─┴─┐  │   ░ └╥┘┌─┐
-q_1: |0>─────┤ X ├──┼───░──╫─┤M├───
-             └───┘┌─┴─┐ ░  ║ └╥┘┌─┐
-q_2: |0>──────────┤ X ├─░──╫──╫─┤M├
-                  └───┘ ░  ║  ║ └╥┘
- c_0: 0 ═══════════════════╩══╬══╬═
-                              ║  ║
- c_1: 0 ══════════════════════╩══╬═
-                                 ║
- c_2: 0 ═════════════════════════╩═
-                                   </pre><p>This circuit adds a classical register, and three measurements that are
+<img alt="_images/getting_started_with_qiskit_circuit_0.png" src="_images/getting_started_with_qiskit_circuit_0.png" />
+<p>This circuit adds a classical register, and three measurements that are
 used to map the outcome of qubits to the classical bits.</p>
 <p>To simulate this circuit, we use the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> in Qiskit Aer.
 Each run of this circuit will yield either the bitstring 000 or 111. To
@@ -1515,7 +1499,7 @@ circuit. Then, we execute the circuit on the backend using the
 running our circuit.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When the .result() method is called, the code block will wait
+<p class="last">When the <code class="docutils literal notranslate"><span class="pre">.result()</span></code> method is called, the code block will wait
 until the job has finished before releasing the cell.</p>
 </div>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result_exp</span> <span class="o">=</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
