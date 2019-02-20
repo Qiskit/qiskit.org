@@ -163,7 +163,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
           </nav>
           <nav class="second">
-            <a href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">${i18next.t('tutorials')}</a>
+            <a rel="noopener" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">${i18next.t('tutorials')}</a>
             <a href="/documentation/" target="_blank">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
