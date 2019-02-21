@@ -575,6 +575,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-documentation">Writing Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#creating-a-custom-provider">Creating a Custom Provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#designing-the-backend-class">Designing the Backend Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#designing-the-job-class">Designing the Job Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#designing-the-provider-class">Designing the Provider Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#implementing-a-custom-simulator">Implementing a Custom Simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#using-custom-providers">Using Custom Providers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community Extensions</a><ul>
@@ -1130,6 +1138,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-documentation">Writing Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#creating-a-custom-provider">Creating a Custom Provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#designing-the-backend-class">Designing the Backend Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#designing-the-job-class">Designing the Job Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#designing-the-provider-class">Designing the Provider Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#implementing-a-custom-simulator">Implementing a Custom Simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#using-custom-providers">Using Custom Providers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../community.html">Community Extensions</a><ul>
@@ -1174,7 +1190,7 @@ the number of qubits.</p>
 <p>Python statevector simulator.</p>
 <dl class="attribute">
 <dt id="qiskit.providers.builtinsimulators.statevector_simulator.StatevectorSimulatorPy.DEFAULT_CONFIGURATION">
-<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'backend_name': 'statevector_simulator', 'backend_version': '1.0.0', 'basis_gates': ['u1', 'u2', 'u3', 'cx', 'id', 'snapshot'], 'conditional': True, 'description': 'A Python statevector simulator for qobj files', 'gates': [{'name': 'u1', 'qasm_def': 'gate u1(lambda) q { U(0,0,lambda) q; }', 'parameters': ['lambda']}, {'name': 'u2', 'qasm_def': 'gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }', 'parameters': ['phi', 'lambda']}, {'name': 'u3', 'qasm_def': 'gate u3(theta,phi,lambda) q { U(theta,phi,lambda) q; }', 'parameters': ['theta', 'phi', 'lambda']}, {'name': 'cx', 'qasm_def': 'gate cx c,t { CX c,t; }', 'parameters': ['c', 't']}, {'name': 'id', 'qasm_def': 'gate id a { U(0,0,0) a; }', 'parameters': ['a']}, {'name': 'snapshot', 'qasm_def': 'gate snapshot(slot) q { TODO }', 'parameters': ['slot']}], 'local': True, 'max_shots': 65536, 'memory': True, 'n_qubits': 24, 'open_pulse': False, 'simulator': True, 'url': 'https://github.com/Qiskit/qiskit-terra'}</em><a class="headerlink" href="#qiskit.providers.builtinsimulators.statevector_simulator.StatevectorSimulatorPy.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<code class="descname">DEFAULT_CONFIGURATION</code><em class="property"> = {'backend_name': 'statevector_simulator', 'backend_version': '1.0.0', 'basis_gates': ['u1', 'u2', 'u3', 'cx', 'id', 'snapshot'], 'conditional': True, 'description': 'A Python statevector simulator for qobj files', 'gates': [{'parameters': ['lambda'], 'qasm_def': 'gate u1(lambda) q { U(0,0,lambda) q; }', 'name': 'u1'}, {'parameters': ['phi', 'lambda'], 'qasm_def': 'gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }', 'name': 'u2'}, {'parameters': ['theta', 'phi', 'lambda'], 'qasm_def': 'gate u3(theta,phi,lambda) q { U(theta,phi,lambda) q; }', 'name': 'u3'}, {'parameters': ['c', 't'], 'qasm_def': 'gate cx c,t { CX c,t; }', 'name': 'cx'}, {'parameters': ['a'], 'qasm_def': 'gate id a { U(0,0,0) a; }', 'name': 'id'}, {'parameters': ['slot'], 'qasm_def': 'gate snapshot(slot) q { TODO }', 'name': 'snapshot'}], 'local': True, 'max_shots': 65536, 'memory': True, 'n_qubits': 24, 'open_pulse': False, 'simulator': True, 'url': 'https://github.com/Qiskit/qiskit-terra'}</em><a class="headerlink" href="#qiskit.providers.builtinsimulators.statevector_simulator.StatevectorSimulatorPy.DEFAULT_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
