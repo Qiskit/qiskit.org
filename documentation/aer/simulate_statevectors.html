@@ -1189,6 +1189,15 @@ of quantum circuits.</p>
 simulation. The circuit may contain <em>gates</em>, and also <em>measure</em>,
 <em>reset</em>, and <em>conditional</em> operations.</p>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">StatevectorSimulator</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_state_city</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="k">import</span> <span class="n">StatevectorSimulator</span>
+</pre></div>
+</div>
 <div class="section" id="simulating-a-quantum-circuit">
 <h3>Simulating a quantum circuit<a class="headerlink" href="#simulating-a-quantum-circuit" title="Permalink to this headline">¶</a></h3>
 <p>The basic operation executes a quantum circuit and returns a counts
@@ -1196,6 +1205,21 @@ dictionary of measurement outcomes. Here we execute a simple circuit
 that prepares a 2-qubit Bell-state
 <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{2}(|0,0\rangle + |1,1 \rangle)\)</span> and
 measures both qubits.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct quantum circuit without measure</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Select the StatevectorSimulator from the Aer provider</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Execute and get counts</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">statevector</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">plot_state_city</span><span class="p">(</span><span class="n">statevector</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Bell state&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <img alt="../_images/simulate_statevectors_5_0.png" src="../_images/simulate_statevectors_5_0.png" />
 </div>
 <div class="section" id="simulating-a-quantum-circuit-with-measurement">
@@ -1205,6 +1229,23 @@ statevector will be a conditional statevector <em>after</em> simulating
 wave-function collapse to the outcome of a measure or reset. For the
 Bell-state circuit this means the final statevector will be <em>either</em>
 <span class="math notranslate nohighlight">\(|0,0\rangle\)</span> <em>or</em> <span class="math notranslate nohighlight">\(|1, 1\rangle\)</span>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct quantum circuit with measure</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cr&#39;</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+<span class="c1"># Select the StatevectorSimulator from the Aer provider</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Execute and get counts</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">statevector</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">plot_state_city</span><span class="p">(</span><span class="n">statevector</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Bell state post-measurement&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <img alt="../_images/simulate_statevectors_7_0.png" src="../_images/simulate_statevectors_7_0.png" />
 </div>
 </div>

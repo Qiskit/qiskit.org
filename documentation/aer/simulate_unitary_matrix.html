@@ -1189,10 +1189,33 @@ quantum circuits.</p>
 The circuit may only contain <em>gates</em>, if it contains <em>resets</em> or
 <em>measure</em> operations an exception will be raised.</p>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">UnitarySimulator</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="k">import</span> <span class="n">UnitarySimulator</span>
+</pre></div>
+</div>
 <div class="section" id="simulating-a-quantum-circuit-unitary">
 <h3>Simulating a quantum circuit unitary<a class="headerlink" href="#simulating-a-quantum-circuit-unitary" title="Permalink to this headline">¶</a></h3>
 <p>For this example we will return the unitary matrix corresponding to the
 previous examples circuit which prepares a bell state.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct an empty quantum circuit</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Select the UnitarySimulator from the Aer provider</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Execute and get counts</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">unitary</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_unitary</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Circuit unitary:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">unitary</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Circuit</span> <span class="n">unitary</span><span class="p">:</span>
  <span class="p">[[</span> <span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]</span>
  <span class="p">[</span> <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="o">-</span><span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]</span>
@@ -1214,6 +1237,27 @@ correct size fo <em>all</em> experiments in the Qobj, otherwise an exception
 will be raised.</p>
 <p>Let us consider preparing the output unitary of the previous circuit as
 the initial state for the simulator:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct an empty quantum circuit</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">iden</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+<span class="c1"># Set the initial unitary</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;initial_unitary&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+                                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+                                     <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))}</span>
+
+<span class="c1"># Select the UnitarySimulator from the Aer provider</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Execute and get counts</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="n">opts</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">unitary</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_unitary</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">unitary</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_unitary</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial Unitary:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">unitary</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initial</span> <span class="n">Unitary</span><span class="p">:</span>
  <span class="p">[[</span> <span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]</span>
  <span class="p">[</span> <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.</span>        <span class="o">+</span><span class="mf">0.</span><span class="n">j</span>  <span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="o">-</span><span class="mf">0.70710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]</span>
