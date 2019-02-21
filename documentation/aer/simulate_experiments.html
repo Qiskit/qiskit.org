@@ -1190,6 +1190,15 @@ containing the final values of any classical registers in the circuit.
 The circuit may contain <em>gates</em> <em>measure</em>, <em>reset</em>, <em>conditionals</em>, and
 other advanced simulator options.</p>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">QasmSimulator</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="k">import</span> <span class="n">QasmSimulator</span>
+</pre></div>
+</div>
 <div class="section" id="simulating-a-quantum-circuit">
 <h3>Simulating a quantum circuit<a class="headerlink" href="#simulating-a-quantum-circuit" title="Permalink to this headline">¶</a></h3>
 <p>The basic operation executes a quantum circuit and returns a counts
@@ -1198,11 +1207,27 @@ that prepares a 2-qubit Bell-state
 <span class="math notranslate nohighlight">\(|\psi\rangle = \frac{1}{2}(|0,0\rangle + |1,1 \rangle)\)</span> and
 measures both qubits.</p>
 <p>Construct the quantum circuit.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cr&#39;</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">qiskit</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">instructionset</span><span class="o">.</span><span class="n">InstructionSet</span> <span class="n">at</span> <span class="mh">0xa24190cf8</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Select the QasmSimulator from the Aer provider.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>Execute the simulation, get counts, and plot the result.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Bell-State counts&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <img alt="../_images/simulate_experiments_10_0.png" src="../_images/simulate_experiments_10_0.png" />
 </div>
 <div class="section" id="returning-measurements-outcomes-for-each-shot">
@@ -1211,6 +1236,23 @@ measures both qubits.</p>
 outcomes for each individual shot. This is enabled by setting the
 keyword argument <code class="docutils literal notranslate"><span class="pre">memory=True</span></code> in the <code class="docutils literal notranslate"><span class="pre">compile</span></code> or <code class="docutils literal notranslate"><span class="pre">execute</span></code>
 function.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct quantum circuit</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cr&#39;</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+<span class="c1"># Select the QasmSimulator from the Aer provider</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Execute and get memory</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;00&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;00&#39;</span><span class="p">,</span> <span class="s1">&#39;00&#39;</span><span class="p">,</span> <span class="s1">&#39;00&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1231,6 +1273,24 @@ exception will be raised.</p>
 <p>We now demonstate this functionality be executing an empty circuit, but
 setting the simulator to be initialized in the the final Bell-state of
 the previous example:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct an empty quantum circuit</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+<span class="c1"># Set the initial state</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;initial_statevector&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))}</span>
+
+<span class="c1"># Select the QasmSimulator from the Aer provider</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Execute and get counts</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="n">opts</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Bell initial statevector&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <img alt="../_images/simulate_experiments_14_0.png" src="../_images/simulate_experiments_14_0.png" />
 </div>
 </div>
