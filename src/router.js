@@ -46,6 +46,13 @@ export function init(outlet) {
       },
     },
     {
+      path: '/documentation',
+      component: 'page-documentation',
+      action: () => {
+        window.location.replace('/documentation');
+      },
+    },
+    {
       path: '/fun',
       name: 'fun',
       component: 'page-fun',
