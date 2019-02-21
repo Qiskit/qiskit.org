@@ -294,10 +294,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="oracles.html">Oracles</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#satisfiability-grover-oracle-sat">SATisfiability Grover Oracle (SAT)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#deutsch-jozsa-oracle">Deutsch-Jozsa Oracle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#bernstein-vazirani-oracle">Bernstein-Vazirani Oracle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#simon-oracle">Simon Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#logic-expression-oracle">Logic Expression Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#truth-table-oracle">Truth Table Oracle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
@@ -854,10 +852,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="oracles.html">Oracles</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#satisfiability-grover-oracle-sat">SATisfiability Grover Oracle (SAT)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#deutsch-jozsa-oracle">Deutsch-Jozsa Oracle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#bernstein-vazirani-oracle">Bernstein-Vazirani Oracle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="oracles.html#simon-oracle">Simon Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#logic-expression-oracle">Logic Expression Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oracles.html#truth-table-oracle">Truth Table Oracle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
@@ -1305,24 +1301,33 @@ apply to the <code class="docutils literal notranslate"><span class="pre">q_targ
 also be passed in to indicate the mode, but at the moment only the <code class="docutils literal notranslate"><span class="pre">'basic'</span></code>
 mode is supported. If omitted, this argument defaults to <code class="docutils literal notranslate"><span class="pre">'basic'</span></code>.</p>
 </div>
-<div class="topic" id="logic-expr">
-<p class="topic-title first">Circuit Construction for Logic Expressions</p>
-<p>Aqua includes utilities for constructing circuits for simple logic expressions.
-Currently three types of logic expressions are supported:
+<div class="topic" id="boolean-logic-expr">
+<p class="topic-title first">Circuit Construction for Boolean Logic Expressions</p>
+<p>Aqua provides a set of utilities
+capable of constructing circuits
+for simple boolean logic expressions.
+Currently three types of expressions are supported:
 Conjunctive Normal Forms (<code class="docutils literal notranslate"><span class="pre">CNF</span></code>), Disjunctive Normal Forms (<code class="docutils literal notranslate"><span class="pre">DNF</span></code>), and
 Exclusive Sum of Products (<code class="docutils literal notranslate"><span class="pre">ESOP</span></code>).
-These utilities are used internally by Aqua for constructing <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a>,
+These utilities are used internally by Aqua
+for constructing various <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a>,
 and can be accessed programmatically to build circuits for other purposes.
 For initialization of each of the three types of objects,
 the corresponding logic expression
-can be specified as a list of lists of non-zero integers,
-where each integer’s absolute value indicates a variable,
-and a negative sign would indicate the negation of the corresponding variable.
+can be specified as a tuple corresponding to the Abstract Syntax Tree (AST)
+of the desired expression,
+where each literal’s absolute value indicates a variable,
+and a negative sign indicates the negation of the corresponding variable.
 The logic operations represented by the inner and outer lists
-depend on the particular type (CNF, DNF, or ESOP) of objects being created.</p>
-<p>The current implementations use Aqua’s <span class="xref std std-ref">mct</span> operations,
-where no optimizations (e.g. minimization)
-are carried out on the input logic expressions, yet.</p>
+depend on the particular type (CNF, DNF, or ESOP) of objects being created.
+For example, below is the AST for a simple CNF expression:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;and&#39;</span><span class="p">,</span>
+  <span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lit&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lit&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+  <span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;lit&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lit&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Aqua’s <span class="xref std std-ref">mct</span> operations are used
+for building the CNF, DNF, and ESOP circuits.</p>
 </div>
 <div class="section" id="quantum-algorithms">
 <span id="id2"></span><h2>Quantum Algorithms<a class="headerlink" href="#quantum-algorithms" title="Permalink to this headline">¶</a></h2>
@@ -1657,18 +1662,23 @@ Conversely, Grover’s Search algorithm allows to solve the unstructured-search
 problem on a quantum computer in <span class="math notranslate nohighlight">\(\mathcal{O}(\sqrt{N})\)</span> queries.</p>
 <p>All that is needed for carrying out a search is an Grover oracle from Aqua’s
 <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a> library for specifying the search criterion, which basically
-indicates a hit or miss for any given record.  More formally, an Grover
+indicates a hit or miss for any given record.  More formally, an
 <em>oracle</em> <span class="math notranslate nohighlight">\(O_f\)</span> is an object implementing a boolean function
 <span class="math notranslate nohighlight">\(f\)</span> as specified above.  Given an input <span class="math notranslate nohighlight">\(x \in X\)</span>,
-<span class="math notranslate nohighlight">\(O_f\)</span> returns <span class="math notranslate nohighlight">\(f(x)\)</span>.  The details of how <span class="math notranslate nohighlight">\(O_f\)</span> works are
+<span class="math notranslate nohighlight">\(O_f\)</span> implements <span class="math notranslate nohighlight">\(f(x)\)</span>.  The details of how <span class="math notranslate nohighlight">\(O_f\)</span> works are
 unimportant; Grover’s search algorithm treats the oracle as a black box.
-Currently, Aqua provides the <a class="reference internal" href="oracles.html#sat"><span class="std std-ref">SATisfiability Grover Oracle (SAT)</span></a>, which takes as input a SAT problem in
+Currently, Aqua provides a <span class="xref std std-ref">logic_expr_oracle</span> and a <a class="reference internal" href="oracles.html#truth-table-oracle"><span class="std std-ref">Truth Table Oracle</span></a>,
+both of which can be used in Grover’s search tasks.
+In particular, the <span class="xref std std-ref">logic_expr_oracle</span>
+can take as input a SAT problem instance in
 <a class="reference external" href="http://www.satcompetition.org/2009/format-benchmarks2009.html">DIMACS CNF
 format</a>
-and constructs the corresponding quantum circuit.  Grover oracles are treated
+and constructs the corresponding quantum circuit,
+which can then be fed to the Grover algorithm to find a satisfiable assignment.</p>
+<p>Oracles are treated
 as pluggable components in Aqua; researchers interested in
-<a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> can design and implement new Grover oracles and extend
-Aqua’s Grover oracle library.</p>
+<a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> can design and implement new oracles and extend
+Aqua’s oracle library.</p>
 <p>Grover’s Search by default uses uniform superposition to initialize
 its quantum state. However, an initial state from Aqua’s
 <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a> library may be supplied to
@@ -1726,8 +1736,10 @@ classical algorithm, given a black box oracle function.
 The algorithm determines whether the given function
 <span class="math notranslate nohighlight">\(f:\{0,1\}^n \rightarrow \{0,1\}\)</span> is constant or balanced. A constant
 function maps all inputs to 0 or 1, and a balanced function maps half of its
-inputs to 0 and the other half to 1. The oracle implementation can be found
-at <a class="reference internal" href="oracles.html#djoracle"><span class="std std-ref">Deutsch-Jozsa Oracle</span></a></p>
+inputs to 0 and the other half to 1.
+Any of the oracles provided by Aqua can be used with the Deutsch-Jozsa algorithm,
+as long as the boolean function implemented by the oracle indeed satisfies the constraint of being either constant or balanced.
+Above said, a <span class="xref std std-ref">truth-table-oracle</span> instance might be easier to construct to meet the constraint, but a <span class="xref std std-ref">logic-expr-oracle</span> can certainly also be used.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to Deutsch-Jozsa declaratively inside Aqua, its code
@@ -1746,8 +1758,7 @@ problem.</p>
 Deutsch-Jozsa algorithm. The goal of the algorithm is to determine a secret
 string <span class="math notranslate nohighlight">\(s \in \{0,1\}^n\)</span>, given a black box oracle function
 that maps <span class="math notranslate nohighlight">\(f:\{0,1\}^n \rightarrow \{0,1\}\)</span> such that
-<span class="math notranslate nohighlight">\(f(x)=s \cdot x (\bmod 2)\)</span>. The oracle implementation can be found at
-<a class="reference internal" href="oracles.html#bvoracle"><span class="std std-ref">Bernstein-Vazirani Oracle</span></a>.</p>
+<span class="math notranslate nohighlight">\(f(x)=s \cdot x (\bmod 2)\)</span>.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to Bernstein-Vazirani declaratively inside Aqua, its code
@@ -1767,8 +1778,9 @@ from an oracle <span class="math notranslate nohighlight">\(f_s\)</span> that sa
 if <span class="math notranslate nohighlight">\(y=x \oplus s\)</span> for all <span class="math notranslate nohighlight">\(x \in \{0,1\}^n\)</span>. Thus, if
 <span class="math notranslate nohighlight">\(s = 0\ldots 0\)</span>, i.e., the all-zero bitstring, then <span class="math notranslate nohighlight">\(f_s\)</span> is a
 1-to-1 (or, permutation) function. Otherwise, if <span class="math notranslate nohighlight">\(s \neq 0\ldots 0\)</span>,
-then <span class="math notranslate nohighlight">\(f_s\)</span> is a 2-to-1 function. The oracle implementation can be found
-at <a class="reference internal" href="oracles.html#simonoracle"><span class="std std-ref">Simon Oracle</span></a>.</p>
+then <span class="math notranslate nohighlight">\(f_s\)</span> is a 2-to-1 function.
+Of Aqua’s included oracles,
+<span class="xref std std-ref">truth-table-oracle</span> should be the easiest to use to create one that can be used with the Simon algorith.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to Simon declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
