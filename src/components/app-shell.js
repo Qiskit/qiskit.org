@@ -20,6 +20,7 @@ import { store } from '../store.js';
 import { navigate } from '../actions/app.js';
 
 import { SharedStyles } from './app-shared-styles.js';
+import '@polymer/iron-dropdown/iron-dropdown.js';
 
 class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   static get properties() {
@@ -83,7 +84,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           display: flex;
         }
 
-        .toolbar nav.first::before {
+        .toolbar nav.first::before,
+        .navbar-mobile {
           content: '';
           width: 2px;
           background-color: rgba(255, 255, 255, 0.3);
@@ -106,6 +108,10 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           bottom: 0;
           left: 0;
           right: 0;
+        }
+
+        .navbar-mobile {
+          display: none !important;
         }
 
         /* Workaround for IE11 displaying <main> as inline */
@@ -139,12 +145,43 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         }
 
         @media (max-width: 600px) {
+          .only-desktop {
+            display: none !important;
+          }
+
           .toolbar nav.second {
             position: absolute;
             right: 5px;
             bottom: -40px;
             height: 40px;
             font-size: 0.9em;
+          }
+
+          .navbar-mobile {
+            display: flex !important;
+          }
+
+          .first,
+          .second {
+            display: none !important;
+          }
+
+          iron-dropdown {
+            background-color: #21252b;
+            top: 61px !important;
+          }
+
+          iron-dropdown > div {
+            padding: 1em 1em 1em 0;
+            width: auto;
+          }
+
+          iron-dropdown#dropdown-right {
+            left: 197px; !important;
+          }
+
+          .header-btn {
+            cursor: pointer;
           }
         }
       `,
@@ -157,6 +194,37 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       <header>
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
+          <nav class="navbar-mobile">
+            <a class="header-btn" @click=${this.openDropdownLeft}>Elements</a>
+            <iron-dropdown id="dropdown-left">
+              <div slot="dropdown-content">
+                <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
+              </div>
+              <div slot="dropdown-content">
+                <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
+              </div>
+              <div slot="dropdown-content">
+                <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
+              </div>
+            </iron-dropdown>
+            <a class="header-btn" @click=${this.openDropdownRight}>Links</a>
+            <iron-dropdown id="dropdown-right">
+              <div slot="dropdown-content">
+                <a rel="noopener" target='_blank' href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">
+                  ${i18next.t('tutorials')}
+                </a>
+              </div>
+              <div slot="dropdown-content">
+                <a href="/documentation/">${i18next.t('documentation')}</a>
+              </div>
+              <div slot="dropdown-content">
+                <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
+              </div>
+              <div slot="dropdown-content">
+                <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
+              </div>
+            </iron-dropdown>
+          </nav>
           <nav class="first">
             <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
             <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
@@ -167,7 +235,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">
               ${i18next.t('tutorials')}
             </a>
-            <a href="/documentation/" target="_blank">${i18next.t('documentation')}</a>
+            <a href="/documentation/" >${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
@@ -231,6 +299,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   changeLanguage(event) {
     i18next.changeLanguage(event.target.value);
+  }
+
+  openDropdownRight() {
+    this.shadowRoot.querySelector('#dropdown-right').open();
+  }
+
+  openDropdownLeft() {
+    this.shadowRoot.querySelector('#dropdown-left').open();
   }
 }
 
