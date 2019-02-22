@@ -177,7 +177,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           }
 
           iron-dropdown#dropdown-right {
-            left: 197px; !important;
+            left: 197px !important;
           }
 
           .header-btn {
