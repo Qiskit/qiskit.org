@@ -389,6 +389,21 @@ class PageHome extends localize(i18next)(LitElement) {
         </div>
       </section>
 
+      <section class="citation">
+        <div class="row limited-width">
+          <div class="description">
+            <h3>${i18next.t('pages.home.citationTitle')}</h3>
+            <p>
+              ${i18next.t('pages.home.citationDescription')}
+              <a href="https://raw.githubusercontent.com/Qiskit/qiskit/master/Qiskit.bib" title="BibTeX"
+                target="_blank" rel="noopener">
+                ${i18next.t('pages.home.bibtexLink')}
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section class="supporting">
         <div class="limited-width">
           <div class="description">
