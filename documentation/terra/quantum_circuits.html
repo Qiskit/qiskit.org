@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>Quantum Circuits &#8212; Qiskit 0.7 documentation</title>
+    <title>Circuits and Registers &#8212; Qiskit 0.7 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -117,14 +117,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">The Quantum Circuit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Quantum Circuits</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#extending-a-circuit">Extending a circuit</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#counting-circuit-resources">Counting circuit resources</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Circuits and Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-circuits">Creating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concatenating-circuits">Concatenating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determining-circuit-resources">Determining Circuit Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
@@ -680,14 +678,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">The Quantum Circuit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Quantum Circuits</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#extending-a-circuit">Extending a circuit</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#counting-circuit-resources">Counting circuit resources</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Circuits and Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-circuits">Creating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concatenating-circuits">Concatenating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determining-circuit-resources">Determining Circuit Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
@@ -1175,19 +1171,21 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="quantum-circuits">
-<h1>Quantum Circuits<a class="headerlink" href="#quantum-circuits" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="circuits-and-registers">
+<h1>Circuits and Registers<a class="headerlink" href="#circuits-and-registers" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>, <code class="docutils literal notranslate"><span class="pre">QuantumRegister</span></code>, and <code class="docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>
-are the main objects for Qiskit Terra. Most users will be able to do all
-they want with these objects.</p>
+are the main objects for Qiskit Terra. You can create custom circuits,
+combine existing circuits, manipulate a circuit’s structure,
+and index into circuit elements.</p>
+<p>The following imports will be used in the examples below.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">BasicAer</span><span class="p">,</span> <span class="n">execute</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="k">import</span> <span class="n">Pauli</span><span class="p">,</span> <span class="n">state_fidelity</span><span class="p">,</span> <span class="n">basis_state</span><span class="p">,</span> <span class="n">process_fidelity</span>
 </pre></div>
 </div>
-<div class="section" id="quantum-and-classical-registers">
-<h2>Quantum and Classical Registers<a class="headerlink" href="#quantum-and-classical-registers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="constructing-registers">
+<h2>Constructing Registers<a class="headerlink" href="#constructing-registers" title="Permalink to this headline">¶</a></h2>
 <p>Quantum and Classical Registers are declared using the following:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">q0</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;q0&#39;</span><span class="p">)</span>
 <span class="n">c0</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c0&#39;</span><span class="p">)</span>
@@ -1196,8 +1194,8 @@ they want with these objects.</p>
 <span class="n">q_test</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;q0&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The name is optional. If not given Qiskit will name it <span class="math notranslate nohighlight">\(qi\)</span> where
-<span class="math notranslate nohighlight">\(i\)</span> is an interger which will count from 0. The name and size can
+<p>The name is optional. If not given Qiskit will name it <code class="docutils literal notranslate"><span class="pre">qi</span></code> where
+<code class="docutils literal notranslate"><span class="pre">i</span></code> is an integer which will count from 0. The name and size can
 be returned using the following:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">q0</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">q0</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
@@ -1227,67 +1225,49 @@ be returned using the following:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Quantum Circuits<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-circuits">
+<h2>Creating Circuits<a class="headerlink" href="#creating-circuits" title="Permalink to this headline">¶</a></h2>
 <p>Quantum Circuits are made using registers. Either when initiated or by
 using the <code class="docutils literal notranslate"><span class="pre">add_register</span></code> command.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
 <span class="n">circ</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">circ</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">
-q0_0: |0>──────────
-              ┌───┐
-q0_1: |0>─────┤ X ├
-         ┌───┐└───┘
-q1_0: |0>┤ X ├─────
-         └───┘
-q1_1: |0>──────────
-                   </pre><p>is the same as</p>
+<img alt="../_images/quantum_circuits_13_0.png" src="../_images/quantum_circuits_13_0.png" />
+<p>is the same as</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ2</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">()</span>
 <span class="n">circ2</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
 <span class="n">circ2</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
 <span class="n">circ2</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">circ2</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">circ2</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circ2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">
-q0_0: |0>──────────
-              ┌───┐
-q0_1: |0>─────┤ X ├
-         ┌───┐└───┘
-q1_0: |0>┤ X ├─────
-         └───┘
-q1_1: |0>──────────
-                   </pre><div class="alert alert-block alert-info"><p>Note: The order of registers in the list is the order they are initiated
-or added (<strong>not</strong> the tensor product for quantum registers).</p>
-</div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<img alt="../_images/quantum_circuits_13_0.png" src="../_images/quantum_circuits_13_0.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The order of registers in the list is the order they are initiated
+or added <strong>not</strong> the tensor product for quantum registers.</p>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 
 <span class="n">q3</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;q3&#39;</span><span class="p">)</span>
 <span class="n">circ3</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
 <span class="n">circ3</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
-<span class="n">circ3</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circ3</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">
-q0_0: |0>──────────
-              ┌───┐
-q0_1: |0>─────┤ X ├
-         ┌───┐└───┘
-q1_0: |0>┤ X ├─────
-         └───┘
-q1_1: |0>──────────
-
-q3_0: |0>──────────
-
-q3_1: |0>──────────
-                   </pre><div class="alert alert-block alert-info"><p>Note: The circuit drawer has the last register added at the bottom and
+<img alt="../_images/quantum_circuits_15_0.png" src="../_images/quantum_circuits_15_0.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The circuit drawer has the last register added at the bottom and
 if we add a new register it will add it to the bottom of the circuit.</p>
-</div><div class="section" id="extending-a-circuit">
-<h3>Extending a circuit<a class="headerlink" href="#extending-a-circuit" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="concatenating-circuits">
+<h2>Concatenating Circuits<a class="headerlink" href="#concatenating-circuits" title="Permalink to this headline">¶</a></h2>
 <p>In many situations you may have two circuits that you want to
 concatenate together to form a new circuit. This is very useful when one
 circuit has no measurements and the final circuit represents a
@@ -1298,26 +1278,11 @@ measurement.</p>
 
 <span class="n">qc</span> <span class="o">=</span> <span class="n">circ</span> <span class="o">+</span> <span class="n">meas</span>
 
-<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">                            ┌─┐
-q0_0: |0>───────────────────┤M├
-                    ┌───┐┌─┐└╥┘
-q0_1: |0>───────────┤ X ├┤M├─╫─
-            ┌───┐┌─┐└───┘└╥┘ ║
-q1_0: |0>───┤ X ├┤M├──────╫──╫─
-         ┌─┐└───┘└╥┘      ║  ║
-q1_1: |0>┤M├──────╫───────╫──╫─
-         └╥┘      ║       ║  ║
- c0_0: 0 ═╬═══════╬═══════╬══╩═
-          ║       ║       ║
- c0_1: 0 ═╬═══════╬═══════╩════
-          ║       ║
- c1_0: 0 ═╬═══════╩════════════
-          ║
- c1_1: 0 ═╩════════════════════
-                               </pre><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meas2</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">()</span>
+<img alt="../_images/quantum_circuits_18_0.png" src="../_images/quantum_circuits_18_0.png" />
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meas2</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">()</span>
 <span class="n">meas2</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">q0</span><span class="p">)</span>
 <span class="n">meas2</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
 <span class="n">meas2</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">c0</span><span class="p">)</span>
@@ -1327,94 +1292,51 @@ q1_1: |0>┤M├──────╫───────╫──╫─
 
 <span class="n">qc2</span> <span class="o">=</span> <span class="n">circ2</span> <span class="o">+</span> <span class="n">meas2</span>
 
-<span class="n">qc2</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">qc2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">                            ┌─┐
-q0_0: |0>───────────────────┤M├
-                    ┌───┐┌─┐└╥┘
-q0_1: |0>───────────┤ X ├┤M├─╫─
-            ┌───┐┌─┐└───┘└╥┘ ║
-q1_0: |0>───┤ X ├┤M├──────╫──╫─
-         ┌─┐└───┘└╥┘      ║  ║
-q1_1: |0>┤M├──────╫───────╫──╫─
-         └╥┘      ║       ║  ║
- c0_0: 0 ═╬═══════╬═══════╬══╩═
-          ║       ║       ║
- c0_1: 0 ═╬═══════╬═══════╩════
-          ║       ║
- c1_0: 0 ═╬═══════╩════════════
-          ║
- c1_1: 0 ═╩════════════════════
-                               </pre><p>It even works when the circuits have different registers. Let’s start by
-making two new circuits:</p>
+<img alt="../_images/quantum_circuits_19_0.png" src="../_images/quantum_circuits_19_0.png" />
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ4</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
 <span class="n">circ4</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
-<span class="n">circ4</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circ4</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">              ┌───┐
-q1_0: |0>─────┤ X ├
-         ┌───┐└───┘
-q1_1: |0>┤ X ├─────
-         └───┘     </pre><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ5</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
+<img alt="../_images/quantum_circuits_20_0.png" src="../_images/quantum_circuits_20_0.png" />
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ5</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
 <span class="n">circ5</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
-<span class="n">circ5</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circ5</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">              ┌───┐
-q3_0: |0>─────┤ H ├
-         ┌───┐└───┘
-q3_1: |0>┤ H ├─────
-         └───┘     </pre><p>The new register is added to the circuit:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">circ4</span><span class="o">+</span><span class="n">circ5</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<img alt="../_images/quantum_circuits_21_0.png" src="../_images/quantum_circuits_21_0.png" />
+<p>The new register is added to the circuit:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">circ4</span><span class="o">+</span><span class="n">circ5</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">                        ┌───┐
-q1_0: |0>───────────────┤ X ├
-                   ┌───┐└───┘
-q1_1: |0>──────────┤ X ├─────
-              ┌───┐└───┘
-q3_0: |0>─────┤ H ├──────────
-         ┌───┐└───┘
-q3_1: |0>┤ H ├───────────────
-         └───┘               </pre><p>We have also overloaded <code class="docutils literal notranslate"><span class="pre">+=</span></code> to the <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object:</p>
+<img alt="../_images/quantum_circuits_23_0.png" src="../_images/quantum_circuits_23_0.png" />
+<p>We have also overloaded <code class="docutils literal notranslate"><span class="pre">+=</span></code> to the <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ4</span> <span class="o">+=</span> <span class="n">circ5</span>
-<span class="n">circ4</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circ4</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">                        ┌───┐
-q1_0: |0>───────────────┤ X ├
-                   ┌───┐└───┘
-q1_1: |0>──────────┤ X ├─────
-              ┌───┐└───┘
-q3_0: |0>─────┤ H ├──────────
-         ┌───┐└───┘
-q3_1: |0>┤ H ├───────────────
-         └───┘               </pre></div>
+<img alt="../_images/quantum_circuits_25_0.png" src="../_images/quantum_circuits_25_0.png" />
 </div>
-<div class="section" id="outcomes-of-quantum-circuits">
-<h2>Outcomes of Quantum Circuits<a class="headerlink" href="#outcomes-of-quantum-circuits" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="examining-circuit-results">
+<h2>Examining Circuit Results<a class="headerlink" href="#examining-circuit-results" title="Permalink to this headline">¶</a></h2>
 <p>In the circuit output, the most significant bit (MSB) is to the left and
 the least significant bit (LSB) is to the right (i.e.&nbsp;we follow the
 regular computer science little endian ordering). In this example:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">
-q0_0: |0>──────────
-              ┌───┐
-q0_1: |0>─────┤ X ├
-         ┌───┐└───┘
-q1_0: |0>┤ X ├─────
-         └───┘
-q1_1: |0>──────────
-                   </pre><p>qubit register <span class="math notranslate nohighlight">\(Q_0\)</span> is prepared in the state <span class="math notranslate nohighlight">\(|10\rangle\)</span>
+<img alt="../_images/quantum_circuits_27_0.png" src="../_images/quantum_circuits_27_0.png" />
+<p>qqubit register <span class="math notranslate nohighlight">\(Q_0\)</span> is prepared in the state <span class="math notranslate nohighlight">\(|10\rangle\)</span>
 and <span class="math notranslate nohighlight">\(Q_1\)</span> is in the state <span class="math notranslate nohighlight">\(|01\rangle\)</span> giving a total state
 <span class="math notranslate nohighlight">\(|0110\rangle\)</span> (<span class="math notranslate nohighlight">\(Q1\otimes Q0\)</span>).</p>
-<div class="alert alert-block alert-info"><p>Note: The tensor order in Qiskit goes as
-<span class="math notranslate nohighlight">\(Q_n \otimes .. Q_1 \otimes Q_0\)</span></p>
-</div><p>That is the four qubit statevector of length 16 with the 6th element
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The tensor order in Qiskit goes as <span class="math notranslate nohighlight">\(Q_n \otimes .. Q_1 \otimes Q_0\)</span></p>
+</div>
+<p>That is the four qubit statevector of length 16 with the 6th element
 (<code class="docutils literal notranslate"><span class="pre">int('0110',2)=6</span></code>) being one. Note the element count starts from
 zero.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend_sim</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
@@ -1437,7 +1359,7 @@ Terra you can use:</p>
 </div>
 <p>We can also use Qiskit Terra to make the unitary operator representing
 the circuit (provided there are no measurements). This will be a
-<span class="math notranslate nohighlight">\(16\otimes16\)</span> matrix equal to
+<span class="math notranslate nohighlight">\(16\times16\)</span> matrix equal to
 <span class="math notranslate nohighlight">\(I\otimes X\otimes X\otimes I\)</span>. To check this is correct we can
 use the <code class="docutils literal notranslate"><span class="pre">Pauli</span></code> class and the <code class="docutils literal notranslate"><span class="pre">process_fidelity</span></code> function.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend_sim</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
@@ -1451,26 +1373,11 @@ use the <code class="docutils literal notranslate"><span class="pre">Pauli</span
 </div>
 <p>To map the information of the quantum state to the classial world we
 have to use the example with measurements <code class="docutils literal notranslate"><span class="pre">qc</span></code>:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">                            ┌─┐
-q0_0: |0>───────────────────┤M├
-                    ┌───┐┌─┐└╥┘
-q0_1: |0>───────────┤ X ├┤M├─╫─
-            ┌───┐┌─┐└───┘└╥┘ ║
-q1_0: |0>───┤ X ├┤M├──────╫──╫─
-         ┌─┐└───┘└╥┘      ║  ║
-q1_1: |0>┤M├──────╫───────╫──╫─
-         └╥┘      ║       ║  ║
- c0_0: 0 ═╬═══════╬═══════╬══╩═
-          ║       ║       ║
- c0_1: 0 ═╬═══════╬═══════╩════
-          ║       ║
- c1_0: 0 ═╬═══════╩════════════
-          ║
- c1_1: 0 ═╩════════════════════
-                               </pre><p>This will map the quantum state to the classical world and since the
+<img alt="../_images/quantum_circuits_35_0.png" src="../_images/quantum_circuits_35_0.png" />
+<p>This will map the quantum state to the classical world and since the
 state has no superpositions it will be deterministic and equal to
 <code class="docutils literal notranslate"><span class="pre">'01</span> <span class="pre">10'</span></code>. Here a space is used to separate the registers.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend_sim</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
@@ -1516,8 +1423,8 @@ same as above on the second example circuit:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="counting-circuit-resources">
-<h2>Counting circuit resources<a class="headerlink" href="#counting-circuit-resources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="determining-circuit-resources">
+<h2>Determining Circuit Resources<a class="headerlink" href="#determining-circuit-resources" title="Permalink to this headline">¶</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object provides methods for inquiring its resource
 use. This includes the number of qubits, operations, and a few other
 things.</p>
@@ -1529,22 +1436,11 @@ things.</p>
 <span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre style="word-wrap: normal;white-space: pre;line-height: 15px;">                   ┌───┐               ┌───┐
-q0_0: |0>──────────┤ H ├──■────────────┤ X ├────────────────────
-                   └───┘  │            └───┘               ┌───┐
-q0_1: |0>─────────────────■───────────────────■────────────┤ X ├
-                        ┌─┴─┐┌───┐┌───┐       │            └───┘
-q0_2: |0>───────────────┤ X ├┤ X ├┤ H ├───────┼─────────────────
-                        └───┘└───┘└───┘     ┌─┴─┐┌───┐┌───┐
-q0_3: |0>───────────────────────────────────┤ X ├┤ X ├┤ H ├─────
-              ┌───┐                         └───┘└───┘└───┘
-q0_4: |0>─────┤ X ├─────────────────────────────────────────────
-         ┌───┐└───┘
-q0_5: |0>┤ X ├──────────────────────────────────────────────────
-         └───┘                                                  </pre><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># total number of operations in the circuit. no unrolling is done.</span>
+<img alt="../_images/quantum_circuits_44_0.png" src="../_images/quantum_circuits_44_0.png" />
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># total number of operations in the circuit. no unrolling is done.</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1569,7 +1465,7 @@ q0_5: |0>┤ X ├────────────────────�
 <span class="n">circuit</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;ccx&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;h&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;ccx&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of unentangled subcircuits in this circuit.</span>
