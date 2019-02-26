@@ -117,14 +117,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="terra/quantum_circuits.html">The Quantum Circuit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#id1">Quantum Circuits</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="terra/quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terra/quantum_circuits.html">Circuits and Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#creating-circuits">Creating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
@@ -680,14 +678,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="terra/quantum_circuits.html">The Quantum Circuit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#quantum-and-classical-registers">Quantum and Classical Registers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#id1">Quantum Circuits</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="terra/quantum_circuits.html#extending-a-circuit">Extending a circuit</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#outcomes-of-quantum-circuits">Outcomes of Quantum Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#counting-circuit-resources">Counting circuit resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terra/quantum_circuits.html">Circuits and Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#creating-circuits">Creating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terra/quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
@@ -1177,34 +1173,50 @@
         
   <div class="section" id="community-extensions">
 <h1>Community Extensions<a class="headerlink" href="#community-extensions" title="Permalink to this headline">¶</a></h1>
-<p>Qiskit has been designed with modularity in mind. It is extensible in many different ways and
-it is important to us to highlight the community projects</p>
+<p>Qiskit has been designed with modularity in mind. It is extensible in many
+different ways and it is important to us to highlight the community projects</p>
 <div class="section" id="backend-providers">
 <h2>Backend Providers<a class="headerlink" href="#backend-providers" title="Permalink to this headline">¶</a></h2>
-<p>The Qiskit base provider is an entity that provides access to a group of different
-backends (for example, backends available through IBM Q). It interacts with
-those backends to do many things: find out which ones are available, retrieve
-an instance of a particular backend, get backend properties and configurations,
-and handling running and working with jobs.</p>
+<p>The Qiskit base provider is an entity that provides access to a group
+of different backends (for example, backends available through IBM Q).
+It interacts with those backends to do many things: find out which ones
+are available, retrieve an instance of a particular backend, get backend
+properties and configurations, and handling running and working with jobs.</p>
 <div class="section" id="additional-providers">
 <h3>Additional providers<a class="headerlink" href="#additional-providers" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>Decision diagram-based quantum simulator</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Organization:</strong> Alwin Zulehner and Robert Wille
+from Johannes Kepler University, Linz, Austria</li>
+<li><strong>Description:</strong> A local provider which allows Qiskit to use decision
+diagram-based quantum simulation</li>
+<li><strong>Qiskit Version:</strong> 0.7</li>
+<li><strong>More info:</strong>  <a class="reference external" href="http://iic.jku.at/eda/research/quantum_simulation">Webpage at JKU</a>, <a class="reference external" href="https://medium.com/qiskit/classical-simulators-for-quantum-computers-4b994dad4fa2">Medium Blog</a> and <a class="reference external" href="https://github.com/Qiskit/qiskit-jku-provider">Github Repo</a></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="circuit-optimization">
 <h2>Circuit Optimization<a class="headerlink" href="#circuit-optimization" title="Permalink to this headline">¶</a></h2>
-<p>Circuit optimization is at the heart of making quantum computing. A central component of Qiskit is
-the transpiler, which is designed for modularity and extensibility. The goal is to be able to
-easily write new circuit transformations (known as transpiler passes) and combine them with other
-existing passes. In this way, the transpiler opens up the door for research into aggressive
-optimization of quantum circuits.</p>
+<p>Circuit optimization is at the heart of making quantum computing. A central
+component of Qiskit is the transpiler, which is designed for modularity
+and extensibility. The goal is to be able to easily write new circuit
+transformations (known as transpiler passes) and combine them with other
+existing passes. In this way, the transpiler opens up the door for research
+into aggressive optimization of quantum circuits.</p>
 <div class="section" id="additional-passes">
 <h3>Additional passes<a class="headerlink" href="#additional-passes" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 <div class="section" id="tools">
 <h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
-<p>Extending Qiskit with new tools and functionality is an important part of building a community.
-These tools can be new visualizations, slack integration, Juypter extensions and much more.</p>
+<p>Extending Qiskit with new tools and functionality is an important part
+of building a community. These tools can be new visualizations, slack integration,
+Juypter extensions and much more.</p>
 <div class="section" id="additional-tools">
 <h3>Additional Tools<a class="headerlink" href="#additional-tools" title="Permalink to this headline">¶</a></h3>
 </div>
