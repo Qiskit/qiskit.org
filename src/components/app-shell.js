@@ -152,6 +152,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   }
 
   render() {
+    const currentYear = new Date().getFullYear();
+
     // prettier-ignore
     return html`
       <header>
@@ -190,7 +192,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               <!-- <option value="ja" ?selected=${i18next.languages[0] === 'ja'}>Japanese</option> -->
             </select>
           </div>
-          <div class="copyright">© ${this.getYear()} IBM</div>
+          <div class="copyright">© ${currentYear} IBM</div>
         </div>
       </footer>
     `;
@@ -231,11 +233,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   changeLanguage(event) {
     i18next.changeLanguage(event.target.value);
-  }
-
-  getYear() {
-    const d = new Date();
-    return d.getFullYear();
   }
 }
 
