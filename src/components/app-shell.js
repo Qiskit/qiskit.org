@@ -190,7 +190,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               <!-- <option value="ja" ?selected=${i18next.languages[0] === 'ja'}>Japanese</option> -->
             </select>
           </div>
-          <div class="copyright">© 2018 IBM</div>
+          <div class="copyright">© ${this.getYear()} IBM</div>
         </div>
       </footer>
     `;
@@ -231,6 +231,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   changeLanguage(event) {
     i18next.changeLanguage(event.target.value);
+  }
+
+  getYear() {
+    const d = new Date();
+    return d.getFullYear();
   }
 }
 
