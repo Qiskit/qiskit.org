@@ -182,7 +182,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: underline;
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 768px) {
           .toolbar {
             display: flex;
             flex-grow: 1;
@@ -209,11 +209,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     // prettier-ignore
     return html`
       <header class="header">
-        <nav class="toolbar-top">
+        <app-toolbar class="toolbar-top">
           <button class="menu-btn" title="Menu"
             @click="${this.menuButtonClicked}">${menuIcon}</button>
             <a href="/" class="home">Qiskit ™</a>
-        </nav>
+        </app-toolbar>
         <!-- This gets hidden on a small screen-->
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
