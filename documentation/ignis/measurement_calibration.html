@@ -1199,15 +1199,99 @@
         
   <div class="section" id="measurement-calibration">
 <h1>Measurement Calibration<a class="headerlink" href="#measurement-calibration" title="Permalink to this headline">¶</a></h1>
-<p>The measurement calibration…</p>
+<p>The measurement calibration is used to mitigate measurement errors.
+The main idea is to prepare all <span class="math notranslate nohighlight">\(2^n\)</span> basis input states and compute the
+probability of measuring counts in the other basis states.
+From these calibrations, it is possible to correct the average results
+of another experiment of interest.</p>
+<p>To use Qiskit Ignis Measurement Calibration module, import it with</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span><span class="n">complete_measurement_calibration</span><span class="p">,</span>
+                                                 <span class="n">CompleteMeasFitter</span><span class="p">,</span> <span class="n">MeasurementFilter</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="section" id="generating-measurement-calibration-circuits">
 <h2>Generating Measurement Calibration Circuits<a class="headerlink" href="#generating-measurement-calibration-circuits" title="Permalink to this headline">¶</a></h2>
+<p>The goal is to generate a list of measurement calibration circuits for the full
+Hilbert space. Each circuit creates a basis state.
+If there are <span class="math notranslate nohighlight">\(n\)</span> qubits, then you get <span class="math notranslate nohighlight">\(2^n\)</span> calibration circuits.</p>
+<p>The following function returns
+a list <strong>cal_circuits</strong> of QuantumCircuit objects containing the calibration circuits,
+and a list <strong>state_labels</strong> of the calibration state labels.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span>
+<span class="n">complete_measurement_calibration</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">,</span> <span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">circlabel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input to this function can be given in one of the following three forms:</p>
+<ul class="simple">
+<li><strong>qubit_list:</strong> A list of qubits to perform the measurement correction on, or:</li>
+<li><strong>qr (QuantumRegister):</strong> A quantum register, or:</li>
+<li><strong>cr (ClassicalRegister):</strong> A classical register.</li>
+</ul>
+<p>In addition, you can provide a string <strong>circlabel</strong>, which is added at
+the beginning of the circuit names for unique identification.</p>
+<p>For example, for a 5-qubit QuantumRegister, use</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">complete_measurement_calibration</span><span class="p">(</span>
+                            <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now, you can execute the calibration circuits either using
+Qiskit Aer Simulator (with some noise model) or using IBMQ provider.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cal_circuits</span><span class="p">)</span>
+<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="analyzing-the-results">
 <h2>Analyzing the Results<a class="headerlink" href="#analyzing-the-results" title="Permalink to this headline">¶</a></h2>
+<p>After you run the calibration circuits and obtain the results <strong>cal_results</strong>,
+you can compute the calibration matrix
+(this matrix will be ordered according to the state_labels).</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="n">cal_results</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">,</span> <span class="n">circlabel</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meas_fitter</span><span class="o">.</span><span class="n">cal_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To compute the measurement fidelity, use</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fidelity</span> <span class="o">=</span> <span class="n">meas_fitter</span><span class="o">.</span><span class="n">readout_fidelity</span><span class="p">(</span><span class="n">label_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <strong>label_list</strong> is None, then it returns the average assignment fidelity
+of a single state. Otherwise it returns the assignment fidelity
+to be in any one of these states averaged over the second index.</p>
 </div>
 <div class="section" id="applying-the-calibration">
 <h2>Applying the Calibration<a class="headerlink" href="#applying-the-calibration" title="Permalink to this headline">¶</a></h2>
+<p>If you now perform another experiment using another circuits <strong>my_circuits</strong>
+and obtain the results <strong>my_results</strong>, for example</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">my_circuits</span><span class="p">)</span>
+<span class="n">my_results</span> <span class="o">=</span> <span class="n">my_job</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>then you can compute the mitigated results <strong>mitigated_results</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Results without mitigation</span>
+<span class="n">raw_counts</span> <span class="o">=</span> <span class="n">my_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+
+<span class="c1"># Get the filter object</span>
+<span class="n">meas_filter</span> <span class="o">=</span> <span class="n">meas_fitter</span><span class="o">.</span><span class="n">filter</span>
+
+<span class="c1"># Results with mitigation</span>
+<span class="n">mitigated_results</span> <span class="o">=</span> <span class="n">meas_filter</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">my_results</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+<span class="n">mitigated_counts</span> <span class="o">=</span> <span class="n">mitigated_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The raw data to be corrected can be given in a number of forms:</p>
+<ul class="simple">
+<li>Form1: A counts dictionary from results.get_counts,</li>
+<li>Form2: A list of counts of length=len(state_labels),</li>
+<li>Form3: A list of counts of length=M*len(state_labels) where M is an integer
+(e.g. for use with the tomography data),</li>
+<li>Form4: A qiskit Result (e.g. my_results as above).</li>
+</ul>
+<p>There are two fitting methods for applying the calibration:</p>
+<ul class="simple">
+<li><strong>method=’pseudo_inverse’</strong>, which is a direct inversion of the calibration matrix.</li>
+<li><strong>method=’least_squares’</strong>, which constrained to have physical probabilities</li>
+</ul>
+<p>If none method is defined, then ‘least_squares’ is used.</p>
 </div>
 </div>
 
