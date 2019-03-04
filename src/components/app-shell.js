@@ -245,9 +245,9 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           @opened-changed="${this.drawerOpenedChanged}">
         <nav class="drawer-list">
           <span>Elements</span>
-          <a ?selected="${this.page === 'terra'}" href="/terra">Terra</a>
-          <a ?selected="${this.page === 'aer'}" href="/aer">Aer</a>
-          <a ?selected="${this.page === 'aqua'}" href="/aqua">Aqua</a>
+          <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
+          <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
+          <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
           <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           <span>Tools</span>
           <a
