@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>Randomization Benchmarking &#8212; Qiskit 0.7 documentation</title>
+    <title>Randomized Benchmarking &#8212; Qiskit 0.7 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -1197,9 +1197,9 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="randomization-benchmarking">
-<h1>Randomization Benchmarking<a class="headerlink" href="#randomization-benchmarking" title="Permalink to this headline">¶</a></h1>
-<p>Randomization benchmarking (RB) is a well-known technique to measure
+  <div class="section" id="randomized-benchmarking">
+<h1>Randomized Benchmarking<a class="headerlink" href="#randomized-benchmarking" title="Permalink to this headline">¶</a></h1>
+<p>Randomized benchmarking (RB) is a well-known technique to measure
 average gate performance by running sequences of random Clifford gates
 that should return the qubits to the initial state. Ignis has tools
 to generate one- and two-qubit Clifford gate sequences simultaneously.</p>
@@ -1212,7 +1212,8 @@ to generate one- and two-qubit Clifford gate sequences simultaneously.</p>
 <p>In order to generate the RB sequences <strong>rb_circs</strong>, which is a  list of lists of
 quantum circuits, run</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rb_circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">randomized_benchmarking_seq</span><span class="p">(</span><span class="n">nseeds</span><span class="p">,</span> <span class="n">length_vector</span><span class="p">,</span>
-                                              <span class="n">rb_pattern</span><span class="p">,</span> <span class="n">length_multiplier</span><span class="p">)</span>
+                                              <span class="n">rb_pattern</span><span class="p">,</span>
+                                              <span class="n">length_multiplier</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The parameters given to this function are:</p>
@@ -1266,26 +1267,40 @@ and obtain a list of results <strong>result_list</strong> for the RB sequences.<
     <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>To get the statistics about the survival probabilities, compute</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">RBFitter</span><span class="p">(</span><span class="n">result_list</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="p">)</span>
+<p>To get the statistics about the survival probabilities add the results
+to a RB fitter.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">RBFitter</span><span class="p">(</span><span class="n">result_list</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <strong>results_list</strong>, <strong>xdata</strong> and <strong>rb_patterns</strong> are as above,
-and <strong>shots</strong> is the number of shots (the default value is 1024).</p>
-<p>Now, you can fit the RB results to an exponential curve (fit each of the RB patterns
-<strong>pattern_index</strong>) and calculate the statistical parameters:</p>
+<p>where <strong>results_list</strong>, <strong>xdata</strong> and <strong>rb_patterns</strong> are as above.
+The results can be added as a list or as one result. Results can be added
+to an existing fitter as</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">more_results</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The number of seeds in the fitter is based on the number of added
+results. To compute the data, calculate the mean over seeds and fit the
+results to an exponential curve (fit each of the RB patterns
+<strong>pattern_index</strong>):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">calc_data</span><span class="p">()</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>These steps are performed automatically when data is added (unless rerun_fit
+is set to False in add_data()). The fit parameters are:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The three parameters (a, alpha, b) of the function a * alpha ** x + b.</span>
 <span class="c1"># The middle one is the exponent alpha.</span>
-<span class="n">rbfit</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;parmas&#39;</span><span class="p">]</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;parmas&#39;</span><span class="p">]</span>
 <span class="c1"># The error limits of the parameters.</span>
-<span class="n">rbfit</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;err&#39;</span><span class="p">]</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;err&#39;</span><span class="p">]</span>
 <span class="c1"># The error per Clifford</span>
-<span class="n">rbfit</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc&#39;</span><span class="p">]</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc&#39;</span><span class="p">]</span>
 <span class="c1"># The error limit per Clifford</span>
-<span class="n">rbfit</span><span class="o">.</span><span class="n">_fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc_err&#39;</span><span class="p">]</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;epc_err&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>To plot the exponential decaying curve, use</p>
+<p>To plot the data plus fit, use</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">plot_rb_data</span><span class="p">(</span><span class="n">pattern_index</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_plt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1299,8 +1314,9 @@ and <strong>shots</strong> is the number of shots (the default value is 1024).</
 </div>
 <div class="section" id="predicted-results">
 <h2>Predicted Results<a class="headerlink" href="#predicted-results" title="Permalink to this headline">¶</a></h2>
-<p>From the known depolarizing errors on the simulation you can predict the fidelity.
-First you need to count the number of gates per Clifford.</p>
+<p>From the known depolarizing errors on the simulation you can
+predict the fidelity. First you need to count the number
+of gates per Clifford.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gates_per_cliff</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">rb_utils</span><span class="o">.</span><span class="n">gates_per_clifford</span><span class="p">(</span><span class="n">qobj_list</span><span class="p">,</span>
                                                  <span class="n">xdata</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                                  <span class="n">basis_gates</span><span class="p">,</span>
