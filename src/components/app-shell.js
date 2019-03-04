@@ -50,14 +50,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
           --app-drawer-width: 256px;
 
-          display: block;
+          display: flex;
           flex-direction: column;
           flex-grow: 1;
           min-height: 100vh;
           max-width: 100vw;
         }
 
-        .header {
+        header {
           display: flex;
           background-color: var(--app-header-color);
           height: 60px;
@@ -67,6 +67,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         app-drawer {
           z-index: 1000;
         }
+
         .drawer-list {
           box-sizing: border-box;
           width: 100%;
@@ -75,6 +76,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           background: var(--app-header-color);
           position: relative;
         }
+
         .drawer-list > a {
           display: block;
           text-decoration: none;
@@ -82,6 +84,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           line-height: 40px;
           padding: 0 24px;
         }
+
         .drawer-list > span {
           color: gray;
           display: block;
@@ -208,12 +211,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
     // prettier-ignore
     return html`
-      <header class="header">
+      <header>
         <app-toolbar class="toolbar-top">
-          <button class="menu-btn" title="Menu"
-            @click="${this.menuButtonClicked}">${menuIcon}</button>
-            <a href="/" class="home">Qiskit ™</a>
+          <button class="menu-btn" title="Menu" @click="${this.menuButtonClicked}">${menuIcon}</button>
+          <a href="/" class="home">Qiskit ™</a>
         </app-toolbar>
+
         <!-- This gets hidden on a small screen-->
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
@@ -221,36 +224,40 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
             <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
             <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
-            <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           </nav>
           <nav class="second">
-            <a rel="noopener" target='_blank'
-              href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">
+            <a
+                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+                rel="noopener"
+                target="_blank">
               ${i18next.t('tutorials')}
             </a>
-            <a href="/documentation/">${i18next.t('documentation')}</a>
+            <a href="/documentation">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
         </div>
       </header>
 
-      <app-drawer .opened="${this.drawerOpened}" @opened-changed="${this.drawerOpenedChanged}">
+      <app-drawer
+          .opened="${this.drawerOpened}"
+          @opened-changed="${this.drawerOpenedChanged}">
         <nav class="drawer-list">
           <span>Elements</span>
           <a ?selected="${this.page === 'terra'}" href="/terra">Terra</a>
           <a ?selected="${this.page === 'aer'}" href="/aer">Aer</a>
           <a ?selected="${this.page === 'aqua'}" href="/aqua">Aqua</a>
-          <a ?selected="${this.page === 'ignis'}" href="/ignis">Ignis</a>
+
           <span>Tools</span>
-          <a rel="noopener" target='_blank'
-            href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">
+          <a
+              href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+              rel="noopener"
+              target="_blank">
             ${i18next.t('tutorials')}
           </a>
-          <a href="/documentation/">${i18next.t('documentation')}</a>
+          <a href="/documentation">${i18next.t('documentation')}</a>
           <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
           <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
-
         </nav>
       </app-drawer>
 
@@ -295,7 +302,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       routing.init(this.shadowRoot.querySelector('main'));
     });
 
-    installMediaQueryWatcher(`(min-width: 460px)`, () =>
+    installMediaQueryWatcher(`(min-width: 768px)`, () =>
       store.dispatch(updateDrawerState(false)),
     );
   }
