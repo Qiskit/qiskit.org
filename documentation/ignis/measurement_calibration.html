@@ -1205,7 +1205,7 @@ probability of measuring counts in the other basis states.
 From these calibrations, it is possible to correct the average results
 of another experiment of interest.</p>
 <p>To use Qiskit Ignis Measurement Calibration module, import it with</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span><span class="n">complete_measurement_calibration</span><span class="p">,</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span><span class="n">complete_meas_cal</span><span class="p">,</span>
                                                  <span class="n">CompleteMeasFitter</span><span class="p">,</span> <span class="n">MeasurementFilter</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1218,7 +1218,7 @@ If there are <span class="math notranslate nohighlight">\(n\)</span> qubits, the
 a list <strong>cal_circuits</strong> of QuantumCircuit objects containing the calibration circuits,
 and a list <strong>state_labels</strong> of the calibration state labels.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span>
-<span class="n">complete_measurement_calibration</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">,</span> <span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">circlabel</span><span class="p">)</span>
+<span class="n">complete_meas_cal</span><span class="p">(</span><span class="n">qubit_list</span><span class="p">,</span> <span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">circlabel</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The input to this function can be given in one of the following three forms:</p>
@@ -1230,7 +1230,7 @@ and a list <strong>state_labels</strong> of the calibration state labels.</p>
 <p>In addition, you can provide a string <strong>circlabel</strong>, which is added at
 the beginning of the circuit names for unique identification.</p>
 <p>For example, for a 5-qubit QuantumRegister, use</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">complete_measurement_calibration</span><span class="p">(</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">state_labels</span> <span class="o">=</span> <span class="n">complete_meas_cal</span><span class="p">(</span>
                             <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>

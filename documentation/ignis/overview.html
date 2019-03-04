@@ -1199,23 +1199,57 @@
         
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>A framework for characterizing quantum circuits and devices.</p>
-<p>Qiskit ignis is a two-part framework. The first part is a set
-of tools for generating characterization circuits that can
-be run on quantum devices through terra (or simulators via aer).
-The second part is a set of tools to analyze the results
-after running these circuits. Ignis includes visualization tools
-and data fitting to extract characterization parameters.
-Some of these fit parameters can be used to calibrate
-the results of algorithmic circuits.</p>
-<div class="section" id="ignis-components">
-<h2>Ignis Components<a class="headerlink" href="#ignis-components" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Randomized benchmarking</li>
-<li>Measurement calibration</li>
-<li>Tomography (state and process)</li>
-<li>Coherence characterization (T1,T2)</li>
-</ul>
+<p>A framework for characterizing and mitigating noise in
+quantum circuits and devices.</p>
+<img alt="../_images/ignis_overview.png" src="../_images/ignis_overview.png" />
+<p>Ignis provides code for users to easily generate circuits for specific
+experiments given a minimal set of user input parameters. Ignis code contains
+three fundamental building blocks: circuits, fitters and filters.</p>
+<div class="section" id="circuits">
+<h2>Circuits<a class="headerlink" href="#circuits" title="Permalink to this headline">¶</a></h2>
+<p>The circuits module provides the code to generate the list of circuits
+for a particular Ignis experiment based on a minimal set of user
+parameters. These are then run on Terra or Aer.</p>
+</div>
+<div class="section" id="fitters">
+<h2>Fitters<a class="headerlink" href="#fitters" title="Permalink to this headline">¶</a></h2>
+<p>The results of an Ignis experiment are passed to the Fitters module where
+they are analyzed and fit according to the physics model describing
+the experiment. Fitters can plot the data plus fit and output a list
+of parameters.</p>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>For certain Ignis experiments, the fitters can output a Filter object.
+Filters can be used to mitigate errors in other experiments using the
+calibration results of an Ignis experiment.</p>
+<div class="section" id="ignis-organization">
+<h3>Ignis Organization<a class="headerlink" href="#ignis-organization" title="Permalink to this headline">¶</a></h3>
+<p>The Ignis repository is grouped into the types of experiments that can be
+performed: characterization, verification and mitigation.</p>
+</div>
+</div>
+<div class="section" id="characterization">
+<h2>Characterization<a class="headerlink" href="#characterization" title="Permalink to this headline">¶</a></h2>
+<p>Characterization experiments are designed to measure parameters in the
+system such as noise parameters (T1, T2*, T2), Hamiltonian parameters such
+as the ZZ interaction rate and control errors in the gates.</p>
+</div>
+<div class="section" id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h2>
+<p>Verification experiments are designed to verify gate and small
+circuit performance. Verification includes state and process tomography
+and randomized benchmarking (RB). These experiments provide the information
+to determine performance metrics such as the gate fideltiy.</p>
+</div>
+<div class="section" id="mitigation">
+<h2>Mitigation<a class="headerlink" href="#mitigation" title="Permalink to this headline">¶</a></h2>
+<p>Mitigation experiments run calibration circuits that are analyzed to
+generate mitigation routines that can be applied to arbitrary sets of results
+run on the same backend. Ignis code will generate a list of circuits that
+run calibration measurements. The results of these measurements will be
+processed by a Fitter and will output a Filter than can be used to apply
+mitigation to other results.</p>
 <p><em>This project uses the</em> <a class="reference external" href="https://www.apache.org/licenses/LICENSE-2.0"><em>Apache License Version 2.0 software license</em></a>.</p>
 </div>
 </div>
