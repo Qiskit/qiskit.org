@@ -9,7 +9,10 @@
 
 import { LitElement, html, css } from 'lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
+import '@polymer/app-layout/app-drawer/app-drawer.js';
+import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
+import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
@@ -17,7 +20,7 @@ import { i18next } from '../i18next.js';
 import { store } from '../store.js';
 
 // These are the actions needed by this element.
-import { navigate } from '../actions/app.js';
+import { navigate, updateDrawerState } from '../actions/app.js';
 
 import { SharedStyles } from './app-shared-styles.js';
 
@@ -25,6 +28,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   static get properties() {
     return {
       page: { type: String },
+      drawerOpened: { type: Boolean },
     };
   }
 
@@ -35,6 +39,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         :host {
           --app-primary-color: #8a3ffc;
           --app-secondary-color: #242a2e;
+          --app-header-color: #21252b;
 
           --qiskit-terra-color: #8c8c8c;
           --qiskit-aqua-color: #30b0ff;
@@ -42,6 +47,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           --qiskit-ignis-color: #20d5d2;
 
           --qiskit-vscode-color: #f5f5f5;
+
+          --app-drawer-width: 256px;
 
           display: flex;
           flex-direction: column;
@@ -52,16 +59,41 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
         header {
           display: flex;
-          background-color: #21252b;
+          background-color: var(--app-header-color);
           height: 60px;
           border-bottom: 1px solid #181b20;
         }
 
-        .toolbar {
-          display: flex;
-          flex-grow: 1;
+        app-drawer {
+          z-index: 1000;
+        }
+
+        .drawer-list {
           box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+          padding: 24px;
+          background: var(--app-header-color);
           position: relative;
+        }
+
+        .drawer-list > a {
+          display: block;
+          text-decoration: none;
+          color: #ffffff;
+          line-height: 40px;
+          padding: 0 24px;
+        }
+
+        .drawer-list > span {
+          color: gray;
+          display: block;
+          font-size: 0.9em;
+          padding: 1em;
+        }
+
+        .toolbar {
+          display: none;
         }
 
         .toolbar a {
@@ -79,7 +111,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           margin-left: -1em; /* Reduce the 1em padding from the <a> */
         }
 
-        .toolbar nav {
+        .toolbar nav,
+        .toolbar-top {
           display: flex;
         }
 
@@ -108,11 +141,25 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           right: 0;
         }
 
+        .toolbar-top > a.home {
+          color: #ffffff;
+          font-weight: 500;
+        }
+
         /* Workaround for IE11 displaying <main> as inline */
         main {
           display: flex;
           flex-grow: 1;
           flex-direction: column;
+        }
+
+        .menu-btn {
+          background: none;
+          border: none;
+          fill: #ffffff;
+          cursor: pointer;
+          height: 44px;
+          width: 44px;
         }
 
         footer {
@@ -138,13 +185,16 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: underline;
         }
 
-        @media (max-width: 600px) {
-          .toolbar nav.second {
-            position: absolute;
-            right: 5px;
-            bottom: -40px;
-            height: 40px;
-            font-size: 0.9em;
+        @media (min-width: 768px) {
+          .toolbar {
+            display: flex;
+            flex-grow: 1;
+            box-sizing: border-box;
+            position: relative;
+          }
+
+          .toolbar-top {
+            display: none;
           }
         }
       `,
@@ -152,9 +202,22 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   }
 
   render() {
+    const currentYear = new Date().getFullYear();
+    const menuIcon = html`
+      <svg height="24" viewBox="0 0 24 24" width="24">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+      </svg>
+    `;
+
     // prettier-ignore
     return html`
       <header>
+        <app-toolbar class="toolbar-top">
+          <button class="menu-btn" title="Menu" @click="${this.menuButtonClicked}">${menuIcon}</button>
+          <a href="/" class="home">Qiskit ™</a>
+        </app-toolbar>
+
+        <!-- This gets hidden on a small screen-->
         <div class="toolbar limited-width">
           <a href="/" class="home">Qiskit ™</a>
           <nav class="first">
@@ -164,16 +227,40 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           </nav>
           <nav class="second">
-            <a rel="noopener" target='_blank'
-              href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">
+            <a
+                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+                rel="noopener"
+                target="_blank">
               ${i18next.t('tutorials')}
             </a>
-            <a href="/documentation/">${i18next.t('documentation')}</a>
+            <a href="/documentation">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
         </div>
       </header>
+
+      <app-drawer
+          .opened="${this.drawerOpened}"
+          @opened-changed="${this.drawerOpenedChanged}">
+        <nav class="drawer-list">
+          <span>Elements</span>
+          <a ?selected="${this.page === 'terra'}" href="/terra">Terra</a>
+          <a ?selected="${this.page === 'aer'}" href="/aer">Aer</a>
+          <a ?selected="${this.page === 'aqua'}" href="/aqua">Aqua</a>
+
+          <span>Tools</span>
+          <a
+              href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+              rel="noopener"
+              target="_blank">
+            ${i18next.t('tutorials')}
+          </a>
+          <a href="/documentation">${i18next.t('documentation')}</a>
+          <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
+          <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
+        </nav>
+      </app-drawer>
 
       <main role="main">
         <!-- added / removed dynamically by the router -->
@@ -191,7 +278,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               <!-- <option value="ja" ?selected=${i18next.languages[0] === 'ja'}>Japanese</option> -->
             </select>
           </div>
-          <div class="copyright">© 2018 IBM</div>
+          <div class="copyright">© ${currentYear} IBM</div>
         </div>
       </footer>
     `;
@@ -215,6 +302,10 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     import('../router.js').then(routing => {
       routing.init(this.shadowRoot.querySelector('main'));
     });
+
+    installMediaQueryWatcher(`(min-width: 768px)`, () =>
+      store.dispatch(updateDrawerState(false)),
+    );
   }
 
   updated(changedProperties) {
@@ -228,10 +319,19 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   stateChanged(state) {
     this.page = state.app.page;
+    this.drawerOpened = state.app.drawerOpened;
   }
 
   changeLanguage(event) {
     i18next.changeLanguage(event.target.value);
+  }
+
+  menuButtonClicked() {
+    store.dispatch(updateDrawerState(true));
+  }
+
+  drawerOpenedChanged(e) {
+    store.dispatch(updateDrawerState(e.target.opened));
   }
 }
 
