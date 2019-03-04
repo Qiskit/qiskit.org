@@ -135,7 +135,8 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error
 
                 # Import the RB Functions
-                from qiskit.ignis.verification.randomized_benchmarking import randomized_benchmarking_seq, RBFitter
+                from qiskit.ignis.verification.randomized_benchmarking \
+                import randomized_benchmarking_seq, RBFitter
 
                 #Generate RB circuits (2Q RB)
                 rb_opts = {}
@@ -152,18 +153,18 @@ class PageIgnis extends localize(i18next)(LitElement) {
 
                 backend = qiskit.Aer.get_backend('qasm_simulator')
                 basis_gates = 'u1,u2,u3,cx'
-                shots = 1024
                 result_list = []
 
                 #Create the RB fitter
-                rb_fit = RBFitter(None, xdata, shots, rb_opts['rb_pattern'])
+                rb_fit = RBFitter(None, xdata, rb_opts['rb_pattern'])
                 for rb_seed,rb_circ_seed in enumerate(rb_circs):
-                    qobj = qiskit.compile(rb_circ_seed, backend=backend, shots=shots,
+                    qobj = qiskit.compile(rb_circ_seed,
+                    backend=backend,
                     basis_gates=basis_gates)
                     job = backend.run(qobj, noise_model=noise_model)
 
                     #add data to the fitter
-                    rb_fit.add_data([job.result()])
+                    rb_fit.add_data(job.result())
                     print('After seed %d, EPC %f'%(rb_seed,rb_fit.fit[0]['epc']))
               </template>
               <!-- htmlmin:ignore -->
