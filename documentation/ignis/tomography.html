@@ -1204,11 +1204,86 @@ Qiskit circuit (the outcome of the circuit for state tomography,
 the circuit itself for process). Tomography attempts to reconstruct
 the state (density matrix) or the process map (superoperator)
 given the constraints of quantum measurements.</p>
+<p>To use the tomography module, import it with</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiskit.ignis.verification.tomography</span>
+</pre></div>
+</div>
 <div class="section" id="generating-tomography-circuits">
 <h2>Generating Tomography Circuits<a class="headerlink" href="#generating-tomography-circuits" title="Permalink to this headline">¶</a></h2>
+<p>The goal of the generation stage is to obtain a family of circuits that can be passed
+to the backend in order to obtain enough measurement for full tomography.</p>
+<p>For state tomography this amounts to adding measurement gates, and in process
+tomography this amounts to adding both measurement and initialization gates.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">state_tomography_circuits</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">measured_qubits</span><span class="p">,</span>
+                                   <span class="n">meas_labels</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">,</span>
+                                   <span class="n">meas_basis</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Creates state tomography circuits from <code class="docutils literal notranslate"><span class="pre">circuit</span></code> for the given <code class="docutils literal notranslate"><span class="pre">measured_qubits</span></code>.</li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">meas_basis</span></code> is a string or an <code class="docutils literal notranslate"><span class="pre">TomographyBasis</span></code> object,
+which by default is <code class="docutils literal notranslate"><span class="pre">PauliBasis</span></code></li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">meas_labels</span></code> are used in naming the generated circuits.</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">process_tomography_circuits</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">measured_qubits</span><span class="p">,</span>
+                                     <span class="n">prepared_qubits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                     <span class="n">meas_labels</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">,</span>
+                                     <span class="n">meas_basis</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">,</span>
+                                     <span class="n">prep_labels</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">,</span>
+                                     <span class="n">prep_basis</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Creates process tomography circuits from <code class="docutils literal notranslate"><span class="pre">circuit</span></code> for the given <code class="docutils literal notranslate"><span class="pre">measured_qubits</span></code>.</li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">prepared_qubits</span></code> is used to specify a set of qubits to prepare
+in case they are different than <code class="docutils literal notranslate"><span class="pre">measured_qubits</span></code>.</li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">meas_basis</span></code> is a string or an <code class="docutils literal notranslate"><span class="pre">TomographyBasis</span></code> object,
+which by default is <code class="docutils literal notranslate"><span class="pre">PauliBasis</span></code></li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">prep_basis</span></code> is a string or an <code class="docutils literal notranslate"><span class="pre">TomographyBasis</span></code> object,
+which by default is <code class="docutils literal notranslate"><span class="pre">PauliBasis</span></code></li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">meas_labels</span></code> are used in naming the generated circuits.</li>
+<li>The optional <code class="docutils literal notranslate"><span class="pre">prep_labels</span></code> are used in naming the generated circuits.</li>
+</ul>
 </div>
 <div class="section" id="fitting-tomography-results">
 <h2>Fitting Tomography Results<a class="headerlink" href="#fitting-tomography-results" title="Permalink to this headline">¶</a></h2>
+<p>The fitting stage extracts the experimental results obtained from the backend
+into a matrix representation of the state (density matrix) or process
+(Choi matrix) described by the input circuit.</p>
+<p>To perform fitting, an object of the class <code class="docutils literal notranslate"><span class="pre">TomographyFitter</span></code>
+needs to be created. This is done by creating an <code class="docutils literal notranslate"><span class="pre">StateTomographyFitter</span></code>
+object for state tomography and <code class="docutils literal notranslate"><span class="pre">ProcessTomographyFitter</span></code>
+for process tomography.</p>
+<p>Fitting is performed by solving an optimization problem using a dedicated library
+the current implementations rely on <strong>scipy</strong> and <strong>cvxpy</strong>. The implementations
+differ in how they ensure the result is a proper density matrix/Choi matrix:
+in <strong>cvxpy</strong> the constraints are encoded directly into the optimization problem
+whereas in the <strong>scipy</strong> based algorithm the solution is rescaled to ensure it is
+a proper solution.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StateTomographyFitter</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">meas_basis</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creates a state tomography fitter object.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ProcessTomographyFitter</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">meas_basis</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">,</span> <span class="n">prep_basis</span><span class="o">=</span><span class="s1">&#39;Pauli&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creates a process tomography fitter object.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">result</span></code> is the result obtained via the backend run on <code class="docutils literal notranslate"><span class="pre">circuits</span></code> and
+<code class="docutils literal notranslate"><span class="pre">meas_basis</span></code> and <code class="docutils literal notranslate"><span class="pre">prep_basis</span></code> should be the same as used in the circuit generation.</p>
+<p>Both fitter classes include the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span>fit(self, method=&#39;auto&#39;, standard_weights=True, beta=0.5, ``kwargs)
+</pre></div>
+</div>
+<p>This method performs the actual fitting. The parameters are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">method</span></code>: can be <code class="docutils literal notranslate"><span class="pre">'auto'</span></code>, <code class="docutils literal notranslate"><span class="pre">'cvx'</span></code> or <code class="docutils literal notranslate"><span class="pre">'lstsq'</span></code>. The <code class="docutils literal notranslate"><span class="pre">'auto'</span></code> options attempts
+to use cvx and resorts to lstsq if cvx is not available.</li>
+<li><code class="docutils literal notranslate"><span class="pre">standard_weights</span></code>: a boolean deciding whether to apply weights to
+tomography data based on count probability</li>
+<li><code class="docutils literal notranslate"><span class="pre">beta</span></code>: a float hedging parameter for converting counts</li>
+<li><code class="docutils literal notranslate"><span class="pre">kwargs</span></code>: holds additional parameters passed directly to the solver
+engine (e.g. <code class="docutils literal notranslate"><span class="pre">cvxopt</span></code>)</li>
+</ul>
 </div>
 </div>
 
