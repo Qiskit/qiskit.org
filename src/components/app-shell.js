@@ -185,7 +185,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: underline;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 800px) {
           .toolbar {
             display: flex;
             flex-grow: 1;
@@ -224,6 +224,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
             <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
             <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
+            <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           </nav>
           <nav class="second">
             <a
@@ -244,10 +245,10 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           @opened-changed="${this.drawerOpenedChanged}">
         <nav class="drawer-list">
           <span>Elements</span>
-          <a ?selected="${this.page === 'terra'}" href="/terra">Terra</a>
-          <a ?selected="${this.page === 'aer'}" href="/aer">Aer</a>
-          <a ?selected="${this.page === 'aqua'}" href="/aqua">Aqua</a>
-
+          <a href="/terra" ?selected=${this.page === 'terra'}>Terra</a>
+          <a href="/aer" ?selected=${this.page === 'aer'}>Aer</a>
+          <a href="/aqua" ?selected=${this.page === 'aqua'}>Aqua</a>
+          <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           <span>Tools</span>
           <a
               href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
@@ -302,7 +303,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       routing.init(this.shadowRoot.querySelector('main'));
     });
 
-    installMediaQueryWatcher(`(min-width: 768px)`, () =>
+    installMediaQueryWatcher(`(min-width: 800px)`, () =>
       store.dispatch(updateDrawerState(false)),
     );
   }

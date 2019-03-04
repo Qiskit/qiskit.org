@@ -46,6 +46,14 @@ export function init(outlet) {
       },
     },
     {
+      path: '/ignis',
+      name: 'ignis',
+      component: 'page-ignis',
+      action: () => {
+        import('./components/page-ignis.js');
+      },
+    },
+    {
       path: '/documentation',
       component: 'page-documentation',
       action: () => {
