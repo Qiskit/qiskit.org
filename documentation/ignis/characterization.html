@@ -260,7 +260,18 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Characterization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#coherence">Coherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circuits">Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#coherence">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hamiltonian-parameters">Hamiltonian  Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gate-characterization">Gate Characterization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fitters">Fitters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hamiltonian">Hamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates">Gates</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="measurement_calibration.html">Measurement Calibration</a><ul>
@@ -872,7 +883,18 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Characterization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#coherence">Coherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circuits">Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#coherence">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hamiltonian-parameters">Hamiltonian  Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gate-characterization">Gate Characterization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fitters">Fitters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hamiltonian">Hamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates">Gates</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="measurement_calibration.html">Measurement Calibration</a><ul>
@@ -1278,9 +1300,208 @@
 <p>Ignis provides a set of tools to characterize specific aspects
 of the quantum device and the gates, generically, circuits
 and analysis tools to extract single characterization parameters.</p>
+<div class="section" id="circuits">
+<h2>Circuits<a class="headerlink" href="#circuits" title="Permalink to this headline">¶</a></h2>
+<p>There are modules to generate circuits for coherence, hamiltonian and
+gate characterization. Each follows a general template of specifying
+a list of values to vary, and the qubits to characterize. Qubits in the list
+are characterized in parallel.</p>
 <div class="section" id="coherence">
-<h2>Coherence<a class="headerlink" href="#coherence" title="Permalink to this headline">¶</a></h2>
-<p>The coherence tools look at measuring T1 and T2.</p>
+<h3>Coherence<a class="headerlink" href="#coherence" title="Permalink to this headline">¶</a></h3>
+<p>The coherence circuit scripts are in</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit</span><span class="o">.</span><span class="n">ignis</span><span class="o">.</span><span class="n">characterization</span><span class="o">.</span><span class="n">coherence</span><span class="o">.</span><span class="n">circuits</span>
+</pre></div>
+</div>
+<p>To generate coherence circuits, call the functions <code class="docutils literal notranslate"><span class="pre">t1_circuits</span></code>,
+<code class="docutils literal notranslate"><span class="pre">t2_circuits</span></code>, and  <code class="docutils literal notranslate"><span class="pre">t2star_circuits</span></code>. These circuits contain blocks of
+identity gates (<code class="docutils literal notranslate"><span class="pre">id</span></code>) between particular gates depending on the experiment.
+The user specifies a list with the number of identity gates for each
+experiment; the list must be in ascending order. The length of the <code class="docutils literal notranslate"><span class="pre">id</span></code>
+gate is backend dependent and the user must provide that time (<code class="docutils literal notranslate"><span class="pre">gate_time</span></code>)
+to these functions. For each experiment the user also specifies a list of
+qubits; identical experiments will occur in parallel on these qubits. Only
+these qubits are measured and the results are mapped to a classical register
+of size <code class="docutils literal notranslate"><span class="pre">len(qubits)</span></code> (the first qubit specified is mapped to the first
+bit of the classical register, etc.). Each circuit function returns
+a list of circuits (objects of type <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>),
+and a list of delay times indicating the total time of identity gates in that
+sequence.</p>
+<p>The <span class="math notranslate nohighlight">\(T_1\)</span> circuits consist of an <cite>X</cite> gate to excite the qubit and then
+varying length of identity gates before a measurement. Here is a usage
+example for <code class="docutils literal notranslate"><span class="pre">t1_circuit</span></code>:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">t1_circuits</span><span class="p">(</span>
+    <span class="n">num_of_gates</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+    <span class="n">gate_time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(T_2^*\)</span> circuits consist of one Hadamard gate, one block of identity gates,
+a phase gate, and an additional Hadamard gate. You can control the
+phase gate by setting the number of oscillations. Example:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">osc_frec</span> <span class="o">=</span> <span class="n">t2star_circuits</span><span class="p">(</span>
+    <span class="n">num_of_gates</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="n">gate_time</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">nosc</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note an additional return parameter, the expected oscillation frequency which
+can be used as an initial value for the fit.</p>
+<p><code class="docutils literal notranslate"><span class="pre">t2_circuits</span></code> follow the CPMG protocol. Specify the number of echoes,
+and whether to alternate the echo between X and Y. The <code class="docutils literal notranslate"><span class="pre">num_of_gates</span></code>
+specifies the wait between the <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse and the first echo.
+The <code class="docutils literal notranslate"><span class="pre">xdata</span></code> is the total time of the sequence.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">osc_frec</span> <span class="o">=</span> <span class="n">t2star_circuits</span><span class="p">(</span>
+    <span class="n">num_of_gates</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+    <span class="n">gate_time</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">n_echos</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">phase_alt_echo</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hamiltonian-parameters">
+<h3>Hamiltonian  Parameters<a class="headerlink" href="#hamiltonian-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Circuits for studying Hamiltonian parameters are in</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit</span><span class="o">.</span><span class="n">ignis</span><span class="o">.</span><span class="n">characterization</span><span class="o">.</span><span class="n">hamiltonian</span><span class="o">.</span><span class="n">circuits</span>
+</pre></div>
+</div>
+<p>The circuits to study the ZZ interaction between qubits perform a <span class="math notranslate nohighlight">\(T_2^*\)</span>
+experiment on a qubit with a specator qubit in the <span class="math notranslate nohighlight">\(|0\rangle\)</span> state and
+another <span class="math notranslate nohighlight">\(T_2^*\)</span> experiment with the qubit in the <span class="math notranslate nohighlight">\(|1\rangle\)</span> state.
+The difference frequency between these experiments is the ZZ rate.
+Here is a usage example for <code class="docutils literal notranslate"><span class="pre">zz_circuits</span></code>:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">zz_circuits</span><span class="p">(</span>
+    <span class="n">num_of_gates</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+    <span class="n">gate_time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">spectators</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="n">nosc</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">qubits</span></code> is the list of qubits to be measured using the <span class="math notranslate nohighlight">\(T_2^*\)</span> sequence and
+<code class="docutils literal notranslate"><span class="pre">spectators</span></code> is the list of qubits to be flipped. These lists must be
+the same length and be unique. The sequences therefore measure ZZ between
+the elements of <code class="docutils literal notranslate"><span class="pre">qubits</span></code> and <code class="docutils literal notranslate"><span class="pre">spectators</span></code> at the same index.</p>
+</div>
+<div class="section" id="gate-characterization">
+<h3>Gate Characterization<a class="headerlink" href="#gate-characterization" title="Permalink to this headline">¶</a></h3>
+<p>Circuits for studying gate errors are in</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit</span><span class="o">.</span><span class="n">ignis</span><span class="o">.</span><span class="n">characterization</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">circuits</span>
+</pre></div>
+</div>
+<p>These circuits repeat gates in a particular sequence to amplify either
+rotation (amplitude) or angle error. There are circuits to look at the
+single qubit <code class="docutils literal notranslate"><span class="pre">U2</span></code> gates and circuits to look at the two-qubit <code class="docutils literal notranslate"><span class="pre">CX</span></code> gate.</p>
+<p>For the single qubit gates an example of the amplitude calibration is</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">ampcal_1Q_circuits</span><span class="p">(</span>
+    <span class="n">max_reps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The amplitude calibration does a <code class="docutils literal notranslate"><span class="pre">U2</span></code> gate followed by the same <code class="docutils literal notranslate"><span class="pre">U2</span></code> gate in
+pairs. The <code class="docutils literal notranslate"><span class="pre">max_reps</span></code> is the number of pair repetitions. <code class="docutils literal notranslate"><span class="pre">xdata</span></code> gives the
+total number of applied <code class="docutils literal notranslate"><span class="pre">U2</span></code> gates. An example usage of the angle calibration
+is</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">anglecal_1Q_circuits</span><span class="p">(</span>
+    <span class="n">max_reps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">angleerr</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">angleerr</span></code> is an artifial angle error that can be added using <code class="docutils literal notranslate"><span class="pre">U1</span></code> gates
+to test the sequence.</p>
+<p>The functions are similar for <code class="docutils literal notranslate"><span class="pre">CX</span></code>,</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">ampcal_cx_circuits</span><span class="p">(</span>
+    <span class="n">max_reps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">control_qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="n">circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">anglecal_cx_circuits</span><span class="p">(</span><span class="n">max_reps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">control_qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="n">angleerr</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">control_qubits</span></code> specifies the control of the <code class="docutils literal notranslate"><span class="pre">cx</span></code> gate and
+<code class="docutils literal notranslate"><span class="pre">qubits</span></code> are the targets.</p>
+</div>
+</div>
+<div class="section" id="fitters">
+<h2>Fitters<a class="headerlink" href="#fitters" title="Permalink to this headline">¶</a></h2>
+<p>All characterization experiments are analyzed by fitters derived by the
+<code class="docutils literal notranslate"><span class="pre">BaseFitter</span></code> class. Using the <span class="math notranslate nohighlight">\(T_1\)</span> fitter as an example</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span> <span class="o">=</span> <span class="n">T1Fitter</span><span class="p">(</span>
+    <span class="n">backend_result</span><span class="p">,</span>
+    <span class="n">xdata</span><span class="p">,</span>
+    <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">fit_p0</span><span class="o">=</span><span class="p">[</span><span class="n">initial_a</span><span class="p">,</span> <span class="n">initial_t1</span><span class="p">,</span> <span class="n">initial_c</span><span class="p">],</span>
+    <span class="n">fit_bounds</span><span class="o">=</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>we pass in the result, the <code class="docutils literal notranslate"><span class="pre">xdata</span></code>, and the <code class="docutils literal notranslate"><span class="pre">qubits</span></code> plus guess values
+for the fit parameters and fit bounds. The results can be passed in as
+a single result, as a list of results (e.g., if the experiment has
+to be run across several jobs) or as an empty result. Data can be added
+later using</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_results</span><span class="p">,</span> <span class="n">re_calc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">re_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">add_data</span></code> can be used to add results from new circuits or to add more
+shots to circuits that have already been added. If <code class="docutils literal notranslate"><span class="pre">re_calc</span></code> is True then
+the data is processed. If <code class="docutils literal notranslate"><span class="pre">re_fit</span></code> is True then the data is fit.
+The data can also be fit by an explicit call to</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">fit_data</span><span class="p">(</span><span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">qid</span></code> can be used to fit only a single qubit’s data (this refers to
+the qubit index in the list passed to init). As specified (<code class="docutils literal notranslate"><span class="pre">qid=-1</span></code>),
+this fits all the data. New initial values and bounds for the fit can also
+be passed in. <code class="docutils literal notranslate"><span class="pre">series</span></code> specifies the data series to fit. Most circuits
+only have a single series by default, but certain experiments (e.g. ZZ)
+have multiple series. The data can be plotted with a call to <code class="docutils literal notranslate"><span class="pre">fit.plot</span></code>.
+The properties <code class="docutils literal notranslate"><span class="pre">params</span></code> and <code class="docutils literal notranslate"><span class="pre">params_err</span></code> return the fit parameters
+and errors.</p>
+<div class="section" id="id1">
+<h3>Coherence<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Analysis is done by classes <code class="docutils literal notranslate"><span class="pre">T1Fitter</span></code>, <code class="docutils literal notranslate"><span class="pre">T2Fitter</span></code>, and <code class="docutils literal notranslate"><span class="pre">T2StarFitter</span></code>.</p>
+<p>The <span class="math notranslate nohighlight">\(T_1\)</span> data is fit to</p>
+<div class="math notranslate nohighlight">
+\[f(t) = a \, e^{-t/T_1} + c,\]</div>
+<p>for unknown parameters <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(c\)</span>, and <span class="math notranslate nohighlight">\(T_1\)</span>. If there are no SPAM
+errors, <span class="math notranslate nohighlight">\(a=1\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>. After initializing the fitter object,
+the function <code class="docutils literal notranslate"><span class="pre">time()</span></code> of <code class="docutils literal notranslate"><span class="pre">T1Fitter</span></code> gives the estimated <span class="math notranslate nohighlight">\(T_1\)</span>. Similarly,
+for <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(T_2^*\)</span>, the ground state population is expected to behave like</p>
+<div class="math notranslate nohighlight">
+\[a \, e^{-t/T_1} + c\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[a \, e^{-t/{T_2}^*} \, \cos(2\pi ft + \phi) + c,\]</div>
+<p>respectively; both with <span class="math notranslate nohighlight">\(a=c=0.5\)</span> in the lack of SPAM errors.</p>
+</div>
+<div class="section" id="hamiltonian">
+<h3>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Permalink to this headline">¶</a></h3>
+<p>Analysis is done by the class <code class="docutils literal notranslate"><span class="pre">ZZFitter</span></code>. There are two data series <code class="docutils literal notranslate"><span class="pre">0</span></code> and
+<code class="docutils literal notranslate"><span class="pre">1</span></code>. The data is fit to the same function <span class="math notranslate nohighlight">\(T_2^*\)</span> and the ZZ rate (obtained
+using function <code class="docutils literal notranslate"><span class="pre">ZZ_rate</span></code>) is the  difference between the values of <code class="docutils literal notranslate"><span class="pre">f</span></code>
+from the two fits.</p>
+</div>
+<div class="section" id="gates">
+<h3>Gates<a class="headerlink" href="#gates" title="Permalink to this headline">¶</a></h3>
+<p>Analysis is done by classes <code class="docutils literal notranslate"><span class="pre">AmpCalFitter</span></code>, <code class="docutils literal notranslate"><span class="pre">AngleCalFitter</span></code>,
+<code class="docutils literal notranslate"><span class="pre">AmpCalCXFitter</span></code>, <code class="docutils literal notranslate"><span class="pre">AngleCalCXFitter</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">AmpCalFitter</span></code> and <code class="docutils literal notranslate"><span class="pre">AngleCalFitter</span></code> is fit to the function</p>
+<div class="math notranslate nohighlight">
+\[c - \frac{1}{2} \, \cos \left( \left(\theta+\frac{\pi}{2}\right) (x + 1)
+\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(x\)</span> is the number of gate repetitions and <span class="math notranslate nohighlight">\(\theta\)</span> is the
+error for the pulse (amplitude/error).</p>
+<p><code class="docutils literal notranslate"><span class="pre">AmpCalCXFitter</span></code> and <code class="docutils literal notranslate"><span class="pre">AngleCalCXFitter</span></code> is fit to the function</p>
+<div class="math notranslate nohighlight">
+\[c + \frac{1}{2} \, \sin\left((\theta+\pi) \, x \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(x\)</span> is the number of gate repetitions and <span class="math notranslate nohighlight">\(\theta\)</span> is the
+amplitude error for the pulse.</p>
+</div>
 </div>
 </div>
 
