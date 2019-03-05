@@ -135,8 +135,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 from qiskit.providers.aer.noise.errors.standard_errors import depolarizing_error
 
                 # Import the RB Functions
-                from qiskit.ignis.verification.randomized_benchmarking \
-                import randomized_benchmarking_seq, RBFitter
+                from qiskit.ignis.verification.randomized_benchmarking import randomized_benchmarking_seq, RBFitter
 
                 #Generate RB circuits (2Q RB)
                 rb_opts = {}
@@ -147,8 +146,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
 
                 # Run on a noisy simulator
                 noise_model = NoiseModel()
-                noise_model.add_all_qubit_quantum_error(depolarizing_error(0.002, 1), ['u1',
-                'u2', 'u3'])
+                noise_model.add_all_qubit_quantum_error(depolarizing_error(0.002, 1), ['u1', 'u2', 'u3'])
                 noise_model.add_all_qubit_quantum_error(depolarizing_error(0.002, 2), 'cx')
 
                 backend = qiskit.Aer.get_backend('qasm_simulator')
