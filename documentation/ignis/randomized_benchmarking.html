@@ -1297,33 +1297,39 @@
         
   <div class="section" id="randomized-benchmarking">
 <h1>Randomized Benchmarking<a class="headerlink" href="#randomized-benchmarking" title="Permalink to this headline">¶</a></h1>
-<p>Randomized benchmarking (RB) is a well-known technique to measure
-average gate performance by running sequences of random Clifford gates
-that should return the qubits to the initial state. Ignis has tools
-to generate one- and two-qubit Clifford gate sequences simultaneously.</p>
-<p>To use Qiskit Ignis randomized benchmarking (RB) module, import it with</p>
+<p>Randomized benchmarking (RB) is a well-known technique to measure average gate
+performance by running sequences of random Clifford gates that should return the
+qubits to the initial state. Ignis has tools to generate one- and two-qubit
+Clifford gate sequences simultaneously.</p>
+<p>To use the Qiskit Ignis randomized benchmarking (RB) module, import it with</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiskit.ignis.verification.randomized_benchmarking</span> <span class="k">as</span> <span class="nn">rb</span>
 </pre></div>
 </div>
 <div class="section" id="generating-rb-sequences">
 <h2>Generating RB Sequences<a class="headerlink" href="#generating-rb-sequences" title="Permalink to this headline">¶</a></h2>
-<p>In order to generate the RB sequences <strong>rb_circs</strong>, which is a  list of lists of
+<p>In order to generate the RB sequences <code class="docutils literal notranslate"><span class="pre">rb_circs</span></code>, which is a  list of lists of
 quantum circuits, run</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rb_circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">randomized_benchmarking_seq</span><span class="p">(</span><span class="n">nseeds</span><span class="p">,</span> <span class="n">length_vector</span><span class="p">,</span>
-                                              <span class="n">rb_pattern</span><span class="p">,</span>
-                                              <span class="n">length_multiplier</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rb_circs</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">randomized_benchmarking_seq</span><span class="p">(</span>
+    <span class="n">nseeds</span><span class="p">,</span>
+    <span class="n">length_vector</span><span class="p">,</span>
+    <span class="n">rb_pattern</span><span class="p">,</span>
+    <span class="n">length_multiplier</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The parameters given to this function are:</p>
 <ul class="simple">
-<li><strong>nseeds:</strong> The number of seeds. For each seed there you will get a separate list
-of output circuits in <strong>rb_circs</strong>.</li>
-<li><strong>length_vector</strong>: The length vector of Clifford lengths. Must be in ascending order.
-RB sequences of increasing length grow on top of the previous sequences.</li>
-<li><strong>rb_pattern:</strong> A list of the form [[i,j],[k],…] which will make simultaneous RB sequences
-where Qi,Qj are a 2-qubit RB sequence and Qk is a 1-qubit sequence, etc. The number of qubits
-is the sum of the entries. For ‘regular’ RB the qubit_pattern is just [[0]],[[0,1]].</li>
-<li><strong>length_multiplier:</strong> If this is an array it scales each rb_sequence by the multiplier.</li>
+<li><code class="docutils literal notranslate"><span class="pre">nseeds</span></code>: the number of seeds. For each seed there you will get a separate
+list of output circuits in <code class="docutils literal notranslate"><span class="pre">rb_circs</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">length_vector</span></code>: the length vector of Clifford lengths. Must be in
+ascending order. RB sequences of increasing length grow on top of the
+previous sequences</li>
+<li><code class="docutils literal notranslate"><span class="pre">rb_pattern</span></code>: a list of the form <code class="docutils literal notranslate"><span class="pre">[[i,j],[k],...]</span></code> which will make
+simultaneous RB sequences where <span class="math notranslate nohighlight">\(Q_i,\,Q_j\)</span> are a 2-qubit RB sequence
+and <span class="math notranslate nohighlight">\(Q_k\)</span> is a 1-qubit sequence, etc. The number of qubits is the sum
+of the entries. For ‘regular’ RB the <code class="docutils literal notranslate"><span class="pre">qubit_pattern</span></code> is just
+<code class="docutils literal notranslate"><span class="pre">[[0]],[[0,1]]</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">length_multiplier</span></code>: if this is an array it scales each <code class="docutils literal notranslate"><span class="pre">rb_sequence</span></code> by
+the multiplier</li>
 </ul>
 <p>For example,</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of qubits</span>
@@ -1345,51 +1351,55 @@ is the sum of the entries. For ‘regular’ RB the qubit_pattern is just [[0]],
 </div>
 <p>This function returns:</p>
 <ul class="simple">
-<li><strong>rb_circs:</strong> A list of lists of circuits for the rb sequences (separate list for each seed).</li>
-<li><strong>xdata:</strong> The Clifford lengths (with multiplier if applicable).</li>
-<li><strong>rb_opts_dict:</strong> Option dictionary back out with default options appended.</li>
+<li><code class="docutils literal notranslate"><span class="pre">rb_circs</span></code>: a list of lists of circuits for the RB sequences (separate list
+for each seed)</li>
+<li><code class="docutils literal notranslate"><span class="pre">xdata</span></code>: the Clifford lengths (with multiplier if applicable)</li>
+<li><code class="docutils literal notranslate"><span class="pre">rb_opts_dict</span></code>: option dictionary back out with default options appended</li>
 </ul>
 </div>
 <div class="section" id="analyzing-results">
 <h2>Analyzing Results<a class="headerlink" href="#analyzing-results" title="Permalink to this headline">¶</a></h2>
-<p>Now, you can execute the randomized benchmarking either using
-Qiskit Aer Simulator (with some noise model) or using IBMQ provider,
-and obtain a list of results <strong>result_list</strong> for the RB sequences.</p>
+<p>Now, you can execute the randomized benchmarking either using Qiskit Aer
+Simulator (with some noise model) or using IBMQ provider, and obtain a list of
+results <code class="docutils literal notranslate"><span class="pre">result_list</span></code> for the RB sequences.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Output results</span>
 <span class="k">for</span> <span class="n">rb_seed</span><span class="p">,</span><span class="n">rb_circ_seed</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rb_circs</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Executing seed </span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">rb_seed</span><span class="p">)</span>
     <span class="c1"># Executing each RB sequence</span>
-    <span class="n">job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">rb_circ_seed</span><span class="p">,</span>
-                        <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
-                        <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="n">rb_circ_seed</span><span class="p">,</span>
+        <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
+        <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
+        <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
+        <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
     <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>To get the statistics about the survival probabilities add the results
-to a RB fitter.</p>
+<p>To get the statistics about the survival probabilities add the results to a RB
+fitter.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">RBFitter</span><span class="p">(</span><span class="n">result_list</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <strong>results_list</strong>, <strong>xdata</strong> and <strong>rb_patterns</strong> are as above.
-The results can be added as a list or as one result. Results can be added
-to an existing fitter as</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">results_list</span></code>, <code class="docutils literal notranslate"><span class="pre">xdata</span></code> and <code class="docutils literal notranslate"><span class="pre">rb_patterns</span></code> are as above. The results
+can be added as a list or as one result. Results can be added to an existing
+fitter as</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">more_results</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The number of seeds in the fitter is based on the number of added
-results. To compute the data, calculate the mean over seeds and fit the
-results to an exponential curve (fit each of the RB patterns
-<strong>pattern_index</strong>):</p>
+<p>The number of seeds in the fitter is based on the number of added results. To
+compute the data, calculate the mean over seeds and fit the results to an
+exponential curve (fit each of the RB patterns <code class="docutils literal notranslate"><span class="pre">pattern_index</span></code>):</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">calc_data</span><span class="p">()</span>
 <span class="n">rbfit</span><span class="o">.</span><span class="n">calc_statistics</span><span class="p">()</span>
 <span class="n">rbfit</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>These steps are performed automatically when data is added (unless rerun_fit
-is set to False in add_data()). The fit parameters are:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The three parameters (a, alpha, b) of the function a * alpha ** x + b.</span>
+<p>These steps are performed automatically when data is added (unless <code class="docutils literal notranslate"><span class="pre">rerun_fit</span></code>
+is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> in <code class="docutils literal notranslate"><span class="pre">add_data()</span></code>). The fit parameters are:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The three parameters (a, alpha, b)</span>
+<span class="c1"># of the function a * alpha ** x + b.</span>
 <span class="c1"># The middle one is the exponent alpha.</span>
-<span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;parmas&#39;</span><span class="p">]</span>
+<span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
 <span class="c1"># The error limits of the parameters.</span>
 <span class="n">rbfit</span><span class="o">.</span><span class="n">fit</span><span class="p">[</span><span class="n">pattern_index</span><span class="p">][</span><span class="s1">&#39;err&#39;</span><span class="p">]</span>
 <span class="c1"># The error per Clifford</span>
@@ -1399,39 +1409,43 @@ is set to False in add_data()). The fit parameters are:</p>
 </pre></div>
 </div>
 <p>To plot the data plus fit, use</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">plot_rb_data</span><span class="p">(</span><span class="n">pattern_index</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_plt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rbfit</span><span class="o">.</span><span class="n">plot_rb_data</span><span class="p">(</span>
+    <span class="n">pattern_index</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="n">add_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_plt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where:</p>
 <ul class="simple">
-<li><strong>pattern_index:</strong> Which RB pattern to plot.</li>
-<li><strong>ax (Axes or None):</strong> Plot axis (if passed in).</li>
-<li><strong>add_label (bool):</strong> Add an EPC label.</li>
-<li><strong>show_plt (bool):</strong> Display the plot.</li>
+<li><code class="docutils literal notranslate"><span class="pre">pattern_index</span></code>: which RB pattern to plot</li>
+<li><code class="docutils literal notranslate"><span class="pre">ax</span></code> (<code class="docutils literal notranslate"><span class="pre">Axes</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code>): plot axis (if passed in)</li>
+<li><code class="docutils literal notranslate"><span class="pre">add_label</span></code> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): add an error per Clifford label</li>
+<li><code class="docutils literal notranslate"><span class="pre">show_plt</span></code> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): display the plot</li>
 </ul>
 </div>
 <div class="section" id="predicted-results">
 <h2>Predicted Results<a class="headerlink" href="#predicted-results" title="Permalink to this headline">¶</a></h2>
-<p>From the known depolarizing errors on the simulation you can
-predict the fidelity. First you need to count the number
-of gates per Clifford.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gates_per_cliff</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">rb_utils</span><span class="o">.</span><span class="n">gates_per_clifford</span><span class="p">(</span><span class="n">qobj_list</span><span class="p">,</span>
-                                                 <span class="n">xdata</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                                 <span class="n">basis_gates</span><span class="p">,</span>
-                                                 <span class="n">rb_opts</span><span class="p">[</span><span class="s1">&#39;rb_pattern&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<p>From the known depolarizing errors on the simulation you can predict the
+fidelity. First you need to count the number of gates per Clifford.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gates_per_cliff</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">rb_utils</span><span class="o">.</span><span class="n">gates_per_clifford</span><span class="p">(</span>
+    <span class="n">qobj_list</span><span class="p">,</span>
+    <span class="n">xdata</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">basis_gates</span><span class="p">,</span>
+    <span class="n">rb_opts</span><span class="p">[</span><span class="s1">&#39;rb_pattern&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Then you need to prepare lists of the number of qubits and the errors
-and calculate the predicted error per clifford (epc):</p>
+<p>Then you need to prepare lists of the number of qubits and the errors and
+calculate the predicted error per Clifford (epc):</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pred_epc</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">rb_utils</span><span class="o">.</span><span class="n">twoQ_clifford_error</span><span class="p">(</span><span class="n">ngates</span><span class="p">,</span><span class="n">gate_qubits</span><span class="p">,</span><span class="n">gate_errs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where:</p>
 <ul class="simple">
-<li><strong>ngates:</strong> A List of the number of gates per 2Q Clifford</li>
-<li><strong>gate_qubit:</strong> A list of the qubit corresponding to the gate (0, 1 or -1).
--1 corresponds to the 2Q gate.</li>
-<li><strong>gate_err:</strong> list of the gate errors</li>
+<li><code class="docutils literal notranslate"><span class="pre">ngates</span></code>: a list of the number of gates per 2Q Clifford</li>
+<li><code class="docutils literal notranslate"><span class="pre">gate_qubit</span></code>: a list of the qubit corresponding to the gate (0, 1 or -1).
+-1 corresponds to the 2Q gate</li>
+<li><code class="docutils literal notranslate"><span class="pre">gate_err</span></code>: list of the gate errors</li>
 </ul>
 </div>
 </div>
