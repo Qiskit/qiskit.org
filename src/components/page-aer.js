@@ -82,8 +82,8 @@ class PageAer extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.aer.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Qobj</div>
-                <div class="subtitle">OpenQASM</div>
+                <div class="title">Qiskit Terra</div>
+                <div class="subtitle">Quantum Circuit</div>
               </div>
               <div class="element">
                 <div class="title">Noise model</div>
