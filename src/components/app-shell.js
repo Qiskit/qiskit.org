@@ -185,7 +185,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: underline;
         }
 
-        @media (min-width: 800px) {
+        @media (min-width: 895px) {
           .toolbar {
             display: flex;
             flex-grow: 1;
@@ -235,6 +235,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             </a>
             <a href="/documentation">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
+            <a href="/community" ?selected=${this.page === 'community'}>${i18next.t('community')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
         </div>
@@ -258,6 +259,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           </a>
           <a href="/documentation">${i18next.t('documentation')}</a>
           <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
+          <a href="/community" ?selected=${this.page === 'community'}>${i18next.t('community')}</a>
           <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
         </nav>
       </app-drawer>
@@ -303,7 +305,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
       routing.init(this.shadowRoot.querySelector('main'));
     });
 
-    installMediaQueryWatcher(`(min-width: 800px)`, () =>
+    installMediaQueryWatcher(`(min-width: 895px)`, () =>
       store.dispatch(updateDrawerState(false)),
     );
   }
