@@ -96,23 +96,20 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 </div>
               </div>
               <div class="element">
-                <div class="title">Qobj (Terra/Aer)</div>
-                <div class="subtitle">OpenQASM</div>
+                <div class="title">Qiskit Terra</div>
+                <div class="subtitle">Compile circuits</div>
               </div>
               <div class="element">
-                <div class="title">Backend (Terra/Aer)</div>
+                <div class="title">Execute circuits</div>
                 <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator
                 </div>
               </div>
               <div class="element">
-                <div class="title">Job (Terra/Aer)</div>
-              </div>
-              <div class="element">
-                <div class="title">Result (Terra/Aer)</div>
+                <div class="title">Result</div>
                 <div class="subtitle">Counts, Memory, Statevector, Unitary, Snapshots</div>
               </div>
               <div class="element">
-                <div class="title">Fitter</div>
+                <div class="title">Fitter/Filter</div>
                 <div class="subtitle">Take Ignis results and fit to a model/plot results</div>
                 <div class="subtitle">Apply mitigation (if applicable)</div>
               </div>
