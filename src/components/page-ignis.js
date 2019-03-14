@@ -120,7 +120,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
             <p class="note">${i18next.t('pages.ignis.pythonIsRequired')}</p>
             <code-sample type="bash">
               <template>
-                [python3] $ pip install qiskit-ignis
+                [python3] $ pip install qiskit
               </template>
             </code-sample>
             <h3>${i18next.t('pages.ignis.exampleTitle')}</h3>
