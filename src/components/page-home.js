@@ -319,7 +319,7 @@ class PageHome extends localize(i18next)(LitElement) {
               </li>
               <li>
                 <a
-                    href="https://quantumcomputing.stackexchange.com/search?q=qiskit"
+                    href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit"
                     title="Stack Exchange community"
                     target="_blank"
                     rel="noopener">
