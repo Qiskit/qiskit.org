@@ -23,6 +23,7 @@ import { store } from '../store.js';
 import { navigate, updateDrawerState } from '../actions/app.js';
 
 import { SharedStyles } from './app-shared-styles.js';
+import { QISKIT_SEGMENT_APP_KEY, QISKIT_SEGMENT_SCRIPT } from '../config.js';
 
 class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   static get properties() {
@@ -299,8 +300,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
-    this.appKey = process.env.QISKIT_SEGMENT_APP_KEY;
-    this.scriptUrl = process.env.QISKIT_SEGMENT_SCRIPT;
+    this.appKey = QISKIT_SEGMENT_APP_KEY;
+    this.scriptUrl = QISKIT_SEGMENT_SCRIPT;
     this.brand = 'qiskit.org website';
   }
 
@@ -367,6 +368,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         title: i18next.t(`pages.${this.page}.metaTitle`),
         description: i18next.t(`pages.${this.page}.metaDescription`),
       });
+      console.log(this.page);
       this.trackNewPage(this.page);
     }
   }
