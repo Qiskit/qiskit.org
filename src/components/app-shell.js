@@ -236,11 +236,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <nav class="second">
             <a
                 href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+                @click=${this.trackNewPage('tutorials')}
                 rel="noopener"
                 target="_blank">
               ${i18next.t('tutorials')}
             </a>
-            <a href="/documentation">${i18next.t('documentation')}</a>
+            <a href="/documentation" @click=${this.trackNewPage('documentation')}>${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
@@ -259,11 +260,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <span>Tools</span>
           <a
               href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+              @click=${this.trackNewPage('documentation')}
               rel="noopener"
               target="_blank">
             ${i18next.t('tutorials')}
           </a>
-          <a href="/documentation">${i18next.t('documentation')}</a>
+          <a href="/documentation" @click=${this.trackNewPage('documentation')}>${i18next.t('documentation')}</a>
           <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
           <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
         </nav>
@@ -368,7 +370,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         title: i18next.t(`pages.${this.page}.metaTitle`),
         description: i18next.t(`pages.${this.page}.metaDescription`),
       });
-      console.log(this.page);
       this.trackNewPage(this.page);
     }
   }
