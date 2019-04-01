@@ -33,14 +33,28 @@ task('add-ibm-stats-script', () => {
       window.digitalData = {
         page: {
           category: {
-            primaryCategory: 'ibm-research'
+            primaryCategory: 'ibm-research',
           },
           pageInfo: {
             ibm: {
-              siteID: 'qiskit'
-            }
-          }
-        }
+              siteID: 'qiskit',
+            },
+            pageID: 'qiskit',
+            productTitle: this.brand,
+            analytics: {
+              category: 'Offering Interface',
+            },
+          },
+        },
+      };
+      window._analytics = {
+        segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
+        coremetrics: false,
+        optimizely: false,
+        googleAddServices: false,
+        fullStory: false,
+        autoPageEventSpa: true,
+        autoFormEvents: true,
       };
     </script>
     <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
@@ -55,6 +69,7 @@ task('add-ibm-stats-script', () => {
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
+    <script async src="https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js'"></script>
   `;
 
   return src(`${buildPath}**/index.html`)

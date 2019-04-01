@@ -23,7 +23,6 @@ import { store } from '../store.js';
 import { navigate, updateDrawerState } from '../actions/app.js';
 
 import { SharedStyles } from './app-shared-styles.js';
-import { QISKIT_SEGMENT_APP_KEY, QISKIT_SEGMENT_SCRIPT } from '../config.js';
 
 class AppShell extends localize(i18next)(connect(store)(LitElement)) {
   static get properties() {
@@ -302,8 +301,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
-    this.appKey = QISKIT_SEGMENT_APP_KEY;
-    this.scriptUrl = QISKIT_SEGMENT_SCRIPT;
     this.brand = 'qiskit.org website';
   }
 
@@ -321,53 +318,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     installMediaQueryWatcher(`(min-width: 800px)`, () =>
       store.dispatch(updateDrawerState(false)),
     );
-
-    window.digitalData = {
-      page: {
-        category: {
-          primaryCategory: 'ibm-research',
-        },
-        pageInfo: {
-          ibm: {
-            siteID: 'qiskit',
-          },
-          pageID: 'qiskit',
-          productTitle: this.brand,
-          analytics: {
-            category: 'Offering Interface',
-          },
-        },
-      },
-    };
-
-    if (this.appKey) {
-      /* eslint-disable no-underscore-dangle */
-      window._analytics = {
-        segment_key: this.appKey,
-        coremetrics: false,
-        optimizely: false,
-        googleAddServices: false,
-        fullStory: false,
-        autoPageEventSpa: true,
-        autoFormEvents: true,
-      };
-
-      // load segment script asynchronously
-      /* eslint-disable */
-      (function(scriptUrl, callback) {
-        var bluemixAnalytics = document.createElement('script');
-        bluemixAnalytics.type = 'text/javascript';
-        bluemixAnalytics.async = true;
-        //enter url of script here
-        bluemixAnalytics.src = scriptUrl;
-        bluemixAnalytics.onload = callback;
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(bluemixAnalytics, s);
-      })(this.scriptUrl, () => {
-        this.trackNewPage(this.page);
-      });
-      /* eslint-enable */
-    }
   }
 
   updated(changedProperties) {
