@@ -324,8 +324,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
     window.digitalData = {
       page: {
+        category: {
+          primaryCategory: 'ibm-research',
+        },
         pageInfo: {
-          pageID: 'Qiskit',
+          ibm: {
+            siteID: 'qiskit',
+          },
+          pageID: 'qiskit',
           productTitle: this.brand,
           analytics: {
             category: 'Offering Interface',
