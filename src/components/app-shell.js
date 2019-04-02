@@ -185,12 +185,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           text-decoration: underline;
         }
 
-        .cookie-preferences {
-          text-align: right;
-          padding: 1em 2em;
-          font-size: 0.8rem;
-        }
-
         @media (min-width: 800px) {
           .toolbar {
             display: flex;
