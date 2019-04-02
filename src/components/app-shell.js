@@ -288,9 +288,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           </div>
           <div class="copyright">© ${currentYear} IBM</div>
         </div>
-        <div class="segment">
-          <div id="teconsent" class="cookie-preferences" style="display:none"></div>
-        </div>
       </footer>
     `;
   }
