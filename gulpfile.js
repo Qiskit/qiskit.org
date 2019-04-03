@@ -40,7 +40,7 @@ task('add-ibm-stats-script', () => {
               siteID: 'qiskit',
             },
             pageID: 'qiskit',
-            productTitle: this.brand,
+            productTitle: 'IBM Q Experience',
             analytics: {
               category: 'Offering Interface',
             },

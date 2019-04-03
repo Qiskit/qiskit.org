@@ -292,7 +292,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
-    this.brand = 'qiskit.org website';
+    this.brand = 'IBM Q Experience';
   }
 
   firstUpdated() {
