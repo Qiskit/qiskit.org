@@ -1358,28 +1358,44 @@ the following:</p>
 other applications and improve your experience.</p>
 <p>The simplest way to use environments is by using the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command,
 included with Anaconda. A Conda environment allows you to specify a specific
-version of Python and set of libraries. Run the following commands from a
-terminal window:</p>
+version of Python and set of libraries. Open a terminal window in the directory
+where you want to work.</p>
+<p>Create a minimal environment with only Python installed in it.</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">name_of_my_env</span> <span class="n">python</span><span class="o">=</span><span class="mi">3</span>
 </pre></div>
 </div>
-<p>This will create a minimal environment with only Python installed in it. To put
-yourself inside this environment run:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">name_of_my_env</span>
 </pre></div>
 </div>
-<p>On Windows the command is:</p>
+<p>Or, if you’re using Windows, use the following command.</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">activate</span> <span class="n">name_of_my_env</span>
 </pre></div>
 </div>
-<p>The final step required is to install Qiskit with the following command:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span>
+<p>Next, install the Qiskit package, which includes Terra, Aer, and Ignis.
+Then, install Qiskit Aqua.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span>
 </pre></div>
 </div>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span>
+</pre></div>
+</div>
+<p>If the packages installed correctly, you can run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> to see the active
+packages in your virtual environment.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">During installation, you might see the warning message
+<code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">build</span> <span class="pre">qiskit</span></code>. This is a non-fatal error that does not affect
+installation.</p>
+</div>
 <p>There are optional dependencies that are required to use all the visualization
-functions available in Qiskit. You can install Qiskit along with these optional
-dependencies by running</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="p">[</span><span class="n">visualization</span><span class="p">]</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span>
+functions available in Qiskit. You can install these optional
+dependencies by with the following command</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">terra</span><span class="p">[</span><span class="n">visualization</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>After you’ve installed and verified the Qiskit packages you want to use, import
+them into your environment with Python to begin working.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiskit</span>
 </pre></div>
 </div>
 </div>
@@ -1410,7 +1426,7 @@ repository:</p>
 </ol>
 <p>For more information see:</p>
 <ul class="simple">
-<li><a class="reference internal" href="install/terra.html#install-terra-source"><span class="std std-ref">Installing Qiskit Terra from Source</span></a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-terra/blob/master/.github/CONTRIBUTING.rst">Qiskit Terra</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-aer/blob/master/.github/CONTRIBUTING.md">Qiskit Aer</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-ignis/blob/master/.github/CONTRIBUTING.md">Qiskit Ignis</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-aqua/blob/master/.github/CONTRIBUTING.rst">Qiskit Aqua</a></li>
