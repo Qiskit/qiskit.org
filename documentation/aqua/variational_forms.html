@@ -1364,22 +1364,23 @@ location in the file system.
 This is done in order to encourage researchers and
 developers interested in
 <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> to extend the Aqua framework with their novel research contributions.</p>
-<p>When a variational form is used at run time, the <code class="docutils literal notranslate"><span class="pre">init_args</span></code> method will be
+<p>When a variational form is used at run time, the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method will be
 called with parameters as per the schema. The number of qubits will also be supplied as the value of the parameter
-following <code class="docutils literal notranslate"><span class="pre">self</span></code> in the method argument list. During initialization, in <code class="docutils literal notranslate"><span class="pre">init_args</span></code>, the variational form should set the
+following <code class="docutils literal notranslate"><span class="pre">self</span></code> in the method argument list. During initialization, in <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, the variational form should set the
 number of parameters it has and their bounds, as in the following example:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_num_parameters</span> <span class="o">=</span> <span class="n">num_qubits</span> <span class="o">*</span> <span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">_bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_parameters</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>These values will later be used by the variational algorithm in conjunction with the optimizer.</p>
+<p>These values will later be used by the variational algorithm in conjunction with the optimizer.
+Note that the above example is correct when none of qubits are unentangled.</p>
 <p>The variational form can also
 indicate a <em>preferred initial point</em>.  This feature is particularly useful when there are reasons to believe that the
 solution point is close to a particular point, which can then be provided as the preferred initial point.  As an example,
 when building the dissociation profile of a molecule, it is likely that
 using the previous computed optimal solution as the starting initial point for the next interatomic distance is going
 to reduce the number of iterations necessary for the variational algorithm to converge.  Aqua provides
-<a class="reference external" href="https://github.com/Qiskit/aqua-tutorials/blob/master/chemistry/h2_vqe_initial_point.ipynb">a tutorial detailing this use case</a>.</p>
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/community/aqua/chemistry/h2_vqe_initial_point.ipynb">a tutorial detailing this use case</a>.</p>
 <p><a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a> can, therefore, take an optional initial point from the user
 as the value of the <code class="docutils literal notranslate"><span class="pre">initial_point</span></code> parameter, specified as a list of <code class="docutils literal notranslate"><span class="pre">float</span></code> values.
 The length of this list must match the number of the parameters expected by the variational form being used.
@@ -1398,10 +1399,9 @@ details on how to extend Aqua with new components.</p>
 <p class="topic-title first">Entangler Map Associated with a Variational Form</p>
 <p>A variational form is associated with an entangler map, which specifies the entanglement of the qubits.
 An entangler map can be envisioned (and that is also how it is implemented in Aqua)
-as a dictionary <span class="math notranslate nohighlight">\(D\)</span> such that each entry in the dictionary has a source qubit
-index as the key <span class="math notranslate nohighlight">\(k\)</span>, with the corresponding value <span class="math notranslate nohighlight">\(D(k) = v\)</span> being a list of target qubit indexes to which qubit
-<span class="math notranslate nohighlight">\(k\)</span> is entangled.  Indexes are non-negative integer values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q - 1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span>
-is the total number of qubits.  The following Python dictionary shows a possible entangler map: <code class="docutils literal notranslate"><span class="pre">{0:</span> <span class="pre">[1,</span> <span class="pre">2],</span> <span class="pre">1:</span> <span class="pre">[3]}</span></code>.</p>
+as a list such that each element in the list is a list where the first element is source qubit
+<span class="math notranslate nohighlight">\(k\)</span> and the second element is target qubit <span class="math notranslate nohighlight">\(l\)</span>.  Indexes are non-negative integer values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q - 1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span>
+is the total number of qubits.  The following Python list shows a possible entangler map: <code class="docutils literal notranslate"><span class="pre">[[0,</span> <span class="pre">1],</span> <span class="pre">[1,</span> <span class="pre">2],</span> <span class="pre">[0,</span> <span class="pre">3]]</span></code> for <span class="math notranslate nohighlight">\(q=4\)</span>.</p>
 </div>
 <p>Currently, Aqua supplies the following variational forms:</p>
 <ul class="simple">
@@ -1412,9 +1412,16 @@ is the total number of qubits.  The following Python dictionary shows a possible
 </ul>
 <div class="section" id="ry">
 <span id="id2"></span><h2>Ry<a class="headerlink" href="#ry" title="Permalink to this headline">¶</a></h2>
-<p>The Ry trial wave function is layers of <span class="math notranslate nohighlight">\(y\)</span> rotations with entanglements. The number of
-optimizer parameters this form creates and uses is given by <span class="math notranslate nohighlight">\(q \times (d + 1)\)</span>, where
-<span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits and <span class="math notranslate nohighlight">\(d\)</span> is the depth of the circuit.</p>
+<p>The Ry trial wave function is layers of <span class="math notranslate nohighlight">\(y\)</span> rotations with entanglements.
+When none of qubits are unentangled to other qubits, the number of optimizer parameters this form
+creates and uses is given by <span class="math notranslate nohighlight">\(q \times (d + 1)\)</span>, where
+<span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits and <span class="math notranslate nohighlight">\(d\)</span> is the depth of the circuit.
+Nonetheless, in some cases, if an <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> does not include all qubits, that is, some
+qubits are not entangled by other qubits. The number of parameters is reduced by <span class="math notranslate nohighlight">\(d \times q'
+\)</span> is the number of unentangled qubits.
+This is because adding more parameters to the unentangled qubits only introduce overhead without
+bring any benefit; furthermore, theroetically, applying multiple Ry gates in a row can be reduced
+to one Ry gate with the summed rotation angles.</p>
 <p>The following allows a specific form to be configured in the
 <code class="docutils literal notranslate"><span class="pre">variational_form</span></code> section of the Aqua
 <a class="reference internal" href="execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a> when the <code class="docutils literal notranslate"><span class="pre">name</span></code> field
@@ -1436,33 +1443,29 @@ With full entanglement, each qubit is entangled with all the others; with linear
 qubit <span class="math notranslate nohighlight">\(i\)</span> is entangled with qubit <span class="math notranslate nohighlight">\(i + 1\)</span>, for all
 <span class="math notranslate nohighlight">\(i \in \{0, 1, ... , q - 2\}\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.</p>
 </li>
-<li><p class="first">A dictionary of lists of non-negative <code class="docutils literal notranslate"><span class="pre">int</span></code> values specifying the entangler map:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="o">...</span> <span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
+<li><p class="first">A list of list of non-negative <code class="docutils literal notranslate"><span class="pre">int</span></code> values specifying the entangler map:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="o">...</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly
-specified as the value of the  <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
+specified as the value of the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
 from full or linear is desired.
-As explained more generally above, the form of the map is a dictionary; each entry in the
-dictionary has a source qubit
-index as the key, with the corresponding value being a list of target qubit indexes to which the
-source qubit should
-be entangled.
+As explained more generally above, the form of the map is a list; each element in the
+list is a pair of a source qubit and a target qubit index.
 Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of
 qubits,
 as in the following example:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.
-In other words, qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <cite>:math:D(i)</cite> of qubits mapped to qubit
-<span class="math notranslate nohighlight">\(i\)</span> itself.</p>
+<p>The source qubit index is excluded from the target qubit index.
+In other words, qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be both source and target qubit indexes.</p>
 <p class="last">Furthermore, by default, if
-the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>, where
+the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that :math:[<cite>i, j</cite>], where
 <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it cannot also specify
-<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.
+:math:[<cite>j, i</cite>].  A run-time error will be generated if double entanglement is configured.
 This
 restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code>
 boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside the
@@ -1481,15 +1484,20 @@ a tool to execute experiments,
 Aqua is working at a higher, more abstract level.  In such cases, the number of qubits
 is computed internally at run time based on the particular experiment, and passed
 programmatically to
-the <code class="docutils literal notranslate"><span class="pre">init_args</span></code> initialization method of the <code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> object.
+the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> initialization method of the <code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> object.
 Manually configuring the entangler map, therefore,
 requires knowing the number of qubits <span class="math notranslate nohighlight">\(q\)</span>, since the qubit indexes allowed
 in the entangler map comfiguration can only take <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.
 Providing an entangler
 map with indexes outside of this range will generate a run-time error.  Therefore, caution
-should be used when
-manually configuring the entangler map.</p>
+should be used when manually configuring the entangler map.</p>
 </div>
+</li>
+<li><p class="first">The boolean value to skip applying gates on unentangled qubits:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">skip_unentangled_qubits</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>This default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>. If a given <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> does not entangle some qubits, this might imply that the users would like to keep as is. A use case is that users have another circuit works on that qubit and would like to keep intact without varying it/them.</p>
 </li>
 </ul>
 <div class="topic">
@@ -1502,13 +1510,19 @@ is <code class="docutils literal notranslate"><span class="pre">RY</span></code>
 <div class="section" id="ryrz">
 <span id="id3"></span><h2>RyRz<a class="headerlink" href="#ryrz" title="Permalink to this headline">¶</a></h2>
 <p>The RyRz trial wave function is layers of <span class="math notranslate nohighlight">\(y\)</span> plus <span class="math notranslate nohighlight">\(z\)</span> rotations with entanglements.
-The number of optimizer parameters this form
+When none of qubits are unentangled to other qubits, the number of optimizer parameters this form
 creates and uses is given by <span class="math notranslate nohighlight">\(q \times (d + 1) \times 2\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total
 number of qubits and <span class="math notranslate nohighlight">\(d\)</span> is the depth of the circuit.
-The parameters of RyRz can be configured after selecting <code class="docutils literal notranslate"><span class="pre">RYRZ</span></code> as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
+Nonetheless, in some cases, if an <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> does not include all qubits, that is, some
+qubits are not entangled by other qubits. The number of parameters is reduced by <span class="math notranslate nohighlight">\(d \times
+q' \times 2\)</span> where <span class="math notranslate nohighlight">\(q'\)</span> is the number of unentangled qubits.
+This is because adding more parameters to the unentangled qubits only introduce overhead without
+bring any benefit; furthermore, theroetically, applying multiple Ry and Rz gates in a row can be
+reduced to one Ry gate and one Rz gate with the summed rotation angles.</p>
+<p>The parameters of RyRz can be configured after selecting <code class="docutils literal notranslate"><span class="pre">RYRZ</span></code> as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
 field in the
 <code class="docutils literal notranslate"><span class="pre">variational_form</span></code> section of the Aqua <span class="xref std std-ref">input-file</span>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>,
-<code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, and <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> — the same
+<code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>, and <code class="docutils literal notranslate"><span class="pre">skip_unentangled_qubits</span></code> — the same
 as those of <a class="reference internal" href="#ry"><span class="std std-ref">Ry</span></a>.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
@@ -1736,15 +1750,21 @@ the <a class="reference internal" href="chemistry/qiskit_chemistry_translators.h
 <p>The parameters of SwapRz can be configured after selecting <code class="docutils literal notranslate"><span class="pre">SWAPRZ</span></code> as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
 field in the
 <code class="docutils literal notranslate"><span class="pre">variational_form</span></code> section of the Aqua
-<span class="xref std std-ref">aqua-input file</span>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>. <code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, and <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>
-— the same
-as those of <a class="reference internal" href="#ry"><span class="std std-ref">Ry</span></a>.</p>
+<span class="xref std std-ref">aqua-input file</span>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>. <code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">skip_unentangled_qubits</span></code> — the same as those of <a class="reference internal" href="#ry"><span class="std std-ref">Ry</span></a>.</p>
 <p>Based on the notation introduced above for the entangler map associated with a variational form,
+for the case of none of qubits are unentangled to other qubits,
 the number of optimizer parameters SwapRz creates and uses is given by
 <span class="math notranslate nohighlight">\(q + d \times \left(q + \sum_{k=0}^{q-1}|D(k)|\right)\)</span>, where <span class="math notranslate nohighlight">\(|D(k)|\)</span> denotes the
 <em>cardinality</em> of
 <span class="math notranslate nohighlight">\(D(k)\)</span> or, more precisely, the <em>length</em> of <span class="math notranslate nohighlight">\(D(k)\)</span> (since <span class="math notranslate nohighlight">\(D(k)\)</span> is not
-just a set, but a list).</p>
+just a set, but a list).
+Nonetheless, in some cases, if an <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> does not include all qubits, that is, some
+qubits are not entangled by other qubits. The number of parameters is reduced by <span class="math notranslate nohighlight">\(d \times q'
+\)</span> is the number of unentangled qubits.
+This is because adding more Rz gates to the unentangled qubits only introduce overhead without
+bring any benefit; furthermore, theroetically, applying multiple Rz gates in a row can be reduced
+to one Rz gate with the summed rotation angles.</p>
 <div class="topic">
 <p class="topic-title first">Particle Preservation</p>
 <p>Particle preservation plays an important role when computing the excited states of
