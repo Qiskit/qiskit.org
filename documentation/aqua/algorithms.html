@@ -1354,6 +1354,7 @@ of the quantum circuits modeling the specific problems.</p>
 <li><span class="xref std std-ref">Support Vector Machine Quantum Kernel (QSVM Kernel)</span></li>
 <li><span class="xref std std-ref">Support Vector Machine Variational (QSVM Variational)</span></li>
 <li><span class="xref std std-ref">HHL algorithm for solving linear systems (HHL)</span></li>
+<li><span class="xref std std-ref">Shor’s Factoring Algorithm</span></li>
 </ul>
 <p>Aqua includes  also some <a class="reference external" href="#classical-reference-algorithms">classical algorithms</a>
 for generating reference values. This feature of Aqua may be
@@ -1983,6 +1984,32 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
 <p>In Aqua, HHL supports the <code class="docutils literal notranslate"><span class="pre">linear_system</span></code> problem.</p>
+</div>
+</div>
+<div class="section" id="shor-s-factory-algorithm-shor">
+<span id="shor"></span><h3>Shor’s Factory Algorithm (Shor)<a class="headerlink" href="#shor-s-factory-algorithm-shor" title="Permalink to this headline">¶</a></h3>
+<p>Shor’s Factoring algorithm is one of the most well-known quantum algorithms.
+It takes advantage of <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a> circuits
+and finds the prime factors for input integer <span class="math notranslate nohighlight">\(N\)</span> in polynomial time.
+The Shor’s algorithm included in Aqua is adapted from
+<a class="reference external" href="https://github.com/ttlion/ShorAlgQiskit">this implementation</a>.</p>
+<p>The only input parameter is the number <code class="docutils literal notranslate"><span class="pre">N</span></code> that is to be factored,
+which is expected to be an odd integer greater than 2.
+Even though our implementation is general,
+its capability will be limited by the capacity of the simulator/hardware.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">For more details, please see <a class="reference external" href="https://github.com/ttlion/ShorAlgQiskit">this implementation</a>
+and <a class="reference external" href="https://arxiv.org/abs/quant-ph/0205095">this paper</a>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Shor’s algorithm declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
+Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">Shor</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In Aqua, Shor’s algorithm supports the <code class="docutils literal notranslate"><span class="pre">factoring</span></code> problem.</p>
 </div>
 </div>
 </div>
