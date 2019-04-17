@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.providers.builtinsimulators.qasm_simulator &#8212; Qiskit 0.7 documentation</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.providers.builtinsimulators.qasm_simulator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="c1"># pylint: disable=invalid-name</span>
+<span class="c1"># pylint: disable=arguments-differ</span>
+
+<span class="sd">&quot;&quot;&quot;Contains a (slow) python simulator.</span>
+
+<span class="sd">It simulates a qasm quantum circuit (an experiment) that has been compiled</span>
+<span class="sd">to run on the simulator. It is exponential in the number of qubits.</span>
+
+<span class="sd">The simulator is run using</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    QasmSimulatorPy().run(qobj)</span>
+
+<span class="sd">Where the input is a Qobj object and the output is a SimulatorsJob object, which can</span>
+<span class="sd">later be queried for the Result object. The result will contain a &#39;memory&#39; data</span>
+<span class="sd">field, which is a result of measurements for each shot.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log2</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
+<span class="kn">from</span> <span class="nn">qiskit.result</span> <span class="k">import</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseBackend</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.builtinsimulators.simulatorsjob</span> <span class="k">import</span> <span class="n">SimulatorsJob</span>
+<span class="kn">from</span> <span class="nn">._simulatorerror</span> <span class="k">import</span> <span class="n">SimulatorError</span>
+<span class="kn">from</span> <span class="nn">._simulatortools</span> <span class="k">import</span> <span class="n">single_gate_matrix</span>
+<span class="kn">from</span> <span class="nn">._simulatortools</span> <span class="k">import</span> <span class="n">cx_gate_matrix</span>
+<span class="kn">from</span> <span class="nn">._simulatortools</span> <span class="k">import</span> <span class="n">einsum_vecmul_index</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="QasmSimulatorPy"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.builtinsimulators.qasm_simulator.html#qiskit.providers.builtinsimulators.qasm_simulator.QasmSimulatorPy">[docs]</a><span class="k">class</span> <span class="nc">QasmSimulatorPy</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Python implementation of a qasm simulator.&quot;&quot;&quot;</span>
+
+    <span class="n">MAX_QUBITS_MEMORY</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">local_hardware_info</span><span class="p">()[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">16</span><span class="p">))</span>
+
+    <span class="n">DEFAULT_CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;backend_name&#39;</span><span class="p">:</span> <span class="s1">&#39;qasm_simulator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;backend_version&#39;</span><span class="p">:</span> <span class="s1">&#39;2.0.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;n_qubits&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">MAX_QUBITS_MEMORY</span><span class="p">),</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/Qiskit/qiskit-terra&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;conditional&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;open_pulse&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;max_shots&#39;</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A python simulator for qasm experiments&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u1(lambda) q { U(0,0,lambda) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u2(phi,lambda) q { U(pi/2,phi,lambda) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate u3(theta,phi,lambda) q { U(theta,phi,lambda) q; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate cx c,t { CX c,t; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate id a { U(0,0,0) a; }&#39;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">DEFAULT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;initial_statevector&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;chop_threshold&quot;</span><span class="p">:</span> <span class="mf">1e-15</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Class level variable to return the final state at the end of simulation</span>
+    <span class="c1"># This should be set to True for the statevector simulator</span>
+    <span class="n">SHOW_FINAL_STATE</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="p">(</span><span class="n">configuration</span> <span class="ow">or</span>
+                                        <span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">)),</span>
+                         <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
+
+        <span class="c1"># Define attributes in __init__.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_local_random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shots</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memory</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_OPTIONS</span><span class="p">[</span><span class="s2">&quot;initial_statevector&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_chop_threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_OPTIONS</span><span class="p">[</span><span class="s2">&quot;chop_threshold&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_config</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># TEMP</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_add_unitary_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply an arbitrary 1-qubit unitary matrix.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gate (matrix_like): a single qubit gate matrix</span>
+<span class="sd">            qubit (int): the qubit to apply gate to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Compute einsum index string for 1-qubit matrix multiplication</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">einsum_vecmul_index</span><span class="p">([</span><span class="n">qubit</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
+        <span class="c1"># Convert to complex rank-2 tensor</span>
+        <span class="n">gate_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="c1"># Apply matrix multiplication</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">gate_tensor</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">,</span>
+                                      <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">,</span>
+                                      <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_unitary_two</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply a two-qubit unitary matrix.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gate (matrix_like): a the two-qubit gate matrix</span>
+<span class="sd">            qubit0 (int): gate qubit-0</span>
+<span class="sd">            qubit1 (int): gate qubit-1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Compute einsum index string for 1-qubit matrix multiplication</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">einsum_vecmul_index</span><span class="p">([</span><span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
+        <span class="c1"># Convert to complex rank-4 tensor</span>
+        <span class="n">gate_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">),</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="c1"># Apply matrix multiplication</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">gate_tensor</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">,</span>
+                                      <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">,</span>
+                                      <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_measure_outcome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simulate the outcome of measurement of a qubit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qubit (int): the qubit to measure</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            tuple: pair (outcome, probability) where outcome is &#39;0&#39; or &#39;1&#39; and</span>
+<span class="sd">            probability is the probability of the returned outcome.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Axis for numpy.sum to compute probabilities</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">))</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">qubit</span><span class="p">)</span>
+        <span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">axis</span><span class="p">))</span>
+        <span class="c1"># Compute einsum index string for 1-qubit matrix multiplication</span>
+        <span class="n">random_number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">random_number</span> <span class="o">&lt;</span> <span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Else outcome was &#39;1&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_add_sample_measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measure_params</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate memory samples from current statevector.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            measure_params (list): List of (qubit, clbit) values for</span>
+<span class="sd">                                   measure instructions to sample.</span>
+<span class="sd">            num_samples (int): The number of memory samples to generate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A list of memory values in hex format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get unique qubits that are actually measured</span>
+        <span class="n">measured_qubits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">qubit</span> <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">measure_params</span><span class="p">]))</span>
+        <span class="n">num_measured</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">measured_qubits</span><span class="p">)</span>
+        <span class="c1"># Axis for numpy.sum to compute probabilities</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">measured_qubits</span><span class="p">):</span>
+            <span class="c1"># Remove from largest qubit to smallest so list position is correct</span>
+            <span class="c1"># with respect to position from end of the list</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">qubit</span><span class="p">)</span>
+        <span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+                                          <span class="n">axis</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">axis</span><span class="p">)),</span>
+                                   <span class="mi">2</span> <span class="o">**</span> <span class="n">num_measured</span><span class="p">)</span>
+        <span class="c1"># Generate samples on measured qubits</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">num_measured</span><span class="p">),</span>
+                                            <span class="n">num_samples</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">probabilities</span><span class="p">)</span>
+        <span class="c1"># Convert to bit-strings</span>
+        <span class="n">memory</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">:</span>
+            <span class="n">classical_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span>
+            <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">measure_params</span><span class="p">)):</span>
+                <span class="n">qubit_outcome</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">sample</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">count</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="n">count</span><span class="p">)</span>
+                <span class="n">bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">cbit</span>
+                <span class="n">classical_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">classical_state</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">bit</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="n">qubit_outcome</span> <span class="o">&lt;&lt;</span> <span class="n">cbit</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">classical_state</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="n">memory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">memory</span>
+
+    <span class="k">def</span> <span class="nf">_add_qasm_measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply a measure instruction to a qubit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qubit (int): qubit is the qubit measured.</span>
+<span class="sd">            cbit (int): is the classical bit to store outcome in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># get measure outcome</span>
+        <span class="n">outcome</span><span class="p">,</span> <span class="n">probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_measure_outcome</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+        <span class="c1"># update classical state</span>
+        <span class="n">bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">cbit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">bit</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">outcome</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">cbit</span><span class="p">)</span>
+        <span class="c1"># update quantum state</span>
+        <span class="k">if</span> <span class="n">outcome</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="n">update_diag</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probability</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">update_diag</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probability</span><span class="p">)]]</span>
+        <span class="c1"># update classical state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_single</span><span class="p">(</span><span class="n">update_diag</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_qasm_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply a reset instruction to a qubit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qubit (int): the qubit being rest</span>
+
+<span class="sd">        This is done by doing a simulating a measurement</span>
+<span class="sd">        outcome and projecting onto the outcome state while</span>
+<span class="sd">        renormalizing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># get measure outcome</span>
+        <span class="n">outcome</span><span class="p">,</span> <span class="n">probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_measure_outcome</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+        <span class="c1"># update quantum state</span>
+        <span class="k">if</span> <span class="n">outcome</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="n">update</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probability</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_single</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">update</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probability</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_single</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate_initial_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Validate an initial statevector&quot;&quot;&quot;</span>
+        <span class="c1"># If initial statevector isn&#39;t set we don&#39;t need to validate</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="c1"># Check statevector is correct length for number of qubits</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span><span class="p">)</span>
+        <span class="n">required_dim</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">!=</span> <span class="n">required_dim</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="s1">&#39;initial statevector is incorrect length: &#39;</span> <span class="o">+</span>
+                                 <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> != </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">required_dim</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the backend options for all experiments in a qobj&quot;&quot;&quot;</span>
+        <span class="c1"># Reset default options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_OPTIONS</span><span class="p">[</span><span class="s2">&quot;initial_statevector&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_chop_threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_OPTIONS</span><span class="p">[</span><span class="s2">&quot;chop_threshold&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">backend_options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">backend_options</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Check for custom initial statevector in backend_options first,</span>
+        <span class="c1"># then config second</span>
+        <span class="k">if</span> <span class="s1">&#39;initial_statevector&#39;</span> <span class="ow">in</span> <span class="n">backend_options</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">backend_options</span><span class="p">[</span><span class="s1">&#39;initial_statevector&#39;</span><span class="p">],</span>
+                                                 <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">qobj_config</span><span class="p">,</span> <span class="s1">&#39;initial_statevector&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qobj_config</span><span class="o">.</span><span class="n">initial_statevector</span><span class="p">,</span>
+                                                 <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Check the initial statevector is normalized</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">round</span><span class="p">(</span><span class="n">norm</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="s1">&#39;initial statevector is not normalized: &#39;</span> <span class="o">+</span>
+                                     <span class="s1">&#39;norm </span><span class="si">{}</span><span class="s1"> != 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">norm</span><span class="p">))</span>
+        <span class="c1"># Check for custom chop threshold</span>
+        <span class="c1"># Replace with custom options</span>
+        <span class="k">if</span> <span class="s1">&#39;chop_threshold&#39;</span> <span class="ow">in</span> <span class="n">backend_options</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_chop_threshold</span> <span class="o">=</span> <span class="n">backend_options</span><span class="p">[</span><span class="s1">&#39;chop_threshold&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">qobj_config</span><span class="p">,</span> <span class="s1">&#39;chop_threshold&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_chop_threshold</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">chop_threshold</span>
+
+    <span class="k">def</span> <span class="nf">_initialize_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the initial statevector for simulation&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Set to default state of all qubits in |0&gt;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">,</span>
+                                         <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_statevector</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Reshape to rank-N tensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the current statevector in JSON Result spec format&quot;&quot;&quot;</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
+        <span class="c1"># Expand complex numbers</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">vec</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">vec</span><span class="o">.</span><span class="n">imag</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Truncate small values</span>
+        <span class="n">vec</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chop_threshold</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">vec</span>
+
+    <span class="k">def</span> <span class="nf">_validate_measure_sampling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determine if measure sampling is allowed for an experiment</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            experiment (QobjExperiment): a qobj experiment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Check for config flag</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;allows_measure_sampling&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">allows_measure_sampling</span>
+        <span class="c1"># If flag isn&#39;t found do a simple test to see if a circuit contains</span>
+        <span class="c1"># no reset instructions, and no gates instructions after</span>
+        <span class="c1"># the first measure.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">measure_flag</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
+                <span class="c1"># If circuit contains reset operations we cannot sample</span>
+                <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;reset&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">return</span>
+                <span class="c1"># If circuit contains a measure option then we can</span>
+                <span class="c1"># sample only if all following operations are measures</span>
+                <span class="k">if</span> <span class="n">measure_flag</span><span class="p">:</span>
+                    <span class="c1"># If we find a non-measure instruction</span>
+                    <span class="c1"># we cannot do measure sampling</span>
+                    <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;u0&quot;</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">return</span>
+                <span class="k">elif</span> <span class="n">instruction</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;measure&quot;</span><span class="p">:</span>
+                    <span class="n">measure_flag</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1"># If we made it to the end of the circuit without returning</span>
+            <span class="c1"># measure sampling is allowed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="QasmSimulatorPy.run"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.builtinsimulators.qasm_simulator.html#qiskit.providers.builtinsimulators.qasm_simulator.QasmSimulatorPy.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run qobj asynchronously.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qobj (Qobj): payload of the experiment</span>
+<span class="sd">            backend_options (dict): backend options</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            SimulatorsJob: derived from BaseJob</span>
+
+<span class="sd">        Additional Information:</span>
+<span class="sd">            backend_options: Is a dict of options for the backend. It may contain</span>
+<span class="sd">                * &quot;initial_statevector&quot;: vector_like</span>
+
+<span class="sd">            The &quot;initial_statevector&quot; option specifies a custom initial</span>
+<span class="sd">            initial statevector for the simulator to be used instead of the all</span>
+<span class="sd">            zero state. This size of this vector must be correct for the number</span>
+<span class="sd">            of qubits in all experiments in the qobj.</span>
+
+<span class="sd">            Example::</span>
+
+<span class="sd">                backend_options = {</span>
+<span class="sd">                    &quot;initial_statevector&quot;: np.array([1, 0, 0, 1j]) / np.sqrt(2),</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_options</span><span class="p">(</span><span class="n">qobj_config</span><span class="o">=</span><span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="p">,</span>
+                          <span class="n">backend_options</span><span class="o">=</span><span class="n">backend_options</span><span class="p">)</span>
+        <span class="n">job_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="n">job</span> <span class="o">=</span> <span class="n">SimulatorsJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_job</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span>
+        <span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">job</span></div>
+
+    <span class="k">def</span> <span class="nf">_run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run experiments in qobj</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): unique id for the job.</span>
+<span class="sd">            qobj (Qobj): job description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result: Result object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shots</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">shots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memory</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_config</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">config</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">:</span>
+            <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;backend_name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
+                  <span class="s1">&#39;backend_version&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="o">.</span><span class="n">backend_version</span><span class="p">,</span>
+                  <span class="s1">&#39;qobj_id&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="o">.</span><span class="n">qobj_id</span><span class="p">,</span>
+                  <span class="s1">&#39;job_id&#39;</span><span class="p">:</span> <span class="n">job_id</span><span class="p">,</span>
+                  <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="n">result_list</span><span class="p">,</span>
+                  <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                  <span class="s1">&#39;time_taken&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span>
+                  <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()}</span>
+
+        <span class="k">return</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QasmSimulatorPy.run_experiment"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.builtinsimulators.qasm_simulator.html#qiskit.providers.builtinsimulators.qasm_simulator.QasmSimulatorPy.run_experiment">[docs]</a>    <span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run an experiment (circuit) and return a single experiment result.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            experiment (QobjExperiment): experiment from qobj experiments list</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">             dict: A result dictionary which looks something like::</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &quot;name&quot;: name of this experiment (obtained from qobj.experiment header)</span>
+<span class="sd">                &quot;seed&quot;: random seed used for simulation</span>
+<span class="sd">                &quot;shots&quot;: number of shots used in the simulation</span>
+<span class="sd">                &quot;data&quot;:</span>
+<span class="sd">                    {</span>
+<span class="sd">                    &quot;counts&quot;: {&#39;0x9: 5, ...},</span>
+<span class="sd">                    &quot;memory&quot;: [&#39;0x9&#39;, &#39;0xF&#39;, &#39;0x1D&#39;, ..., &#39;0x9&#39;]</span>
+<span class="sd">                    },</span>
+<span class="sd">                &quot;status&quot;: status string for the simulation</span>
+<span class="sd">                &quot;success&quot;: boolean</span>
+<span class="sd">                &quot;time_taken&quot;: simulation time of this single experiment</span>
+<span class="sd">                }</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            SimulatorError: if an error occurred.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statevector</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># Validate the dimension of initial statevector if set</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_initial_statevector</span><span class="p">()</span>
+        <span class="c1"># Get the seed looking in circuit, qobj, and then random.</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">):</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj_config</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">):</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_config</span><span class="o">.</span><span class="n">seed</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># For compatibility on Windows force dyte to be int32</span>
+            <span class="c1"># and set the maximum value to be (2 ** 31) - 1</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2147483647</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_local_random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="c1"># Check if measure sampling is supported for current circuit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_measure_sampling</span><span class="p">(</span><span class="n">experiment</span><span class="p">)</span>
+
+        <span class="c1"># List of final counts for all shots</span>
+        <span class="n">memory</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Check if we can sample measurements, if so we only perform 1 shot</span>
+        <span class="c1"># and sample all outcomes from the final state vector</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span><span class="p">:</span>
+            <span class="n">shots</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="c1"># Store (qubit, cbit) pairs for all measure ops in circuit to</span>
+            <span class="c1"># be sampled</span>
+            <span class="n">measure_sample_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shots</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shots</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_statevector</span><span class="p">()</span>
+            <span class="c1"># Initialize classical memory to all 0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="s1">&#39;conditional&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+                    <span class="n">mask</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">conditional</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">mask</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span> <span class="o">&amp;</span> <span class="n">mask</span>
+                        <span class="k">while</span> <span class="p">(</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">mask</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+                            <span class="n">value</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">conditional</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+                            <span class="k">continue</span>
+                <span class="c1"># Check if single  gate</span>
+                <span class="k">if</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">):</span>
+                    <span class="n">params</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="n">qubit</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">gate</span> <span class="o">=</span> <span class="n">single_gate_matrix</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_single</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+                <span class="c1"># Check if CX gate</span>
+                <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;u0&#39;</span><span class="p">):</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;CX&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">):</span>
+                    <span class="n">qubit0</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">qubit1</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">gate</span> <span class="o">=</span> <span class="n">cx_gate_matrix</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_two</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">)</span>
+                <span class="c1"># Check if reset</span>
+                <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;reset&#39;</span><span class="p">:</span>
+                    <span class="n">qubit</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_qasm_reset</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                <span class="c1"># Check if barrier</span>
+                <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;barrier&#39;</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="c1"># Check if measure</span>
+                <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;measure&#39;</span><span class="p">:</span>
+                    <span class="n">qubit</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">cbit</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">memory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span><span class="p">:</span>
+                        <span class="c1"># If sampling measurements record the qubit and cbit</span>
+                        <span class="c1"># for this measurement for later sampling</span>
+                        <span class="n">measure_sample_ops</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># If not sampling perform measurement as normal</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_add_qasm_measure</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> encountered unrecognized operation &quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+                    <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="n">err_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+            <span class="c1"># Add final creg data to memory list</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_cbits</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_measure</span><span class="p">:</span>
+                    <span class="c1"># If sampling we generate all shot samples from the final statevector</span>
+                    <span class="n">memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_sample_measure</span><span class="p">(</span><span class="n">measure_sample_ops</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shots</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Turn classical_state (int) into bit string and pad zero for unused cbits</span>
+                    <span class="n">outcome</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classical_state</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+                    <span class="n">memory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">outcome</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+
+        <span class="c1"># Add data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;counts&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">memory</span><span class="p">))}</span>
+        <span class="c1"># Optionally add memory list</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">memory</span>
+        <span class="c1"># Optionally add final statevector</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">SHOW_FINAL_STATE</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;statevector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_statevector</span><span class="p">()</span>
+            <span class="c1"># Remove empty counts and memory for statevector simulator</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;counts&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;memory&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;memory&#39;</span><span class="p">]:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;memory&#39;</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
+                <span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shots</span><span class="p">,</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;DONE&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;time_taken&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span>
+                <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()}</span></div>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Semantic validations of the qobj which cannot be done via schemas.&quot;&quot;&quot;</span>
+        <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
+        <span class="n">max_qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span>
+        <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="n">max_qubits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SimulatorError</span><span class="p">(</span><span class="s1">&#39;Number of qubits </span><span class="si">{}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span> <span class="o">+</span>
+                                 <span class="s1">&#39;is greater than maximum (</span><span class="si">{}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_qubits</span><span class="p">)</span> <span class="o">+</span>
+                                 <span class="s1">&#39;for &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+        <span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No classical registers in circuit &quot;</span><span class="si">%s</span><span class="s1">&quot;, &#39;</span> <span class="o">+</span>
+                               <span class="s1">&#39;counts will be empty.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;measure&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No measurements in circuit &quot;</span><span class="si">%s</span><span class="s1">&quot;, &#39;</span> <span class="o">+</span>
+                               <span class="s1">&#39;classical register will remain all zeros.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>
