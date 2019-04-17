@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit_aqua.algorithms.adaptive.vqe.vqe &#8212; Qiskit 0.7 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit_aqua.algorithms.adaptive.vqe.vqe</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2018 IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># =============================================================================</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The Variational Quantum Eigensolver algorithm.</span>
+<span class="sd">See https://arxiv.org/abs/1304.3061</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+
+<span class="kn">from</span> <span class="nn">qiskit_aqua.algorithms</span> <span class="k">import</span> <span class="n">QuantumAlgorithm</span>
+<span class="kn">from</span> <span class="nn">qiskit_aqua</span> <span class="k">import</span> <span class="n">AquaError</span><span class="p">,</span> <span class="n">PluggableType</span><span class="p">,</span> <span class="n">get_pluggable_class</span>
+<span class="kn">from</span> <span class="nn">qiskit_aqua.utils</span> <span class="k">import</span> <span class="n">find_regs_by_name</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="VQE"><a class="viewcode-back" href="../../../../../autodoc/qiskit_aqua.algorithms.adaptive.vqe.vqe.html#qiskit_aqua.algorithms.VQE">[docs]</a><span class="k">class</span> <span class="nc">VQE</span><span class="p">(</span><span class="n">QuantumAlgorithm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Variational Quantum Eigensolver algorithm.</span>
+
+<span class="sd">    See https://arxiv.org/abs/1304.3061</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;VQE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;VQE Algorithm&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;input_schema&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;$schema&#39;</span><span class="p">:</span> <span class="s1">&#39;http://json-schema.org/schema#&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;vqe_schema&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;operator_mode&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;matrix&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;oneOf&#39;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span><span class="s1">&#39;enum&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;paulis&#39;</span><span class="p">,</span> <span class="s1">&#39;grouped_paulis&#39;</span><span class="p">]}</span>
+                    <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;initial_point&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;batch_mode&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">False</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;additionalProperties&#39;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;problems&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;ising&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;depends&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;optimizer&#39;</span><span class="p">,</span> <span class="s1">&#39;variational_form&#39;</span><span class="p">,</span> <span class="s1">&#39;initial_state&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;defaults&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;optimizer&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;L_BFGS_B&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;variational_form&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;RYRZ&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;initial_state&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ZERO&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">var_form</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">operator_mode</span><span class="o">=</span><span class="s1">&#39;matrix&#39;</span><span class="p">,</span>
+                 <span class="n">initial_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">aux_operators</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            operator (Operator): Qubit operator</span>
+<span class="sd">            operator_mode (str): operator mode, used for eval of operator</span>
+<span class="sd">            var_form (VariationalForm) : parametrized variational form.</span>
+<span class="sd">            optimizer (Optimizer) : the classical optimization algorithm.</span>
+<span class="sd">            initial_point (numpy.ndarray) : optimizer initial point.</span>
+<span class="sd">            aux_operators ([Operator]): Auxiliary operators to be evaluated at each eigenvalue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span> <span class="o">=</span> <span class="n">operator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span> <span class="o">=</span> <span class="n">var_form</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span> <span class="o">=</span> <span class="n">operator_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_point</span> <span class="o">=</span> <span class="n">initial_point</span>
+        <span class="k">if</span> <span class="n">initial_point</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initial_point</span> <span class="o">=</span> <span class="n">var_form</span><span class="o">.</span><span class="n">preferred_init_points</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">set_batch_mode</span><span class="p">(</span><span class="n">batch_mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">aux_operators</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_aux_operators</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_aux_operators</span> <span class="o">=</span> <span class="p">[</span><span class="n">aux_operators</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">aux_operators</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">aux_operators</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">print_setting</span><span class="p">())</span>
+
+<div class="viewcode-block" id="VQE.init_params"><a class="viewcode-back" href="../../../../../autodoc/qiskit_aqua.algorithms.adaptive.vqe.vqe.html#qiskit_aqua.algorithms.VQE.init_params">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">init_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">algo_input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize via parameters dictionary and algorithm input instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            params (dict): parameters dictionary</span>
+<span class="sd">            algo_input (EnergyInput): EnergyInput instance</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            VQE: vqe object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">algo_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s2">&quot;EnergyInput instance is required.&quot;</span><span class="p">)</span>
+
+        <span class="n">operator</span> <span class="o">=</span> <span class="n">algo_input</span><span class="o">.</span><span class="n">qubit_op</span>
+
+        <span class="n">vqe_params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">QuantumAlgorithm</span><span class="o">.</span><span class="n">SECTION_KEY_ALGORITHM</span><span class="p">)</span>
+        <span class="n">operator_mode</span> <span class="o">=</span> <span class="n">vqe_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;operator_mode&#39;</span><span class="p">)</span>
+        <span class="n">initial_point</span> <span class="o">=</span> <span class="n">vqe_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;initial_point&#39;</span><span class="p">)</span>
+        <span class="n">batch_mode</span> <span class="o">=</span> <span class="n">vqe_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;batch_mode&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Set up initial state, we need to add computed num qubits to params</span>
+        <span class="n">init_state_params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">QuantumAlgorithm</span><span class="o">.</span><span class="n">SECTION_KEY_INITIAL_STATE</span><span class="p">)</span>
+        <span class="n">init_state_params</span><span class="p">[</span><span class="s1">&#39;num_qubits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">num_qubits</span>
+        <span class="n">init_state</span> <span class="o">=</span> <span class="n">get_pluggable_class</span><span class="p">(</span><span class="n">PluggableType</span><span class="o">.</span><span class="n">INITIAL_STATE</span><span class="p">,</span>
+                                         <span class="n">init_state_params</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">init_params</span><span class="p">(</span><span class="n">init_state_params</span><span class="p">)</span>
+
+        <span class="c1"># Set up variational form, we need to add computed num qubits, and initial state to params</span>
+        <span class="n">var_form_params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">QuantumAlgorithm</span><span class="o">.</span><span class="n">SECTION_KEY_VAR_FORM</span><span class="p">)</span>
+        <span class="n">var_form_params</span><span class="p">[</span><span class="s1">&#39;num_qubits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">num_qubits</span>
+        <span class="n">var_form_params</span><span class="p">[</span><span class="s1">&#39;initial_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">init_state</span>
+        <span class="n">var_form</span> <span class="o">=</span> <span class="n">get_pluggable_class</span><span class="p">(</span><span class="n">PluggableType</span><span class="o">.</span><span class="n">VARIATIONAL_FORM</span><span class="p">,</span>
+                                       <span class="n">var_form_params</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">init_params</span><span class="p">(</span><span class="n">var_form_params</span><span class="p">)</span>
+
+        <span class="c1"># Set up optimizer</span>
+        <span class="n">opt_params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">QuantumAlgorithm</span><span class="o">.</span><span class="n">SECTION_KEY_OPTIMIZER</span><span class="p">)</span>
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">get_pluggable_class</span><span class="p">(</span><span class="n">PluggableType</span><span class="o">.</span><span class="n">OPTIMIZER</span><span class="p">,</span>
+                                        <span class="n">opt_params</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">init_params</span><span class="p">(</span><span class="n">opt_params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">var_form</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">operator_mode</span><span class="o">=</span><span class="n">operator_mode</span><span class="p">,</span>
+                   <span class="n">initial_point</span><span class="o">=</span><span class="n">initial_point</span><span class="p">,</span> <span class="n">batch_mode</span><span class="o">=</span><span class="n">batch_mode</span><span class="p">,</span>
+                   <span class="n">aux_operators</span><span class="o">=</span><span class="n">algo_input</span><span class="o">.</span><span class="n">aux_ops</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">setting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Prepare the setting of VQE as a string.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;Algorithm: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;_configuration&quot;</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;_&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;initial_point&quot;</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">params</span> <span class="o">+=</span> <span class="s2">&quot;-- </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s2">&quot;Random seed&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">params</span> <span class="o">+=</span> <span class="s2">&quot;-- </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+<div class="viewcode-block" id="VQE.print_setting"><a class="viewcode-back" href="../../../../../autodoc/qiskit_aqua.algorithms.adaptive.vqe.vqe.html#qiskit_aqua.algorithms.VQE.print_setting">[docs]</a>    <span class="k">def</span> <span class="nf">print_setting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Preparing the setting of VQE into a string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: the formatted setting of VQE</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;==================== Setting of </span><span class="si">{}</span><span class="s2"> ============================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setting</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;===============================================================</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">setting</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;===============================================================</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">setting</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;===============================================================</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="VQE.construct_circuit"><a class="viewcode-back" href="../../../../../autodoc/qiskit_aqua.algorithms.adaptive.vqe.vqe.html#qiskit_aqua.algorithms.VQE.construct_circuit">[docs]</a>    <span class="k">def</span> <span class="nf">construct_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate the circuits.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parameters (numpy.ndarray): parameters for variational form.</span>
+<span class="sd">            backend (BaseBackend): backend object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [QuantumCircuit]: the generated circuits with Hamiltonian.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">construct_circuit</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warning_msg</span> <span class="o">=</span> <span class="s2">&quot;Circuits used in VQE depends on the backend type, &quot;</span>
+            <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">BasicAer</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span> <span class="o">==</span> <span class="s1">&#39;matrix&#39;</span><span class="p">:</span>
+                <span class="n">temp_backend_name</span> <span class="o">=</span> <span class="s1">&#39;statevector_simulator&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">temp_backend_name</span> <span class="o">=</span> <span class="s1">&#39;qasm_simulator&#39;</span>
+            <span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">temp_backend_name</span><span class="p">)</span>
+            <span class="n">warning_msg</span> <span class="o">+=</span> <span class="s2">&quot;since operator_mode is &#39;</span><span class="si">{}</span><span class="s2">&#39;, &#39;</span><span class="si">{}</span><span class="s2">&#39; backend is used.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span><span class="p">,</span> <span class="n">temp_backend_name</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">warning_msg</span><span class="p">)</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="o">.</span><span class="n">construct_evaluation_circuit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span><span class="p">,</span>
+                                                              <span class="n">input_circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">circuit</span></div>
+
+    <span class="k">def</span> <span class="nf">_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">opt_params</span><span class="p">,</span> <span class="n">opt_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_minimum_eigenvalue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;eigvals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">opt_val</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;opt_params&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt_params</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">construct_circuit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;opt_params&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">is_statevector</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;eigvecs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">ret</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">16</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">find_regs_by_name</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;eigvecs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">ret</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="nf">_get_ground_state_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;eigvals&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_solve</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;eigvals&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_eval_aux_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;opt_params&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_ground_state_energy</span><span class="p">()</span>
+        <span class="n">wavefn_circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">construct_circuit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;opt_params&#39;</span><span class="p">])</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aux_operators</span><span class="p">:</span>
+            <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">operator</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+                <span class="n">circuit</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">construct_evaluation_circuit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span><span class="p">,</span>
+                                                                <span class="n">wavefn_circuit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+                <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">evaluate_with_result</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span><span class="p">,</span>
+                                                          <span class="n">circuit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+                <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="n">real</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mean</span><span class="o">.</span><span class="n">real</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="k">else</span> <span class="mf">0.0</span>
+                <span class="n">std</span> <span class="o">=</span> <span class="n">std</span><span class="o">.</span><span class="n">real</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">std</span><span class="o">.</span><span class="n">real</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="k">else</span> <span class="mf">0.0</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">aux_op_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_aux_operators</span><span class="p">),</span> <span class="mi">2</span><span class="p">])</span>
+            <span class="n">aux_op_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;aux_ops&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aux_op_vals</span>
+
+    <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run the algorithm to compute the minimum eigenvalue.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary of results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">is_statevector</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span> <span class="o">==</span> <span class="s1">&#39;matrix&#39;</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Qasm simulation does not work on </span><span class="si">{}</span><span class="s1"> mode, changing &#39;</span>
+                           <span class="s1">&#39;the operator_mode to &quot;paulis&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span> <span class="o">=</span> <span class="s1">&#39;paulis&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">circuit_summary</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solve</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_ground_state_energy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_aux_ops</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;eval_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span><span class="p">[</span><span class="s1">&#39;eval_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_time</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ret</span>
+
+    <span class="c1"># This is the objective function to be passed to the optimizer that is uses for evaluation</span>
+    <span class="k">def</span> <span class="nf">_energy_evaluation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate energy at given parameters for the variational form.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parameters (numpy.ndarray): parameters for variational form.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float or [float]: energy of the hamiltonian of each parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num_parameter_sets</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">num_parameters</span>
+        <span class="n">circuits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">parameter_sets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">num_parameter_sets</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">parameter_sets</span><span class="p">)):</span>
+            <span class="n">parameter</span> <span class="o">=</span> <span class="n">parameter_sets</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct_circuit</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
+            <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+
+        <span class="n">to_be_simulated_circuits</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">circuits</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">to_be_simulated_circuits</span><span class="p">)</span>
+        <span class="n">mean_energy</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">std_energy</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">parameter_sets</span><span class="p">)):</span>
+            <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="o">.</span><span class="n">evaluate_with_result</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_operator_mode</span><span class="p">,</span> <span class="n">circuits</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantum_instance</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+            <span class="n">mean_energy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mean</span><span class="p">))</span>
+            <span class="n">std_energy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">std</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Energy evaluation </span><span class="si">{}</span><span class="s1"> returned </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mean</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="n">mean_energy</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mean_energy</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">mean_energy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="VQE.find_minimum_eigenvalue"><a class="viewcode-back" href="../../../../../autodoc/qiskit_aqua.algorithms.adaptive.vqe.vqe.html#qiskit_aqua.algorithms.VQE.find_minimum_eigenvalue">[docs]</a>    <span class="k">def</span> <span class="nf">find_minimum_eigenvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_point</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determine minimum energy state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            initial_point (numpy.ndarray[float]) : initial point, or None</span>
+<span class="sd">                if not provided.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optimized variational parameters, and corresponding minimum eigenvalue.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">initial_point</span> <span class="o">=</span> <span class="n">initial_point</span> <span class="k">if</span> <span class="n">initial_point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_point</span>
+
+        <span class="n">nparms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">num_parameters</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">parameter_bounds</span>
+
+        <span class="k">if</span> <span class="n">initial_point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_point</span><span class="p">)</span> <span class="o">!=</span> <span class="n">nparms</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Initial point size </span><span class="si">{}</span><span class="s1"> and parameter size </span><span class="si">{}</span><span class="s1"> mismatch&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">initial_point</span><span class="p">),</span> <span class="n">nparms</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span> <span class="o">!=</span> <span class="n">nparms</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Variational form bounds size does not match parameter size&#39;</span><span class="p">)</span>
+        <span class="c1"># If *any* value is *equal* in bounds array to None then the problem does *not* have bounds</span>
+        <span class="n">problem_has_bounds</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="c1"># Check capabilities of the optimizer</span>
+        <span class="k">if</span> <span class="n">problem_has_bounds</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">is_bounds_supported</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Problem has bounds but optimizer does not support bounds&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">is_bounds_required</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Problem does not have bounds but optimizer requires bounds&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">initial_point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">is_initial_point_supported</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Optimizer does not support initial point&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">is_initial_point_required</span><span class="p">:</span>
+                <span class="n">low</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span> <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">]</span>
+                <span class="n">high</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">]</span>
+                <span class="n">initial_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Starting optimizer bounds=</span><span class="si">{}</span><span class="se">\n</span><span class="s1">initial point=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">initial_point</span><span class="p">))</span>
+        <span class="n">sol</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">nfev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_var_form</span><span class="o">.</span><span class="n">num_parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_energy_evaluation</span><span class="p">,</span>
+                                                  <span class="n">variable_bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">initial_point</span><span class="o">=</span><span class="n">initial_point</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nfev</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span> <span class="o">&gt;=</span> <span class="n">nfev</span> <span class="k">else</span> <span class="n">nfev</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Optimization complete in </span><span class="si">{}</span><span class="s1">s found </span><span class="si">{}</span><span class="s1"> num evals </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eval_time</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_count</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">sol</span><span class="p">,</span> <span class="n">opt</span></div></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>
