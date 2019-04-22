@@ -359,6 +359,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Oracles</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#logical-expression-oracle">Logical Expression Oracle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#truth-table-oracle">Truth Table Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-circuit-oracle">Custom Circuit Oracle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
@@ -1000,6 +1001,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Oracles</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#logical-expression-oracle">Logical Expression Oracle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#truth-table-oracle">Truth Table Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-circuit-oracle">Custom Circuit Oracle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
@@ -1342,6 +1344,7 @@ where the goal of the algorithm is to determine some property of <span class="ma
 <ul class="simple">
 <li><span class="xref std std-ref">Logic Expression Oracle</span></li>
 <li><span class="xref std std-ref">Truth Table Oracle</span></li>
+<li><span class="xref std std-ref">Custom Circuit Oracle</span></li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Extending the Oracle Library</p>
@@ -1556,6 +1559,23 @@ When omitted, it will default to <code class="docutils literal notranslate"><spa
 <p>When referring to the Truth Table Oracle declaratively inside Aqua,
 its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it, is
 <code class="docutils literal notranslate"><span class="pre">TruthTableOracle</span></code>.</p>
+</div>
+</div>
+<div class="section" id="custom-circuit-oracle">
+<span id="id4"></span><h2>Custom Circuit Oracle<a class="headerlink" href="#custom-circuit-oracle" title="Permalink to this headline">¶</a></h2>
+<p>This class is provided for easy creation of oracles using custom circuits.
+It is geared towards programmatically experimenting with oracles,
+where a user would directly provide a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object
+corresponding to the intended oracle function,
+together with the various <code class="docutils literal notranslate"><span class="pre">QuantumRegister</span></code> objects involved.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">variable_register</span> <span class="p">:</span> <span class="n">QuantumRegister</span> <span class="o">=</span> <span class="n">The</span> <span class="n">register</span> <span class="n">holding</span> <span class="n">the</span> <span class="n">variables</span>
+
+<span class="n">output_register</span> <span class="p">:</span> <span class="n">QuantumRegister</span> <span class="o">=</span> <span class="n">The</span> <span class="n">register</span> <span class="n">holding</span> <span class="n">the</span> <span class="n">output</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">ancillary_register</span> <span class="p">:</span> <span class="n">QuantumRegister</span> <span class="o">=</span> <span class="n">The</span> <span class="n">optional</span> <span class="n">register</span> <span class="n">holding</span> <span class="n">ancillae</span>
+
+<span class="n">circuit</span><span class="p">:</span> <span class="n">QuantumCircuit</span> <span class="o">=</span> <span class="n">The</span> <span class="n">actual</span> <span class="n">circuit</span> <span class="k">for</span> <span class="n">the</span> <span class="n">oracle</span> <span class="n">function</span>
+</pre></div>
 </div>
 </div>
 </div>
