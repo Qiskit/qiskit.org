@@ -1351,12 +1351,17 @@ for implementing various different quantum algorithms, such as Grover’s search
 quantum gates <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">cx</span></code>, <code class="docutils literal notranslate"><span class="pre">ccx</span></code>,&nbsp;… The first three are basic/well-known
 quantum gates. In Aqua, <code class="docutils literal notranslate"><span class="pre">mct</span></code> provides support for arbitrary
 numbers of controls, in particular, 3 or above.</p>
-<p>Currently three different implementation strategies are included: <em>basic</em>,
-<em>advanced</em>, and <em>noancilla</em>. The basic mode employs a textbook
+<p>Currently four different implementation strategies are included: <em>basic</em>,
+<em>basic-dirty-ancilla</em>, <em>advanced</em>, and <em>noancilla</em>.
+The basic mode employs a textbook
 implementation, where a series of <code class="docutils literal notranslate"><span class="pre">ccx</span></code> Toffoli gates are linked
 together in a <code class="docutils literal notranslate"><span class="pre">V</span></code> shape to achieve the desired Multiple-Control Toffoli
 operation. This mode requires <span class="math notranslate nohighlight">\(n-2\)</span> ancillary qubits, where
-<span class="math notranslate nohighlight">\(n\)</span> is the number of controls. For the advanced mode, the <code class="docutils literal notranslate"><span class="pre">cccx</span></code>
+<span class="math notranslate nohighlight">\(n\)</span> is the number of controls.
+The basic-dirty-ancilla mode is the same as the basic mode
+except that it allows using dirty ancillary qubits,
+whereas the basic mode requires clean ancillae.
+For the advanced mode, the <code class="docutils literal notranslate"><span class="pre">cccx</span></code>
 and <code class="docutils literal notranslate"><span class="pre">ccccx</span></code> operations are achieved without needing ancillary
 qubits. Multiple-Control Toffoli operations for higher
 number of controls (5 and above) are implemented recursively using these
@@ -1370,7 +1375,8 @@ basic gates for values above. This technique relies on <code class="docutils lit
 using the <code class="docutils literal notranslate"><span class="pre">mct</span></code> API, which expects a list <code class="docutils literal notranslate"><span class="pre">q_controls</span></code> of control qubits,
 a target qubit <code class="docutils literal notranslate"><span class="pre">q_target</span></code>, and a list <code class="docutils literal notranslate"><span class="pre">q_ancilla</span></code> of ancillary qubits.
 An optional keyword argument <code class="docutils literal notranslate"><span class="pre">mode</span></code> can also be passed in to indicate
-whether the <code class="docutils literal notranslate"><span class="pre">'basic'</span></code>, <code class="docutils literal notranslate"><span class="pre">'advanced'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'noancilla'</span></code> mode is chosen.
+whether the <code class="docutils literal notranslate"><span class="pre">'basic'</span></code>, <code class="docutils literal notranslate"><span class="pre">'basic-dirty-ancilla'</span></code>, <code class="docutils literal notranslate"><span class="pre">'advanced'</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">'noancilla'</span></code> mode is chosen.
 If omitted, this argument defaults to <code class="docutils literal notranslate"><span class="pre">'basic'</span></code>.</p>
 </div>
 <div class="topic" id="mcux">
