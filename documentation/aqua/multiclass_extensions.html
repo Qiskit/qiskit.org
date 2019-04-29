@@ -378,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#raw-feature-vector">Raw Feature Vector</a></li>
 </ul>
 </li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Multiclass Extensions</a><ul>
@@ -1029,6 +1030,7 @@
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#raw-feature-vector">Raw Feature Vector</a></li>
 </ul>
 </li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Multiclass Extensions</a><ul>
@@ -1355,12 +1357,12 @@
         
   <div class="section" id="multiclass-extension">
 <span id="multiclass-extensions"></span><h1>Multiclass Extension<a class="headerlink" href="#multiclass-extension" title="Permalink to this headline">¶</a></h1>
-<p>Both the Support Vector Machine Quantum Kernel (QSVM Kernel) and Support Vector Machine Quantum
-Variational (QSVM Variational) algorithms, as well as the
+<p>Both the Quantum Support Vector Machine (QSVM) and
+Variational Quantum Classifier (vqc) algorithms, as well as the
 Support Vector Machine Radial Basis Function Kernel (SVM RBF Kernel) classical algorithm
 integrated into Aqua for generation of reference values,
 come with built-in binary classifiers. Aqua includes
-the <code class="docutils literal notranslate"><span class="pre">MulticlassExtension</span></code> pluggable interface for QSVM Kernel and SVM RBF Kernel,
+the <code class="docutils literal notranslate"><span class="pre">MulticlassExtension</span></code> pluggable interface for QSVM and SVM RBF Kernel,
 allowing for various multiclass classification
 extension algorithms to be included.</p>
 <div class="topic">
@@ -1396,7 +1398,7 @@ highest  value  from  its  decision  function  is  selected  as  the
 winner and the corresponding class label is returned.</p>
 <p>In order to instantiate a <code class="docutils literal notranslate"><span class="pre">OneAgainstRest</span></code> object, you need to provide a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> and
 an <code class="docutils literal notranslate"><span class="pre">Estimator</span></code> object representing the binary classifier to be used.  The <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> is
-required only for the QSVM Kernel algorithm – not by the SVM RBF Kernel classical algorithm.</p>
+required only for the QSVM algorithm – not by the SVM RBF Kernel classical algorithm.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to the one-against-rest method declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by
@@ -1413,7 +1415,7 @@ assigned the sum of all the scores obtained by the various classifiers.  The com
 returns as a result the class getting the highest value.</p>
 <p>In order to instantiate an <code class="docutils literal notranslate"><span class="pre">AllPairs</span></code> object, you need to provide a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> and
 an <code class="docutils literal notranslate"><span class="pre">Estimator</span></code> object representing the binary classifier to be used.  The <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> is
-required only for the QSVM Kernel algorithm – not by the SVM RBF Kernel classical algorithm.</p>
+required only for the QSVM algorithm – not by the SVM RBF Kernel classical algorithm.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to the all-pair method declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
@@ -1485,7 +1487,7 @@ uses the Euclidean distance.</p>
 <p>In order to instantiate an <code class="docutils literal notranslate"><span class="pre">ErrorCorrectingCode</span></code> object, you need to provide a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code>,
 an <code class="docutils literal notranslate"><span class="pre">Estimator</span></code> object representing the binary classifier to be used, and a <code class="docutils literal notranslate"><span class="pre">code_size</span></code> positive
 integer parameter representing the length of the bitstrings.  The <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> is required only
-for the QSVM Kernel algorithm – not by the SVM RBF Kernel classical algorithm.</p>
+for the QSVM algorithm – not by the SVM RBF Kernel classical algorithm.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to the error-correcting code algorithm declaratively inside Aqua,
