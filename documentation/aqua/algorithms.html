@@ -378,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#raw-feature-vector">Raw Feature Vector</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="multiclass_extensions.html">Multiclass Extensions</a><ul>
@@ -1029,6 +1030,7 @@
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feature_maps.html#raw-feature-vector">Raw Feature Vector</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="multiclass_extensions.html">Multiclass Extensions</a><ul>
@@ -1373,8 +1375,8 @@ of the quantum circuits modeling the specific problems.</p>
 <li><span class="xref std std-ref">Deutsch Jozsa</span></li>
 <li><span class="xref std std-ref">Bernstein Vazirani</span></li>
 <li><span class="xref std std-ref">Simon</span></li>
-<li><span class="xref std std-ref">Support Vector Machine Quantum Kernel (QSVM Kernel)</span></li>
-<li><span class="xref std std-ref">Support Vector Machine Variational (QSVM Variational)</span></li>
+<li><span class="xref std std-ref">Quantum Support Vector Machine (QSVM)</span></li>
+<li><span class="xref std std-ref">Variational Quantum Classifier (VQC)</span></li>
 <li><span class="xref std std-ref">HHL algorithm for solving linear systems (HHL)</span></li>
 <li><span class="xref std std-ref">Shor’s Factoring Algorithm</span></li>
 </ul>
@@ -1886,8 +1888,8 @@ by which Aqua dynamically discovers and loads it, is <code class="docutils liter
 <p>In Aqua, the Simon algorithm supports the <code class="docutils literal notranslate"><span class="pre">periodfinding</span></code> problem.</p>
 </div>
 </div>
-<div class="section" id="support-vector-machine-quantum-kernel-qsvm-kernel">
-<span id="svm-q-kernel"></span><h3>Support Vector Machine Quantum Kernel (QSVM Kernel)<a class="headerlink" href="#support-vector-machine-quantum-kernel-qsvm-kernel" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="quantum-support-vector-machine-qsvm">
+<span id="qsvm"></span><h3>Quantum Support Vector Machine (QSVM)<a class="headerlink" href="#quantum-support-vector-machine-qsvm" title="Permalink to this headline">¶</a></h3>
 <p>Classification algorithms and methods for machine learning are essential
 for pattern recognition and data mining applications. Well known
 techniques, such as support vector machines or neural networks, have
@@ -1911,17 +1913,17 @@ product of each pair of data points in the new feature space. This
 collection of inner products is called the <em>kernel</em> and it is perfectly
 possible to have feature maps that are hard to compute but whose kernels
 are not.</p>
-<p>The QSVM Kernel algorithm applies to classification problems that
+<p>The QSVM algorithm applies to classification problems that
 require a feature map for which computing the kernel is not efficient
 classically. This means that the required computational resources are
 expected to scale exponentially with the size of the problem.
-QSVM Kernel uses a Quantum processor to solve this problem by a direct
+QSVM uses a Quantum processor to solve this problem by a direct
 estimation of the kernel in the feature space. The method used falls in
 the category of what is called <em>supervised learning</em>, consisting of a
 <em>training phase</em> (where the kernel is calculated and the support vectors
 obtained) and a <em>test or classification phase</em> (where new labelless data
 is classified according to the solution found in the training phase).</p>
-<p>QSVM Kernel can be configured with a <code class="docutils literal notranslate"><span class="pre">bool</span></code> parameter, indicating
+<p>QSVM can be configured with a <code class="docutils literal notranslate"><span class="pre">bool</span></code> parameter, indicating
 whether or not to print additional information when the algorithm is running:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_info</span> <span class="p">:</span> <span class="nb">bool</span>
 </pre></div>
@@ -1929,23 +1931,22 @@ whether or not to print additional information when the algorithm is running:</p
 <p>The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to QSVM Kernel declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
-Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">QSVM.Kernel</span></code>.</p>
+<p>When referring to QSVM declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
+Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">QSVM</span></code>.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
-<p>In Aqua, QSVM Kernel  supports the <code class="docutils literal notranslate"><span class="pre">svm_classification</span></code> problem.</p>
+<p>In Aqua, QSVM  supports the <code class="docutils literal notranslate"><span class="pre">classification</span></code> problem.</p>
 </div>
 </div>
-<div class="section" id="support-vector-machine-variational-qsvm-variational">
-<span id="svm-variational"></span><h3>Support Vector Machine Variational (QSVM Variational)<a class="headerlink" href="#support-vector-machine-variational-qsvm-variational" title="Permalink to this headline">¶</a></h3>
-<p>Just like QSVM Kernel, the QSVM Variational algorithm applies to
-classification problems that require a feature map for which computing
-the kernel is not efficient classically. QSVM Variational uses the variational method to solve such
+<div class="section" id="variational-quantum-classifier-vqc">
+<span id="vqc"></span><h3>Variational Quantum Classifier (VQC)<a class="headerlink" href="#variational-quantum-classifier-vqc" title="Permalink to this headline">¶</a></h3>
+<p>Similar to QSVM, the VQC algorithm also applies to
+classification problems. VQC uses the variational method to solve such
 problems in a quantum processor.  Specifically, it optimizes a
 parameterized quantum circuit to provide a solution that cleanly
 separates the data.</p>
-<p>QSVM Variational can be configured with the following parameters:</p>
+<p>VQC can be configured with the following parameters:</p>
 <ul>
 <li><p class="first">The depth of the variational circuit to be optimized:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circuit_depth</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="o">...</span>
@@ -1963,12 +1964,12 @@ running:</p>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to QSVM Variational declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
-Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">QSVM.Variational</span></code>.</p>
+<p>When referring to VQC declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
+Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">VQC</span></code>.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
-<p>In Aqua, QSVM Variational  supports the <code class="docutils literal notranslate"><span class="pre">svm_classification</span></code> problem.</p>
+<p>In Aqua, VQC  supports the <code class="docutils literal notranslate"><span class="pre">classification</span></code> problem.</p>
 </div>
 </div>
 <div class="section" id="hhl-algorithm-for-solving-linear-systems-hhl">
@@ -2134,7 +2135,7 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 </div>
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
-<p>In Aqua, SVM Classical supports the <code class="docutils literal notranslate"><span class="pre">svm_classification</span></code> problem.</p>
+<p>In Aqua, SVM Classical supports the <code class="docutils literal notranslate"><span class="pre">classification</span></code> problem.</p>
 </div>
 </div>
 </div>
