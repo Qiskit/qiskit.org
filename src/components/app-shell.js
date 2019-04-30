@@ -293,6 +293,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
     this.brand = 'qiskit.org website';
+    this.lastPage = null;
   }
 
   firstUpdated() {
@@ -317,7 +318,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         title: i18next.t(`pages.${this.page}.metaTitle`),
         description: i18next.t(`pages.${this.page}.metaDescription`),
       });
-      this.trackNewPage(this.page);
+
+      if (this.lastPage !== this.page) {
+        this.lastPage = this.page;
+        this.trackNewPage(this.page);
+      }
     }
   }
 
@@ -326,12 +331,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     this.drawerOpened = state.app.drawerOpened;
   }
 
-  trackNewPage(newPath) {
+  trackNewPage(page) {
     if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
-      window.bluemixAnalytics.pageEvent('Qiskit.org', null, {
+      window.bluemixAnalytics.pageEvent('Qiskit.org', page, {
         navigationType: 'pushState',
-        productTitle: this.brand,
-        path: newPath,
+        productTitle: 'IBM Q Experience',
       });
     }
   }

@@ -32,15 +32,8 @@ task('add-ibm-stats-script', () => {
       /* Define digital data object based on _appInfo object */
       window.digitalData = {
         page: {
-          category: {
-            primaryCategory: 'ibm-research',
-          },
           pageInfo: {
-            ibm: {
-              siteID: 'qiskit',
-            },
-            pageID: 'qiskit',
-            productTitle: this.brand,
+            productTitle: 'IBM Q Experience',
             analytics: {
               category: 'Offering Interface',
             },
@@ -69,7 +62,7 @@ task('add-ibm-stats-script', () => {
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    <script async src="https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js'"></script>
+    <script async src="https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
   `;
 
   return src(`${buildPath}**/index.html`)
