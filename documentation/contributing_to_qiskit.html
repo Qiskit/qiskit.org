@@ -99,7 +99,6 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing Qiskit</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#install-from-source">Install from Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#access-ibm-q-devices">Access IBM Q Devices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
 </ul>
@@ -670,13 +669,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing to Qiskit</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-documentation">Writing Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-a-custom-provider">Creating a Custom Provider</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#designing-the-backend-class">Designing the Backend Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#designing-the-job-class">Designing the Job Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#designing-the-provider-class">Designing the Provider Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implementing-a-custom-simulator">Implementing a Custom Simulator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-custom-providers">Using Custom Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-and-building-documentation">Writing and Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-terra-from-source">Install Terra from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-macos">Install a compiler for MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-windows">Install a compiler for Windows</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -756,7 +755,6 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing Qiskit</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#install-from-source">Install from Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#access-ibm-q-devices">Access IBM Q Devices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
 </ul>
@@ -1327,13 +1325,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing to Qiskit</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#where-things-are">Where Things Are</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-documentation">Writing Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-a-custom-provider">Creating a Custom Provider</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#designing-the-backend-class">Designing the Backend Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#designing-the-job-class">Designing the Job Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#designing-the-provider-class">Designing the Provider Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implementing-a-custom-simulator">Implementing a Custom Simulator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-custom-providers">Using Custom Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-and-building-documentation">Writing and Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-terra-from-source">Install Terra from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-macos">Install a compiler for MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-windows">Install a compiler for Windows</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1371,7 +1369,8 @@
 backgrounds. This page describes how you can join the Qiskit community in this goal.</p>
 <div class="section" id="where-things-are">
 <h2>Where Things Are<a class="headerlink" href="#where-things-are" title="Permalink to this headline">¶</a></h2>
-<p>The code for Qiskit is located in the <a class="reference external" href="https://github.com/Qiskit">Qiskit GitHub organization</a>, where you can find the individual projects that make up Qiskit, including</p>
+<p>The code for Qiskit is located in the <a class="reference external" href="https://github.com/Qiskit">Qiskit GitHub organization</a>,
+where you can find the individual projects that make up Qiskit, including</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-terra">Qiskit Terra</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-aer">Qiskit Aer</a></li>
@@ -1386,323 +1385,147 @@ backgrounds. This page describes how you can join the Qiskit community in this g
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>Learn how members of the Qiskit community</p>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit/blob/master/.github/CODE_OF_CONDUCT.md">relate to one another</a></li>
-<li><a class="reference external" href="https://qiskit.slack.com/">discuss ideas</a></li>
-<li><a class="reference external" href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit">get help when we’re stuck</a></li>
-<li><a class="reference external" href="https://medium.com/qiskit">stay informed of news in the community</a></li>
-<li><a class="reference external" href="https://www.python.org/dev/peps/pep-0008">keep a consistent style</a></li>
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit/blob/master/.github/CONTRIBUTING.md">work together on GitHub</a></li>
-<li><a class="reference internal" href="install.html#install-install-from-source-label"><span class="std std-ref">build Qiskit packages from source</span></a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit/blob/master/.github/CODE_OF_CONDUCT.md">Relate to one another</a></li>
+<li><a class="reference external" href="https://qiskit.slack.com/">Discuss ideas</a></li>
+<li><a class="reference external" href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit">Get help when we’re stuck</a></li>
+<li><a class="reference external" href="https://medium.com/qiskit">Stay informed of news in the community</a></li>
+<li><a class="reference external" href="https://www.python.org/dev/peps/pep-0008">Keep a consistent style</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit/blob/master/.github/CONTRIBUTING.md">Work together on GitHub</a></li>
+<li><a class="reference internal" href="#install-install-from-source-label"><span class="std std-ref">Build Qiskit packages from source</span></a></li>
 </ul>
 </div>
-<div class="section" id="writing-documentation">
-<h2>Writing Documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="writing-and-building-documentation">
+<h2>Writing and Building Documentation<a class="headerlink" href="#writing-and-building-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy.</p>
 <p>The <a class="reference external" href="https://qiskit.org/documentation/index.html">published documentation</a> is built from the master branch of <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>.</p>
 <p>The Python API reference documentation is automatically generated from comments in the code by navigating to your local clone of <a class="reference external" href="https://github.com/Qiskit/qiskit">Qiskit/qiskit</a> and running the following command in a terminal window:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">doc</span>
 </pre></div>
 </div>
+<p>You can build a local copy of the documentation from your local clone of the
+<cite>Qiskit/qiskit</cite> repository by opening a terminal window or command prompt in
+the <cite>docs</cite> directory, then running the following command.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
 </div>
-<div class="section" id="creating-a-custom-provider">
-<h2>Creating a Custom Provider<a class="headerlink" href="#creating-a-custom-provider" title="Permalink to this headline">¶</a></h2>
-<p>This example discusses how to approach the design and implementation of
-a Qiskit provider, described in <a class="reference external" href="https://qiskit.org/documentation/advanced_use_of_ibm_q_devices.html">Advanced Use of IBM Q
-Devices</a>.
-The objective of the provider in this example is to simulate circuits
-made up entirely of Hadamard gates terminating with measurement of all
-qubits.</p>
-<div class="section" id="designing-the-backend-class">
-<h3>Designing the Backend Class<a class="headerlink" href="#designing-the-backend-class" title="Permalink to this headline">¶</a></h3>
-<p>To design a provider that simulates Hadamard gates, first determine the
-elements of data and operations that form your <em>backend</em>, a simulator
-(in this example) or real quantum computer responsible for running
-circuits and returning results. A backend has at least these properties:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">name</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">configuration</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">status</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">provider</span></code></li>
-</ul>
-<p>You must be able to perform certain operations on a backend:</p>
-<ul class="simple">
-<li>Translate a circuit, described by a <code class="docutils literal notranslate"><span class="pre">qobj</span></code> (a quantum object) into
-a form expected by your simulator</li>
-<li>Run your simulator</li>
-<li>Return a <code class="docutils literal notranslate"><span class="pre">BaseJob</span></code> object that contains the results of your
-simulator</li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">run()</span></code> method implements these operations.</p>
-<p><strong>Implementing the Backend Class</strong></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseBackend</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">qobj</span> <span class="k">as</span> <span class="n">qiskit_qobj</span>
-<span class="kn">from</span> <span class="nn">qiskit.result</span> <span class="k">import</span> <span class="n">Result</span>
-
-<span class="c1"># Inherit from qiskit.providers.BaseBackend</span>
-<span class="k">class</span> <span class="nc">HadamardSimulator</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-        <span class="n">configuration</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;backend_name&#39;</span><span class="p">:</span> <span class="s1">&#39;hadamard_simulator&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;backend_version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.i_love_hadamard.com&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;simulator&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Simulates only Hadamard gates&#39;</span><span class="p">,</span>
-            <span class="c1"># basis_gates must contain at least two gates</span>
-            <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s1">&#39;n_qubits&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-            <span class="s1">&#39;conditional&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s1">&#39;max_shots&#39;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
-            <span class="s1">&#39;open_pulse&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;TODO&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[],</span>
-                    <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;TODO&#39;</span>
-                <span class="p">}</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-
-        <span class="c1"># The provider will be explained in a section below</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">configuration</span><span class="o">=</span><span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
-                <span class="n">configuration</span><span class="p">),</span>
-            <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
-
-        <span class="c1"># The job object will be explained in a section below</span>
-        <span class="n">hadamard_job</span> <span class="o">=</span> <span class="n">HadamardJob</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-
-        <span class="c1"># Simulate each circuit described by the qobj</span>
-        <span class="n">experiment_results</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">circuit_index</span><span class="p">,</span> <span class="n">circuit</span> \
-            <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">):</span>
-
-            <span class="n">number_of_qubits</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
-            <span class="n">shots</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">shots</span>
-
-            <span class="c1"># Need to ensure that the circuit described by qobj</span>
-            <span class="c1"># only has gates our simulator can handle.</span>
-            <span class="c1"># We take this for granted here.</span>
-
-            <span class="n">list_of_qubits</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span>
-                    <span class="n">list_of_qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-            <span class="c1"># Need to verify that all the qubits are measured,</span>
-            <span class="c1"># and to different classical registers.</span>
-            <span class="c1"># We take this for granted here.</span>
-
-            <span class="c1"># Run the Hadamard simulator, discussed below</span>
-            <span class="n">counts</span> <span class="o">=</span> <span class="n">run_hadamard_simulator</span><span class="p">(</span><span class="n">number_of_qubits</span><span class="p">,</span>
-              <span class="n">list_of_qubits</span><span class="p">,</span> <span class="n">shots</span><span class="p">)</span>
-
-            <span class="c1"># Format results for printing</span>
-            <span class="n">formatted_counts</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">number_of_qubits</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">formatted_counts</span><span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-            <span class="n">experiment_results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">circuit</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                <span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="n">shots</span><span class="p">,</span>
-                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;counts&#39;</span><span class="p">:</span> <span class="n">formatted_counts</span><span class="p">},</span>
-                <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">circuit</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
-            <span class="p">})</span>
-
-        <span class="c1"># Return the simulation results in the job object</span>
-        <span class="n">hadamard_job</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
-            <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="n">experiment_results</span><span class="p">,</span>
-            <span class="s1">&#39;backend_name&#39;</span><span class="p">:</span> <span class="s1">&#39;hadamard_simulator&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;backend_version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;qobj_id&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;job_id&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
-        <span class="p">})</span>
-
-        <span class="k">return</span> <span class="n">hadamard_job</span>
+<p>This will build a styled, HTML version of your local documentation repository
+in a subdirectory, <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.</p>
+</div>
+<div class="section" id="install-from-source">
+<span id="install-install-from-source-label"></span><h2>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h2>
+<p>Installing the elements from source allows you to access the most recently
+updated version of Qiskit instead of using the version in the Python Package
+Index (PyPI) repository. This will give you the ability to inspect and extend
+the latest version of the Qiskit code more efficiently.</p>
+<p>When installing the elements and components from source, by default their
+<code class="docutils literal notranslate"><span class="pre">development</span></code> version (which corresponds to the <code class="docutils literal notranslate"><span class="pre">master</span></code> git branch) will
+be used, as opposed to the <code class="docutils literal notranslate"><span class="pre">stable</span></code> version (which contains the same codebase
+as the published <code class="docutils literal notranslate"><span class="pre">pip</span></code> packages). Since the <code class="docutils literal notranslate"><span class="pre">development</span></code> versions of an
+element or component usually includes new features and changes, in general they
+require using the <code class="docutils literal notranslate"><span class="pre">development</span></code> version of the rest of the items as well.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Terra and Aer packages both require a compiler to build from source before
+you can install. Ignis, Aqua, Qiskit Chemistry, and the IBM Q provider backend
+do not require a compiler.</p>
+</div>
+<p>To work with several components and elements simultaneously, use the following
+steps for each element.</p>
+<p>The following steps show the installation process for Ignis.</p>
+<ol class="arabic simple">
+<li>Clone the Qiskit element repository.</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Qiskit/qiskit-ignis.git
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Create a virtual development environment.</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda create -y -n QiskitDevenv <span class="nv">python</span><span class="o">=</span><span class="m">3</span>
+conda activate QiskitDevenv
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Install the package in <a class="reference external" href="https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs">editable mode</a> from the root directory of the
+repository. The following example shows the installation for Ignis.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">ignis</span>
+</pre></div>
+</div>
+<div class="section" id="install-terra-from-source">
+<h3>Install Terra from Source<a class="headerlink" href="#install-terra-from-source" title="Permalink to this headline">¶</a></h3>
+<p>Installing from source requires that you have a c++ compiler on your system that supports
+c++-11.  On most Linux platforms, the necessary GCC compiler is already installed.</p>
+<div class="section" id="install-a-compiler-for-macos">
+<h4>Install a compiler for MacOS<a class="headerlink" href="#install-a-compiler-for-macos" title="Permalink to this headline">¶</a></h4>
+<p>If you use Apple OSX, you can install the Clang compiler by installing XCode.
+Check if you have XCode and clang installed by opening a terminal window and entering the
+following.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clang</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>Install XCode and clang by using the following command.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcode</span><span class="o">-</span><span class="n">select</span> <span class="o">--</span><span class="n">install</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="designing-the-job-class">
-<h3>Designing the Job Class<a class="headerlink" href="#designing-the-job-class" title="Permalink to this headline">¶</a></h3>
-<p>Job instances can be thought of as the “ticket” for a submitted job.
-They find out the execution’s state at a given point in time (for
-example, if the job is queued, running, or has failed) and also allow
-control over the job.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">HadamardJob</span></code> class stores information about itself and the
-simulation results in the following properties:</p>
+<div class="section" id="install-a-compiler-for-windows">
+<h4>Install a compiler for Windows<a class="headerlink" href="#install-a-compiler-for-windows" title="Permalink to this headline">¶</a></h4>
+<p>On Windows, it is easiest to install the Visual C++ compiler from the
+<a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017">Build Tools for Visual Studio 2017</a>.
+You can instead install Visual Studio version 2015 or 2017, making sure to select the
+options for installing the C++ compiler.</p>
+<div class="section" id="install-qiskit-terra">
+<h5>Install Qiskit Terra<a class="headerlink" href="#install-qiskit-terra" title="Permalink to this headline">¶</a></h5>
+<ol class="arabic simple">
+<li>Clone the Terra repository.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Qiskit</span><span class="o">/</span><span class="n">qiskit</span><span class="o">-</span><span class="n">terra</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Cloning the repository creates a local folder called <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code>.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">terra</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Install the Python requirements libraries from your <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> directory.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cython</span>
+</pre></div>
+</div>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">job_id</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">backend</span></code> - The backend the job was run on</li>
+<li>If you want to run tests or linting checks, install the developer requirements.</li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">HadamardJob</span></code> class performs the following operations:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">-</span><span class="n">dev</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Install the Qiskit modules.</li>
+</ol>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">result</span></code> - get the result of a <code class="docutils literal notranslate"><span class="pre">run</span></code> on the backend</li>
-<li><code class="docutils literal notranslate"><span class="pre">status</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">cancel</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">submit</span></code></li>
+<li>If you want to only install <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> onto your system.</li>
 </ul>
-<p>In this example, we will only implement a method for the <cite>result</cite> operation.</p>
-<p><strong>Implementing the Job Class</strong></p>
-<p>Define a simple implementation of a job class that can merely return the
-simulation results.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseJob</span>
-
-<span class="c1"># Inherits from qiskit.providers.BaseJob</span>
-<span class="k">class</span> <span class="nc">HadamardJob</span><span class="p">(</span><span class="n">BaseJob</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span>
-
-    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="designing-the-provider-class">
-<h3>Designing the Provider Class<a class="headerlink" href="#designing-the-provider-class" title="Permalink to this headline">¶</a></h3>
-<p>A provider is an entity that gives access to a group of different
-backends. A provider must be able to</p>
 <ul class="simple">
-<li>return all backends known to it</li>
-<li>return a backend queried by name</li>
+<li>To get the examples working, install and run them with the following commands.</li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">HadamardProvider</span></code> class implements two methods:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+<span class="n">python</span> <span class="n">examples</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">using_qiskit_terra_level_0</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>After you’ve installed Terra, you can install Aer as an add-on to run additional simulators.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">backends</span></code> - Method that lists all known backends</li>
-<li><code class="docutils literal notranslate"><span class="pre">get_backend</span></code> - Method that returns backends by name.</li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aer/blob/master/.github/CONTRIBUTING.md">Qiskit Aer</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-ignis/blob/master/.github/CONTRIBUTING.md">Qiskit Ignis</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aqua/blob/master/.github/CONTRIBUTING.rst">Qiskit Aqua</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-chemistry/blob/master/.github/CONTRIBUTING.rst">Qiskit Chemistry</a></li>
+<li><a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/blob/master/.github/CONTRIBUTING.rst">Qiskit IBMQ Provider</a></li>
 </ul>
-<p><strong>Implementing the Provider Class</strong></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseProvider</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.providerutils</span> <span class="k">import</span> <span class="n">filter_backends</span>
-
-<span class="c1"># Inherits from qiskit.providers.BaseProvider</span>
-<span class="k">class</span> <span class="nc">HadamardProvider</span><span class="p">(</span><span class="n">BaseProvider</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="c1"># Populate the list of Hadamard backends</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_backends</span> <span class="o">=</span> <span class="p">[</span><span class="n">HadamardSimulator</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="p">)]</span>
-
-    <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># pylint: disable=arguments-differ</span>
-        <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backends</span>
-        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
-            <span class="n">backends</span> <span class="o">=</span> <span class="p">[</span><span class="n">backend</span> <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">backends</span>
-                        <span class="k">if</span> <span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">filter_backends</span><span class="p">(</span>
-            <span class="n">backends</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;HadamardProvider&#39;</span>
-</pre></div>
 </div>
-</div>
-<div class="section" id="implementing-a-custom-simulator">
-<h3>Implementing a Custom Simulator<a class="headerlink" href="#implementing-a-custom-simulator" title="Permalink to this headline">¶</a></h3>
-<p>The simulator accepts only a single quantum circuit, where all the gates
-are Hadamard gates, and all qubits are measured at the end. The input
-format is a list of qubits on whom Hadamard gates are applied. The
-simulator returns the counts of each basis state, in the form of a list,
-where the basis states are assumed to be ordered lexicographically.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_hadamard_simulator</span><span class="p">(</span><span class="n">number_of_qubits</span><span class="p">,</span> <span class="n">list_of_qubits</span><span class="p">,</span> <span class="n">shots</span><span class="p">):</span>
-
-    <span class="c1"># For each qubit, store whether it is manipulated</span>
-    <span class="c1"># by an odd number of Hadamard gates</span>
-    <span class="c1"># Example: for run_hadamard_simulator(5, [3, 1, 3, 4], 100)</span>
-    <span class="c1"># we obtain hadamard_list:</span>
-    <span class="c1"># [0, 1, 0, 0, 1]</span>
-    <span class="c1"># because qubits 1 and 4 have</span>
-    <span class="c1"># an odd number of Hadamard gates.</span>
-    <span class="n">hadamard_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">number_of_qubits</span>
-    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">list_of_qubits</span><span class="p">:</span>
-        <span class="n">hadamard_list</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">hadamard_list</span><span class="p">[</span><span class="n">qubit</span><span class="p">])</span><span class="o">%</span><span class="mi">2</span>
-
-    <span class="c1"># Calculate the result for each basis state</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">number_of_qubits</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">number_of_qubits</span><span class="p">):</span>
-        <span class="c1"># Example: when i is 2,</span>
-        <span class="c1"># the basis_state is 01000</span>
-        <span class="n">basis_state</span> <span class="o">=</span> \
-            <span class="s1">&#39;</span><span class="si">{0:b}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">number_of_qubits</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_qubits</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">hadamard_list</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
-                <span class="ow">and</span> <span class="n">basis_state</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">):</span>
-                <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="k">break</span>
-            <span class="k">if</span> <span class="n">hadamard_list</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span>
-                    <span class="n">shots</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">hadamard_list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))))</span>
-
-    <span class="k">return</span> <span class="n">result</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="using-custom-providers">
-<h3>Using Custom Providers<a class="headerlink" href="#using-custom-providers" title="Permalink to this headline">¶</a></h3>
-<p>The following code runs two simulators on the same quantum circuit. The
-simulators are accessed by their providers.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">execute</span><span class="p">,</span> <span class="n">Aer</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">PassManager</span>
-
-<span class="c1"># Create a circuit with just Hadamards and measurements</span>
-<span class="n">qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">creg</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qreg</span><span class="p">,</span> <span class="n">creg</span><span class="p">)</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qreg</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qreg</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qreg</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qreg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qreg</span><span class="p">,</span> <span class="n">creg</span><span class="p">)</span>
-
-<span class="c1"># Use the custom provider to simulate the circuit</span>
-<span class="n">hadamard_provider</span> <span class="o">=</span> <span class="n">HadamardProvider</span><span class="p">()</span>
-
-<span class="n">hadamard_job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">hadamard_provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;hadamard_simulator&#39;</span><span class="p">),</span> <span class="n">pass_manager</span><span class="o">=</span><span class="n">PassManager</span><span class="p">(),</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
-
-<span class="n">hadamard_result</span> <span class="o">=</span> <span class="n">hadamard_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-
-<span class="c1"># Use an Aer provider to compare and contrast</span>
-<span class="n">aer_job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span>
-    <span class="n">pass_manager</span><span class="o">=</span><span class="n">PassManager</span><span class="p">(),</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
-
-<span class="n">aer_result</span> <span class="o">=</span> <span class="n">aer_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-
-<span class="c1"># Print the results of both providers</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hadamard simulator:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hadamard_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Aer simulator:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">aer_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hadamard</span> <span class="n">simulator</span><span class="p">:</span>
-<span class="p">{</span><span class="s1">&#39;0100&#39;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s1">&#39;0000&#39;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s1">&#39;0010&#39;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s1">&#39;0110&#39;</span><span class="p">:</span> <span class="mi">256</span><span class="p">}</span>
-<span class="n">Aer</span> <span class="n">simulator</span><span class="p">:</span>
-<span class="p">{</span><span class="s1">&#39;0100&#39;</span><span class="p">:</span> <span class="mi">266</span><span class="p">,</span> <span class="s1">&#39;0000&#39;</span><span class="p">:</span> <span class="mi">252</span><span class="p">,</span> <span class="s1">&#39;0010&#39;</span><span class="p">:</span> <span class="mi">233</span><span class="p">,</span> <span class="s1">&#39;0110&#39;</span><span class="p">:</span> <span class="mi">273</span><span class="p">}</span>
-</pre></div>
 </div>
 </div>
 </div>
