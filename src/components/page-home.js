@@ -243,15 +243,15 @@ class PageHome extends localize(i18next)(LitElement) {
         <div class="row limited-width">
           <div class="column">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsQiskit9Title')}</h3>
-              <p>${i18next.t('pages.home.newsQiskit9Description')}</p>
+              <h3>${i18next.t('pages.home.newsQCampTitle')}</h3>
+              <p>${i18next.t('pages.home.newsQCampDescription')}</p>
               <div class="actions">
                 <a
-                    href="https://medium.com/@qiskit/whats-new-in-qiskit-0-9-e875f96ca695"
+                    href="https://qiskit.camp"
                     target="_blank"
                     rel="noopener"
                     tabindex="-1">
-                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsQiskit9Button')}</vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsQCampButton')}</vaadin-button>
                 </a>
               </div>
             </div>
