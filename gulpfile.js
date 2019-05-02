@@ -62,7 +62,7 @@ task('add-ibm-stats-script', () => {
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    <script async src="https://test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    <script async src="https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
   `;
 
   return src(`${buildPath}**/index.html`)
