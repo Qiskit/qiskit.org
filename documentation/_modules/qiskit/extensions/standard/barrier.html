@@ -130,42 +130,48 @@
   <h1>Source code for qiskit.extensions.standard.barrier</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Barrier instruction.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Instruction</span>
-<span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">header</span>  <span class="c1"># pylint: disable=unused-import</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.decorators</span> <span class="k">import</span> <span class="n">_convert_to_bits</span>
 
 
-<div class="viewcode-block" id="Barrier"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.quantumcircuit.Barrier">[docs]</a><span class="k">class</span> <span class="nc">Barrier</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+<div class="viewcode-block" id="Barrier"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.compositegate.Barrier">[docs]</a><span class="k">class</span> <span class="nc">Barrier</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Barrier instruction.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">circ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new barrier instruction.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="nb">list</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span> <span class="p">[],</span> <span class="n">circ</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
 
-<div class="viewcode-block" id="Barrier.inverse"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.quantumcircuit.Barrier.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Barrier.inverse"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.compositegate.Barrier.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Special case. Return self.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
-
-<div class="viewcode-block" id="Barrier.reapply"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.quantumcircuit.Barrier.reapply">[docs]</a>    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reapply this instruction to corresponding qubits in circ.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_modifiers</span><span class="p">(</span><span class="n">circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">qargs</span><span class="p">))</span></div></div>
+        <span class="k">return</span> <span class="n">Barrier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="barrier"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.quantumcircuit.barrier">[docs]</a><span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qargs</span><span class="p">):</span>
+<div class="viewcode-block" id="barrier"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.compositegate.barrier">[docs]</a><span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply barrier to circuit.</span>
 <span class="sd">    If qargs is None, applies to all the qbits.</span>
 <span class="sd">    Args is a list of QuantumRegister or single qubits.</span>
-<span class="sd">    For QuantumRegister, applies barrier to all the qbits in that register.&quot;&quot;&quot;</span>
+<span class="sd">    For QuantumRegister, applies barrier to all the qubits in that register.&quot;&quot;&quot;</span>
     <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">qargs</span> <span class="o">=</span> <span class="n">_convert_to_bits</span><span class="p">(</span><span class="n">qargs</span><span class="p">,</span> <span class="p">[</span><span class="n">qbit</span> <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="k">for</span> <span class="n">qbit</span> <span class="ow">in</span> <span class="n">qreg</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">qargs</span><span class="p">:</span>  <span class="c1"># None</span>
         <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
@@ -173,19 +179,19 @@
                 <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">qreg</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
 
     <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qarg</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">qarg</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumRegister</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qarg</span><span class="o">.</span><span class="n">size</span><span class="p">)])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">_check_dups</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach</span><span class="p">(</span><span class="n">Barrier</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Barrier</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)),</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[])</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">barrier</span> <span class="o">=</span> <span class="n">barrier</span>
+<span class="n">CompositeGate</span><span class="o">.</span><span class="n">barrier</span> <span class="o">=</span> <span class="n">barrier</span>
 </pre></div>
 
         </div>

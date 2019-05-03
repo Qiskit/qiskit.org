@@ -128,19 +128,28 @@
         <div class="page-content">
         
   <h1>Source code for qiskit.providers.aer.noise.errors.readout_error</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-
-<span class="c1"># Copyright 2018, IBM.</span>
+<span></span><span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
-
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Readout error class for Qiskit Aer noise model.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">log2</span><span class="p">,</span> <span class="n">eye</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">norm</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">is_identity_matrix</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">ATOL_DEFAULT</span><span class="p">,</span> <span class="n">RTOL_DEFAULT</span>
 
 <span class="kn">from</span> <span class="nn">..noiseerror</span> <span class="k">import</span> <span class="n">NoiseError</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">qubits_from_mat</span>
@@ -151,12 +160,18 @@
 <span class="sd">    Readout error class for Qiskit Aer noise model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">):</span>
+    <span class="n">ATOL</span> <span class="o">=</span> <span class="n">ATOL_DEFAULT</span>
+    <span class="n">RTOL</span> <span class="o">=</span> <span class="n">RTOL_DEFAULT</span>
+    <span class="n">MAX_TOL</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">ATOL_DEFAULT</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a readout error for a noise model.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            probabilities (array like): List of outcome assignment probabilities.</span>
+<span class="sd">            probabilities (matrix): List of outcome assignment probabilities.</span>
+<span class="sd">            atol (double): Threshold for checking probabilities are normalized</span>
+<span class="sd">                           [Default: 1e-8]</span>
 
 <span class="sd">        Additional Information:</span>
 <span class="sd">            For an N-qubit readout error probabilites are entered as vectors:</span>
@@ -175,57 +190,9 @@
 <span class="sd">                probabilities[1] = [P(&quot;00&quot;|&quot;10&quot;), P(&quot;01&quot;|&quot;10&quot;), P(&quot;10&quot;|&quot;10&quot;), P(&quot;11&quot;|&quot;10&quot;)]</span>
 <span class="sd">                probabilities[1] = [P(&quot;00&quot;|&quot;11&quot;), P(&quot;01&quot;|&quot;11&quot;), P(&quot;10&quot;|&quot;11&quot;), P(&quot;11&quot;|&quot;11&quot;)]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_probabilities</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span> <span class="o">=</span> <span class="n">probabilities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_probabilities</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">atol</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="n">qubits_from_mat</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">number_of_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the number of qubits for the error.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the readout error probabilities matrix.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span>
-
-<div class="viewcode-block" id="ReadoutError.ideal"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.ideal">[docs]</a>    <span class="k">def</span> <span class="nf">ideal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if current error object is an identity&quot;&quot;&quot;</span>
-        <span class="n">iden</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">)</span>
-        <span class="n">delta</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">-</span> <span class="n">iden</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
-
-<div class="viewcode-block" id="ReadoutError.as_dict"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the current error as a dictionary.&quot;&quot;&quot;</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;roerror&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;measure&quot;</span><span class="p">],</span>
-                 <span class="s2">&quot;probabilities&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">}</span>
-        <span class="k">return</span> <span class="n">error</span></div>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_check_probabilities</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check probabilities are valid.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input probabilities: empty.&quot;</span><span class="p">)</span>
-        <span class="n">num_outcomes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">num_outcomes</span><span class="p">))</span>
-        <span class="k">if</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">num_qubits</span> <span class="o">!=</span> <span class="n">num_outcomes</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities: length&quot;</span> <span class="o">+</span>
-                                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> != 2**</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_outcomes</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">))</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_outcomes</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities.&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">vec</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">:</span>
-            <span class="n">arr</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_outcomes</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities: vectors are different lengths.&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities: sum(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">+</span>
-                                    <span class="s2">&quot; = </span><span class="si">{}</span><span class="s2"> is not 1.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">arr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">+</span>
-                                    <span class="s2">&quot; contains a negative probability.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Display ReadoutError.&quot;&quot;&quot;</span>
@@ -237,7 +204,197 @@
                  <span class="s2">&quot; Assignment probabilities:&quot;</span>
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">):</span>
             <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> P(j|</span><span class="si">{0}</span><span class="s2">) =  </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">vec</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test if two ReadoutErrors are equal.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ReadoutError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span>
+                           <span class="n">atol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rtol</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ReadoutError.copy"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make a copy of current ReadoutError.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=no-value-for-parameter</span>
+        <span class="c1"># The constructor of subclasses from raw data should be a copy</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">number_of_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of qubits for the error.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the readout error probabilities matrix.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The absolute tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ATOL</span>
+
+    <span class="nd">@atol</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">atol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the absolute tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="n">max_tol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_TOL</span>
+        <span class="k">if</span> <span class="n">atol</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid atol: must be non-negative.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">atol</span> <span class="o">&gt;</span> <span class="n">max_tol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid atol: must be less than </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_tol</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ATOL</span> <span class="o">=</span> <span class="n">atol</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The relative tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">RTOL</span>
+
+    <span class="nd">@rtol</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rtol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the relative tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="n">max_tol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_TOL</span>
+        <span class="k">if</span> <span class="n">rtol</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid rtol: must be non-negative.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rtol</span> <span class="o">&gt;</span> <span class="n">max_tol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid rtol: must be less than </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_tol</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RTOL</span> <span class="o">=</span> <span class="n">rtol</span>
+
+<div class="viewcode-block" id="ReadoutError.ideal"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.ideal">[docs]</a>    <span class="k">def</span> <span class="nf">ideal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if current error object is an identity&quot;&quot;&quot;</span>
+        <span class="n">iden</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">-</span> <span class="n">iden</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ReadoutError.as_dict"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the current error as a dictionary.&quot;&quot;&quot;</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;roerror&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;measure&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;probabilities&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">error</span></div>
+
+<div class="viewcode-block" id="ReadoutError.compose"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the composition readout error self∘other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (ReadoutError): a readout error.</span>
+<span class="sd">            front (bool): If False compose in standard order other(self(input))</span>
+<span class="sd">                          otherwise compose in reverse order self(other(input))</span>
+<span class="sd">                          [default: False]</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ReadoutError: The composition readout error.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other is not a ReadoutError or has incompatible</span>
+<span class="sd">            dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ReadoutError</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">ReadoutError</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;other must have same number of qubits.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">front</span><span class="p">:</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ReadoutError</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ReadoutError.power"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.power">[docs]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the compose of the readout error with itself n times.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n (int): the number of times to compose with self (n&gt;0).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ReadoutError: the n-times composition channel.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if the power is not a positive integer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Can only power with positive integer powers.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ReadoutError.tensor"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.tensor">[docs]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product readout error self ⊗ other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (ReadoutError): a readout error.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ReadoutError: the tensor product readout error self ⊗ other.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other is not a ReadoutError.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ReadoutError.expand"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.readout_error.html#qiskit.providers.aer.noise.errors.readout_error.ReadoutError.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product readout error self ⊗ other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (ReadoutError): a readout error.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ReadoutError: the tensor product readout error other ⊗ self.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other is not a ReadoutError.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_check_probabilities</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check probabilities are valid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input probabilities: empty.&quot;</span><span class="p">)</span>
+        <span class="n">num_outcomes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">num_outcomes</span><span class="p">))</span>
+        <span class="k">if</span> <span class="mi">2</span><span class="o">**</span><span class="n">num_qubits</span> <span class="o">!=</span> <span class="n">num_outcomes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities: length &quot;</span>
+                             <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> != 2**</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_outcomes</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_outcomes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">vec</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">:</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_outcomes</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid probabilities: vectors are different lengths.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid probabilities: sum(</span><span class="si">{}</span><span class="s2">)= </span><span class="si">{}</span><span class="s2"> &quot;</span>
+                                 <span class="s2">&quot;is not 1.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">arr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid probabilities: </span><span class="si">{}</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;contains a negative probability.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_tensor_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product readout error.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (ReadoutError): a readout error.</span>
+<span class="sd">            reverse (bool): If False return self ⊗ other, if True return</span>
+<span class="sd">                            if True return (other ⊗ self) [Default: False</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            ReadoutError: the tensor product readout error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ReadoutError</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">ReadoutError</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ReadoutError</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

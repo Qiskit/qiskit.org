@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.result.models</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Schema and helper models for schema-conformant Results.&quot;&quot;&quot;</span>
 
@@ -143,6 +150,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.validation.fields</span> <span class="k">import</span> <span class="n">Complex</span><span class="p">,</span> <span class="n">ByType</span>
 <span class="kn">from</span> <span class="nn">qiskit.validation.fields</span> <span class="k">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Nested</span><span class="p">,</span> <span class="n">Raw</span><span class="p">,</span> <span class="n">String</span>
 <span class="kn">from</span> <span class="nn">qiskit.validation.validate</span> <span class="k">import</span> <span class="n">PatternProperties</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj.utils</span> <span class="k">import</span> <span class="n">MeasReturnType</span>
 
 
 <div class="viewcode-block" id="ExperimentResultDataSchema"><a class="viewcode-back" href="../../../autodoc/qiskit.result.models.html#qiskit.result.models.ExperimentResultDataSchema">[docs]</a><span class="k">class</span> <span class="nc">ExperimentResultDataSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
@@ -174,7 +182,9 @@
     <span class="c1"># Optional fields.</span>
     <span class="n">status</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">()</span>
-    <span class="n">meas_return</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">([</span><span class="s1">&#39;single&#39;</span><span class="p">,</span> <span class="s1">&#39;avg&#39;</span><span class="p">]))</span>
+    <span class="n">meas_level</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">meas_return</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="n">MeasReturnType</span><span class="o">.</span><span class="n">AVERAGE</span><span class="p">,</span>
+                                                 <span class="n">MeasReturnType</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">)))</span>
     <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">ObjSchema</span><span class="p">)</span></div>
 
 
@@ -218,12 +228,14 @@
 <span class="sd">        shots (int or tuple): the starting and ending shot for this data.</span>
 <span class="sd">        success (bool): if true, we can trust results for this experiment.</span>
 <span class="sd">        data (ExperimentResultData): results information.</span>
+<span class="sd">        meas_level (int): Measurement result level.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">success</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">success</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">meas_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shots</span> <span class="o">=</span> <span class="n">shots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meas_level</span> <span class="o">=</span> <span class="n">meas_level</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>

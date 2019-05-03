@@ -130,24 +130,30 @@
   <h1>Source code for qiskit.quantum_info.operators.pauli</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name</span>
+<span class="c1"># pylint: disable=invalid-name,assignment-from-no-return</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Tools for working with Pauli Operators.</span>
 
 <span class="sd">A simple pauli class and some tools.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">sparse</span>
 
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
 
 <span class="k">def</span> <span class="nf">_make_np_bool</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
@@ -346,22 +352,6 @@
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Old getter of z.&quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Accessing property `v` is deprecated, please access `z` instead,&#39;</span>
-                      <span class="s1">&#39;Furthermore, use the `update_z` method if you would like to update&#39;</span>
-                      <span class="s1">&#39;the z vector&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">w</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Old getter of x.&quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Accessing property `w` is deprecated, please access `x` instead,&#39;</span>
-                      <span class="s1">&#39;Furthermore, use the `update_x` method if you would like to update&#39;</span>
-                      <span class="s1">&#39;the x vector&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
-
-    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Getter of z.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
@@ -440,6 +430,25 @@
                 <span class="n">mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">bmat</span><span class="p">([[</span><span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="n">mat</span><span class="p">],</span> <span class="p">[</span><span class="n">mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;coo&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">mat</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Pauli.to_operator"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.operators.pauli.html#qiskit.quantum_info.operators.pauli.Pauli.to_operator">[docs]</a>    <span class="k">def</span> <span class="nf">to_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert to Operator object.&quot;&quot;&quot;</span>
+        <span class="c1"># Place import here to avoid cyclic import from circuit visualization</span>
+        <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.operator</span> <span class="k">import</span> <span class="n">Operator</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Pauli.to_instruction"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.operators.pauli.html#qiskit.quantum_info.operators.pauli.Pauli.to_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert to Pauli circuit instruction.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+        <span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">IdGate</span><span class="p">,</span> <span class="n">XGate</span><span class="p">,</span> <span class="n">YGate</span><span class="p">,</span> <span class="n">ZGate</span>
+        <span class="n">gates</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="n">IdGate</span><span class="p">(),</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">XGate</span><span class="p">(),</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="n">YGate</span><span class="p">(),</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="n">ZGate</span><span class="p">()}</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_label</span><span class="p">()</span>
+        <span class="n">n_qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numberofqubits</span>
+        <span class="n">qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qreg</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pauli:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pauli</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">label</span><span class="p">)):</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gates</span><span class="p">[</span><span class="n">pauli</span><span class="p">],</span> <span class="p">[</span><span class="n">qreg</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="n">circuit</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Pauli.update_z"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.operators.pauli.html#qiskit.quantum_info.operators.pauli.Pauli.update_z">[docs]</a>    <span class="k">def</span> <span class="nf">update_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -571,15 +580,17 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Pauli.random"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.operators.pauli.html#qiskit.quantum_info.operators.pauli.Pauli.random">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a random Pauli on number of qubits.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            num_qubits (int): the number of qubits</span>
-
+<span class="sd">            seed (int): Optional. To set a random seed.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            Pauli: the random pauli</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
@@ -660,15 +671,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">number_of_qubits</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
         <span class="n">temp_set</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Passing case as integer is deprecated, please pass `weight`&#39;</span>
-                          <span class="s1">&#39; or `tensor` instead,&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">case</span> <span class="o">=</span> <span class="s1">&#39;weight&#39;</span>
-            <span class="k">elif</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">case</span> <span class="o">=</span> <span class="s1">&#39;tensor&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">case</span> <span class="o">=</span> <span class="s1">&#39;na&#39;</span>
 
         <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span>
             <span class="n">tmp</span> <span class="o">=</span> <span class="n">pauli_group</span><span class="p">(</span><span class="n">number_of_qubits</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s1">&#39;tensor&#39;</span><span class="p">)</span>

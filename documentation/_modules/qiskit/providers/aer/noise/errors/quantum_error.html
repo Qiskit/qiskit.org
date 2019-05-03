@@ -128,20 +128,35 @@
         <div class="page-content">
         
   <h1>Source code for qiskit.providers.aer.noise.errors.quantum_error</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-
-<span class="c1"># Copyright 2018, IBM.</span>
+<span></span><span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
-
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Quantum error class for Qiskit Aer noise model</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.base_operator</span> <span class="k">import</span> <span class="n">BaseOperator</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators</span> <span class="k">import</span> <span class="n">Kraus</span><span class="p">,</span> <span class="n">SuperOp</span><span class="p">,</span> <span class="n">Operator</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">ATOL_DEFAULT</span><span class="p">,</span> <span class="n">RTOL_DEFAULT</span>
+
 <span class="kn">from</span> <span class="nn">..noiseerror</span> <span class="k">import</span> <span class="n">NoiseError</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">kraus2instructions</span>
+<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">circuit2superop</span>
+<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">standard_instruction_channel</span>
+<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">standard_instruction_operator</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -156,8 +171,15 @@
 <span class="sd">             module.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noise_ops</span><span class="p">,</span> <span class="n">number_of_qubits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
+    <span class="n">ATOL</span> <span class="o">=</span> <span class="n">ATOL_DEFAULT</span>
+    <span class="n">RTOL</span> <span class="o">=</span> <span class="n">RTOL_DEFAULT</span>
+    <span class="n">MAX_TOL</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">noise_ops</span><span class="p">,</span>
+                 <span class="n">number_of_qubits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">atol</span><span class="o">=</span><span class="n">ATOL_DEFAULT</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a quantum error for a noise model.</span>
 
@@ -167,8 +189,11 @@
 <span class="sd">                                    error. If None this will be determined</span>
 <span class="sd">                                    automatically (default None).</span>
 <span class="sd">            standard_gates (bool): Check if input matrices are standard gates.</span>
-<span class="sd">            threshold (double): Threshold for testing if probabilities are</span>
-<span class="sd">                                equal to 0 or 1 (Default: 1e-10).</span>
+<span class="sd">            atol (double): Threshold for testing if probabilities are</span>
+<span class="sd">                           equal to 0 or 1 (Default: 1e-8).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: If input noise_ops are not a CPTP map.</span>
 
 <span class="sd">        Additional Information:</span>
 <span class="sd">            Noise ops may either be specified as list of Kraus operators</span>
@@ -193,27 +218,47 @@
 <span class="sd">            ```</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="c1"># Shallow copy constructor</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="n">noise_ops</span><span class="o">.</span><span class="n">_number_of_qubits</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span> <span class="o">=</span> <span class="n">noise_ops</span><span class="o">.</span><span class="n">_noise_circuits</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span> <span class="o">=</span> <span class="n">noise_ops</span><span class="o">.</span><span class="n">_noise_probabilities</span>
+            <span class="k">return</span>
+
         <span class="c1"># Initialize internal variables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span> <span class="o">=</span> <span class="p">[]</span>
 
+        <span class="c1"># Convert operator subclasses into Kraus list</span>
+        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">noise_ops</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">BaseOperator</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span>
+                <span class="n">noise_ops</span><span class="p">,</span> <span class="s1">&#39;to_quantumchannel&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span>
+                    <span class="n">noise_ops</span><span class="p">,</span> <span class="s1">&#39;to_operator&#39;</span><span class="p">):</span>
+            <span class="n">noise_ops</span><span class="p">,</span> <span class="n">other</span> <span class="o">=</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span><span class="o">.</span><span class="n">_data</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># A Kraus map with different left and right Kraus matrices</span>
+                <span class="c1"># cannot be CPTP</span>
+                <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input quantum channel is not CPTP.&quot;</span><span class="p">)</span>
+
         <span class="c1"># Convert iterable input into list</span>
         <span class="n">noise_ops</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span>
         <span class="c1"># Check if Kraus</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-            <span class="n">noise_ops</span> <span class="o">=</span> <span class="n">kraus2instructions</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">standard_gates</span><span class="p">,</span>
-                                           <span class="n">threshold</span><span class="p">)</span>
+            <span class="n">noise_ops</span> <span class="o">=</span> <span class="n">kraus2instructions</span><span class="p">(</span>
+                <span class="n">noise_ops</span><span class="p">,</span> <span class="n">standard_gates</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span>
         <span class="n">minimum_qubits</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># Add non-zero probability error circuits to the error</span>
         <span class="k">for</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">noise_ops</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">prob</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">prob</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
                 <span class="c1"># Determinine minimum qubit number for error from circuits</span>
-                <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">circuit</span><span class="p">:</span>
-                    <span class="n">op_qubits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="s2">&quot;qubits&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="n">minimum_qubits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">minimum_qubits</span><span class="p">,</span> <span class="n">op_qubits</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">circuit</span><span class="p">:</span>
+                    <span class="n">gate_qubits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">gate</span><span class="p">[</span><span class="s2">&quot;qubits&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">minimum_qubits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">minimum_qubits</span><span class="p">,</span> <span class="n">gate_qubits</span><span class="p">])</span>
+
+        <span class="c1"># Combine any kraus circuits</span>
+        <span class="n">noise_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_kraus</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span>
 
         <span class="c1"># Set number of qubits</span>
         <span class="k">if</span> <span class="n">number_of_qubits</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -223,26 +268,81 @@
 
         <span class="c1"># Error checking</span>
         <span class="k">if</span> <span class="n">minimum_qubits</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input errors require </span><span class="si">{}</span><span class="s2"> qubits, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minimum_qubits</span><span class="p">)</span> <span class="o">+</span>
-                                <span class="s2">&quot;but number_of_qubits is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number_of_qubits</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input errors require </span><span class="si">{}</span><span class="s2"> qubits, &quot;</span>
+                             <span class="s2">&quot;but number_of_qubits is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                 <span class="n">minimum_qubits</span><span class="p">,</span> <span class="n">number_of_qubits</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Number of error circuits does not match length of probabilities&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;Number of error circuits does not match length of probabilities&quot;</span>
+            <span class="p">)</span>
         <span class="n">total_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total_probs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Probabilities are not normalized: </span><span class="si">{}</span><span class="s2"> != 1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_probs</span><span class="p">))</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total_probs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">atol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;Probabilities are not normalized: </span><span class="si">{}</span><span class="s2"> != 1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">total_probs</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Probabilities are invalid.&quot;</span><span class="p">)</span>
+        <span class="c1"># Rescale probabilities if their sum is ok to avoid</span>
+        <span class="c1"># accumulation of rounding errors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_probs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Display QuantumError.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;QuantumError(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="s2">&quot;QuantumError(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print error information.&quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;QuantumError on </span><span class="si">{}</span><span class="s2"> qubits. Noise circuits:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;QuantumError on </span><span class="si">{}</span><span class="s2"> qubits. Noise circuits:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">pair</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">)):</span>
-            <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  P(</span><span class="si">{0}</span><span class="s2">) = </span><span class="si">{1}</span><span class="s2">, QobjInstructions = [</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  P(</span><span class="si">{0}</span><span class="s2">) = </span><span class="si">{1}</span><span class="s2">, QasmQobjInstructions = [</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">j</span><span class="p">,</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test if two QuantumErrors are equal as SuperOps&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_quantumchannel</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">to_quantumchannel</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QuantumError.copy"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make a copy of current QuantumError.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=no-value-for-parameter</span>
+        <span class="c1"># The constructor of subclasses from raw data should be a copy</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The absolute tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ATOL</span>
+
+    <span class="nd">@atol</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">atol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the absolute tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="n">max_tol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_TOL</span>
+        <span class="k">if</span> <span class="n">atol</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid atol: must be non-negative.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">atol</span> <span class="o">&gt;</span> <span class="n">max_tol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid atol: must be less than </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_tol</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ATOL</span> <span class="o">=</span> <span class="n">atol</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rtol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The relative tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">RTOL</span>
+
+    <span class="nd">@rtol</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rtol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rtol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the relative tolerence parameter for float comparisons.&quot;&quot;&quot;</span>
+        <span class="n">max_tol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_TOL</span>
+        <span class="k">if</span> <span class="n">rtol</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid rtol: must be non-negative.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rtol</span> <span class="o">&gt;</span> <span class="n">max_tol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid rtol: must be less than </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_tol</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RTOL</span> <span class="o">=</span> <span class="n">rtol</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -267,10 +367,28 @@
 <div class="viewcode-block" id="QuantumError.ideal"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.ideal">[docs]</a>    <span class="k">def</span> <span class="nf">ideal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if current error object is an identity&quot;&quot;&quot;</span>
         <span class="n">instructions</span><span class="p">,</span> <span class="n">probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_term</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">instructions</span> <span class="o">==</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]:</span>
+        <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">instructions</span> <span class="o">==</span> <span class="p">[{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}]:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error object is ideal&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="QuantumError.to_quantumchannel"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.to_quantumchannel">[docs]</a>    <span class="k">def</span> <span class="nf">to_quantumchannel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convet the QuantumError to a SuperOp quantum channel.&quot;&quot;&quot;</span>
+        <span class="c1"># Initialize as an empty superoperator of the correct size</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">,</span> <span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">):</span>
+            <span class="n">component</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">*</span> <span class="n">circuit2superop</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">)</span>
+            <span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span> <span class="o">+</span> <span class="n">component</span>
+        <span class="k">return</span> <span class="n">channel</span></div>
+
+<div class="viewcode-block" id="QuantumError.to_instruction"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.to_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convet the QuantumError to a circuit Instruction.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_quantumchannel</span><span class="p">()</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="QuantumError.error_term"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.error_term">[docs]</a>    <span class="k">def</span> <span class="nf">error_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -280,7 +398,7 @@
 <span class="sd">            position (int): the position of the error term.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            A pair `(p, circuit)` for error term at `position` &lt; size</span>
+<span class="sd">            tuple: A pair `(p, circuit)` for error term at `position` &lt; size</span>
 <span class="sd">            where `p` is the probability of the error term, and `circuit`</span>
 <span class="sd">            is the list of qobj instructions for the error term.</span>
 
@@ -291,190 +409,339 @@
         <span class="k">if</span> <span class="n">position</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuits</span><span class="p">[</span><span class="n">position</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">probabilities</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Position </span><span class="si">{}</span><span class="s2"> is greater than the number&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="o">+</span>
-                                <span class="s2">&quot;of error outcomes </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Position </span><span class="si">{}</span><span class="s2"> is greater than the number&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">position</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;of error outcomes </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="QuantumError.as_dict"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the current error as a dictionary.&quot;&quot;&quot;</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;qerror&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[],</span>
-                 <span class="s2">&quot;instructions&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">),</span>
-                 <span class="s2">&quot;probabilities&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">)}</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;qerror&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;instructions&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">),</span>
+            <span class="s2">&quot;probabilities&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">)</span>
+        <span class="p">}</span>
         <span class="k">return</span> <span class="n">error</span></div>
 
-<div class="viewcode-block" id="QuantumError.compose"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compose with another quantum error.</span>
-
-<span class="sd">        The resulting composite quanutm error will be equivalent to</span>
-<span class="sd">        applying the current quantum error followed by applying the</span>
-<span class="sd">        additional quantum error.</span>
+<div class="viewcode-block" id="QuantumError.compose"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the composition error channel self∘other.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            error (QuantumError): a quantum error to compose.</span>
+<span class="sd">            other (QuantumError): a quantum error channel.</span>
+<span class="sd">            front (bool): If False compose in standard order other(self(input))</span>
+<span class="sd">                          otherwise compose in reverse order self(other(input))</span>
+<span class="sd">                          [default: False]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            QauntumError: the composed quantum error.</span>
+<span class="sd">            QuantumError: The composition error channel.</span>
 
-<span class="sd">        Additional Information:</span>
-<span class="sd">            Two quantum errors can only be composed if they apply to the</span>
-<span class="sd">            same number of qubits.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other cannot be converted into a QuantumError,</span>
+<span class="sd">            or has incompatible dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert other into a quantum error</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="c1"># Error checking</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;error1 is not a QuantumError&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">!=</span> <span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;QuantumErrors are not defined on same number of qubits.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+                <span class="s2">&quot;QuantumErrors are not defined on same number of qubits.&quot;</span><span class="p">)</span>
 
         <span class="n">combined_noise_circuits</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">combined_noise_probabilities</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># Combine subcircuits and probabilities</span>
-        <span class="k">for</span> <span class="n">circuit0</span><span class="p">,</span> <span class="n">prob0</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">circuit1</span><span class="p">,</span> <span class="n">prob1</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="n">error</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">front</span><span class="p">:</span>
+            <span class="n">noise_ops0</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+            <span class="n">noise_ops1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">noise_ops0</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+            <span class="n">noise_ops1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+
+        <span class="c1"># Combine subcircuits and probabilities</span>
+        <span class="k">for</span> <span class="n">circuit0</span><span class="p">,</span> <span class="n">prob0</span> <span class="ow">in</span> <span class="n">noise_ops0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">circuit1</span><span class="p">,</span> <span class="n">prob1</span> <span class="ow">in</span> <span class="n">noise_ops1</span><span class="p">:</span>
                 <span class="n">combined_noise_probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob0</span> <span class="o">*</span> <span class="n">prob1</span><span class="p">)</span>
                 <span class="n">tmp_combined</span> <span class="o">=</span> <span class="n">circuit0</span> <span class="o">+</span> <span class="n">circuit1</span>
 
                 <span class="c1"># Fuse compatible ops to reduce noise operations:</span>
                 <span class="n">combined_circuit</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp_combined</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-                <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">tmp_combined</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-                    <span class="n">last_op</span> <span class="o">=</span> <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">name</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
-                        <span class="c1"># Pass identity operation</span>
-                        <span class="k">pass</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;unitary&#39;</span> <span class="ow">and</span> <span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;unitary&#39;</span> <span class="ow">and</span>
-                            <span class="n">op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]):</span>
-                        <span class="c1"># Combine unitary matrix operations</span>
-                        <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compose_unitary</span><span class="p">(</span><span class="n">last_op</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span> <span class="ow">and</span> <span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span> <span class="ow">and</span>
-                          <span class="n">op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]):</span>
-                        <span class="c1"># Combine Kraus operations</span>
-                        <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compose_kraus</span><span class="p">(</span><span class="n">last_op</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="n">tmp_combined</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="n">last_instr</span> <span class="o">=</span> <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">last_name</span> <span class="o">=</span> <span class="n">last_instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="n">can_combine</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
+                                   <span class="ow">or</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">can_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">last_name</span><span class="p">)</span>
+                            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
+                        <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compose_instr</span><span class="p">(</span>
+                            <span class="n">last_instr</span><span class="p">,</span> <span class="n">instr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="c1"># Append the operation</span>
-                        <span class="n">combined_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                        <span class="c1"># If they cannot be combined append the operation</span>
+                        <span class="n">combined_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instr</span><span class="p">)</span>
                 <span class="c1"># Check if circuit is empty and add identity</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">combined_circuit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">combined_circuit</span><span class="p">:</span>
                     <span class="n">combined_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
                 <span class="c1"># Add circuit</span>
                 <span class="n">combined_noise_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combined_circuit</span><span class="p">)</span>
-        <span class="n">noise_ops</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">combined_noise_circuits</span><span class="p">,</span>
-                        <span class="n">combined_noise_probabilities</span><span class="p">)</span>
+        <span class="n">noise_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_kraus</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">combined_noise_circuits</span><span class="p">,</span> <span class="n">combined_noise_probabilities</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QuantumError.kron"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.kron">[docs]</a>    <span class="k">def</span> <span class="nf">kron</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Kronecker product current error with another quantum error.</span>
+<div class="viewcode-block" id="QuantumError.power"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.power">[docs]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the compose of a error channel with itself n times.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            error (QuantumError): a quantum error to compose.</span>
+<span class="sd">            n (int): the number of times to compose with self (n&gt;0).</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            QauntumError: the composite quantum error.</span>
+<span class="sd">            QuantumError: the n-times composition error channel.</span>
 
-<span class="sd">        Additional Information:</span>
-<span class="sd">            The resulting qauntum error will be defined on a number of</span>
-<span class="sd">            qubits equal to the sum of both errors. The qubits of the</span>
-<span class="sd">            current error will be shifted by the number of qubits in the</span>
-<span class="sd">            second error.</span>
-
-<span class="sd">            Example: For two single qubit errors E0 E1, E1.kron(E0) will</span>
-<span class="sd">            be a two-qubit error where E0 acts on qubit-0 and E1 acts on</span>
-<span class="sd">            qubit-1.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if the power is not a positive integer.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Can only power with positive integer powers.&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
 
-        <span class="c1"># Error checking</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a QuantumError&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+<div class="viewcode-block" id="QuantumError.tensor"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.tensor">[docs]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product quantum error channel self ⊗ other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumError): a quantum error channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumError: the tensor product error channel self ⊗ other.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other cannot be converted to a QuantumError.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumError.expand"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product quantum error channel self ⊗ other.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumError): a quantum error channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumError: the tensor product error channel other ⊗ self.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other cannot be converted to a QuantumError.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumError.kron"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.kron">[docs]</a>    <span class="k">def</span> <span class="nf">kron</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product quantum error channel self ⊗ other.</span>
+
+<span class="sd">        DEPRECIATED: use QuantumError.tensor instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumError): a quantum error or channel.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumError: the tensor product channel self ⊗ other.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s1">&#39;The kron() method is deprecated and will be removed &#39;</span>
+            <span class="s1">&#39;in a future release. Use QuantumError.tensor instead.&#39;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_tensor_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tensor product error channel.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (QuantumError): a quantum channel subclass</span>
+<span class="sd">            reverse (bool): If False return self ⊗ other, if True return</span>
+<span class="sd">                            if True return (other ⊗ self) [Default: False</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumError: the tensor product error channel.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NoiseError: if other cannot be converted to a QuantumError.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert other into a quantum error</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="n">combined_noise_circuits</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">combined_noise_probabilities</span> <span class="o">=</span> <span class="p">[]</span>
-
         <span class="c1"># Combine subcircuits and probabilities</span>
-        <span class="n">shift_qubits</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span>
-        <span class="k">for</span> <span class="n">circuit1</span><span class="p">,</span> <span class="n">prob1</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">circuit0</span><span class="p">,</span> <span class="n">prob0</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="n">error</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
+            <span class="n">shift_qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span>
+            <span class="n">noise_ops0</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+            <span class="n">noise_ops1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shift_qubits</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">number_of_qubits</span>
+            <span class="n">noise_ops0</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+            <span class="n">noise_ops1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_circuits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_probabilities</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">circuit1</span><span class="p">,</span> <span class="n">prob1</span> <span class="ow">in</span> <span class="n">noise_ops1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">circuit0</span><span class="p">,</span> <span class="n">prob0</span> <span class="ow">in</span> <span class="n">noise_ops0</span><span class="p">:</span>
                 <span class="n">combined_noise_probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob0</span> <span class="o">*</span> <span class="n">prob1</span><span class="p">)</span>
-
                 <span class="c1"># Shift qubits in circuit1</span>
                 <span class="n">circuit1_shift</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">circuit1</span><span class="p">:</span>
-                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="n">circuit1</span><span class="p">:</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">instr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
                     <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span> <span class="o">+</span> <span class="n">shift_qubits</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]]</span>
                     <span class="n">circuit1_shift</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
                 <span class="n">tmp_combined</span> <span class="o">=</span> <span class="n">circuit0</span> <span class="o">+</span> <span class="n">circuit1_shift</span>
                 <span class="c1"># Fuse compatible ops to reduce noise operations:</span>
                 <span class="n">combined_circuit</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp_combined</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-                <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">tmp_combined</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-                    <span class="n">last_op</span> <span class="o">=</span> <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">name</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
-                        <span class="c1"># Pass identity operation</span>
-                        <span class="k">pass</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;unitary&#39;</span> <span class="ow">and</span> <span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;unitary&#39;</span> <span class="ow">and</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">_qubits_distinct</span><span class="p">(</span><span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">],</span> <span class="n">op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">])):</span>
-                        <span class="c1"># Combine unitary matrix operations</span>
-                        <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kron_unitary</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">last_op</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span> <span class="ow">and</span> <span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span> <span class="ow">and</span>
-                          <span class="bp">self</span><span class="o">.</span><span class="n">_qubits_distinct</span><span class="p">(</span><span class="n">last_op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">],</span> <span class="n">op</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">])):</span>
-                        <span class="c1"># Combine Kraus operations</span>
-                        <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kron_kraus</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">last_op</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="n">tmp_combined</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="c1"># Check if instructions can be combined</span>
+                    <span class="n">last_instr</span> <span class="o">=</span> <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">last_name</span> <span class="o">=</span> <span class="n">last_instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="n">can_combine</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
+                                   <span class="ow">or</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">can_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">last_name</span><span class="p">)</span>
+                            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
+                        <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_instr</span><span class="p">(</span>
+                            <span class="n">last_instr</span><span class="p">,</span> <span class="n">instr</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="c1"># Append the operation</span>
-                        <span class="n">combined_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                        <span class="c1"># If they cannot be combined append the operation</span>
+                        <span class="n">combined_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instr</span><span class="p">)</span>
                 <span class="c1"># Check if circuit is empty and add identity</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">combined_circuit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">combined_circuit</span><span class="p">:</span>
                     <span class="n">combined_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
                 <span class="c1"># Add circuit</span>
                 <span class="n">combined_noise_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combined_circuit</span><span class="p">)</span>
-        <span class="n">noise_ops</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">combined_noise_circuits</span><span class="p">,</span>
-                        <span class="n">combined_noise_probabilities</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span></div>
+        <span class="c1"># Now we combine any error circuits containing only Kraus operations</span>
+        <span class="n">noise_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_kraus</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">combined_noise_circuits</span><span class="p">,</span> <span class="n">combined_noise_probabilities</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_kron_kraus</span><span class="p">(</span><span class="n">kraus1</span><span class="p">,</span> <span class="n">kraus0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Helper function for kron of two kraus qobj instructions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">qubits</span> <span class="o">=</span> <span class="n">kraus0</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">kraus1</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">kraus0</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
-                  <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">kraus1</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubits</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">}</span>
+    <span class="k">def</span> <span class="nf">_combine_kraus</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Combine any noise circuits containing only Kraus instructions.&quot;&quot;&quot;</span>
+        <span class="n">kraus_instr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">kraus_probs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">new_circuits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">new_probs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Partion circuits into Kraus and non-Kraus</span>
+        <span class="k">for</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">noise_ops</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">circuit</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span><span class="p">:</span>
+                <span class="n">kraus_instr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">kraus_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+                <span class="n">new_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+        <span class="c1"># Recursivly combine matching Kraus instructions</span>
+        <span class="k">while</span> <span class="n">kraus_instr</span><span class="p">:</span>
+            <span class="n">instr</span> <span class="o">=</span> <span class="n">kraus_instr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">prob</span> <span class="o">=</span> <span class="n">kraus_probs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kraus_instr</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]:</span>
+                    <span class="c1"># remove from lists</span>
+                    <span class="n">kraus_instr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">prob_i</span> <span class="o">=</span> <span class="n">kraus_probs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">+</span> <span class="n">prob_i</span>
+                    <span class="n">kraus</span> <span class="o">=</span> <span class="p">(</span><span class="n">prob</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">Kraus</span><span class="p">(</span>
+                        <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">prob_i</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span>
+                    <span class="c1"># update instruction</span>
+                    <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;param&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kraus</span><span class="o">.</span><span class="n">data</span>
+                    <span class="n">prob</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="c1"># append combined instruction to circuits</span>
+            <span class="n">new_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">instr</span><span class="p">])</span>
+            <span class="n">new_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">new_circuits</span><span class="p">,</span> <span class="n">new_probs</span><span class="p">))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_kron_unitary</span><span class="p">(</span><span class="n">unitary1</span><span class="p">,</span> <span class="n">unitary0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Helper function for kron of two unitary qobj instructions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">qubits</span> <span class="o">=</span> <span class="n">unitary0</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">unitary1</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">unitary1</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span> <span class="n">unitary0</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;unitary&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubits</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">}</span>
+    <span class="k">def</span> <span class="nf">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if instruction name can be converted to standard operator&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">,</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;tdg&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">,</span> <span class="s1">&#39;swap&#39;</span><span class="p">,</span> <span class="s1">&#39;ccx&#39;</span>
+        <span class="p">]</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_compose_kraus</span><span class="p">(</span><span class="n">kraus0</span><span class="p">,</span> <span class="n">kraus1</span><span class="p">):</span>
-        <span class="n">qubits0</span> <span class="o">=</span> <span class="n">kraus0</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
-        <span class="n">qubits1</span> <span class="o">=</span> <span class="n">kraus1</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">qubits0</span> <span class="o">!=</span> <span class="n">qubits1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Kraus instructions are on different qubits&quot;</span><span class="p">)</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">kraus0</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
-                  <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">kraus1</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubits0</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">}</span>
+    <span class="k">def</span> <span class="nf">_instr2op</span><span class="p">(</span><span class="n">instr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Try and convert an instruction into an operator&quot;&quot;&quot;</span>
+        <span class="c1"># Try and convert to operator first</span>
+        <span class="n">operator</span> <span class="o">=</span> <span class="n">standard_instruction_operator</span><span class="p">(</span><span class="n">instr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">operator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">operator</span>
+        <span class="c1"># Otherwise return SuperOp or None</span>
+        <span class="k">return</span> <span class="n">standard_instruction_channel</span><span class="p">(</span><span class="n">instr</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_compose_unitary</span><span class="p">(</span><span class="n">mat0</span><span class="p">,</span> <span class="n">mat1</span><span class="p">):</span>
-        <span class="n">qubits0</span> <span class="o">=</span> <span class="n">mat0</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
-        <span class="n">qubits1</span> <span class="o">=</span> <span class="n">mat1</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">qubits0</span> <span class="o">!=</span> <span class="n">qubits1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Unitary instructions are on different qubits&quot;</span><span class="p">)</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mat1</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span> <span class="n">mat0</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;unitary&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubits0</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">}</span>
+    <span class="k">def</span> <span class="nf">_tensor_instr</span><span class="p">(</span><span class="n">instr0</span><span class="p">,</span> <span class="n">instr1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tensor of two operator qobj instructions.&quot;&quot;&quot;</span>
+        <span class="c1"># If one of the instructions is an identity we only need</span>
+        <span class="c1"># to return the other instruction</span>
+        <span class="k">if</span> <span class="n">instr0</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">instr1</span>
+        <span class="k">if</span> <span class="n">instr1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">instr0</span>
+        <span class="c1"># Combine qubits</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="n">instr0</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">instr1</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
+        <span class="c1"># Convert to ops</span>
+        <span class="n">op0</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="o">.</span><span class="n">_instr2op</span><span class="p">(</span><span class="n">instr0</span><span class="p">)</span>
+        <span class="n">op1</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="o">.</span><span class="n">_instr2op</span><span class="p">(</span><span class="n">instr1</span><span class="p">)</span>
+        <span class="c1"># Check if at least one of the instructions is a channel</span>
+        <span class="c1"># and if so convert to Kraus representation.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op0</span><span class="p">,</span> <span class="n">SuperOp</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">SuperOp</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;kraus&#39;</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="n">op0</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">op1</span><span class="p">))</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;unitary&#39;</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">op0</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">op1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubits</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">}</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_qubits_distinct</span><span class="p">(</span><span class="n">qubits0</span><span class="p">,</span> <span class="n">qubits1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return true if two lists of qubits are distinct.&quot;&quot;&quot;</span>
-        <span class="n">joint</span> <span class="o">=</span> <span class="n">qubits0</span> <span class="o">+</span> <span class="n">qubits1</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">joint</span><span class="p">))</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">joint</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">_compose_instr</span><span class="p">(</span><span class="n">instr0</span><span class="p">,</span> <span class="n">instr1</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper function for compose a kraus with another instruction.&quot;&quot;&quot;</span>
+        <span class="c1"># If one of the instructions is an identity we only need</span>
+        <span class="c1"># to return the other instruction</span>
+        <span class="k">if</span> <span class="n">instr0</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">instr1</span>
+        <span class="k">if</span> <span class="n">instr1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">instr0</span>
+        <span class="c1"># Convert to ops</span>
+        <span class="n">op0</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="o">.</span><span class="n">_instr2op</span><span class="p">(</span><span class="n">instr0</span><span class="p">)</span>
+        <span class="n">op1</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="o">.</span><span class="n">_instr2op</span><span class="p">(</span><span class="n">instr1</span><span class="p">)</span>
+        <span class="c1"># Check if at least one of the instructions is a channel</span>
+        <span class="c1"># and if so convert both to SuperOp representation</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op0</span><span class="p">,</span>
+                      <span class="p">(</span><span class="n">SuperOp</span><span class="p">,</span> <span class="n">Kraus</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="p">(</span><span class="n">SuperOp</span><span class="p">,</span> <span class="n">Kraus</span><span class="p">)):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;kraus&#39;</span>
+            <span class="n">op0</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="p">(</span><span class="n">op0</span><span class="p">)</span>
+            <span class="n">op1</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="p">(</span><span class="n">op1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;unitary&#39;</span>
+        <span class="c1"># Check qubits for compositions</span>
+        <span class="n">qubits0</span> <span class="o">=</span> <span class="n">instr0</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
+        <span class="n">qubits1</span> <span class="o">=</span> <span class="n">instr1</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">qubits0</span> <span class="o">==</span> <span class="n">qubits1</span><span class="p">:</span>
+            <span class="n">composed</span> <span class="o">=</span> <span class="n">op0</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">op1</span><span class="p">)</span>
+            <span class="n">qubits</span> <span class="o">=</span> <span class="n">qubits0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If qubits don&#39;t match we compose with total number of qubits</span>
+            <span class="c1"># for the error</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span><span class="p">:</span>
+                <span class="n">composed</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span> <span class="o">**</span> <span class="n">num_qubits</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">composed</span> <span class="o">=</span> <span class="n">Operator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">num_qubits</span><span class="p">))</span>
+            <span class="n">composed</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">op0</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="n">qubits0</span><span class="p">)</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="n">qubits1</span><span class="p">)</span>
+            <span class="n">qubits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">))</span>
+        <span class="c1"># Get instruction params</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;kraus&#39;</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">composed</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">composed</span><span class="o">.</span><span class="n">data</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="n">qubits</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">}</span></div>
 </pre></div>
 
         </div>
