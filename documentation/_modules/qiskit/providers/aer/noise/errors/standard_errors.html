@@ -128,29 +128,34 @@
         <div class="page-content">
         
   <h1>Source code for qiskit.providers.aer.noise.errors.standard_errors</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-
-<span class="c1"># Copyright 2018, IBM.</span>
+<span></span><span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
-
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Standard quantum computing error channels for Qiskit Aer.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.pauli</span> <span class="k">import</span> <span class="n">Pauli</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel</span> <span class="k">import</span> <span class="n">Choi</span><span class="p">,</span> <span class="n">Kraus</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">is_unitary_matrix</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">is_identity_matrix</span>
+
 <span class="kn">from</span> <span class="nn">..noiseerror</span> <span class="k">import</span> <span class="n">NoiseError</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">make_unitary_instruction</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">qubits_from_mat</span>
-<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">canonical_kraus_matrices</span>
-<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">choi2kraus</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">standard_gate_unitary</span>
-<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">is_unitary_matrix</span>
-<span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">is_identity_matrix</span>
 <span class="kn">from</span> <span class="nn">.quantum_error</span> <span class="k">import</span> <span class="n">QuantumError</span>
 
 
@@ -171,12 +176,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid Kraus error input.&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">noise_ops</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Kraus error noise_ops must not be empty.&quot;</span><span class="p">)</span>
-    <span class="n">kraus_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">noise_ops</span><span class="p">]</span>
+    <span class="n">kraus</span> <span class="o">=</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">canonical_kraus</span><span class="p">:</span>
-        <span class="n">kraus_ops</span> <span class="o">=</span> <span class="n">canonical_kraus_matrices</span><span class="p">(</span><span class="n">kraus_ops</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">kraus_ops</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span></div>
+        <span class="c1"># Convert to Choi and back to get canonical Kraus</span>
+        <span class="n">kraus</span> <span class="o">=</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">Choi</span><span class="p">(</span><span class="n">kraus</span><span class="p">))</span>  
+    <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">kraus</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="mixed_unitary_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.mixed_unitary_error">[docs]</a><span class="k">def</span> <span class="nf">mixed_unitary_error</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -204,7 +210,7 @@
 
     <span class="c1"># Convert to numpy arrays</span>
     <span class="n">noise_ops</span> <span class="o">=</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">op</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">noise_ops</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">noise_ops</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input noise list is empty.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Check for identity unitaries</span>
@@ -222,8 +228,8 @@
         <span class="k">if</span> <span class="n">is_identity_matrix</span><span class="p">(</span><span class="n">unitary</span><span class="p">):</span>
             <span class="n">prob_identity</span> <span class="o">+=</span> <span class="n">prob</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">instr</span> <span class="o">=</span> <span class="n">make_unitary_instruction</span><span class="p">(</span><span class="n">unitary</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span>
-                                             <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
+            <span class="n">instr</span> <span class="o">=</span> <span class="n">make_unitary_instruction</span><span class="p">(</span>
+                <span class="n">unitary</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
             <span class="n">instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instr</span><span class="p">)</span>
             <span class="n">instructions_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">prob_identity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -271,11 +277,10 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input noise ops is not a list.&quot;</span><span class="p">)</span>
     <span class="n">noise_ops</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">noise_ops</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Input noise list is empty.&quot;</span><span class="p">)</span>
     <span class="n">num_qubits</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">noise_ops</span><span class="p">:</span>
-        <span class="n">pauli</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">pauli</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">noise_ops</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pauli</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">):</span>
             <span class="n">pauli_str</span> <span class="o">=</span> <span class="n">pauli</span><span class="o">.</span><span class="n">to_label</span><span class="p">()</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pauli</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -291,21 +296,22 @@
     <span class="k">if</span> <span class="n">standard_gates</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_pauli_error_unitary</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">)</span>
     <span class="c1"># Compute as qobj Pauli gate instructions</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_pauli_error_standard</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_pauli_error_standard</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_pauli_error_unitary</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return Pauli error as unitary qobj instructions.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">single_pauli</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">single_pauli</span><span class="p">(</span><span class="n">pauli</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">standard_gate_unitary</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">standard_gate_unitary</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">standard_gate_unitary</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">standard_gate_unitary</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid Pauli string.&quot;</span><span class="p">)</span>
 
     <span class="n">prob_identity</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">pauli_circs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -321,40 +327,41 @@
                 <span class="n">pauli_str</span> <span class="o">=</span> <span class="n">pauli</span><span class="o">.</span><span class="n">to_label</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">pauli_str</span> <span class="o">=</span> <span class="n">pauli</span>
-            <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">pauli_str</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]:</span>
-                    <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">single_pauli</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">mat</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">pstr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">pauli_str</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">pstr</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]:</span>
+                    <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">single_pauli</span><span class="p">(</span><span class="n">pstr</span><span class="p">),</span> <span class="n">mat</span><span class="p">)</span>
                     <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">s</span> <span class="o">!=</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">pstr</span> <span class="o">!=</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid Pauli string.&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">mat</span> <span class="ow">is</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">prob_identity</span> <span class="o">+=</span> <span class="n">prob</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">circ</span> <span class="o">=</span> <span class="n">make_unitary_instruction</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span>
-                                                <span class="n">standard_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">circ</span> <span class="o">=</span> <span class="n">make_unitary_instruction</span><span class="p">(</span>
+                    <span class="n">mat</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                 <span class="n">pauli_circs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
                 <span class="n">pauli_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">prob_identity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">pauli_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob_identity</span><span class="p">)</span>
         <span class="n">pauli_circs</span><span class="o">.</span><span class="n">append</span><span class="p">([{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}])</span>
 
-    <span class="n">error</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pauli_circs</span><span class="p">,</span> <span class="n">pauli_probs</span><span class="p">),</span>
-                         <span class="n">number_of_qubits</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span>
+        <span class="nb">zip</span><span class="p">(</span><span class="n">pauli_circs</span><span class="p">,</span> <span class="n">pauli_probs</span><span class="p">),</span> <span class="n">number_of_qubits</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error</span>
 
 
 <span class="k">def</span> <span class="nf">_pauli_error_standard</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return Pauli error as standard Pauli gate qobj instructions.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">single_pauli</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">single_pauli</span><span class="p">(</span><span class="n">pauli</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">}</span>
+
     <span class="n">prob_identity</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">pauli_circuits</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">pauli_probs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -368,12 +375,12 @@
                 <span class="n">pauli_str</span> <span class="o">=</span> <span class="n">pauli</span><span class="o">.</span><span class="n">to_label</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">pauli_str</span> <span class="o">=</span> <span class="n">pauli</span>
-            <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">pauli_str</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]:</span>
-                    <span class="n">instruction</span> <span class="o">=</span> <span class="n">single_pauli</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">pstr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">pauli_str</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">pstr</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]:</span>
+                    <span class="n">instruction</span> <span class="o">=</span> <span class="n">single_pauli</span><span class="p">(</span><span class="n">pstr</span><span class="p">)</span>
                     <span class="n">instruction</span><span class="p">[</span><span class="s2">&quot;qubits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">qubit</span><span class="p">]</span>
                     <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">s</span> <span class="o">!=</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">pstr</span> <span class="o">!=</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid Pauli string.&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">circuit</span> <span class="o">==</span> <span class="p">[]:</span>
                 <span class="n">prob_identity</span> <span class="o">+=</span> <span class="n">prob</span>
@@ -384,8 +391,8 @@
         <span class="n">pauli_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">([{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}])</span>
         <span class="n">pauli_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob_identity</span><span class="p">)</span>
 
-    <span class="n">error</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pauli_circuits</span><span class="p">,</span> <span class="n">pauli_probs</span><span class="p">),</span>
-                         <span class="n">number_of_qubits</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span>
+        <span class="nb">zip</span><span class="p">(</span><span class="n">pauli_circuits</span><span class="p">,</span> <span class="n">pauli_probs</span><span class="p">),</span> <span class="n">number_of_qubits</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error</span>
 
 
@@ -403,20 +410,30 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        QuantumError: The quantum error object.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NoiseError: If noise parameters are invalid.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">prob</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">prob</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Depolarizing probability must be in between 0 and 1.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+            <span class="s2">&quot;Depolarizing probability must be in between 0 and 1.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">num_qubits</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;num_qubits must be a positive integer.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Rescale completely depolarizing channel error probs</span>
     <span class="c1"># with the identity component removed</span>
-    <span class="n">num_terms</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">**</span> <span class="n">num_qubits</span>  <span class="c1"># terms in completely depolarizing channel</span>
+    <span class="n">num_terms</span> <span class="o">=</span> <span class="mi">4</span><span class="o">**</span><span class="n">num_qubits</span>  <span class="c1"># terms in completely depolarizing channel</span>
     <span class="n">prob_error</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">/</span> <span class="n">num_terms</span>
-    <span class="n">prob_iden</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob_error</span>  <span class="c1"># subtract off non-identity terms</span>
+    <span class="n">prob_iden</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span>
+        <span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob_error</span>  <span class="c1"># subtract off non-identity terms</span>
     <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">prob_iden</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="n">prob_error</span><span class="p">]</span>
     <span class="c1"># Generate pauli strings. The order doesn&#39;t matter as long</span>
     <span class="c1"># as the all identity string is first.</span>
-    <span class="n">paulis</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)]</span>
+    <span class="n">paulis</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">it</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="p">]</span>
     <span class="k">return</span> <span class="n">pauli_error</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">paulis</span><span class="p">,</span> <span class="n">probs</span><span class="p">),</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span></div>
 
 
@@ -431,11 +448,28 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        QuantumError: the quantum error object.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NoiseError: If noise parameters are invalid.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">prob0</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">prob1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">prob0</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">prob1</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid reset probabilities.&quot;</span><span class="p">)</span>
     <span class="n">noise_ops</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">prob0</span> <span class="o">-</span> <span class="n">prob1</span><span class="p">),</span>
-        <span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span> <span class="n">prob0</span><span class="p">),</span>
-        <span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span> <span class="n">prob1</span><span class="p">),</span>
+        <span class="p">([{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}],</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">prob0</span> <span class="o">-</span> <span class="n">prob1</span><span class="p">),</span>
+        <span class="p">([{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}],</span> <span class="n">prob0</span><span class="p">),</span>
+        <span class="p">([{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">},</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}],</span> <span class="n">prob1</span><span class="p">),</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span></div>
 
@@ -445,14 +479,17 @@
 <span class="sd">    Single-qubit thermal relaxation quantum error channel.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        t1 (double &gt; 0): the T_1 relaxation time constant.</span>
-<span class="sd">        t2 (double &gt; 0): the T_2 relaxation time constant.</span>
-<span class="sd">        gate_time (double &gt;= 0): the time period for relaxation error.</span>
+<span class="sd">        t1 (double): the T_1 relaxation time constant.</span>
+<span class="sd">        t2 (double): the T_2 relaxation time constant.</span>
+<span class="sd">        time (double): the gate time for relaxation error.</span>
 <span class="sd">        excited_state_population (double): the population of |1&gt; state at</span>
 <span class="sd">                                           equilibrium (default: 0).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        QuantumError: a quantum error object for a noise model.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NoiseError: If noise parameters are invalid.</span>
 
 <span class="sd">    Additional information:</span>
 <span class="sd">        For parameters to be valid T_2 &lt;= 2 * T_1.</span>
@@ -462,10 +499,10 @@
 <span class="sd">        non-unitary Kraus error channel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">excited_state_population</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> &lt; 0).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">excited_state_population</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">excited_state_population</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> &gt; 1).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">excited_state_population</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid gate_time (</span><span class="si">{}</span><span class="s2"> &lt; 0)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
@@ -474,7 +511,8 @@
     <span class="k">if</span> <span class="n">t2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 &lt;= 0.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">t2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 greater than 2 * T_1.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 greater than 2 * T_1.&quot;</span><span class="p">)</span>
 
     <span class="c1"># T1 relaxation rate</span>
     <span class="k">if</span> <span class="n">t1</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
@@ -497,21 +535,30 @@
     <span class="k">if</span> <span class="n">t2</span> <span class="o">&gt;</span> <span class="n">t1</span><span class="p">:</span>
         <span class="c1"># If T_2 &gt; T_1 we must express this as a Kraus channel</span>
         <span class="c1"># We start with the Choi-matrix representation:</span>
-        <span class="n">choi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">exp_t2</span><span class="p">],</span>
-                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                         <span class="p">[</span><span class="n">exp_t2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">]])</span>
-        <span class="c1"># Find canonical Kraus operators by eigendecomposition of Choi-matrix</span>
-        <span class="n">kraus</span> <span class="o">=</span> <span class="n">choi2kraus</span><span class="p">(</span><span class="n">choi</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">kraus</span><span class="p">)</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">Choi</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">exp_t2</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span><span class="n">exp_t2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">p_reset</span><span class="p">]]))</span>
+        <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">Kraus</span><span class="p">(</span><span class="n">chan</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># If T_2 &lt; T_1 we can express this channel as a probabilistic</span>
         <span class="c1"># mixture of reset operations and unitary errors:</span>
-        <span class="n">circuits</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
-            <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
-            <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
-            <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]]</span>
+        <span class="n">circuits</span> <span class="o">=</span> <span class="p">[[{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}],</span> <span class="p">[{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}],</span> <span class="p">[{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}],</span> <span class="p">[{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">},</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}]]</span>
         <span class="c1"># Probability</span>
         <span class="n">p_reset0</span> <span class="o">=</span> <span class="n">p_reset</span> <span class="o">*</span> <span class="n">p0</span>
         <span class="n">p_reset1</span> <span class="o">=</span> <span class="n">p_reset</span> <span class="o">*</span> <span class="n">p1</span>
@@ -521,7 +568,8 @@
         <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="phase_amplitude_damping_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.phase_amplitude_damping_error">[docs]</a><span class="k">def</span> <span class="nf">phase_amplitude_damping_error</span><span class="p">(</span><span class="n">param_amp</span><span class="p">,</span> <span class="n">param_phase</span><span class="p">,</span>
+<div class="viewcode-block" id="phase_amplitude_damping_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.phase_amplitude_damping_error">[docs]</a><span class="k">def</span> <span class="nf">phase_amplitude_damping_error</span><span class="p">(</span><span class="n">param_amp</span><span class="p">,</span>
+                                  <span class="n">param_phase</span><span class="p">,</span>
                                   <span class="n">excited_state_population</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                   <span class="n">canonical_kraus</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -537,6 +585,9 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        QuantumError: a quantum error object for a noise model.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NoiseError: If noise parameters are invalid.</span>
 
 <span class="sd">    Additional information:</span>
 <span class="sd">        The single-qubit combined phase and amplitude damping channel is</span>
@@ -561,19 +612,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">param_amp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid amplitude damping to |0&gt; parameter &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid amplitude damping to |0&gt; parameter &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> &lt; 0)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param_amp</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">param_phase</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid phase damping parameter &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid phase damping parameter &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> &lt; 0)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param_phase</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">param_phase</span> <span class="o">+</span> <span class="n">param_amp</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid amplitude and phase damping parameters &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid amplitude and phase damping parameters &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> + </span><span class="si">{}</span><span class="s2"> &gt; 1)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param_phase</span><span class="p">,</span> <span class="n">param_amp</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">excited_state_population</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> &lt; 0).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">excited_state_population</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">excited_state_population</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span> <span class="o">+</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid excited state population &quot;</span>
                          <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2"> &gt; 1).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">excited_state_population</span><span class="p">))</span>
     <span class="n">c0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">excited_state_population</span><span class="p">)</span>
     <span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">excited_state_population</span><span class="p">)</span>
@@ -587,12 +638,14 @@
     <span class="n">B1</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">param_amp</span><span class="p">),</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
     <span class="n">B2</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">param_phase</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
     <span class="c1"># Select non-zero ops</span>
-    <span class="n">noise_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">B0</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">]</span>
-                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">]</span>
+    <span class="n">noise_ops</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">B0</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">]</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span>
+    <span class="p">]</span>
     <span class="k">return</span> <span class="n">kraus_error</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">,</span> <span class="n">canonical_kraus</span><span class="o">=</span><span class="n">canonical_kraus</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="amplitude_damping_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.amplitude_damping_error">[docs]</a><span class="k">def</span> <span class="nf">amplitude_damping_error</span><span class="p">(</span><span class="n">param_amp</span><span class="p">,</span> <span class="n">excited_state_population</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<div class="viewcode-block" id="amplitude_damping_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.amplitude_damping_error">[docs]</a><span class="k">def</span> <span class="nf">amplitude_damping_error</span><span class="p">(</span><span class="n">param_amp</span><span class="p">,</span>
+                            <span class="n">excited_state_population</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                             <span class="n">canonical_kraus</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Single-qubit generalized amplitude damping quantum error channel.</span>
@@ -624,9 +677,11 @@
 <span class="sd">            rho = [[1 - p1, 0]],</span>
 <span class="sd">                   [0, p1]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">phase_amplitude_damping_error</span><span class="p">(</span><span class="n">param_amp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-                                         <span class="n">excited_state_population</span><span class="o">=</span><span class="n">excited_state_population</span><span class="p">,</span>
-                                         <span class="n">canonical_kraus</span><span class="o">=</span><span class="n">canonical_kraus</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">phase_amplitude_damping_error</span><span class="p">(</span>
+        <span class="n">param_amp</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="n">excited_state_population</span><span class="o">=</span><span class="n">excited_state_population</span><span class="p">,</span>
+        <span class="n">canonical_kraus</span><span class="o">=</span><span class="n">canonical_kraus</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="phase_damping_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.phase_damping_error">[docs]</a><span class="k">def</span> <span class="nf">phase_damping_error</span><span class="p">(</span><span class="n">param_phase</span><span class="p">,</span> <span class="n">canonical_kraus</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -655,9 +710,11 @@
 <span class="sd">                   [0, rho[1, 1]]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">phase_amplitude_damping_error</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">param_phase</span><span class="p">,</span>
-                                         <span class="n">excited_state_population</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                         <span class="n">canonical_kraus</span><span class="o">=</span><span class="n">canonical_kraus</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">phase_amplitude_damping_error</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="n">param_phase</span><span class="p">,</span>
+        <span class="n">excited_state_population</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">canonical_kraus</span><span class="o">=</span><span class="n">canonical_kraus</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

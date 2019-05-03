@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.ignis.verification.randomized_benchmarking.clifford_utils &#8212; Qiskit 0.7 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.ignis.verification.randomized_benchmarking.clifford_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Advanced Clifford operations needed for randomized benchmarking</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qiskit</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Clifford</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">cPickle</span> <span class="k">as</span> <span class="nn">pickle</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pickle</span>
+
+
+<span class="c1"># ----------------------------------------------------------------------------------------</span>
+<span class="c1"># Functions that convert to/from a Clifford object</span>
+<span class="c1"># ----------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="compose_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.compose_gates">[docs]</a><span class="k">def</span> <span class="nf">compose_gates</span><span class="p">(</span><span class="n">cliff</span><span class="p">,</span> <span class="n">gatelist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add gates to a Clifford object from a list of gates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cliff: A Clifford class object.</span>
+<span class="sd">        gatelist: a list of gates.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A Clifford class object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">gatelist</span><span class="p">:</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">w</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">y</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cx&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sdg&#39;</span><span class="p">:</span>
+            <span class="n">cliff</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown gate type: &quot;</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cliff</span></div>
+
+
+<div class="viewcode-block" id="clifford_from_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.clifford_from_gates">[docs]</a><span class="k">def</span> <span class="nf">clifford_from_gates</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">gatelist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Clifford object from a list of gates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_qubits: the number of qubits for the Clifford.</span>
+<span class="sd">        gatelist: a list of gates.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A num-qubit Clifford class object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cliff</span> <span class="o">=</span> <span class="n">Clifford</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">new_cliff</span> <span class="o">=</span> <span class="n">compose_gates</span><span class="p">(</span><span class="n">cliff</span><span class="p">,</span> <span class="n">gatelist</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_cliff</span></div>
+
+
+<span class="c1"># --------------------------------------------------------</span>
+<span class="c1"># Add gates to Cliffords</span>
+<span class="c1"># --------------------------------------------------------</span>
+
+<div class="viewcode-block" id="pauli_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.pauli_gates">[docs]</a><span class="k">def</span> <span class="nf">pauli_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">pauli</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;adds a pauli gate on qubit q&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;x &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">pauli</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;y &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">pauli</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;z &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="h_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.h_gates">[docs]</a><span class="k">def</span> <span class="nf">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;adds a hadamard gate or not on qubit q&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;h &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="v_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.v_gates">[docs]</a><span class="k">def</span> <span class="nf">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;adds an axis-swap-gates on qubit q&quot;&quot;&quot;</span>
+    <span class="c1">#  rotation is V=HSHS = [[0,1],[1,1]] tableau</span>
+    <span class="c1">#  takes Z-&gt;X-&gt;Y-&gt;Z</span>
+    <span class="c1">#  V is of order 3, and two V-gates is W-gate, so: W=VV and WV=I</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;v &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">v</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;w &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="cx_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.cx_gates">[docs]</a><span class="k">def</span> <span class="nf">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="n">ctrl</span><span class="p">,</span> <span class="n">tgt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;adds a controlled=x gates&quot;&quot;&quot;</span>
+    <span class="n">gatelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;cx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctrl</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tgt</span><span class="p">))</span></div>
+
+
+<span class="c1"># --------------------------------------------------------</span>
+<span class="c1"># Create a 1 or 2 Qubit Clifford based on a unique index</span>
+<span class="c1"># --------------------------------------------------------</span>
+
+<div class="viewcode-block" id="clifford1_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.clifford1_gates">[docs]</a><span class="k">def</span> <span class="nf">clifford1_gates</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a single qubit Clifford gate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        idx: the index (mod 24) of a single qubit Clifford.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A single qubit Clifford gate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">gatelist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cannonical Ordering of Cliffords 0,...,23</span>
+    <span class="n">cannonicalorder</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">24</span>
+    <span class="n">pauli</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">cannonicalorder</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">rotation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">cannonicalorder</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">h_or_not</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">cannonicalorder</span> <span class="o">//</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h_or_not</span><span class="p">)</span>
+
+    <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rotation</span><span class="p">)</span>  <span class="c1"># do the R-gates</span>
+
+    <span class="n">pauli_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pauli</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">gatelist</span></div>
+
+
+<div class="viewcode-block" id="clifford2_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.clifford2_gates">[docs]</a><span class="k">def</span> <span class="nf">clifford2_gates</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a 2-qubit Clifford gate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        idx: the index (mod 11520) of a two-qubit Clifford.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A 2-qubit Clifford gate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">gatelist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cannon</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">11520</span>
+
+    <span class="n">pauli</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">cannon</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="n">symp</span> <span class="o">=</span> <span class="n">cannon</span> <span class="o">//</span> <span class="mi">16</span>
+
+    <span class="k">if</span> <span class="n">symp</span> <span class="o">&lt;</span> <span class="mi">36</span><span class="p">:</span>  <span class="c1"># 1-qubit Cliffords Class</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h0</span><span class="p">)</span>
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">symp</span> <span class="o">&lt;</span> <span class="mi">360</span><span class="p">:</span>  <span class="c1"># CNOT-like Class</span>
+        <span class="n">symp</span> <span class="o">=</span> <span class="n">symp</span> <span class="o">-</span> <span class="mi">36</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h0</span><span class="p">)</span>
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+        <span class="n">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r3</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">symp</span> <span class="o">&lt;</span> <span class="mi">684</span><span class="p">:</span>  <span class="c1"># iSWAP-like Class</span>
+        <span class="n">symp</span> <span class="o">=</span> <span class="n">symp</span> <span class="o">-</span> <span class="mi">360</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h0</span><span class="p">)</span>
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+        <span class="n">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r3</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># SWAP Class</span>
+        <span class="n">symp</span> <span class="o">=</span> <span class="n">symp</span> <span class="o">-</span> <span class="mi">684</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">symp</span> <span class="o">//</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h0</span><span class="p">)</span>
+        <span class="n">h_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span>
+
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+        <span class="n">v_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+
+        <span class="n">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cx_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">pauli_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">pauli</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">pauli_gates</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pauli</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">gatelist</span></div>
+
+
+<span class="c1"># --------------------------------------------------------</span>
+<span class="c1"># Create a 1 or 2 Qubit Clifford tables</span>
+<span class="c1"># --------------------------------------------------------</span>
+<div class="viewcode-block" id="clifford2_gates_table"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.clifford2_gates_table">[docs]</a><span class="k">def</span> <span class="nf">clifford2_gates_table</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a table of all 2-qubit Clifford gates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A table of all 2-qubit Clifford gates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cliffords2</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11520</span><span class="p">):</span>
+        <span class="n">circ</span> <span class="o">=</span> <span class="n">clifford2_gates</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">clifford_from_gates</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">()</span>
+        <span class="n">cliffords2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">circ</span>
+    <span class="k">return</span> <span class="n">cliffords2</span></div>
+
+
+<div class="viewcode-block" id="clifford1_gates_table"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.clifford1_gates_table">[docs]</a><span class="k">def</span> <span class="nf">clifford1_gates_table</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a table of all 1-qubit Clifford gates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A table of all 1-qubit Clifford gates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cliffords1</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">):</span>
+        <span class="n">circ</span> <span class="o">=</span> <span class="n">clifford1_gates</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">clifford_from_gates</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">()</span>
+        <span class="n">cliffords1</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">circ</span>
+    <span class="k">return</span> <span class="n">cliffords1</span></div>
+
+
+<div class="viewcode-block" id="pickle_clifford_table"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.pickle_clifford_table">[docs]</a><span class="k">def</span> <span class="nf">pickle_clifford_table</span><span class="p">(</span><span class="n">picklefile</span><span class="o">=</span><span class="s1">&#39;cliffords2.pickle&#39;</span><span class="p">,</span> <span class="n">num_qubits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     Create pickled versions of the 1 and 2 qubit Clifford tables.</span>
+
+<span class="sd">     Args:</span>
+<span class="sd">         picklefile - pickle file name.</span>
+<span class="sd">         num_qubits - number of qubits.</span>
+
+<span class="sd">     Returns:</span>
+<span class="sd">         A pickle file with the 1 and 2 qubit Clifford tables.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="n">cliffords</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cliffords</span> <span class="o">=</span> <span class="n">clifford1_gates_table</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">cliffords</span> <span class="o">=</span> <span class="n">clifford2_gates_table</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;number of qubits bigger than is not supported for pickle&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">picklefile</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pf</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cliffords</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_clifford_table"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.load_clifford_table">[docs]</a><span class="k">def</span> <span class="nf">load_clifford_table</span><span class="p">(</span><span class="n">picklefile</span><span class="o">=</span><span class="s1">&#39;cliffords2.pickle&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      Load pickled files of the tables of 1 and 2 qubit Clifford tables.</span>
+
+<span class="sd">      Args:</span>
+<span class="sd">          picklefile - pickle file name.</span>
+
+<span class="sd">      Returns:</span>
+<span class="sd">          A table of 1 and 2 qubit Clifford gates.</span>
+<span class="sd">      &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">picklefile</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pf</span><span class="p">)</span></div>
+
+
+<span class="c1"># --------------------------------------------------------</span>
+<span class="c1"># Main function that generates a random clifford gate</span>
+<span class="c1"># --------------------------------------------------------</span>
+<div class="viewcode-block" id="random_clifford_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.random_clifford_gates">[docs]</a><span class="k">def</span> <span class="nf">random_clifford_gates</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pick a random Clifford gate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_qubits: dimension of the Clifford.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A 1 or 2 qubit Clifford gate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">clifford1_gates</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">clifford2_gates</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11520</span><span class="p">))</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of qubits should be only 1 or 2&quot;</span><span class="p">)</span></div>
+
+
+<span class="c1"># --------------------------------------------------------</span>
+<span class="c1"># Main function that calculates an inverse of a clifford gate</span>
+<span class="c1"># --------------------------------------------------------</span>
+<div class="viewcode-block" id="find_inverse_clifford_gates"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.find_inverse_clifford_gates">[docs]</a><span class="k">def</span> <span class="nf">find_inverse_clifford_gates</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">gatelist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the inverse of a Clifford gate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_qubits: the dimension of the Clifford.</span>
+<span class="sd">        gatelist: a Clifford gate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An inverse Clifford gate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">num_qubits</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">inv_gatelist</span> <span class="o">=</span> <span class="n">gatelist</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">inv_gatelist</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="c1"># replace v by w and w by v</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inv_gatelist</span><span class="p">):</span>
+            <span class="n">split</span> <span class="o">=</span> <span class="n">inv_gatelist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span>
+                <span class="n">inv_gatelist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;w &#39;</span> <span class="o">+</span> <span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+                <span class="n">inv_gatelist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;v &#39;</span> <span class="o">+</span> <span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">inv_gatelist</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of qubits should be only 1 or 2&quot;</span><span class="p">)</span></div>
+
+
+<span class="c1"># --------------------------------------------------------</span>
+<span class="c1"># Returns the Clifford circuit in the form of a QuantumCircuit object</span>
+<span class="c1"># --------------------------------------------------------</span>
+<div class="viewcode-block" id="get_quantum_circuit"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.randomized_benchmarking.clifford_utils.html#qiskit.ignis.verification.randomized_benchmarking.clifford_utils.get_quantum_circuit">[docs]</a><span class="k">def</span> <span class="nf">get_quantum_circuit</span><span class="p">(</span><span class="n">gatelist</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the Clifford circuit in the form of a QuantumCircuit object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        num_qubits: the dimension of the Clifford.</span>
+<span class="sd">        gatelist: a Clifford gate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A QuantumCircuit object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">gatelist</span><span class="p">:</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">op_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="c1"># temporary correcting the ops name since QuantumCircuit has no</span>
+        <span class="c1"># attributes &#39;v&#39; or &#39;w&#39; yet:</span>
+        <span class="k">if</span> <span class="n">op_names</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]:</span>
+            <span class="n">op_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sdg&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">op_names</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]:</span>
+            <span class="n">op_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">]</span>
+
+        <span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+        <span class="k">for</span> <span class="n">sub_op</span> <span class="ow">in</span> <span class="n">op_names</span><span class="p">:</span>
+            <span class="n">operation</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;qiskit.QuantumCircuit.&#39;</span> <span class="o">+</span> <span class="n">sub_op</span><span class="p">)</span>
+            <span class="n">operation</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="o">*</span><span class="n">qubits</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">qc</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

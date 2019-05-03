@@ -128,12 +128,17 @@
         <div class="page-content">
         
   <h1>Source code for qiskit.providers.aer.utils.qobj_utils</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-
-<span class="c1"># Copyright 2018, IBM.</span>
+<span></span><span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Temporary hacks for qobj until Terra supports Aer instructions (likely 0.8)</span>
@@ -144,28 +149,28 @@
 
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">QobjInstruction</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">QasmQobjInstruction</span>
 
 
 <div class="viewcode-block" id="append_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.append_instr">[docs]</a><span class="k">def</span> <span class="nf">append_instr</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">exp_index</span><span class="p">,</span> <span class="n">instruction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Append a QobjInstruction to a QobjExperiment.</span>
+    <span class="sd">&quot;&quot;&quot;Append a QasmQobjInstruction to a QobjExperiment.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        qobj (Qobj): a Qobj object.</span>
 <span class="sd">        exp_index (int): The index of the experiment in the qobj.</span>
-<span class="sd">        instruction (QobjInstruction): instruction to insert.</span>
+<span class="sd">        instruction (QasmQobjInstruction): instruction to insert.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">[</span><span class="n">exp_index</span><span class="p">]</span><span class="o">.</span><span class="n">instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">qobj</span></div>
 
 
 <div class="viewcode-block" id="insert_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.insert_instr">[docs]</a><span class="k">def</span> <span class="nf">insert_instr</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">exp_index</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Insert a QobjInstruction into a QobjExperiment.</span>
+    <span class="sd">&quot;&quot;&quot;Insert a QasmQobjInstruction into a QobjExperiment.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        qobj (Qobj): a Qobj object</span>
 <span class="sd">        exp_index (int): The index of the experiment in the qobj.</span>
-<span class="sd">        instruction(QobjInstruction): instruction to insert.</span>
+<span class="sd">        instruction(QasmQobjInstruction): instruction to insert.</span>
 <span class="sd">        pos (int): the position to insert the item.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">[</span><span class="n">exp_index</span><span class="p">]</span><span class="o">.</span><span class="n">instructions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
@@ -173,7 +178,7 @@
 
 
 <div class="viewcode-block" id="get_instr_pos"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.get_instr_pos">[docs]</a><span class="k">def</span> <span class="nf">get_instr_pos</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">exp_index</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return all locations of QobjInstruction in a Qobj experiment.</span>
+    <span class="sd">&quot;&quot;&quot;Return all locations of QasmQobjInstruction in a Qobj experiment.</span>
 
 <span class="sd">    The return list is sorted in reverse order so iterating over it</span>
 <span class="sd">    to insert new items will work as expected.</span>
@@ -181,10 +186,10 @@
 <span class="sd">    Args:</span>
 <span class="sd">        qobj (Qobj): a Qobj object</span>
 <span class="sd">        exp_index (int): The index of the experiment in the qobj</span>
-<span class="sd">        name (str): QobjInstruction name to find</span>
+<span class="sd">        name (str): QasmQobjInstruction name to find</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        list[int]: A list of positions where the QobjInstruction is located.</span>
+<span class="sd">        list[int]: A list of positions where the QasmQobjInstruction is located.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check only the name string of the item</span>
     <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">[</span><span class="n">exp_index</span><span class="p">]</span><span class="o">.</span><span class="n">instructions</span><span class="p">)</span>
@@ -193,7 +198,7 @@
 
 
 <div class="viewcode-block" id="unitary_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.unitary_instr">[docs]</a><span class="k">def</span> <span class="nf">unitary_instr</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a unitary gate QobjInstruction.</span>
+    <span class="sd">&quot;&quot;&quot;Create a unitary gate QasmQobjInstruction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mat (matrix_like): an n-qubit unitary matrix</span>
@@ -201,7 +206,7 @@
 <span class="sd">        label (str): optional string label for the untiary matrix</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        QobjInstruction: The qobj item for the unitary instruction.</span>
+<span class="sd">        QasmQobjInstruction: The qobj item for the unitary instruction.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: if the input matrix is not unitary</span>
@@ -224,38 +229,39 @@
     <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)]:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid&quot;</span><span class="p">)</span>
     <span class="n">instruction</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;unitary&quot;</span><span class="p">,</span> <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span>
-                   <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)}</span>
+                   <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)]}</span>
     <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">instruction</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="o">**</span><span class="n">instruction</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="o">**</span><span class="n">instruction</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="measure_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.measure_instr">[docs]</a><span class="k">def</span> <span class="nf">measure_instr</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span> <span class="n">registers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
     <span class="sd">&quot;&quot;&quot;Create a multi-qubit measure instruction&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of qubits does not match number of memory&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">registers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">)</span>
     <span class="c1"># Case where we also measure to registers</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">registers</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of qubits does not match number of registers&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
+    <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
                            <span class="n">register</span><span class="o">=</span><span class="n">registers</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="reset_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.reset_instr">[docs]</a><span class="k">def</span> <span class="nf">reset_instr</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create a multi-qubit reset instruction&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="barrier_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.barrier_instr">[docs]</a><span class="k">def</span> <span class="nf">barrier_instr</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a barrier QobjInstruction.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)))</span></div>
+    <span class="sd">&quot;&quot;&quot;Create a barrier QasmQobjInstruction.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)))</span></div>
 
 
 <div class="viewcode-block" id="iden_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.iden_instr">[docs]</a><span class="k">def</span> <span class="nf">iden_instr</span><span class="p">(</span><span class="n">qubit</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a barrier QobjInstruction.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="n">qubit</span><span class="p">])</span></div>
+    <span class="sd">&quot;&quot;&quot;Create a barrier QasmQobjInstruction.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="p">[</span><span class="n">qubit</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="snapshot_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.snapshot_instr">[docs]</a><span class="k">def</span> <span class="nf">snapshot_instr</span><span class="p">(</span><span class="n">snapshot_type</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -269,7 +275,7 @@
 <span class="sd">                         See additional information.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        QobjInstruction: The qobj item for the snapshot instruction.</span>
+<span class="sd">        QasmQobjInstruction: The qobj item for the snapshot instruction.</span>
 
 
 <span class="sd">    Additional Information:</span>
@@ -297,7 +303,7 @@
 <span class="sd">        Matrix expectation value params:</span>
 <span class="sd">            TODO</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">snap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">snapshot_type</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">label</span><span class="p">)}</span>
+    <span class="n">snap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;snapshot_type&quot;</span><span class="p">:</span> <span class="n">snapshot_type</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">label</span><span class="p">)}</span>
     <span class="k">if</span> <span class="n">qubits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">snap</span><span class="p">[</span><span class="s2">&quot;qubits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -308,7 +314,7 @@
         <span class="n">snap</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;expval_matrix&quot;</span>
         <span class="n">snap</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">params</span><span class="p">]]</span>
     <span class="c1"># TODO: implicit conversion for Pauli expval params</span>
-    <span class="k">return</span> <span class="n">QobjInstruction</span><span class="p">(</span><span class="o">**</span><span class="n">snap</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="o">**</span><span class="n">snap</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="insert_snapshots_after_barriers"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.insert_snapshots_after_barriers">[docs]</a><span class="k">def</span> <span class="nf">insert_snapshots_after_barriers</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">):</span>
@@ -319,7 +325,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        qobj (Qobj): a qobj to insert snapshots into</span>
-<span class="sd">        snapshot (QobjInstruction): a snapshot instruction.</span>
+<span class="sd">        snapshot (QasmQobjInstruction): a snapshot instruction.</span>
 
 <span class="sd">    Additional Information:</span>
 <span class="sd">    &quot;&quot;&quot;</span>

@@ -130,12 +130,20 @@
   <h1>Source code for qiskit.tools.qi.qi</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="c1"># pylint: disable=invalid-name,anomalous-backslash-in-string</span>
+<span class="c1"># pylint: disable=assignment-from-no-return</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A collection of useful quantum information functions.</span>
@@ -149,12 +157,10 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">unitary_group</span>
 
-
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="k">import</span> <span class="n">pauli_group</span>
-<span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="k">import</span> <span class="n">state_fidelity</span> <span class="k">as</span> <span class="n">new_state_fidelity</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="k">import</span> <span class="n">purity</span> <span class="k">as</span> <span class="n">new_purity</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="k">import</span> <span class="n">random</span>
 
 
 <span class="c1">###############################################################</span>
@@ -465,121 +471,29 @@
 <span class="c1"># Random Matrices.</span>
 <span class="c1">###############################################################</span>
 
-<div class="viewcode-block" id="random_unitary_matrix"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.random_unitary_matrix">[docs]</a><span class="k">def</span> <span class="nf">random_unitary_matrix</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a random unitary ndarray.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        length (int): the length of the returned unitary.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        ndarray: U (length, length) unitary ndarray.</span>
+<div class="viewcode-block" id="random_unitary_matrix"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.random_unitary_matrix">[docs]</a><span class="k">def</span> <span class="nf">random_unitary_matrix</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Deprecated in 0.8+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">unitary_group</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">length</span><span class="p">)</span></div>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The random_unitary_matrix() function in qiskit.tools.qi has been &#39;</span>
+                  <span class="s1">&#39;deprecated and will be removed in the future. Instead use &#39;</span>
+                  <span class="s1">&#39;the function in qiskit.quantum_info.random&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random_unitary</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span><span class="o">.</span><span class="n">data</span></div>
 
 
-<div class="viewcode-block" id="random_density_matrix"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.random_density_matrix">[docs]</a><span class="k">def</span> <span class="nf">random_density_matrix</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Hilbert-Schmidt&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a random density matrix rho.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        length (int): the length of the density matrix.</span>
-<span class="sd">        rank (int or None): the rank of the density matrix. The default</span>
-<span class="sd">            value is full-rank.</span>
-<span class="sd">        method (string): the method to use.</span>
-<span class="sd">            &#39;Hilbert-Schmidt&#39;: sample rho from the Hilbert-Schmidt metric.</span>
-<span class="sd">            &#39;Bures&#39;: sample rho from the Bures metric.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        ndarray: rho (length, length) a density matrix.</span>
-<span class="sd">    Raises:</span>
-<span class="sd">        QiskitError: if the method is not valid.</span>
+<div class="viewcode-block" id="random_density_matrix"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.random_density_matrix">[docs]</a><span class="k">def</span> <span class="nf">random_density_matrix</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Hilbert-Schmidt&#39;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Deprecated in 0.8+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;Hilbert-Schmidt&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">__random_density_hs</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;Bures&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">__random_density_bures</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Error: unrecognized method </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span></div>
-
-
-<span class="k">def</span> <span class="nf">__ginibre_matrix</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a normally distributed complex random matrix.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        nrow (int): number of rows in output matrix.</span>
-<span class="sd">        ncol (int): number of columns in output matrix.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        ndarray: A complex rectangular matrix where each real and imaginary</span>
-<span class="sd">            entry is sampled from the normal distribution.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">ncol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">ncol</span> <span class="o">=</span> <span class="n">nrow</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">))</span> <span class="o">+</span> \
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">))</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
-    <span class="k">return</span> <span class="n">G</span>
-
-
-<span class="k">def</span> <span class="nf">__random_density_hs</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a random density matrix from the Hilbert-Schmidt metric.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        N (int): the length of the density matrix.</span>
-<span class="sd">        rank (int or None): the rank of the density matrix. The default</span>
-<span class="sd">            value is full-rank.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        ndarray: rho (N,N  a density matrix.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">__ginibre_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">G</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">__random_density_bures</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a random density matrix from the Bures metric.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        N (int): the length of the density matrix.</span>
-<span class="sd">        rank (int or None): the rank of the density matrix. The default</span>
-<span class="sd">            value is full-rank.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        ndarray: rho (N,N) a density matrix.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="n">random_unitary_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">__ginibre_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rank</span><span class="p">))</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">G</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The random_density_matrix() function in qiskit.tools.qi has been &#39;</span>
+                  <span class="s1">&#39;deprecated and will be removed in the future. Instead use &#39;</span>
+                  <span class="s1">&#39;the function in qiskit.quantum_info.random&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random_density_matrix</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span></div>
 
 
 <span class="c1">###############################################################</span>
 <span class="c1"># Measures.</span>
 <span class="c1">###############################################################</span>
-
-
-<div class="viewcode-block" id="state_fidelity"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.state_fidelity">[docs]</a><span class="k">def</span> <span class="nf">state_fidelity</span><span class="p">(</span><span class="n">state1</span><span class="p">,</span> <span class="n">state2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the state fidelity between two quantum states.</span>
-
-<span class="sd">    Either input may be a state vector, or a density matrix. The state</span>
-<span class="sd">    fidelity (F) for two density matrices is defined as:</span>
-<span class="sd">        F(rho1, rho2) = Tr[sqrt(sqrt(rho1).rho2.sqrt(rho1))] ^ 2</span>
-<span class="sd">    For two pure states the fidelity is given by</span>
-<span class="sd">        F(|psi1&gt;, |psi2&gt;) = |&lt;psi1|psi2&gt;|^2</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        state1 (array_like): a quantum state vector or density matrix.</span>
-<span class="sd">        state2 (array_like): a quantum state vector or density matrix.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        array_like: The state fidelity F(state1, state2).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The state_fidelity() function in qiskit.tools.qi has been &#39;</span>
-                  <span class="s1">&#39;deprecated and will be removed in the future. Instead use &#39;</span>
-                  <span class="s1">&#39;the state_fidelity() function in qiskit.quantum_info&#39;</span><span class="p">,</span>
-                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">new_state_fidelity</span><span class="p">(</span><span class="n">state1</span><span class="p">,</span> <span class="n">state2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="purity"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.purity">[docs]</a><span class="k">def</span> <span class="nf">purity</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
@@ -590,10 +504,11 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        float: purity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">rho</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">rho</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">rho</span><span class="p">)))</span></div>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The purity() function in qiskit.tools.qi has been &#39;</span>
+                  <span class="s1">&#39;deprecated and will be removed in the future. Instead use &#39;</span>
+                  <span class="s1">&#39;the purity() function in qiskit.quantum_info&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_purity</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="concurrence"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.qi.qi.html#qiskit.tools.qi.qi.concurrence">[docs]</a><span class="k">def</span> <span class="nf">concurrence</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>

@@ -130,31 +130,43 @@
   <h1>Source code for qiskit.quantum_info.analyzation.average</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;A collection of useful functions for post processing results.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.make_observable</span> <span class="k">import</span> <span class="n">make_dict_observable</span>
 
 
 <div class="viewcode-block" id="average_data"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.analyzation.average.html#qiskit.quantum_info.analyzation.average.average_data">[docs]</a><span class="k">def</span> <span class="nf">average_data</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">observable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute the mean value of an diagonal observable.</span>
 
-<span class="sd">    Takes in an observable in dictionary format and then</span>
-<span class="sd">    calculates the sum_i value(i) P(i) where value(i) is the value of</span>
-<span class="sd">    the observable for state i.</span>
-
-<span class="sd">    TODO: make the observable also include a matrix</span>
+<span class="sd">    Takes in a diagonal observable in dictionary, list or matrix format and then</span>
+<span class="sd">    calculates the sum_i value(i) P(i) where value(i) is the value of the</span>
+<span class="sd">    observable for state i.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        counts (dict): a dict of outcomes from an experiment</span>
-<span class="sd">        observable (dict): The observable to be averaged over. As an example</span>
-<span class="sd">        ZZ on qubits equals {&quot;00&quot;: 1, &quot;11&quot;: 1, &quot;01&quot;: -1, &quot;10&quot;: -1}</span>
+<span class="sd">        observable (dict or matrix or list): The observable to be averaged over.</span>
+<span class="sd">        As an example, ZZ on qubits can be given as:</span>
+<span class="sd">        * dict: {&quot;00&quot;: 1, &quot;11&quot;: 1, &quot;01&quot;: -1, &quot;10&quot;: -1}</span>
+<span class="sd">        * matrix: [[1, 0, 0, 0], [0, -1, 0, 0, ], [0, 0, -1, 0], [0, 0, 0, 1]]</span>
+<span class="sd">        * matrix diagonal (list): [1, -1, -1, 1]</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Double: Average of the observable</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">observable</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">observable</span> <span class="o">=</span> <span class="n">make_dict_observable</span><span class="p">(</span><span class="n">observable</span><span class="p">)</span>
     <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">tot</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>

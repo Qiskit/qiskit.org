@@ -130,14 +130,20 @@
   <h1>Source code for qiskit.converters.dag_to_circuit</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Helper function for converting a dag to a circuit&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
@@ -165,35 +171,24 @@
     <span class="n">name</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="kc">None</span>
     <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="o">*</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="n">graph</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">multi_graph</span>
-    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;U&#39;</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;u_base&#39;</span>
-            <span class="k">elif</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;CX&#39;</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cx_base&#39;</span>
-            <span class="k">elif</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;iden&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">topological_op_nodes</span><span class="p">():</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">:</span>
+            <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qregs</span><span class="p">[</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
-            <span class="n">instr_method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-            <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;qargs&#39;</span><span class="p">]:</span>
-                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qregs</span><span class="p">[</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">clbits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">:</span>
+            <span class="n">clbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cregs</span><span class="p">[</span><span class="n">clbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">clbit</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
-            <span class="n">clbits</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;cargs&#39;</span><span class="p">]:</span>
-                <span class="n">clbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cregs</span><span class="p">[</span><span class="n">clbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">clbit</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-            <span class="n">params</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">param</span>
+        <span class="c1"># Get arguments for classical control (if any)</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">condition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node</span><span class="o">.</span><span class="n">condition</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="s1">&#39;noise&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">]:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">instr_method</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">instr_method</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">,</span> <span class="o">*</span><span class="n">qubits</span><span class="p">,</span> <span class="o">*</span><span class="n">clbits</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s1">&#39;condition&#39;</span> <span class="ow">in</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">]:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">c_if</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">])</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">inst</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="n">control</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">clbits</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">circuit</span></div>
 </pre></div>
 

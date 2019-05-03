@@ -130,19 +130,24 @@
   <h1>Source code for qiskit.tools.compiler</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Helper module for simplified Qiskit usage.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;DEPRECATED: WILL BE REMOVED AFTER 0.8.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">transpiler</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler._passmanager</span> <span class="k">import</span> <span class="n">PassManager</span>
-<span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuits_to_qobj</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.compiler.transpile</span> <span class="k">import</span> <span class="n">transpile</span>
+<span class="kn">from</span> <span class="nn">qiskit.compiler.assemble</span> <span class="k">import</span> <span class="n">assemble</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -150,15 +155,16 @@
 <span class="c1"># pylint: disable=redefined-builtin</span>
 <div class="viewcode-block" id="compile"><a class="viewcode-back" href="../../../autodoc/qiskit.tools.compiler.html#qiskit.tools.compiler.compile">[docs]</a><span class="k">def</span> <span class="nf">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
             <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed_mapper</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed_mapper</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compile a list of circuits into a qobj.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        circuits (QuantumCircuit or list[QuantumCircuit]): circuits to compile</span>
 <span class="sd">        backend (BaseBackend): a backend to compile for</span>
 <span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
-<span class="sd">        basis_gates (str): comma-separated basis gate set to compile to</span>
+<span class="sd">        basis_gates (list[str]): list of basis gates names supported by the</span>
+<span class="sd">            target. Default: [&#39;u1&#39;,&#39;u2&#39;,&#39;u3&#39;,&#39;cx&#39;,&#39;id&#39;]</span>
 <span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
 <span class="sd">        initial_layout (list): initial layout of qubits in mapping</span>
 <span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
@@ -168,7 +174,6 @@
 <span class="sd">        qobj_id (int): identifier for the generated qobj</span>
 <span class="sd">        pass_manager (PassManager): a pass manger for the transpiler pipeline</span>
 <span class="sd">        memory (bool): if True, per-shot measurement bitstrings are returned as well</span>
-<span class="sd">        skip_transpiler (bool): DEPRECATED skip transpiler and create qobj directly</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Qobj: the qobj to be run on the backends</span>
@@ -176,68 +181,29 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        QiskitError: if the desired options are not supported by backend</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">skip_transpiler</span><span class="p">:</span>  <span class="c1"># empty pass manager which does nothing</span>
-        <span class="n">pass_manager</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">()</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The skip_transpiler option has been deprecated. &#39;</span>
-                      <span class="s1">&#39;Please pass an empty PassManager() instance instead&#39;</span><span class="p">,</span>
-                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;qiskit.compile() is deprecated and will be removed in Qiskit Terra 0.9. &#39;</span>
+                  <span class="s1">&#39;Please use qiskit.compiler.transpile() to transform circuits &#39;</span>
+                  <span class="s1">&#39;and qiskit.compiler.assemble() to produce a runnable qobj.&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
 
-    <span class="n">backend_memory</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">(),</span> <span class="s1">&#39;memory&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">memory</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">backend_memory</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Backend </span><span class="si">%s</span><span class="s2"> only returns total counts, not single-shot memory.&quot;</span> <span class="o">%</span>
-                          <span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+    <span class="n">new_circuits</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span>
+                             <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
+                             <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span>
+                             <span class="n">initial_layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">,</span>
+                             <span class="n">seed_transpiler</span><span class="o">=</span><span class="n">seed_mapper</span><span class="p">,</span>
+                             <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
+                             <span class="n">pass_manager</span><span class="o">=</span><span class="n">pass_manager</span><span class="p">)</span>
 
-    <span class="n">circuits</span> <span class="o">=</span> <span class="n">transpiler</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
-                                    <span class="n">seed_mapper</span><span class="p">,</span> <span class="n">pass_manager</span><span class="p">)</span>
-
-    <span class="c1"># step 4: Making a qobj</span>
-    <span class="n">qobj</span> <span class="o">=</span> <span class="n">circuits_to_qobj</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend_name</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
-                            <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span>
-                            <span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span>
-                            <span class="n">coupling_map</span><span class="o">=</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">)</span>
+    <span class="n">qobj</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">new_circuits</span><span class="p">,</span>
+                    <span class="n">qobj_header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
+                    <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span>
+                    <span class="n">seed_simulator</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+                    <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
+                    <span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span><span class="p">,</span>
+                    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>  <span class="c1"># deprecated</span>
 
     <span class="k">return</span> <span class="n">qobj</span></div>
-
-
-<div class="viewcode-block" id="execute"><a class="viewcode-back" href="../../../autodoc/qiskit.tools.compiler.html#qiskit.tools.compiler.execute">[docs]</a><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_transpiler</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed_mapper</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">memory</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Executes a set of circuits.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        circuits (QuantumCircuit or list[QuantumCircuit]): circuits to execute</span>
-<span class="sd">        backend (BaseBackend): a backend to execute the circuits on</span>
-<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
-<span class="sd">        basis_gates (str): comma-separated basis gate set to compile to</span>
-<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
-<span class="sd">        initial_layout (list): initial layout of qubits in mapping</span>
-<span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
-<span class="sd">        max_credits (int): maximum credits to use</span>
-<span class="sd">        seed (int): random seed for simulators</span>
-<span class="sd">        seed_mapper (int): random seed for swapper mapper</span>
-<span class="sd">        qobj_id (int): identifier for the generated qobj</span>
-<span class="sd">        pass_manager (PassManager): a pass manger for the transpiler pipeline</span>
-<span class="sd">        memory (bool): if True, per-shot measurement bitstrings are returned as well.</span>
-<span class="sd">        skip_transpiler (bool): DEPRECATED skip transpiler and create qobj directly</span>
-<span class="sd">        kwargs: extra arguments used by AER for running configurable backends.</span>
-<span class="sd">                Refer to the backend documentation for details on these arguments</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        BaseJob: returns job instance derived from BaseJob</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">skip_transpiler</span><span class="p">:</span>  <span class="c1"># empty pass manager which does nothing</span>
-        <span class="n">pass_manager</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">()</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The skip_transpiler option has been deprecated. &#39;</span>
-                      <span class="s1">&#39;Please pass an empty PassManager() instance instead&#39;</span><span class="p">,</span>
-                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
-
-    <span class="n">qobj</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
-                   <span class="n">config</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
-                   <span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span>
-                   <span class="n">skip_transpiler</span><span class="p">,</span> <span class="n">seed_mapper</span><span class="p">,</span> <span class="n">pass_manager</span><span class="p">,</span> <span class="n">memory</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

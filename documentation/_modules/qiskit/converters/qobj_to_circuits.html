@@ -130,16 +130,23 @@
   <h1>Source code for qiskit.converters.qobj_to_circuits</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Helper function for converting qobj to a list of circuits&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">classicalregister</span> <span class="k">as</span> <span class="n">cr</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">quantumcircuit</span> <span class="k">as</span> <span class="n">qc</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">quantumregister</span> <span class="k">as</span> <span class="n">qr</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.assembler</span> <span class="k">import</span> <span class="n">disassemble</span>
 
 
 <div class="viewcode-block" id="qobj_to_circuits"><a class="viewcode-back" href="../../../autodoc/qiskit.converters.qobj_to_circuits.html#qiskit.converters.qobj_to_circuits.qobj_to_circuits">[docs]</a><span class="k">def</span> <span class="nf">qobj_to_circuits</span><span class="p">(</span><span class="n">qobj</span><span class="p">):</span>
@@ -151,43 +158,13 @@
 <span class="sd">        list: A list of QuantumCircuit objects from the qobj</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">:</span>
-        <span class="n">circuits</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">:</span>
-            <span class="n">quantum_registers</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">qr</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span>
-                    <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">qreg_sizes</span><span class="p">]</span>
-            <span class="n">classical_registers</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">cr</span><span class="o">.</span><span class="n">ClassicalRegister</span><span class="p">(</span>
-                    <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">creg_sizes</span><span class="p">]</span>
-            <span class="n">circuit</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">*</span><span class="n">quantum_registers</span><span class="p">,</span>
-                                        <span class="o">*</span><span class="n">classical_registers</span><span class="p">,</span>
-                                        <span class="n">name</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">qreg_dict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">creg_dict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">quantum_registers</span><span class="p">:</span>
-                <span class="n">qreg_dict</span><span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span>
-            <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">classical_registers</span><span class="p">:</span>
-                <span class="n">creg_dict</span><span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
-                <span class="n">instr_method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">qubits</span><span class="p">:</span>
-                    <span class="n">qubit_label</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">qubit_labels</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span>
-                    <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                        <span class="n">qreg_dict</span><span class="p">[</span><span class="n">qubit_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">qubit_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                <span class="n">clbits</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">memory</span><span class="p">:</span>
-                    <span class="n">clbit_label</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">clbit_labels</span><span class="p">[</span><span class="n">clbit</span><span class="p">]</span>
-                    <span class="n">clbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                        <span class="n">creg_dict</span><span class="p">[</span><span class="n">clbit_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">clbit_label</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;noise&#39;</span><span class="p">]:</span>
-                    <span class="n">instr_method</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">instr_method</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="o">*</span><span class="n">qubits</span><span class="p">,</span> <span class="o">*</span><span class="n">clbits</span><span class="p">)</span>
-            <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">circuits</span>
-    <span class="k">return</span> <span class="kc">None</span></div>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;qiskit.converters.qobj_to_circuit() is deprecated and will &#39;</span>
+                  <span class="s1">&#39;be removed in Qiskit Terra 0.9. Please use &#39;</span>
+                  <span class="s1">&#39;qiskit.compiler.disassemble_circuits() to convert a qobj &#39;</span>
+                  <span class="s1">&#39;to list of circuits.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+    <span class="n">variables</span> <span class="o">=</span> <span class="n">disassemble</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 </pre></div>
 
         </div>

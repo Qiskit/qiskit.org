@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.validation.base</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Building blocks for Qiskit validated classes.</span>
 
@@ -160,6 +167,8 @@
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">post_dump</span><span class="p">,</span> <span class="n">post_load</span>
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span> <span class="k">as</span> <span class="n">_fields</span>
 <span class="kn">from</span> <span class="nn">marshmallow.utils</span> <span class="k">import</span> <span class="n">is_collection</span>
+
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">ModelValidationError</span>
 
 
 <div class="viewcode-block" id="ModelTypeValidator"><a class="viewcode-back" href="../../../autodoc/qiskit.validation.base.html#qiskit.validation.base.ModelTypeValidator">[docs]</a><span class="k">class</span> <span class="nc">ModelTypeValidator</span><span class="p">(</span><span class="n">_fields</span><span class="o">.</span><span class="n">Field</span><span class="p">):</span>
@@ -221,6 +230,11 @@
 <span class="sd">         model_cls (type): class used to instantiate the instance. The</span>
 <span class="sd">         constructor is passed all named parameters from deserialization.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BaseSchema.Meta"><a class="viewcode-back" href="../../../autodoc/qiskit.validation.base.html#qiskit.validation.base.BaseSchema.Meta">[docs]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;In marshmallow3, all schemas are strict.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: remove when upgrading to marshmallow3</span>
+        <span class="n">strict</span> <span class="o">=</span> <span class="kc">True</span></div>
 
     <span class="n">model_cls</span> <span class="o">=</span> <span class="n">SimpleNamespace</span>
 
@@ -349,9 +363,11 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Validate the internal representation of the instance.&quot;&quot;&quot;</span>
-        <span class="n">errors</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
+                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_validate_after_init</span><span class="p">(</span><span class="n">init_method</span><span class="p">):</span>
@@ -359,9 +375,11 @@
 
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">init_method</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">_decorated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shallow_schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shallow_schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
+                    <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
 
             <span class="n">init_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -442,9 +460,12 @@
 <span class="sd">        Note that this method requires that the model is bound with</span>
 <span class="sd">        ``@bind_schema``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
+                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
+
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="BaseModel.from_dict"><a class="viewcode-back" href="../../../autodoc/qiskit.validation.base.html#qiskit.validation.base.BaseModel.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
@@ -454,10 +475,17 @@
 <span class="sd">        Note that this method requires that the model is bound with</span>
 <span class="sd">        ``@bind_schema``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dict_</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">data</span></div></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dict_</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ModelValidationError</span><span class="p">(</span>
+                <span class="n">ex</span><span class="o">.</span><span class="n">messages</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">field_names</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">ex</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">ex</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="BaseModel.as_dict"><a class="viewcode-back" href="../../../autodoc/qiskit.validation.base.html#qiskit.validation.base.BaseModel.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serialize the model into a Python dict of simple types.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div></div>
 
 
 <div class="viewcode-block" id="ObjSchema"><a class="viewcode-back" href="../../../autodoc/qiskit.validation.base.html#qiskit.validation.base.ObjSchema">[docs]</a><span class="k">class</span> <span class="nc">ObjSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
