@@ -146,8 +146,8 @@ class PageAqua extends localize(i18next)(LitElement) {
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import Aer
-                from qiskit_aqua.components.oracles import SAT
-                from qiskit_aqua.algorithms import Grover
+                from qiskit.aqua.components.oracles import LogicalExpressionOracle
+                from qiskit.aqua.algorithms import Grover
 
                 sat_cnf = """
                 c Example DIMACS 3-sat
@@ -160,7 +160,7 @@ class PageAqua extends localize(i18next)(LitElement) {
                 """
 
                 backend = Aer.get_backend('qasm_simulator')
-                oracle = SAT(sat_cnf)
+                oracle = LogicalExpressionOracle(sat_cnf)
                 algorithm = Grover(oracle)
                 result = algorithm.run(backend)
 
