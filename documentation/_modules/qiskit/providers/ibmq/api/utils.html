@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.ibmq.api.utils &#8212; Qiskit 0.9 documentation</title>
+    <title>qiskit.providers.ibmq.api.utils &#8212; Qiskit 0.10.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -482,10 +482,18 @@
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_url</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Got a </span><span class="si">%s</span><span class="s1"> code response to </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
-                           <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
-                           <span class="n">url</span><span class="p">,</span>
-                           <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;QCircuitApiModels&#39;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+                <span class="c1"># Reduce verbosity for Circuits invocation.</span>
+                <span class="c1"># TODO: reenable once the API is more stable.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Got a </span><span class="si">%s</span><span class="s1"> code response to </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                             <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+                             <span class="n">url</span><span class="p">,</span>
+                             <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Got a </span><span class="si">%s</span><span class="s1"> code response to </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+                               <span class="n">url</span><span class="p">,</span>
+                               <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors_not_retry</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ApiError</span><span class="p">(</span><span class="n">usr_msg</span><span class="o">=</span><span class="s1">&#39;Got a </span><span class="si">{}</span><span class="s1"> code response to </span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
