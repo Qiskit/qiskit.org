@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.ibmq.ibmqjob &#8212; Qiskit 0.9 documentation</title>
+    <title>qiskit.providers.ibmq.ibmqjob &#8212; Qiskit 0.10.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -326,7 +326,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_submission</span><span class="p">()</span>
 
         <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">job_properties</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
-
         <span class="k">return</span> <span class="n">BackendProperties</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></div>
 
     <span class="c1"># pylint: disable=arguments-differ</span>
@@ -602,10 +601,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_submission</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s1">&#39;websocket_url&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_final_status_websocket</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_final_status</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">wait</span><span class="p">)</span>
+        <span class="c1"># TODO: reenable during #61.</span>
+        <span class="c1"># if &#39;websocket_url&#39; in self._api.config:</span>
+        <span class="c1">#     self._wait_for_final_status_websocket(timeout)</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     self._wait_for_final_status(timeout, wait)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_final_status</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">wait</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_wait_for_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Waits for the request to return a job ID&quot;&quot;&quot;</span>

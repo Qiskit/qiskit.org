@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.ibmq.utils &#8212; Qiskit 0.9 documentation</title>
+    <title>qiskit.providers.ibmq.utils &#8212; Qiskit 0.10.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -147,6 +147,31 @@
 <span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">QobjHeader</span>
 
 
+<span class="k">def</span> <span class="nf">_serialize_noise_model</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Traverse the dictionary looking for noise_model keys and apply</span>
+<span class="sd">       a transformation so it can be serialized.</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">           config (dict): The dictionary to traverse</span>
+
+<span class="sd">       Returns:</span>
+<span class="sd">           dict: The transformed dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">_serialize_noise_model</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;noise_model&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">config</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">serializable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="c1"># if .as_dict() fails is probably because the noise_model</span>
+                    <span class="c1"># has been already transformed elsewhere</span>
+                    <span class="k">pass</span>
+
+    <span class="k">return</span> <span class="n">config</span>
+
+
 <div class="viewcode-block" id="update_qobj_config"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.utils.html#qiskit.providers.ibmq.utils.update_qobj_config">[docs]</a><span class="k">def</span> <span class="nf">update_qobj_config</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Update a Qobj configuration from options and noise model.</span>
 
@@ -165,9 +190,12 @@
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">backend_options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
-    <span class="c1"># Append noise model to configuration.</span>
+    <span class="c1"># Append noise model to configuration. Overwrites backend option</span>
     <span class="k">if</span> <span class="n">noise_model</span><span class="p">:</span>
-        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise_model</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">serializable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;noise_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise_model</span>
+
+    <span class="c1"># Look for noise_models in the config, and try to transform them</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">_serialize_noise_model</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 
     <span class="c1"># Update the Qobj configuration.</span>
     <span class="n">qobj</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">QobjHeader</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>

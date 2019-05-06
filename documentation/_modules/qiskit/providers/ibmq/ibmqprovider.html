@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.ibmq.ibmqprovider &#8212; Qiskit 0.9 documentation</title>
+    <title>qiskit.providers.ibmq.ibmqprovider &#8212; Qiskit 0.10.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -154,6 +154,7 @@
                           <span class="n">read_credentials_from_qiskitrc</span><span class="p">,</span> <span class="n">store_credentials</span><span class="p">,</span> <span class="n">discover_credentials</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">IBMQAccountError</span>
 <span class="kn">from</span> <span class="nn">.ibmqsingleprovider</span> <span class="k">import</span> <span class="n">IBMQSingleProvider</span>
+<span class="kn">from</span> <span class="nn">.circuits</span> <span class="k">import</span> <span class="n">CircuitsManager</span>
 
 <span class="n">QE_URL</span> <span class="o">=</span> <span class="s1">&#39;https://quantumexperience.ng.bluemix.net/api&#39;</span>
 
@@ -172,6 +173,12 @@
         <span class="c1"># keys are tuples (hub, group, project), as the convention is that</span>
         <span class="c1"># that tuple uniquely identifies a set of credentials.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circuits_manager</span> <span class="o">=</span> <span class="n">CircuitsManager</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">circuits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Entry point for Circuit invocation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circuits_manager</span>
 
 <div class="viewcode-block" id="IBMQProvider.backends"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqprovider.html#qiskit.providers.ibmq.ibmqprovider.IBMQProvider.backends">[docs]</a>    <span class="k">def</span> <span class="nf">backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return all backends accessible via IBMQ provider, subject to optional filtering.</span>
@@ -341,6 +348,11 @@
             <span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">current_creds</span><span class="p">[</span><span class="n">creds</span><span class="p">]</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
                                       <span class="n">current_creds</span><span class="p">[</span><span class="n">creds</span><span class="p">]</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials_match_filter</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+                <span class="c1"># Remove api from circuits manager if in use.</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span><span class="p">[</span><span class="n">credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">()]</span><span class="o">.</span><span class="n">_api</span> <span class="o">==</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_circuits_manager</span><span class="o">.</span><span class="n">client</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_circuits_manager</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="kc">None</span>
+
                 <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span><span class="p">[</span><span class="n">credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">()]</span>
                 <span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -379,13 +391,26 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            IBMQSingleProvider: new single-account provider.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">update_circuits_manager</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># Use the first account as the account for circuits.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span><span class="p">:</span>
+            <span class="n">update_circuits_manager</span> <span class="o">=</span> <span class="kc">True</span>
+
         <span class="c1"># Check if duplicated credentials are already in use. By convention,</span>
         <span class="c1"># we assume (hub, group, project) is always unique.</span>
         <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Credentials are already in use.&#39;</span><span class="p">)</span>
 
+            <span class="c1"># Remove api from circuits manager if in use.</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span><span class="p">[</span><span class="n">credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">()]</span><span class="o">.</span><span class="n">_api</span> <span class="o">==</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_circuits_manager</span><span class="o">.</span><span class="n">client</span><span class="p">):</span>
+                <span class="n">update_circuits_manager</span> <span class="o">=</span> <span class="kc">True</span>
+
         <span class="n">single_provider</span> <span class="o">=</span> <span class="n">IBMQSingleProvider</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_accounts</span><span class="p">[</span><span class="n">credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">()]</span> <span class="o">=</span> <span class="n">single_provider</span>
+
+        <span class="k">if</span> <span class="n">update_circuits_manager</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_circuits_manager</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">single_provider</span><span class="o">.</span><span class="n">_api</span>
 
         <span class="k">return</span> <span class="n">single_provider</span>
 
