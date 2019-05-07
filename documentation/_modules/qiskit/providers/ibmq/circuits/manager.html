@@ -175,6 +175,7 @@
 
 <div class="viewcode-block" id="CircuitsManager"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.circuits.manager.html#qiskit.providers.ibmq.circuits.manager.CircuitsManager">[docs]</a><span class="k">class</span> <span class="nc">CircuitsManager</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Class that provides access to the different Circuits.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -284,7 +285,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            CircuitError: if the parameters are not valid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">number_of_qubits</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">number_of_qubits</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">CircuitError</span><span class="p">(</span><span class="s1">&#39;Invalid number_of_qubits&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">!=</span> <span class="n">number_of_qubits</span><span class="o">*</span><span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">CircuitError</span><span class="p">(</span><span class="s1">&#39;Invalid angles length&#39;</span><span class="p">)</span>
@@ -314,7 +315,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            CircuitError: if the parameters are not valid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="mi">4</span> <span class="o">&lt;=</span> <span class="n">number_of_qubits</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">4</span> <span class="o">&lt;=</span> <span class="n">number_of_qubits</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">CircuitError</span><span class="p">(</span><span class="s1">&#39;Invalid number_of_qubits&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span><span class="o">*</span><span class="n">number_of_qubits</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">CircuitError</span><span class="p">(</span><span class="s1">&#39;Invalid angles length&#39;</span><span class="p">)</span>
