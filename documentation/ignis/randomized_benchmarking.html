@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Qiskit Aqua" href="../aqua/index.html" />
+    <link rel="next" title="Quantum Volume" href="quantum_volume.html" />
     <link rel="prev" title="Tomography" href="tomography.html" /> 
   </head>
 <body>
@@ -300,8 +300,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="measurement_calibration.html">Measurement Calibration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#analyzing-the-results">Analyzing the Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#complete-measurement-calibration">Complete Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#analyzing-the-results">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#tensored-measurement-calibration">Tensored Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#id1">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#id2">Analyzing the Results</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#applying-the-calibration">Applying the Calibration</a></li>
 </ul>
 </li>
@@ -314,6 +322,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#generating-rb-sequences">Generating RB Sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#analyzing-results">Analyzing Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#predicted-results">Predicted Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quantum_volume.html">Quantum Volume</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#generating-qv-sequences">Generating QV Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#analyzing-results">Analyzing Results</a></li>
 </ul>
 </li>
 </ul>
@@ -1005,8 +1018,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="measurement_calibration.html">Measurement Calibration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#analyzing-the-results">Analyzing the Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#complete-measurement-calibration">Complete Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#analyzing-the-results">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#tensored-measurement-calibration">Tensored Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#id1">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="measurement_calibration.html#id2">Analyzing the Results</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="measurement_calibration.html#applying-the-calibration">Applying the Calibration</a></li>
 </ul>
 </li>
@@ -1019,6 +1040,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#generating-rb-sequences">Generating RB Sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#analyzing-results">Analyzing Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#predicted-results">Predicted Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quantum_volume.html">Quantum Volume</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#generating-qv-sequences">Generating QV Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#analyzing-results">Analyzing Results</a></li>
 </ul>
 </li>
 </ul>
@@ -1479,7 +1505,9 @@ quantum circuits, run</p>
     <span class="n">nseeds</span><span class="p">,</span>
     <span class="n">length_vector</span><span class="p">,</span>
     <span class="n">rb_pattern</span><span class="p">,</span>
-    <span class="n">length_multiplier</span><span class="p">)</span>
+    <span class="n">length_multiplier</span><span class="p">,</span>
+    <span class="n">seed_offset</span><span class="p">,</span>
+    <span class="n">align_cliffs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The parameters given to this function are:</p>
@@ -1496,6 +1524,11 @@ of the entries. For ‘regular’ RB the <code class="docutils literal notransla
 <code class="docutils literal notranslate"><span class="pre">[[0]],[[0,1]]</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">length_multiplier</span></code>: if this is an array it scales each <code class="docutils literal notranslate"><span class="pre">rb_sequence</span></code> by
 the multiplier</li>
+<li><code class="docutils literal notranslate"><span class="pre">seed_offset</span></code>: Use this to create new seeds (trials) if we later determine
+that more are needed</li>
+<li><code class="docutils literal notranslate"><span class="pre">align_cliffs</span></code>: Use this to align the Cliffords across simultaneous
+sequences, i.e., this will add barriers after each Clifford x <code class="docutils literal notranslate"><span class="pre">length_multiplier</span></code>
+that applies to all qubits in <code class="docutils literal notranslate"><span class="pre">rb_pattern</span></code></li>
 </ul>
 <p>For example,</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of qubits</span>
@@ -1627,10 +1660,10 @@ calculate the predicted error per Clifford (epc):</p>
             <div>Tomography</div>
          </div>
      </a>
-     <a id="button-next" href="../aqua/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="quantum_volume.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>Qiskit Aqua</div>
+            <div>Quantum Volume</div>
         </div>
      </a>
         
