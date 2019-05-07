@@ -300,8 +300,16 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Measurement Calibration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#analyzing-the-results">Analyzing the Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-measurement-calibration">Complete Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analyzing-the-results">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tensored-measurement-calibration">Tensored Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Analyzing the Results</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#applying-the-calibration">Applying the Calibration</a></li>
 </ul>
 </li>
@@ -314,6 +322,11 @@
 <li class="toctree-l3"><a class="reference internal" href="randomized_benchmarking.html#generating-rb-sequences">Generating RB Sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="randomized_benchmarking.html#analyzing-results">Analyzing Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="randomized_benchmarking.html#predicted-results">Predicted Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quantum_volume.html">Quantum Volume</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#generating-qv-sequences">Generating QV Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#analyzing-results">Analyzing Results</a></li>
 </ul>
 </li>
 </ul>
@@ -1005,8 +1018,16 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Measurement Calibration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#analyzing-the-results">Analyzing the Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-measurement-calibration">Complete Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analyzing-the-results">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tensored-measurement-calibration">Tensored Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Analyzing the Results</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#applying-the-calibration">Applying the Calibration</a></li>
 </ul>
 </li>
@@ -1019,6 +1040,11 @@
 <li class="toctree-l3"><a class="reference internal" href="randomized_benchmarking.html#generating-rb-sequences">Generating RB Sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="randomized_benchmarking.html#analyzing-results">Analyzing Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="randomized_benchmarking.html#predicted-results">Predicted Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quantum_volume.html">Quantum Volume</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#generating-qv-sequences">Generating QV Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_volume.html#analyzing-results">Analyzing Results</a></li>
 </ul>
 </li>
 </ul>
@@ -1463,11 +1489,20 @@
         
   <div class="section" id="measurement-calibration">
 <h1>Measurement Calibration<a class="headerlink" href="#measurement-calibration" title="Permalink to this headline">¶</a></h1>
-<p>The measurement calibration is used to mitigate measurement errors. The main
-idea is to prepare all <span class="math notranslate nohighlight">\(2^n\)</span> basis input states and compute the
-probability of measuring counts in the other basis states. From these
-calibrations, it is possible to correct the average results of another
-experiment of interest.</p>
+<p>The idea of measurement calibration and mitigation is to calibrate
+measurement errors via a series of basis state measurements and then
+apply that calibration to correct the average results of another
+experiment of interest. In the most general case we need to calibrate
+all <span class="math notranslate nohighlight">\(2^n\)</span> basis states. If the measurement noise is
+uncorrelated between qubit subsets we only need prepare the full basis
+states in those subsets and measure the outcome states. The first we call the
+complete measurement and the latter the tensored measurement.</p>
+<div class="section" id="complete-measurement-calibration">
+<h2>Complete Measurement Calibration<a class="headerlink" href="#complete-measurement-calibration" title="Permalink to this headline">¶</a></h2>
+<p>In the complete measurement we prepare all <span class="math notranslate nohighlight">\(2^n\)</span> basis input
+states and compute the probability of measuring counts in the other
+basis states. From these calibrations, it is possible to correct the
+average results of another experiment of interest.</p>
 <p>To use the Qiskit Ignis Measurement Calibration module, import it with</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">complete_meas_cal</span><span class="p">,</span>
@@ -1476,7 +1511,7 @@ experiment of interest.</p>
 </pre></div>
 </div>
 <div class="section" id="generating-measurement-calibration-circuits">
-<h2>Generating Measurement Calibration Circuits<a class="headerlink" href="#generating-measurement-calibration-circuits" title="Permalink to this headline">¶</a></h2>
+<h3>Generating Measurement Calibration Circuits<a class="headerlink" href="#generating-measurement-calibration-circuits" title="Permalink to this headline">¶</a></h3>
 <p>The goal is to generate a list of measurement calibration circuits for the full
 Hilbert space. Each circuit creates a basis state. If there are <span class="math notranslate nohighlight">\(n\)</span>
 qubits, then you get <span class="math notranslate nohighlight">\(2^n\)</span> calibration circuits.</p>
@@ -1511,7 +1546,7 @@ beginning of the circuit names for unique identification.</p>
 </div>
 </div>
 <div class="section" id="analyzing-the-results">
-<h2>Analyzing the Results<a class="headerlink" href="#analyzing-the-results" title="Permalink to this headline">¶</a></h2>
+<h3>Analyzing the Results<a class="headerlink" href="#analyzing-the-results" title="Permalink to this headline">¶</a></h3>
 <p>After you run the calibration circuits and obtain the results <code class="docutils literal notranslate"><span class="pre">cal_results</span></code>,
 you can compute the calibration matrix (this matrix will be ordered according to
 the <code class="docutils literal notranslate"><span class="pre">state_labels</span></code>).</p>
@@ -1529,6 +1564,68 @@ the <code class="docutils literal notranslate"><span class="pre">state_labels</s
 <p>If <code class="docutils literal notranslate"><span class="pre">label_list</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, then it returns the average assignment fidelity
 of a single state. Otherwise it returns the assignment fidelity to be in any one
 of these states averaged over the second index.</p>
+</div>
+</div>
+<div class="section" id="tensored-measurement-calibration">
+<h2>Tensored Measurement Calibration<a class="headerlink" href="#tensored-measurement-calibration" title="Permalink to this headline">¶</a></h2>
+<p>In the tensored measurement we only prepare the full <span class="math notranslate nohighlight">\(2^m\)</span>
+basis states in the size m subsets.</p>
+<p>To use the Qiskit Ignis Tensored Measurement Calibration module,
+import it with</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">tensored_meas_cal</span><span class="p">,</span>
+    <span class="n">TensoredMeasFitter</span><span class="p">,</span>
+    <span class="n">TensoredFilter</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>Generating Measurement Calibration Circuits<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The following function returns a list <code class="docutils literal notranslate"><span class="pre">cal_circuits</span></code> of <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>
+objects containing the calibration circuits.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">mit_pattern</span> <span class="o">=</span> <span class="n">tensored_meas_cal</span><span class="p">(</span>
+    <span class="n">mit_pattern</span><span class="p">,</span>
+    <span class="n">qr</span><span class="p">,</span>
+    <span class="n">cr</span><span class="p">,</span>
+    <span class="n">circlabel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input to this function can be given in one of the following three forms:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">mit_pattern:</span></code> A list of list of qubits. Each list of qubits is a subset for
+which we will prepare the full set of basis states. The calibrations from each
+of these subsets will be tensored together to create a full calibration.</li>
+<li><code class="docutils literal notranslate"><span class="pre">qr</span></code> (<code class="docutils literal notranslate"><span class="pre">QuantumRegister</span></code>): A quantum register, or:</li>
+<li><code class="docutils literal notranslate"><span class="pre">cr</span></code> (<code class="docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>): A classical register.</li>
+</ul>
+<p>In addition, you can provide a string <code class="docutils literal notranslate"><span class="pre">'circlabel'</span></code>, which is added at the
+beginning of the circuit names for unique identification.</p>
+<p>For example, for 5-qubits with uncorrelated measurement error</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cal_circuits</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tensored_meas_cal</span><span class="p">(</span>
+    <span class="n">mit_pattern</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Now, you can execute the calibration circuits using either Qiskit Aer Simulator
+(with some noise model) or using IBMQ provider.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cal_circuits</span><span class="p">)</span>
+<span class="n">cal_results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Analyzing the Results<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>After you run the calibration circuits and obtain the results <code class="docutils literal notranslate"><span class="pre">cal_results</span></code>,
+you can compute the calibration matrices. Each subset of qubits will get
+a separate calibration matrix ordered by the appropriate sublist in
+<code class="docutils literal notranslate"><span class="pre">substate_labels_list</span></code> (if provided).</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meas_fitter</span> <span class="o">=</span> <span class="n">TensoredMeasFitter</span><span class="p">(</span>
+    <span class="n">cal_results</span><span class="p">,</span>
+    <span class="n">mit_pattern</span><span class="p">,</span>
+    <span class="n">substate_labels_list</span><span class="p">,</span>
+    <span class="n">circlabel</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meas_fitter</span><span class="o">.</span><span class="n">cal_matrices</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="applying-the-calibration">
 <h2>Applying the Calibration<a class="headerlink" href="#applying-the-calibration" title="Permalink to this headline">¶</a></h2>
@@ -1550,7 +1647,10 @@ obtain the results <code class="docutils literal notranslate"><span class="pre">
 <span class="n">mitigated_counts</span> <span class="o">=</span> <span class="n">mitigated_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The raw data to be corrected can be given in a number of forms:</p>
+<p>Both the <code class="docutils literal notranslate"><span class="pre">CompleteMeasFitter</span></code> and <code class="docutils literal notranslate"><span class="pre">TensoredMeasFitter</span></code> will return
+a filter that can be used to mitigate results.  The raw data to be
+corrected can be given in a number of forms (tensored data can only
+be applied for Form1 and Form4):</p>
 <ul class="simple">
 <li>Form1: A counts dictionary from <code class="docutils literal notranslate"><span class="pre">results.get_counts</span></code>,</li>
 <li>Form2: A list of counts of length <code class="docutils literal notranslate"><span class="pre">len(state_labels)</span></code>,</li>
