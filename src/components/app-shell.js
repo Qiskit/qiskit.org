@@ -228,7 +228,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           </nav>
           <nav class="second">
             <a
-                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb"
+                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
                 @click=${this.trackNewPage('tutorials')}
                 rel="noopener"
                 target="_blank">
