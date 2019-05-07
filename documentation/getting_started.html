@@ -1463,14 +1463,16 @@
         
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Here, we provide an overview of working with Qiskit. Qiskit provides the basic building blocks
-necessary to program quantum computers. The basic concept of Qiskit is an array of quantum
-circuits. A workflow using Qiskit consists of two stages: <strong>Build</strong> and <strong>Execute</strong>. <strong>Build</strong>
-allows you to make different quantum circuits that represent the problem you are solving, and
-<strong>Execute</strong> allows you to run them on different <em>backends</em>, a term meant to encompass both
-devices and simulation frameworks. After the jobs have been run, the data is collected. There
-are methods for putting this data together, depending on the program. This either gives you the
-answer you wanted, or allows you to make a better program for the next instance.</p>
+<p>Here, we provide an overview of working with Qiskit. Qiskit provides the basic
+building blocks necessary to program quantum computers. The basic concept of
+Qiskit is an array of quantum circuits. A workflow using Qiskit consists of two
+stages: <strong>Build</strong> and <strong>Execute</strong>. <strong>Build</strong> allows you to make different
+quantum circuits that represent the problem you are solving, and <strong>Execute</strong>
+allows you to run them on different <em>backends</em>, a term meant to encompass both
+devices and simulation frameworks. After the jobs have been run, the data is
+collected. There are methods for putting this data together, depending on the
+program. This either gives you the answer you wanted, or allows you to make a
+better program for the next instance.</p>
 <p><strong>Code imports</strong></p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
@@ -1496,15 +1498,16 @@ and QuantumRegister.</p>
 </div>
 <p>After you create the circuit with its registers, you can add gates
 (“operations”) to manipulate the registers. As you proceed through the
-documentation you will find more gates and circuits; the below is an
-example of a quantum circuit that makes a three-qubit GHZ state</p>
+documentation you will find more gates and circuits; the below is an example of
+a quantum circuit that makes a three-qubit GHZ state</p>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle = \left(|000\rangle+|111\rangle\right)/\sqrt{2}.\]</div>
-<p>To create such a state, we start with a 3-qubit quantum register. By
-default, each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>.
-To make the GHZ state, we apply the following gates:</p>
+<p>To create such a state, we start with a 3-qubit quantum register. By default,
+each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>. To make the GHZ
+state, we apply the following gates:</p>
 <ul class="simple">
-<li>A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into a superposition state.</li>
+<li>A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into a superposition
+state.</li>
 <li>A controlled-Not operation (<span class="math notranslate nohighlight">\(C_{X}\)</span>) between qubit 0 and qubit 1.</li>
 <li>A controlled-Not operation between qubit 0 and qubit 2.</li>
 </ul>
@@ -1526,16 +1529,15 @@ below.</p>
 </div>
 <div class="section" id="visualize-circuit">
 <h2>Visualize Circuit<a class="headerlink" href="#visualize-circuit" title="Permalink to this headline">¶</a></h2>
-<p>You can visualize your circuit using Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>,
-which plots circuit in the form found in many textbooks.</p>
+<p>You can visualize your circuit using Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>, which
+plots circuit in the form found in many textbooks.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="Quantum circuit with an H gate and two controlled nots." src="_images/getting_started_with_qiskit_circuit_0.png" />
-<p>In this circuit, the qubits are put in order with qubit zero at the top
-and qubit two at the bottom. The circuit is read left-to-right (meaning
-that gates which are applied earlier in the circuit show up further to
-the left).</p>
+<p>In this circuit, the qubits are put in order with qubit zero at the top and
+qubit two at the bottom. The circuit is read left-to-right (meaning that gates
+which are applied earlier in the circuit show up further to the left).</p>
 </div>
 <div class="section" id="simulating-circuits-using-qiskit-aer">
 <h2>Simulating Circuits using Qiskit Aer<a class="headerlink" href="#simulating-circuits-using-qiskit-aer" title="Permalink to this headline">¶</a></h2>
@@ -1543,11 +1545,10 @@ the left).</p>
 different backends for doing a simulation. Here we use the basic Python version.</p>
 <div class="section" id="statevector-backend">
 <h3>Statevector backend<a class="headerlink" href="#statevector-backend" title="Permalink to this headline">¶</a></h3>
-<p>The most common backend in Qiskit Aer is the <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>.
-This simulator returns the quantum state which is a complex vector of
-dimensions <span class="math notranslate nohighlight">\(2^n\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits (so be
-careful using this as it will quickly get too large to run on your
-machine).</p>
+<p>The most common backend in Qiskit Aer is the <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>. This
+simulator returns the quantum state which is a complex vector of dimensions
+<span class="math notranslate nohighlight">\(2^n\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits (so be careful using this as
+it will quickly get too large to run on your machine).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>When representing the state of a multi-qubit system, the tensor order
@@ -1572,26 +1573,26 @@ being the target as</p>
 <div class="last math notranslate nohighlight">
 \[\begin{split}C_X = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\\end{pmatrix}.\end{split}\]</div>
 </div>
-<p>To run the above circuit using the statevector simulator, first you need
-to import Aer and then set the backend to <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>.</p>
+<p>To run the above circuit using the statevector simulator, first you need to
+import Aer and then set the backend to <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Aer</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">BasicAer</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span>
 
 <span class="c1"># Run the quantum circuit on a statevector simulator backend</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now we have chosen the backend it’s time to compile and run the quantum
-circuit. In Qiskit we provide the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function for this.
-<code class="docutils literal notranslate"><span class="pre">execute</span></code> returns a <code class="docutils literal notranslate"><span class="pre">job</span></code> object that encapsulates information about
-the job submitted to the backend.</p>
+<p>Now we have chosen the backend it’s time to compile and run the quantum circuit.
+In Qiskit we provide the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function for this. <code class="docutils literal notranslate"><span class="pre">execute</span></code> returns a
+<code class="docutils literal notranslate"><span class="pre">job</span></code> object that encapsulates information about the job submitted to the
+backend.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Quantum Program for execution</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>When you run a program, a job object is made that has the following two
-useful methods: <code class="docutils literal notranslate"><span class="pre">job.status()</span></code> and <code class="docutils literal notranslate"><span class="pre">job.result()</span></code> which return the
-status of the job and a result object respectively.</p>
+<p>When you run a program, a job object is made that has the following two useful
+methods: <code class="docutils literal notranslate"><span class="pre">job.status()</span></code> and <code class="docutils literal notranslate"><span class="pre">job.result()</span></code> which return the status of the
+job and a result object respectively.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Jobs run asynchronously but when the result method is called it
@@ -1602,8 +1603,8 @@ another task.</p>
 </pre></div>
 </div>
 <p>The results object contains the data and Qiskit provides the method
-<code class="docutils literal notranslate"><span class="pre">result.get_statevector(circ)</span></code> to return the state vector for the
-quantum circuit.</p>
+<code class="docutils literal notranslate"><span class="pre">result.get_statevector(circ)</span></code> to return the state vector for the quantum
+circuit.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputstate</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">outputstate</span><span class="p">)</span>
 </pre></div>
@@ -1611,11 +1612,10 @@ quantum circuit.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.707</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span> <span class="mf">0.707</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Qiskit also provides a visualization toolbox to allow you to view these
-results.</p>
+<p>Qiskit also provides a visualization toolbox to allow you to view these results.</p>
 <p>Below, we use the visualization function to plot the real and imaginary
 components of the state vector.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_state_city</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">plot_state_city</span>
 <span class="n">plot_state_city</span><span class="p">(</span><span class="n">outputstate</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1623,12 +1623,11 @@ components of the state vector.</p>
 </div>
 <div class="section" id="unitary-backend">
 <h3>Unitary backend<a class="headerlink" href="#unitary-backend" title="Permalink to this headline">¶</a></h3>
-<p>Qiskit Aer also includes a <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> that works <em>provided
-all the elements in the circuit are unitary operations</em>. This backend
-calculates the <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> matrix representing the gates in
-the quantum circuit.</p>
+<p>Qiskit Aer also includes a <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> that works <em>provided all the
+elements in the circuit are unitary operations</em>. This backend calculates the
+<span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> matrix representing the gates in the quantum circuit.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the quantum circuit on a unitary simulator backend</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;unitary_simulator&#39;</span><span class="p">)</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
@@ -1649,41 +1648,38 @@ the quantum circuit.</p>
 </div>
 <div class="section" id="openqasm-backend">
 <h3>OpenQASM backend<a class="headerlink" href="#openqasm-backend" title="Permalink to this headline">¶</a></h3>
-<p>The simulators above are useful because they provide information about
-the state output by the ideal circuit and the matrix representation of
-the circuit. However, a real experiment terminates by <em>measuring</em> each
-qubit (usually in the computational <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span> basis).
-Without measurement, we cannot gain information about the state.
-Measurements cause the quantum system to collapse into classical bits.</p>
-<p>For example, suppose we make independent measurements on each qubit of
-the three-qubit GHZ state</p>
+<p>The simulators above are useful because they provide information about the state
+output by the ideal circuit and the matrix representation of the circuit.
+However, a real experiment terminates by <em>measuring</em> each qubit (usually in the
+computational <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span> basis). Without measurement, we
+cannot gain information about the state. Measurements cause the quantum system
+to collapse into classical bits.</p>
+<p>For example, suppose we make independent measurements on each qubit of the
+three-qubit GHZ state</p>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle = (|000\rangle +|111\rangle)/\sqrt{2},\]</div>
-<p>and let <span class="math notranslate nohighlight">\(xyz\)</span> denote the bitstring that results. Recall that,
-under the qubit labeling used by Qiskit, <span class="math notranslate nohighlight">\(x\)</span> would correspond to
-the outcome on qubit 2, <span class="math notranslate nohighlight">\(y\)</span> to the outcome on qubit 1, and
-<span class="math notranslate nohighlight">\(z\)</span> to the outcome on qubit 0. This representation of the
-bitstring puts the most significant bit (MSB) on the left, and the least
-significant bit (LSB) on the right. This is the standard ordering of
-binary bitstrings. We order the qubits in the same way, which is why
-Qiskit uses a non-standard tensor product order.</p>
+<p>and let <span class="math notranslate nohighlight">\(xyz\)</span> denote the bitstring that results. Recall that, under the
+qubit labeling used by Qiskit, <span class="math notranslate nohighlight">\(x\)</span> would correspond to the outcome on
+qubit 2, <span class="math notranslate nohighlight">\(y\)</span> to the outcome on qubit 1, and <span class="math notranslate nohighlight">\(z\)</span> to the outcome on
+qubit 0. This representation of the bitstring puts the most significant bit
+(MSB) on the left, and the least significant bit (LSB) on the right. This is the
+standard ordering of binary bitstrings. We order the qubits in the same way,
+which is why Qiskit uses a non-standard tensor product order.</p>
 <p>The probability of obtaining outcome <span class="math notranslate nohighlight">\(xyz\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{Pr}(xyz) = |\langle xyz | \psi \rangle |^{2}.\]</div>
-<p>By explicit computation, we see there are only two bitstrings that will
-occur: <span class="math notranslate nohighlight">\(000\)</span> and <span class="math notranslate nohighlight">\(111\)</span>. If the bitstring <span class="math notranslate nohighlight">\(000\)</span> is
-obtained, the state of the qubits is <span class="math notranslate nohighlight">\(|000\rangle\)</span>, and if the
-bitstring is <span class="math notranslate nohighlight">\(111\)</span>, the qubits are left in the state
-<span class="math notranslate nohighlight">\(|111\rangle\)</span>. The probability of obtaining 000 or 111 is the
-same; namely, 1/2:</p>
+<p>By explicit computation, we see there are only two bitstrings that will occur:
+<span class="math notranslate nohighlight">\(000\)</span> and <span class="math notranslate nohighlight">\(111\)</span>. If the bitstring <span class="math notranslate nohighlight">\(000\)</span> is obtained, the state
+of the qubits is <span class="math notranslate nohighlight">\(|000\rangle\)</span>, and if the bitstring is <span class="math notranslate nohighlight">\(111\)</span>, the
+qubits are left in the state <span class="math notranslate nohighlight">\(|111\rangle\)</span>. The probability of obtaining
+000 or 111 is the same; namely, 1/2:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \mathrm{Pr}(000) &amp;= |\langle 000 | \psi \rangle |^{2} = \frac{1}{2}\\
 \mathrm{Pr}(111) &amp;= |\langle 111 | \psi \rangle |^{2} = \frac{1}{2}.
 \end{align}\end{split}\]</div>
-<p>To simulate a circuit that includes measurement, we need to add
-measurements to the original circuit above, and use a different Aer
-backend.</p>
+<p>To simulate a circuit that includes measurement, we need to add measurements to
+the original circuit above, and use a different Aer backend.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Classical Register with 3 bits.</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
 <span class="c1"># Create a Quantum Circuit</span>
@@ -1701,16 +1697,16 @@ backend.</p>
 </pre></div>
 </div>
 <img alt="Circuit diagram of an H gate and two controlled nots with measurements." src="_images/getting_started_with_qiskit_circuit_1.png" />
-<p>This circuit adds a classical register, and three measurements that are
-used to map the outcome of qubits to the classical bits.</p>
-<p>To simulate this circuit, we use the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> in Qiskit Aer.
-Each run of this circuit will yield either the bitstring 000 or 111. To
-build up statistics about the distribution of the bitstrings (to, e.g.,
-estimate <span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span>), we need to repeat the circuit many
-times. The number of times the circuit is repeated can be specified in
-the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function, via the <code class="docutils literal notranslate"><span class="pre">shots</span></code> keyword.</p>
+<p>This circuit adds a classical register, and three measurements that are used to
+map the outcome of qubits to the classical bits.</p>
+<p>To simulate this circuit, we use the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> in Qiskit Aer. Each run
+of this circuit will yield either the bitstring 000 or 111. To build up
+statistics about the distribution of the bitstrings (to, e.g., estimate
+<span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span>), we need to repeat the circuit many times. The number
+of times the circuit is repeated can be specified in the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function,
+via the <code class="docutils literal notranslate"><span class="pre">shots</span></code> keyword.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Aer&#39;s qasm_simulator</span>
-<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">backend_sim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 
 <span class="c1"># Execute the circuit on the qasm simulator.</span>
 <span class="c1"># We&#39;ve set the number of repeats of the circuit</span>
@@ -1721,9 +1717,9 @@ the <code class="docutils literal notranslate"><span class="pre">execute</span><
 <span class="n">result_sim</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Once you have a result object, you can access the counts via the
-function <code class="docutils literal notranslate"><span class="pre">get_counts(circuit)</span></code>. This gives you the <em>aggregated</em> binary
-outcomes of the circuit you submitted.</p>
+<p>Once you have a result object, you can access the counts via the function
+<code class="docutils literal notranslate"><span class="pre">get_counts(circuit)</span></code>. This gives you the <em>aggregated</em> binary outcomes of the
+circuit you submitted.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">result_sim</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
@@ -1731,30 +1727,32 @@ outcomes of the circuit you submitted.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;000&#39;</span><span class="p">:</span> <span class="mi">526</span><span class="p">,</span> <span class="s1">&#39;111&#39;</span><span class="p">:</span> <span class="mi">498</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>Approximately 50 percent of the time the output bitstring is 000. Qiskit
-also provides a function <code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code> which allows you to view the
-outcomes.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
+<p>Approximately 50 percent of the time the output bitstring is 000. Qiskit also
+provides a function <code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code> which allows you to view the outcomes.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
 <span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="Histogram showing nearly equal probablities of measuring 000 and 111 states." src="_images/getting_started_with_qiskit_33_0.png" />
 <p>The estimated outcome probabilities <span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span> and
 <span class="math notranslate nohighlight">\(\mathrm{Pr}(111)\)</span> are computed by taking the aggregate counts and
-dividing by the number of shots (times the circuit was repeated). Try
-changing the <code class="docutils literal notranslate"><span class="pre">shots</span></code> keyword in the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function and see how
-the estimated probabilities change.</p>
+dividing by the number of shots (times the circuit was repeated). Try changing
+the <code class="docutils literal notranslate"><span class="pre">shots</span></code> keyword in the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function and see how the estimated
+probabilities change.</p>
 </div>
 </div>
 <div class="section" id="running-circuits-on-ibm-q-devices">
 <h2>Running Circuits on IBM Q Devices<a class="headerlink" href="#running-circuits-on-ibm-q-devices" title="Permalink to this headline">¶</a></h2>
-<p>To follow along with this section, first be sure to set up an IBM Q account as explained in the
-<a class="reference internal" href="install.html#install-access-ibm-q-devices-label"><span class="std std-ref">Access IBM Q Devices</span></a> section of the Qiskit installation instructions.</p>
+<p>To follow along with this section, first be sure to set up an IBM Q account as
+explained in the <a class="reference internal" href="install.html#install-access-ibm-q-devices-label"><span class="std std-ref">Access IBM Q Devices</span></a> section of the Qiskit
+installation instructions.</p>
 <p>Load your IBM Q account credentials by calling</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Once your account has been loaded, you can view the list of devices available to you.</p>
+<p>Once your account has been loaded, you can view the list of devices available to
+you.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available backends:&quot;</span><span class="p">)</span>
 <span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
 </pre></div>
@@ -1762,17 +1760,19 @@ the estimated probabilities change.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Available</span> <span class="n">backends</span><span class="p">:</span>
 
 <span class="p">[</span><span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmqx2&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
  <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">IBMQBackend</span><span class="p">(</span><span class="s1">&#39;ibmq_20_tokyo&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">(</span><span class="n">ibm</span><span class="o">-</span><span class="n">q</span><span class="o">-</span><span class="n">internal</span><span class="p">,</span> <span class="n">research</span><span class="p">,</span> <span class="n">yorktown</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+ <span class="o">&lt;</span><span class="n">IBMQSimulator</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">IBMQ</span><span class="p">()</span><span class="o">&gt;</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="running-circuits-on-real-devices">
 <h3>Running circuits on real devices<a class="headerlink" href="#running-circuits-on-real-devices" title="Permalink to this headline">¶</a></h3>
-<p>Today’s quantum information processors are small and noisy, but are advancing at a fast pace.
-They provide a great opportunity to explore what noisy quantum computers can do.</p>
-<p>The IBMQ provider uses a queue to allocate the devices to users. We now choose a device with the
-least busy queue which can support our program (has at least 3 qubits).</p>
+<p>Today’s quantum information processors are small and noisy, but are advancing at
+a fast pace. They provide a great opportunity to explore what noisy quantum
+computers can do.</p>
+<p>The IBMQ provider uses a queue to allocate the devices to users. We now choose a
+device with the least busy queue which can support our program (has at least 3
+qubits).</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="k">import</span> <span class="n">least_busy</span>
 
 <span class="n">large_enough_devices</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span><span class="p">)</span>
@@ -1783,15 +1783,14 @@ least busy queue which can support our program (has at least 3 qubits).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">best</span> <span class="n">backend</span> <span class="ow">is</span> <span class="n">ibmqx4</span>
 </pre></div>
 </div>
-<p>To run the circuit on the backend, we need to specify the number of
-shots and the number of credits we are willing to spend to run the
-circuit. Then, we execute the circuit on the backend using the
-<code class="docutils literal notranslate"><span class="pre">execute</span></code> function.</p>
+<p>To run the circuit on the backend, we need to specify the number of shots and
+the number of credits we are willing to spend to run the circuit. Then, we
+execute the circuit on the backend using the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="k">import</span> <span class="n">job_monitor</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>           <span class="c1"># Number of shots to run the program (experiment); maximum is 8192 shots.</span>
 <span class="n">max_credits</span> <span class="o">=</span> <span class="mi">3</span>        <span class="c1"># Maximum number of credits to spend on executions.</span>
 
-<span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">)</span>
+<span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">)</span>
 <span class="n">job_monitor</span><span class="p">(</span><span class="n">job_exp</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1819,16 +1818,15 @@ until the job has finished before releasing the cell.</p>
 <div class="section" id="simulating-circuits-using-a-hpc-simulator">
 <h3>Simulating circuits using a HPC simulator<a class="headerlink" href="#simulating-circuits-using-a-hpc-simulator" title="Permalink to this headline">¶</a></h3>
 <p>The IBMQ provider also comes with a remote optimized simulator called
-<code class="docutils literal notranslate"><span class="pre">ibmq_qasm_simulator</span></code>. This remote simulator is capable of simulating
-up to 32 qubits. It can be used the same way as the remote real
-backends.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<code class="docutils literal notranslate"><span class="pre">ibmq_qasm_simulator</span></code>. This remote simulator is capable of simulating up to 32
+qubits. It can be used the same way as the remote real backends.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend_hpc</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>           <span class="c1"># Number of shots to run the program (experiment); maximum is 8192 shots.</span>
 <span class="n">max_credits</span> <span class="o">=</span> <span class="mi">3</span>        <span class="c1"># Maximum number of credits to spend on executions.</span>
 
-<span class="n">job_hpc</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">)</span>
+<span class="n">job_hpc</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend_hpc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result_hpc</span> <span class="o">=</span> <span class="n">job_hpc</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
@@ -1842,10 +1840,9 @@ backends.</p>
 </div>
 <div class="section" id="retrieving-a-previously-ran-job">
 <h3>Retrieving a previously ran job<a class="headerlink" href="#retrieving-a-previously-ran-job" title="Permalink to this headline">¶</a></h3>
-<p>If your experiment takes longer to run then you have time to wait
-around, or if you simply want to retrieve old jobs back, the IBMQ
-backends allow you to do that. First you would need to note your job’s
-ID:</p>
+<p>If your experiment takes longer to run then you have time to wait around, or if
+you simply want to retrieve old jobs back, the IBMQ backends allow you to do
+that. First you would need to note your job’s ID:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jobID</span> <span class="o">=</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">job_id</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;JOB ID: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobID</span><span class="p">))</span>
