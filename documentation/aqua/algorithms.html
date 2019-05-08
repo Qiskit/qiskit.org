@@ -1536,6 +1536,7 @@ results in the near term while experimenting with, developing and testing
 quantum algorithms:</p>
 <ul class="simple">
 <li><span class="xref std std-ref">Exact Eigensolver</span></li>
+<li><span class="xref std std-ref">Exact LSsolver</span></li>
 <li><span class="xref std std-ref">CPLEX Ising</span></li>
 <li><span class="xref std std-ref">Support Vector Machine Radial Basis Function Kernel (SVM Classical)</span></li>
 </ul>
@@ -2138,8 +2139,50 @@ solution vector <span class="math notranslate nohighlight">\(|x\rangle\)</span>.
 single vector elements of <span class="math notranslate nohighlight">\(|x\rangle\)</span> but only on certain properties.
 These are accessible by using problem-specific operators. Another use-case is
 the implementation in a larger quantum program.</p>
-<p>Currently only hermitian matrices with a dimension of <span class="math notranslate nohighlight">\(2^{n}\)</span> are
-supported.</p>
+<p>When HHL is executed using a dictionary non-hermitian matrices and matrices
+with dimensions other than <span class="math notranslate nohighlight">\(2^{n}\)</span> are automatically expanded to
+hermitian matrices and next higher dimension <span class="math notranslate nohighlight">\(2^{n}\)</span>, respectively. The
+returned result of the HHL algorithm for expanded matrices will be truncated.</p>
+<ul>
+<li><p class="first">A Boolean indicating whether or not to truncate matrix and result vector
+from dimension <span class="math notranslate nohighlight">\(2^{n}\)</span> to dimension given by <code class="docutils literal notranslate"><span class="pre">orig_size</span></code> by simply
+cutting off entries with larger indices. This parameter is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>
+if HHL is executed using the dictionary approach and the input does
+not have dimension <span class="math notranslate nohighlight">\(2^{n}\)</span>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">truncate_powerdim</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value is expected. The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+<li><p class="first">An integer defining the dimension of the input matrix and vector before
+expansion to dimension <span class="math notranslate nohighlight">\(2^{n}\)</span> has been applied. This parameter is
+needed if <code class="docutils literal notranslate"><span class="pre">truncate_powerdim</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> and will be automatically
+set when HHL is executed using the dictionary approach and the input
+does not have dimension <span class="math notranslate nohighlight">\(2^{n}\)</span>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">orig_size</span> <span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>An <code class="docutils literal notranslate"><span class="pre">int</span></code> value or <code class="docutils literal notranslate"><span class="pre">None</span></code> is epxected. The defult is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">A Boolean indicating whether or not to truncate matrix and result vector
+to half the dimension by simply cutting off entries with other indices
+after the input matrix was expanded to be hermitian following</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}
+0 &amp; A^\mathsf{H}\\
+A &amp; 0
+\end{pmatrix}\end{split}\]</div>
+<p>where the conjugate transpose of matrix <span class="math notranslate nohighlight">\(A\)</span> is denoted by
+<span class="math notranslate nohighlight">\(A^\mathsf{H}\)</span>. The truncation of the result vector is done by simply
+cutting off entries of the upper half. This parameter is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>
+if HHL is executed using the dictionary approach and the input matrix
+is not hermitian.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">truncate_hermitian</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value is expected. The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</li>
+</ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Consult the documentation on <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>,  <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>, <a class="reference internal" href="eigs.html#eigs"><span class="std std-ref">Eigenvalues</span></a>, <a class="reference internal" href="reciprocals.html#reciprocals"><span class="std std-ref">Reciprocals</span></a>
@@ -2270,8 +2313,8 @@ disabled.</p>
 </div>
 <div class="section" id="exact-eigensolver">
 <span id="id4"></span><h3>Exact Eigensolver<a class="headerlink" href="#exact-eigensolver" title="Permalink to this headline">¶</a></h3>
-<p>Exact Eigensolver computes up to the first <span class="math notranslate nohighlight">\(k\)</span> eigenvalues of a complex square matrix of
-dimension
+<p>Exact Eigensolver computes up to the first <span class="math notranslate nohighlight">\(k\)</span> eigenvalues of a
+complex-valued square matrix of dimension
 <span class="math notranslate nohighlight">\(n \times n\)</span>, with <span class="math notranslate nohighlight">\(k \leq n\)</span>.
 It can be configured with an <code class="docutils literal notranslate"><span class="pre">int</span></code> parameter <code class="docutils literal notranslate"><span class="pre">k</span></code> indicating the number of eigenvalues to
 compute:</p>
@@ -2288,6 +2331,23 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
 <p>In Aqua, Exact Eigensolver supports the <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">ising</span></code> and <code class="docutils literal notranslate"><span class="pre">excited_states</span></code>  problems.</p>
+</div>
+</div>
+<div class="section" id="exact-lssolver">
+<span id="id5"></span><h3>Exact LSsolver<a class="headerlink" href="#exact-lssolver" title="Permalink to this headline">¶</a></h3>
+<p>Exact LSsolver (linear system solver) computes the eigenvalues of a
+complex-valued square matrix <span class="math notranslate nohighlight">\(A\)</span> of dimension <span class="math notranslate nohighlight">\(n \times n\)</span> and
+the solution to the systems of linear equations defined by
+<span class="math notranslate nohighlight">\(A\overrightarrow{x}=\overrightarrow{b}\)</span> with input vector
+<span class="math notranslate nohighlight">\(\overrightarrow{b}\)</span>.</p>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to Exact LSsolver declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which
+Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">ExactLSsolver</span></code>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Problems Supported</p>
+<p>In Aqua, Exact LSsolver supports the <code class="docutils literal notranslate"><span class="pre">linear_system</span></code> problem.</p>
 </div>
 </div>
 <div class="section" id="cplex-ising">
