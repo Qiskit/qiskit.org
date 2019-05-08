@@ -1547,6 +1547,20 @@ whether the <code class="docutils literal notranslate"><span class="pre">'basic'
 or <code class="docutils literal notranslate"><span class="pre">'noancilla'</span></code> mode is chosen.
 If omitted, this argument defaults to <code class="docutils literal notranslate"><span class="pre">'basic'</span></code>.</p>
 </div>
+<div class="topic" id="rpt">
+<p class="topic-title first">Relative-Phase Toffoli Gates</p>
+<p>Toffoli gates are helpful in implementing various other quantum circuits,
+including the Multiple-Control Toffoli gates discussed above.
+However, the usage of Toffoli gates might incur high costs in terms of circuit depth
+depending on the particular implementations selected.
+One approach that has been studied to mitigate this problem
+is the use of Toffoli gates <em>up to a relative phase</em>,
+for example, as discussed in <a class="reference external" href="https://arxiv.org/abs/1508.03273">this paper</a>.
+In Aqua, two such Relative-Phase Toffoli gates are provided,
+the 2-Control <code class="docutils literal notranslate"><span class="pre">rccx</span></code> and the 3-Control <code class="docutils literal notranslate"><span class="pre">rcccx</span></code>.
+Upon import, both can be directly invoked from QuantumCircuit objects
+similar to the traditional Toffoli <code class="docutils literal notranslate"><span class="pre">ccx</span></code> gate.</p>
+</div>
 <div class="topic" id="mcux">
 <p class="topic-title first">Multiple-Control U1 and U3 Rotation (MCU1 and MCU3) Gates</p>
 <p>The <em>Multiple-Control Rotation (mcu)</em> gates, implements a U1 (<cite>u1</cite>)
