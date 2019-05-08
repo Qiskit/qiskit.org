@@ -1513,15 +1513,15 @@
 <h4>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The <code class="docutils literal notranslate"><span class="pre">IBMQProvider</span></code> supports connecting to the new version of the IBM Q API.
-Please note support for this version is still experimental <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/78">#78</a></li>
-<li>Added support for Circuits through the new API <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/79">#79</a></li>
+Please note support for this version is still experimental <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/78">#78</a>.</li>
+<li>Added support for Circuits through the new API <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/79">#79</a>.</li>
 </ul>
 </div>
 <div class="section" id="bug-fixes">
 <h4>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Fixed incorrect parsing of some API hub URLs <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/77">#77</a></li>
-<li>Fixed noise model handling for remote simulators <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/84">#84</a></li>
+<li>Fixed incorrect parsing of some API hub URLs <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/77">#77</a>.</li>
+<li>Fixed noise model handling for remote simulators <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/84">#84</a>.</li>
 </ul>
 </div>
 </div>
@@ -1548,8 +1548,8 @@ routines.</li>
 <div class="section" id="id1">
 <h4>New Features<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The core <code class="docutils literal notranslate"><span class="pre">StochasticSwap</span></code> routine is implemented in <a class="reference external" href="https://cython.org/">Cython</a></li>
-<li>Added Quantum Channel classes for manipulating quantum channels and CPTP
+<li>The core <code class="docutils literal notranslate"><span class="pre">StochasticSwap</span></code> routine is implemented in <a class="reference external" href="https://cython.org/">Cython</a>.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">QuantumChannel</span></code> classes for manipulating quantum channels and CPTP
 maps.</li>
 <li>Support for parameterized circuits.</li>
 <li>The <code class="docutils literal notranslate"><span class="pre">PassManager</span></code> interface has been improved and new functions added for
@@ -1557,7 +1557,7 @@ easier interaction and usage with custom pass managers.</li>
 <li>Preset <code class="docutils literal notranslate"><span class="pre">PassManager</span></code>s are now included which offer a predetermined pipeline
 of transpiler passes.</li>
 <li>User configuration files to let local environments override default values
-for some functions</li>
+for some functions.</li>
 <li>New transpiler passes: <code class="docutils literal notranslate"><span class="pre">EnlargeWithAncilla</span></code>, <code class="docutils literal notranslate"><span class="pre">Unroll2Q</span></code>,
 <code class="docutils literal notranslate"><span class="pre">NoiseAdaptiveLayout</span></code>, <code class="docutils literal notranslate"><span class="pre">OptimizeSwapBeforeMeasure</span></code>,
 <code class="docutils literal notranslate"><span class="pre">RemoveDiagonalGatesBeforeMeasure</span></code>, <code class="docutils literal notranslate"><span class="pre">CommutativeCancellation</span></code>,
@@ -1566,15 +1566,14 @@ for some functions</li>
 </div>
 <div class="section" id="compatibility-considerations">
 <h4>Compatibility Considerations<a class="headerlink" href="#compatibility-considerations" title="Permalink to this headline">¶</a></h4>
-<p>As part of the 0.8 release the following things have been
-deprecated and will either be removed or changed in a backwards incompatible
-manner in a future release. While not strictly necessary these are things to
-adjust for before the 0.9 (unless otherwise noted) to avoid a breaking change
-in the future.</p>
+<p>As part of the 0.8 release the following things have been deprecated and will
+either be removed or changed in a backwards incompatible manner in a future
+release. While not strictly necessary these are things to adjust for before the
+0.9 (unless otherwise noted) release to avoid a breaking change in the future.</p>
 <ul class="simple">
 <li>The methods prefixed by <code class="docutils literal notranslate"><span class="pre">_get</span></code> in the <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> object are being
 renamed without that prefix.</li>
-<li>Changed elements in <code class="docutils literal notranslate"><span class="pre">couplinglist</span></code> of <code class="docutils literal notranslate"><span class="pre">CouplingMap</span></code> from tuples to lists</li>
+<li>Changed elements in <code class="docutils literal notranslate"><span class="pre">couplinglist</span></code> of <code class="docutils literal notranslate"><span class="pre">CouplingMap</span></code> from tuples to lists.</li>
 <li>Unroller bases must now be explicit, and violation raises an informative
 <code class="docutils literal notranslate"><span class="pre">QiskitError</span></code>.</li>
 <li>The <code class="docutils literal notranslate"><span class="pre">qiskit.tools.qcvv</span></code> package is deprecated and will be removed in the in
@@ -1583,7 +1582,7 @@ module.</li>
 <li>The <code class="docutils literal notranslate"><span class="pre">qiskit.compile()</span></code> function is now deprecated in favor of explicitly
 using the <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.transpile()</span></code> function to transform a circuit,
 followed by <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.assemble()</span></code> to make a Qobj out of
-it. Instead of compile(…), use assemble(transpile(…), …)</li>
+it. Instead of <code class="docutils literal notranslate"><span class="pre">compile(...)</span></code>, use <code class="docutils literal notranslate"><span class="pre">assemble(transpile(...),</span> <span class="pre">...)</span></code>.</li>
 <li><code class="docutils literal notranslate"><span class="pre">qiskit.converters.qobj_to_circuits()</span></code> has been deprecated and will be
 removed in a future release. Instead
 <code class="docutils literal notranslate"><span class="pre">qiskit.assembler.disassemble()</span></code> should be used to extract
@@ -1702,7 +1701,7 @@ setting <code class="docutils literal notranslate"><span class="pre">fusion_enab
 <li>Added Simulation method based on Stabilizer Rank Decompositions <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/51">#51</a></li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">basis_gates</span></code> kwarg to <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> init <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/175">#175</a>.</li>
 <li>Added an optional parameter to <code class="docutils literal notranslate"><span class="pre">NoiseModel.as_dict()</span></code> for returning
-dictionaries that can be serialized using the standard json library directly.
+dictionaries that can be serialized using the standard json library directly
 <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/165">#165</a></li>
 <li>Refactor thread management <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/50">#50</a></li>
 <li>Improve noise transformations <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/162">#162</a></li>
@@ -1754,54 +1753,54 @@ RB circuits from 0.1 are not compatible with 0.1.1 fitters.</li>
 <div class="section" id="id7">
 <h4>New Features<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Implementation of the HHL algorithm supporting <code class="docutils literal notranslate"><span class="pre">LinearSystemInput</span></code>.</li>
-<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">Eigenvalues</span></code> with variant <code class="docutils literal notranslate"><span class="pre">EigQPE</span></code>.</li>
+<li>Implementation of the HHL algorithm supporting <code class="docutils literal notranslate"><span class="pre">LinearSystemInput</span></code></li>
+<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">Eigenvalues</span></code> with variant <code class="docutils literal notranslate"><span class="pre">EigQPE</span></code></li>
 <li>Pluggable component <code class="docutils literal notranslate"><span class="pre">Reciprocal</span></code> with variants <code class="docutils literal notranslate"><span class="pre">LookupRotation</span></code> and
-<code class="docutils literal notranslate"><span class="pre">LongDivision</span></code>.</li>
-<li>Multiple-Controlled U1 and U3 operations <code class="docutils literal notranslate"><span class="pre">mcu1</span></code> and <code class="docutils literal notranslate"><span class="pre">mcu3</span></code>.</li>
-<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">QFT</span></code> derived from component <code class="docutils literal notranslate"><span class="pre">IQFT</span></code>.</li>
-<li>Summarize the transpiled circuits at the DEBUG logging level.</li>
+<code class="docutils literal notranslate"><span class="pre">LongDivision</span></code></li>
+<li>Multiple-Controlled U1 and U3 operations <code class="docutils literal notranslate"><span class="pre">mcu1</span></code> and <code class="docutils literal notranslate"><span class="pre">mcu3</span></code></li>
+<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">QFT</span></code> derived from component <code class="docutils literal notranslate"><span class="pre">IQFT</span></code></li>
+<li>Summarized the transpiled circuits at the DEBUG logging level</li>
 <li><code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> accepts <code class="docutils literal notranslate"><span class="pre">basis_gates</span></code> and <code class="docutils literal notranslate"><span class="pre">coupling_map</span></code> again.</li>
 <li>Support to use <code class="docutils literal notranslate"><span class="pre">cx</span></code> gate for the entanglement in <code class="docutils literal notranslate"><span class="pre">RY</span></code> and <code class="docutils literal notranslate"><span class="pre">RYRZ</span></code>
-variational form. (<code class="docutils literal notranslate"><span class="pre">cz</span></code> is the default choice.)</li>
-<li>Support to use arbitrary mixer Hamiltonian in QAOA. This allows to use QAOA
-in constrained optimization problems [arXiv:1709.03489].</li>
+variational form (<code class="docutils literal notranslate"><span class="pre">cz</span></code> is the default choice)</li>
+<li>Support to use arbitrary mixer Hamiltonian in QAOA, allowing use of QAOA
+in constrained optimization problems [arXiv:1709.03489]</li>
 <li>Added variational algorithm base class <code class="docutils literal notranslate"><span class="pre">VQAlgorithm</span></code>, implemented by
-<code class="docutils literal notranslate"><span class="pre">VQE</span></code> and <code class="docutils literal notranslate"><span class="pre">QSVMVariational</span></code>.</li>
+<code class="docutils literal notranslate"><span class="pre">VQE</span></code> and <code class="docutils literal notranslate"><span class="pre">QSVMVariational</span></code></li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">ising/docplex.py</span></code> for automatically generating Ising Hamiltonian
-from optimization models of DOcplex.</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">'basic-dirty-ancilla</span></code>’ mode for <code class="docutils literal notranslate"><span class="pre">mct</span></code>.</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">mcmt</span></code> for Multi-Controlled, Multi-Target gate.</li>
+from optimization models of DOcplex</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">'basic-dirty-ancilla</span></code>’ mode for <code class="docutils literal notranslate"><span class="pre">mct</span></code></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">mcmt</span></code> for Multi-Controlled, Multi-Target gate</li>
 <li>Exposed capabilities to generate circuits from logical AND, OR, DNF
-(disjunctive normal forms), and CNF (conjunctive normal forms) formulae.</li>
+(disjunctive normal forms), and CNF (conjunctive normal forms) formulae</li>
 <li>Added the capability to generate circuits from ESOP (exclusive sum of
-products) formulae with optional optimization based on Quine-McCluskey and ExactCover.</li>
+products) formulae with optional optimization based on Quine-McCluskey and ExactCover</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code> for generating oracle circuits from
 arbitrary Boolean logic expressions (including DIMACS support) with optional
-optimization capability.</li>
+optimization capability</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">TruthTableOracle</span></code> for generating oracle circuits from truth-tables
-with optional optimization capability.</li>
+with optional optimization capability</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">CustomCircuitOracle</span></code> for generating oracle from user specified
-circuits.</li>
-<li>Added implementation of the Deutsch-Jozsa algorithm.</li>
-<li>Added implementation of the Bernstein-Vazirani algorithm.</li>
-<li>Added implementation of the Simon’s algorithm.</li>
-<li>Added implementation of the Shor’s algorithm.</li>
-<li>Added optional capability for <code class="docutils literal notranslate"><span class="pre">Grover</span></code>’s algorithm to take a custom
+circuits</li>
+<li>Added implementation of the Deutsch-Jozsa algorithm</li>
+<li>Added implementation of the Bernstein-Vazirani algorithm</li>
+<li>Added implementation of the Simon’s algorithm</li>
+<li>Added implementation of the Shor’s algorithm</li>
+<li>Added optional capability for Grover’s algorithm to take a custom
 initial state (as opposed to the default uniform superposition)</li>
 <li>Added capability to create a <code class="docutils literal notranslate"><span class="pre">Custom</span></code> initial state using existing
-circuit.</li>
+circuit</li>
 <li>Added the ADAM (and AMSGRAD) optimization algorithm</li>
 <li>Multivariate distributions added, so uncertainty models now have univariate
-and multivariate distribution components.</li>
+and multivariate distribution components</li>
 <li>Added option to include or skip the swaps operations for qft and iqft
-circuit constructions.</li>
-<li>Added classical linear system solver <code class="docutils literal notranslate"><span class="pre">ExactLSsolver</span></code>.</li>
+circuit constructions</li>
+<li>Added classical linear system solver <code class="docutils literal notranslate"><span class="pre">ExactLSsolver</span></code></li>
 <li>Added parameters <code class="docutils literal notranslate"><span class="pre">auto_hermitian</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_resize</span></code> to <code class="docutils literal notranslate"><span class="pre">HHL</span></code> algorithm
-to support non-Hermititan and non <span class="math notranslate nohighlight">\(2^n\)</span> Sized matrices by default.</li>
+to support non-Hermitian and non <span class="math notranslate nohighlight">\(2^n\)</span> sized matrices by default</li>
 <li>Added another feature map, <code class="docutils literal notranslate"><span class="pre">RawFeatureVector</span></code>, that directly maps feature
-vectors to qubits’ states for classification.</li>
-<li><code class="docutils literal notranslate"><span class="pre">SVM_Classical</span></code> can now load models trained by <code class="docutils literal notranslate"><span class="pre">QSVM</span></code>.</li>
+vectors to qubits’ states for classification</li>
+<li><code class="docutils literal notranslate"><span class="pre">SVM_Classical</span></code> can now load models trained by <code class="docutils literal notranslate"><span class="pre">QSVM</span></code></li>
 </ul>
 </div>
 <div class="section" id="id8">
@@ -1809,7 +1808,7 @@ vectors to qubits’ states for classification.</li>
 <ul class="simple">
 <li>Fixed <code class="docutils literal notranslate"><span class="pre">ising/docplex.py</span></code> to correctly multiply constant values in constraints</li>
 <li>Fixed package setup to correctly identify namespace packages using
-<code class="docutils literal notranslate"><span class="pre">setuptools.find_namespace_packages</span></code>.</li>
+<code class="docutils literal notranslate"><span class="pre">setuptools.find_namespace_packages</span></code></li>
 </ul>
 </div>
 <div class="section" id="id9">
@@ -1817,24 +1816,24 @@ vectors to qubits’ states for classification.</li>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> does not take <code class="docutils literal notranslate"><span class="pre">memory</span></code> anymore.</li>
 <li>Moved command line and GUI to separate repo
-(<code class="docutils literal notranslate"><span class="pre">qiskit_aqua_uis</span></code>).</li>
+(<code class="docutils literal notranslate"><span class="pre">qiskit_aqua_uis</span></code>)</li>
 <li>Removed the <code class="docutils literal notranslate"><span class="pre">SAT</span></code>-specific oracle (now supported by
-<code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code>).</li>
+<code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code>)</li>
 <li>Changed <code class="docutils literal notranslate"><span class="pre">advanced</span></code> mode implementation of <code class="docutils literal notranslate"><span class="pre">mct</span></code>: using simple <code class="docutils literal notranslate"><span class="pre">h</span></code> gates
-instead of <code class="docutils literal notranslate"><span class="pre">ch</span></code>, and fixing the old recursion step in <code class="docutils literal notranslate"><span class="pre">_multicx</span></code>.</li>
-<li>Components <code class="docutils literal notranslate"><span class="pre">random_distributions</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">uncertainty_models</span></code>.</li>
+instead of <code class="docutils literal notranslate"><span class="pre">ch</span></code>, and fixing the old recursion step in <code class="docutils literal notranslate"><span class="pre">_multicx</span></code></li>
+<li>Components <code class="docutils literal notranslate"><span class="pre">random_distributions</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">uncertainty_models</span></code></li>
 <li>Reorganized the constructions of various common gates (<code class="docutils literal notranslate"><span class="pre">ch</span></code>, <code class="docutils literal notranslate"><span class="pre">cry</span></code>,
 <code class="docutils literal notranslate"><span class="pre">mcry</span></code>, <code class="docutils literal notranslate"><span class="pre">mct</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu1</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu3</span></code>, <code class="docutils literal notranslate"><span class="pre">mcmt</span></code>, <code class="docutils literal notranslate"><span class="pre">logic_and</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">logic_or</span></code>) and circuits (<code class="docutils literal notranslate"><span class="pre">PhaseEstimationCircuit</span></code>,
 <code class="docutils literal notranslate"><span class="pre">BooleanLogicCircuits</span></code>, <code class="docutils literal notranslate"><span class="pre">FourierTransformCircuits</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">StateVectorCircuits</span></code>) under the <code class="docutils literal notranslate"><span class="pre">circuits</span></code> directory.</li>
+and <code class="docutils literal notranslate"><span class="pre">StateVectorCircuits</span></code>) under the <code class="docutils literal notranslate"><span class="pre">circuits</span></code> directory</li>
 <li>Renamed the algorithm <code class="docutils literal notranslate"><span class="pre">QSVMVariational</span></code> to <code class="docutils literal notranslate"><span class="pre">VQC</span></code>, which stands for
-Variational Quantum Classifier.</li>
-<li>Renamed the algorithm <code class="docutils literal notranslate"><span class="pre">QSVMKernel</span></code> to <code class="docutils literal notranslate"><span class="pre">QSVM</span></code>.</li>
-<li>Renamed the class <code class="docutils literal notranslate"><span class="pre">SVMInput</span></code> to <code class="docutils literal notranslate"><span class="pre">ClassificationInput</span></code>.</li>
+Variational Quantum Classifier</li>
+<li>Renamed the algorithm <code class="docutils literal notranslate"><span class="pre">QSVMKernel</span></code> to <code class="docutils literal notranslate"><span class="pre">QSVM</span></code></li>
+<li>Renamed the class <code class="docutils literal notranslate"><span class="pre">SVMInput</span></code> to <code class="docutils literal notranslate"><span class="pre">ClassificationInput</span></code></li>
 <li>Renamed problem type <code class="docutils literal notranslate"><span class="pre">'svm_classification'</span></code> to <code class="docutils literal notranslate"><span class="pre">'classification'</span></code></li>
 <li>Changed the type of <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> used in <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> and
-<code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> to list of lists.</li>
+<code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> to list of lists</li>
 </ul>
 </div>
 </div>
@@ -1843,11 +1842,11 @@ Variational Quantum Classifier.</li>
 <div class="section" id="id10">
 <h4>New Features<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Standalone Package. This is the first release as a standalone package. If you
+<li>This is the first release as a standalone package. If you
 are installing Terra standalone you’ll also need to install the
 <code class="docutils literal notranslate"><span class="pre">qiskit-ibmq-provider</span></code> package with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit-ibmq-provider</span></code> if
 you want to use the IBM Q backends.</li>
-<li>Non-Qobj format jobs. Support for non-Qobj format jobs has been removed from
+<li>Support for non-Qobj format jobs has been removed from
 the provider. You’ll have to convert submissions in an older format to
 Qobj before you can submit.</li>
 </ul>
@@ -1861,12 +1860,12 @@ Qiskit Terra element 0.7.1 release which contains a bug fix for the BasicAer
 Python simulator.</p>
 <div class="section" id="ignis-0-1">
 <h3>Ignis 0.1<a class="headerlink" href="#ignis-0-1" title="Permalink to this headline">¶</a></h3>
-<p>This is the first release of Ignis.</p>
+<p>This is the first release of Qiskit Ignis.</p>
 </div>
 </div>
 <div class="section" id="qiskit-0-7">
 <h2>Qiskit 0.7<a class="headerlink" href="#qiskit-0-7" title="Permalink to this headline">¶</a></h2>
-<p>In Qiskit 0.7 we introduced Qiskit Aer and combined it with Terra.</p>
+<p>In Qiskit 0.7 we introduced Qiskit Aer and combined it with Qiskit Terra.</p>
 <div class="section" id="terra-0-7">
 <h3>Terra 0.7<a class="headerlink" href="#terra-0-7" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id11">
@@ -1881,15 +1880,15 @@ deprecation periods warning of any coming changes.</p>
 <p>There is also the introduction of the following new features:</p>
 <ul class="simple">
 <li>A new ASCII art circuit drawing output mode</li>
-<li>A new circuit drawing interface off of QuantumCircuit objects. Now you can
-call <code class="docutils literal notranslate"><span class="pre">circuit.draw()</span></code> or <code class="docutils literal notranslate"><span class="pre">print(circuit)</span></code> and render a drawing of
-the circuit.</li>
+<li>A new circuit drawing interface off of <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> objects that
+enables calls of <code class="docutils literal notranslate"><span class="pre">circuit.draw()</span></code> or <code class="docutils literal notranslate"><span class="pre">print(circuit)</span></code> to render a drawing
+of circuits</li>
 <li>A visualizer for drawing the DAG representation of a circuit</li>
 <li>A new quantum state plot type for hinton diagrams in the local matplotlib
-based state plots.</li>
+based state plots</li>
 <li>2 new constructor methods off the <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> class
 <code class="docutils literal notranslate"><span class="pre">from_qasm_str()</span></code> and <code class="docutils literal notranslate"><span class="pre">from_qasm_file()</span></code> which let you easily create a
-circuit object from OpenQASM.</li>
+circuit object from OpenQASM</li>
 <li>A new function <code class="docutils literal notranslate"><span class="pre">plot_bloch_multivector()</span></code> to plot Bloch vectors from a
 tensored state vector or density matrix</li>
 <li>Per-shot measurement results are available in simulators and select devices.
@@ -1897,7 +1896,7 @@ These can be accessed by setting the <code class="docutils literal notranslate">
 calling <code class="docutils literal notranslate"><span class="pre">compile()</span></code> or <code class="docutils literal notranslate"><span class="pre">execute()</span></code> and then accessed using the
 <code class="docutils literal notranslate"><span class="pre">get_memory()</span></code> method on the <code class="docutils literal notranslate"><span class="pre">Result</span></code> object.</li>
 <li>A <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_info</span></code> module with revamped Pauli objects and methods for
-working with quantum states.</li>
+working with quantum states</li>
 <li>New transpile passes for circuit analysis and transformation:
 <code class="docutils literal notranslate"><span class="pre">CommutationAnalysis</span></code>, <code class="docutils literal notranslate"><span class="pre">CommutationTransformation</span></code>, <code class="docutils literal notranslate"><span class="pre">CXCancellation</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Decompose</span></code>, <code class="docutils literal notranslate"><span class="pre">Unroll</span></code>, <code class="docutils literal notranslate"><span class="pre">Optimize1QGates</span></code>, <code class="docutils literal notranslate"><span class="pre">CheckMap</span></code>,
@@ -1906,7 +1905,7 @@ working with quantum states.</li>
 <code class="docutils literal notranslate"><span class="pre">BasicSwap</span></code>, <code class="docutils literal notranslate"><span class="pre">LookaheadSwap</span></code>, <code class="docutils literal notranslate"><span class="pre">StochasticSwap</span></code></li>
 <li>More advanced transpiler infrastructure with support for analysis passes,
 transformation passes, a global <code class="docutils literal notranslate"><span class="pre">property_set</span></code> for the pass manager, and
-repeat-until control of passes.</li>
+repeat-until control of passes</li>
 </ul>
 </div>
 <div class="section" id="id12">
@@ -1936,9 +1935,9 @@ dictionary are deprecated, instead the
 <li>The functions <code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">iplot_state()</span></code> have been depreciated.
 Instead the functions <code class="docutils literal notranslate"><span class="pre">plot_state_*()</span></code> and <code class="docutils literal notranslate"><span class="pre">iplot_state_*()</span></code> should be
 called for the visualization method required.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">skip_transpiler</span></code> arg has been deprecated from <code class="docutils literal notranslate"><span class="pre">compile()</span></code> and
-<code class="docutils literal notranslate"><span class="pre">execute()</span></code>. Instead you can use the PassManager directly, just set
-the <code class="docutils literal notranslate"><span class="pre">pass_manager</span></code> to a blank PassManager object with <code class="docutils literal notranslate"><span class="pre">PassManager()</span></code></li>
+<li>The <code class="docutils literal notranslate"><span class="pre">skip_transpiler</span></code> argumentt has been deprecated from <code class="docutils literal notranslate"><span class="pre">compile()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">execute()</span></code>. Instead you can use the <code class="docutils literal notranslate"><span class="pre">PassManager</span></code> directly, just set
+the <code class="docutils literal notranslate"><span class="pre">pass_manager</span></code> to a blank <code class="docutils literal notranslate"><span class="pre">PassManager</span></code> object with <code class="docutils literal notranslate"><span class="pre">PassManager()</span></code></li>
 <li>The <code class="docutils literal notranslate"><span class="pre">transpile_dag()</span></code> function <code class="docutils literal notranslate"><span class="pre">format</span></code> kwarg for emitting different
 output formats is deprecated, instead you should convert the default output
 <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> object to the desired format.</li>
@@ -2174,7 +2173,7 @@ phase damping, combined phase and amplitude damping</li>
 <p><code class="docutils literal notranslate"><span class="pre">utils</span></code> module:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">qobj_utils</span></code> provides functions for directly modifying a Qobj to insert
-special simulator instructions not yet supported through the Qiskit Terra API</li>
+special simulator instructions not yet supported through the Qiskit Terra API.</li>
 </ul>
 </div>
 </div>
@@ -2249,16 +2248,16 @@ release, are:</p>
 <ul class="simple">
 <li>Improvements for inter-operability (based on the Qobj specification) and
 extensibility (facilities for extending Qiskit with new backends in a
-seamless way).</li>
+seamless way)</li>
 <li>New options for handling credentials and authentication for the IBM Q
 backends, aimed at simplifying the process and supporting automatic loading
-of user credentials.</li>
+of user credentials</li>
 <li>A revamp of the visualization utilities: stylish interactive visualizations
 are now available for Jupyter users, along with refinements for the circuit
-drawer (including a matplotlib-based version).</li>
+drawer (including a matplotlib-based version)</li>
 <li>Performance improvements centered around circuit transpilation: the basis for
 a more flexible and modular architecture have been set, including
-parallelization of the circuit compilation and numerous optimizations.</li>
+parallelization of the circuit compilation and numerous optimizations</li>
 </ul>
 </div>
 <div class="section" id="id17">
@@ -2485,12 +2484,12 @@ detailed description of the changes - the highlights are:</p>
 <li>new <code class="docutils literal notranslate"><span class="pre">statevector</span></code> <code class="xref py py-mod docutils literal notranslate"><span class="pre">simulators</span></code> and feature and
 performance improvements to the existing ones (in particular to the C++
 simulator), along with a reorganization of how to work with backends focused
-on extensibility and flexibility (using aliases and backend providers).</li>
+on extensibility and flexibility (using aliases and backend providers)</li>
 <li>reorganization of the asynchronous features, providing a friendlier interface
-for running jobs asynchronously via <code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code> instances.</li>
+for running jobs asynchronously via <code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code> instances</li>
 <li>numerous improvements and fixes throughout the Terra as a whole, both for
 convenience of the users (such as allowing anonymous registers) and for
-enhanced functionality (such as improved plotting of circuits).</li>
+enhanced functionality (such as improved plotting of circuits)</li>
 </ul>
 </div>
 <div class="section" id="id19">
