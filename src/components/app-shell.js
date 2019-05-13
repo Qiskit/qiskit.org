@@ -229,12 +229,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <nav class="second">
             <a
                 href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
-                @click=${this.trackNewPage('tutorials')}
                 rel="noopener"
                 target="_blank">
               ${i18next.t('tutorials')}
             </a>
-            <a href="/documentation" @click=${this.trackNewPage('documentation')}>${i18next.t('documentation')}</a>
+            <a href="/documentation">${i18next.t('documentation')}</a>
             <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
             <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
           </nav>
@@ -253,12 +252,11 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <span>Tools</span>
           <a
               href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
-              @click=${this.trackNewPage('documentation')}
               rel="noopener"
               target="_blank">
             ${i18next.t('tutorials')}
           </a>
-          <a href="/documentation" @click=${this.trackNewPage('documentation')}>${i18next.t('documentation')}</a>
+          <a href="/documentation">${i18next.t('documentation')}</a>
           <a href="/vscode" ?selected=${this.page === 'vscode'}>${i18next.t('tools')}</a>
           <a href="/fun" ?selected=${this.page === 'fun'}>${i18next.t('fun')}</a>
         </nav>
@@ -292,8 +290,6 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
-    this.lastPage = null;
-    this.brand = 'IBM Q Experience';
   }
 
   firstUpdated() {
@@ -318,26 +314,12 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
         title: i18next.t(`pages.${this.page}.metaTitle`),
         description: i18next.t(`pages.${this.page}.metaDescription`),
       });
-
-      if (this.lastPage !== this.page) {
-        this.lastPage = this.page;
-        this.trackNewPage(this.page);
-      }
     }
   }
 
   stateChanged(state) {
     this.page = state.app.page;
     this.drawerOpened = state.app.drawerOpened;
-  }
-
-  trackNewPage(page) {
-    if (window.bluemixAnalytics && window.bluemixAnalytics.pageEvent) {
-      window.bluemixAnalytics.pageEvent('Qiskit.org', page, {
-        navigationType: 'pushState',
-        productTitle: 'IBM Q Experience',
-      });
-    }
   }
 
   changeLanguage(event) {
