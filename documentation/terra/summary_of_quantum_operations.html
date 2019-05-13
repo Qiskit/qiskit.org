@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>Summary of Quantum Operations &#8212; Qiskit 0.10.1 documentation</title>
+    <title>Elementary Operations &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Visualizing a Quantum Circuit" href="visualizing_a_quantum_circuit.html" />
+    <link rel="next" title="Custom gates" href="custom_gates.html" />
     <link rel="prev" title="Circuits and Registers" href="quantum_circuits.html" /> 
   </head>
 <body>
@@ -138,14 +138,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="quantum_circuits.html">Circuits and Registers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#creating-registers">Creating Registers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#creating-circuits">Creating Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Summary of Quantum Operations</a><ul>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Elementary Operations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#single-qubit-gates">Single-Qubit Gates</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#u-gates">u gates</a></li>
@@ -181,6 +183,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#reset">Reset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conditional-operations">Conditional operations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custom_gates.html">Custom Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custom_gates.html#opaque-gates">Opaque Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_gates.html#composite-gates">Composite Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_gates.html#parameterized-gates">Parameterized Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custom_gates.html#combining-parameterized-circuits">Combining Parameterized Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_gates.html#binding-parameters-to-values">Binding Parameters to Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_gates.html#reducing-compilation-time">Reducing Compilation Time</a></li>
 </ul>
 </li>
 </ul>
@@ -864,14 +877,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="quantum_circuits.html">Circuits and Registers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#creating-registers">Creating Registers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#creating-circuits">Creating Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Summary of Quantum Operations</a><ul>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Elementary Operations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#single-qubit-gates">Single-Qubit Gates</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#u-gates">u gates</a></li>
@@ -907,6 +922,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#reset">Reset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conditional-operations">Conditional operations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custom_gates.html">Custom Gates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custom_gates.html#opaque-gates">Opaque Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_gates.html#composite-gates">Composite Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_gates.html#parameterized-gates">Parameterized Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custom_gates.html#combining-parameterized-circuits">Combining Parameterized Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_gates.html#binding-parameters-to-values">Binding Parameters to Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_gates.html#reducing-compilation-time">Reducing Compilation Time</a></li>
 </ul>
 </li>
 </ul>
@@ -1503,8 +1529,8 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="summary-of-quantum-operations">
-<h1>Summary of Quantum Operations<a class="headerlink" href="#summary-of-quantum-operations" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="elementary-operations">
+<h1>Elementary Operations<a class="headerlink" href="#elementary-operations" title="Permalink to this headline">¶</a></h1>
 <p>In this section we will go into the different operations that are
 available in Qiskit Terra. These are: - Single-qubit quantum gates -
 Multi-qubit quantum gates - Measurements - Reset - Conditionals - State
@@ -2772,10 +2798,10 @@ decomposition to primitive gates of cx, rz and ry.</p>
             <div>Circuits and Registers</div>
          </div>
      </a>
-     <a id="button-next" href="visualizing_a_quantum_circuit.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="custom_gates.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>Visualizing a Quantum Circuit</div>
+            <div>Custom gates</div>
         </div>
      </a>
         
