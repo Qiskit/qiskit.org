@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.circuit.instruction &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.circuit.instruction &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,86 +130,88 @@
   <h1>Source code for qiskit.circuit.instruction</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
+<span class="c1"># pylint: disable=too-many-boolean-expressions</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A generic quantum instruction.</span>
 
-<span class="sd">Instructions can be implementable on hardware (U, CX, etc.) or in simulation</span>
+<span class="sd">Instructions can be implementable on hardware (u, cx, etc.) or in simulation</span>
 <span class="sd">(snapshot, noise, etc.).</span>
 
 <span class="sd">Instructions can be unitary (a.k.a Gate) or non-unitary.</span>
 
-<span class="sd">Instructions are identified by the following fields, and are serialized as such in Qobj.</span>
+<span class="sd">Instructions are identified by the following:</span>
 
 <span class="sd">    name: A string to identify the type of instruction.</span>
 <span class="sd">          Used to request a specific instruction on the backend, or in visualizing circuits.</span>
 
-<span class="sd">    param: List of parameters to specialize a specific intruction instance.</span>
+<span class="sd">    num_qubits, num_clbits: dimensions of the instruction</span>
 
-<span class="sd">    qargs: List of qubits (QuantumRegister, index) that the instruction acts on.</span>
+<span class="sd">    params: List of parameters to specialize a specific intruction instance.</span>
 
-<span class="sd">    cargs: List of clbits (ClassicalRegister, index) that the instruction acts on.</span>
-
+<span class="sd">Instructions do not have any context about where they are in a circuit (which qubits/clbits).</span>
+<span class="sd">The circuit itself keeps this context.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">zip_longest</span>
 <span class="kn">import</span> <span class="nn">sympy</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.qasm._node</span> <span class="k">import</span> <span class="n">_node</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
-<span class="kn">from</span> <span class="nn">.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
-<span class="kn">from</span> <span class="nn">.classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.qasm.node</span> <span class="k">import</span> <span class="n">node</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.parameter</span> <span class="k">import</span> <span class="n">Parameter</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj.models.qasm</span> <span class="k">import</span> <span class="n">QasmQobjInstruction</span>
+
+<span class="n">_CUTOFF_PRECISION</span> <span class="o">=</span> <span class="mf">1E-10</span>
 
 
-<div class="viewcode-block" id="Instruction"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction">[docs]</a><span class="k">class</span> <span class="nc">Instruction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction">[docs]</a><span class="k">class</span> <span class="nc">Instruction</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Generic quantum instruction.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new instruction.</span>
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): instruction name</span>
-<span class="sd">            param (list[sympy.Basic|qasm.Node|int|float|complex|str]): list of parameters</span>
-<span class="sd">            qargs (list[(QuantumRegister, index)]): list of quantum args</span>
-<span class="sd">            cargs (list[(ClassicalRegister, index)]): list of classical args</span>
-<span class="sd">            circuit (QuantumCircuit or Instruction): where the instruction is attached</span>
+<span class="sd">            num_qubits (int): instruction&#39;s qubit width</span>
+<span class="sd">            num_clbits (int): instructions&#39;s clbit width</span>
+<span class="sd">            params (list[sympy.Basic|qasm.Node|int|float|complex|str|ndarray]): list of parameters</span>
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: when the register is not in the correct format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="p">(</span><span class="n">QuantumRegister</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;qarg not (QuantumRegister, int) tuple&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="p">(</span><span class="n">ClassicalRegister</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;carg not (ClassicalRegister, int) tuple&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_clbits</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;num_qubits and num_clbits must be integer.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">num_clbits</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s2">&quot;bad instruction dimensions: </span><span class="si">%d</span><span class="s2"> qubits, </span><span class="si">%d</span><span class="s2"> clbits.&quot;</span> <span class="o">%</span>
+                <span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_clbits</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># a list of gate params stored as sympy objects</span>
-        <span class="k">for</span> <span class="n">single_param</span> <span class="ow">in</span> <span class="n">param</span><span class="p">:</span>
-            <span class="c1"># example: u2(pi/2, sin(pi/4))</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Basic</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
-            <span class="c1"># example: OpenQASM parsed instruction</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">_node</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="o">.</span><span class="n">sym</span><span class="p">())</span>
-            <span class="c1"># example: u3(0.1, 0.2, 0.3)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="n">single_param</span><span class="p">))</span>
-            <span class="c1"># example: Initialize([complex(0,1), complex(0,0)])</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">single_param</span><span class="o">.</span><span class="n">imag</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
-            <span class="c1"># example: snapshot(&#39;label&#39;)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">single_param</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;invalid param type </span><span class="si">{0}</span><span class="s2"> in instruction &quot;</span>
-                                  <span class="s2">&quot;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">single_param</span><span class="p">),</span> <span class="n">name</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">qargs</span> <span class="o">=</span> <span class="n">qargs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cargs</span> <span class="o">=</span> <span class="n">cargs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># tuple (ClassicalRegister, int) for &quot;if&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="o">=</span> <span class="n">circuit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">=</span> <span class="n">num_qubits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">=</span> <span class="n">num_clbits</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># a list of gate params stored</span>
+
+        <span class="c1"># tuple (ClassicalRegister, int) when the instruction has a conditional (&quot;if&quot;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># list of instructions (and their contexts) that this instruction is composed of</span>
+        <span class="c1"># empty definition means opaque or fundamental instruction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Two instructions are the same if they have the same name and same</span>
-<span class="sd">        params.</span>
+        <span class="sd">&quot;&quot;&quot;Two instructions are the same if they have the same name,</span>
+<span class="sd">        same dimensions, and same params.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            other (instruction): other instruction</span>
@@ -217,35 +219,175 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: are self and other equal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">param</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="n">res</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">num_qubits</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">num_clbits</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">definition</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="Instruction.check_circuit"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction.check_circuit">[docs]</a>    <span class="k">def</span> <span class="nf">check_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Raise exception if self.circuit is None.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Instruction&#39;s circuit not assigned&quot;</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">self_param</span><span class="p">,</span> <span class="n">other_param</span> <span class="ow">in</span> <span class="n">zip_longest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">params</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">self_param</span> <span class="o">==</span> <span class="n">other_param</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">self_param</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">other_param</span><span class="p">),</span>
+                                 <span class="n">atol</span><span class="o">=</span><span class="n">_CUTOFF_PRECISION</span><span class="p">):</span>
+                    <span class="k">continue</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_define</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Populates self.definition with a decomposition of this gate.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return instruction params&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span>
+
+    <span class="nd">@params</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">single_param</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+            <span class="c1"># example: u2(pi/2, sin(pi/4))</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="p">(</span><span class="n">Parameter</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Basic</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
+            <span class="c1"># example: OpenQASM parsed instruction</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="o">.</span><span class="n">sym</span><span class="p">())</span>
+            <span class="c1"># example: u3(0.1, 0.2, 0.3)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="n">single_param</span><span class="p">))</span>
+            <span class="c1"># example: Initialize([complex(0,1), complex(0,0)])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span>
+                                    <span class="n">single_param</span><span class="o">.</span><span class="n">imag</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+            <span class="c1"># example: snapshot(&#39;label&#39;)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">single_param</span><span class="p">))</span>
+            <span class="c1"># example: numpy.array([[1, 0], [0, 1]])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
+            <span class="c1"># example: sympy.Matrix([[1, 0], [0, 1]])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Expr</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="n">single_param</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;invalid param type </span><span class="si">{0}</span><span class="s2"> in instruction &quot;</span>
+                                  <span class="s2">&quot;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">single_param</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return definition in terms of other basic gates.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_define</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span>
+
+    <span class="nd">@definition</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set matrix representation&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span> <span class="o">=</span> <span class="n">array</span>
+
+<div class="viewcode-block" id="Instruction.assemble"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction.assemble">[docs]</a>    <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assemble a QasmQobjInstruction&quot;&quot;&quot;</span>
+        <span class="n">instruction</span> <span class="o">=</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Evaluate parameters</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;evalf&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
+            <span class="p">]</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">sympy</span><span class="o">.</span><span class="n">matrix2numpy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
+                    <span class="n">x</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">params</span>
+            <span class="p">]</span>
+            <span class="n">instruction</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="c1"># Add placeholder for qarg and carg params</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">:</span>
+            <span class="n">instruction</span><span class="o">.</span><span class="n">qubits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">:</span>
+            <span class="n">instruction</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">))</span>
+        <span class="c1"># Add control parameters for assembler. This is needed to convert</span>
+        <span class="c1"># to a qobj conditional instruction at assemble time and after</span>
+        <span class="c1"># conversion will be deleted by the assembler.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">:</span>
+            <span class="n">instruction</span><span class="o">.</span><span class="n">_control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span>
+        <span class="k">return</span> <span class="n">instruction</span></div>
+
+<div class="viewcode-block" id="Instruction.mirror"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction.mirror">[docs]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For a composite instruction, reverse the order of sub-gates.</span>
+
+<span class="sd">        This is done by recursively mirroring all sub-instructions.</span>
+<span class="sd">        It does not invert any gate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Instruction: a fresh gate with sub-gates reversed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="n">reverse_inst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_mirror&#39;</span><span class="p">)</span>
+        <span class="n">reverse_inst</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="p">):</span>
+            <span class="n">reverse_inst</span><span class="o">.</span><span class="n">_definition</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">mirror</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">reverse_inst</span></div>
+
+<div class="viewcode-block" id="Instruction.inverse"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Invert this instruction.</span>
+
+<span class="sd">        If the instruction is composite (i.e. has a definition),</span>
+<span class="sd">        then its definition will be recursively inverted.</span>
+
+<span class="sd">        Special instructions inheriting from Instruction can</span>
+<span class="sd">        implement their own inverse (e.g. T and Tdg, Barrier, etc.)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Instruction: a fresh instruction for the inverse</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: if the instruction is not composite</span>
+<span class="sd">                and an inverse has not been implemented for it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;inverse() not implemented for </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">inverse_gate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dg&#39;</span><span class="p">)</span>
+        <span class="n">inverse_gate</span><span class="o">.</span><span class="n">_definition</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_definition</span><span class="p">):</span>
+            <span class="n">inverse_gate</span><span class="o">.</span><span class="n">_definition</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">inverse</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">inverse_gate</span></div>
 
 <div class="viewcode-block" id="Instruction.c_if"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction.c_if">[docs]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add classical control on register classical and value val.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_circuit</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">_check_creg</span><span class="p">(</span><span class="n">classical</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;c_if must be used with a classical register&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;control value should be non-negative&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="k">def</span> <span class="nf">_modifiers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply any modifiers of this instruction to another one.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">check_circuit</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">gate</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;control register </span><span class="si">%s</span><span class="s2"> not found&quot;</span>
-                                  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">gate</span><span class="o">.</span><span class="n">c_if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<div class="viewcode-block" id="Instruction.copy"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instruction.html#qiskit.circuit.instruction.Instruction.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        shallow copy of the instruction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          name (str): name to be given to the copied circuit,</span>
+<span class="sd">            if None then the name stays the same</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          Instruction: a shallow copy of the current instruction, with the name</span>
+<span class="sd">            updated if it was provided</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cpy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">cpy</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">return</span> <span class="n">cpy</span></div>
 
     <span class="k">def</span> <span class="nf">_qasmif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print an if statement if needed.&quot;&quot;&quot;</span>
@@ -260,14 +402,11 @@
 <span class="sd">        different format (e.g. measure q[0] -&gt; c[0];).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">name_param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">:</span>
-            <span class="n">name_param</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name_param</span><span class="p">,</span>
-                                     <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="n">name_param</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name_param</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">]))</span>
 
-        <span class="n">name_param_arg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name_param</span><span class="p">,</span>
-                                     <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                                               <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qargs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cargs</span><span class="p">]))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="n">name_param_arg</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="n">name_param</span><span class="p">)</span></div></div>
 </pre></div>
 
         </div>

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.ibmq.ibmqsingleprovider &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.providers.ibmq.ibmqsingleprovider &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,24 +130,32 @@
   <h1>Source code for qiskit.providers.ibmq.ibmqsingleprovider</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Provider for a single IBMQ account.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 
-<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">ValidationError</span>
-
 <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseProvider</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="p">(</span><span class="n">QasmBackendConfiguration</span><span class="p">,</span>
+                                     <span class="n">PulseBackendConfiguration</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.providerutils</span> <span class="k">import</span> <span class="n">filter_backends</span>
+<span class="kn">from</span> <span class="nn">qiskit.validation.exceptions</span> <span class="k">import</span> <span class="n">ModelValidationError</span>
 
 <span class="kn">from</span> <span class="nn">.api</span> <span class="k">import</span> <span class="n">IBMQConnector</span>
-<span class="kn">from</span> <span class="nn">.ibmqbackend</span> <span class="k">import</span> <span class="n">IBMQBackend</span>
+<span class="kn">from</span> <span class="nn">.api_v2</span> <span class="k">import</span> <span class="n">IBMQClient</span>
+<span class="kn">from</span> <span class="nn">.ibmqbackend</span> <span class="k">import</span> <span class="n">IBMQBackend</span><span class="p">,</span> <span class="n">IBMQSimulator</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -159,8 +167,10 @@
 <span class="sd">    Note: this class is not part of the public API and is not guaranteed to be</span>
 <span class="sd">    present in future releases.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">ibmq_provider</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a new IBMQSingleProvider.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            credentials (Credentials): Quantum Experience or IBMQ credentials.</span>
 <span class="sd">            ibmq_provider (IBMQProvider): IBMQ main provider.</span>
@@ -196,12 +206,21 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the authentication resulted in error.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: add more robust detection.</span>
+        <span class="c1"># Check if the URL belongs to auth services of the new API.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;quantum-computing.ibm.com/api&#39;</span> <span class="ow">in</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span> <span class="ow">and</span>
+                <span class="s1">&#39;auth&#39;</span> <span class="ow">in</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IBMQClient</span><span class="p">(</span><span class="n">api_token</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+                              <span class="n">auth_url</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
             <span class="p">}</span>
             <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">proxies</span><span class="p">:</span>
                 <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">proxies</span>
+            <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">websocket_url</span><span class="p">:</span>
+                <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;websocket_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">websocket_url</span>
             <span class="k">return</span> <span class="n">IBMQConnector</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span>
                                  <span class="n">credentials</span><span class="o">.</span><span class="n">verify</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
@@ -224,13 +243,17 @@
         <span class="n">configs_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">raw_config</span> <span class="ow">in</span> <span class="n">configs_list</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">config</span> <span class="o">=</span> <span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span>
-                <span class="n">ret</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">backend_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">IBMQBackend</span><span class="p">(</span>
+                <span class="k">if</span> <span class="n">raw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;open_pulse&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                    <span class="n">config</span> <span class="o">=</span> <span class="n">PulseBackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">config</span> <span class="o">=</span> <span class="n">QasmBackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span>
+                <span class="n">backend_cls</span> <span class="o">=</span> <span class="n">IBMQSimulator</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">simulator</span> <span class="k">else</span> <span class="n">IBMQBackend</span>
+                <span class="n">ret</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">backend_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">backend_cls</span><span class="p">(</span>
                     <span class="n">configuration</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
                     <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ibm_provider</span><span class="p">,</span>
                     <span class="n">credentials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">credentials</span><span class="p">,</span>
                     <span class="n">api</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">)</span>
-            <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">except</span> <span class="n">ModelValidationError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
                     <span class="s1">&#39;Remote backend &quot;</span><span class="si">%s</span><span class="s1">&quot; could not be instantiated due to an &#39;</span>
                     <span class="s1">&#39;invalid config: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>

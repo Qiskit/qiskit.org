@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.circuit.register &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.circuit.register &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.circuit.register</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Base register reference object.</span>
@@ -142,12 +149,12 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span><span class="p">,</span> <span class="n">QiskitIndexError</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span><span class="p">,</span> <span class="n">QiskitIndexError</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Register"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.register.html#qiskit.circuit.register.Register">[docs]</a><span class="k">class</span> <span class="nc">Register</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Register"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.register.html#qiskit.circuit.register.Register">[docs]</a><span class="k">class</span> <span class="nc">Register</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Implement a generic register.&quot;&quot;&quot;</span>
 
     <span class="c1"># Counter for the number of instances in this class.</span>
@@ -186,26 +193,42 @@
 
 <div class="viewcode-block" id="Register.check_range"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.register.html#qiskit.circuit.register.Register.check_range">[docs]</a>    <span class="k">def</span> <span class="nf">check_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check that j is a valid index into self.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitIndexError</span><span class="p">(</span><span class="s2">&quot;register index out of range&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitIndexError</span><span class="p">(</span><span class="s2">&quot;register index out of range&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">stop</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="ow">or</span> <span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+                                                          <span class="n">j</span><span class="o">.</span><span class="n">step</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">QiskitIndexError</span><span class="p">(</span><span class="s2">&quot;register index slice out of range&quot;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Arg:</span>
-<span class="sd">            key (int): index of the bit/qubit to be retrieved.</span>
+<span class="sd">            key (int|slice|list): index of the bit/qubit to be retrieved.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            tuple[Register, int]: a tuple in the form `(self, key)`.</span>
+<span class="sd">            tuple[Register, int]: a tuple in the form `(self, key)` if key is int.</span>
+<span class="sd">                If key is a slice, return a `list((self,key))`.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if the `key` is not an integer.</span>
 <span class="sd">            QiskitIndexError: if the `key` is not in the range</span>
 <span class="sd">                `(0, self.size)`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;expected integer index into register&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">slice</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;expected integer or slice index into register&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">key</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>  <span class="c1"># list of qubit indices</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;register index out of range&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">key</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -234,7 +257,7 @@
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make object hashable, based on the name and size to hash.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span></div>
 </pre></div>
 
         </div>

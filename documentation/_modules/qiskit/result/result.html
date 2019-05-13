@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.result.result &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.result.result &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,18 +130,26 @@
   <h1>Source code for qiskit.result.result</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Model for schema-conformant Results.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QiskitError</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.pulse.schedule</span> <span class="k">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+
 <span class="kn">from</span> <span class="nn">qiskit.validation.base</span> <span class="k">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">bind_schema</span>
-<span class="kn">from</span> <span class="nn">.postprocess</span> <span class="k">import</span> <span class="p">(</span><span class="n">format_counts</span><span class="p">,</span> <span class="n">format_statevector</span><span class="p">,</span>
-                          <span class="n">format_unitary</span><span class="p">,</span> <span class="n">format_memory</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiskit.result</span> <span class="k">import</span> <span class="n">postprocess</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">ResultSchema</span>
 
 
@@ -174,7 +182,7 @@
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Result.data"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.data"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the raw data for an experiment.</span>
 
 <span class="sd">        Note this data will be a single classical and quantum register and in a</span>
@@ -182,16 +190,18 @@
 <span class="sd">        the get_xxx method, and the data will be post-processed for the data type.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit (str or QuantumCircuit or int or None): the index of the</span>
+<span class="sd">            experiment (str or QuantumCircuit or Schedule or int or None): the index of the</span>
 <span class="sd">                experiment. Several types are accepted for convenience::</span>
 <span class="sd">                * str: the name of the experiment.</span>
-<span class="sd">                * QuantumCircuit: the name of the instance will be used.</span>
+<span class="sd">                * QuantumCircuit: the name of the circuit instance will be used.</span>
+<span class="sd">                * Schedule: the name of the schedule instance will be used.</span>
 <span class="sd">                * int: the position of the experiment.</span>
 <span class="sd">                * None: if there is only one experiment, returns it.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: A dictionary of results data for an experiment. The data</span>
-<span class="sd">            depends on the backend it ran on.</span>
+<span class="sd">            depends on the backend it ran on and the settings of `meas_level`,</span>
+<span class="sd">            `meas_return` and `memory`.</span>
 
 <span class="sd">            QASM backends return a dictionary of dictionary with the key</span>
 <span class="sd">            &#39;counts&#39; and  with the counts, with the second dictionary keys</span>
@@ -221,40 +231,63 @@
 <span class="sd">            QiskitError: if data for the experiment could not be retrieved.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_experiment</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No data for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No data for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the sequence of memory states (readouts) for each shot</span>
 <span class="sd">        The data from the experiment is a list of format</span>
 <span class="sd">        [&#39;00000&#39;, &#39;01000&#39;, &#39;10100&#39;, &#39;10100&#39;, &#39;11101&#39;, &#39;11100&#39;, &#39;00101&#39;, ..., &#39;01010&#39;]</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit (str or QuantumCircuit or int or None): the index of the</span>
+<span class="sd">            experiment (str or QuantumCircuit or Schedule or int or None): the index of the</span>
 <span class="sd">                experiment, as specified by ``data()``.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            List[str]: the list of each outcome, formatted according to</span>
-<span class="sd">                registers in circuit.</span>
+<span class="sd">            List[str] or np.ndarray: Either the list of each outcome, formatted according to</span>
+<span class="sd">                registers in circuit or a complex numpy np.darray with shape:</span>
+
+<span class="sd">                | `meas_level` | `meas_return` | shape                                             |</span>
+<span class="sd">                |--------------|---------------|---------------------------------------------------|</span>
+<span class="sd">                | 0            | `single`      | np.ndarray[shots, memory_slots, memory_slot_size] |</span>
+<span class="sd">                | 0            | `avg`         | np.ndarray[memory_slots, memory_slot_size]        |</span>
+<span class="sd">                | 1            | `single`      | np.ndarray[shots, memory_slots]                   |</span>
+<span class="sd">                | 1            | `avg`         | np.ndarray[memory_slots]                          |</span>
+<span class="sd">                | 2            | `memory=True` | list                                              |</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if there is no memory data for the circuit.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_experiment</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-            <span class="n">memory_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">memory</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;memory&#39;</span><span class="p">]:</span>
-                <span class="n">memory_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">format_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">header</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">memory_list</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No memory for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
+            <span class="n">exp_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_counts">[docs]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>  <span class="c1"># header is not available</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="n">exp_result</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">QiskitError</span><span class="p">):</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">meas_level</span> <span class="o">=</span> <span class="n">exp_result</span><span class="o">.</span><span class="n">meas_level</span>
+
+            <span class="n">memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">experiment</span><span class="p">)[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">meas_level</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">postprocess</span><span class="o">.</span><span class="n">format_level_2_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">meas_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">postprocess</span><span class="o">.</span><span class="n">format_level_1_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">meas_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">postprocess</span><span class="o">.</span><span class="n">format_level_0_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Measurement level </span><span class="si">{0}</span><span class="s1"> is not supported&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">meas_level</span><span class="p">))</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No memory for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_counts">[docs]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the histogram data of an experiment.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit (str or QuantumCircuit or int or None): the index of the</span>
+<span class="sd">            experiment (str or QuantumCircuit or Schedule or int or None): the index of the</span>
 <span class="sd">                experiment, as specified by ``get_data()``.</span>
 
 <span class="sd">        Returns:</span>
@@ -267,16 +300,22 @@
 <span class="sd">            QiskitError: if there are no counts for the experiment.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">format_counts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;counts&#39;</span><span class="p">],</span>
-                                 <span class="bp">self</span><span class="o">.</span><span class="n">_get_experiment</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No counts for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
+            <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">QiskitError</span><span class="p">):</span>  <span class="c1"># header is not available</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="Result.get_statevector"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_statevector">[docs]</a>    <span class="k">def</span> <span class="nf">get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">postprocess</span><span class="o">.</span><span class="n">format_counts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">experiment</span><span class="p">)[</span><span class="s1">&#39;counts&#39;</span><span class="p">],</span>
+                                             <span class="n">header</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No counts for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Result.get_statevector"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_statevector">[docs]</a>    <span class="k">def</span> <span class="nf">get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the final statevector of an experiment.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit (str or QuantumCircuit or int or None): the index of the</span>
+<span class="sd">            experiment (str or QuantumCircuit or Schedule or int or None): the index of the</span>
 <span class="sd">                experiment, as specified by ``data()``.</span>
 <span class="sd">            decimals (int): the number of decimals in the statevector.</span>
 <span class="sd">                If None, does not round.</span>
@@ -288,16 +327,16 @@
 <span class="sd">            QiskitError: if there is no statevector for the experiment.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">format_statevector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;statevector&#39;</span><span class="p">],</span>
-                                      <span class="n">decimals</span><span class="o">=</span><span class="n">decimals</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">postprocess</span><span class="o">.</span><span class="n">format_statevector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">experiment</span><span class="p">)[</span><span class="s1">&#39;statevector&#39;</span><span class="p">],</span>
+                                                  <span class="n">decimals</span><span class="o">=</span><span class="n">decimals</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No statevector for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No statevector for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_unitary"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_unitary">[docs]</a>    <span class="k">def</span> <span class="nf">get_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_unitary"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_unitary">[docs]</a>    <span class="k">def</span> <span class="nf">get_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the final unitary of an experiment.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            circuit (str or QuantumCircuit or int or None): the index of the</span>
+<span class="sd">            experiment (str or QuantumCircuit or Schedule or int or None): the index of the</span>
 <span class="sd">                experiment, as specified by ``data()``.</span>
 <span class="sd">            decimals (int): the number of decimals in the unitary.</span>
 <span class="sd">                If None, does not round.</span>
@@ -310,23 +349,23 @@
 <span class="sd">            QiskitError: if there is no unitary for the experiment.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">format_unitary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">circuit</span><span class="p">)[</span><span class="s1">&#39;unitary&#39;</span><span class="p">],</span>
-                                  <span class="n">decimals</span><span class="o">=</span><span class="n">decimals</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">postprocess</span><span class="o">.</span><span class="n">format_unitary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">experiment</span><span class="p">)[</span><span class="s1">&#39;unitary&#39;</span><span class="p">],</span>
+                                              <span class="n">decimals</span><span class="o">=</span><span class="n">decimals</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No unitary for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">circuit</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No unitary for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_get_experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a single experiment result from a given key.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            key (str or QuantumCircuit or int or None): the index of the</span>
+<span class="sd">            key (str or QuantumCircuit or Schedule or int or None): the index of the</span>
 <span class="sd">                experiment, as specified by ``get_data()``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            ExperimentResult: the results for an experiment.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if there is no data for the circuit, or an unhandled</span>
+<span class="sd">            QiskitError: if there is no data for the experiment, or an unhandled</span>
 <span class="sd">                error occurred while fetching the data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
@@ -337,17 +376,17 @@
         <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
-                    <span class="s1">&#39;You have to select a circuit when there is more than &#39;</span>
+                    <span class="s1">&#39;You have to select a circuit or schedule when there is more than &#39;</span>
                     <span class="s1">&#39;one available&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># Key is an integer: return result by index.</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-        <span class="c1"># Key is a QuantumCircuit or str: retrieve result by name.</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
+        <span class="c1"># Key is a QuantumCircuit/Schedule or str: retrieve result by name.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Schedule</span><span class="p">)):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">name</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -357,123 +396,7 @@
                                    <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Data for experiment &quot;</span><span class="si">%s</span><span class="s1">&quot; could not be found.&#39;</span> <span class="o">%</span>
-                              <span class="n">key</span><span class="p">)</span>
-
-    <span class="c1"># To be deprecated after 0.7</span>
-
-    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Append a Result object to current Result object.</span>
-
-<span class="sd">        Arg:</span>
-<span class="sd">            other (Result): a Result object to append.</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            Result: The current object with appended results.</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if the Results cannot be combined.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Result addition is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-
-        <span class="n">this_backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_name</span>
-        <span class="n">other_backend</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">backend_name</span>
-        <span class="k">if</span> <span class="n">this_backend</span> <span class="o">!=</span> <span class="n">other_backend</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Result objects from different backends cannot be combined.&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Can not combine a failed result with another result.&#39;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Combine Result objects.</span>
-
-<span class="sd">        Arg:</span>
-<span class="sd">            other (Result): a Result object to combine.</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            Result: A new Result object consisting of combined objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Result addition is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-
-        <span class="n">copy_of_self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-        <span class="n">copy_of_self</span> <span class="o">+=</span> <span class="n">other</span>
-        <span class="k">return</span> <span class="n">copy_of_self</span>
-
-<div class="viewcode-block" id="Result.get_status"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_status">[docs]</a>    <span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return whole result status.&quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;get_status() is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+. Instead use result.status directly.&#39;</span><span class="p">,</span>
-                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Result.circuit_statuses"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.circuit_statuses">[docs]</a>    <span class="k">def</span> <span class="nf">circuit_statuses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return statuses of all circuits.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            list(str): List of status result strings.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;circuit_statuses() is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+. Instead use result.results[x]status &#39;</span>
-                      <span class="s1">&#39;directly.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">experiment_result</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span>
-                <span class="n">experiment_result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">]</span></div>
-
-<div class="viewcode-block" id="Result.get_circuit_status"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_circuit_status">[docs]</a>    <span class="k">def</span> <span class="nf">get_circuit_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icircuit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the status of circuit at index icircuit.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            icircuit (int): index of circuit</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            string: the status of the circuit.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;get_circuit_status() is deprecated and will be removed &#39;</span>
-                      <span class="s1">&#39;in version 0.7+. Instead use result.results[x]status &#39;</span>
-                      <span class="s1">&#39;directly.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">icircuit</span><span class="p">]</span><span class="o">.</span><span class="n">status</span></div>
-
-<div class="viewcode-block" id="Result.get_job_id"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_job_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_job_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the job id assigned by the api if this is a remote job.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            string: a string containing the job id.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;get_job_id() is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+. Instead use result.job_id directly.&#39;</span><span class="p">,</span>
-                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">job_id</span></div>
-
-<div class="viewcode-block" id="Result.get_ran_qasm"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_ran_qasm">[docs]</a>    <span class="k">def</span> <span class="nf">get_ran_qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the ran qasm for the named circuit and backend.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): the name of the quantum circuit.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            string: A text version of the qasm file that has been run.</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if the circuit was not found.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;get_ran_qasm() is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">compiled_circuit_qasm</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No  qasm for circuit &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
-
-<div class="viewcode-block" id="Result.get_names"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the circuit names of the results.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            List: A list of circuit names.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;get_names() is deprecated and will be removed in &#39;</span>
-                      <span class="s1">&#39;version 0.7+. Instead inspect result.results directly&#39;</span><span class="p">,</span>
-                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div></div>
+                              <span class="n">key</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

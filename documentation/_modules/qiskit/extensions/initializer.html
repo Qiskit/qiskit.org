@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.extensions.initializer &#8212; Qiskit 0.10.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.extensions.initializer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Initialize qubit registers to desired arbitrary state.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Instruction</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.decorators</span> <span class="k">import</span> <span class="n">_convert_to_bits</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.ry</span> <span class="k">import</span> <span class="n">RYGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions.standard.rz</span> <span class="k">import</span> <span class="n">RZGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.reset</span> <span class="k">import</span> <span class="n">Reset</span>
+
+<span class="n">_EPS</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># global variable used to chop very small numbers to zero</span>
+
+
+<div class="viewcode-block" id="Initialize"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.initializer.html#qiskit.circuit.quantumcircuit.Initialize">[docs]</a><span class="k">class</span> <span class="nc">Initialize</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Complex amplitude initialization.</span>
+
+<span class="sd">    Class that implements the (complex amplitude) initialization of some</span>
+<span class="sd">    flexible collection of qubit registers (assuming the qubits are in the</span>
+<span class="sd">    zero state).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new initialize composite.</span>
+
+<span class="sd">        params (list): vector of complex amplitudes to initialize to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num_qubits</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+
+        <span class="c1"># Check if param is a power of 2</span>
+        <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">num_qubits</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Desired statevector length not a positive power of 2.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if probabilities (amplitudes squared) sum to 1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">,</span>
+                            <span class="n">abs_tol</span><span class="o">=</span><span class="n">_EPS</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Sum of amplitudes-squared does not equal one.&quot;</span><span class="p">)</span>
+
+        <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;initialize&quot;</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_define</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate a subcircuit that implements this initialization</span>
+
+<span class="sd">        Implements a recursive initialization algorithm, including optimizations,</span>
+<span class="sd">        from &quot;Synthesis of Quantum Logic Circuits&quot; Shende, Bullock, Markov</span>
+<span class="sd">        https://arxiv.org/abs/quant-ph/0406176v5</span>
+
+<span class="sd">        Additionally implements some extra optimizations: remove zero rotations and</span>
+<span class="sd">        double cnots.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># call to generate the circuit that takes the desired vector to zero</span>
+        <span class="n">disentangling_circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates_to_uncompute</span><span class="p">()</span>
+
+        <span class="c1"># invert the circuit to create the desired vector from zero (assuming</span>
+        <span class="c1"># the qubits are in the zero state)</span>
+        <span class="n">initialize_instr</span> <span class="o">=</span> <span class="n">disentangling_circuit</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
+
+        <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+        <span class="n">initialize_circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;init_def&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">initialize_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Reset</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">])</span>
+        <span class="n">initialize_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">initialize_instr</span><span class="p">,</span> <span class="n">q</span><span class="p">[:])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">initialize_circuit</span><span class="o">.</span><span class="n">data</span>
+
+<div class="viewcode-block" id="Initialize.gates_to_uncompute"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.initializer.html#qiskit.circuit.quantumcircuit.Initialize.gates_to_uncompute">[docs]</a>    <span class="k">def</span> <span class="nf">gates_to_uncompute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call to create a circuit with gates that take the</span>
+<span class="sd">        desired vector to zero.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumCircuit: circuit to take self.params vector to |00..0&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;disentangler&#39;</span><span class="p">)</span>
+
+        <span class="c1"># kick start the peeling loop, and disentangle one-by-one from LSB to MSB</span>
+        <span class="n">remaining_param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">):</span>
+            <span class="c1"># work out which rotations must be done to disentangle the LSB</span>
+            <span class="c1"># qubit (we peel away one qubit at a time)</span>
+            <span class="p">(</span><span class="n">remaining_param</span><span class="p">,</span>
+             <span class="n">thetas</span><span class="p">,</span>
+             <span class="n">phis</span><span class="p">)</span> <span class="o">=</span> <span class="n">Initialize</span><span class="o">.</span><span class="n">_rotations_to_disentangle</span><span class="p">(</span><span class="n">remaining_param</span><span class="p">)</span>
+
+            <span class="c1"># perform the required rotations to decouple the LSB qubit (so that</span>
+            <span class="c1"># it can be &quot;factored&quot; out, leaving a shorter amplitude vector to peel away)</span>
+            <span class="n">rz_mult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">RZGate</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>
+            <span class="n">ry_mult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">RYGate</span><span class="p">,</span> <span class="n">thetas</span><span class="p">)</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rz_mult</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">(),</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">])</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ry_mult</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">(),</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">circuit</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_rotations_to_disentangle</span><span class="p">(</span><span class="n">local_param</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Static internal method to work out Ry and Rz rotation angles used</span>
+<span class="sd">        to disentangle the LSB qubit.</span>
+<span class="sd">        These rotations make up the block diagonal matrix U (i.e. multiplexor)</span>
+<span class="sd">        that disentangles the LSB.</span>
+
+<span class="sd">        [[Ry(theta_1).Rz(phi_1)  0   .   .   0],</span>
+<span class="sd">         [0         Ry(theta_2).Rz(phi_2) .  0],</span>
+<span class="sd">                                    .</span>
+<span class="sd">                                        .</span>
+<span class="sd">          0         0           Ry(theta_2^n).Rz(phi_2^n)]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">remaining_vector</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">thetas</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">phis</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">param_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_param</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">param_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="c1"># Ry and Rz rotations to move bloch vector from 0 to &quot;imaginary&quot;</span>
+            <span class="c1"># qubit</span>
+            <span class="c1"># (imagine a qubit state signified by the amplitudes at index 2*i</span>
+            <span class="c1"># and 2*(i+1), corresponding to the select qubits of the</span>
+            <span class="c1"># multiplexor being in state |i&gt;)</span>
+            <span class="p">(</span><span class="n">remains</span><span class="p">,</span>
+             <span class="n">add_theta</span><span class="p">,</span>
+             <span class="n">add_phi</span><span class="p">)</span> <span class="o">=</span> <span class="n">Initialize</span><span class="o">.</span><span class="n">_bloch_angles</span><span class="p">(</span><span class="n">local_param</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+
+            <span class="n">remaining_vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remains</span><span class="p">)</span>
+
+            <span class="c1"># rotations for all imaginary qubits of the full vector</span>
+            <span class="c1"># to move from where it is to zero, hence the negative sign</span>
+            <span class="n">thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">add_theta</span><span class="p">)</span>
+            <span class="n">phis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">add_phi</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">remaining_vector</span><span class="p">,</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">phis</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_bloch_angles</span><span class="p">(</span><span class="n">pair_of_complex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Static internal method to work out rotation to create the passed in</span>
+<span class="sd">        qubit from the zero vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">[</span><span class="n">a_complex</span><span class="p">,</span> <span class="n">b_complex</span><span class="p">]</span> <span class="o">=</span> <span class="n">pair_of_complex</span>
+        <span class="c1"># Force a and b to be complex, as otherwise numpy.angle might fail.</span>
+        <span class="n">a_complex</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">a_complex</span><span class="p">)</span>
+        <span class="n">b_complex</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">b_complex</span><span class="p">)</span>
+        <span class="n">mag_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">a_complex</span><span class="p">)</span>
+        <span class="n">final_r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mag_a</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">b_complex</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">final_r</span> <span class="o">&lt;</span> <span class="n">_EPS</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">final_r</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">final_t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">mag_a</span> <span class="o">/</span> <span class="n">final_r</span><span class="p">))</span>
+            <span class="n">a_arg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">a_complex</span><span class="p">)</span>
+            <span class="n">b_arg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">b_complex</span><span class="p">)</span>
+            <span class="n">final_t</span> <span class="o">=</span> <span class="n">a_arg</span> <span class="o">+</span> <span class="n">b_arg</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">b_arg</span> <span class="o">-</span> <span class="n">a_arg</span>
+
+        <span class="k">return</span> <span class="n">final_r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1.</span><span class="n">J</span> <span class="o">*</span> <span class="n">final_t</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span>
+
+    <span class="k">def</span> <span class="nf">_multiplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_gate</span><span class="p">,</span> <span class="n">list_of_angles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a recursive implementation of a multiplexor circuit,</span>
+<span class="sd">        where each instruction itself has a decomposition based on</span>
+<span class="sd">        smaller multiplexors.</span>
+
+<span class="sd">        The LSB is the multiplexor &quot;data&quot; and the other bits are multiplexor &quot;select&quot;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            target_gate (Gate): Ry or Rz gate to apply to target qubit, multiplexed</span>
+<span class="sd">                over all other &quot;select&quot; qubits</span>
+<span class="sd">            list_of_angles (list[float]): list of rotation angles to apply Ry and Rz</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DAGCircuit: the circuit implementing the multiplexor&#39;s action</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_of_angles</span><span class="p">)</span>
+        <span class="n">local_num_qubits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">list_len</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">local_num_qubits</span><span class="p">)</span>
+        <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;multiplex&quot;</span> <span class="o">+</span> <span class="n">local_num_qubits</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
+
+        <span class="n">lsb</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">msb</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">local_num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># case of no multiplexing: base case for recursion</span>
+        <span class="k">if</span> <span class="n">local_num_qubits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_gate</span><span class="p">(</span><span class="n">list_of_angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="k">return</span> <span class="n">circuit</span>
+
+        <span class="c1"># calc angle weights, assuming recursion (that is the lower-level</span>
+        <span class="c1"># requested angles have been correctly implemented by recursion</span>
+        <span class="n">angle_weight</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">kron</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]],</span>
+                                  <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">local_num_qubits</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)))</span>
+
+        <span class="c1"># calc the combo angles</span>
+        <span class="n">list_of_angles</span> <span class="o">=</span> <span class="n">angle_weight</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_of_angles</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="c1"># recursive step on half the angles fulfilling the above assumption</span>
+        <span class="n">multiplex_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">target_gate</span><span class="p">,</span> <span class="n">list_of_angles</span><span class="p">[</span><span class="mi">0</span><span class="p">:(</span><span class="n">list_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)])</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplex_1</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">(),</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># attach CNOT as follows, thereby flipping the LSB qubit</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">msb</span><span class="p">,</span> <span class="n">lsb</span><span class="p">])</span>
+
+        <span class="c1"># implement extra efficiency from the paper of cancelling adjacent</span>
+        <span class="c1"># CNOTs (by leaving out last CNOT and reversing (NOT inverting) the</span>
+        <span class="c1"># second lower-level multiplex)</span>
+        <span class="n">multiplex_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiplex</span><span class="p">(</span><span class="n">target_gate</span><span class="p">,</span> <span class="n">list_of_angles</span><span class="p">[(</span><span class="n">list_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):])</span>
+        <span class="k">if</span> <span class="n">list_len</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplex_2</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span><span class="o">.</span><span class="n">mirror</span><span class="p">(),</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplex_2</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">(),</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># attach a final CNOT</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">msb</span><span class="p">,</span> <span class="n">lsb</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">circuit</span></div>
+
+
+<div class="viewcode-block" id="initialize"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.initializer.html#qiskit.circuit.quantumcircuit.initialize">[docs]</a><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply initialize to circuit.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="n">qubits</span><span class="p">[:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="n">_convert_to_bits</span><span class="p">([</span><span class="n">qubits</span><span class="p">],</span> <span class="p">[</span><span class="n">qbit</span> <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="k">for</span> <span class="n">qbit</span> <span class="ow">in</span> <span class="n">qreg</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Initialize</span><span class="p">(</span><span class="n">params</span><span class="p">),</span> <span class="n">qubits</span><span class="p">)</span></div>
+
+
+<span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">initialize</span> <span class="o">=</span> <span class="n">initialize</span>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

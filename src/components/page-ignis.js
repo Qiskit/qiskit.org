@@ -147,16 +147,14 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 noise_model.add_all_qubit_quantum_error(depolarizing_error(0.002, 2), 'cx')
 
                 backend = qiskit.Aer.get_backend('qasm_simulator')
-                basis_gates = 'u1,u2,u3,cx'
-                result_list = []
-
+                
                 #Create the RB fitter
                 rb_fit = RBFitter(None, xdata, rb_opts['rb_pattern'])
                 for rb_seed,rb_circ_seed in enumerate(rb_circs):
-                    qobj = qiskit.compile(rb_circ_seed,
-                    backend=backend,
-                    basis_gates=basis_gates)
-                    job = backend.run(qobj, noise_model=noise_model)
+                    
+                    job = qiskit.execute(rb_circ_seed, backend=backend, 
+                         basis_gates=['u1','u2','u3','cx'], 
+                         noise_model=noise_model)
 
                     #add data to the fitter
                     rb_fit.add_data(job.result())

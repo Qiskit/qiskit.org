@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.aer.noise.device.models &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.providers.aer.noise.device.models &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -128,13 +128,19 @@
         <div class="page-content">
         
   <h1>Source code for qiskit.providers.aer.noise.device.models</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-
-<span class="c1"># Copyright 2018, IBM.</span>
+<span></span><span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
+<span class="c1"># pylint: disable=invalid-name</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Simplified noise models for devices backends.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -153,6 +159,7 @@
 
 
 <div class="viewcode-block" id="basic_device_noise_model"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.device.models.html#qiskit.providers.aer.noise.device.models.basic_device_noise_model">[docs]</a><span class="k">def</span> <span class="nf">basic_device_noise_model</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span>
+                             <span class="n">gate_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">readout_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -161,19 +168,20 @@
     <span class="sd">&quot;&quot;&quot;Approximate device noise model derived from backend properties.</span>
 
 <span class="sd">    Params:</span>
-<span class="sd">        properties (BackendProperties): backend properties</span>
+<span class="sd">        properties (BackendProperties): backend properties.</span>
+<span class="sd">        gate_error (bool): Include depolarizing gate errors [Default: True].</span>
 <span class="sd">        readout_errors (Bool): Include readout errors in model</span>
-<span class="sd">                               (Default: True).</span>
+<span class="sd">                               [Default: True].</span>
 <span class="sd">        thermal_relaxation (Bool): Include thermal relaxation errors</span>
-<span class="sd">                                   (Default: True).</span>
+<span class="sd">                                   [Default: True].</span>
 <span class="sd">        temperature (double): qubit temperature in milli-Kelvin (mK) for</span>
-<span class="sd">                              thermal relaxation errors (Default: 0).</span>
+<span class="sd">                              thermal relaxation errors [Default: 0].</span>
 <span class="sd">        gate_times (list): Custom gate times for thermal relaxation errors.</span>
 <span class="sd">                           Used to extend or override the gate times in</span>
-<span class="sd">                           the backend properties (Default: None).</span>
+<span class="sd">                           the backend properties [Default: None])</span>
 <span class="sd">        standard_gates (bool): If true return errors as standard</span>
 <span class="sd">                               qobj gates. If false return as unitary</span>
-<span class="sd">                               qobj instructions (Default: True)</span>
+<span class="sd">                               qobj instructions [Default: True]</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        NoiseModel: An approximate noise model for the device backend.</span>
@@ -182,10 +190,10 @@
 
 <span class="sd">        The noise model includes the following errors:</span>
 
-<span class="sd">        If readout_error is True:</span>
+<span class="sd">        If `readout_error=True`:</span>
 <span class="sd">            * Single qubit readout errors on measurements.</span>
 
-<span class="sd">        If thermal_relaxation is True:</span>
+<span class="sd">        If `gate_error` is True and `thermal_relaxation` is True:</span>
 <span class="sd">            * Single-qubit gate errors consisting of a depolarizing error</span>
 <span class="sd">              followed by a thermal relaxation error for the qubit the gate</span>
 <span class="sd">              acts on.</span>
@@ -193,9 +201,13 @@
 <span class="sd">              error followed by single qubit thermal relaxation errors for</span>
 <span class="sd">              all qubits participating in the gate.</span>
 
-<span class="sd">        Else if thermal_relaxation is False:</span>
+<span class="sd">        If `gate_error` is True and `thermal_relaxation` is False:</span>
 <span class="sd">            * Single-qubit depolarizing gate errors.</span>
 <span class="sd">            * Multi-qubit depolarizing gate errors.</span>
+
+<span class="sd">        If `gate_error` is False and `thermal_relaxation` is True:</span>
+<span class="sd">            * Single-qubit thermal relaxation errors for all qubits</span>
+<span class="sd">              participating in a multi-qubit gate.</span>
 
 <span class="sd">        For best practice in simulating a backend make sure that the</span>
 <span class="sd">        circuit is compiled using the set of basis gates in the noise</span>
@@ -227,11 +239,13 @@
             <span class="n">noise_model</span><span class="o">.</span><span class="n">add_readout_error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">qubits</span><span class="p">)</span>
 
     <span class="c1"># Add gate errors</span>
-    <span class="n">gate_errors</span> <span class="o">=</span> <span class="n">basic_device_gate_errors</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span>
-                                           <span class="n">thermal_relaxation</span><span class="o">=</span><span class="n">thermal_relaxation</span><span class="p">,</span>
-                                           <span class="n">gate_times</span><span class="o">=</span><span class="n">gate_times</span><span class="p">,</span>
-                                           <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
-                                           <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
+    <span class="n">gate_errors</span> <span class="o">=</span> <span class="n">basic_device_gate_errors</span><span class="p">(</span>
+        <span class="n">properties</span><span class="p">,</span>
+        <span class="n">gate_error</span><span class="o">=</span><span class="n">gate_error</span><span class="p">,</span>
+        <span class="n">thermal_relaxation</span><span class="o">=</span><span class="n">thermal_relaxation</span><span class="p">,</span>
+        <span class="n">gate_times</span><span class="o">=</span><span class="n">gate_times</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+        <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">gate_errors</span><span class="p">:</span>
         <span class="n">noise_model</span><span class="o">.</span><span class="n">add_quantum_error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">qubits</span><span class="p">)</span>
 
@@ -256,17 +270,27 @@
     <span class="k">return</span> <span class="n">errors</span></div>
 
 
-<div class="viewcode-block" id="basic_device_gate_errors"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.device.models.html#qiskit.providers.aer.noise.device.models.basic_device_gate_errors">[docs]</a><span class="k">def</span> <span class="nf">basic_device_gate_errors</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                             <span class="n">gate_times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<div class="viewcode-block" id="basic_device_gate_errors"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.device.models.html#qiskit.providers.aer.noise.device.models.basic_device_gate_errors">[docs]</a><span class="k">def</span> <span class="nf">basic_device_gate_errors</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span>
+                             <span class="n">gate_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">gate_times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                              <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get depolarizing noise quantum error objects for backend gates</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        properties (BackendProperties): device backend properties</span>
-<span class="sd">        temperature (double): qubit temperature in milli-Kelvin (mK).</span>
+<span class="sd">        gate_error (bool): Include depolarizing gate errors [Default: True].</span>
+<span class="sd">        thermal_relaxation (Bool): Include thermal relaxation errors</span>
+<span class="sd">                                   [Default: True].</span>
 <span class="sd">        gate_times (list): Override device gate times with custom</span>
 <span class="sd">                           values. If None use gate times from</span>
-<span class="sd">                           backend properties. (Default: None)</span>
+<span class="sd">                           backend properties. [Default: None]</span>
+<span class="sd">        temperature (double): qubit temperature in milli-Kelvin (mK)</span>
+<span class="sd">                              [Default: 0].</span>
+<span class="sd">        standard_gates (bool): If true return errors as standard</span>
+<span class="sd">                               qobj gates. If false return as unitary</span>
+<span class="sd">                               qobj instructions [Default: True].</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dict: A dictionary of pairs name: (qubits, error). If gate</span>
@@ -280,8 +304,12 @@
 <span class="sd">        gate one any set of qubits, and value is the gate time in</span>
 <span class="sd">        nanoseconds.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initilize empty errors</span>
+    <span class="n">depol_error</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">relax_error</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># Generate custom gate time dict</span>
     <span class="n">custom_times</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">relax_params</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">thermal_relaxation</span><span class="p">:</span>
         <span class="c1"># If including thermal relaxation errors load</span>
         <span class="c1"># T1, T2, and frequency values from properties</span>
@@ -299,28 +327,28 @@
 
     <span class="c1"># Construct quantum errors</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">gate_error</span> <span class="ow">in</span> <span class="n">device_gate_params</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">error_param</span> <span class="ow">in</span> <span class="n">device_gate_params</span><span class="p">:</span>
         <span class="c1"># Check for custom gate time</span>
         <span class="n">relax_time</span> <span class="o">=</span> <span class="n">gate_time</span>
         <span class="c1"># Override with custom value</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">custom_times</span><span class="p">:</span>
-            <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">custom_times</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-                        <span class="k">if</span> <span class="n">q</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q</span> <span class="o">==</span> <span class="n">qubits</span><span class="p">]</span>
+            <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">val</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">custom_times</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">q</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q</span> <span class="o">==</span> <span class="n">qubits</span>
+            <span class="p">]</span>
             <span class="k">if</span> <span class="n">filtered</span><span class="p">:</span>
                 <span class="c1"># get first value</span>
                 <span class="n">relax_time</span> <span class="o">=</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="c1"># Get depolarizing error channel</span>
-        <span class="n">depol_error</span> <span class="o">=</span> <span class="n">_device_depolarizing_error</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">gate_error</span><span class="p">,</span>
-                                                 <span class="n">relax_time</span><span class="p">,</span>
-                                                 <span class="n">relax_params</span><span class="p">,</span>
-                                                 <span class="n">temperature</span><span class="p">,</span>
-                                                 <span class="n">thermal_relaxation</span><span class="p">,</span>
-                                                 <span class="n">standard_gates</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">gate_error</span><span class="p">:</span>
+            <span class="n">depol_error</span> <span class="o">=</span> <span class="n">_device_depolarizing_error</span><span class="p">(</span>
+                <span class="n">qubits</span><span class="p">,</span> <span class="n">error_param</span><span class="p">,</span> <span class="n">relax_time</span><span class="p">,</span> <span class="n">relax_params</span><span class="p">,</span>
+                <span class="n">thermal_relaxation</span><span class="p">,</span> <span class="n">standard_gates</span><span class="p">)</span>
         <span class="c1"># Get relaxation error</span>
-        <span class="n">relax_error</span> <span class="o">=</span> <span class="n">_device_thermal_relaxation_error</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">relax_time</span><span class="p">,</span>
-                                                       <span class="n">relax_params</span><span class="p">,</span>
-                                                       <span class="n">temperature</span><span class="p">,</span>
-                                                       <span class="n">thermal_relaxation</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">thermal_relaxation</span><span class="p">:</span>
+            <span class="n">relax_error</span> <span class="o">=</span> <span class="n">_device_thermal_relaxation_error</span><span class="p">(</span>
+                <span class="n">qubits</span><span class="p">,</span> <span class="n">relax_time</span><span class="p">,</span> <span class="n">relax_params</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span>
+                <span class="n">thermal_relaxation</span><span class="p">)</span>
         <span class="c1"># Combine errors</span>
         <span class="k">if</span> <span class="n">depol_error</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">relax_error</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># No error for this gate</span>
@@ -339,44 +367,70 @@
     <span class="k">return</span> <span class="n">errors</span></div>
 
 
-<span class="k">def</span> <span class="nf">_device_depolarizing_error</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">gate_error</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">relax_params</span><span class="p">,</span>
-                               <span class="n">temperature</span><span class="p">,</span> <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">_device_depolarizing_error</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span>
+                               <span class="n">error_param</span><span class="p">,</span>
+                               <span class="n">gate_time</span><span class="p">,</span>
+                               <span class="n">relax_params</span><span class="p">,</span>
+                               <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Construct a depolarizing_error for device&quot;&quot;&quot;</span>
+
+    <span class="c1"># We now deduce the depolarizing channel error parameter in the</span>
+    <span class="c1"># presence of T1/T2 thermal relaxation. We assume the gate error</span>
+    <span class="c1"># parameter is given by e = 1 - F where F is the average gate fidelity,</span>
+    <span class="c1"># and that this average gate fidelity is for the composition</span>
+    <span class="c1"># of a T1/T2 thermal relaxation channel and a depolarizing channel.</span>
+
+    <span class="c1"># For the n-qubit depolarizing channel E_dep = (1-p) * I + p * D, where</span>
+    <span class="c1"># I is the identity channel and D is the completely depolarizing</span>
+    <span class="c1"># channel, the average gate fidelity is given by:</span>
+    <span class="c1"># F(E_dep) = (1 - p) * F(I) + p * F(D)</span>
+    <span class="c1">#          = (1 - p) * 1 + p * (1 / dim)</span>
+    <span class="c1"># where F(I) = 1, F(D) = 1 / dim = 1 - p * (dim - 1) / dim</span>
+    <span class="c1"># Hence we have that</span>
+    <span class="c1"># p = (1 - F(E_dep)) / ((dim - 1) / dim)</span>
+    <span class="c1">#   = dim * (1 - F(E_dep)) / (dim - 1)</span>
+    <span class="c1">#   = dim * e / (dim - 1)</span>
+    <span class="c1"># therefore p = dim * error_param / (dim - 1)</span>
+    <span class="c1"># with dim = 2 ** N for an N-qubit gate error.</span>
+
     <span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">thermal_relaxation</span><span class="p">:</span>
         <span class="c1"># Model gate error entirely as depolarizing error</span>
-        <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">gate_error</span><span class="p">)</span>
+        <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">error_param</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Model gate error as thermal relaxation and depolarizing</span>
         <span class="c1"># error.</span>
         <span class="c1"># Get depolarizing probability</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">gate_error</span><span class="p">,</span>
-                                                   <span class="n">gate_time</span><span class="p">,</span>
-                                                   <span class="n">t1</span><span class="o">=</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">t2</span><span class="p">)</span>
+            <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span>
+                <span class="n">error_param</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">t2</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">q0_t1</span><span class="p">,</span> <span class="n">q0_t2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
             <span class="n">q1_t1</span><span class="p">,</span> <span class="n">q1_t2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubits</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_two_qubit</span><span class="p">(</span><span class="n">gate_error</span><span class="p">,</span>
-                                                   <span class="n">gate_time</span><span class="p">,</span>
-                                                   <span class="n">qubit0_t1</span><span class="o">=</span><span class="n">q0_t1</span><span class="p">,</span>
-                                                   <span class="n">qubit0_t2</span><span class="o">=</span><span class="n">q0_t2</span><span class="p">,</span>
-                                                   <span class="n">qubit1_t1</span><span class="o">=</span><span class="n">q1_t1</span><span class="p">,</span>
-                                                   <span class="n">qubit1_t2</span><span class="o">=</span><span class="n">q1_t2</span><span class="p">)</span>
+            <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_two_qubit</span><span class="p">(</span>
+                <span class="n">error_param</span><span class="p">,</span>
+                <span class="n">gate_time</span><span class="p">,</span>
+                <span class="n">qubit0_t1</span><span class="o">=</span><span class="n">q0_t1</span><span class="p">,</span>
+                <span class="n">qubit0_t2</span><span class="o">=</span><span class="n">q0_t2</span><span class="p">,</span>
+                <span class="n">qubit1_t1</span><span class="o">=</span><span class="n">q1_t1</span><span class="p">,</span>
+                <span class="n">qubit1_t2</span><span class="o">=</span><span class="n">q1_t2</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Device noise model only supports&quot;</span> <span class="o">+</span>
+            <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Device noise model only supports &quot;</span>
                              <span class="s2">&quot;1 and 2-qubit gates when using &quot;</span>
                              <span class="s2">&quot;thermal_relaxation=True.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">p_depol</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="n">depolarizing_error</span><span class="p">(</span><span class="n">p_depol</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span>
-                                   <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">depolarizing_error</span><span class="p">(</span>
+            <span class="n">p_depol</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error</span>
 
 
-<span class="k">def</span> <span class="nf">_device_thermal_relaxation_error</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">relax_params</span><span class="p">,</span>
-                                     <span class="n">temperature</span><span class="p">,</span> <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_device_thermal_relaxation_error</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span>
+                                     <span class="n">gate_time</span><span class="p">,</span>
+                                     <span class="n">relax_params</span><span class="p">,</span>
+                                     <span class="n">temperature</span><span class="p">,</span>
+                                     <span class="n">thermal_relaxation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Construct a thermal_relaxation_error for device&quot;&quot;&quot;</span>
     <span class="c1"># Check trivial case</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">thermal_relaxation</span> <span class="ow">or</span> <span class="n">gate_time</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">gate_time</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -387,17 +441,15 @@
     <span class="c1"># for any multi qubit gates</span>
     <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
         <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span>
         <span class="n">population</span> <span class="o">=</span> <span class="n">_excited_population</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
-            <span class="n">error</span> <span class="o">=</span> <span class="n">thermal_relaxation_error</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span>
-                                             <span class="n">population</span><span class="p">)</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">thermal_relaxation_error</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>
             <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">single</span> <span class="o">=</span> <span class="n">thermal_relaxation_error</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span>
-                                              <span class="n">population</span><span class="p">)</span>
-            <span class="n">error</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">single</span><span class="p">)</span>
+            <span class="n">single</span> <span class="o">=</span> <span class="n">thermal_relaxation_error</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">single</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error</span>
 
 
@@ -420,12 +472,12 @@
     <span class="k">return</span> <span class="n">population</span>
 
 
-<span class="k">def</span> <span class="nf">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">gate_error</span><span class="p">,</span> <span class="n">gate_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">inf</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">error_param</span><span class="p">,</span> <span class="n">gate_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">inf</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return 2-qubit depolarizing channel probability for device model&quot;&quot;&quot;</span>
     <span class="c1"># Check trivial case where there is no gate error</span>
-    <span class="k">if</span> <span class="n">gate_error</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">gate_error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">error_param</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
 
     <span class="c1"># Check t1 and t2 are valid</span>
@@ -434,16 +486,14 @@
     <span class="k">if</span> <span class="n">t2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 &lt;= 0.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">t2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 greater than 2 * T_1.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 greater than 2 * T_1.&quot;</span><span class="p">)</span>
 
-    <span class="c1"># If T1 or T2 we have only a depolarizing error model</span>
-    <span class="c1"># in this case p_depol = dim * gate_error / (dim - 1)</span>
-    <span class="c1"># with dim = 2 for 1-qubit</span>
     <span class="k">if</span> <span class="n">gate_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">gate_time</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">gate_time</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">t2</span> <span class="o">==</span> <span class="n">inf</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">gate_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">gate_error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">gate_error</span>
+        <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">error_param</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">error_param</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
 
@@ -457,18 +507,21 @@
         <span class="n">par2</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">par2</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gate_time</span> <span class="o">/</span> <span class="n">t2</span><span class="p">)</span>
-    <span class="n">p_depol</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gate_error</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">par1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">par2</span><span class="p">)</span>
+    <span class="n">p_depol</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">par1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">par2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">p_depol</span>
 
 
-<span class="k">def</span> <span class="nf">_depol_error_value_two_qubit</span><span class="p">(</span><span class="n">gate_error</span><span class="p">,</span> <span class="n">gate_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                 <span class="n">qubit0_t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">qubit0_t2</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
-                                 <span class="n">qubit1_t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">qubit1_t2</span><span class="o">=</span><span class="n">inf</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_depol_error_value_two_qubit</span><span class="p">(</span><span class="n">error_param</span><span class="p">,</span>
+                                 <span class="n">gate_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">qubit0_t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
+                                 <span class="n">qubit0_t2</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
+                                 <span class="n">qubit1_t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
+                                 <span class="n">qubit1_t2</span><span class="o">=</span><span class="n">inf</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return 2-qubit depolarizing channel probability for device model&quot;&quot;&quot;</span>
     <span class="c1"># Check trivial case where there is no gate error</span>
-    <span class="k">if</span> <span class="n">gate_error</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">gate_error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">error_param</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
 
     <span class="c1"># Check t1 and t2 are valid</span>
@@ -477,17 +530,15 @@
     <span class="k">if</span> <span class="n">qubit0_t2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">qubit1_t2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 &lt;= 0.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">qubit0_t2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">qubit0_t1</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">qubit1_t2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">qubit1_t1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 greater than 2 * T_1.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid T_2 relaxation time parameter: T_2 greater than 2 * T_1.&quot;</span><span class="p">)</span>
 
-    <span class="c1"># If T1 or T2 we have only a depolarizing error model</span>
-    <span class="c1"># in this case p_depol = dim * gate_error / (dim - 1)</span>
-    <span class="c1"># with dim = 4 for 2-qubits</span>
     <span class="k">if</span> <span class="n">gate_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">gate_time</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">gate_time</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">qubit0_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">qubit0_t2</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span>
-                          <span class="n">qubit1_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">qubit1_t2</span> <span class="o">==</span> <span class="n">inf</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">gate_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">gate_error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">gate_error</span> <span class="o">/</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="n">gate_time</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">qubit0_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">qubit0_t2</span> <span class="o">==</span> <span class="n">inf</span>
+                          <span class="ow">and</span> <span class="n">qubit1_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">qubit1_t2</span> <span class="o">==</span> <span class="n">inf</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">error_param</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">/</span> <span class="mi">3</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
 
@@ -509,11 +560,10 @@
         <span class="n">q1_par2</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">q1_par2</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gate_time</span> <span class="o">/</span> <span class="n">qubit1_t2</span><span class="p">)</span>
-    <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">q0_par1</span> <span class="o">+</span> <span class="n">q1_par1</span> <span class="o">+</span> <span class="n">q0_par1</span> <span class="o">*</span> <span class="n">q1_par1</span> <span class="o">+</span>
-             <span class="mi">4</span> <span class="o">*</span> <span class="n">q0_par2</span> <span class="o">*</span> <span class="n">q1_par2</span> <span class="o">+</span>
-             <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">q0_par2</span> <span class="o">+</span> <span class="n">q1_par2</span><span class="p">)</span> <span class="o">+</span>
-             <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">q1_par1</span> <span class="o">*</span> <span class="n">q0_par2</span> <span class="o">+</span> <span class="n">q0_par1</span> <span class="o">*</span> <span class="n">q1_par2</span><span class="p">))</span>
-    <span class="n">p_depol</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">gate_error</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">q0_par1</span> <span class="o">+</span> <span class="n">q1_par1</span> <span class="o">+</span> <span class="n">q0_par1</span> <span class="o">*</span> <span class="n">q1_par1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">q0_par2</span> <span class="o">*</span> <span class="n">q1_par2</span> <span class="o">+</span>
+        <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">q0_par2</span> <span class="o">+</span> <span class="n">q1_par2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">q1_par1</span> <span class="o">*</span> <span class="n">q0_par2</span> <span class="o">+</span> <span class="n">q0_par1</span> <span class="o">*</span> <span class="n">q1_par2</span><span class="p">))</span>
+    <span class="n">p_depol</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
     <span class="k">return</span> <span class="n">p_depol</span>
 </pre></div>
 

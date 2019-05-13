@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.validation.validate &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.validation.validate &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,12 +130,21 @@
   <h1>Source code for qiskit.validation.validate</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Validators for Qiskit validated classes.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Mapping</span>
 
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">ValidationError</span>
 <span class="kn">from</span> <span class="nn">marshmallow.validate</span> <span class="k">import</span> <span class="n">Validator</span>
@@ -198,7 +207,13 @@
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value_</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
+            <span class="n">_dict</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_dict</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="vm">__dict__</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value_</span> <span class="ow">in</span> <span class="n">_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="c1"># Attempt to validate the keys against any field.</span>
             <span class="n">field</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">validator</span><span class="p">,</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>

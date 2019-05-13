@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.validation.fields.containers &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.validation.fields.containers &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,19 +130,27 @@
   <h1>Source code for qiskit.validation.fields.containers</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Container fields that represent nested/collections of schemas or types.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
 
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">fields</span> <span class="k">as</span> <span class="n">_fields</span>
+<span class="kn">from</span> <span class="nn">marshmallow.exceptions</span> <span class="k">import</span> <span class="n">ValidationError</span>
 <span class="kn">from</span> <span class="nn">marshmallow.utils</span> <span class="k">import</span> <span class="n">is_collection</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.validation</span> <span class="k">import</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">ModelTypeValidator</span>
+<span class="kn">from</span> <span class="nn">qiskit.validation</span> <span class="k">import</span> <span class="n">ModelTypeValidator</span>
 
 
 <div class="viewcode-block" id="Nested"><a class="viewcode-back" href="../../../../autodoc/qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.Nested">[docs]</a><span class="k">class</span> <span class="nc">Nested</span><span class="p">(</span><span class="n">_fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">,</span> <span class="n">ModelTypeValidator</span><span class="p">):</span>
@@ -203,6 +211,13 @@
             <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">value</span></div></div>
+
+
+<div class="viewcode-block" id="Dict"><a class="viewcode-back" href="../../../../autodoc/qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.Dict">[docs]</a><span class="k">class</span> <span class="nc">Dict</span><span class="p">(</span><span class="n">_fields</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">ModelTypeValidator</span><span class="p">):</span>
+    <span class="c1"># pylint: disable=missing-docstring</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_fields</span><span class="o">.</span><span class="n">Dict</span><span class="o">.</span><span class="vm">__doc__</span>
+
+    <span class="n">valid_types</span> <span class="o">=</span> <span class="p">(</span><span class="n">Mapping</span><span class="p">,</span> <span class="p">)</span></div>
 </pre></div>
 
         </div>

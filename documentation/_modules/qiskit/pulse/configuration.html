@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.pulse.configuration &#8212; Qiskit 0.10.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.pulse.configuration</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Configurations for pulse experiments.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">.channels</span> <span class="k">import</span> <span class="n">PulseChannel</span><span class="p">,</span> <span class="n">DriveChannel</span><span class="p">,</span> <span class="n">MeasureChannel</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">PulseError</span>
+
+
+<div class="viewcode-block" id="LoRange"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoRange">[docs]</a><span class="k">class</span> <span class="nc">LoRange</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Range of LO frequency.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lb</span> <span class="o">=</span> <span class="n">lower_bound</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ub</span> <span class="o">=</span> <span class="n">upper_bound</span>
+
+<div class="viewcode-block" id="LoRange.includes"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoRange.includes">[docs]</a>    <span class="k">def</span> <span class="nf">includes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lo_freq</span><span class="p">:</span> <span class="nb">complex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Whether `lo_freq` is within the `LoRange`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lo_freq: LO frequency to be validated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if lo_freq is included in this range, otherwise False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lb</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">lo_freq</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ub</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lower_bound</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Lower bound of the LO range&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lb</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">upper_bound</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Upper bound of the LO range&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ub</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ub</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Two LO ranges are the same if they are of the same type, and</span>
+<span class="sd">        have the same frequency range</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (LoRange): other LoRange</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: are self and other equal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ub</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_ub</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_lb</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_lb</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="LoConfig"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoConfig">[docs]</a><span class="k">class</span> <span class="nc">LoConfig</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Pulse channel LO frequency container.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_los</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PulseChannel</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">lo_ranges</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PulseChannel</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">LoRange</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Lo channel configuration data structure.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel_los: Dictionary of mappings from configurable channel to lo</span>
+<span class="sd">            lo_ranges: Dictionary of mappings to be enforced from configurable channel to `LoRange`</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PulseError: If channel is not configurable or set lo is out of range.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_q_lo_freq</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_m_lo_freq</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lo_ranges</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">lo_ranges</span> <span class="o">=</span> <span class="n">lo_ranges</span> <span class="k">if</span> <span class="n">lo_ranges</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">channel</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">lo_ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_lo_range</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+
+        <span class="n">channel_los</span> <span class="o">=</span> <span class="n">channel_los</span> <span class="k">if</span> <span class="n">channel_los</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">channel</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">channel_los</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_lo</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LoConfig.add_lo"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoConfig.add_lo">[docs]</a>    <span class="k">def</span> <span class="nf">add_lo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DriveChannel</span><span class="p">,</span> <span class="n">MeasureChannel</span><span class="p">],</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a lo mapping for a channel.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">DriveChannel</span><span class="p">):</span>
+            <span class="c1"># add qubit_lo_freq</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_lo</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_q_lo_freq</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">MeasureChannel</span><span class="p">):</span>
+            <span class="c1"># add meas_lo_freq</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_lo</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_m_lo_freq</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PulseError</span><span class="p">(</span><span class="s2">&quot;Specified channel </span><span class="si">%s</span><span class="s2"> cannot be configured.&quot;</span> <span class="o">%</span>
+                             <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LoConfig.add_lo_range"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoConfig.add_lo_range">[docs]</a>    <span class="k">def</span> <span class="nf">add_lo_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">DriveChannel</span><span class="p">,</span> <span class="n">lo_range</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">LoRange</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+        <span class="sd">&quot;&quot;&quot;Add lo range to configuration.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel: Channel to add lo range for</span>
+<span class="sd">            lo_range: Lo range to add</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lo_range</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">lo_range</span> <span class="o">=</span> <span class="n">LoRange</span><span class="p">(</span><span class="o">*</span><span class="n">lo_range</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lo_ranges</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">lo_range</span></div>
+
+<div class="viewcode-block" id="LoConfig.check_lo"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoConfig.check_lo">[docs]</a>    <span class="k">def</span> <span class="nf">check_lo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DriveChannel</span><span class="p">,</span> <span class="n">MeasureChannel</span><span class="p">],</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check that lo is valid for channel.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel: Channel to validate lo for</span>
+<span class="sd">            freq: lo frequency</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            PulseError: If freq is outside of channels range</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lo_ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_ranges</span>
+        <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">lo_ranges</span><span class="p">:</span>
+            <span class="n">lo_range</span> <span class="o">=</span> <span class="n">lo_ranges</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">lo_range</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="n">freq</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">PulseError</span><span class="p">(</span><span class="s2">&quot;Specified LO freq </span><span class="si">%f</span><span class="s2"> is out of range </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                                 <span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">lo_range</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="LoConfig.channel_lo"><a class="viewcode-back" href="../../../autodoc/qiskit.pulse.configuration.html#qiskit.pulse.configuration.LoConfig.channel_lo">[docs]</a>    <span class="k">def</span> <span class="nf">channel_lo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DriveChannel</span><span class="p">,</span> <span class="n">MeasureChannel</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return channel lo.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel: Channel to get lo for</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            PulseError: If channel is not configured</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Lo of supplied channel if present</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">DriveChannel</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubit_los</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubit_los</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">MeasureChannel</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meas_los</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meas_los</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+
+        <span class="k">raise</span> <span class="n">PulseError</span><span class="p">(</span><span class="s1">&#39;Channel </span><span class="si">%s</span><span class="s1"> is not configured&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">qubit_los</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns dictionary mapping qubit channels (DriveChannel) to los.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_q_lo_freq</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">meas_los</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns dictionary mapping measure channels (MeasureChannel) to los.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_m_lo_freq</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

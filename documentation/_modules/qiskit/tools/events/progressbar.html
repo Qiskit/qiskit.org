@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.tools.events.progressbar &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.tools.events.progressbar &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.tools.events.progressbar</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="c1"># This file is part of QuTiP: Quantum Toolbox in Python.</span>
 <span class="c1">#</span>
@@ -173,7 +180,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">qiskit.tools.events._pubsub</span> <span class="k">import</span> <span class="n">Subscriber</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.events.pubsub</span> <span class="k">import</span> <span class="n">Subscriber</span>
 
 
 <div class="viewcode-block" id="BaseProgressBar"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.events.progressbar.html#qiskit.tools.events.progressbar.BaseProgressBar">[docs]</a><span class="k">class</span> <span class="nc">BaseProgressBar</span><span class="p">(</span><span class="n">Subscriber</span><span class="p">):</span>
@@ -239,11 +246,16 @@
 <div class="viewcode-block" id="TextProgressBar"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.events.progressbar.html#qiskit.tools.events.progressbar.TextProgressBar">[docs]</a><span class="k">class</span> <span class="nc">TextProgressBar</span><span class="p">(</span><span class="n">BaseProgressBar</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple text-based progress bar.</span>
+
+<span class="sd">    output_handler : the handler the progress bar should be written to, default</span>
+<span class="sd">                     is sys.stdout, another option is sys.stderr</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_handler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_subscriber</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_handler</span> <span class="o">=</span> <span class="n">output_handler</span> <span class="k">if</span> <span class="n">output_handler</span> <span class="k">else</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
 
     <span class="k">def</span> <span class="nf">_init_subscriber</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">_initialize_progress_bar</span><span class="p">(</span><span class="n">num_tasks</span><span class="p">):</span>
@@ -269,17 +281,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="n">pbar</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">50</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">|</span><span class="si">%s</span><span class="s1">| </span><span class="si">%s%s%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span>
-                         <span class="p">(</span><span class="n">pbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_handler</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">|</span><span class="si">%s</span><span class="s1">| </span><span class="si">%s%s%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span>
+                                  <span class="p">(</span><span class="n">pbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="TextProgressBar.update"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.events.progressbar.html#qiskit.tools.events.progressbar.TextProgressBar.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">filled_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">))</span>
         <span class="n">pbar</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;█&#39;</span> <span class="o">*</span> <span class="n">filled_length</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">50</span> <span class="o">-</span> <span class="n">filled_length</span><span class="p">)</span>
         <span class="n">time_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_remaining_est</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">|</span><span class="si">%s</span><span class="s1">| </span><span class="si">%s%s%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pbar</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="n">time_left</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_handler</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">|</span><span class="si">%s</span><span class="s1">| </span><span class="si">%s%s%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pbar</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="n">time_left</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_handler</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_handler</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div></div>
 </pre></div>
 
         </div>

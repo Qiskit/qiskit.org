@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.providers.models.backendconfiguration &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.providers.models.backendconfiguration &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,17 +130,26 @@
   <h1>Source code for qiskit.providers.models.backendconfiguration</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Model and schema for backend configuration.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">marshmallow.validate</span> <span class="k">import</span> <span class="n">Length</span><span class="p">,</span> <span class="n">OneOf</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Regexp</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.validation</span> <span class="k">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">BaseSchema</span><span class="p">,</span> <span class="n">bind_schema</span>
-<span class="kn">from</span> <span class="nn">qiskit.validation.fields</span> <span class="k">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Nested</span><span class="p">,</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">qiskit.validation.fields</span> <span class="k">import</span> <span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Nested</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span>
+                                      <span class="n">Complex</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">InstructionParameter</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiskit.validation.validate</span> <span class="k">import</span> <span class="n">PatternProperties</span>
 
 
 <div class="viewcode-block" id="GateConfigSchema"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.GateConfigSchema">[docs]</a><span class="k">class</span> <span class="nc">GateConfigSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
@@ -162,9 +171,33 @@
     <span class="n">description</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="UchannelLOSchema"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.UchannelLOSchema">[docs]</a><span class="k">class</span> <span class="nc">UchannelLOSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Schema for uchannel LO.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Required properties.</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">Complex</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="c1"># Optional properties.</span>
+
+
+<div class="viewcode-block" id="PulseHamiltonianSchema"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.PulseHamiltonianSchema">[docs]</a><span class="k">class</span> <span class="nc">PulseHamiltonianSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Schema for PulseHamiltonian.&quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=redefined-builtin</span>
+
+    <span class="c1"># Required properties.</span>
+    <span class="n">h_str</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">String</span><span class="p">(),</span> <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dim_osc</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dim_qub</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">vars</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">PatternProperties</span><span class="p">({</span>
+        <span class="n">Regexp</span><span class="p">(</span><span class="s1">&#39;^([a-z0-9])+$&#39;</span><span class="p">):</span> <span class="n">InstructionParameter</span><span class="p">()</span>
+    <span class="p">}),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="c1"># Optional properties.</span>
+
+
 <div class="viewcode-block" id="BackendConfigurationSchema"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.BackendConfigurationSchema">[docs]</a><span class="k">class</span> <span class="nc">BackendConfigurationSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for BackendConfiguration.&quot;&quot;&quot;</span>
-
     <span class="c1"># Required properties.</span>
     <span class="n">backend_name</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">backend_version</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -199,6 +232,37 @@
     <span class="n">tags</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">String</span><span class="p">())</span></div>
 
 
+<div class="viewcode-block" id="QasmBackendConfigurationSchema"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema">[docs]</a><span class="k">class</span> <span class="nc">QasmBackendConfigurationSchema</span><span class="p">(</span><span class="n">BackendConfigurationSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Schema for Qasm backend.&quot;&quot;&quot;</span>
+    <span class="n">open_pulse</span> <span class="o">=</span> <span class="n">Boolean</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">([</span><span class="kc">False</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="PulseBackendConfigurationSchema"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema">[docs]</a><span class="k">class</span> <span class="nc">PulseBackendConfigurationSchema</span><span class="p">(</span><span class="n">QasmBackendConfigurationSchema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Schema for pulse backend&quot;&quot;&quot;</span>
+    <span class="c1"># Required properties.</span>
+    <span class="n">open_pulse</span> <span class="o">=</span> <span class="n">Boolean</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">([</span><span class="kc">True</span><span class="p">]))</span>
+    <span class="n">n_uchannels</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">u_channel_lo</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">Nested</span><span class="p">(</span><span class="n">UchannelLOSchema</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                               <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">meas_levels</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">Integer</span><span class="p">(),</span> <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">qubit_lo_range</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Float</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
+                               <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="n">equal</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">meas_lo_range</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Float</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
+                              <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="n">equal</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="n">dtm</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">rep_times</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">Float</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">meas_kernels</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">String</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">discriminators</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">String</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Optional properties.</span>
+    <span class="n">meas_map</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Integer</span><span class="p">(),</span> <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="n">channel_bandwidth</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Float</span><span class="p">(),</span> <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="n">equal</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">acquisition_latency</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Integer</span><span class="p">()))</span>
+    <span class="n">conditional_latency</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span><span class="n">List</span><span class="p">(</span><span class="n">Integer</span><span class="p">()))</span>
+    <span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">PulseHamiltonianSchema</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="GateConfig"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.GateConfig">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">GateConfigSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">GateConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for GateConfig.</span>
@@ -207,9 +271,9 @@
 <span class="sd">    full description of the model, please check ``GateConfigSchema``.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        name (str): the gate name as it will be referred to in QASM.</span>
+<span class="sd">        name (str): the gate name as it will be referred to in Qasm.</span>
 <span class="sd">        parameters (list[str]): variable names for the gate parameters (if any).</span>
-<span class="sd">        qasm_def (str): definition of this gate in terms of QASM primitives U</span>
+<span class="sd">        qasm_def (str): definition of this gate in terms of Qasm primitives U</span>
 <span class="sd">            and CX.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -219,6 +283,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">qasm_def</span> <span class="o">=</span> <span class="n">qasm_def</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UchannelLO"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.UchannelLO">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">UchannelLOSchema</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UchannelLO</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Model for GateConfig.</span>
+
+<span class="sd">    Please note that this class only describes the required fields. For the</span>
+<span class="sd">    full description of the model, please check ``GateConfigSchema``.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        q (int): Qubit that scale corresponds too.</span>
+<span class="sd">        scale (complex): Scale factor for qubit frequency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">q</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="BackendConfiguration"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.BackendConfiguration">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">BackendConfigurationSchema</span><span class="p">)</span>
@@ -244,6 +327,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">backend_version</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span>
                  <span class="n">gates</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">conditional</span><span class="p">,</span> <span class="n">open_pulse</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span>
                  <span class="n">max_shots</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">backend_name</span> <span class="o">=</span> <span class="n">backend_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">backend_version</span> <span class="o">=</span> <span class="n">backend_version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">=</span> <span class="n">n_qubits</span>
@@ -257,6 +341,99 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_shots</span> <span class="o">=</span> <span class="n">max_shots</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QasmBackendConfiguration"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">QasmBackendConfigurationSchema</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QasmBackendConfiguration</span><span class="p">(</span><span class="n">BackendConfiguration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Model for QasmBackendConfiguration.</span>
+
+<span class="sd">    Please note that this class only describes the required fields. For the</span>
+<span class="sd">    full description of the model, please check ``QasmBackendConfigurationSchema``.</span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        backend_name (str): backend name.</span>
+<span class="sd">        backend_version (str): backend version in the form X.Y.Z.</span>
+<span class="sd">        n_qubits (int): number of qubits.</span>
+<span class="sd">        basis_gates (list[str]): list of basis gates names on the backend.</span>
+<span class="sd">        gates (GateConfig): list of basis gates on the backend.</span>
+<span class="sd">        local (bool): backend is local or remote.</span>
+<span class="sd">        simulator (bool): backend is a simulator.</span>
+<span class="sd">        conditional (bool): backend supports conditional operations.</span>
+<span class="sd">        open_pulse (bool): backend supports open pulse.</span>
+<span class="sd">        memory (bool): backend supports memory.</span>
+<span class="sd">        max_shots (int): maximum number of shots supported.</span>
+<span class="sd">        **kwargs: Optional fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">backend_version</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span>
+                 <span class="n">gates</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">conditional</span><span class="p">,</span> <span class="n">open_pulse</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span>
+                 <span class="n">max_shots</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">,</span> <span class="n">backend_version</span><span class="o">=</span><span class="n">backend_version</span><span class="p">,</span>
+                         <span class="n">n_qubits</span><span class="o">=</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">gates</span><span class="o">=</span><span class="n">gates</span><span class="p">,</span>
+                         <span class="n">local</span><span class="o">=</span><span class="n">local</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="n">simulator</span><span class="p">,</span> <span class="n">conditional</span><span class="o">=</span><span class="n">conditional</span><span class="p">,</span>
+                         <span class="n">open_pulse</span><span class="o">=</span><span class="n">open_pulse</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span> <span class="n">max_shots</span><span class="o">=</span><span class="n">max_shots</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PulseBackendConfiguration"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.models.backendconfiguration.html#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">PulseBackendConfigurationSchema</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">PulseBackendConfiguration</span><span class="p">(</span><span class="n">BackendConfiguration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Model for PulseBackendConfiguration.</span>
+
+<span class="sd">    Please note that this class only describes the required fields. For the</span>
+<span class="sd">    full description of the model, please check ``PulseBackendConfigurationSchema``.</span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        backend_name (str): backend name.</span>
+<span class="sd">        backend_version (str): backend version in the form X.Y.Z.</span>
+<span class="sd">        n_qubits (int): number of qubits.</span>
+<span class="sd">        basis_gates (list[str]): list of basis gates names on the backend.</span>
+<span class="sd">        gates (GateConfig): list of basis gates on the backend.</span>
+<span class="sd">        local (bool): backend is local or remote.</span>
+<span class="sd">        simulator (bool): backend is a simulator.</span>
+<span class="sd">        conditional (bool): backend supports conditional operations.</span>
+<span class="sd">        open_pulse (bool): backend supports open pulse.</span>
+<span class="sd">        memory (bool): backend supports memory.</span>
+<span class="sd">        max_shots (int): maximum number of shots supported.</span>
+<span class="sd">        n_uchannels (int): Number of u-channels.</span>
+<span class="sd">        u_channel_lo (list[UchannelLO]): U-channel relationship on device los.</span>
+<span class="sd">        meas_levels (list[int]): Supported measurement levels.</span>
+<span class="sd">        qubit_lo_range (list[list[float]]): Qubit lo ranges for each qubit</span>
+<span class="sd">            with form (min, max) in GHz.</span>
+<span class="sd">        meas_lo_range (list[list[float]]): Measurement lo ranges for each qubit</span>
+<span class="sd">            with form (min, max) in GHz.</span>
+<span class="sd">        dt (float): Qubit drive channel timestep in nanoseconds.</span>
+<span class="sd">        dtm (float): Measurement drive channel timestep in nanoseconds.</span>
+<span class="sd">        rep_times (list[float]): Supported repition times for device in microseconds.</span>
+<span class="sd">        meas_kernels (list[str]): Supported measurement kernels.</span>
+<span class="sd">        discriminators: Supported discriminators.</span>
+<span class="sd">        **kwargs: Optional fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">backend_version</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span>
+                 <span class="n">gates</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">conditional</span><span class="p">,</span> <span class="n">open_pulse</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span>
+                 <span class="n">max_shots</span><span class="p">,</span> <span class="n">n_uchannels</span><span class="p">,</span> <span class="n">u_channel_lo</span><span class="p">,</span> <span class="n">meas_levels</span><span class="p">,</span>
+                 <span class="n">qubit_lo_range</span><span class="p">,</span> <span class="n">meas_lo_range</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">dtm</span><span class="p">,</span> <span class="n">rep_times</span><span class="p">,</span> <span class="n">meas_kernels</span><span class="p">,</span>
+                 <span class="n">discriminators</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_uchannels</span> <span class="o">=</span> <span class="n">n_uchannels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_channel_lo</span> <span class="o">=</span> <span class="n">u_channel_lo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meas_levels</span> <span class="o">=</span> <span class="n">meas_levels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qubit_lo_range</span> <span class="o">=</span> <span class="n">qubit_lo_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meas_lo_range</span> <span class="o">=</span> <span class="n">meas_lo_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtm</span> <span class="o">=</span> <span class="n">dtm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rep_times</span> <span class="o">=</span> <span class="n">rep_times</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meas_kernels</span> <span class="o">=</span> <span class="n">meas_kernels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discriminators</span> <span class="o">=</span> <span class="n">discriminators</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">,</span> <span class="n">backend_version</span><span class="o">=</span><span class="n">backend_version</span><span class="p">,</span>
+                         <span class="n">n_qubits</span><span class="o">=</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">gates</span><span class="o">=</span><span class="n">gates</span><span class="p">,</span>
+                         <span class="n">local</span><span class="o">=</span><span class="n">local</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="n">simulator</span><span class="p">,</span> <span class="n">conditional</span><span class="o">=</span><span class="n">conditional</span><span class="p">,</span>
+                         <span class="n">open_pulse</span><span class="o">=</span><span class="n">open_pulse</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span> <span class="n">max_shots</span><span class="o">=</span><span class="n">max_shots</span><span class="p">,</span>
+                         <span class="n">n_uchannels</span><span class="o">=</span><span class="n">n_uchannels</span><span class="p">,</span> <span class="n">u_channel_lo</span><span class="o">=</span><span class="n">u_channel_lo</span><span class="p">,</span>
+                         <span class="n">meas_levels</span><span class="o">=</span><span class="n">meas_levels</span><span class="p">,</span> <span class="n">qubit_lo_range</span><span class="o">=</span><span class="n">qubit_lo_range</span><span class="p">,</span>
+                         <span class="n">meas_lo_range</span><span class="o">=</span><span class="n">meas_lo_range</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">dtm</span><span class="o">=</span><span class="n">dtm</span><span class="p">,</span>
+                         <span class="n">rep_times</span><span class="o">=</span><span class="n">rep_times</span><span class="p">,</span> <span class="n">meas_kernels</span><span class="o">=</span><span class="n">meas_kernels</span><span class="p">,</span>
+                         <span class="n">discriminators</span><span class="o">=</span><span class="n">discriminators</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

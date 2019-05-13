@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.aqua.components.reciprocals.lookup_rotation &#8212; Qiskit 0.10.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.aqua.components.reciprocals.lookup_rotation</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;Controlled rotation for the HHL algorithm based on partial table lookup&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.aqua.components.reciprocals</span> <span class="k">import</span> <span class="n">Reciprocal</span>
+<span class="kn">from</span> <span class="nn">qiskit.aqua.circuits.gates</span> <span class="k">import</span> <span class="n">mct</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LookupRotation"><a class="viewcode-back" href="../../../../../autodoc/qiskit.aqua.components.reciprocals.lookup_rotation.html#qiskit.aqua.components.reciprocals.LookupRotation">[docs]</a><span class="k">class</span> <span class="nc">LookupRotation</span><span class="p">(</span><span class="n">Reciprocal</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;The Lookup Rotation for Reciprocals.</span>
+
+<span class="sd">    A calculation of reciprocals of eigenvalues is performed and controlled</span>
+<span class="sd">    rotation of ancillary qubit via a lookup method. It uses a partial table</span>
+<span class="sd">    lookup of rotation angles to rotate an ancillary qubit by arcsin(C/lambda).</span>
+<span class="sd">    Please refer to the HHL documentation for an explanation of this method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">CONFIGURATION</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Lookup&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;approximate inversion for HHL based on table lookup&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;input_schema&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;$schema&#39;</span><span class="p">:</span> <span class="s1">&#39;http://json-schema.org/schema#&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;reciprocal_lookup_schema&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;pat_length&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;subpat_length&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;negative_evals&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">False</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="s1">&#39;minimum&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="s1">&#39;maximum&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;evo_time&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;lambda_min&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;additionalProperties&#39;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">pat_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">subpat_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">negative_evals</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">evo_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">lambda_min</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pat_length (int, optional): the number of qubits used for binning pattern</span>
+<span class="sd">            subpat_length (int, optional): the number of qubits used for binning sub-pattern</span>
+<span class="sd">            scale (float, optional): the scale of rotation angle, corresponds to HHL constant C</span>
+<span class="sd">            negative_evals (bool, optional): indicate if negative eigenvalues need to be handled</span>
+<span class="sd">            evo_time (float, optional): the evolution time</span>
+<span class="sd">            lambda_min (float, optional): the smallest expected eigenvalue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span> <span class="o">=</span> <span class="n">pat_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subpat_length</span> <span class="o">=</span> <span class="n">subpat_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span> <span class="o">=</span> <span class="n">negative_evals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evo_time</span> <span class="o">=</span> <span class="n">evo_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_min</span> <span class="o">=</span> <span class="n">lambda_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workq</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_msq</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circuit</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="LookupRotation.sv_to_resvec"><a class="viewcode-back" href="../../../../../autodoc/qiskit.aqua.components.reciprocals.lookup_rotation.html#qiskit.aqua.components.reciprocals.LookupRotation.sv_to_resvec">[docs]</a>    <span class="k">def</span> <span class="nf">sv_to_resvec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">statevector</span><span class="p">,</span> <span class="n">num_q</span><span class="p">):</span>
+        <span class="n">half</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">statevector</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">statevector</span><span class="p">[</span><span class="n">half</span><span class="p">:</span><span class="n">half</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">num_q</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">vec</span></div>
+
+    <span class="k">def</span> <span class="nf">_classic_approx</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">negative_evals</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Approximate arcsin(1/x) for controlled-rotation.</span>
+
+<span class="sd">        This method calculates the binning of arcsin(1/x) function using k</span>
+<span class="sd">        bits fixed point numbers and n bit accuracy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            k (int): register length</span>
+<span class="sd">            n (int): num bits following most-significant qubit taken into account</span>
+<span class="sd">            m (int): length of sub string of n-qubit pattern</span>
+<span class="sd">            negative_evals (bool): flag for using first qubit as sign bit</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing values of approximated and binned values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">bin_to_num</span><span class="p">(</span><span class="n">binary</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Convert to numeric&quot;&quot;&quot;</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="mi">2</span> <span class="o">**</span> <span class="o">-</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span>
+                <span class="n">binary</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">num</span>
+
+        <span class="k">def</span> <span class="nf">get_est_lamb</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">fo</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Estimate the bin mid point and return the float value&quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">fo</span> <span class="o">-</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">remainder</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">2</span> <span class="o">**</span> <span class="o">-</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="n">fo</span> <span class="o">-</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+                                                        <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+                <span class="k">return</span> <span class="n">bin_to_num</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">+</span><span class="n">remainder</span><span class="o">/</span><span class="mi">2</span>
+            <span class="k">return</span> <span class="n">bin_to_num</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">fo</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># skip first bit if negative ev are used</span>
+            <span class="k">if</span> <span class="n">negative_evals</span> <span class="ow">and</span> <span class="n">fo</span> <span class="o">==</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># init bit string</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span>
+            <span class="c1"># set most significant bit</span>
+            <span class="n">vec</span><span class="p">[</span><span class="n">fo</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="c1"># iterate over all 2^m combinations = sub string in n-bit pattern</span>
+            <span class="k">for</span> <span class="n">pattern_</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">m</span><span class="p">):</span>
+                <span class="n">app_pattern_array</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">lambda_array</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">fo_array</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="c1"># iterate over all 2^(n-m) combinations</span>
+                <span class="k">for</span> <span class="n">appendpat</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">):</span>
+                    <span class="c1"># combine both generated patterns</span>
+                    <span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern_</span> <span class="o">+</span> <span class="n">appendpat</span>
+                    <span class="n">vec</span><span class="p">[</span><span class="n">fo</span> <span class="o">-</span> <span class="n">n</span><span class="p">:</span><span class="n">fo</span><span class="p">]</span> <span class="o">=</span> <span class="n">pattern</span>
+                    <span class="c1"># estimate bin mid point</span>
+                    <span class="n">e_l</span> <span class="o">=</span> <span class="n">get_est_lamb</span><span class="p">(</span><span class="n">vec</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">fo</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                    <span class="n">lambda_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e_l</span><span class="p">)</span>
+                    <span class="n">fo_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fo</span><span class="p">)</span>
+                    <span class="n">app_pattern_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">appendpat</span><span class="p">)))</span>
+
+                <span class="c1"># rewrite first-one to correct index in QuantumRegister</span>
+                <span class="n">fo_pos</span> <span class="o">=</span> <span class="n">k</span><span class="o">-</span><span class="n">fo</span><span class="o">-</span><span class="mi">1</span>
+                <span class="k">if</span> <span class="n">fo_pos</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="n">prev_res</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">fo_pos</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">prev_res</span> <span class="o">=</span> <span class="p">[]</span>
+
+                <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">fo_pos</span><span class="p">:</span> <span class="n">prev_res</span> <span class="o">+</span> <span class="p">[(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">pattern_</span><span class="p">)),</span>
+                                          <span class="n">app_pattern_array</span><span class="p">,</span> <span class="n">lambda_array</span><span class="p">)]})</span>
+
+        <span class="c1"># last iterations, only last n bits != 0</span>
+        <span class="n">last_fo</span> <span class="o">=</span> <span class="n">fo</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span>
+        <span class="k">for</span> <span class="n">pattern_</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">app_pattern_array</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">lambda_array</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">fo_array</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">appendpat</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">):</span>
+                <span class="n">pattern</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pattern_</span> <span class="o">+</span> <span class="n">appendpat</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">if</span> <span class="s1">&#39;1&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pattern</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">negative_evals</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="s1">&#39;1&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pattern</span> <span class="ow">and</span> <span class="n">negative_evals</span><span class="p">:</span>
+                    <span class="n">e_l</span> <span class="o">=</span> <span class="mf">0.5</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">vec</span><span class="p">[</span><span class="n">last_fo</span> <span class="o">-</span> <span class="n">n</span><span class="p">:</span><span class="n">last_fo</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+                    <span class="n">e_l</span> <span class="o">=</span> <span class="n">get_est_lamb</span><span class="p">(</span><span class="n">vec</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">last_fo</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">lambda_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e_l</span><span class="p">)</span>
+                <span class="n">fo_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last_fo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">app_pattern_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">appendpat</span><span class="p">)))</span>
+
+            <span class="n">fo_pos</span> <span class="o">=</span> <span class="n">k</span><span class="o">-</span><span class="n">last_fo</span>
+            <span class="k">if</span> <span class="n">fo_pos</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">prev_res</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">fo_pos</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">prev_res</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">fo_pos</span><span class="p">:</span> <span class="n">prev_res</span> <span class="o">+</span> <span class="p">[(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">pattern_</span><span class="p">)),</span>
+                                                <span class="n">app_pattern_array</span><span class="p">,</span>
+                                                <span class="n">lambda_array</span><span class="p">)]})</span>
+
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span> <span class="nf">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msq</span><span class="p">,</span> <span class="n">ev_reg</span><span class="p">,</span> <span class="n">fo_pos</span><span class="p">,</span> <span class="n">last_iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds multi-controlled NOT gate to entangle |msq&gt; qubit</span>
+<span class="sd">        with states having the correct first-one qubit</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            msq (QuantumRegister): most-significant qubit, this is a garbage qubit</span>
+<span class="sd">            ev_reg (QuantumRegister): register storing eigenvalues</span>
+<span class="sd">            fo_pos (int): position of first-one bit</span>
+<span class="sd">            last_iteration (bool): switch which is set for numbers where only the</span>
+<span class="sd">                        last n bits is different from 0 in the binary string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circuit</span>
+        <span class="n">ev</span> <span class="o">=</span> <span class="p">[</span><span class="n">ev_reg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ev_reg</span><span class="p">))]</span>
+        <span class="c1"># last_iteration = no MSQ set, only the n-bit long pattern</span>
+        <span class="k">if</span> <span class="n">last_iteration</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fo_pos</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">msq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">fo_pos</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">msq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">fo_pos</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fo_pos</span><span class="p">):</span>
+                    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">(</span><span class="n">ev</span><span class="p">[:</span><span class="n">fo_pos</span><span class="p">],</span> <span class="n">msq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;noancilla&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fo_pos</span><span class="p">):</span>
+                    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">msq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">fo_pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">msq</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">fo_pos</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">msq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">fo_pos</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fo_pos</span><span class="p">):</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">(</span><span class="n">ev</span><span class="p">[:</span><span class="n">fo_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">msq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;noancilla&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fo_pos</span><span class="p">):</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;first-one register index &lt; 0&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_bit_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">tgt</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add multi-controlled NOT gate to circuit that has negated/normal</span>
+<span class="sd">        controls according to the pattern specified</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pattern (list): List of strings giving a bit string that negates</span>
+<span class="sd">                controls if &#39;0&#39;</span>
+<span class="sd">            tgt (QuantumRegister): target qubit</span>
+<span class="sd">            offset (int): start index for the control qubits</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circuit</span>
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">temp_reg</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">offset</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">))]</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">mct</span><span class="p">(</span><span class="n">temp_reg</span><span class="p">,</span> <span class="n">tgt</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;noancilla&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="n">offset</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">tgt</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="n">offset</span><span class="p">],</span> <span class="n">tgt</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)])</span>
+
+<div class="viewcode-block" id="LookupRotation.construct_circuit"><a class="viewcode-back" href="../../../../../autodoc/qiskit.aqua.components.reciprocals.lookup_rotation.html#qiskit.aqua.components.reciprocals.LookupRotation.construct_circuit">[docs]</a>    <span class="k">def</span> <span class="nf">construct_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">inreg</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Construct the Lookup Rotation circuit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode (str): consctruction mode, &#39;matrix&#39; not supported</span>
+<span class="sd">            inreg (QuantumRegister): input register, typically output register of Eigenvalues</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            QuantumCircuit containing the Lookup Rotation circuit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># initialize circuit</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;matrix&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;The matrix mode is not supported.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_min</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambda_min</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_evo_time</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**-</span><span class="nb">len</span><span class="p">(</span><span class="n">inreg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span> <span class="o">=</span> <span class="n">inreg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workq</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;work&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_msq</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;msq&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;anc&#39;</span><span class="p">)</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circuit</span> <span class="o">=</span> <span class="n">qc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inreg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span> <span class="o">-</span> \
+                                   <span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span> <span class="o">-</span> \
+                               <span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subpat_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subpat_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subpat_length</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pat_length</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reg_size</span>
+        <span class="n">neg_evals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span>
+
+        <span class="c1"># get classically precomputed eigenvalue binning</span>
+        <span class="n">approx_dict</span> <span class="o">=</span> <span class="n">LookupRotation</span><span class="o">.</span><span class="n">_classic_approx</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span>
+                                                     <span class="n">negative_evals</span><span class="o">=</span><span class="n">neg_evals</span><span class="p">)</span>
+
+        <span class="n">fo</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">old_fo</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># for negative EV, we pass a pseudo register ev[1:] ign. sign bit</span>
+        <span class="n">ev</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">))]</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">fo</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">approx_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+            <span class="c1"># read m-bit and (n-m) bit patterns for current first-one and</span>
+            <span class="c1"># correct Lambdas</span>
+            <span class="n">pattern_map</span> <span class="o">=</span> <span class="n">approx_dict</span><span class="p">[</span><span class="n">fo</span><span class="p">]</span>
+            <span class="c1"># set most-significant-qbit register and uncompute previous</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">old_fo</span> <span class="o">!=</span> <span class="n">fo</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">old_fo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nb">int</span><span class="p">(</span><span class="n">old_fo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+                    <span class="n">old_fo</span> <span class="o">=</span> <span class="n">fo</span>
+                    <span class="k">if</span> <span class="n">fo</span> <span class="o">+</span> <span class="n">n</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nb">int</span><span class="p">(</span><span class="n">fo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+                                      <span class="n">last_iteration</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nb">int</span><span class="p">(</span><span class="n">fo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+                                      <span class="n">last_iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">old_fo</span> <span class="o">!=</span> <span class="n">fo</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">old_fo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">old_fo</span><span class="p">))</span>
+                    <span class="n">old_fo</span> <span class="o">=</span> <span class="n">fo</span>
+                    <span class="k">if</span> <span class="n">fo</span> <span class="o">+</span> <span class="n">n</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">fo</span><span class="p">),</span>
+                                      <span class="n">last_iteration</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">fo</span><span class="p">),</span>
+                                      <span class="n">last_iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="c1"># offset = start idx for ncx gate setting and unsetting m-bit</span>
+            <span class="c1"># long bitstring</span>
+            <span class="n">offset_mpat</span> <span class="o">=</span> <span class="n">fo</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">)</span> <span class="k">if</span> <span class="n">fo</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">-</span> <span class="n">n</span> <span class="k">else</span> <span class="n">fo</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">mainpat</span><span class="p">,</span> <span class="n">subpat</span><span class="p">,</span> <span class="n">lambda_ar</span> <span class="ow">in</span> <span class="n">pattern_map</span><span class="p">:</span>
+                <span class="c1"># set m-bit pattern in register workq</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_bit_pattern</span><span class="p">(</span><span class="n">mainpat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset_mpat</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># iterate of all 2**(n-m) combinations for fixed m-bit</span>
+                <span class="k">for</span> <span class="n">subpattern</span><span class="p">,</span> <span class="n">lambda_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">subpat</span><span class="p">,</span> <span class="n">lambda_ar</span><span class="p">):</span>
+
+                    <span class="c1"># calculate rotation angle</span>
+                    <span class="n">theta</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">/</span> <span class="n">lambda_</span><span class="p">))</span>
+                    <span class="c1"># offset for ncx gate checking subpattern</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="n">fo</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">fo</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">-</span> <span class="n">n</span> <span class="k">else</span> <span class="n">fo</span>
+
+                    <span class="c1"># rotation is happening here</span>
+                    <span class="c1"># 1. rotate by half angle</span>
+                    <span class="n">qc</span><span class="o">.</span><span class="n">mcu3</span><span class="p">(</span><span class="n">theta</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_workq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="c1"># 2. mct gate to reverse rotation direction</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_bit_pattern</span><span class="p">(</span><span class="n">subpattern</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset</span><span class="p">)</span>
+                    <span class="c1"># 3. rotate by inverse of halfangle to uncompute / complete</span>
+                    <span class="n">qc</span><span class="o">.</span><span class="n">mcu3</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_workq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="c1"># 4. mct gate to uncompute first mct gate</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_bit_pattern</span><span class="p">(</span><span class="n">subpattern</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset</span><span class="p">)</span>
+                <span class="c1"># uncompute m-bit pattern</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_bit_pattern</span><span class="p">(</span><span class="n">mainpat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset_mpat</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">last_fo</span> <span class="o">=</span> <span class="n">fo</span>
+        <span class="c1"># uncompute msq register</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="n">ev</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nb">int</span><span class="p">(</span><span class="n">last_fo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+                          <span class="n">last_iteration</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_msq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_msq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">last_fo</span><span class="p">),</span>
+                          <span class="n">last_iteration</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># rotate by pi to fix sign for negative evals</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_negative_evals</span><span class="p">:</span>
+            <span class="n">qc</span><span class="o">.</span><span class="n">cu3</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ev</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_anc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circuit</span> <span class="o">=</span> <span class="n">qc</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circuit</span></div></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

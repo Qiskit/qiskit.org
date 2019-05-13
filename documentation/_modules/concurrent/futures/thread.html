@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>concurrent.futures.thread &#8212; Qiskit 0.7 documentation</title>
+    <title>concurrent.futures.thread &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -137,6 +137,7 @@
 
 <span class="kn">import</span> <span class="nn">atexit</span>
 <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="k">import</span> <span class="n">_base</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">queue</span>
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">weakref</span>
@@ -170,6 +171,7 @@
 
 <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">_python_exit</span><span class="p">)</span>
 
+
 <span class="k">class</span> <span class="nc">_WorkItem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">future</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">future</span> <span class="o">=</span> <span class="n">future</span>
@@ -183,12 +185,24 @@
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">future</span><span class="o">.</span><span class="n">set_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">future</span><span class="o">.</span><span class="n">set_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+            <span class="c1"># Break a reference cycle with the exception &#39;exc&#39;</span>
+            <span class="bp">self</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="n">executor_reference</span><span class="p">,</span> <span class="n">work_queue</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="n">executor_reference</span><span class="p">,</span> <span class="n">work_queue</span><span class="p">,</span> <span class="n">initializer</span><span class="p">,</span> <span class="n">initargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">initializer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">initializer</span><span class="p">(</span><span class="o">*</span><span class="n">initargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+            <span class="n">_base</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Exception in initializer:&#39;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">executor</span> <span class="o">=</span> <span class="n">executor_reference</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">executor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">executor</span><span class="o">.</span><span class="n">_initializer_failed</span><span class="p">()</span>
+            <span class="k">return</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">work_item</span> <span class="o">=</span> <span class="n">work_queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -203,6 +217,10 @@
             <span class="c1">#   - The executor that owns the worker has been collected OR</span>
             <span class="c1">#   - The executor that owns the worker has been shutdown.</span>
             <span class="k">if</span> <span class="n">_shutdown</span> <span class="ow">or</span> <span class="n">executor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">executor</span><span class="o">.</span><span class="n">_shutdown</span><span class="p">:</span>
+                <span class="c1"># Flag the executor as shutting down as early as possible if it</span>
+                <span class="c1"># is not gc-ed yet.</span>
+                <span class="k">if</span> <span class="n">executor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">executor</span><span class="o">.</span><span class="n">_shutdown</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="c1"># Notice other workers</span>
                 <span class="n">work_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
                 <span class="k">return</span>
@@ -210,13 +228,28 @@
     <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
         <span class="n">_base</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Exception in worker&#39;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+
+<span class="k">class</span> <span class="nc">BrokenThreadPool</span><span class="p">(</span><span class="n">_base</span><span class="o">.</span><span class="n">BrokenExecutor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when a worker thread in a ThreadPoolExecutor failed initializing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
 <span class="k">class</span> <span class="nc">ThreadPoolExecutor</span><span class="p">(</span><span class="n">_base</span><span class="o">.</span><span class="n">Executor</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="c1"># Used to assign unique thread names when thread_name_prefix is not supplied.</span>
+    <span class="n">_counter</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="fm">__next__</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">thread_name_prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                 <span class="n">initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initargs</span><span class="o">=</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;Initializes a new ThreadPoolExecutor instance.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            max_workers: The maximum number of threads that can be used to</span>
 <span class="sd">                execute the given calls.</span>
+<span class="sd">            thread_name_prefix: An optional name prefix to give our threads.</span>
+<span class="sd">            initializer: An callable used to initialize worker threads.</span>
+<span class="sd">            initargs: A tuple of arguments to pass to the initializer.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">max_workers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Use this number because ThreadPoolExecutor is often</span>
@@ -225,16 +258,30 @@
         <span class="k">if</span> <span class="n">max_workers</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_workers must be greater than 0&quot;</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">initializer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">initializer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;initializer must be a callable&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_workers</span> <span class="o">=</span> <span class="n">max_workers</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_work_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_work_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">SimpleQueue</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_broken</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thread_name_prefix</span> <span class="o">=</span> <span class="p">(</span><span class="n">thread_name_prefix</span> <span class="ow">or</span>
+                                    <span class="p">(</span><span class="s2">&quot;ThreadPoolExecutor-</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span> <span class="o">=</span> <span class="n">initializer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initargs</span> <span class="o">=</span> <span class="n">initargs</span>
 
     <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broken</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">BrokenThreadPool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_broken</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;cannot schedule new futures after shutdown&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_shutdown</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;cannot schedule new futures after&#39;</span>
+                                   <span class="s1">&#39;interpreter shutdown&#39;</span><span class="p">)</span>
 
             <span class="n">f</span> <span class="o">=</span> <span class="n">_base</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
             <span class="n">w</span> <span class="o">=</span> <span class="n">_WorkItem</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
@@ -251,14 +298,32 @@
             <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="c1"># TODO(bquinlan): Should avoid creating new threads if there are more</span>
         <span class="c1"># idle threads than items in the work queue.</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_workers</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span>
+        <span class="n">num_threads</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_threads</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_workers</span><span class="p">:</span>
+            <span class="n">thread_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_thread_name_prefix</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">,</span>
+                                     <span class="n">num_threads</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">thread_name</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span>
                                  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weakref_cb</span><span class="p">),</span>
-                                       <span class="bp">self</span><span class="o">.</span><span class="n">_work_queue</span><span class="p">))</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_work_queue</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_initargs</span><span class="p">))</span>
             <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
             <span class="n">_threads_queues</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_work_queue</span>
+
+    <span class="k">def</span> <span class="nf">_initializer_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_lock</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_broken</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;A thread initializer failed, the thread pool &#39;</span>
+                            <span class="s1">&#39;is not usable anymore&#39;</span><span class="p">)</span>
+            <span class="c1"># Drain work queue and mark pending futures failed</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">work_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_work_queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+                <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">work_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">work_item</span><span class="o">.</span><span class="n">future</span><span class="o">.</span><span class="n">set_exception</span><span class="p">(</span><span class="n">BrokenThreadPool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_broken</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_lock</span><span class="p">:</span>
