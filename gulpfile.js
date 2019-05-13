@@ -33,7 +33,7 @@ task('add-ibm-stats-script', () => {
       window.digitalData = {
         page: {
           pageInfo: {
-            productTitle: 'IBM Q Experience',
+            productTitle: 'Qiskit.org',
             analytics: {
               category: 'Offering Interface',
             },
@@ -62,7 +62,7 @@ task('add-ibm-stats-script', () => {
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    <script async src="https://console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
   `;
 
   return src(`${buildPath}**/index.html`)
