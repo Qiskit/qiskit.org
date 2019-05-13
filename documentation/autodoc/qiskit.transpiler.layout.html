@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.transpiler.layout module &#8212; Qiskit 0.10.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.transpiler.models module" href="qiskit.transpiler.models.html" />
+    <link rel="prev" title="qiskit.transpiler.fencedobjs module" href="qiskit.transpiler.fencedobjs.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+      
+      <nav class="mdl-navigation">
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html#qiskit-elements">Qiskit Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-components">Qiskit Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-devices">Access IBM Q Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#simulating-circuits-using-qiskit-aer">Simulating Circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#running-circuits-on-ibm-q-devices">Running Circuits on IBM Q Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terra/index.html">Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../terra/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#tools">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/quantum_circuits.html">Circuits and Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#creating-circuits">Creating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#pauli-gates">Pauli gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#clifford-gates">Clifford gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#c3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-u3-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#toffoli-gate-ccx-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html">Plotting Data in Qiskit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#histograms">Histograms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#specifying-histogram-properties">Specifying Histogram Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#saving-histograms">Saving Histograms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#interactive-histograms">Interactive Histograms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#state-plots">State Plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#specifying-state-plot-properties">Specifying State Plot Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#saving-state-plots">Saving State Plots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#interactive-state-plots">Interactive State Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#bloch-vector-plots">Bloch Vector Plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#specifying-bloch-vector-plot-properties">Specifying Bloch Vector Plot Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#saving-bloch-vector-plots">Saving Bloch Vector Plots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/backend_monitoring_tools.html">Tools for Monitoring Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/user_config.html">Using User Config Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/user_config.html#creating-a-user-config-file">Creating a User Config File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/user_config.html#alternative-locations-for-a-user-config-file">Alternative Locations for a User Config File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../aer/index.html">Qiskit Aer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../aer/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aer/index.html#getting-started-with-qiskit-aer">Getting Started with Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aer/simulate_experiments.html">Simulate an experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_experiments.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_experiments.html#qasmsimulator">QasmSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aer/simulate_statevectors.html">Find the final statevector</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_statevectors.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_statevectors.html#statevectorsimulator">StatevectorSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aer/simulate_unitary_matrix.html">Find the unitary matrix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_unitary_matrix.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_unitary_matrix.html#unitarysimulator">UnitarySimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aer/device_noise_simulation.html">Use a simple noise model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#device-noise-module">Device noise module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#generating-a-device-noise-model">Generating a device noise model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#simulating-a-quantum-circuit-with-noise">Simulating a quantum circuit with noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#comparison-to-the-real-device">Comparison to the real device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ignis/index.html">Qiskit Ignis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#circuits">Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#fitters">Fitters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#filters">Filters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/overview.html#ignis-organization">Ignis Organization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#characterization">Characterization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#verification">Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#mitigation">Mitigation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/characterization.html">Characterization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/characterization.html#circuits">Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#coherence">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#hamiltonian-parameters">Hamiltonian  Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#gate-characterization">Gate Characterization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/characterization.html#fitters">Fitters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#id1">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#hamiltonian">Hamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#gates">Gates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/measurement_calibration.html">Measurement Calibration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/measurement_calibration.html#complete-measurement-calibration">Complete Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#analyzing-the-results">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/measurement_calibration.html#tensored-measurement-calibration">Tensored Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#id1">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#id2">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/measurement_calibration.html#applying-the-calibration">Applying the Calibration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/tomography.html">Tomography</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/tomography.html#generating-tomography-circuits">Generating Tomography Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/tomography.html#fitting-tomography-results">Fitting Tomography Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/randomized_benchmarking.html">Randomized Benchmarking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/randomized_benchmarking.html#generating-rb-sequences">Generating RB Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/randomized_benchmarking.html#analyzing-results">Analyzing Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/randomized_benchmarking.html#predicted-results">Predicted Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/quantum_volume.html">Quantum Volume</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/quantum_volume.html#generating-qv-sequences">Generating QV Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/quantum_volume.html#analyzing-results">Analyzing Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../aqua/index.html">Qiskit Aqua</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/library.html">Aqua: A Library of Quantum Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/installation.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/execution.html#input-file">Input File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/extending.html">Contributing to Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#aqua-extension-points">Aqua Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#aqua-documentation-ui">Aqua Documentation UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#aqua-unit-tests">Aqua Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/algorithms.html">Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/algorithms.html#quantum-algorithms">Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/algorithms.html#classical-reference-algorithms">Classical Reference Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimizers.html">Optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimizers.html#local-optimizers">Local Optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimizers.html#global-optimizers">Global Optimizers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/variational_forms.html">Variational Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#ry">Ry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#ryrz">RyRz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#unitary-coupled-cluster-singles-and-doubles-uccsd">Unitary Coupled Cluster Singles and Doubles (UCCSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#swaprz">SwapRz</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/oracles.html">Oracles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/oracles.html#logical-expression-oracle">Logical Expression Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/oracles.html#truth-table-oracle">Truth Table Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/oracles.html#custom-circuit-oracle">Custom Circuit Oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/iqfts.html#standard-iqft">Standard IQFT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/iqfts.html#approximate-iqft">Approximate IQFT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/initial_states.html">Initial States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/initial_states.html#zero">Zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/initial_states.html#hartree-fock">Hartree-Fock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/initial_states.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/feature_maps.html">Feature Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#first-order-expansion">First Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#raw-feature-vector">Raw Feature Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/multiclass_extensions.html">Multiclass Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/multiclass_extensions.html#one-against-rest">One Against Rest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/multiclass_extensions.html#all-pairs">All Pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/multiclass_extensions.html#error-correcting-code">Error Correcting Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/random_distributions.html">Random Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/random_distributions.html#univariate-distributions">Univariate Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/random_distributions.html#multivariate-distributions">Multivariate Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/uncertainty_problems.html">Uncertainty Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/uncertainty_problems.html#european-call-option">European Call Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/eigs.html">Eigenvalues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/eigs.html#eigsqpe">EigsQPE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/reciprocals.html">Reciprocals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/reciprocals.html#partial-table-look-up">Partial Table Look Up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/reciprocals.html#long-division">Long Division</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html">Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#gaussian-16">Gaussian™ 16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#psi4">PSI4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#pyscf">PySCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#pyquante">PyQuante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#hdf5">HDF5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html">Translators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#jordan-wigner">Jordan-Wigner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#parity">Parity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev">Bravyi-Kitaev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev-superfast">Bravyi-Kitaev Superfast</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html#input-file">Input File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation">Input File for Direct Algorithm Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html">Contributing to Qiskit Chemistry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html#extension-points">Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html#unit-tests">Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/release_history.html">Release history</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/release_history.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/ai/qiskit_ai.html">Qiskit AI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#contributing-to-qiskit-ai">Contributing to Qiskit AI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html">Qiskit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#qiskit-optimization-problems">Qiskit Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#contributing-to-qiskit-optimization">Contributing to Qiskit Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/finance/qiskit_finance.html">Qiskit Finance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/finance/qiskit_finance.html#qiskit-finance-problems">Qiskit Finance Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/finance/qiskit_finance.html#contributing-to-qiskit-finance">Contributing to Qiskit Finance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/finance/qiskit_finance.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/tutorials/aqua_tutorials.html">Aqua Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/release_history.html#release-notes">Release Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/release_history.html#qiskit-aqua-0-4-0">Qiskit Aqua 0.4.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html">Advanced Use of IBM Q Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#the-provider">The Provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#filtering-the-backends">Filtering the backends</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#the-backend">The Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#the-job">The Job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development_strategy.html">Development Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#component-status">Component Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#aer-provider">Aer Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#versioning">Versioning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#meta-package-version">Meta-package Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#adding-new-elements">Adding New Elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#patch-version-increases">Patch Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#minor-version-increases">Minor Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#major-version-increases">Major Version Increases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-10">Qiskit 0.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-2">IBM Q Provider 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#new-features">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-9">Qiskit 0.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-8">Terra 0.8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#highlights">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id1">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#compatibility-considerations">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-2">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id2">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id3">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id4">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ignis-0-1-1">Ignis 0.1.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id5">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id6">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-5">Aqua 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id7">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id8">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id9">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-1">IBM Q Provider 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id10">New Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-8">Qiskit 0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ignis-0-1">Ignis 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-7">Qiskit 0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-7">Terra 0.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id11">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id12">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-1">Aer 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id13">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-4">Aqua 0.4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id14">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id15">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-6">Qiskit 0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-6">Terra 0.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id16">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id17">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-5">Qiskit 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-5">Terra 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id18">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id19">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">API References</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.aqua.html">qiskit.aqua package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.assembler.html">qiskit.assembler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.chemistry.html">qiskit.chemistry package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.compiler.html">qiskit.compiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.compiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.pulse.html">qiskit.pulse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.test.html">qiskit.test package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.visualization.html">qiskit.visualization package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit._util.html">qiskit._util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.exceptions.html">qiskit.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.execute.html">qiskit.execute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.user_config.html">qiskit.user_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.util.html">qiskit.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.version.html">qiskit.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_to_qiskit.html">Contributing to Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-documentation">Writing and Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#install-from-source">Install from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#install-terra-from-source">Install Terra from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#install-a-compiler-for-macos">Install a compiler for MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#install-a-compiler-for-windows">Install a compiler for Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#backend-providers">Backend Providers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../community.html#additional-providers">Additional providers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#circuit-optimization">Circuit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../community.html#additional-passes">Additional passes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#tools">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../community.html#additional-tools">Additional Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+      
+      <nav class="mdl-navigation">
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html#qiskit-elements">Qiskit Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#qiskit-components">Qiskit Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-devices">Access IBM Q Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#circuit-basics">Circuit Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#building-the-circuit">Building the circuit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#visualize-circuit">Visualize Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#simulating-circuits-using-qiskit-aer">Simulating Circuits using Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#statevector-backend">Statevector backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#unitary-backend">Unitary backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#openqasm-backend">OpenQASM backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#running-circuits-on-ibm-q-devices">Running Circuits on IBM Q Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#running-circuits-on-real-devices">Running circuits on real devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#simulating-circuits-using-a-hpc-simulator">Simulating circuits using a HPC simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#retrieving-a-previously-ran-job">Retrieving a previously ran job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terra/index.html">Qiskit Terra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../terra/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/overview.html#terra-organization">Terra Organization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-circuits">Quantum Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#transpiler">Transpiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#tools">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#backends-and-results">Backends and Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#quantum-information">Quantum Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/overview.html#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/quantum_circuits.html">Circuits and Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#constructing-registers">Constructing Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#creating-circuits">Creating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#concatenating-circuits">Concatenating Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#examining-circuit-results">Examining Circuit Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/quantum_circuits.html#determining-circuit-resources">Determining Circuit Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/summary_of_quantum_operations.html">Summary of Quantum Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-quantum-states">Single Qubit Quantum states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#single-qubit-gates">Single-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#u-gates">u gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#identity-gate">Identity gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#pauli-gates">Pauli gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#clifford-gates">Clifford gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#c3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#standard-rotations">Standard Rotations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#multi-qubit-gates">Multi-Qubit Gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#mathematical-preliminaries">Mathematical Preliminaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#basis-vector-ordering-in-qiskit">Basis vector ordering in Qiskit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-operations-on-qubits">Controlled operations on qubits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#two-qubit-gates">Two-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-pauli-gates">Controlled Pauli Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-hadamard-gate">Controlled Hadamard gate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-rotation-gates">Controlled rotation gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-phase-rotation">Controlled phase rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-u3-rotation">Controlled <span class="math notranslate nohighlight">\(u3\)</span> rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#swap-gate">SWAP gate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#three-qubit-gates">Three-qubit gates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#toffoli-gate-ccx-gate">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#controlled-swap-gate-fredkin-gate">Controlled swap gate (Fredkin Gate)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#non-unitary-operations">Non unitary operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#measurements">Measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#reset">Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#conditional-operations">Conditional operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/summary_of_quantum_operations.html#arbitrary-initialization">Arbitrary initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html">Visualizing a Quantum Circuit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#drawing-a-quantum-circuit">Drawing a Quantum Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#alternative-renderers-for-circuits">Alternative Renderers for Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#controlling-output-from-circuit-draw">Controlling output from circuit.draw()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#customizing-the-output">Customizing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#disable-plot-barriers-and-reversing-bit-order">Disable Plot Barriers and Reversing Bit Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#backend-specific-customizations">Backend specific customizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#latex-source">Latex Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/visualizing_a_quantum_circuit.html#circuit-drawer-as-function">circuit_drawer() as function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html">Plotting Data in Qiskit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#histograms">Histograms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#specifying-histogram-properties">Specifying Histogram Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#saving-histograms">Saving Histograms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#interactive-histograms">Interactive Histograms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#state-plots">State Plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#specifying-state-plot-properties">Specifying State Plot Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#saving-state-plots">Saving State Plots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#interactive-state-plots">Interactive State Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#bloch-vector-plots">Bloch Vector Plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#specifying-bloch-vector-plot-properties">Specifying Bloch Vector Plot Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/plotting_data_in_qiskit.html#saving-bloch-vector-plots">Saving Bloch Vector Plots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/backend_monitoring_tools.html">Tools for Monitoring Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#loading-the-monitoring-tools">Loading the Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#tracking-job-status">Tracking Job Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#monitoring-the-status-of-a-single-job">Monitoring the status of a single job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../terra/backend_monitoring_tools.html#changing-the-interval-of-status-updating">Changing the interval of status updating</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/backend_monitoring_tools.html#backend-details">Backend Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/terra_parallel_tools.html">Terra Parallel Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#define-a-function-that-builds-a-single-quantum-volume-circuit">Define a function that builds a single Quantum Volume circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#generate-1000-circuits-in-parallel-and-track-progress">Generate 1000 circuits in parallel and track progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/terra_parallel_tools.html#use-a-jupyter-progress-bar">Use a Jupyter progress bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../terra/user_config.html">Using User Config Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../terra/user_config.html#creating-a-user-config-file">Creating a User Config File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../terra/user_config.html#alternative-locations-for-a-user-config-file">Alternative Locations for a User Config File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../aer/index.html">Qiskit Aer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../aer/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aer/index.html#getting-started-with-qiskit-aer">Getting Started with Qiskit Aer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aer/simulate_experiments.html">Simulate an experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_experiments.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_experiments.html#qasmsimulator">QasmSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aer/simulate_statevectors.html">Find the final statevector</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_statevectors.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_statevectors.html#statevectorsimulator">StatevectorSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aer/simulate_unitary_matrix.html">Find the unitary matrix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_unitary_matrix.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/simulate_unitary_matrix.html#unitarysimulator">UnitarySimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aer/device_noise_simulation.html">Use a simple noise model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#device-noise-module">Device noise module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#generating-a-device-noise-model">Generating a device noise model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#simulating-a-quantum-circuit-with-noise">Simulating a quantum circuit with noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aer/device_noise_simulation.html#comparison-to-the-real-device">Comparison to the real device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ignis/index.html">Qiskit Ignis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#circuits">Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#fitters">Fitters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#filters">Filters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/overview.html#ignis-organization">Ignis Organization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#characterization">Characterization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#verification">Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/overview.html#mitigation">Mitigation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/characterization.html">Characterization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/characterization.html#circuits">Circuits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#coherence">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#hamiltonian-parameters">Hamiltonian  Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#gate-characterization">Gate Characterization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/characterization.html#fitters">Fitters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#id1">Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#hamiltonian">Hamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/characterization.html#gates">Gates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/measurement_calibration.html">Measurement Calibration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/measurement_calibration.html#complete-measurement-calibration">Complete Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#generating-measurement-calibration-circuits">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#analyzing-the-results">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/measurement_calibration.html#tensored-measurement-calibration">Tensored Measurement Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#id1">Generating Measurement Calibration Circuits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ignis/measurement_calibration.html#id2">Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/measurement_calibration.html#applying-the-calibration">Applying the Calibration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/tomography.html">Tomography</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/tomography.html#generating-tomography-circuits">Generating Tomography Circuits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/tomography.html#fitting-tomography-results">Fitting Tomography Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/randomized_benchmarking.html">Randomized Benchmarking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/randomized_benchmarking.html#generating-rb-sequences">Generating RB Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/randomized_benchmarking.html#analyzing-results">Analyzing Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/randomized_benchmarking.html#predicted-results">Predicted Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ignis/quantum_volume.html">Quantum Volume</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/quantum_volume.html#generating-qv-sequences">Generating QV Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ignis/quantum_volume.html#analyzing-results">Analyzing Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../aqua/index.html">Qiskit Aqua</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/library.html">Aqua: A Library of Quantum Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#contributors-in-alphabetical-order">Contributors (in Alphabetical Order)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/installation.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/execution.html#input-file">Input File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/extending.html">Contributing to Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#aqua-extension-points">Aqua Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#aqua-documentation-ui">Aqua Documentation UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/extending.html#aqua-unit-tests">Aqua Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/algorithms.html">Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/algorithms.html#quantum-algorithms">Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/algorithms.html#classical-reference-algorithms">Classical Reference Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimizers.html">Optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimizers.html#local-optimizers">Local Optimizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimizers.html#global-optimizers">Global Optimizers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/variational_forms.html">Variational Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#ry">Ry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#ryrz">RyRz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#unitary-coupled-cluster-singles-and-doubles-uccsd">Unitary Coupled Cluster Singles and Doubles (UCCSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/variational_forms.html#swaprz">SwapRz</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/oracles.html">Oracles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/oracles.html#logical-expression-oracle">Logical Expression Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/oracles.html#truth-table-oracle">Truth Table Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/oracles.html#custom-circuit-oracle">Custom Circuit Oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/iqfts.html">Inverse Quantum Fourier Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/iqfts.html#standard-iqft">Standard IQFT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/iqfts.html#approximate-iqft">Approximate IQFT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/initial_states.html">Initial States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/initial_states.html#zero">Zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/initial_states.html#hartree-fock">Hartree-Fock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/initial_states.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/feature_maps.html">Feature Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#first-order-expansion">First Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#second-order-expansion">Second Order Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#pauli-z-expansion">Pauli Z Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#pauli-expansion">Pauli Expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/feature_maps.html#raw-feature-vector">Raw Feature Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/multiclass_extensions.html">Multiclass Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/multiclass_extensions.html#one-against-rest">One Against Rest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/multiclass_extensions.html#all-pairs">All Pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/multiclass_extensions.html#error-correcting-code">Error Correcting Code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/random_distributions.html">Random Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/random_distributions.html#univariate-distributions">Univariate Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/random_distributions.html#multivariate-distributions">Multivariate Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/uncertainty_problems.html">Uncertainty Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/uncertainty_problems.html#european-call-option">European Call Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/uncertainty_problems.html#fixed-income-asset-pricing">Fixed-Income Asset Pricing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/eigs.html">Eigenvalues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/eigs.html#eigsqpe">EigsQPE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/reciprocals.html">Reciprocals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/reciprocals.html#partial-table-look-up">Partial Table Look Up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/reciprocals.html#long-division">Long Division</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html#novel-features">Novel Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html">Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#gaussian-16">Gaussian™ 16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#psi4">PSI4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#pyscf">PySCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#pyquante">PyQuante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_drivers.html#hdf5">HDF5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html">Translators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#jordan-wigner">Jordan-Wigner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#parity">Parity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev">Bravyi-Kitaev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_translators.html#bravyi-kitaev-superfast">Bravyi-Kitaev Superfast</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html">Configuring and Running an Experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html#execution-modes">Execution Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html#input-file">Input File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation">Input File for Direct Algorithm Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html">Contributing to Qiskit Chemistry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html#dynamically-discovered-components">Dynamically Discovered Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html#extension-points">Extension Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/qiskit_chemistry_extending.html#unit-tests">Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/chemistry/release_history.html">Release history</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/chemistry/release_history.html#release-notes">Release Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/ai/qiskit_ai.html">Qiskit AI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#applicable-algorithms">Applicable Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#ai-specific-quantum-algorithms">AI-specific Quantum Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#general-quantum-algorithms-for-ai">General Quantum Algorithms for AI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#classical-reference-algorithms-for-ai">Classical Reference Algorithms for AI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#contributing-to-qiskit-ai">Contributing to Qiskit AI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/ai/qiskit_ai.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html">Qiskit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#qiskit-optimization-problems">Qiskit Optimization Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#aqua-algorithms-for-optimization">Aqua Algorithms for Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#general-quantum-algorithms-for-optimization">General Quantum Algorithms for Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#classical-reference-algorithms-for-optimization">Classical Reference Algorithms for Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#contributing-to-qiskit-optimization">Contributing to Qiskit Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/optimization/qiskit_optimization.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/finance/qiskit_finance.html">Qiskit Finance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/finance/qiskit_finance.html#qiskit-finance-problems">Qiskit Finance Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/finance/qiskit_finance.html#contributing-to-qiskit-finance">Contributing to Qiskit Finance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/finance/qiskit_finance.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/tutorials/aqua_tutorials.html">Aqua Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aqua/release_history.html">Release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aqua/release_history.html#release-notes">Release Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../aqua/release_history.html#qiskit-aqua-0-4-0">Qiskit Aqua 0.4.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html">Advanced Use of IBM Q Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#the-provider">The Provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#filtering-the-backends">Filtering the backends</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#the-backend">The Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced_use_of_ibm_q_devices.html#the-job">The Job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development_strategy.html">Development Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aqua">Qiskit Aqua</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#qiskit-chemistry">Qiskit Chemistry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#component-status">Component Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#aer-provider">Aer Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#versioning">Versioning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#meta-package-version">Meta-package Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#adding-new-elements">Adding New Elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#patch-version-increases">Patch Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#minor-version-increases">Minor Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#major-version-increases">Major Version Increases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-10">Qiskit 0.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-2">IBM Q Provider 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#new-features">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-9">Qiskit 0.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-8">Terra 0.8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#highlights">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id1">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#compatibility-considerations">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-2">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id2">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id3">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id4">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ignis-0-1-1">Ignis 0.1.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id5">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id6">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-5">Aqua 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id7">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id8">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id9">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-1">IBM Q Provider 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id10">New Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-8">Qiskit 0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ignis-0-1">Ignis 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-7">Qiskit 0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-7">Terra 0.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id11">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id12">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-1">Aer 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id13">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-4">Aqua 0.4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id14">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id15">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-6">Qiskit 0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-6">Terra 0.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id16">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id17">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-5">Qiskit 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-5">Terra 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id18">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id19">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">API References</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.aqua.html">qiskit.aqua package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.assembler.html">qiskit.assembler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.chemistry.html">qiskit.chemistry package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.compiler.html">qiskit.compiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.compiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.pulse.html">qiskit.pulse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.test.html">qiskit.test package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.visualization.html">qiskit.visualization package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit._util.html">qiskit._util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.exceptions.html">qiskit.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.execute.html">qiskit.execute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.user_config.html">qiskit.user_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.util.html">qiskit.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.version.html">qiskit.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_to_qiskit.html">Contributing to Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-documentation">Writing and Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#install-from-source">Install from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#install-terra-from-source">Install Terra from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#install-a-compiler-for-macos">Install a compiler for MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#install-a-compiler-for-windows">Install a compiler for Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#backend-providers">Backend Providers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../community.html#additional-providers">Additional providers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#circuit-optimization">Circuit Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../community.html#additional-passes">Additional passes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#tools">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../community.html#additional-tools">Additional Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="module-qiskit.transpiler.layout">
+<span id="qiskit-transpiler-layout-module"></span><h1>qiskit.transpiler.layout module<a class="headerlink" href="#module-qiskit.transpiler.layout" title="Permalink to this headline">¶</a></h1>
+<p>A two-ways dict to represent a layout.</p>
+<p>Layout is the relation between virtual (qu)bits and physical (qu)bits.
+Virtual (qu)bits are tuples, e.g. <cite>(QuantumRegister(3, ‘qr’), 2)</cite> or simply <cite>qr[2]</cite>.
+Physical (qu)bits are integers.</p>
+<dl class="class">
+<dt id="qiskit.transpiler.layout.Layout">
+<em class="property">class </em><code class="descname">Layout</code><span class="sig-paren">(</span><em>input_dict=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Two-ways dict to represent a Layout.</p>
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>virtual_bit</em>, <em>physical_bit=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a map element between <cite>bit</cite> and <cite>physical_bit</cite>. If <cite>physical_bit</cite> is not
+defined, <cite>bit</cite> will be mapped to a new physical bit (extending the length of the
+layout by one.)
+:param virtual_bit: A (qu)bit. For example, (QuantumRegister(3, ‘qr’), 2).
+:type virtual_bit: tuple
+:param physical_bit: A physical bit. For example, 3.
+:type physical_bit: int</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.add_register">
+<code class="descname">add_register</code><span class="sig-paren">(</span><em>reg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.add_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.add_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds at the end physical_qubits that map each bit in reg.
+:param reg: A (qu)bit Register. For example, QuantumRegister(3, ‘qr’).
+:type reg: Register</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.combine_into_edge_map">
+<code class="descname">combine_into_edge_map</code><span class="sig-paren">(</span><em>another_layout</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.combine_into_edge_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.combine_into_edge_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines self and another_layout into an “edge map”.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="bp">self</span>       <span class="n">another_layout</span>  <span class="n">resulting</span> <span class="n">edge</span> <span class="nb">map</span>
+<span class="n">qr_1</span> <span class="o">-&gt;</span> <span class="mi">0</span>        <span class="mi">0</span> <span class="o">&lt;-</span> <span class="n">q_2</span>         <span class="n">qr_1</span> <span class="o">-&gt;</span> <span class="n">q_2</span>
+<span class="n">qr_2</span> <span class="o">-&gt;</span> <span class="mi">2</span>        <span class="mi">2</span> <span class="o">&lt;-</span> <span class="n">q_1</span>         <span class="n">qr_2</span> <span class="o">-&gt;</span> <span class="n">q_1</span>
+<span class="n">qr_3</span> <span class="o">-&gt;</span> <span class="mi">3</span>        <span class="mi">3</span> <span class="o">&lt;-</span> <span class="n">q_0</span>         <span class="n">qr_3</span> <span class="o">-&gt;</span> <span class="n">q_0</span>
+</pre></div>
+</div>
+<p>The edge map is used to compose dags via, for example, compose_back.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>another_layout</strong> (<a class="reference internal" href="#qiskit.transpiler.layout.Layout" title="qiskit.transpiler.layout.Layout"><em>Layout</em></a>) – The other layout to combine.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A “edge map”.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LayoutError</span></code> – another_layout can be bigger than self, but not smaller. Otherwise, raises.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of a Layout instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.from_dict">
+<code class="descname">from_dict</code><span class="sig-paren">(</span><em>input_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populates a Layout from a dictionary.
+The dictionary must be a bijective mapping between
+virtual qubits (tuple) and physical qubits (int).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_dict</strong> (<em>dict</em>) – <p>e.g.:
+{(QuantumRegister(3, ‘qr’), 0): 0,</p>
+<blockquote>
+<div>(QuantumRegister(3, ‘qr’), 1): 1,
+(QuantumRegister(3, ‘qr’), 2): 2}</div></blockquote>
+<p>Can be written more concisely as follows:</p>
+<dl class="docutils">
+<dt>virtual to physical:</dt>
+<dd><dl class="first last docutils">
+<dt>{qr[0]: 0,</dt>
+<dd>qr[1]: 1,
+qr[2]: 2}</dd>
+</dl>
+</dd>
+<dt>physical to virtual:</dt>
+<dd><dl class="first last docutils">
+<dt>{0: qr[0],</dt>
+<dd>1: qr[1],
+2: qr[2]}</dd>
+</dl>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.transpiler.layout.Layout.from_intlist">
+<em class="property">static </em><code class="descname">from_intlist</code><span class="sig-paren">(</span><em>int_list</em>, <em>*qregs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.from_intlist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.from_intlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a list of integers to a Layout
+mapping virtual qubits (index of the list) to
+physical qubits (the list values).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>int_list</strong> (<em>list</em>) – A list of integers.</li>
+<li><strong>*qregs</strong> (<em>QuantumRegisters</em>) – The quantum registers to apply
+the layout to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The corresponding Layout object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#qiskit.transpiler.layout.Layout" title="qiskit.transpiler.layout.Layout">Layout</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LayoutError</span></code> – Invalid input layout.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.transpiler.layout.Layout.from_tuplelist">
+<em class="property">static </em><code class="descname">from_tuplelist</code><span class="sig-paren">(</span><em>tuple_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.from_tuplelist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.from_tuplelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populates a Layout from a list containing virtual
+qubits—(QuantumRegister, int) tuples—, or None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tuple_list</strong> (<em>list</em>) – e.g.: [qr[0], None, qr[2], qr[3]]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the corresponding Layout object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.transpiler.layout.Layout" title="qiskit.transpiler.layout.Layout">Layout</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LayoutError</span></code> – If the elements are not (Register, integer) or None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.transpiler.layout.Layout.generate_trivial_layout">
+<em class="property">static </em><code class="descname">generate_trivial_layout</code><span class="sig-paren">(</span><em>*regs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.generate_trivial_layout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.generate_trivial_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a trivial (“one-to-one”) Layout with the registers in <cite>regs</cite>.
+:param *regs: registers to include in the layout.
+:type *regs: Registers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A layout with all the <cite>regs</cite> in the given order.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#qiskit.transpiler.layout.Layout" title="qiskit.transpiler.layout.Layout">Layout</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.get_physical_bits">
+<code class="descname">get_physical_bits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.get_physical_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.get_physical_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dictionary where the keys are physical (qu)bits and the
+values are virtual (qu)bits.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.get_registers">
+<code class="descname">get_registers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.get_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.get_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the registers in the layout [QuantumRegister(2, ‘qr0’), QuantumRegister(3, ‘qr1’)]
+:returns: A list of Register in the layout
+:rtype: List</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.get_virtual_bits">
+<code class="descname">get_virtual_bits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.get_virtual_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.get_virtual_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dictionary where the keys are virtual (qu)bits and the
+values are physical (qu)bits.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.transpiler.layout.Layout.is_virtual">
+<em class="property">static </em><code class="descname">is_virtual</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.is_virtual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.is_virtual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if value has the format of a virtual qubit</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.transpiler.layout.Layout.order_based_on_type">
+<em class="property">static </em><code class="descname">order_based_on_type</code><span class="sig-paren">(</span><em>value1</em>, <em>value2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.order_based_on_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.order_based_on_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>decides which one is physical/virtual based on the type. Returns (virtual, physical)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.layout.Layout.swap">
+<code class="descname">swap</code><span class="sig-paren">(</span><em>left</em>, <em>right</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/transpiler/layout.html#Layout.swap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.transpiler.layout.Layout.swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swaps the map between left and right.
+:param left: Item to swap with right.
+:type left: tuple or int
+:param right: Item to swap with left.
+:type right: tuple or int</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LayoutError</span></code> – If left and right have not the same type.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="qiskit.transpiler.fencedobjs.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>qiskit.transpiler.fencedobjs module</div>
+         </div>
+     </a>
+     <a id="button-next" href="qiskit.transpiler.models.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>qiskit.transpiler.models module</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+  </body>
+</html>

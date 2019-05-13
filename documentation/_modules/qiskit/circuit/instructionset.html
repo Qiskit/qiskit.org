@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.circuit.instructionset &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.circuit.instructionset &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,31 +130,54 @@
   <h1>Source code for qiskit.circuit.instructionset</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Instruction collection.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
 
 
-<div class="viewcode-block" id="InstructionSet"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet">[docs]</a><span class="k">class</span> <span class="nc">InstructionSet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Instruction collection.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="InstructionSet"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet">[docs]</a><span class="k">class</span> <span class="nc">InstructionSet</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Instruction collection, and their contexts.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;New collection of instructions.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="sd">&quot;&quot;&quot;New collection of instructions.</span>
 
-<div class="viewcode-block" id="InstructionSet.add"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add instruction to set.&quot;&quot;&quot;</span>
+<span class="sd">        The context (qargs and cargs that each instruction is attached to),</span>
+<span class="sd">        is also stored separately for each instruction.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qargs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cargs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return number of instructions in set&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return instruction at index&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<div class="viewcode-block" id="InstructionSet.add"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add an instruction and its context (where it&#39;s attached).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;attempt to add non-Instruction&quot;</span> <span class="o">+</span>
                               <span class="s2">&quot; to InstructionSet&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="InstructionSet.inverse"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert all instructions.&quot;&quot;&quot;</span>

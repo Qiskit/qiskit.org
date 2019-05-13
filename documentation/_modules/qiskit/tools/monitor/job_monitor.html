@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.tools.monitor.job_monitor &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.tools.monitor.job_monitor &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.tools.monitor.job_monitor</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 
 <span class="sd">&quot;&quot;&quot;A module for monitoring various qiskit functionality&quot;&quot;&quot;</span>
@@ -141,33 +148,33 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">threading</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
 <span class="n">_NOTEBOOK_ENV</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ipykernel&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;spyder&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">):</span>
     <span class="n">_NOTEBOOK_ENV</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>    <span class="c1"># pylint: disable=import-error</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>           <span class="c1"># pylint: disable=import-error</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;These functions  need ipywidgets. &#39;</span>
-                          <span class="s1">&#39;Run &quot;pip install ipywidgets&quot; before.&#39;</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">qiskit.tools.jupyter.jupyter_magics</span> <span class="k">import</span> <span class="n">_html_checker</span>    <span class="c1"># pylint: disable=C0412</span>
 
 
-<span class="k">def</span> <span class="nf">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A text-based job status checker</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        job (BaseJob): The job to check.</span>
 <span class="sd">        interval (int): The interval at which to check.</span>
+<span class="sd">        _interval_set (bool): Was interval time set by user?</span>
+<span class="sd">        quiet (bool): If True, do not print status messages.</span>
+<span class="sd">        output (file): The file like object to write status messages to.</span>
+<span class="sd">        By default this is sys.stdout.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">status</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">value</span>
     <span class="n">prev_msg</span> <span class="o">=</span> <span class="n">msg</span>
     <span class="n">msg_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Job Status&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Job Status&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">status</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;DONE&#39;</span><span class="p">,</span> <span class="s1">&#39;CANCELLED&#39;</span><span class="p">,</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">]:</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
         <span class="n">status</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
@@ -175,6 +182,11 @@
 
         <span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;QUEUED&#39;</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">job</span><span class="o">.</span><span class="n">queue_position</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_interval_set</span><span class="p">:</span>
+                <span class="n">interval</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">queue_position</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_interval_set</span><span class="p">:</span>
+                <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span>
 
         <span class="c1"># Adjust length of message so there are no artifacts</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">msg_len</span><span class="p">:</span>
@@ -182,39 +194,60 @@
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">msg_len</span><span class="p">:</span>
             <span class="n">msg_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">msg</span> <span class="o">!=</span> <span class="n">prev_msg</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Job Status&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg</span> <span class="o">!=</span> <span class="n">prev_msg</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">quiet</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Job Status&#39;</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
             <span class="n">prev_msg</span> <span class="o">=</span> <span class="n">msg</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="job_monitor"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.monitor.job_monitor.html#qiskit.tools.monitor.job_monitor.job_monitor">[docs]</a><span class="k">def</span> <span class="nf">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="job_monitor"><a class="viewcode-back" href="../../../../autodoc/qiskit.tools.monitor.job_monitor.html#qiskit.tools.monitor.job_monitor.job_monitor">[docs]</a><span class="k">def</span> <span class="nf">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Monitor the status of a IBMQJob instance.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        job (BaseJob): Job to monitor.</span>
 <span class="sd">        interval (int): Time interval between status queries.</span>
 <span class="sd">        monitor_async (bool): Monitor asyncronously (in Jupyter only).</span>
+<span class="sd">        quiet (bool): If True, do not print status messages.</span>
+<span class="sd">        output (file): The file like object to write status messages to.</span>
+<span class="sd">        By default this is sys.stdout.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        QiskitError: When trying to run async outside of Jupyter</span>
+<span class="sd">        ImportError: ipywidgets not available for notebook.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_interval_set</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_interval_set</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">if</span> <span class="n">_NOTEBOOK_ENV</span><span class="p">:</span>
-        <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;font-size:16px;&quot;</span>
-        <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&lt;p style=&#39;</span><span class="si">{style}</span><span class="s2">&#39;&gt;Job Status: </span><span class="si">%s</span><span class="s2"> &lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
-        <span class="n">status</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">header</span> <span class="o">%</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="n">display</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">monitor_async</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>  <span class="c1"># pylint: disable=import-error</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;These functions  need ipywidgets. &#39;</span>
+                                  <span class="s1">&#39;Run &quot;pip install ipywidgets&quot; before.&#39;</span><span class="p">)</span>
+            <span class="kn">from</span> <span class="nn">qiskit.tools.jupyter.jupyter_magics</span> <span class="k">import</span> <span class="n">_html_checker</span>  <span class="c1"># pylint: disable=C0412</span>
+
+            <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;font-size:16px;&quot;</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&lt;p style=&#39;</span><span class="si">{style}</span><span class="s2">&#39;&gt;Job Status: </span><span class="si">%s</span><span class="s2"> &lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">header</span> <span class="o">%</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
             <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_html_checker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span>
                                                                   <span class="n">status</span><span class="p">,</span> <span class="n">header</span><span class="p">))</span>
             <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_html_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+            <span class="n">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="p">,</span>
+                          <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">monitor_async</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;monitor_async only available in Jupyter notebooks.&#39;</span><span class="p">)</span>
-        <span class="n">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s1">&#39;monitor_async only available in Jupyter notebooks.&#39;</span><span class="p">)</span>
+        <span class="n">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.transpiler.passes.mapping.stochastic_swap &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.transpiler.passes.mapping.stochastic_swap &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.transpiler.passes.mapping.stochastic_swap</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A pass implementing the default Qiskit stochastic mapper.</span>
@@ -144,13 +151,15 @@
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">inf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.transpiler._basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">TranspilerError</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">SwapGate</span>
-<span class="kn">from</span> <span class="nn">qiskit.mapper</span> <span class="k">import</span> <span class="n">Layout</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">BarrierBeforeFinalMeasurements</span>
-
+<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">Layout</span>
+<span class="c1"># pylint: disable=no-name-in-module, import-error</span>
+<span class="kn">from</span> <span class="nn">.cython.stochastic_swap.utils</span> <span class="k">import</span> <span class="n">nlayout_from_layout</span>
+<span class="c1"># pylint: disable=no-name-in-module, import-error</span>
+<span class="kn">from</span> <span class="nn">.cython.stochastic_swap.swap_trial</span> <span class="k">import</span> <span class="n">swap_trial</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
@@ -198,14 +207,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
-        <span class="k">if</span> <span class="n">initial_layout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trials</span> <span class="o">=</span> <span class="n">trials</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BarrierBeforeFinalMeasurements</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="StochasticSwap.run"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.StochasticSwap.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -216,18 +223,39 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            DAGCircuit: A mapped DAG.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TranspilerError: if the coupling map or the layout are not</span>
+<span class="sd">            compatible with the DAG</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># If the property_set contains a layout, use it to</span>
-        <span class="c1"># override any layout passed to __init__</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
-        <span class="n">new_dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapper</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="o">*</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;The layout does not match the amount of qubits in the DAG&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span>
+                <span class="s2">&quot;Mappers require to have the layout to be the same size as the coupling map&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;StochasticSwap RandomState seeded with seed=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="n">new_dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapper</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span>
         <span class="c1"># self.property_set[&quot;layout&quot;] = self.initial_layout</span>
         <span class="k">return</span> <span class="n">new_dag</span></div>
 
     <span class="k">def</span> <span class="nf">_layer_permutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
-                           <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                           <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Find a swap circuit that implements a permutation for this layer.</span>
 
 <span class="sd">        The goal is to swap qubits such that qubits in the same two-qubit gates</span>
@@ -247,11 +275,9 @@
 <span class="sd">            This coupling map should be one that was provided to the</span>
 <span class="sd">            stochastic mapper.</span>
 <span class="sd">        trials (int): Number of attempts the randomized algorithm makes.</span>
-<span class="sd">        seed (int): Optional seed for the random number generator. If it is</span>
-<span class="sd">            None we do not reseed.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">             Tuple: success_flag, best_circuit, best_depth, best_layout, trivial_flag</span>
+<span class="sd">            Tuple: success_flag, best_circuit, best_depth, best_layout, trivial_flag</span>
 
 <span class="sd">        If success_flag is True, then best_circuit contains a DAGCircuit with</span>
 <span class="sd">        the swap circuit, best_depth contains the depth of the swap circuit,</span>
@@ -261,160 +287,11 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            TranspilerError: if anything went wrong.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layer_partition = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-                     <span class="n">pformat</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-                     <span class="n">pformat</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: qubit_subset = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-                     <span class="n">pformat</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trials = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trials</span><span class="p">)</span>
-
-        <span class="n">gates</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of lists of tuples [[(register, index), ...], ...]</span>
-        <span class="k">for</span> <span class="n">gate_args</span> <span class="ow">in</span> <span class="n">layer_partition</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Layer contains &gt; 2-qubit gates&quot;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">gate_args</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: gates = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
-
-        <span class="c1"># Can we already apply the gates? If so, there is no work to do.</span>
-        <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: distance = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: nothing to do&quot;</span><span class="p">)</span>
-            <span class="n">circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">circ</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                    <span class="n">circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">circ</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
-
-        <span class="c1"># Begin loop over trials of randomized algorithm</span>
-        <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
-        <span class="n">best_depth</span> <span class="o">=</span> <span class="n">inf</span>  <span class="c1"># initialize best depth</span>
-        <span class="n">best_circuit</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initialize best swap circuit</span>
-        <span class="n">best_layout</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initialize best final layout</span>
-        <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trial </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
-            <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">trial_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>  <span class="c1"># SWAP circuit for this trial</span>
-            <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">trial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trial_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                    <span class="n">trial_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-            <span class="c1"># Compute randomized distance</span>
-            <span class="n">xi</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># pylint: disable=invalid-name</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-                <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
-                    <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">num_qubits</span><span class="p">)</span>
-                    <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="n">xi</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-
-            <span class="n">slice_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>  <span class="c1"># circuit for this swap slice</span>
-            <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">trial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">slice_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                    <span class="n">slice_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">slice_circuit</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s2">&quot;swap&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-            <span class="c1"># Loop over depths from 1 up to a maximum depth</span>
-            <span class="n">depth_step</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">depth_max</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">num_qubits</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="k">while</span> <span class="n">depth_step</span> <span class="o">&lt;</span> <span class="n">depth_max</span><span class="p">:</span>
-                <span class="n">qubit_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">)</span>
-                <span class="c1"># While there are still qubits available</span>
-                <span class="k">while</span> <span class="n">qubit_set</span><span class="p">:</span>
-                    <span class="c1"># Compute the objective function</span>
-                    <span class="n">min_cost</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">xi</span><span class="p">[</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]]][</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-                    <span class="c1"># Try to decrease objective function</span>
-                    <span class="n">cost_reduced</span> <span class="o">=</span> <span class="kc">False</span>
-
-                    <span class="c1"># Loop over edges of coupling graph</span>
-                    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">coupling</span><span class="o">.</span><span class="n">get_edges</span><span class="p">():</span>
-                        <span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">]</span>
-                        <span class="c1"># Are the qubits available?</span>
-                        <span class="k">if</span> <span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">qubit_set</span> <span class="ow">and</span> <span class="n">qubits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">qubit_set</span><span class="p">:</span>
-                            <span class="c1"># Try this edge to reduce the cost</span>
-                            <span class="n">new_layout</span> <span class="o">=</span> <span class="n">trial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                            <span class="n">new_layout</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-                            <span class="c1"># Compute the objective function</span>
-                            <span class="n">new_cost</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">xi</span><span class="p">[</span><span class="n">new_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]]][</span><span class="n">new_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-                            <span class="c1"># Record progress if we succceed</span>
-                            <span class="k">if</span> <span class="n">new_cost</span> <span class="o">&lt;</span> <span class="n">min_cost</span><span class="p">:</span>
-                                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: min_cost &quot;</span>
-                                             <span class="s2">&quot;improved to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">min_cost</span><span class="p">)</span>
-                                <span class="n">cost_reduced</span> <span class="o">=</span> <span class="kc">True</span>
-                                <span class="n">min_cost</span> <span class="o">=</span> <span class="n">new_cost</span>
-                                <span class="n">optimal_layout</span> <span class="o">=</span> <span class="n">new_layout</span>
-                                <span class="n">optimal_edge</span> <span class="o">=</span> <span class="n">qubits</span>
-
-                    <span class="c1"># Were there any good swap choices?</span>
-                    <span class="k">if</span> <span class="n">cost_reduced</span><span class="p">:</span>
-                        <span class="n">qubit_set</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">optimal_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                        <span class="n">qubit_set</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">optimal_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                        <span class="n">trial_layout</span> <span class="o">=</span> <span class="n">optimal_layout</span>
-                        <span class="n">slice_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
-                            <span class="n">SwapGate</span><span class="p">(</span><span class="n">optimal_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                     <span class="n">optimal_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: swap the pair </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-                                     <span class="n">pformat</span><span class="p">(</span><span class="n">optimal_edge</span><span class="p">))</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="k">break</span>
-
-                <span class="c1"># We have either run out of swap pairs to try or</span>
-                <span class="c1"># failed to improve the cost.</span>
-
-                <span class="c1"># Compute the coupling graph distance</span>
-                <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
-                                              <span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: new swap distance = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
-                <span class="c1"># If all gates can be applied now, we are finished.</span>
-                <span class="c1"># Otherwise we need to consider a deeper swap circuit</span>
-                <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: all gates can be &quot;</span>
-                                 <span class="s2">&quot;applied now in this layer&quot;</span><span class="p">)</span>
-                    <span class="n">trial_circuit</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">slice_circuit</span><span class="p">)</span>
-                    <span class="k">break</span>
-
-                <span class="c1"># Increment the depth</span>
-                <span class="n">depth_step</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: increment depth to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">depth_step</span><span class="p">)</span>
-
-            <span class="c1"># Either we have succeeded at some depth d &lt; dmax or failed</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
-                                          <span class="n">trial_layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: final distance for this trial = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">depth_step</span> <span class="o">&lt;</span> <span class="n">best_depth</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: got circuit with improved depth </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-                                 <span class="n">depth_step</span><span class="p">)</span>
-                    <span class="n">best_circuit</span> <span class="o">=</span> <span class="n">trial_circuit</span>
-                    <span class="n">best_layout</span> <span class="o">=</span> <span class="n">trial_layout</span>
-                    <span class="n">best_depth</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">best_depth</span><span class="p">,</span> <span class="n">depth_step</span><span class="p">)</span>
-
-            <span class="c1"># Break out of trial loop if we found a depth 1 circuit</span>
-            <span class="c1"># since we can&#39;t improve it further</span>
-            <span class="k">if</span> <span class="n">best_depth</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">break</span>
-
-        <span class="c1"># If we have no best circuit for this layer, all of the</span>
-        <span class="c1"># trials have failed</span>
-        <span class="k">if</span> <span class="n">best_circuit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: failed!&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
-
-        <span class="c1"># Otherwise, we return our result for this layer</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: success!&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circuit</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="kc">False</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">,</span>
+                                  <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
+                                  <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_layer_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span>
                       <span class="n">best_circuit</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
@@ -450,7 +327,7 @@
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="c1"># Make qubit edge map and extend by classical bits</span>
                 <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">get_bits</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
                     <span class="n">edge_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
                 <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
         <span class="c1"># Otherwise, we output the current layer and the associated swap gates.</span>
@@ -464,7 +341,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: there are no swaps in this layer&quot;</span><span class="p">)</span>
             <span class="c1"># Make qubit edge map and extend by classical bits</span>
             <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">get_bits</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
                 <span class="n">edge_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
             <span class="c1"># Output this layer</span>
             <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
@@ -472,7 +349,7 @@
         <span class="k">return</span> <span class="n">dagcircuit_output</span>
 
     <span class="k">def</span> <span class="nf">_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
-                <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Map a DAGCircuit onto a CouplingMap using swap gates.</span>
 
 <span class="sd">        Use self.initial_layout for the initial layout.</span>
@@ -481,7 +358,6 @@
 <span class="sd">            circuit_graph (DAGCircuit): input DAG circuit</span>
 <span class="sd">            coupling_graph (CouplingMap): coupling graph to map onto</span>
 <span class="sd">            trials (int): number of trials.</span>
-<span class="sd">            seed (int): initial seed.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            DAGCircuit: object containing a circuit equivalent to</span>
@@ -536,9 +412,9 @@
         <span class="c1"># Make a trivial wire mapping between the subcircuits</span>
         <span class="c1"># returned by _layer_update and the circuit we build</span>
         <span class="n">identity_wire_map</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">get_qubits</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">qubits</span><span class="p">():</span>
             <span class="n">identity_wire_map</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="o">=</span> <span class="n">qubit</span>
-        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">get_bits</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
             <span class="n">identity_wire_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
 
         <span class="n">first_layer</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># True until first layer is output</span>
@@ -551,7 +427,7 @@
             <span class="n">success_flag</span><span class="p">,</span> <span class="n">best_circuit</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">trivial_flag</span> \
                 <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_layer_permutation</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">],</span> <span class="n">layout</span><span class="p">,</span>
                                           <span class="n">qubit_subset</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
-                                          <span class="n">trials</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+                                          <span class="n">trials</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: layer </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: success_flag=</span><span class="si">%s</span><span class="s2">,best_depth=</span><span class="si">%s</span><span class="s2">,trivial_flag=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
                          <span class="n">success_flag</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">best_depth</span><span class="p">),</span> <span class="n">trivial_flag</span><span class="p">)</span>
@@ -570,7 +446,7 @@
                             <span class="n">serial_layer</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">],</span>
                             <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
                             <span class="n">coupling_graph</span><span class="p">,</span>
-                            <span class="n">trials</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+                            <span class="n">trials</span><span class="p">)</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: success_flag=</span><span class="si">%s</span><span class="s2">,best_depth=</span><span class="si">%s</span><span class="s2">,&quot;</span>
                                  <span class="s2">&quot;trivial_flag=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -578,12 +454,8 @@
 
                     <span class="c1"># Give up if we fail again</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">success_flag</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;mapper failed: &quot;</span> <span class="o">+</span>
-                                              <span class="s2">&quot;layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span>
-                                              <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">%</span>
-                                              <span class="n">serial_layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">qasm</span><span class="p">(</span>
-                                                  <span class="n">no_decls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                  <span class="n">aliases</span><span class="o">=</span><span class="n">layout</span><span class="p">))</span>
+                        <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;swap mapper failed: &quot;</span> <span class="o">+</span>
+                                              <span class="s2">&quot;layer </span><span class="si">%d</span><span class="s2">, sublayer </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
 
                     <span class="c1"># If this layer is only single-qubit gates,</span>
                     <span class="c1"># and we have yet to see multi-qubit gates,</span>
@@ -648,6 +520,174 @@
                 <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">dagcircuit_output</span></div>
+
+
+<span class="k">def</span> <span class="nf">_layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
+                       <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">qregs</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find a swap circuit that implements a permutation for this layer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        layer_partition (list): The layer_partition is a list of (qu)bit</span>
+<span class="sd">            lists and each qubit is a tuple (qreg, index).</span>
+<span class="sd">        initial_layout (Layout): The initial layout passed.</span>
+<span class="sd">        layout (Layout): The layout is a Layout object mapping virtual</span>
+<span class="sd">            qubits in the input circuit to physical qubits in the coupling</span>
+<span class="sd">            graph. It reflects the current positions of the data.</span>
+<span class="sd">        qubit_subset (list): The qubit_subset is the set of qubits in</span>
+<span class="sd">            the coupling graph that we have chosen to map into, as tuples</span>
+<span class="sd">            (Register, index).</span>
+<span class="sd">        coupling (CouplingMap): Directed graph representing a coupling map.</span>
+<span class="sd">            This coupling map should be one that was provided to the</span>
+<span class="sd">            stochastic mapper.</span>
+<span class="sd">        trials (int): Number of attempts the randomized algorithm makes.</span>
+<span class="sd">        qregs (OrderedDict): Ordered dict of registers from input DAG.</span>
+<span class="sd">        rng (RandomState): Random number generator.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple: success_flag, best_circuit, best_depth, best_layout, trivial_flag</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TranspilerError: if anything went wrong.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layer_partition = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                 <span class="n">pformat</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                 <span class="n">pformat</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: qubit_subset = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                 <span class="n">pformat</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trials = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trials</span><span class="p">)</span>
+
+    <span class="n">gates</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of lists of tuples [[(register, index), ...], ...]</span>
+    <span class="k">for</span> <span class="n">gate_args</span> <span class="ow">in</span> <span class="n">layer_partition</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Layer contains &gt; 2-qubit gates&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">gate_args</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: gates = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
+
+    <span class="c1"># Can we already apply the gates? If so, there is no work to do.</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coupling</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">layout</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: distance = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: nothing to do&quot;</span><span class="p">)</span>
+        <span class="n">circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">circ</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
+
+    <span class="c1"># Begin loop over trials of randomized algorithm</span>
+    <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+    <span class="n">best_depth</span> <span class="o">=</span> <span class="n">inf</span>  <span class="c1"># initialize best depth</span>
+    <span class="n">best_edges</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># best edges found</span>
+    <span class="n">best_circuit</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initialize best swap circuit</span>
+    <span class="n">best_layout</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initialize best final layout</span>
+
+    <span class="n">cdist2</span> <span class="o">=</span> <span class="n">coupling</span><span class="o">.</span><span class="n">_dist_matrix</span><span class="o">**</span><span class="mi">2</span>
+    <span class="c1"># Scaling matrix</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">))</span>
+
+    <span class="n">int_qubit_subset</span> <span class="o">=</span> <span class="n">regtuple_to_numeric</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">,</span> <span class="n">qregs</span><span class="p">)</span>
+    <span class="n">int_gates</span> <span class="o">=</span> <span class="n">gates_to_idx</span><span class="p">(</span><span class="n">gates</span><span class="p">,</span> <span class="n">qregs</span><span class="p">)</span>
+    <span class="n">int_layout</span> <span class="o">=</span> <span class="n">nlayout_from_layout</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">qregs</span><span class="p">,</span> <span class="n">coupling</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+    <span class="n">trial_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>  <span class="c1"># SWAP circuit for this trial</span>
+    <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trial_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">slice_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>  <span class="c1"># circuit for this swap slice</span>
+    <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">slice_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">slice_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coupling</span><span class="o">.</span><span class="n">get_edges</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">cdist</span> <span class="o">=</span> <span class="n">coupling</span><span class="o">.</span><span class="n">_dist_matrix</span>
+    <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trial </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
+        <span class="c1"># This is one Trial --------------------------------------</span>
+        <span class="n">dist</span><span class="p">,</span> <span class="n">optim_edges</span><span class="p">,</span> <span class="n">trial_layout</span><span class="p">,</span> <span class="n">depth_step</span> <span class="o">=</span> <span class="n">swap_trial</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">int_layout</span><span class="p">,</span>
+                                                                 <span class="n">int_qubit_subset</span><span class="p">,</span>
+                                                                 <span class="n">int_gates</span><span class="p">,</span> <span class="n">cdist2</span><span class="p">,</span>
+                                                                 <span class="n">cdist</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span>
+                                                                 <span class="n">rng</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: final distance for this trial = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span> <span class="ow">and</span> <span class="n">depth_step</span> <span class="o">&lt;</span> <span class="n">best_depth</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: got circuit with improved depth </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                         <span class="n">depth_step</span><span class="p">)</span>
+            <span class="n">best_edges</span> <span class="o">=</span> <span class="n">optim_edges</span>
+            <span class="n">best_layout</span> <span class="o">=</span> <span class="n">trial_layout</span>
+            <span class="n">best_depth</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">best_depth</span><span class="p">,</span> <span class="n">depth_step</span><span class="p">)</span>
+
+        <span class="c1"># Break out of trial loop if we found a depth 1 circuit</span>
+        <span class="c1"># since we can&#39;t improve it further</span>
+        <span class="k">if</span> <span class="n">best_depth</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="c1"># If we have no best circuit for this layer, all of the</span>
+    <span class="c1"># trials have failed</span>
+    <span class="k">if</span> <span class="n">best_layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: failed!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
+
+    <span class="n">edgs</span> <span class="o">=</span> <span class="n">best_edges</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">best_edges</span><span class="o">.</span><span class="n">size</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">slice_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
+            <span class="n">SwapGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">initial_layout</span><span class="p">[</span><span class="n">edgs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]],</span> <span class="n">initial_layout</span><span class="p">[</span><span class="n">edgs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]]],</span> <span class="p">[])</span>
+    <span class="n">trial_circuit</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">slice_circuit</span><span class="p">)</span>
+    <span class="n">best_circuit</span> <span class="o">=</span> <span class="n">trial_circuit</span>
+
+    <span class="c1"># Otherwise, we return our result for this layer</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: success!&quot;</span><span class="p">)</span>
+    <span class="n">best_lay</span> <span class="o">=</span> <span class="n">best_layout</span><span class="o">.</span><span class="n">to_layout</span><span class="p">(</span><span class="n">qregs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circuit</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span> <span class="n">best_lay</span><span class="p">,</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="regtuple_to_numeric"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.regtuple_to_numeric">[docs]</a><span class="k">def</span> <span class="nf">regtuple_to_numeric</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes (QuantumRegister, int) tuples and converts</span>
+<span class="sd">    them into an integer array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        items (list): List of tuples of (QuantumRegister, int)</span>
+<span class="sd">                      to convert.</span>
+<span class="sd">        qregs (dict): List of )QuantumRegister, int) tuples.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Array of integers.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">qr</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">qr</span> <span class="ow">in</span> <span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="n">reg_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">sizes</span><span class="p">)</span>
+    <span class="n">regint</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="n">regint</span><span class="p">[</span><span class="n">qreg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="gates_to_idx"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.gates_to_idx">[docs]</a><span class="k">def</span> <span class="nf">gates_to_idx</span><span class="p">(</span><span class="n">gates</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts gate tuples into a nested list of integers.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gates (list): List of (QuantumRegister, int) pairs</span>
+<span class="sd">                      representing gates.</span>
+<span class="sd">        qregs (dict): List of )QuantumRegister, int) tuples.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: Nested list of integers for gates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">qr</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">qr</span> <span class="ow">in</span> <span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="n">reg_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">sizes</span><span class="p">)</span>
+    <span class="n">regint</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="n">regint</span><span class="p">[</span><span class="n">qreg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">gate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
+        <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">out</span></div>
 </pre></div>
 
         </div>

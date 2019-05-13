@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.transpiler.passes.mapping.barrier_before_final_measurements &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.transpiler.passes.mapping.barrier_before_final_measurements &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,70 +130,87 @@
   <h1>Source code for qiskit.transpiler.passes.mapping.barrier_before_final_measurements</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This pass adds a barrier before the final measurements.</span>
+<span class="sd">This pass adds a barrier before the set of final measurements. Measurements</span>
+<span class="sd">are considered final if they are followed by no other operations (aside from</span>
+<span class="sd">other measurements or barriers.)</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.barrier</span> <span class="k">import</span> <span class="n">Barrier</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">TransformationPass</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
+<span class="kn">from</span> <span class="nn">..merge_adjacent_barriers</span> <span class="k">import</span> <span class="n">MergeAdjacentBarriers</span>
 
 
 <div class="viewcode-block" id="BarrierBeforeFinalMeasurements"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.barrier_before_final_measurements.html#qiskit.transpiler.passes.mapping.barrier_before_final_measurements.BarrierBeforeFinalMeasurements">[docs]</a><span class="k">class</span> <span class="nc">BarrierBeforeFinalMeasurements</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Adds a barrier before final measurements.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BarrierBeforeFinalMeasurements.run"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.barrier_before_final_measurements.html#qiskit.transpiler.passes.mapping.barrier_before_final_measurements.BarrierBeforeFinalMeasurements.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a circuit with a barrier before last measurments.&quot;&quot;&quot;</span>
-        <span class="n">last_measures</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">get_named_nodes</span><span class="p">(</span><span class="s1">&#39;measure&#39;</span><span class="p">):</span>
-            <span class="n">is_last_measurement</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="n">after_measure</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">output_map</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">after_measure</span> <span class="ow">in</span>
-                                       <span class="n">dag</span><span class="o">.</span><span class="n">quantum_successors</span><span class="p">(</span><span class="n">measure</span><span class="p">)])</span>
-            <span class="k">if</span> <span class="n">is_last_measurement</span><span class="p">:</span>
-                <span class="n">last_measures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measure</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;Return a circuit with a barrier before last measurements.&quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">last_measures</span><span class="p">:</span>
+        <span class="c1"># Collect DAG nodes which are followed only by barriers or other measures.</span>
+        <span class="n">final_op_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="s1">&#39;barrier&#39;</span><span class="p">]</span>
+        <span class="n">final_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">candidate_node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">named_nodes</span><span class="p">(</span><span class="o">*</span><span class="n">final_op_types</span><span class="p">):</span>
+            <span class="n">is_final_op</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">child_successors</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">bfs_successors</span><span class="p">(</span><span class="n">candidate_node</span><span class="p">):</span>
+
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">suc</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span> <span class="ow">and</span> <span class="n">suc</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">final_op_types</span>
+                       <span class="k">for</span> <span class="n">suc</span> <span class="ow">in</span> <span class="n">child_successors</span><span class="p">):</span>
+                    <span class="n">is_final_op</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="n">is_final_op</span><span class="p">:</span>
+                <span class="n">final_ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate_node</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">final_ops</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">dag</span>
 
-        <span class="c1"># create a laywer with the barrier and the measurements in last_measures operation</span>
-        <span class="n">dag</span><span class="o">.</span><span class="n">add_basis_element</span><span class="p">(</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">last_measures</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">barried_layer</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
-        <span class="n">last_measures_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">dag</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">last_measures</span><span class="p">]</span>
-        <span class="n">last_measures_qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;qargs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">last_measures_nodes</span><span class="p">]</span>
-
-        <span class="c1"># Add registers from the original dag.</span>
+        <span class="c1"># Create a layer with the barrier and add registers from the original dag.</span>
+        <span class="n">barrier_layer</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">barried_layer</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qreg</span><span class="p">)</span>
+            <span class="n">barrier_layer</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qreg</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">barried_layer</span><span class="o">.</span><span class="n">add_creg</span><span class="p">(</span><span class="n">creg</span><span class="p">)</span>
+            <span class="n">barrier_layer</span><span class="o">.</span><span class="n">add_creg</span><span class="p">(</span><span class="n">creg</span><span class="p">)</span>
 
-        <span class="c1"># Add the barrier operation</span>
-        <span class="n">barried_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">Barrier</span><span class="p">(</span><span class="n">qubits</span><span class="o">=</span><span class="n">last_measures_qubits</span><span class="p">))</span>
+        <span class="n">final_qubits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">final_op</span><span class="o">.</span><span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">final_op</span> <span class="ow">in</span> <span class="n">final_ops</span><span class="p">)</span>
 
-        <span class="c1"># Add the measurements to the behind the barrier</span>
-        <span class="k">for</span> <span class="n">last_measures_node</span> <span class="ow">in</span> <span class="n">last_measures_nodes</span><span class="p">:</span>
-            <span class="n">barried_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">last_measures_node</span><span class="p">[</span><span class="s1">&#39;op&#39;</span><span class="p">])</span>
+        <span class="n">barrier_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
+            <span class="n">Barrier</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">final_qubits</span><span class="p">)),</span> <span class="nb">list</span><span class="p">(</span><span class="n">final_qubits</span><span class="p">),</span> <span class="p">[])</span>
 
-        <span class="c1"># Remove barriers in front the measurements in the original dag</span>
-        <span class="k">for</span> <span class="n">last_measure</span> <span class="ow">in</span> <span class="n">last_measures</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">predecesor</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">last_measure</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">dag</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">predecesor</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span> <span class="ow">and</span> \
-                        <span class="nb">isinstance</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">multi_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">predecesor</span><span class="p">][</span><span class="s1">&#39;op&#39;</span><span class="p">],</span> <span class="n">Barrier</span><span class="p">):</span>
-                    <span class="n">dag</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">predecesor</span><span class="p">)</span>
+        <span class="c1"># Preserve order of final ops collected earlier from the original DAG.</span>
+        <span class="n">ordered_final_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">topological_op_nodes</span><span class="p">()</span>
+                               <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">final_ops</span><span class="p">)]</span>
 
-        <span class="c1"># Remove the measurements from the original dag</span>
-        <span class="k">for</span> <span class="n">last_measure</span> <span class="ow">in</span> <span class="n">last_measures</span><span class="p">:</span>
-            <span class="n">dag</span><span class="o">.</span><span class="n">_remove_op_node</span><span class="p">(</span><span class="n">last_measure</span><span class="p">)</span>
+        <span class="c1"># Move final ops to the new layer and append the new layer to the DAG.</span>
+        <span class="k">for</span> <span class="n">final_node</span> <span class="ow">in</span> <span class="n">ordered_final_nodes</span><span class="p">:</span>
+            <span class="n">barrier_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">final_node</span><span class="o">.</span><span class="n">op</span><span class="p">,</span>
+                                               <span class="n">final_node</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span>
+                                               <span class="n">final_node</span><span class="o">.</span><span class="n">cargs</span><span class="p">)</span>
 
-        <span class="c1"># Extend the original dag with the barried layer</span>
-        <span class="n">dag</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">barried_layer</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">final_op</span> <span class="ow">in</span> <span class="n">final_ops</span><span class="p">:</span>
+            <span class="n">dag</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">final_op</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">dag</span></div></div>
+        <span class="n">dag</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">barrier_layer</span><span class="p">)</span>
+
+        <span class="c1"># Merge the new barrier into any other barriers</span>
+        <span class="n">adjacent_pass</span> <span class="o">=</span> <span class="n">MergeAdjacentBarriers</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">adjacent_pass</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span></div></div>
 </pre></div>
 
         </div>

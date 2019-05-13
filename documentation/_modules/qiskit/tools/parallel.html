@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.tools.parallel &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.tools.parallel &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,10 +130,17 @@
   <h1>Source code for qiskit.tools.parallel</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="c1"># This file is part of QuTiP: Quantum Toolbox in Python.</span>
 <span class="c1">#</span>
@@ -176,9 +183,9 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
-<span class="kn">from</span> <span class="nn">qiskit._util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
-<span class="kn">from</span> <span class="nn">qiskit.tools.events._pubsub</span> <span class="k">import</span> <span class="n">Publisher</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.events.pubsub</span> <span class="k">import</span> <span class="n">Publisher</span>
 
 <span class="c1"># Set parallel flag</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;QISKIT_IN_PARALLEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FALSE&#39;</span>
@@ -199,7 +206,7 @@
 <span class="sd">    overhead from spawning processes in Windows.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        task (func): Function that is to be called for each value in ``task_vec``.</span>
+<span class="sd">        task (func): Function that is to be called for each value in ``values``.</span>
 <span class="sd">        values (array_like): List or array of values for which the ``task``</span>
 <span class="sd">                            function is to be evaluated.</span>
 <span class="sd">        task_args (list): Optional additional arguments to the ``task`` function.</span>

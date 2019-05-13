@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.ignis.verification.quantum_volume.circuits &#8212; Qiskit 0.10.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.ignis.verification.quantum_volume.circuits</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Generates quantum volume circuits</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.random</span> <span class="k">import</span> <span class="n">random_unitary</span>
+
+
+<div class="viewcode-block" id="qv_circuits"><a class="viewcode-back" href="../../../../../autodoc/qiskit.ignis.verification.quantum_volume.circuits.html#qiskit.ignis.verification.quantum_volume.circuits.qv_circuits">[docs]</a><span class="k">def</span> <span class="nf">qv_circuits</span><span class="p">(</span><span class="n">qubit_lists</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ntrials</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">qr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a list of square quantum volume circuits (depth=width)</span>
+
+<span class="sd">    The qubit_lists is specified as a list of qubit lists. For each</span>
+<span class="sd">    set of qubits, circuits the depth as the number of qubits in the list</span>
+<span class="sd">    are generated</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        qubit_lists: list of list of qubits to apply qv circuits to. Assume</span>
+<span class="sd">        the list is ordered in increasing number of qubits</span>
+<span class="sd">        ntrials: number of random iterations</span>
+<span class="sd">        qr: quantum register to act on (if None one is created)</span>
+<span class="sd">        cr: classical register to measure to (if None one is created)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        qv_circs: list of lists of circuits for the qv sequences</span>
+<span class="sd">        (separate list for each trial)</span>
+<span class="sd">        qv_circs_nomeas: same as above with no measurements for the ideal</span>
+<span class="sd">        simulation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">circuits</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntrials</span><span class="p">)]</span>
+    <span class="n">circuits_nomeas</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntrials</span><span class="p">)]</span>
+
+    <span class="c1"># get the largest qubit number out of all the lists (for setting the</span>
+    <span class="c1"># register)</span>
+
+    <span class="n">depth_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">qubit_lists</span><span class="p">]</span>
+
+    <span class="c1"># go through for each trial</span>
+    <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntrials</span><span class="p">):</span>
+
+        <span class="c1"># go through for each depth in the depth list</span>
+        <span class="k">for</span> <span class="n">depthidx</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">depth_list</span><span class="p">):</span>
+
+            <span class="n">n_q_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">qubit_lists</span><span class="p">[</span><span class="n">depthidx</span><span class="p">])</span>
+
+            <span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n_q_max</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
+            <span class="n">qr2</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">depth</span><span class="p">),</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
+            <span class="n">cr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">ClassicalRegister</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">depth</span><span class="p">),</span> <span class="s1">&#39;cr&#39;</span><span class="p">)</span>
+
+            <span class="n">qc</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+            <span class="n">qc2</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr2</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+
+            <span class="n">qc</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;qv_depth_</span><span class="si">%d</span><span class="s1">_trial_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">trial</span><span class="p">)</span>
+            <span class="n">qc2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">name</span>
+
+            <span class="c1"># build the circuit</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+                <span class="c1"># Generate uniformly random permutation Pj of [0...n-1]</span>
+                <span class="n">perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+                <span class="c1"># For each pair p in Pj, generate Haar random SU(4)</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">depth</span><span class="o">/</span><span class="mi">2</span><span class="p">))):</span>
+                    <span class="n">U</span> <span class="o">=</span> <span class="n">random_unitary</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+                    <span class="n">pair</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">perm</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">perm</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="n">qubit_lists</span><span class="p">[</span><span class="n">depthidx</span><span class="p">][</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]]],</span>
+                                  <span class="n">qr</span><span class="p">[</span><span class="n">qubit_lists</span><span class="p">[</span><span class="n">depthidx</span><span class="p">][</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]])</span>
+                    <span class="n">qc2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="p">[</span><span class="n">qr2</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                   <span class="n">qr2</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
+
+            <span class="n">circuits_nomeas</span><span class="p">[</span><span class="n">trial</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc2</span><span class="p">)</span>
+
+            <span class="c1"># add measurement</span>
+            <span class="k">for</span> <span class="n">qind</span><span class="p">,</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qubit_lists</span><span class="p">[</span><span class="n">depthidx</span><span class="p">]):</span>
+                <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="n">qind</span><span class="p">])</span>
+
+            <span class="n">circuits</span><span class="p">[</span><span class="n">trial</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">circuits_nomeas</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

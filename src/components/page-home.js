@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright (c) 2018, IBM.
+ * Copyright (c) 2019, IBM.
  *
  * This source code is licensed under the Apache License, Version 2.0 found in
  * the LICENSE.txt file in the root directory of this source tree.
@@ -277,7 +277,7 @@ class PageHome extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.home.tryDescription')}</p>
             <div class="actions">
               <a
-                  href="https://mybinder.org/v2/gh/QISKit/qiskit-tutorial/master?filepath=index.ipynb"
+                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">

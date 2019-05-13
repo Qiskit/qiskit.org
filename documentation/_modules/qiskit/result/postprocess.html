@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.result.postprocess &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.result.postprocess &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,14 +130,23 @@
   <h1>Source code for qiskit.result.postprocess</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Post-processing of raw result.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
 
 <span class="k">def</span> <span class="nf">_hex_to_bin</span><span class="p">(</span><span class="n">hexstring</span><span class="p">):</span>
@@ -161,7 +170,7 @@
     <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">substrings</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="format_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_memory">[docs]</a><span class="k">def</span> <span class="nf">format_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+<div class="viewcode-block" id="format_counts_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_counts_memory">[docs]</a><span class="k">def</span> <span class="nf">format_counts_memory</span><span class="p">(</span><span class="n">shot_memory</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Format a single bitstring (memory) from a single shot experiment.</span>
 
@@ -170,25 +179,107 @@
 <span class="sd">    - Spaces are inserted at register divisions.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        memory (str): result of a single experiment.</span>
+<span class="sd">        shot_memory (str): result of a single experiment.</span>
 <span class="sd">        header (dict): the experiment header dictionary containing</span>
-<span class="sd">            useful information for postprocessing.</span>
+<span class="sd">            useful information for postprocessing. creg_sizes</span>
+<span class="sd">            are a nested list where the inner element is a list</span>
+<span class="sd">            of creg name, creg size pairs. memory_slots is an integers</span>
+<span class="sd">            specifying the number of total memory_slots in the experiment.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dict: a formatted memory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">creg_sizes</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;creg_sizes&#39;</span><span class="p">)</span>
-    <span class="n">memory_slots</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;memory_slots&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">memory</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">):</span>
-        <span class="n">memory</span> <span class="o">=</span> <span class="n">_hex_to_bin</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">memory_slots</span><span class="p">:</span>
-        <span class="n">memory</span> <span class="o">=</span> <span class="n">_pad_zeros</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">memory_slots</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">creg_sizes</span><span class="p">:</span>
-        <span class="n">memory</span> <span class="o">=</span> <span class="n">_separate_bitstring</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">creg_sizes</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">memory</span></div>
+    <span class="k">if</span> <span class="n">shot_memory</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">):</span>
+        <span class="n">shot_memory</span> <span class="o">=</span> <span class="n">_hex_to_bin</span><span class="p">(</span><span class="n">shot_memory</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">creg_sizes</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;creg_sizes&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">memory_slots</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;memory_slots&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">memory_slots</span><span class="p">:</span>
+            <span class="n">shot_memory</span> <span class="o">=</span> <span class="n">_pad_zeros</span><span class="p">(</span><span class="n">shot_memory</span><span class="p">,</span> <span class="n">memory_slots</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">creg_sizes</span> <span class="ow">and</span> <span class="n">memory_slots</span><span class="p">:</span>
+            <span class="n">shot_memory</span> <span class="o">=</span> <span class="n">_separate_bitstring</span><span class="p">(</span><span class="n">shot_memory</span><span class="p">,</span> <span class="n">creg_sizes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">shot_memory</span></div>
 
 
-<div class="viewcode-block" id="format_counts"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_counts">[docs]</a><span class="k">def</span> <span class="nf">format_counts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_list_to_complex_array</span><span class="p">(</span><span class="n">complex_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert nested list of shape (..., 2) to complex numpy array with shape (...)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        complex_list (list): List to convert.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Complex numpy aray</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: If inner most array of input nested list is not of length 2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">complex_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Inner most nested list is not of length 2.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">arr</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="format_level_0_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_level_0_memory">[docs]</a><span class="k">def</span> <span class="nf">format_level_0_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Format an experiment result memory object for measurement level 0.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        memory (list): Memory from experiment with `meas_level==1`. `avg` or</span>
+<span class="sd">            `single` will be inferred from shape of result memory.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Measurement level 0 complex numpy array</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: If the returned numpy array does not have 2 (avg) or 3 (single)</span>
+<span class="sd">            indicies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formatted_memory</span> <span class="o">=</span> <span class="n">_list_to_complex_array</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+    <span class="c1"># infer meas_return from shape of returned data.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">formatted_memory</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Level zero memory is not of correct shape.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">formatted_memory</span></div>
+
+
+<div class="viewcode-block" id="format_level_1_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_level_1_memory">[docs]</a><span class="k">def</span> <span class="nf">format_level_1_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Format an experiment result memory object for measurement level 1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        memory (list): Memory from experiment with `meas_level==1`. `avg` or</span>
+<span class="sd">            `single` will be inferred from shape of result memory.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Measurement level 1 complex numpy array</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: If the returned numpy array does not have 1 (avg) or 2 (single)</span>
+<span class="sd">            indicies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formatted_memory</span> <span class="o">=</span> <span class="n">_list_to_complex_array</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+    <span class="c1"># infer meas_return from shape of returned data.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">formatted_memory</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Level one memory is not of correct shape.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">formatted_memory</span></div>
+
+
+<div class="viewcode-block" id="format_level_2_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_level_2_memory">[docs]</a><span class="k">def</span> <span class="nf">format_level_2_memory</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Format an experiment result memory object for measurement level 2.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        memory (list): Memory from experiment with `meas_level==2` and `memory==True`.</span>
+<span class="sd">        header (dict): the experiment header dictionary containing</span>
+<span class="sd">            useful information for postprocessing.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: List of bitstrings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">memory_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">shot_memory</span> <span class="ow">in</span> <span class="n">memory</span><span class="p">:</span>
+        <span class="n">memory_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">format_counts_memory</span><span class="p">(</span><span class="n">shot_memory</span><span class="p">,</span> <span class="n">header</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">memory_list</span></div>
+
+
+<div class="viewcode-block" id="format_counts"><a class="viewcode-back" href="../../../autodoc/qiskit.result.postprocess.html#qiskit.result.postprocess.format_counts">[docs]</a><span class="k">def</span> <span class="nf">format_counts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Format a single experiment result coming from backend to present</span>
 <span class="sd">    to the Qiskit user.</span>
 
@@ -202,7 +293,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">counts_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">format_memory</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">format_counts_memory</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
         <span class="n">counts_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
     <span class="k">return</span> <span class="n">counts_dict</span></div>
 

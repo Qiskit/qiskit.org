@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+
+    
+    <title>qiskit.providers.ibmq.api_v2.ibmqclient &#8212; Qiskit 0.10.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+        <a class="external" href="/fun">Fun</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.providers.ibmq.api_v2.ibmqclient</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;Client for accessing IBM Q.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.session</span> <span class="k">import</span> <span class="n">RetrySession</span>
+<span class="kn">from</span> <span class="nn">.rest</span> <span class="k">import</span> <span class="n">Api</span><span class="p">,</span> <span class="n">Auth</span>
+
+
+<div class="viewcode-block" id="IBMQClient"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient">[docs]</a><span class="k">class</span> <span class="nc">IBMQClient</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Client for programmatic access to the IBM Q API.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_token</span><span class="p">,</span> <span class="n">auth_url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;IBMQClient constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            api_token (str): IBM Q api token.</span>
+<span class="sd">            auth_url (str): URL for the authentication service.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_token</span> <span class="o">=</span> <span class="n">api_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_url</span> <span class="o">=</span> <span class="n">auth_url</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_client</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">RetrySession</span><span class="p">(</span><span class="n">auth_url</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_api_client</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_init_api_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the client used for communicating with the API.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Api: client for the api server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Request an access token.</span>
+        <span class="n">access_token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_access_token</span><span class="p">()</span>
+        <span class="c1"># Use the token for the next auth server requests.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_client</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">access_token</span>
+        <span class="n">api_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_user_urls</span><span class="p">()[</span><span class="s1">&#39;http&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Create the api server client, using the access token.</span>
+        <span class="n">api_session</span> <span class="o">=</span> <span class="n">Api</span><span class="p">(</span><span class="n">RetrySession</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">access_token</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">api_session</span>
+
+    <span class="k">def</span> <span class="nf">_request_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Request a new access token from the API.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: access token.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_token</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_user_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve the api URLs from the auth server.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: a dict with the base URLs for the services. Currently</span>
+<span class="sd">                supported keys:</span>
+<span class="sd">                * ``http``: the api URL for http communication.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_client</span><span class="o">.</span><span class="n">user_info</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;urls&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Backend-related public functions.</span>
+
+<div class="viewcode-block" id="IBMQClient.list_backends"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.list_backends">[docs]</a>    <span class="k">def</span> <span class="nf">list_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of backends.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[dict]: a list of backends.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.backend_status"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.backend_status">[docs]</a>    <span class="k">def</span> <span class="nf">backend_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the status of a backend.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backend_name (str): the name of the backend.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: backend status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">backend</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span><span class="o">.</span><span class="n">status</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.backend_properties"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.backend_properties">[docs]</a>    <span class="k">def</span> <span class="nf">backend_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the properties of a backend.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backend_name (str): the name of the backend.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: backend properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">backend</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.backend_pulse_defaults"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.backend_pulse_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">backend_pulse_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the pulse defaults of a backend.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backend_name (str): the name of the backend.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: backend pulse defaults.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="c1"># return self.api_client.backend(backend_name).pulse_defaults()</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="c1"># Jobs-related public functions.</span>
+
+<div class="viewcode-block" id="IBMQClient.list_jobs_statuses"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.list_jobs_statuses">[docs]</a>    <span class="k">def</span> <span class="nf">list_jobs_statuses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">extra_filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of statuses of jobs, with filtering and pagination.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            limit (int): maximum number of items to return.</span>
+<span class="sd">            skip (int): offset for the items to return.</span>
+<span class="sd">            extra_filter (dict): additional filtering passed to the query.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[dict]: a list of job statuses.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="n">skip</span><span class="p">,</span>
+                                    <span class="n">extra_filter</span><span class="o">=</span><span class="n">extra_filter</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.job_run_qobj"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.job_run_qobj">[docs]</a>    <span class="k">def</span> <span class="nf">job_run_qobj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">qobj_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a Qobj to a device.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backend_name (str): the name of the backend.</span>
+<span class="sd">            qobj_dict (dict): the Qobj to be executed, as a dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: job status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">run_job</span><span class="p">(</span><span class="n">backend_name</span><span class="p">,</span> <span class="n">qobj_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.job_get"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.job_get">[docs]</a>    <span class="k">def</span> <span class="nf">job_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">excluded_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">included_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return information about a job.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the id of the job.</span>
+<span class="sd">            excluded_fields (list[str]): names of the fields to explicitly</span>
+<span class="sd">                exclude from the result.</span>
+<span class="sd">            included_fields (list[str]): names of the fields to explicitly</span>
+<span class="sd">                include in the result.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: job information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">job</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">excluded_fields</span><span class="p">,</span>
+                                               <span class="n">included_fields</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.job_status"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.job_status">[docs]</a>    <span class="k">def</span> <span class="nf">job_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the status of a job.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the id of the job.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: job status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">job</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span><span class="o">.</span><span class="n">status</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.job_properties"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.job_properties">[docs]</a>    <span class="k">def</span> <span class="nf">job_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the backend properties of a job.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the id of the job.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: backend properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">job</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.job_cancel"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.job_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">job_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a request for cancelling a job.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the id of the job.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: job cancellation response.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">job</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span></div>
+
+    <span class="c1"># Miscellaneous public functions.</span>
+
+<div class="viewcode-block" id="IBMQClient.api_version"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.api_version">[docs]</a>    <span class="k">def</span> <span class="nf">api_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the version of the API.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: versions of the api components.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">version</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.circuit_run"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.circuit_run">[docs]</a>    <span class="k">def</span> <span class="nf">circuit_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute a Circuit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): name of the Circuit.</span>
+<span class="sd">            **kwargs (dict): arguments for the Circuit.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: json response.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span><span class="o">.</span><span class="n">circuit</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="c1"># Endpoints for compatibility with classic IBMQConnector. These functions</span>
+    <span class="c1"># are meant to facilitate the transition, and should be removed moving</span>
+    <span class="c1"># forward.</span>
+
+<div class="viewcode-block" id="IBMQClient.get_status_job"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.get_status_job">[docs]</a>    <span class="k">def</span> <span class="nf">get_status_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_job</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">job_status</span><span class="p">(</span><span class="n">id_job</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.run_job"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.run_job">[docs]</a>    <span class="k">def</span> <span class="nf">run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">job_run_qobj</span><span class="p">(</span><span class="n">backend_name</span><span class="p">,</span> <span class="n">qobj</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.get_jobs"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.get_jobs">[docs]</a>    <span class="k">def</span> <span class="nf">get_jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">only_completed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="nb">filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring,redefined-builtin</span>
+        <span class="c1"># TODO: this function seems to be unused currently in IBMQConnector.</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="IBMQClient.get_status_jobs"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.get_status_jobs">[docs]</a>    <span class="k">def</span> <span class="nf">get_status_jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring,redefined-builtin</span>
+        <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+            <span class="nb">filter</span> <span class="o">=</span> <span class="nb">filter</span> <span class="ow">or</span> <span class="p">{}</span>
+            <span class="nb">filter</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;backend.name&#39;</span><span class="p">:</span> <span class="n">backend</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_jobs_statuses</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">skip</span><span class="p">,</span> <span class="nb">filter</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.cancel_job"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.cancel_job">[docs]</a>    <span class="k">def</span> <span class="nf">cancel_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_job</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">job_cancel</span><span class="p">(</span><span class="n">id_job</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.backend_defaults"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.backend_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">backend_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_pulse_defaults</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQClient.available_backends"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.available_backends">[docs]</a>    <span class="k">def</span> <span class="nf">available_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_backends</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQClient.get_job"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.ibmqclient.html#qiskit.providers.ibmq.api_v2.ibmqclient.IBMQClient.get_job">[docs]</a>    <span class="k">def</span> <span class="nf">get_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_job</span><span class="p">,</span> <span class="n">exclude_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=missing-docstring</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">job_get</span><span class="p">(</span><span class="n">id_job</span><span class="p">,</span> <span class="n">exclude_fields</span><span class="p">,</span> <span class="n">include_fields</span><span class="p">)</span></div></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+  </body>
+</html>

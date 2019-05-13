@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.circuit.compositegate &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.circuit.compositegate &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,30 +130,40 @@
   <h1>Source code for qiskit.circuit.compositegate</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2017, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Composite gate, a container for a sequence of unitary gates.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">.gate</span> <span class="k">import</span> <span class="n">Gate</span>
 
 
 <div class="viewcode-block" id="CompositeGate"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.compositegate.html#qiskit.circuit.compositegate.CompositeGate">[docs]</a><span class="k">class</span> <span class="nc">CompositeGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
     <span class="sd">&quot;&quot;&quot;Composite gate, a sequence of unitary gates.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">circuit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inverse_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">inverse_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new composite gate.</span>
 
 <span class="sd">        name = instruction name string</span>
-<span class="sd">        param = list of real parameters</span>
-<span class="sd">        qarg = list of pairs (QuantumRegister, index)</span>
-<span class="sd">        circ = QuantumCircuit or CompositeGate containing this gate</span>
+<span class="sd">        params = list of real parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">circuit</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;CompositeGate is deprecated and will be removed in v0.9. &#39;</span>
+                      <span class="s1">&#39;Any Instruction can now be composed of other sub-instructions. &#39;</span>
+                      <span class="s1">&#39;To build them, you construct a circuit then use &#39;</span>
+                      <span class="s1">&#39;circuit.to_instruction().&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># gate sequence defining the composite unitary</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inverse_name</span> <span class="o">=</span> <span class="n">inverse_name</span> <span class="ow">or</span> <span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;dg&#39;</span><span class="p">)</span>
@@ -172,46 +182,14 @@
                 <span class="n">instruction_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">instruction_list</span></div>
 
-<div class="viewcode-block" id="CompositeGate.has_register"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.compositegate.html#qiskit.circuit.compositegate.CompositeGate.has_register">[docs]</a>    <span class="k">def</span> <span class="nf">has_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test if this gate&#39;s circuit has the register r.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_circuit</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">register</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_modifiers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply any modifiers of this gate to another composite g.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span><span class="p">:</span>
-            <span class="n">gate</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_modifiers</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
+<div class="viewcode-block" id="CompositeGate.append"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.compositegate.html#qiskit.circuit.compositegate.CompositeGate.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Attach a gate.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">gate</span>
+        <span class="k">return</span> <span class="n">gate</span></div>
 
-    <span class="k">def</span> <span class="nf">_check_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Raise exception if q is not an argument or not qreg in circuit.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_circuit</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span>
-                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">qargs</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;qubit &#39;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&#39; not argument of gate&quot;</span>
-                              <span class="o">%</span> <span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-
-    <span class="k">def</span> <span class="nf">_check_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Raise exception.</span>
-
-<span class="sd">        if quantum register is not in this gate&#39;s circuit.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_circuit</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">_check_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_check_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Raise exception.</span>
-
-<span class="sd">        if classical register is not in this gate&#39;s circuit.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_circuit</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">_check_creg</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;DEPRECATED after 0.8.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_check_dups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Raise exception.</span>
@@ -231,11 +209,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">gate</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span> <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flag</span>
         <span class="k">return</span> <span class="bp">self</span></div>
-
-<div class="viewcode-block" id="CompositeGate.reapply"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.compositegate.html#qiskit.circuit.compositegate.CompositeGate.reapply">[docs]</a>    <span class="k">def</span> <span class="nf">reapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circ</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reapply this gate to corresponding qubits in circ.&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-            <span class="n">gate</span><span class="o">.</span><span class="n">reapply</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CompositeGate.q_if"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.compositegate.html#qiskit.circuit.compositegate.CompositeGate.q_if">[docs]</a>    <span class="k">def</span> <span class="nf">q_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qregs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add controls to this gate.&quot;&quot;&quot;</span>

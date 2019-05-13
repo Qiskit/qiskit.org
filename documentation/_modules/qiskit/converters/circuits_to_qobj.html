@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.converters.circuits_to_qobj &#8212; Qiskit 0.7 documentation</title>
+    <title>qiskit.converters.circuits_to_qobj &#8212; Qiskit 0.10.1 documentation</title>
 
     <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -39,7 +39,7 @@
         <a href="/ignis">Ignis</a>
       </nav>
       <nav class="second">
-        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorial/blob/master/index.ipynb">Tutorials</a>
+        <a class="external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
         <a class="external" href="/fun">Fun</a>
@@ -130,112 +130,71 @@
   <h1>Source code for qiskit.converters.circuits_to_qobj</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2018, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Helper function for converting a list of circuits to a qobj&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="sd">&quot;&quot;&quot;Compile function for converting a list of circuits to the qobj&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">Qobj</span><span class="p">,</span> <span class="n">QobjConfig</span><span class="p">,</span> <span class="n">QobjExperiment</span><span class="p">,</span> <span class="n">QobjItem</span><span class="p">,</span> <span class="n">QobjHeader</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">QobjHeader</span>
+<span class="kn">from</span> <span class="nn">qiskit.compiler</span> <span class="k">import</span> <span class="n">assemble</span>
 
 
-<div class="viewcode-block" id="circuits_to_qobj"><a class="viewcode-back" href="../../../autodoc/qiskit.converters.circuits_to_qobj.html#qiskit.converters.circuits_to_qobj.circuits_to_qobj">[docs]</a><span class="k">def</span> <span class="nf">circuits_to_qobj</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-                     <span class="n">max_credits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="circuits_to_qobj"><a class="viewcode-back" href="../../../autodoc/qiskit.converters.circuits_to_qobj.html#qiskit.converters.circuits_to_qobj.circuits_to_qobj">[docs]</a><span class="k">def</span> <span class="nf">circuits_to_qobj</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">qobj_header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">qobj_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_credits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a list of circuits into a qobj.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        circuits (list[QuantumCircuits] or QuantumCircuit): circuits to compile</span>
-<span class="sd">        backend_name (str): name of runner backend</span>
-<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
-<span class="sd">        shots (int): number of repetitions of each circuit, for sampling</span>
-<span class="sd">        max_credits (int): maximum credits to use</span>
-<span class="sd">        qobj_id (int): identifier for the generated qobj</span>
-<span class="sd">        basis_gates (list[str])): basis gates for the experiment</span>
-<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
-<span class="sd">        seed (int): random seed for simulators</span>
-<span class="sd">        memory (bool): if True, per-shot measurement bitstrings are returned as well</span>
+<span class="sd">        qobj_header (QobjHeader): header to pass to the results</span>
+<span class="sd">        qobj_id (int): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        backend_name (str): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        config (dict): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        shots (int): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        max_credits (int): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        basis_gates (str): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        coupling_map (list): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        seed (int): TODO: delete after qiskit-terra 0.8</span>
+<span class="sd">        memory (bool): TODO: delete after qiskit-terra 0.8</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Qobj: the Qobj to be run on the backends</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO: the following will be removed from qobj and thus removed here:</span>
-    <span class="c1"># `basis_gates`, `coupling_map`</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;circuits_to_qobj is deprecated and will be removed in Qiskit Terra 0.9. &#39;</span>
+                  <span class="s1">&#39;Use qiskit.compiler.assemble() to serialize circuits into a qobj.&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
 
-    <span class="c1"># Step 1: create the Qobj, with empty experiments.</span>
-    <span class="c1"># Copy the configuration: the values in `config` have preference</span>
-    <span class="n">qobj_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span> <span class="ow">or</span> <span class="p">{})</span>
-    <span class="n">qobj_config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="n">shots</span><span class="p">,</span>
-                        <span class="s1">&#39;max_credits&#39;</span><span class="p">:</span> <span class="n">max_credits</span><span class="p">,</span>
-                        <span class="s1">&#39;memory_slots&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                        <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="n">memory</span><span class="p">})</span>
+    <span class="n">qobj_header</span> <span class="o">=</span> <span class="n">qobj_header</span> <span class="ow">or</span> <span class="n">QobjHeader</span><span class="p">()</span>
 
-    <span class="n">qobj</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()),</span>
-                <span class="n">config</span><span class="o">=</span><span class="n">QobjConfig</span><span class="p">(</span><span class="o">**</span><span class="n">qobj_config</span><span class="p">),</span>
-                <span class="n">experiments</span><span class="o">=</span><span class="p">[],</span>
-                <span class="n">header</span><span class="o">=</span><span class="n">QobjHeader</span><span class="p">(</span><span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">seed</span><span class="p">:</span>
-        <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+    <span class="k">if</span> <span class="n">backend_name</span><span class="p">:</span>
+        <span class="n">qobj_header</span><span class="o">.</span><span class="n">backend_name</span> <span class="o">=</span> <span class="n">backend_name</span>
+    <span class="k">if</span> <span class="n">basis_gates</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;basis_gates was unused and will be removed.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">coupling_map</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;coupling_map was unused and will be removed.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
-        <span class="n">circuits</span> <span class="o">=</span> <span class="p">[</span><span class="n">circuits</span><span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">:</span>
-        <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_circuit_to_experiment</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
-                                                       <span class="n">config</span><span class="p">,</span>
-                                                       <span class="n">basis_gates</span><span class="p">,</span>
-                                                       <span class="n">coupling_map</span><span class="p">))</span>
-
-    <span class="c1"># Update the global `memory_slots` and `n_qubits` values.</span>
-    <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory_slots</span> <span class="k">for</span>
-                                   <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">)</span>
-
-    <span class="n">qobj</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span> <span class="k">for</span>
-                               <span class="n">experiment</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">)</span>
+    <span class="n">qobj</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">experiments</span><span class="o">=</span><span class="n">circuits</span><span class="p">,</span>
+                    <span class="n">qobj_id</span><span class="o">=</span><span class="n">qobj_id</span><span class="p">,</span>
+                    <span class="n">qobj_header</span><span class="o">=</span><span class="n">qobj_header</span><span class="p">,</span>
+                    <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span>
+                    <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
+                    <span class="n">max_credits</span><span class="o">=</span><span class="n">max_credits</span><span class="p">,</span>
+                    <span class="n">seed_simulator</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+                    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">qobj</span></div>
-
-
-<span class="k">def</span> <span class="nf">_circuit_to_experiment</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                           <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for dags to qobj in parallel (if available).</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        circuit (QuantumCircuit): QuantumCircuit to convert into qobj experiment</span>
-<span class="sd">        config (dict): dictionary of parameters (e.g. noise) used by runner</span>
-<span class="sd">        basis_gates (list[str])): basis gates for the experiment</span>
-<span class="sd">        coupling_map (list): coupling map (perhaps custom) to target in mapping</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Qobj: Qobj to be run on the backends</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># pylint: disable=unused-argument</span>
-    <span class="c1">#  TODO: if arguments are really unused, consider changing the signature</span>
-    <span class="c1"># TODO: removed the DAG from this function</span>
-    <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span>
-    <span class="kn">from</span> <span class="nn">qiskit.unroll</span> <span class="k">import</span> <span class="n">DagUnroller</span><span class="p">,</span> <span class="n">JsonBackend</span>
-    <span class="n">dag</span> <span class="o">=</span> <span class="n">circuit_to_dag</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
-    <span class="n">json_circuit</span> <span class="o">=</span> <span class="n">DagUnroller</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">JsonBackend</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">basis</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-    <span class="c1"># Step 3a: create the Experiment based on json_circuit</span>
-    <span class="n">experiment</span> <span class="o">=</span> <span class="n">QobjExperiment</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">json_circuit</span><span class="p">)</span>
-    <span class="c1"># Step 3b: populate the Experiment configuration and header</span>
-    <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">name</span>
-    <span class="n">experiment_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span> <span class="ow">or</span> <span class="p">{})</span>
-    <span class="n">experiment_config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
-        <span class="s1">&#39;memory_slots&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">()]),</span>
-        <span class="s1">&#39;n_qubits&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="n">qreg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
-        <span class="p">})</span>
-    <span class="n">experiment</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">QobjItem</span><span class="p">(</span><span class="o">**</span><span class="n">experiment_config</span><span class="p">)</span>
-
-    <span class="c1"># set eval_symbols=True to evaluate each symbolic expression</span>
-    <span class="c1"># TODO: after transition to qobj, we can drop this</span>
-    <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">compiled_circuit_qasm</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">qasm</span><span class="p">()</span>
-    <span class="c1"># Step 3c: add the Experiment to the Qobj</span>
-    <span class="k">return</span> <span class="n">experiment</span>
 </pre></div>
 
         </div>
