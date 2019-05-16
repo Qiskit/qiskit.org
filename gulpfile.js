@@ -35,7 +35,7 @@ task('add-ibm-stats-script', () => {
           pageInfo: {
             productTitle: 'Qiskit.org',
             analytics: {
-              category: 'Offering Interface',
+              category: 'Qiskit.org',
             },
           },
         },
@@ -50,6 +50,7 @@ task('add-ibm-stats-script', () => {
         autoFormEvents: true,
       };
     </script>
+    <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
     <!-- Hotjar Tracking Code for ibm.com -->
     <script>
@@ -62,7 +63,6 @@ task('add-ibm-stats-script', () => {
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
   `;
 
   return src(`${buildPath}**/index.html`)
