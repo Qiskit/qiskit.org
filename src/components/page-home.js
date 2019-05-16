@@ -374,7 +374,7 @@ class PageHome extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
             <div class="actions">
               <a
-                  href="https://quantumexperience.ng.bluemix.net/qx/editor"
+                  href="https://quantum-computing.ibm.com/composer"
                   title="IBM Q Experience"
                   target="_blank"
                   rel="noopener"
