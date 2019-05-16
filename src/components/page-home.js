@@ -124,6 +124,12 @@ class PageHome extends localize(i18next)(LitElement) {
           font-weight: 300;
         }
 
+        .colored-link {
+          color: #fff;
+          text-decoration: underline;
+          font-style: italic;
+        }
+
         @media (min-width: 400px) {
           .social-networks-list li {
             width: 50%;
@@ -258,11 +264,11 @@ class PageHome extends localize(i18next)(LitElement) {
           </div>
           <div class="column video">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsVideoTitle')}</h3>
-              <p>${i18next.t('pages.home.newsVideoDescription')}</p>
+              <h3>${i18next.t('pages.home.newsGetStartedTitle')}</h3>
+              <p>${i18next.t('pages.home.newsGetStartedDescription')}</p>
               <div class="actions">
                 <a href="https://www.youtube.com/watch?v=V3hXSftZuoc" tabindex="-1">
-                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsVideoButton')}</vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsGetStartedButton')}</vaadin-button>
                 </a>
               </div>
             </div>
@@ -273,20 +279,21 @@ class PageHome extends localize(i18next)(LitElement) {
       <section class="colored">
         <div class="row limited-width">
           <div class="description">
-            <h3>${i18next.t('pages.home.tryTitle')}</h3>
-            <p>${i18next.t('pages.home.tryDescription')}</p>
+            <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
+            <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
             <div class="actions">
               <a
-                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
+                  href="https://quantum-computing.ibm.com/composer"
+                  title="IBM Q Experience"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.tryButton')}</vaadin-button>
+                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButton')}</vaadin-button>
               </a>
             </div>
           </div>
           <div class="illustration">
-            <img src="images/try-and-learn.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
+            <img src="images/ibm-q-experience-2.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
           </div>
         </div>
       </section>
@@ -367,37 +374,19 @@ class PageHome extends localize(i18next)(LitElement) {
         </div>
       </section>
 
-      <section class="colored">
-        <div class="row limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.ibmQExperienceTitle')}</h3>
-            <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
-            <div class="actions">
-              <a
-                  href="https://quantum-computing.ibm.com/composer"
-                  title="IBM Q Experience"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButton')}</vaadin-button>
-              </a>
-            </div>
-          </div>
-          <div class="illustration">
-            <img src="images/ibm-q-experience.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
-          </div>
-        </div>
-      </section>
-
-      <section class="citation">
+      <section class="citation colored">
         <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.home.citationTitle')}</h3>
             <p>
               ${i18next.t('pages.home.citationDescription')}
-              <a href="https://raw.githubusercontent.com/Qiskit/qiskit/master/Qiskit.bib" title="BibTeX"
-                target="_blank" rel="noopener">
-                ${i18next.t('pages.home.bibtexLink')}
+              <a
+                class="colored-link"
+                href="https://raw.githubusercontent.com/Qiskit/qiskit/master/Qiskit.bib"
+                title="BibTeX"
+                target="_blank"
+                rel="noopener">
+                  ${i18next.t('pages.home.bibtexLink')}
               </a>
             </p>
           </div>
