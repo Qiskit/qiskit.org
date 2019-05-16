@@ -187,7 +187,7 @@ class PageAqua extends localize(i18next)(LitElement) {
                 <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
               </a>
               <a
-                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/aqua/chemistry/index.ipynb"
+                  href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/chemistry/index.ipynb"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
