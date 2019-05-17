@@ -23,6 +23,8 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
+import { trackClickEvent } from '../helpers/track-events.js';
+
 class PageTerra extends localize(i18next)(LitElement) {
   static get styles() {
     return [
@@ -67,7 +69,12 @@ class PageTerra extends localize(i18next)(LitElement) {
                 href="https://github.com/Qiskit/qiskit-terra"
                 target="_blank"
                 rel="noopener"
-                tabindex="-1">
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  cta: 'Qiskit Terra GitHub Repository',
+                  location: 'Header',
+                  text: 'Github'
+                })}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -122,7 +129,14 @@ class PageTerra extends localize(i18next)(LitElement) {
               </template>
             </code-sample>
             <h3>${i18next.t('pages.terra.exampleTitle')}</h3>
-            <code-sample type="python" copy-clipboard-button>
+            <code-sample
+              type="python"
+              copy-clipboard-button
+              @click=${() => trackClickEvent({
+                cta: 'Qiskit Terra: Copy Code Sample',
+                location: 'Home Example Section',
+                text: 'Code'
+              })}>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import QuantumRegister, ClassicalRegister

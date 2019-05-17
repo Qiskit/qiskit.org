@@ -23,6 +23,8 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
+import { trackClickEvent } from '../helpers/track-events.js';
+
 class PageIgnis extends localize(i18next)(LitElement) {
   static get styles() {
     return [
@@ -73,8 +75,16 @@ class PageIgnis extends localize(i18next)(LitElement) {
           </h1>
           <h2>${i18next.t('pages.ignis.headerSubTitle')}</h2>
           <div class="badges">
-            <a href="https://github.com/Qiskit/qiskit-ignis" target="_blank" rel="noopener"
-              tabindex="-1">
+            <a
+              href="https://github.com/Qiskit/qiskit-ignis"
+              target="_blank"
+              rel="noopener"
+              tabindex="-1"
+              @click=${() => trackClickEvent({
+                cta: 'Qiskit Ignis GitHub Repository',
+                location: 'Header',
+                text: 'Github'
+              })}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -124,7 +134,14 @@ class PageIgnis extends localize(i18next)(LitElement) {
               </template>
             </code-sample>
             <h3>${i18next.t('pages.ignis.exampleTitle')}</h3>
-            <code-sample type="python" copy-clipboard-button>
+            <code-sample
+              type="python"
+              copy-clipboard-button
+              @click=${() => trackClickEvent({
+                cta: 'Qiskit Ignis: Copy Code Sample',
+                location: 'Ignis Example Section',
+                text: 'Code'
+              })}>
               <!-- htmlmin:ignore -->
               <template>
                 import qiskit
@@ -147,13 +164,13 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 noise_model.add_all_qubit_quantum_error(depolarizing_error(0.002, 2), 'cx')
 
                 backend = qiskit.Aer.get_backend('qasm_simulator')
-                
+
                 #Create the RB fitter
                 rb_fit = RBFitter(None, xdata, rb_opts['rb_pattern'])
                 for rb_seed,rb_circ_seed in enumerate(rb_circs):
-                    
-                    job = qiskit.execute(rb_circ_seed, backend=backend, 
-                         basis_gates=['u1','u2','u3','cx'], 
+
+                    job = qiskit.execute(rb_circ_seed, backend=backend,
+                         basis_gates=['u1','u2','u3','cx'],
                          noise_model=noise_model)
 
                     #add data to the fitter
