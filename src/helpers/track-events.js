@@ -1,0 +1,26 @@
+/**
+ * @license
+ *
+ * Copyright (c) 2019, IBM.
+ *
+ * This source code is licensed under the Apache License, Version 2.0 found in
+ * the LICENSE.txt file in the root directory of this source tree.
+ */
+
+export const trackClickEvent = data => {
+  if (window.bluemixAnalytics && window.digitalData) {
+    const segmentEvent = {
+      productTitle: window.digitalData.page.pageInfo.productTitle,
+      category: window.digitalData.page.pageInfo.analytics.category,
+      url: window.location.href,
+      path: window.location.pathname,
+      action: 'button clicked',
+      successFlag: true,
+      CTA: data.cta,
+      location: data.location,
+      text: data.text,
+    };
+
+    window.bluemixAnalytics.trackEvent('Click Button', segmentEvent);
+  }
+};

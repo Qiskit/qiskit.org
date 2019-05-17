@@ -21,6 +21,7 @@ import { store } from '../store.js';
 
 // These are the actions needed by this element.
 import { navigate, updateDrawerState } from '../actions/app.js';
+import { trackClickEvent } from '../helpers/track-events.js';
 
 import { SharedStyles } from './app-shared-styles.js';
 
@@ -228,9 +229,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           </nav>
           <nav class="second">
             <a
-                href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
-                rel="noopener"
-                target="_blank">
+              href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
+              rel="noopener"
+              target="_blank"
+              @click=${() => trackClickEvent({
+                cta: 'Tutorials',
+                location: 'Navbar',
+                text: i18next.t('tutorials')
+              })}>
               ${i18next.t('tutorials')}
             </a>
             <a href="/documentation">${i18next.t('documentation')}</a>
@@ -251,9 +257,14 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
           <a href="/ignis" ?selected=${this.page === 'ignis'}>Ignis</a>
           <span>Tools</span>
           <a
-              href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
-              rel="noopener"
-              target="_blank">
+            href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
+            rel="noopener"
+            target="_blank"
+            @click=${() => trackClickEvent({
+              cta: 'Tutorials External Link',
+              location: 'Navbar Offcanvas',
+              text: i18next.t('tutorials')
+            })}>
             ${i18next.t('tutorials')}
           </a>
           <a href="/documentation">${i18next.t('documentation')}</a>
