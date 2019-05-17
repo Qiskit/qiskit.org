@@ -50,6 +50,7 @@ task('add-ibm-stats-script', () => {
         autoFormEvents: true,
       };
     </script>
+    <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     <!-- Hotjar Tracking Code for ibm.com -->
     <script>
       (function(h,o,t,j,a,r){
@@ -61,7 +62,6 @@ task('add-ibm-stats-script', () => {
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
   `;
 
   return src(`${buildPath}**/index.html`)
