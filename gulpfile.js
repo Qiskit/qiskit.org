@@ -35,7 +35,7 @@ task('add-ibm-stats-script', () => {
           pageInfo: {
             productTitle: 'Qiskit.org',
             analytics: {
-              category: 'Offering Interface',
+              category: 'Qiskit.org',
             },
           },
         },
@@ -50,7 +50,6 @@ task('add-ibm-stats-script', () => {
         autoFormEvents: true,
       };
     </script>
-    <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
     <!-- Hotjar Tracking Code for ibm.com -->
     <script>
       (function(h,o,t,j,a,r){
