@@ -24,3 +24,21 @@ export const trackClickEvent = data => {
     window.bluemixAnalytics.trackEvent('Click Button', segmentEvent);
   }
 };
+
+export const trackSelectCombo = data => {
+  if (window.bluemixAnalytics && window.digitalData) {
+    const segmentEvent = {
+      productTitle: window.digitalData.page.pageInfo.productTitle,
+      category: window.digitalData.page.pageInfo.analytics.category,
+      url: window.location.href,
+      path: window.location.pathname,
+      action: 'change language',
+      successFlag: true,
+      CTA: data.cta,
+      location: data.location,
+      text: data.text,
+    };
+
+    window.bluemixAnalytics.trackEvent('Select Language', segmentEvent);
+  }
+};

@@ -21,7 +21,7 @@ import { store } from '../store.js';
 
 // These are the actions needed by this element.
 import { navigate, updateDrawerState } from '../actions/app.js';
-import { trackClickEvent } from '../helpers/track-events.js';
+import { trackClickEvent, trackSelectCombo } from '../helpers/track-events.js';
 
 import { SharedStyles } from './app-shared-styles.js';
 
@@ -335,6 +335,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
 
   changeLanguage(event) {
     i18next.changeLanguage(event.target.value);
+    trackSelectCombo({ text: event.target.value });
   }
 
   menuButtonClicked() {
