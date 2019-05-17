@@ -12,6 +12,8 @@ import { localize } from '../pwa-helpers/i18next-localize-mixin.js';
 
 import { i18next } from '../i18next.js';
 
+import { trackClickEvent } from '../helpers/track-events.js';
+
 import {
   SharedStyles,
   HeaderStyles,
@@ -42,7 +44,16 @@ class PageFun extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.fun.modelQTitle')}</h3>
             <p>${i18next.t('pages.fun.modelQDescription')}</p>
             <div class="actions">
-              <a href="/modelq/" target="_blank" rel="noopener" tabindex="-1">
+              <a
+                href="/modelq/"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  cta: 'Model Q',
+                  location: 'Fun Section',
+                  text: 'Visit Model Q'
+                })}>
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.modelQButton')}</vaadin-button>
               </a>
             </div>
@@ -63,7 +74,12 @@ class PageFun extends localize(i18next)(LitElement) {
                   href="https://helloquantum.mybluemix.net"
                   target="_blank"
                   rel="noopener"
-                  tabindex="-1">
+                  tabindex="-1"
+                  @click=${() => trackClickEvent({
+                    cta: 'Hello Quantum',
+                    location: 'Fun Section',
+                    text: 'Visit Hello Quantum'
+                  })}>
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.helloQuantumButton')}</vaadin-button>
               </a>
             </div>
@@ -84,7 +100,12 @@ class PageFun extends localize(i18next)(LitElement) {
                   href="https://entanglion.github.io"
                   target="_blank"
                   rel="noopener"
-                  tabindex="-1">
+                  tabindex="-1"
+                  @click=${() => trackClickEvent({
+                    cta: 'Entaglion',
+                    location: 'Fun Section',
+                    text: 'Visit Entaglion'
+                  })}>
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.entanglionButton')}</vaadin-button>
               </a>
             </div>
