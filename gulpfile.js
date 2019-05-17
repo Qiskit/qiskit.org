@@ -51,7 +51,6 @@ task('add-ibm-stats-script', () => {
       };
     </script>
     <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
-    <script src="//1.www.s81c.com/common/stats/ida_stats.js"></script>
     <!-- Hotjar Tracking Code for ibm.com -->
     <script>
       (function(h,o,t,j,a,r){
