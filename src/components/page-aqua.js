@@ -23,6 +23,8 @@ import { githubIcon } from './app-icons.js';
 import './vaadin-ibmq-styles/vaadin-button.js';
 import '@kuscamara/code-sample/code-sample.js';
 
+import { trackClickEvent } from '../helpers/track-events.js';
+
 class PageAqua extends localize(i18next)(LitElement) {
   static get styles() {
     return [
@@ -77,7 +79,12 @@ class PageAqua extends localize(i18next)(LitElement) {
                 href="https://github.com/Qiskit/qiskit-aqua"
                 target="_blank"
                 rel="noopener"
-                tabindex="-1">
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  cta: 'Qiskit Aqua GitHub Repository',
+                  location: 'Header',
+                  text: 'Github'
+                })}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -142,7 +149,14 @@ class PageAqua extends localize(i18next)(LitElement) {
               </template>
             </code-sample>
             <h3>${i18next.t('pages.aqua.exampleTitle')}</h3>
-            <code-sample type="python" copy-clipboard-button>
+            <code-sample
+              type="python"
+              copy-clipboard-button
+              @click=${() => trackClickEvent({
+                cta: 'Qiskit Aqua: Copy Code Sample',
+                location: 'Aqua Example Section',
+                text: 'Code'
+              })}>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import Aer
@@ -183,14 +197,24 @@ class PageAqua extends localize(i18next)(LitElement) {
                   href="https://github.com/Qiskit/qiskit-chemistry"
                   target="_blank"
                   rel="noopener"
-                  tabindex="-1">
+                  tabindex="-1"
+                  @click=${() => trackClickEvent({
+                    cta: 'Qiskit Chemistry GitHub Repository',
+                    location: 'Qiskit Chemistry Section',
+                    text: 'Github'
+                  })}>
                 <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
               </a>
               <a
                   href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/chemistry/index.ipynb"
                   target="_blank"
                   rel="noopener"
-                  tabindex="-1">
+                  tabindex="-1"
+                  @click=${() => trackClickEvent({
+                    cta: 'Qiskit Chemistry Tutorials',
+                    location: 'Qiskit Chemistry Section',
+                    text: 'Tutorials'
+                  })}>
                 <vaadin-button theme="secondary small">${i18next.t('tutorials')}</vaadin-button>
               </a>
             </div>
@@ -208,7 +232,14 @@ class PageAqua extends localize(i18next)(LitElement) {
             </code-sample>
             <h3>${i18next.t('pages.aqua.exampleTitle')}</h3>
             <p class="note">${i18next.t('pages.aqua.pyscfIsRequired')}</p>
-            <code-sample type="python" copy-clipboard-button>
+            <code-sample
+              type="python"
+              copy-clipboard-button
+              @click=${() => trackClickEvent({
+                cta: 'Qiskit Chemistry: Copy Code Sample',
+                location: 'Chemistry Example Section',
+                text: 'Code'
+              })}>
               <!-- htmlmin:ignore -->
               <template>
                 import numpy as np
