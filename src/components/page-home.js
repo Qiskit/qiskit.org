@@ -267,7 +267,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <h3>${i18next.t('pages.home.newsGetStartedTitle')}</h3>
               <p>${i18next.t('pages.home.newsGetStartedDescription')}</p>
               <div class="actions">
-                <a href="https://www.youtube.com/watch?v=V3hXSftZuoc" tabindex="-1">
+                <a href="https://quantum-computing.ibm.com/login" tabindex="-1">
                   <vaadin-button theme="secondary">${i18next.t('pages.home.newsGetStartedButton')}</vaadin-button>
                 </a>
               </div>
