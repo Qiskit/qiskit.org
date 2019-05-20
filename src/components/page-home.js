@@ -322,22 +322,35 @@ class PageHome extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
             <div class="actions">
               <a
-                  href="https://quantum-computing.ibm.com/composer"
+                  href="https://www.research.ibm.com/ibm-q/technology/experience/"
                   title="IBM Q Experience"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
-                    cta: 'Don\'t know quantum circuits?',
-                    location: 'Home News Section',
-                    text: i18next.t('pages.home.ibmQExperienceButton')
+                    cta: 'Introducing Qiskit notebooks',
+                    location: 'Home IBM Q Experience Section',
+                    text: i18next.t('pages.home.ibmQExperienceButtonLearnMore')
                   })}>
-                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButton')}</vaadin-button>
+                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButtonLearnMore')}</vaadin-button>
               </a>
-            </div>
+              <a
+                  href="https://quantum-computing.ibm.com/login"
+                  title="IBM Q Experience"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1"
+                  @click=${() => trackClickEvent({
+                    cta: 'Introducing Qiskit notebooks',
+                    location: 'Home IBM Q Experience Section',
+                    text: i18next.t('pages.home.ibmQExperienceButtonTryOut')
+                  })}>
+                <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButtonTryOut')}</vaadin-button>
+              </a>
+              </div>
           </div>
           <div class="illustration">
-            <img src="images/ibm-q-experience-2.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
+            <img src="images/qiskit-notebooks.jpg" .alt=${i18next.t('pages.home.ibmQExperienceAltImage')}>
           </div>
         </div>
       </section>
