@@ -1609,20 +1609,38 @@ where you can find the individual projects that make up Qiskit, including</p>
 </div>
 <div class="section" id="writing-and-building-documentation">
 <h2>Writing and Building Documentation<a class="headerlink" href="#writing-and-building-documentation" title="Permalink to this headline">¶</a></h2>
-<p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy.</p>
-<p>The <a class="reference external" href="https://qiskit.org/documentation/index.html">published documentation</a> is built from the master branch of <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>.</p>
-<p>The Python API reference documentation is automatically generated from comments in the code by navigating to your local clone of <a class="reference external" href="https://github.com/Qiskit/qiskit">Qiskit/qiskit</a> and running the following command in a terminal window:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">doc</span>
+<p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy and follows the
+<a class="reference external" href="https://www.ibm.com/developerworks/library/styleguidelines/">IBM style guidelines</a>.</p>
+<p>The <a class="reference external" href="https://qiskit.org/documentation/index.html">published documentation</a> is
+built from the master branch of <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>.</p>
+<p>You can build a local copy of the documentation from your local clone of the
+<cite>Qiskit/qiskit</cite> repository as follows:</p>
+<ol class="arabic">
+<li><p class="first">Clone <cite>Qiskit/qiskit</cite> (or your personal fork).</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/installation.html">Install Sphinx</a>.</p>
+</li>
+<li><p class="first">Install the <cite>Material Design HTML Theme for Sphinx</cite> by running the following
+in a terminal window:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install sphinx_materialdesign_theme
 </pre></div>
 </div>
-<p>You can build a local copy of the documentation from your local clone of the
-<cite>Qiskit/qiskit</cite> repository by opening a terminal window or command prompt in
-the <cite>docs</cite> directory, then running the following command.</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</li>
+<li><p class="first">Build the documentation by navigating to your local clone of <cite>Qiskit/qiskit</cite>
+and running the following command in a terminal window:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make doc
+</pre></div>
+</div>
+</li>
+</ol>
+<p>As you make changes to your local RST files, you can update your
+HTML files by navigating to <cite>/doc/</cite> and running the following in a terminal
+window:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make html
 </pre></div>
 </div>
 <p>This will build a styled, HTML version of your local documentation repository
-in a subdirectory, <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.</p>
+in the subdirectory <cite>/docs/_build/html/</cite>.</p>
 </div>
 <div class="section" id="install-from-source">
 <span id="install-install-from-source-label"></span><h2>Install from Source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h2>
