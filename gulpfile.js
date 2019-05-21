@@ -33,7 +33,7 @@ task('add-ibm-stats-script', () => {
       window.digitalData = {
         page: {
           pageInfo: {
-            productTitle: 'Qiskit.org',
+            productTitle: 'IBM Q Experience',
             analytics: {
               category: 'Qiskit.org',
             },
