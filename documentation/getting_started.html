@@ -1591,8 +1591,6 @@ subsequent sections:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span><span class="p">(</span>
   <span class="n">QuantumCircuit</span><span class="p">,</span>
-  <span class="n">QuantumRegister</span><span class="p">,</span>
-  <span class="n">ClassicalRegister</span><span class="p">,</span>
   <span class="n">execute</span><span class="p">,</span>
   <span class="n">Aer</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
@@ -1600,23 +1598,17 @@ subsequent sections:</p>
 <span class="c1"># Use Aer&#39;s qasm_simulator</span>
 <span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 
-<span class="c1"># Create a Quantum Register with 2 qubits.</span>
-<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1"># Create a Classical Register with 2 bits.</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
 <span class="c1"># Create a Quantum Circuit acting on the q register</span>
-<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Add a H gate on qubit 0</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Add a CX (CNOT) gate on control qubit 0 and target qubit 1</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Map the quantum measurement to the classical bits</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># Execute the circuit on the qasm simulator</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
@@ -1658,8 +1650,6 @@ subsequent sections:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span><span class="p">(</span>
   <span class="n">QuantumCircuit</span><span class="p">,</span>
-  <span class="n">QuantumRegister</span><span class="p">,</span>
-  <span class="n">ClassicalRegister</span><span class="p">,</span>
   <span class="n">execute</span><span class="p">,</span>
   <span class="n">Aer</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_histogram</span>
@@ -1669,8 +1659,6 @@ subsequent sections:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>: can be thought as the instructions of the quantum system.
 It holds all your quantum operations.</li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumRegister</span></code>: holds your qubits.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>: stores classical bits.</li>
 <li><code class="docutils literal notranslate"><span class="pre">execute</span></code>: runs your circuit / experiment.</li>
 <li><code class="docutils literal notranslate"><span class="pre">Aer</span></code>: handles simulator backends.</li>
 <li><code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>: creates histograms.</li>
@@ -1678,29 +1666,24 @@ It holds all your quantum operations.</li>
 </div>
 <div class="section" id="step-2-initialize-variables">
 <h3>Step 2 : Initialize Variables<a class="headerlink" href="#step-2-initialize-variables" title="Permalink to this headline">¶</a></h3>
-<p>Consider the next three lines of code</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<p>Consider the next line of code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, you are initializing <code class="docutils literal notranslate"><span class="pre">q</span></code> with 2 qubits in the zero state; <code class="docutils literal notranslate"><span class="pre">c</span></code> with 2
-classical bits set to zero; and <code class="docutils literal notranslate"><span class="pre">circuit</span></code> is the quantum circuit that
-comprises <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+<p>Here, you are initializing with 2 qubits in the zero state; with 2
+classical bits set to zero; and <code class="docutils literal notranslate"><span class="pre">circuit</span></code> is the quantum circuit.</p>
 <p>Syntax:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">QuantumRegister(number_of_qubits)</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">ClassicalRegister(number_of_bits)</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit(QuantumRegister,</span> <span class="pre">ClassicalRegister)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit(int,</span> <span class="pre">int)</span></code></li>
 </ul>
 </div>
 <div class="section" id="step-3-add-gates">
 <h3>Step 3 : Add Gates<a class="headerlink" href="#step-3-add-gates" title="Permalink to this headline">¶</a></h3>
 <p>You can add gates (operations) to manipulate the registers of your circuit.</p>
 <p>Consider the following three lines of code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The gates are added to the circuit one-by-one to form the Bell state</p>
@@ -1708,12 +1691,12 @@ comprises <code class="docutils literal notranslate"><span class="pre">q</span><
 \[|\psi\rangle = \left(|00\rangle+|11\rangle\right)/\sqrt{2}.\]</div>
 <p>The code above applies the following gates:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.h(QuantumRegister)</span></code>: A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0,
+<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.h(0)</span></code>: A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0,
 which puts it into a <strong>superposition state</strong>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(QuantumRegister)</span></code>: A controlled-Not operation
+<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,1)</span></code>: A controlled-Not operation
 (<span class="math notranslate nohighlight">\(C_{X}\)</span>) on control qubit 0 and target qubit 1, putting the qubits in
 an <strong>entangled state</strong>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.measure(QuantumRegister,</span> <span class="pre">ClassicalRegister)</span></code>: if you pass
+<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.measure([0,1],</span> <span class="pre">[0,1])</span></code>: if you pass
 the entire quantum and classical registers to <code class="docutils literal notranslate"><span class="pre">measure</span></code>, the ith qubit’s
 measurement result will be stored in the ith classical bit.</li>
 </ul>
