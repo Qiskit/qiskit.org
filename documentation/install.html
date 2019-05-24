@@ -99,7 +99,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Qiskit</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices">Access IBM Q Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-systems">Access IBM Q Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
 </ul>
 </li>
@@ -879,7 +879,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Qiskit</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-devices">Access IBM Q Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-systems">Access IBM Q Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
 </ul>
 </li>
@@ -1680,37 +1680,29 @@ them into your environment with Python to begin working.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="access-ibm-q-devices">
-<span id="install-access-ibm-q-devices-label"></span><h2>Access IBM Q Devices<a class="headerlink" href="#access-ibm-q-devices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="access-ibm-q-systems">
+<span id="install-access-ibm-q-devices-label"></span><h2>Access IBM Q Systems<a class="headerlink" href="#access-ibm-q-systems" title="Permalink to this headline">¶</a></h2>
 <p>IBM Q offers several real quantum computers and high-performance classical
-computing simulators through its <a class="reference external" href="https://www.research.ibm.com/ibm-q/technology/devices/">quantum cloud services</a> with Qiskit.</p>
-<p><a class="reference external" href="https://quantumexperience.ng.bluemix.net/qx/login">Create a free IBM Q account</a> to get an API token.</p>
-<p>After logging in, navigate to <strong>My Account</strong>.</p>
-<img alt="_images/install_my_account.png" src="_images/install_my_account.png" />
-<p>Navigate to the <strong>Advanced</strong> tab and click the <strong>Generate</strong> button in the API Token
-section.</p>
-<img alt="_images/install_api_token.png" src="_images/install_api_token.png" />
-<p>Store your API token locally for later use in a configuration file called
-<code class="docutils literal notranslate"><span class="pre">qiskitrc</span></code> by running the following Python code:</p>
+computing simulators through its <a class="reference external" href="https://www.research.ibm.com/ibm-q/technology/experience/">quantum cloud services</a> with Qiskit. Follow
+these steps to setup your Qiskit environment to send jobs to IBM Q systems.</p>
+<p><strong>Step 1:</strong> <a class="reference external" href="https://quantum-computing.ibm.com/login">Create a free IBM Q Experience account</a>.</p>
+<p><strong>Step 2:</strong>  Navigate to <strong>My Account</strong> to view your account settings.</p>
+<img alt="Image of where to find the section 'My accounts'." src="_images/install_my_account.png" />
+<p><strong>Step 3:</strong> Click on <strong>Copy token</strong> to copy the token to your clipboard.
+Temporarily paste this into your favorite text editor for use in step 5.</p>
+<img alt="Image of where to get an API token." src="_images/install_api_token.png" />
+<p><strong>Step 4:</strong> Scroll down to the section titled <strong>Your accounts</strong>. Click on <strong>copy
+url</strong> for the account you would like to use. Temporarily paste this url into
+your favorite text editor for use in step 5.</p>
+<img alt="Image of section 'Your accounts'." src="_images/install_copy_url.png" />
+<p><strong>Step 5:</strong> Store your API token and url locally for later use in a
+configuration file called <code class="docutils literal notranslate"><span class="pre">qiskitrc</span></code> by running the following Python code:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">)</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="s1">&#39;MY_URL&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">MY_API_TOKEN</span></code> should be replaced with your token.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you are an IBM Q Network member, you must specify more than just an API token
-by using the following commands.</p>
-</div>
-<p>If you are a member of the IBM Q Network, you must pass an additional argument
-to <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account()</span></code>. The <code class="docutils literal notranslate"><span class="pre">url</span></code> argument can be found on your q-console
-account page, along with any other additional information required, e.g. proxy
-information. Pass your API token and the <code class="docutils literal notranslate"><span class="pre">url</span></code> argument by running the
-following Python code:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://...&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">MY_API_TOKEN</span></code> and <code class="docutils literal notranslate"><span class="pre">MY_URL</span></code> should be replaced with the values you set
+aside in steps 3 and 4.</p>
 <p>Refer to <a class="reference internal" href="advanced_use_of_ibm_q_devices.html#advanced-use-of-ibm-q-devices-label"><span class="std std-ref">Advanced Use of IBM Q Devices</span></a> for more details, such as
 how to manage multiple IBM Q account credentials.</p>
 </div>
@@ -1733,15 +1725,13 @@ installed versions. For example, running:</p>
 <span class="n">qiskit</span><span class="o">.</span><span class="n">__qiskit_version__</span>
 </pre></div>
 </div>
-<p>will return a dictionary like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="s1">&#39;qiskit-terra&#39;</span><span class="p">:</span> <span class="s1">&#39;0.7.1&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;qiskit&#39;</span><span class="p">:</span> <span class="s1">&#39;0.8.0&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;qiskit-ignis&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;qiskit-aer&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;qiskit-ibmq-provider&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1rc2&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;qiskit-aqua&#39;</span><span class="p">:</span> <span class="kc">None</span>
-<span class="p">}</span>
+<p>will return a dictionary like</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;qiskit&#39;: &#39;0.10.1&#39;,
+ &#39;qiskit-terra&#39;: &#39;0.8.0&#39;,
+ &#39;qiskit-ignis&#39;: &#39;0.1.1&#39;,
+ &#39;qiskit-aer&#39;: &#39;0.2.0&#39;,
+ &#39;qiskit-ibmq-provider&#39;: &#39;0.2.2&#39;,
+ &#39;qiskit-aqua&#39;: &#39;0.5.0&#39;}
 </pre></div>
 </div>
 <p>If you’re filing an issue or need to share your installed qiskit versions for
