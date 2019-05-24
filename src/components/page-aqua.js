@@ -110,15 +110,15 @@ class PageAqua extends localize(i18next)(LitElement) {
                     <div class="stack-list quantum-algorithms">
                       <div class="element">
                         <div class="title">Adaptive</div>
-                        <div class="subtitle">VQE, QAOA.Variational, QSVM.Variational, VQE2QPE</div>
+                        <div class="subtitle">VQE, QAOA.Variational, VQC, QGAN</div>
                       </div>
                       <div class="element">
                         <div class="title">Many-sample</div>
-                        <div class="subtitle">EOH, QSVM.Kernel</div>
+                        <div class="subtitle">EOH, QSVM</div>
                       </div>
                       <div class="element">
                         <div class="title">Single-sample</div>
-                        <div class="subtitle">QPE, IQPE, Grover, Amplitude Estimation</div>
+                        <div class="subtitle">QPE, IQPE, Grover's, Amplitude Estimation, Bernstein-Vazirani, Deutsch-Jozsa, HHL, Shor's, Simon's</div>
                       </div>
                     </div>
                   </div>
