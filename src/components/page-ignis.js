@@ -80,11 +80,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
               target="_blank"
               rel="noopener"
               tabindex="-1"
-              @click=${() => trackClickEvent({
-                cta: 'Qiskit Ignis GitHub Repository',
-                location: 'Header',
-                text: 'Github'
-              })}>
+              @click=${() => trackClickEvent('Qiskit Ignis GitHub Repository')}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -137,11 +133,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
             <code-sample
               type="python"
               copy-clipboard-button
-              @click=${() => trackClickEvent({
-                cta: 'Qiskit Ignis: Copy Code Sample',
-                location: 'Ignis Example Section',
-                text: 'Code'
-              })}>
+              @click=${() => trackClickEvent('Qiskit Ignis: Copy Code Sample')}>
               <!-- htmlmin:ignore -->
               <template>
                 import qiskit

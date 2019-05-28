@@ -232,11 +232,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
               rel="noopener"
               target="_blank"
-              @click=${() => trackClickEvent({
-                cta: 'Tutorials',
-                location: 'Navbar',
-                text: i18next.t('tutorials')
-              })}>
+              @click=${() => trackClickEvent('Tutorials Link')}>
               ${i18next.t('tutorials')}
             </a>
             <a href="/documentation">${i18next.t('documentation')}</a>
@@ -260,11 +256,7 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb"
             rel="noopener"
             target="_blank"
-            @click=${() => trackClickEvent({
-              cta: 'Tutorials External Link',
-              location: 'Navbar Offcanvas',
-              text: i18next.t('tutorials')
-            })}>
+            @click=${() => trackClickEvent('Tutorials External Link in Navbar')}>
             ${i18next.t('tutorials')}
           </a>
           <a href="/documentation">${i18next.t('documentation')}</a>

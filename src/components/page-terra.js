@@ -70,11 +70,7 @@ class PageTerra extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent({
-                  cta: 'Qiskit Terra GitHub Repository',
-                  location: 'Header',
-                  text: 'Github'
-                })}>
+                @click=${() => trackClickEvent('Qiskit Terra GitHub Repository')}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -132,11 +128,7 @@ class PageTerra extends localize(i18next)(LitElement) {
             <code-sample
               type="python"
               copy-clipboard-button
-              @click=${() => trackClickEvent({
-                cta: 'Qiskit Terra: Copy Code Sample',
-                location: 'Home Example Section',
-                text: 'Code'
-              })}>
+              @click=${() => trackClickEvent('Qiskit Terra: Copy Code Sample')}>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import QuantumRegister, ClassicalRegister

@@ -107,22 +107,14 @@ class PageVscode extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent({
-                  cta: 'Qiskit VSCode Extension',
-                  location: 'Header',
-                  text: 'Github'
-                })}>
+                @click=${() => trackClickEvent('Qiskit VSCode Extension')}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
             <a
                 href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-vscode"
                 target="_blank"
                 rel="noopener"
-                @click=${() => trackClickEvent({
-                  cta: 'Qiskit VSCode Marketplace badge',
-                  location: 'Header',
-                  text: 'Visual Studio Marketplace'
-                })}>
+                @click=${() => trackClickEvent('Qiskit VSCode Marketplace badge')}>
               <img
                   src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-vscode.svg"
                   alt="Qiskit Studio version badge"
@@ -145,11 +137,7 @@ class PageVscode extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent({
-                  cta: 'Get Visual Studio Code',
-                  location: 'Tools Section',
-                  text: 'Download'
-                })}>
+                @click=${() => trackClickEvent('Get Visual Studio Code')}>
               <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepOneButton')}</vaadin-button>
             </a>
           </div>
@@ -161,11 +149,7 @@ class PageVscode extends localize(i18next)(LitElement) {
             <a
               href="vscode:extension/qiskit.qiskit-vscode"
               tabindex="-1"
-              @click=${() => trackClickEvent({
-                cta: 'Qiskit VSCode Extension',
-                location: 'Tools Section',
-                text: 'Install'
-              })}>
+              @click=${() => trackClickEvent('Qiskit VSCode Extension')}>
               <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepTwoButton')}</vaadin-button>
             </a>
           </div>

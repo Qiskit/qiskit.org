@@ -14,11 +14,8 @@ export const trackClickEvent = data => {
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
-      action: 'Button Clicked',
+      action: `Button Clicked: ${data}`,
       successFlag: true,
-      CTA: data.cta,
-      location: data.location,
-      text: data.text,
     };
 
     window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
@@ -32,11 +29,8 @@ export const trackSelectCombo = data => {
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
-      action: 'Language Changed',
+      action: `Language Changed to: ${data.text}`,
       successFlag: true,
-      CTA: data.cta,
-      location: data.location,
-      text: data.text,
     };
 
     window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
