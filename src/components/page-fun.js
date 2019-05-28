@@ -49,11 +49,7 @@ class PageFun extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent({
-                  cta: 'Model Q',
-                  location: 'Fun Section',
-                  text: 'Visit Model Q'
-                })}>
+                @click=${() => trackClickEvent('Model Q')}>
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.modelQButton')}</vaadin-button>
               </a>
             </div>
@@ -75,11 +71,7 @@ class PageFun extends localize(i18next)(LitElement) {
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
-                  @click=${() => trackClickEvent({
-                    cta: 'Hello Quantum',
-                    location: 'Fun Section',
-                    text: 'Visit Hello Quantum'
-                  })}>
+                  @click=${() => trackClickEvent('Hello Quantum')}>
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.helloQuantumButton')}</vaadin-button>
               </a>
             </div>
@@ -101,11 +93,7 @@ class PageFun extends localize(i18next)(LitElement) {
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
-                  @click=${() => trackClickEvent({
-                    cta: 'Entaglion',
-                    location: 'Fun Section',
-                    text: 'Visit Entaglion'
-                  })}>
+                  @click=${() => trackClickEvent('Entaglion')}>
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.entanglionButton')}</vaadin-button>
               </a>
             </div>
