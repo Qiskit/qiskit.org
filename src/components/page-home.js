@@ -257,7 +257,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <vaadin-button theme="secondary small" >${githubIcon} GitHub</vaadin-button>
             </a>
             <a
-                href="https://join.slack.com/t/qiskit/shared_invite/enQtNjM0NjgwODg0MDgzLTRmODMzZDMzMTlmZjg4MWM0YjJhNjQxMzE1YjJhNDNjYzkyZTk3OTU3NmYzNDEwM2JiMzcyN2RkZTc0NzNhMDU"
+                href="https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTBlMWY1ZGJiYmZkNjliZTY4MTViNTQ3NzI2ZmU2MzQxZjlhZDZlYTAzZTNlMDU0ZjVmNzEyMzY3OGE1Y2UyNjk"
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
