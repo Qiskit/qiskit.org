@@ -14,14 +14,14 @@ export const trackClickEvent = data => {
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
-      action: 'button clicked',
+      action: 'Button Clicked',
       successFlag: true,
       CTA: data.cta,
       location: data.location,
       text: data.text,
     };
 
-    window.bluemixAnalytics.trackEvent('Click Button', segmentEvent);
+    window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
   }
 };
 
@@ -32,13 +32,13 @@ export const trackSelectCombo = data => {
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
-      action: 'change language',
+      action: 'Language Changed',
       successFlag: true,
       CTA: data.cta,
       location: data.location,
       text: data.text,
     };
 
-    window.bluemixAnalytics.trackEvent('Select Language', segmentEvent);
+    window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
   }
 };
