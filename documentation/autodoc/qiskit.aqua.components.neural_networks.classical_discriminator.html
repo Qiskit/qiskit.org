@@ -588,7 +588,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#modules">Modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#aer-provider">Aer Provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#ingnis">Ingnis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#ignis">Ignis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#versioning">Versioning</a><ul>
@@ -1374,7 +1374,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#modules">Modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#aer-provider">Aer Provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#ingnis">Ingnis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#ignis">Ignis</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#versioning">Versioning</a><ul>
@@ -1623,137 +1623,8 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.aqua.components.neural_networks.classical_discriminator">
-<span id="qiskit-aqua-components-neural-networks-classical-discriminator-module"></span><h1>qiskit.aqua.components.neural_networks.classical_discriminator module<a class="headerlink" href="#module-qiskit.aqua.components.neural_networks.classical_discriminator" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator">
-<em class="property">class </em><code class="descname">ClassicalDiscriminator</code><span class="sig-paren">(</span><em>n_features=1</em>, <em>n_out=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="qiskit.aqua.components.neural_networks.discriminative_network.html#qiskit.aqua.components.neural_networks.discriminative_network.DiscriminativeNetwork" title="qiskit.aqua.components.neural_networks.discriminative_network.DiscriminativeNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.aqua.components.neural_networks.discriminative_network.DiscriminativeNetwork</span></code></a></p>
-<p>Discriminator</p>
-<dl class="attribute">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.CONFIGURATION">
-<code class="descname">CONFIGURATION</code><em class="property"> = {'description': 'qGAN Discriminator Network', 'input_schema': {'$schema': 'http://json-schema.org/schema#', 'additionalProperties': False, 'id': 'discriminator_schema', 'properties': {'n_features': {'default': 1, 'type': 'integer'}, 'n_out': {'default': 1, 'type': 'integer'}}, 'type': 'object'}, 'name': 'ClassicalDiscriminator'}</em><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.CONFIGURATION" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="staticmethod">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.check_pluggable_valid">
-<em class="property">static </em><code class="descname">check_pluggable_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.check_pluggable_valid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.check_pluggable_valid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if pluggable is ready for use. Throws an exception if not</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.get_discriminator">
-<code class="descname">get_discriminator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.get_discriminator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.get_discriminator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get discriminator
-Returns: discriminator object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.get_label">
-<code class="descname">get_label</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.get_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.get_label" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get data sample labels, i.e. true or fake.
-:param x: numpy array or torch.Tensor, Discriminator input, i.e. data sample.</p>
-<p>Returns:torch.Tensor, Discriminator output, i.e. data label</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.get_section_key_name">
-<em class="property">classmethod </em><code class="descname">get_section_key_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.get_section_key_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.get_section_key_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.gradient_penalty">
-<code class="descname">gradient_penalty</code><span class="sig-paren">(</span><em>x</em>, <em>lambda_=5.0</em>, <em>k=0.01</em>, <em>c=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.gradient_penalty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.gradient_penalty" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute gradient penalty for discriminator optimization
-:param x: numpy array, Generated data sample.
-:param <a href="#id1"><span class="problematic" id="id2">lambda_</span></a>: float, Gradient penalty coefficient 1.
-:param k: float, Gradient penalty coefficient 2.
-:param c: float, Gradient penalty coefficient 3.</p>
-<p>Returns: torch.Tensor, Gradient penalty.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.load_model">
-<code class="descname">load_model</code><span class="sig-paren">(</span><em>load_dir</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.load_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.load_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save discriminator model
-:param dir: str, file with stored pytorch discriminator model to be loaded</p>
-<p>Returns:</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.loss">
-<code class="descname">loss</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.loss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loss function
-:param x: torch.Tensor, Discriminator output.
-:param y: torch.Tensor, Label of the data point
-:param weights: torch.Tensor, Data weights.</p>
-<p>Returns:torch.Tensor, Loss w.r.t to the generated data points.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.save_model">
-<code class="descname">save_model</code><span class="sig-paren">(</span><em>snapshot_dir</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.save_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.save_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save discriminator model
-:param snapshot_dir: str, directory path for saving the model</p>
-<p>Returns:</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.set_seed">
-<code class="descname">set_seed</code><span class="sig-paren">(</span><em>seed</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.set_seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.set_seed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set seed.
-:param seed: int, seed</p>
-<p>Returns:</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>data</em>, <em>weights</em>, <em>penalty=False</em>, <em>quantum_instance=None</em>, <em>shots=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#ClassicalDiscriminator.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.ClassicalDiscriminator.train" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform one training step w.r.t to the discriminator’s parameters
-:param data: [real_barch, generated_batch]</p>
-<blockquote>
-<div>real_batch: torch.Tensor, Training data batch.
-generated_batch: numpy array, Generated data batch.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>weights</strong> – [real_prob, generated_prob]</li>
-<li><strong>penalty</strong> – Boolean, Indicate whether or not penalty function is applied to the loss function.</li>
-<li><strong>quantum_instance</strong> – QuantumInstance (depreciated)</li>
-<li><strong>shots</strong> – int, Number of shots for hardware or qasm execution. Depreciated for classical network(depreciated)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Returns: dict, with Discriminator loss (torch.Tensor) and updated parameters (array).</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.DiscriminatorNet">
-<em class="property">class </em><code class="descname">DiscriminatorNet</code><span class="sig-paren">(</span><em>n_features=1</em>, <em>n_out=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#DiscriminatorNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.DiscriminatorNet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
-<p>Discriminator</p>
-<dl class="method">
-<dt id="qiskit.aqua.components.neural_networks.classical_discriminator.DiscriminatorNet.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/aqua/components/neural_networks/classical_discriminator.html#DiscriminatorNet.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.aqua.components.neural_networks.classical_discriminator.DiscriminatorNet.forward" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> – torch.Tensor, Discriminator input, i.e. data sample.</td>
-</tr>
-</tbody>
-</table>
-<p>Returns: torch.Tensor, Discriminator output, i.e. data label.</p>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="qiskit-aqua-components-neural-networks-classical-discriminator-module">
+<h1>qiskit.aqua.components.neural_networks.classical_discriminator module<a class="headerlink" href="#qiskit-aqua-components-neural-networks-classical-discriminator-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
