@@ -243,7 +243,7 @@ class PageAqua extends localize(i18next)(LitElement) {
               <!-- htmlmin:ignore -->
               <template>
                 import numpy as np
-                from qiskit_chemistry import QiskitChemistry
+                from qiskit.chemistry import QiskitChemistry
 
                 qiskit_chemistry_dict = {
                   "driver": { "name": "PYSCF" },
