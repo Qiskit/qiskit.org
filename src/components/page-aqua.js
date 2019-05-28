@@ -80,11 +80,7 @@ class PageAqua extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent({
-                  cta: 'Qiskit Aqua GitHub Repository',
-                  location: 'Header',
-                  text: 'Github'
-                })}>
+                @click=${() => trackClickEvent('Qiskit Aqua GitHub Repository')}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -152,11 +148,7 @@ class PageAqua extends localize(i18next)(LitElement) {
             <code-sample
               type="python"
               copy-clipboard-button
-              @click=${() => trackClickEvent({
-                cta: 'Qiskit Aqua: Copy Code Sample',
-                location: 'Aqua Example Section',
-                text: 'Code'
-              })}>
+              @click=${() => trackClickEvent('Qiskit Aqua: Copy Code Sample')}>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import Aer
@@ -198,11 +190,7 @@ class PageAqua extends localize(i18next)(LitElement) {
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
-                  @click=${() => trackClickEvent({
-                    cta: 'Qiskit Chemistry GitHub Repository',
-                    location: 'Qiskit Chemistry Section',
-                    text: 'Github'
-                  })}>
+                  @click=${() => trackClickEvent('Qiskit Chemistry GitHub Repository')}>
                 <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
               </a>
               <a
@@ -210,11 +198,7 @@ class PageAqua extends localize(i18next)(LitElement) {
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
-                  @click=${() => trackClickEvent({
-                    cta: 'Qiskit Chemistry Tutorials',
-                    location: 'Qiskit Chemistry Section',
-                    text: 'Tutorials'
-                  })}>
+                  @click=${() => trackClickEvent('Qiskit Chemistry Tutorials')}>
                 <vaadin-button theme="secondary small">${i18next.t('tutorials')}</vaadin-button>
               </a>
             </div>
@@ -235,11 +219,7 @@ class PageAqua extends localize(i18next)(LitElement) {
             <code-sample
               type="python"
               copy-clipboard-button
-              @click=${() => trackClickEvent({
-                cta: 'Qiskit Chemistry: Copy Code Sample',
-                location: 'Chemistry Example Section',
-                text: 'Code'
-              })}>
+              @click=${() => trackClickEvent('Qiskit Chemistry: Copy Code Sample')}>
               <!-- htmlmin:ignore -->
               <template>
                 import numpy as np
