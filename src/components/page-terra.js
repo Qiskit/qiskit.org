@@ -66,11 +66,14 @@ class PageTerra extends localize(i18next)(LitElement) {
           <h2>${i18next.t('pages.terra.headerSubTitle')}</h2>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit/qiskit-terra"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1"
-                @click=${() => trackClickEvent('Qiskit Terra GitHub Repository')}>
+              href="https://github.com/Qiskit/qiskit-terra"
+              target="_blank"
+              rel="noopener"
+              tabindex="-1"
+              @click=${() => trackClickEvent({
+                action: 'Qiskit Terra: GitHub Repository',
+                objectType: 'Button'
+              })}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -128,7 +131,10 @@ class PageTerra extends localize(i18next)(LitElement) {
             <code-sample
               type="python"
               copy-clipboard-button
-              @click=${() => trackClickEvent('Qiskit Terra: Copy Code Sample')}>
+              @click=${() => trackClickEvent({
+                action: 'Qiskit Terra: Copy Code Sample',
+                objectType: 'Button'
+              })}>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import QuantumRegister, ClassicalRegister

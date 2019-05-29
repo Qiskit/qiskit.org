@@ -70,7 +70,10 @@ class PageAer extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent('Qiskit Aer GitHub Repository')}>
+                @click=${() => trackClickEvent({
+                  action: 'Qiskit Aer GitHub Repository',
+                  objectType: 'Button'
+                })}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -134,7 +137,10 @@ class PageAer extends localize(i18next)(LitElement) {
             <code-sample
               type="python"
               copy-clipboard-button
-              @click=${() => trackClickEvent('Qiskit Aer: Copy Code Sample')}>
+              @click=${() => trackClickEvent({
+                action: 'Qiskit Aer: Copy Code Sample',
+                objectType: 'Button'
+              })}>
               <!-- htmlmin:ignore -->
               <template>
                 from qiskit import QuantumRegister, ClassicalRegister

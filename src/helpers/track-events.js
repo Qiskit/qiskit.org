@@ -7,14 +7,18 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-export const trackClickEvent = data => {
+const { productTitle } = window.digitalData.page.pageInfo;
+const { category } = window.digitalData.page.pageInfo.analytics;
+
+export const trackClickEvent = ({ action, objectType }) => {
   if (window.bluemixAnalytics && window.digitalData) {
     const segmentEvent = {
-      productTitle: window.digitalData.page.pageInfo.productTitle,
-      category: window.digitalData.page.pageInfo.analytics.category,
+      productTitle,
+      category,
       url: window.location.href,
       path: window.location.pathname,
-      action: `Button Clicked: ${data}`,
+      action: `Button Clicked: ${action}`,
+      objectType,
       successFlag: true,
     };
 
@@ -25,11 +29,12 @@ export const trackClickEvent = data => {
 export const trackSelectCombo = data => {
   if (window.bluemixAnalytics && window.digitalData) {
     const segmentEvent = {
-      productTitle: window.digitalData.page.pageInfo.productTitle,
-      category: window.digitalData.page.pageInfo.analytics.category,
+      productTitle,
+      category,
       url: window.location.href,
       path: window.location.pathname,
       action: `Language Changed to: ${data.text}`,
+      objectType: 'Select Combobox',
       successFlag: true,
     };
 

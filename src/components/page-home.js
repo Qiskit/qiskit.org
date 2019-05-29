@@ -184,7 +184,10 @@ class PageHome extends localize(i18next)(LitElement) {
                 href="${organization.url}"
                 target="_blank"
                 rel="noopener"
-                @click=${() => trackClickEvent(organization.name)}>
+                @click=${() => trackClickEvent({
+                    action: organization.name,
+                    objectType: 'Link'
+                })}>
                 <span class="name">${organization.name}</span>
               </a>
             ` : html`
@@ -199,7 +202,10 @@ class PageHome extends localize(i18next)(LitElement) {
                 href="${collaborator.url}"
                 target="_blank"
                 rel="noopener"
-                @click=${() => trackClickEvent(collaborator.name)}>
+                @click=${() => trackClickEvent({
+                  action: collaborator.name,
+                  objectType: 'Link'
+                })}>
                 <div class="supporter">
                   <span class="name">${collaborator.name}</span>
                   <span class="institution">${collaborator.institution}</span>
@@ -241,15 +247,21 @@ class PageHome extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent('Qiskit Github Repository')}>
+                @click=${() => trackClickEvent({
+                  action: 'Qiskit GitHub Repository',
+                  objectType: 'Button'
+                })}>
               <vaadin-button theme="secondary small" >${githubIcon} GitHub</vaadin-button>
             </a>
             <a
-                href="https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTBlMWY1ZGJiYmZkNjliZTY4MTViNTQ3NzI2ZmU2MzQxZjlhZDZlYTAzZTNlMDU0ZjVmNzEyMzY3OGE1Y2UyNjk"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1"
-                @click=${() => trackClickEvent('Qiskit Slack Community Channel')}>
+              href="https://join.slack.com/t/qiskit/shared_invite/enQtNjQ5OTc5ODM1ODYyLTBlMWY1ZGJiYmZkNjliZTY4MTViNTQ3NzI2ZmU2MzQxZjlhZDZlYTAzZTNlMDU0ZjVmNzEyMzY3OGE1Y2UyNjk"
+              target="_blank"
+              rel="noopener"
+              tabindex="-1"
+              @click=${() => trackClickEvent({
+                  action: 'Qiskit Slack Community Channel',
+                  objectType: 'Button'
+              })}>
               <vaadin-button theme="secondary small">${slackIcon} ${i18next.t('joinSlack')}</vaadin-button>
             </a>
           </div>
@@ -264,11 +276,14 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsQiskit9Description')}</p>
               <div class="actions">
                 <a
-                    href="https://medium.com/qiskit/whats-new-in-qiskit-0-9-e875f96ca695"
-                    target="_blank"
-                    rel="noopener"
-                    tabindex="-1"
-                    @click=${() => trackClickEvent('Read about Qiskit 0.10')}>
+                  href="https://medium.com/qiskit/whats-new-in-qiskit-0-9-e875f96ca695"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1"
+                  @click=${() => trackClickEvent({
+                    action: 'Read about Qiskit 0.10',
+                    objectType: 'Button'
+                  })}>
                   <vaadin-button theme="secondary">${i18next.t('pages.home.newsQiskit9Button')}</vaadin-button>
                 </a>
               </div>
@@ -282,7 +297,10 @@ class PageHome extends localize(i18next)(LitElement) {
                 <a
                   href="https://quantum-computing.ibm.com/login"
                   tabindex="-1"
-                  @click=${() => trackClickEvent('IBM Q Experience, Getting Started')}>
+                  @click=${() => trackClickEvent({
+                    action: 'IBM Q Experience, Getting Started',
+                    objectType: 'Button'
+                  })}>
                   <vaadin-button theme="secondary">${i18next.t('pages.home.newsGetStartedButton')}</vaadin-button>
                 </a>
               </div>
@@ -298,21 +316,27 @@ class PageHome extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.home.ibmQExperienceDescription')}</p>
             <div class="actions">
               <a
-                  href="https://www.research.ibm.com/ibm-q/technology/experience/"
-                  title="IBM Q Experience"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1"
-                  @click=${() => trackClickEvent('Introducing Qiskit notebooks: Learn More')}>
+                href="https://www.research.ibm.com/ibm-q/technology/experience/"
+                title="IBM Q Experience"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  action: 'Introducing Qiskit notebooks: Learn More',
+                  objectType: 'Button'
+                })}>
                 <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButtonLearnMore')}</vaadin-button>
               </a>
               <a
-                  href="https://quantum-computing.ibm.com/login"
-                  title="IBM Q Experience"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1"
-                  @click=${() => trackClickEvent('Introducing Qiskit notebooks: Try out')}>
+                href="https://quantum-computing.ibm.com/login"
+                title="IBM Q Experience"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  action: 'Introducing Qiskit notebooks: Try out',
+                  objectType: 'Button'
+                })}>
                 <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButtonTryOut')}</vaadin-button>
               </a>
               </div>
@@ -333,69 +357,90 @@ class PageHome extends localize(i18next)(LitElement) {
             <ul class="social-networks-list">
               <li>
                 <a
-                    href="https://qiskit.slack.com"
-                    title="Slack community"
-                    target="_blank"
-                    @click=${() => trackClickEvent('Qiskit Community: Slack')}>
+                  href="https://qiskit.slack.com"
+                  title="Slack community"
+                  target="_blank"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: Slack',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${slackIcon} <span class="name">Slack</span></div>
                 </a>
               </li>
               <li>
                 <a
-                    href="https://github.com/Qiskit"
-                    title="GitHub organization"
-                    target="_blank"
-                    @click=${() => trackClickEvent('Qiskit Community: GitHub')}>
+                  href="https://github.com/Qiskit"
+                  title="GitHub organization"
+                  target="_blank"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: GitHub',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${githubIcon} <span class="name">GitHub</span></div>
                 </a>
               </li>
               <li>
                 <a
-                    href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit"
-                    title="Stack Exchange community"
-                    target="_blank"
-                    rel="noopener"
-                    @click=${() => trackClickEvent('Qiskit Community: StackExchange')}>
+                  href="https://quantumcomputing.stackexchange.com/questions/tagged/qiskit"
+                  title="Stack Exchange community"
+                  target="_blank"
+                  rel="noopener"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: StackExchange',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${stackexchangeIcon} <span class="name">Stack Exchange</span></div>
                 </a>
               </li>
               <li>
                 <a
-                    href="https://twitter.com/Qiskit"
-                    title="Twitter profile"
-                    target="_blank"
-                    rel="noopener"
-                    @click=${() => trackClickEvent('Qiskit Community: Twitter')}>
+                  href="https://twitter.com/Qiskit"
+                  title="Twitter profile"
+                  target="_blank"
+                  rel="noopener"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: Twitter',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${twitterIcon} <span class="name">Twitter</span></div>
                 </a>
               </li>
               <li>
                 <a
-                    href="https://medium.com/Qiskit"
-                    title="Medium profile"
-                    target="_blank"
-                    rel="noopener"
-                    @click=${() => trackClickEvent('Qiskit Community: Medium')}>
+                  href="https://medium.com/Qiskit"
+                  title="Medium profile"
+                  target="_blank"
+                  rel="noopener"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: Medium',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${mediumIcon} <span class="name">Medium</span></div>
                 </a>
               </li>
               <li>
                 <a
-                    href="https://www.youtube.com/Qiskit"
-                    title="YouTube channel"
-                    target="_blank"
-                    rel="noopener"
-                    @click=${() => trackClickEvent('Qiskit Community: Youtube')}>
+                  href="https://www.youtube.com/Qiskit"
+                  title="YouTube channel"
+                  target="_blank"
+                  rel="noopener"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: Youtube',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${youtubeIcon} <span class="name">YouTube</span></div>
                 </a>
               </li>
               <li>
                 <a
-                    href="https://www.facebook.com/Qiskit"
-                    title="Facebook page"
-                    target="_blank"
-                    rel="noopener"
-                    @click=${() => trackClickEvent('Qiskit Community: Facebook')}>
+                  href="https://www.facebook.com/Qiskit"
+                  title="Facebook page"
+                  target="_blank"
+                  rel="noopener"
+                  @click=${() => trackClickEvent({
+                    action: 'Qiskit Community: Facebook',
+                    objectType: 'Icon Button'
+                  })}>
                   <div class="social-network">${facebookIcon} <span class="name">Facebook</span></div>
                 </a>
               </li>
@@ -416,7 +461,10 @@ class PageHome extends localize(i18next)(LitElement) {
                 title="BibTeX"
                 target="_blank"
                 rel="noopener"
-                @click=${() => trackClickEvent('Citation: BibTex File')}>
+                @click=${() => trackClickEvent({
+                  action: 'Citation: BibTex File',
+                  objectType: 'Link'
+                })}>
                   ${i18next.t('pages.home.bibtexLink')}
               </a>
             </p>
