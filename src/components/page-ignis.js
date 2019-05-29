@@ -82,7 +82,8 @@ class PageIgnis extends localize(i18next)(LitElement) {
               @click=${() => trackClickEvent({
                 action: 'Qiskit Ignis: GitHub Repository',
                 objectType: 'Button'
-              })}>
+              })}
+            >
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
           </div>
@@ -138,7 +139,8 @@ class PageIgnis extends localize(i18next)(LitElement) {
               @click=${() => trackClickEvent({
                 action: 'Qiskit Ignis: Copy Code Sample',
                 objectType: 'Button'
-              })}>
+              })}
+            >
               <!-- htmlmin:ignore -->
               <template>
                 import qiskit
