@@ -235,7 +235,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               @click=${() => trackClickEvent({
                 action: 'Tutorials',
                 objectType: 'Link'
-              })}>
+              })}
+            >
               ${i18next.t('tutorials')}
             </a>
             <a href="/documentation">${i18next.t('documentation')}</a>
@@ -262,7 +263,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             @click=${() => trackClickEvent({
               action: 'Tutorials Link in Navbar',
               objectType: 'Link'
-            })}>
+            })}
+           >
             ${i18next.t('tutorials')}
           </a>
           <a href="/documentation">${i18next.t('documentation')}</a>

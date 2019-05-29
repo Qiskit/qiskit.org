@@ -52,7 +52,8 @@ class PageFun extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                   action: 'Model Q',
                   objectType: 'Button'
-                })}>
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.modelQButton')}</vaadin-button>
               </a>
             </div>
@@ -77,7 +78,8 @@ class PageFun extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                   action: 'Hello Quantum',
                   objectType: 'Button'
-                })}>
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.helloQuantumButton')}</vaadin-button>
               </a>
             </div>
@@ -102,7 +104,8 @@ class PageFun extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                   action: 'Entanglion',
                   objectType: 'Button'
-                })}>
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.entanglionButton')}</vaadin-button>
               </a>
             </div>

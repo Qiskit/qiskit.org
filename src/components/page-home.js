@@ -187,7 +187,8 @@ class PageHome extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                     action: organization.name,
                     objectType: 'Link'
-                })}>
+                })}
+              >
                 <span class="name">${organization.name}</span>
               </a>
             ` : html`
@@ -205,7 +206,8 @@ class PageHome extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                   action: collaborator.name,
                   objectType: 'Link'
-                })}>
+                })}
+              >
                 <div class="supporter">
                   <span class="name">${collaborator.name}</span>
                   <span class="institution">${collaborator.institution}</span>
@@ -243,14 +245,15 @@ class PageHome extends localize(i18next)(LitElement) {
           <h2>${i18next.t('pages.home.headerSubTitle')}</h2>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1"
-                @click=${() => trackClickEvent({
-                  action: 'Qiskit GitHub Repository',
-                  objectType: 'Button'
-                })}>
+              href="https://github.com/Qiskit"
+              target="_blank"
+              rel="noopener"
+              tabindex="-1"
+              @click=${() => trackClickEvent({
+                action: 'Qiskit GitHub Repository',
+                objectType: 'Button'
+              })}
+            >
               <vaadin-button theme="secondary small" >${githubIcon} GitHub</vaadin-button>
             </a>
             <a
@@ -261,7 +264,8 @@ class PageHome extends localize(i18next)(LitElement) {
               @click=${() => trackClickEvent({
                   action: 'Qiskit Slack Community Channel',
                   objectType: 'Button'
-              })}>
+              })}
+            >
               <vaadin-button theme="secondary small">${slackIcon} ${i18next.t('joinSlack')}</vaadin-button>
             </a>
           </div>
@@ -283,7 +287,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Read about Qiskit 0.10',
                     objectType: 'Button'
-                  })}>
+                  })}
+                >
                   <vaadin-button theme="secondary">${i18next.t('pages.home.newsQiskit9Button')}</vaadin-button>
                 </a>
               </div>
@@ -300,7 +305,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'IBM Q Experience, Getting Started',
                     objectType: 'Button'
-                  })}>
+                  })}
+                >
                   <vaadin-button theme="secondary">${i18next.t('pages.home.newsGetStartedButton')}</vaadin-button>
                 </a>
               </div>
@@ -336,7 +342,8 @@ class PageHome extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                   action: 'Introducing Qiskit notebooks: Try out',
                   objectType: 'Button'
-                })}>
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.home.ibmQExperienceButtonTryOut')}</vaadin-button>
               </a>
               </div>
@@ -375,7 +382,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Qiskit Community: GitHub',
                     objectType: 'Icon Button'
-                  })}>
+                  })}
+                >
                   <div class="social-network">${githubIcon} <span class="name">GitHub</span></div>
                 </a>
               </li>
@@ -388,7 +396,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Qiskit Community: StackExchange',
                     objectType: 'Icon Button'
-                  })}>
+                  })}
+                >
                   <div class="social-network">${stackexchangeIcon} <span class="name">Stack Exchange</span></div>
                 </a>
               </li>
@@ -401,7 +410,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Qiskit Community: Twitter',
                     objectType: 'Icon Button'
-                  })}>
+                  })}
+                >
                   <div class="social-network">${twitterIcon} <span class="name">Twitter</span></div>
                 </a>
               </li>
@@ -414,7 +424,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Qiskit Community: Medium',
                     objectType: 'Icon Button'
-                  })}>
+                  })}
+                >
                   <div class="social-network">${mediumIcon} <span class="name">Medium</span></div>
                 </a>
               </li>
@@ -427,7 +438,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Qiskit Community: Youtube',
                     objectType: 'Icon Button'
-                  })}>
+                  })}
+                >
                   <div class="social-network">${youtubeIcon} <span class="name">YouTube</span></div>
                 </a>
               </li>
@@ -440,7 +452,8 @@ class PageHome extends localize(i18next)(LitElement) {
                   @click=${() => trackClickEvent({
                     action: 'Qiskit Community: Facebook',
                     objectType: 'Icon Button'
-                  })}>
+                  })}
+                >
                   <div class="social-network">${facebookIcon} <span class="name">Facebook</span></div>
                 </a>
               </li>
@@ -464,7 +477,8 @@ class PageHome extends localize(i18next)(LitElement) {
                 @click=${() => trackClickEvent({
                   action: 'Citation: BibTex File',
                   objectType: 'Link'
-                })}>
+                })}
+              >
                   ${i18next.t('pages.home.bibtexLink')}
               </a>
             </p>

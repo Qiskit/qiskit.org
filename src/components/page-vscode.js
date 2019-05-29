@@ -103,24 +103,26 @@ class PageVscode extends localize(i18next)(LitElement) {
           <h2>${i18next.t('pages.vscode.headerSubTitle')}</h2>
           <div class="badges">
             <a
-                href="https://github.com/Qiskit/qiskit-vscode"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1"
-                @click=${() => trackClickEvent({
-                  action: 'Qiskit VSCode Extension',
-                  objectType: 'Button'
-                })}>
+              href="https://github.com/Qiskit/qiskit-vscode"
+              target="_blank"
+              rel="noopener"
+              tabindex="-1"
+              @click=${() => trackClickEvent({
+                action: 'Qiskit VSCode Extension',
+                objectType: 'Button'
+              })}
+            >
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
             <a
-                href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-vscode"
-                target="_blank"
-                rel="noopener"
-                @click=${() => trackClickEvent({
-                  action: 'Qiskit VSCode Marketplace badge',
-                  objectType: 'Button'
-                })}>
+              href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-vscode"
+              target="_blank"
+              rel="noopener"
+              @click=${() => trackClickEvent({
+                action: 'Qiskit VSCode Marketplace badge',
+                objectType: 'Button'
+              })}
+            >
               <img
                   src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-vscode.svg"
                   alt="Qiskit Studio version badge"
@@ -139,14 +141,15 @@ class PageVscode extends localize(i18next)(LitElement) {
               <span class="title">${i18next.t('pages.vscode.stepOneTitle')}</span>
             </p>
             <a
-                href="https://code.visualstudio.com"
-                target="_blank"
-                rel="noopener"
-                tabindex="-1"
-                @click=${() => trackClickEvent({
-                  action: 'Get Visual Studio Code',
-                  objectType: 'Button'
-                })}>
+              href="https://code.visualstudio.com"
+              target="_blank"
+              rel="noopener"
+              tabindex="-1"
+              @click=${() => trackClickEvent({
+                action: 'Get Visual Studio Code',
+                objectType: 'Button'
+              })}
+            >
               <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepOneButton')}</vaadin-button>
             </a>
           </div>
@@ -161,7 +164,8 @@ class PageVscode extends localize(i18next)(LitElement) {
               @click=${() => trackClickEvent({
                 action: 'Get VSCode Extension',
                 objectType: 'Button'
-              })}>
+              })}
+            >
               <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepTwoButton')}</vaadin-button>
             </a>
           </div>
