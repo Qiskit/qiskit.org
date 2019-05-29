@@ -107,14 +107,20 @@ class PageVscode extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent('Qiskit VSCode Extension')}>
+                @click=${() => trackClickEvent({
+                  action: 'Qiskit VSCode Extension',
+                  objectType: 'Button'
+                })}>
               <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
             </a>
             <a
                 href="https://marketplace.visualstudio.com/items?itemName=qiskit.qiskit-vscode"
                 target="_blank"
                 rel="noopener"
-                @click=${() => trackClickEvent('Qiskit VSCode Marketplace badge')}>
+                @click=${() => trackClickEvent({
+                  action: 'Qiskit VSCode Marketplace badge',
+                  objectType: 'Button'
+                })}>
               <img
                   src="https://vsmarketplacebadge.apphb.com/version/qiskit.qiskit-vscode.svg"
                   alt="Qiskit Studio version badge"
@@ -137,7 +143,10 @@ class PageVscode extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent('Get Visual Studio Code')}>
+                @click=${() => trackClickEvent({
+                  action: 'Get Visual Studio Code',
+                  objectType: 'Button'
+                })}>
               <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepOneButton')}</vaadin-button>
             </a>
           </div>
@@ -149,7 +158,10 @@ class PageVscode extends localize(i18next)(LitElement) {
             <a
               href="vscode:extension/qiskit.qiskit-vscode"
               tabindex="-1"
-              @click=${() => trackClickEvent('Qiskit VSCode Extension')}>
+              @click=${() => trackClickEvent({
+                action: 'Get VSCode Extension',
+                objectType: 'Button'
+              })}>
               <vaadin-button theme="secondary small">${i18next.t('pages.vscode.stepTwoButton')}</vaadin-button>
             </a>
           </div>
