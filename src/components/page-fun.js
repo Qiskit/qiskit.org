@@ -49,7 +49,11 @@ class PageFun extends localize(i18next)(LitElement) {
                 target="_blank"
                 rel="noopener"
                 tabindex="-1"
-                @click=${() => trackClickEvent('Model Q')}>
+                @click=${() => trackClickEvent({
+                  action: 'Model Q',
+                  objectType: 'Button'
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.modelQButton')}</vaadin-button>
               </a>
             </div>
@@ -67,11 +71,15 @@ class PageFun extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.fun.helloQuantumDescription')}</p>
             <div class="actions">
               <a
-                  href="https://helloquantum.mybluemix.net"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1"
-                  @click=${() => trackClickEvent('Hello Quantum')}>
+                href="https://helloquantum.mybluemix.net"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  action: 'Hello Quantum',
+                  objectType: 'Button'
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.helloQuantumButton')}</vaadin-button>
               </a>
             </div>
@@ -89,11 +97,15 @@ class PageFun extends localize(i18next)(LitElement) {
             <p>${i18next.t('pages.fun.entanglionDescription')}</p>
             <div class="actions">
               <a
-                  href="https://entanglion.github.io"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1"
-                  @click=${() => trackClickEvent('Entaglion')}>
+                href="https://entanglion.github.io"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  action: 'Entanglion',
+                  objectType: 'Button'
+                })}
+              >
                 <vaadin-button theme="secondary">${i18next.t('pages.fun.entanglionButton')}</vaadin-button>
               </a>
             </div>
