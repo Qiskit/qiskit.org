@@ -77,11 +77,20 @@ task('copy-license', () => src('license/**').pipe(dest(`${buildPath}license`)));
 task('copy-documentation', () =>
   src('documentation/**').pipe(dest(`${buildPath}documentation`)),
 );
+task('copy-community', () =>
+  src('community/**').pipe(dest(`${buildPath}community`)),
+);
 task('copy-modelq', () => src('modelq/**').pipe(dest(`${buildPath}modelq`)));
 task('copy-robots', () => src('robots.txt').pipe(dest(`${buildPath}`)));
 task(
   'copy-static-files',
-  parallel('copy-license', 'copy-documentation', 'copy-modelq', 'copy-robots'),
+  parallel(
+    'copy-license',
+    'copy-documentation',
+    'copy-community',
+    'copy-modelq',
+    'copy-robots',
+  ),
 );
 
 /**
