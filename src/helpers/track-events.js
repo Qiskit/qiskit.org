@@ -10,8 +10,8 @@
 export const trackClickEvent = ({ action, objectType }) => {
   if (window.bluemixAnalytics && window.digitalData) {
     const segmentEvent = {
-      productTitle: window.digitalData.page.pageInfo,
-      category: window.digitalData.page.pageInfo.analytics,
+      productTitle: window.digitalData.page.pageInfo.productTitle,
+      category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
       action: `Button Clicked: ${action}`,
@@ -26,8 +26,8 @@ export const trackClickEvent = ({ action, objectType }) => {
 export const trackSelectCombo = data => {
   if (window.bluemixAnalytics && window.digitalData) {
     const segmentEvent = {
-      productTitle: window.digitalData.page.pageInfo,
-      category: window.digitalData.page.pageInfo.analytics,
+      productTitle: window.digitalData.page.pageInfo.productTitle,
+      category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
       action: `Language Changed to: ${data.text}`,
