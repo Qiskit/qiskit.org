@@ -78,7 +78,7 @@ task('copy-documentation', () =>
   src('documentation/**').pipe(dest(`${buildPath}documentation`)),
 );
 task('copy-community', () =>
-  src('community/**').pipe(dest(`${buildPath}community`)),
+  src('community-static/**').pipe(dest(`${buildPath}community-static`)),
 );
 task('copy-modelq', () => src('modelq/**').pipe(dest(`${buildPath}modelq`)));
 task('copy-robots', () => src('robots.txt').pipe(dest(`${buildPath}`)));

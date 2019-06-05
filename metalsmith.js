@@ -10,7 +10,7 @@ Metalsmith(__dirname)
     siteurl: 'https://qiskit.org/community',
   })
   .source('./community-src/collections/')
-  .destination('./community/')
+  .destination('./community-static/')
   .clean(true)
   .use(
     collections({
