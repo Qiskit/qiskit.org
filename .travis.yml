@@ -1,0 +1,15 @@
+language: node_js
+node_js: '12'
+cache: npm
+before_script:
+  - npm run lint
+before_deploy:
+  - npm run generate
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
+

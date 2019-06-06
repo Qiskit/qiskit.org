@@ -4,18 +4,18 @@
       <a href="https://qiskit.org" class="text-logo" target="_blank" rel="noopener"><img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit</a>
     </section>
     <div class="convertible-menu">
-      <input class="hamburger" type="checkbox" />
-      <span class="hamburger"></span>
-      <span class="hamburger"></span>
-      <span class="hamburger"></span>
+      <input class="hamburger" type="checkbox">
+      <span class="hamburger" />
+      <span class="hamburger" />
+      <span class="hamburger" />
       <ul>
-        <slot></slot>
+        <slot />
       </ul>
     </div>
   </nav>
 </template>
 
-<style>
+<style scoped>
 .logo {
   width: 1.7rem;
   margin-top: -0.2rem;
@@ -51,6 +51,7 @@ nav {
 }
 
 nav ul {
+  margin: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -1,8 +1,8 @@
 <template>
   <div>
     <Menu>
-      <li><a href="#gather-together">Gather together</a></li>
-      <li><a href="#get-involved">Get involved</a></li>
+      <li><a href="#qiskit-camp">Gather together</a></li>
+      <li><a href="#qiskit-advocates-program">Get involved</a></li>
     </Menu>
     <nuxt />
     <footer>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Menu from '~/components/Menu.vue'
-import { Component } from 'vue-property-decorator';
+import { Component } from 'vue-property-decorator'
 
 @Component({
   components: {
@@ -39,7 +39,6 @@ export default class extends Vue { };
   src: local("IBM Plex Mono Italic"), local("IBMPlexMono-Italic"), url("/fonts/IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-Italic.woff") format("woff");
 }
 
-
 @font-face {
   font-family: 'IBM Plex Sans';
   font-style: normal;
@@ -47,9 +46,18 @@ export default class extends Vue { };
   src: local("IBM Plex Sans"), local("IBMPlexSans"), url("/fonts/IBM-Plex-Sans/fonts/complete/woff/IBMPlexSans-Regular.woff") format("woff");
 }
 
+:root {
+  --secondary-color: rgb(138, 63, 252);
+  --dark-color: rgb(33, 37, 43);
+}
+
 * {
   margin: 0;
   padding: 0;
+}
+
+ul {
+  margin: 1rem 0 1rem 3rem;
 }
 
 a {
@@ -80,6 +88,6 @@ footer {
   min-height: 10rem;
   text-align: center;
   margin-top: 4rem;
-  background-color: #0A1D8F;
+  background-color: var(--dark-color);
 }
 </style>
