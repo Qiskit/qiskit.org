@@ -208,7 +208,6 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trials</span> <span class="o">=</span> <span class="n">trials</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="kc">None</span>
@@ -242,8 +241,6 @@
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span>
                 <span class="s2">&quot;Mappers require to have the layout to be the same size as the coupling map&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
@@ -251,7 +248,6 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;StochasticSwap RandomState seeded with seed=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
 
         <span class="n">new_dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapper</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span>
-        <span class="c1"># self.property_set[&quot;layout&quot;] = self.initial_layout</span>
         <span class="k">return</span> <span class="n">new_dag</span></div>
 
     <span class="k">def</span> <span class="nf">_layer_permutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
@@ -293,13 +289,11 @@
                                   <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span>
                                   <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_layer_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">first_layer</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_layer_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span>
                       <span class="n">best_circuit</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Provide a DAGCircuit for a new mapped layer.</span>
 
 <span class="sd">        i (int) = layer number</span>
-<span class="sd">        first_layer (bool) = True if this is the first layer in the</span>
-<span class="sd">            circuit with any multi-qubit gates</span>
 <span class="sd">        best_layout (Layout) = layout returned from _layer_permutation</span>
 <span class="sd">        best_depth (int) = depth returned from _layer_permutation</span>
 <span class="sd">        best_circuit (DAGCircuit) = swap circuit returned</span>
@@ -318,38 +312,23 @@
             <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                 <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-        <span class="c1"># If this is the first layer with multi-qubit gates,</span>
-        <span class="c1"># output all layers up to this point and ignore any</span>
-        <span class="c1"># swap gates. Set the initial layout.</span>
-        <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: first multi-qubit gate layer&quot;</span><span class="p">)</span>
-            <span class="c1"># Output all layers up to this point</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="c1"># Make qubit edge map and extend by classical bits</span>
-                <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
-                    <span class="n">edge_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
-                <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
-        <span class="c1"># Otherwise, we output the current layer and the associated swap gates.</span>
+        <span class="c1"># Output any swaps</span>
+        <span class="k">if</span> <span class="n">best_depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: there are swaps in this layer, &quot;</span>
+                         <span class="s2">&quot;depth </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">)</span>
+            <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">best_circuit</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Output any swaps</span>
-            <span class="k">if</span> <span class="n">best_depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: there are swaps in this layer, &quot;</span>
-                             <span class="s2">&quot;depth </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">)</span>
-                <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">best_circuit</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: there are no swaps in this layer&quot;</span><span class="p">)</span>
-            <span class="c1"># Make qubit edge map and extend by classical bits</span>
-            <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
-                <span class="n">edge_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
-            <span class="c1"># Output this layer</span>
-            <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: there are no swaps in this layer&quot;</span><span class="p">)</span>
+        <span class="c1"># Make qubit edge map and extend by classical bits</span>
+        <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
+            <span class="n">edge_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
+        <span class="c1"># Output this layer</span>
+        <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">dagcircuit_output</span>
 
-    <span class="k">def</span> <span class="nf">_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span>
-                <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Map a DAGCircuit onto a CouplingMap using swap gates.</span>
 
 <span class="sd">        Use self.initial_layout for the initial layout.</span>
@@ -379,25 +358,9 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">])</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">qubit_subset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Supply a default layout for this dag</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">()</span>
-            <span class="n">physical_qubit</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qreg</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">[(</span><span class="n">qreg</span><span class="p">,</span> <span class="n">index</span><span class="p">)]</span> <span class="o">=</span> <span class="n">physical_qubit</span>
-                    <span class="n">physical_qubit</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">qubit_subset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-            <span class="c1"># Restrict the coupling map to the image of the layout</span>
-            <span class="n">coupling_graph</span> <span class="o">=</span> <span class="n">coupling_graph</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">get_physical_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="k">if</span> <span class="n">coupling_graph</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Coupling map too small for default layout&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">input_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">qubit_subset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-        <span class="c1"># Find swap circuit to preceed to each layer of input circuit</span>
+        <span class="c1"># Find swap circuit to precede each layer of input circuit</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="c1"># Construct an empty DAGCircuit with the same set of</span>
@@ -417,7 +380,6 @@
         <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
             <span class="n">identity_wire_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
 
-        <span class="n">first_layer</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># True until first layer is output</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;initial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
 
         <span class="c1"># Iterate over layers</span>
@@ -460,12 +422,9 @@
                     <span class="c1"># If this layer is only single-qubit gates,</span>
                     <span class="c1"># and we have yet to see multi-qubit gates,</span>
                     <span class="c1"># continue to the next inner iteration</span>
-                    <span class="k">if</span> <span class="n">trivial_flag</span> <span class="ow">and</span> <span class="n">first_layer</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">trivial_flag</span><span class="p">:</span>
                         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: skip to next sublayer&quot;</span><span class="p">)</span>
                         <span class="k">continue</span>
-
-                    <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">layout</span>
 
                     <span class="c1"># Update the record of qubit positions</span>
                     <span class="c1"># for each inner iteration</span>
@@ -473,34 +432,24 @@
                     <span class="c1"># Update the DAG</span>
                     <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_layer_update</span><span class="p">(</span><span class="n">j</span><span class="p">,</span>
-                                           <span class="n">first_layer</span><span class="p">,</span>
                                            <span class="n">best_layout</span><span class="p">,</span>
                                            <span class="n">best_depth</span><span class="p">,</span>
                                            <span class="n">best_circuit</span><span class="p">,</span>
                                            <span class="n">serial_layerlist</span><span class="p">),</span>
                         <span class="n">identity_wire_map</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-                        <span class="n">first_layer</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Update the record of qubit positions for each iteration</span>
                 <span class="n">layout</span> <span class="o">=</span> <span class="n">best_layout</span>
 
-                <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">layout</span>
-
                 <span class="c1"># Update the DAG</span>
                 <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_layer_update</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
-                                       <span class="n">first_layer</span><span class="p">,</span>
                                        <span class="n">best_layout</span><span class="p">,</span>
                                        <span class="n">best_depth</span><span class="p">,</span>
                                        <span class="n">best_circuit</span><span class="p">,</span>
                                        <span class="n">layerlist</span><span class="p">),</span>
                     <span class="n">identity_wire_map</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-                    <span class="n">first_layer</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># This is the final edgemap. We might use it to correctly replace</span>
         <span class="c1"># any measurements that needed to be removed earlier.</span>
@@ -508,16 +457,6 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
         <span class="n">last_edgemap</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: last_edgemap = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">last_edgemap</span><span class="p">))</span>
-
-        <span class="c1"># If first_layer is still set, the circuit only has single-qubit gates</span>
-        <span class="c1"># so we can use the initial layout to output the entire circuit</span>
-        <span class="c1"># This code is dead due to changes to first_layer above.</span>
-        <span class="k">if</span> <span class="n">first_layer</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: first_layer flag still set&quot;</span><span class="p">)</span>
-            <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
-                <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
-                <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">layer</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">],</span> <span class="n">edge_map</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">dagcircuit_output</span></div>
 

@@ -222,7 +222,7 @@
 
     <span class="n">_swap</span> <span class="o">=</span> <span class="p">[</span><span class="n">BarrierBeforeFinalMeasurements</span><span class="p">(),</span>
              <span class="n">Unroll3qOrMore</span><span class="p">(),</span>
-             <span class="n">LegacySwap</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)]</span>
+             <span class="n">LegacySwap</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed_transpiler</span><span class="p">)]</span>
 
     <span class="c1"># 4. Unroll to the basis</span>
     <span class="n">_unroll</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">)</span>
@@ -235,9 +235,13 @@
 
     <span class="n">_opt</span> <span class="o">=</span> <span class="p">[</span><span class="n">RemoveResetInZeroState</span><span class="p">(),</span>
             <span class="n">Collect2qBlocks</span><span class="p">(),</span> <span class="n">ConsolidateBlocks</span><span class="p">(),</span>
-            <span class="n">Unroller</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">),</span> <span class="n">CXDirection</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">),</span>  <span class="c1"># unroll unitaries and match coupling</span>
+            <span class="n">Unroller</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">),</span>  <span class="c1"># unroll unitaries</span>
             <span class="n">Optimize1qGates</span><span class="p">(),</span> <span class="n">CommutativeCancellation</span><span class="p">(),</span>
             <span class="n">OptimizeSwapBeforeMeasure</span><span class="p">(),</span> <span class="n">RemoveDiagonalGatesBeforeMeasure</span><span class="p">()]</span>
+
+    <span class="k">if</span> <span class="n">coupling_map</span><span class="p">:</span>
+        <span class="n">_opt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CXDirection</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">))</span>
+        <span class="c1"># if a coupling map has been provided, match coupling</span>
 
     <span class="n">pm3</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">coupling_map</span><span class="p">:</span>
