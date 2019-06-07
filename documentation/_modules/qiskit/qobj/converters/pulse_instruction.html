@@ -138,6 +138,7 @@
 <span class="sd">&quot;&quot;&quot;Helper class used to convert a pulse instruction into PulseQobjInstruction.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">sympy.parsing.sympy_parser</span> <span class="k">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span> <span class="n">standard_transformations</span><span class="p">,</span>
                                         <span class="n">implicit_multiplication_application</span><span class="p">,</span>
@@ -357,7 +358,9 @@
 <span class="n">_math_ops_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;)|(&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_math_ops</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
 <span class="c1"># match consecutive alphanumeric, and single consecutive math ops +-/.()</span>
 <span class="c1"># and multiple * for exponentiation</span>
-<span class="n">_allowedchars</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([+\/\-\(\)\.])?([\sa-zA-Z\d]+[+\/\-\(\)\.]?\*{0,2})*&#39;</span><span class="p">)</span>
+<span class="n">_allowedchars</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(([+\/\-]?|\*{0,2})?[\(\)\s]*&#39;</span>  <span class="c1"># allow to start with math/bracket</span>
+                           <span class="sa">r</span><span class="s1">&#39;([a-zA-Z][a-zA-Z\d]*|&#39;</span>  <span class="c1"># match word</span>
+                           <span class="sa">r</span><span class="s1">&#39;[\d]+(\.\d*)?)[\(\)\s]*)*&#39;</span><span class="p">)</span>  <span class="c1"># match decimal and bracket</span>
 <span class="c1"># match any sequence of chars and numbers</span>
 <span class="n">_expr_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;([a-zA-Z]+\d*)&#39;</span>
 <span class="c1"># and valid params</span>
@@ -393,6 +396,7 @@
     <span class="n">sub_expressions</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">_expr_regex</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">_valid_sub_expr</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">sub_exp</span><span class="p">)</span> <span class="k">for</span> <span class="n">sub_exp</span> <span class="ow">in</span> <span class="n">sub_expressions</span><span class="p">]):</span>
         <span class="k">return</span> <span class="kc">False</span>
+
     <span class="k">return</span> <span class="kc">True</span>
 
 
@@ -507,44 +511,43 @@
         <span class="n">t0</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">t0</span>
         <span class="n">duration</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">duration</span>
         <span class="n">qubits</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">qubits</span>
+        <span class="n">qubit_channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="o">.</span><span class="n">AcquireChannel</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">buffer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span> <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">]</span>
+
+        <span class="n">mem_slots</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="o">.</span><span class="n">MemorySlot</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">memory_slot</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">))]</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="s1">&#39;register_slot&#39;</span><span class="p">):</span>
+            <span class="n">register_slots</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="o">.</span><span class="n">RegisterSlot</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">register_slot</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">register_slots</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="n">discriminators</span> <span class="o">=</span> <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">discriminators</span>
                           <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="s1">&#39;discriminators&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">discriminators</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">discriminators</span> <span class="o">=</span> <span class="p">[</span><span class="n">discriminators</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">discriminators</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">discriminators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">discriminators</span><span class="p">))):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Can currently only support one discriminator per acquire. Defaulting &quot;</span>
+                          <span class="s2">&quot;to first discriminator entry.&quot;</span><span class="p">)</span>
+        <span class="n">discriminator</span> <span class="o">=</span> <span class="n">discriminators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">discriminator</span><span class="p">:</span>
+            <span class="n">discriminator</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">Discriminator</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">discriminators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                                   <span class="n">params</span><span class="o">=</span><span class="n">discriminators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 
         <span class="n">kernels</span> <span class="o">=</span> <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">kernels</span>
                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="s1">&#39;kernels&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
-
-        <span class="n">mem_slots</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">memory_slot</span>
-        <span class="n">reg_slots</span> <span class="o">=</span> <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">register_slot</span>
-                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="s1">&#39;register_slot&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">discriminators</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">discriminators</span> <span class="o">=</span> <span class="p">[</span><span class="n">discriminators</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">))]</span>
-
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kernels</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="n">kernels</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">))]</span>
+            <span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="n">kernels</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">kernels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">kernels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kernels</span><span class="p">))):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Can currently only support one kernel per acquire. Defaulting to first &quot;</span>
+                          <span class="s2">&quot;kernel entry.&quot;</span><span class="p">)</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">kernel</span><span class="p">:</span>
+            <span class="n">kernel</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">Kernel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">kernels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">kernels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">Acquire</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">discriminator</span><span class="o">=</span><span class="n">discriminator</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
         <span class="n">schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">()</span>
-
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
-            <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">kernel</span><span class="p">:</span>
-                <span class="n">kernel</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">Kernel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">kernel</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                                         <span class="n">params</span><span class="o">=</span><span class="n">kernel</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
-
-            <span class="n">discriminator</span> <span class="o">=</span> <span class="n">discriminators</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">discriminator</span><span class="p">:</span>
-                <span class="n">discriminator</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">Discriminator</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">discriminator</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                                                       <span class="n">params</span><span class="o">=</span><span class="n">discriminator</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
-
-            <span class="n">channel</span> <span class="o">=</span> <span class="n">channels</span><span class="o">.</span><span class="n">AcquireChannel</span><span class="p">(</span><span class="n">qubit</span><span class="p">,</span> <span class="n">buffer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">reg_slots</span><span class="p">:</span>
-                <span class="n">register_slot</span> <span class="o">=</span> <span class="n">channels</span><span class="o">.</span><span class="n">RegisterSlot</span><span class="p">(</span><span class="n">reg_slots</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">register_slot</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">memory_slot</span> <span class="o">=</span> <span class="n">channels</span><span class="o">.</span><span class="n">MemorySlot</span><span class="p">(</span><span class="n">mem_slots</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-            <span class="n">cmd</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">Acquire</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">discriminator</span><span class="o">=</span><span class="n">discriminator</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
-            <span class="n">schedule</span> <span class="o">|=</span> <span class="n">commands</span><span class="o">.</span><span class="n">AcquireInstruction</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">memory_slot</span><span class="p">,</span> <span class="n">register_slot</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">t0</span>
+        <span class="n">schedule</span> <span class="o">|=</span> <span class="n">commands</span><span class="o">.</span><span class="n">AcquireInstruction</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">qubit_channels</span><span class="p">,</span> <span class="n">mem_slots</span><span class="p">,</span>
+                                                <span class="n">register_slots</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">t0</span>
 
         <span class="k">return</span> <span class="n">schedule</span></div>
 

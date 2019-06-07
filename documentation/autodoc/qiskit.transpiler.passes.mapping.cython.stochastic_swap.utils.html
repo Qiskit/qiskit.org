@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>qiskit.transpiler.passes package &#8212; Qiskit 0.10.3 documentation</title>
+    <title>qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils module &#8212; Qiskit 0.10.3 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.transpiler.passes.mapping package" href="qiskit.transpiler.passes.mapping.html" />
-    <link rel="prev" title="qiskit.transpiler package" href="qiskit.transpiler.html" /> 
+    <link rel="next" title="qiskit.transpiler.passes.mapping.barrier_before_final_measurements module" href="qiskit.transpiler.passes.mapping.barrier_before_final_measurements.html" />
+    <link rel="prev" title="qiskit.transpiler.passes.mapping.cython.stochastic_swap.swap_trial module" href="qiskit.transpiler.passes.mapping.cython.stochastic_swap.swap_trial.html" /> 
   </head>
 <body>
   <header>
@@ -1625,84 +1625,121 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.transpiler.passes">
-<span id="qiskit-transpiler-passes-package"></span><h1>qiskit.transpiler.passes package<a class="headerlink" href="#module-qiskit.transpiler.passes" title="Permalink to this headline">¶</a></h1>
-<p>Module containing transpiler pass.</p>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.mapping.html">qiskit.transpiler.passes.mapping package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="qiskit.transpiler.passes.mapping.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cython.html">qiskit.transpiler.passes.mapping.cython package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cython.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cython.stochastic_swap.html">qiskit.transpiler.passes.mapping.cython.stochastic_swap package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cython.stochastic_swap.html#submodules">Submodules</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cython.stochastic_swap.swap_trial.html">qiskit.transpiler.passes.mapping.cython.stochastic_swap.swap_trial module</a></li>
-<li class="toctree-l7"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.html">qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils module</a></li>
+  <div class="section" id="module-qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils">
+<span id="qiskit-transpiler-passes-mapping-cython-stochastic-swap-utils-module"></span><h1>qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils module<a class="headerlink" href="#module-qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection">
+<em class="property">class </em><code class="descname">EdgeCollection</code><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A simple contain that contains a C++ vector
+representing edges in the coupling map that are
+found to be optimal by the swap mapper.  This allows
+us to keep the vector alive.</p>
+<dl class="method">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection.add">
+<code class="descname">add</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add two edges, in order, to the collection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>edge_start</strong> (<em>int</em>) – The beginning edge.</li>
+<li><strong>edge_end</strong> (<em>int</em>) – The end of the edge.</li>
 </ul>
-</li>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection.edges">
+<code class="descname">edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vector of edges as a NumPy arrau.
+:returns: Int array of edges.
+:rtype: ndarray</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection.size">
+<code class="descname">size</code><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.EdgeCollection.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the edge collection.
+:returns: Size of the edge collection.
+:rtype: int</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout">
+<em class="property">class </em><code class="descname">NLayout</code><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Numeric representation of a Qiskit Layout object.
+Here all qubit layouts are stored as int arrays.</p>
+<dl class="attribute">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout.logic_to_phys">
+<code class="descname">logic_to_phys</code><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout.logic_to_phys" title="Permalink to this definition">¶</a></dt>
+<dd><p>The array mapping logical to physical qubits.
+:returns: Int array of logical to physical mappings.
+:rtype: ndarray</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout.phys_to_logic">
+<code class="descname">phys_to_logic</code><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout.phys_to_logic" title="Permalink to this definition">¶</a></dt>
+<dd><p>The array mapping physical to logical qubits.
+:returns: Int array of physical to logical mappings.
+:rtype: ndarray</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout.to_layout">
+<code class="descname">to_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout.to_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts numeric layout back to Qiskit Layout object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>qregs</strong> (<em>OrderedDict</em>) – An ordered dict of (QuantumRegister, int)
+tuples.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The corresponding Qiskit Layout object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout" title="qiskit.transpiler.layout.Layout">Layout</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.nlayout_from_layout">
+<code class="descname">nlayout_from_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.nlayout_from_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts Qiskit Layout object to numerical NLayout.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>layout</strong> (<a class="reference internal" href="qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout" title="qiskit.transpiler.layout.Layout"><em>Layout</em></a>) – A Qiskit Layout instance.</li>
+<li><strong>qregs</strong> (<em>OrderedDict</em>) – An ordered dict of (QuantumRegister, int)
+tuples.</li>
+<li><strong>physical_qubits</strong> (<em>int</em>) – Number of physical qubits.</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="qiskit.transpiler.passes.mapping.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.barrier_before_final_measurements.html">qiskit.transpiler.passes.mapping.barrier_before_final_measurements module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.basic_swap.html">qiskit.transpiler.passes.mapping.basic_swap module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.check_cx_direction.html">qiskit.transpiler.passes.mapping.check_cx_direction module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.check_map.html">qiskit.transpiler.passes.mapping.check_map module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.cx_direction.html">qiskit.transpiler.passes.mapping.cx_direction module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.dense_layout.html">qiskit.transpiler.passes.mapping.dense_layout module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.enlarge_with_ancilla.html">qiskit.transpiler.passes.mapping.enlarge_with_ancilla module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.full_ancilla_allocation.html">qiskit.transpiler.passes.mapping.full_ancilla_allocation module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.legacy_swap.html">qiskit.transpiler.passes.mapping.legacy_swap module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.lookahead_swap.html">qiskit.transpiler.passes.mapping.lookahead_swap module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.noise_adaptive_layout.html">qiskit.transpiler.passes.mapping.noise_adaptive_layout module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.passes.mapping.noise_adaptive_layout.html#greedy-mapping-heuristic">Greedy mapping heuristic</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.set_layout.html">qiskit.transpiler.passes.mapping.set_layout module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.stochastic_swap.html">qiskit.transpiler.passes.mapping.stochastic_swap module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.passes.mapping.trivial_layout.html">qiskit.transpiler.passes.mapping.trivial_layout module</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.collect_2q_blocks.html">qiskit.transpiler.passes.collect_2q_blocks module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.commutation_analysis.html">qiskit.transpiler.passes.commutation_analysis module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.commutative_cancellation.html">qiskit.transpiler.passes.commutative_cancellation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.consolidate_blocks.html">qiskit.transpiler.passes.consolidate_blocks module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.count_ops.html">qiskit.transpiler.passes.count_ops module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.cx_cancellation.html">qiskit.transpiler.passes.cx_cancellation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.dag_fixed_point.html">qiskit.transpiler.passes.dag_fixed_point module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.decompose.html">qiskit.transpiler.passes.decompose module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.depth.html">qiskit.transpiler.passes.depth module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.fixed_point.html">qiskit.transpiler.passes.fixed_point module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.merge_adjacent_barriers.html">qiskit.transpiler.passes.merge_adjacent_barriers module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.num_tensor_factors.html">qiskit.transpiler.passes.num_tensor_factors module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.optimize_1q_gates.html">qiskit.transpiler.passes.optimize_1q_gates module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.optimize_swap_before_measure.html">qiskit.transpiler.passes.optimize_swap_before_measure module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.remove_diagonal_gates_before_measure.html">qiskit.transpiler.passes.remove_diagonal_gates_before_measure module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.remove_reset_in_zero_state.html">qiskit.transpiler.passes.remove_reset_in_zero_state module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.resource_estimation.html">qiskit.transpiler.passes.resource_estimation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.size.html">qiskit.transpiler.passes.size module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.unroll_3q_or_more.html">qiskit.transpiler.passes.unroll_3q_or_more module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.unroller.html">qiskit.transpiler.passes.unroller module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qiskit.transpiler.passes.width.html">qiskit.transpiler.passes.width module</a></li>
-</ul>
-</div>
-</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The corresponding numerical layout.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout" title="qiskit.transpiler.passes.mapping.cython.stochastic_swap.utils.NLayout">NLayout</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -1710,16 +1747,16 @@
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.transpiler.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.transpiler.passes.mapping.cython.stochastic_swap.swap_trial.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>qiskit.transpiler package</div>
+            <div>qiskit.transpiler.passes.mapping.cython.stochastic_swap.swap_trial module</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.transpiler.passes.mapping.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.transpiler.passes.mapping.barrier_before_final_measurements.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.transpiler.passes.mapping package</div>
+            <div>qiskit.transpiler.passes.mapping.barrier_before_final_measurements module</div>
         </div>
      </a>
         
