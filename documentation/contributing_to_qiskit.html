@@ -805,6 +805,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-terra-from-source">Install Terra from Source</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-macos">Install a compiler for MacOS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-windows">Install a compiler for Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-qiskit-terra">Install Qiskit Terra</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-aer-from-source">Install Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macos">macOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
 </ul>
 </li>
 </ul>
@@ -1592,6 +1600,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-terra-from-source">Install Terra from Source</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-macos">Install a compiler for MacOS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-a-compiler-for-windows">Install a compiler for Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-qiskit-terra">Install Qiskit Terra</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-aer-from-source">Install Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macos">macOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
 </ul>
 </li>
 </ul>
@@ -1767,8 +1783,9 @@ following.</p>
 <a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017">Build Tools for Visual Studio 2017</a>.
 You can instead install Visual Studio version 2015 or 2017, making sure to select the
 options for installing the C++ compiler.</p>
+</div>
 <div class="section" id="install-qiskit-terra">
-<h5>Install Qiskit Terra<a class="headerlink" href="#install-qiskit-terra" title="Permalink to this headline">¶</a></h5>
+<h4>Install Qiskit Terra<a class="headerlink" href="#install-qiskit-terra" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li>Clone the Terra repository.</li>
 </ol>
@@ -1817,14 +1834,255 @@ run the example with the following command.</li>
 </pre></div>
 </div>
 <p>After you’ve installed Terra, you can install Aer as an add-on to run additional simulators.</p>
+</div>
+</div>
+<div class="section" id="install-aer-from-source">
+<h3>Install Aer from Source<a class="headerlink" href="#install-aer-from-source" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Clone the Aer repository.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Qiskit</span><span class="o">/</span><span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Install build requirements.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">scikit</span><span class="o">-</span><span class="n">build</span> <span class="n">cython</span>
+</pre></div>
+</div>
+<p>After this the steps to install Aer depend on which operating system you are
+using. Since Aer is a compiled C++ program with a python interface there are
+non-python dependencies for building the Aer binary which can’t be installed
+universally depending on operating system.</p>
+<div class="section" id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic" start="3">
+<li><p class="first">Install compiler requirements.</p>
+<p>Building Aer requires a C++ compiler and development headers</p>
+<p>If you’re using Ubuntu&gt;=16.04 or an equivalent Debian Linux distribution
+you can install this with:</p>
+</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Install OpenBLAS development headers.</li>
+</ol>
+<p>If you’re using Ubuntu&gt;=16.04 or an equivalent Debian Linux distribution,
+you can install this with:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libopenblas</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>Build and install qiskit-aer directly</li>
+</ol>
+<p>If you have pip &lt;19.0.0 installed and your environment doesn’t require a
+custom build options you can just run:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>This will both build the binaries and install Aer.</p>
+<p>Alternatively if you have a newer pip installed, or have some custom requirement
+you can build a python wheel manually.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+<span class="n">python</span> <span class="o">./</span><span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span>
+</pre></div>
+</div>
+<p>If you need to set a custom option during the wheel build you can refer to
+<a class="reference internal" href="#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
+<p>After you build the python wheel it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
+Aer repository. The exact version will depend</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dist</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit_aer</span><span class="o">-*.</span><span class="n">whl</span>
+</pre></div>
+</div>
+<p>The exact filename of the output wheel file depends on the current version of
+Aer under development.</p>
+</div>
+<div class="section" id="macos">
+<h4>macOS<a class="headerlink" href="#macos" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple" start="3">
+<li>Install dependencies.</li>
+</ol>
+<p>To use the <a class="reference external" href="https://clang.llvm.org/">Clang</a> compiler on macOS, you need to install an extra library for
+supporting <a class="reference external" href="https://www.openmp.org/">OpenMP</a>.  You can use <a class="reference external" href="https://brew.sh/">brew</a> to install this and other
+dependencies.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">libomp</span>
+</pre></div>
+</div>
+<p>You then also have to install a BLAS implementation, <a class="reference external" href="https://www.openblas.net/">OpenBLAS</a> is the
+default choice.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">openblas</span>
+</pre></div>
+</div>
+<p>You also need to have <code class="docutils literal notranslate"><span class="pre">Xcode</span> <span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Tools</span></code> installed.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcode</span><span class="o">-</span><span class="n">select</span> <span class="o">--</span><span class="n">install</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Build and install qiskit</li>
+</ol>
+<p>If you have pip &lt;19.0.0 installed and your environment doesn’t require a
+custom build options you can just run:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>This will both build the binaries and install aer.</p>
+<p>Alternatively if you have a newer pip installed, or need to set custom options
+for your environment you can build a python wheel manually.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+<span class="n">python</span> <span class="o">./</span><span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span>
+</pre></div>
+</div>
+<p>If you need to set a custom option during the wheel build you can refer to
+<a class="reference internal" href="#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
+<p>After you build the python wheel it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
+Aer repository. The exact version will depend</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dist</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit_aer</span><span class="o">-*.</span><span class="n">whl</span>
+</pre></div>
+</div>
+<p>The exact filename of the output wheel file depends on the current version of
+Aer under development.</p>
+</div>
+<div class="section" id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
+<p>On Windows you need to use <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a> or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> to install all the
+dependencies.</p>
+<ol class="arabic simple" start="3">
+<li>Install compiler requirements</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">update</span><span class="o">-</span><span class="n">deps</span> <span class="n">vs2017_win</span><span class="o">-</span><span class="mi">64</span> <span class="n">vs2017_win</span><span class="o">-</span><span class="mi">32</span> <span class="n">msvc_runtime</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Install binary and build dependencies</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">update</span><span class="o">-</span><span class="n">deps</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="o">-</span><span class="n">y</span> <span class="n">openblas</span> <span class="n">cmake</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>Install the package</li>
+</ol>
+<p>If you have pip &lt;19.0.0 installed you can just run</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>if you’re using pip &gt;=19.0.0 then you can manually build a wheel file and install
+that instead.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aer</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span>
+</pre></div>
+</div>
+<p>If you need to set a custom option during the wheel build you can refer to
+<a class="reference internal" href="#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
+<p>After you build the python wheel it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
+Aer repository. The exact version will depend</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dist</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit_aer</span><span class="o">-*.</span><span class="n">whl</span>
+</pre></div>
+</div>
+<p>The exact filename of the output wheel file depends on the current version of
+Aer under development.</p>
+</div>
+<div class="section" id="custom-options-during-wheel-builds">
+<span id="aer-wheel-build-options"></span><h4>Custom options during wheel builds<a class="headerlink" href="#custom-options-during-wheel-builds" title="Permalink to this headline">¶</a></h4>
+<p>The Aer build system uses <a class="reference external" href="https://scikit-build.readthedocs.io/en/latest/index.html">scikit-build</a> to run the compilation when building
+it with the python interface. It acts as an interface for <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/">setuptools</a> to
+call <a class="reference external" href="https://cmake.org/">CMake</a> and compile the binaries for your local system.</p>
+<p>Due to the complexity of compiling the binaries you may need to pass options
+to a certain part of the build process. The way to pass variables is:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span> <span class="p">[</span><span class="n">skbuild_opts</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span> <span class="p">[</span><span class="n">cmake_opts</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span> <span class="n">build_tool_opts</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>where the elements within square brackets <cite>[]</cite> are optional, and
+<code class="docutils literal notranslate"><span class="pre">skbuild_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">cmake_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">build_tool_opts</span></code> are to be replaced by
+flags of your choice. A list of <em>CMake</em> options is available here:
+<a class="reference external" href="https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options">https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options</a> . For
+example, you could run something like:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span> <span class="o">--</span> <span class="o">--</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+<p>This is passing the flag <cite>-j8</cite> to the underlying build system (which in this
+case is <a class="reference external" href="https://www.gnu.org/software/automake/">Automake</a>) telling it that we want to build in parallel using 8
+processes.</p>
+<p>For example, a common use case for these flags on linux is to specify a
+specific version of the C++ compiler to use (normally if the default is too
+old).</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span> <span class="o">--</span> <span class="o">-</span><span class="n">DCMAKE_CXX_COMPILER</span><span class="o">=</span><span class="n">g</span><span class="o">++-</span><span class="mi">7</span>
+</pre></div>
+</div>
+<p>which will tell CMake to use the g++-7 command instead of the default g++ when
+compiling Aer</p>
+<p>Another common use case for this, depending on your environment, is that you may
+need to specify your platform name and turn off static linking.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span> <span class="o">--</span><span class="n">plat</span><span class="o">-</span><span class="n">name</span> <span class="n">macosx</span><span class="o">-</span><span class="mf">10.9</span><span class="o">-</span><span class="n">x86_64</span> \
+<span class="o">--</span> <span class="o">-</span><span class="n">DSTATIC_LINKING</span><span class="o">=</span><span class="kc">False</span> <span class="o">--</span> <span class="o">-</span><span class="n">j8</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">--plat-name</span></code> is a flag to setuptools, to specify the platform name to
+use in the package metadata, <code class="docutils literal notranslate"><span class="pre">-DSTATIC_LINKING</span></code> is a flag to CMake being used
+to disable static linking, and <code class="docutils literal notranslate"><span class="pre">-j8</span></code> is a flag to Automake being used to use
+8 processes for compilation.</p>
+<p>A list of common options depending on platform are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="14%" />
+<col width="25%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Platform</th>
+<th class="head">Tool</th>
+<th class="head">Option</th>
+<th class="head">Use Case</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>All</td>
+<td>Automake</td>
+<td>-j</td>
+<td>Followed by a number this set the number of
+process to use for compilation</td>
+</tr>
+<tr class="row-odd"><td>Linux</td>
+<td>CMake</td>
+<td>-DCMAKE_CXX_COMPILER</td>
+<td>Used to specify a specific C++ compiler,
+this is often needed if you default g++ is
+too.</td>
+</tr>
+<tr class="row-even"><td>OSX</td>
+<td>setuptools</td>
+<td>–plat-name</td>
+<td>Used to specify the platform name in the
+output Python package.</td>
+</tr>
+<tr class="row-odd"><td>OSX</td>
+<td>CMake</td>
+<td>-DSTATIC_LINKING</td>
+<td>Used to specify whether static linking
+should be used or not</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some of these options are not platform specific, if a platform is listed
+this is just outlining it’s commonly used in that environment. Refer to the
+tool documentation for more information.</p>
+</div>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/Qiskit/qiskit-aer/blob/master/CONTRIBUTING.md">Qiskit Aer</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-ignis/blob/master/CONTRIBUTING.md">Qiskit Ignis</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-aqua/blob/master/CONTRIBUTING.md">Qiskit Aqua</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-chemistry/blob/master/CONTRIBUTING.md">Qiskit Chemistry</a></li>
 <li><a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/blob/master/CONTRIBUTING.md">Qiskit IBMQ Provider</a></li>
 </ul>
-</div>
 </div>
 </div>
 </div>
