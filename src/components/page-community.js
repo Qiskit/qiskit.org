@@ -39,9 +39,16 @@ class PageFun extends localize(i18next)(LitElement) {
      <section>
         <div class="row reverse limited-width">
           <div class="description">
-            <h3>Welcome to the community</h3>
-            <p>Welcome to Qiskit's global community, where you can connect with other users and contributors. Take a look to our next <b>Qiskit Camps</b>, physical events where we invite our community of researchers, developers and students to create new concepts and ideas by using Qiskit.<br>Also here you will be able to apply to our <b>Qiskit Advocates program</b>.<br>See our <a href="data/codeofconduct.pdf" target="_blank">code of conduct</a> to learn more.</p>
-            
+            <h3>Welcome to the Qiskit Community</h3>
+            <div class="actions">
+              <a
+                  href="https://youtu.be/cllB-q9vUUE"
+                  target="_blank"
+                  rel="noopener"
+                  tabindex="-1">
+                <vaadin-button theme="secondary">Check out the community in action!</vaadin-button>
+              </a>
+            </div>
           </div>
           <div class="illustration">
             <img src="images/community/qiskitBlack.jpg" .alt="Local QiskitCamps">
@@ -53,18 +60,21 @@ class PageFun extends localize(i18next)(LitElement) {
       <section class="colored">
         <div class="row limited-width">
           <div class="description">
-            <h3>Qiskit Camp</h3>
-            <p>Come to our global quantum computing hackathons, build, learn and collaborate with researchers, advocates and developers, to create the next big thing in quantum computing.</p>
+            <h3>Qiskit Camps</h3>
+            <p>Experience our Qiskit Camps, where attendees will learn in an immersive environment, collaborate with peers, and enjoy meaningful experiences resulting in a more connected and impactful global quantum community.</p>
             <div class="actions">
               <a href="https://qiskit.camp" target="_blank" rel="noopener" tabindex="-1">
                 <vaadin-button theme="secondary">Yorktown Recap</vaadin-button>
               </a>
               <a href="./community" rel="noopener" tabindex="-1">
-                <vaadin-button theme="secondary" disabled>South Africa (Soon)</vaadin-button>
-                </a>
-                <a href="./community" rel="noopener" tabindex="-1">
-                <vaadin-button theme="secondary" disabled>Europe (Soon)</vaadin-button>
-                </a>
+                <vaadin-button theme="secondary" disabled>Europe (Coming Soon!)</vaadin-button>
+              </a>
+              <a href="./community" rel="noopener" tabindex="-1">
+                <vaadin-button theme="secondary" disabled>Asia (Coming Soon!)</vaadin-button>
+              </a>
+              <a href="./community" rel="noopener" tabindex="-1">
+                <vaadin-button theme="secondary" disabled>Africa (Coming Soon!)</vaadin-button>
+              </a>
             </div>
           </div>
           <div class="illustration">
@@ -76,8 +86,8 @@ class PageFun extends localize(i18next)(LitElement) {
       <section>
         <div class="row reverse limited-width">
           <div class="description">
-            <h3>Qiskit Camp x Local</h3>
-            <p>Our Qiskit advocates can organize local Qiskit Camps in their cities or regions to encourage local communities of students, developers and researchers to be part of the quantum computing revolution.</p>
+            <h3>Qiskit Hackathons</h3>
+            <p>Host local Qiskit Hackathons in your community and help shape the future of quantum computing!"</p>
             <div class="actions">
               <a
                   href="https://madrid.qiskit.camp"
@@ -114,12 +124,21 @@ class PageFun extends localize(i18next)(LitElement) {
                   target="_blank"
                   rel="noopener"
                   tabindex="-1">
-                <vaadin-button theme="secondary" disabled>Soon</vaadin-button>
+                <vaadin-button theme="secondary" disabled>Apply Now (Coming Soon!)</vaadin-button>
               </a>
             </div>
           </div>
           <div class="illustration">
             <img src="images/community/advocates.jpg" .alt="Qiskit Advocates">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="row limited-width">
+          <div class="description">
+            <h3>Code of Conduct</h3>
+            <p>See our <a href="data/codeofconduct.pdf" target="_blank">code of conduct</a> to learn more.</p>
           </div>
         </div>
       </section>
