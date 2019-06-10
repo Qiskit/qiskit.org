@@ -1665,32 +1665,32 @@ subsequent sections:</p>
 <span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 
 <span class="c1"># Create a Quantum Circuit acting on the q register</span>
-<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Add a H gate on qubit 0</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Add a CX (CNOT) gate on control qubit 0 and target qubit 1</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Map the quantum measurement to the classical bits</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># Execute the circuit on the qasm simulator</span>
-<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="c1"># Grab results from the job</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
 <span class="c1"># Returns counts</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 
 <span class="c1"># Draw the circuit</span>
-<span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 487, &#39;11&#39;: 537}
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
 </pre></div>
 </div>
 <img alt="Quantum Circuit with an H gate and controlled nots." src="_images/getting_started_1_1.png" />
@@ -1790,11 +1790,11 @@ circuit will yield either the bit string 00 or 11.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 504, &#39;11&#39;: 496}
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
 </pre></div>
 </div>
 <p>As expected, the output bit string is 00 approximately 50 percent of the time.
@@ -1812,7 +1812,7 @@ the function <code class="docutils literal notranslate"><span class="pre">plot_h
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="Histogram of results." src="_images/getting_started_14_0.png" />
+<img alt="Histogram of results." src="_images/getting_started_2_0.png" />
 <p>The observed probabilities <span class="math notranslate nohighlight">\(Pr(00)\)</span> and <span class="math notranslate nohighlight">\(Pr(11)\)</span> are computed by
 taking the respective counts and dividing by the total number of shots.</p>
 <div class="admonition note">
