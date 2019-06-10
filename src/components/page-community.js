@@ -39,7 +39,7 @@ class PageFun extends localize(i18next)(LitElement) {
      <section>
         <div class="row reverse limited-width">
           <div class="description">
-            <h3>Welcome to the Qiskit Community</h3>
+            <h3>Welcome to the Qiskit Community!</h3>
             <div class="actions">
               <a
                   href="https://youtu.be/cllB-q9vUUE"
@@ -64,7 +64,7 @@ class PageFun extends localize(i18next)(LitElement) {
             <p>Experience our Qiskit Camps, where attendees will learn in an immersive environment, collaborate with peers, and enjoy meaningful experiences resulting in a more connected and impactful global quantum community.</p>
             <div class="actions">
               <a href="https://qiskit.camp" target="_blank" rel="noopener" tabindex="-1">
-                <vaadin-button theme="secondary">Yorktown Recap</vaadin-button>
+                <vaadin-button theme="secondary">Qiskit Camp 19</vaadin-button>
               </a>
               <a href="./community" rel="noopener" tabindex="-1">
                 <vaadin-button theme="secondary" disabled>Europe (Coming Soon!)</vaadin-button>
@@ -87,7 +87,7 @@ class PageFun extends localize(i18next)(LitElement) {
         <div class="row reverse limited-width">
           <div class="description">
             <h3>Qiskit Hackathons</h3>
-            <p>Host local Qiskit Hackathons in your community and help shape the future of quantum computing!"</p>
+            <p>Host local Qiskit Hackathons in your community and help shape the future of quantum computing!</p>
             <div class="actions">
               <a
                   href="https://madrid.qiskit.camp"
