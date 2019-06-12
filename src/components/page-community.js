@@ -108,25 +108,13 @@ class PageFun extends localize(i18next)(LitElement) {
         <div class="row limited-width">
           <div class="description">
             <h3>Qiskit Advocates Program</h3>
-            <p>A global program that provides support to the individuals who actively work on assiting and growing the Qiskit community.<br>
-            <br>
-            • Educators can request <b>funding</b> for events and projects<br>
-            • Access to a <b>network</b> of experts<br>
-            • <b>Prioritized access</b> to the IBM Q hardware<br>
-            • Opportunities to get your work officially <b>supported by IBM</b>
-            <br>
-            <br>
-            Apply through our Slack bot. You should have an active GitHub account and have completed the <b>learnqiskit.org</b> course.
-            </p>
-            <div class="actions">
-              <a
-                  href="./community"
-                  target="_blank"
-                  rel="noopener"
-                  tabindex="-1">
-                <vaadin-button theme="secondary" disabled>Apply Now (Coming Soon!)</vaadin-button>
-              </a>
-            </div>
+            <p>A global program that provides support to the individuals who actively work on assiting and growing the Qiskit community.</p>
+	    <ul>
+            	<li>Educators can request <b>funding</b> for events and projects</li>
+            	<li>Access to a <b>network</b> of experts</li>
+            	<li>Prioritized access</b> to the IBM Q hardware</li>
+            	<li>Opportunities to get your work officially <b>supported by IBM</b></li>
+	    </ul>
           </div>
           <div class="illustration">
             <img src="images/community/advocates.jpg" .alt="Qiskit Advocates">
