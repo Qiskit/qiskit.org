@@ -234,7 +234,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
               target="_blank"
               @click=${() => trackClickEvent({
                 action: 'Tutorials',
-                objectType: 'Link'
+                objectType: 'Link',
+                milestoneName: 'Looked at tutorials'
               })}
             >
               ${i18next.t('tutorials')}
@@ -262,7 +263,8 @@ class AppShell extends localize(i18next)(connect(store)(LitElement)) {
             target="_blank"
             @click=${() => trackClickEvent({
               action: 'Tutorials Link in Navbar',
-              objectType: 'Link'
+              objectType: 'Link',
+              milestoneName: 'Looked at tutorials'
             })}
            >
             ${i18next.t('tutorials')}
