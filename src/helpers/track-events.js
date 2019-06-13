@@ -7,9 +7,9 @@
  * the LICENSE.txt file in the root directory of this source tree.
  */
 
-export const trackClickEvent = ({ action, objectType }) => {
+export const trackClickEvent = ({ action, objectType, milestoneName }) => {
   if (window.bluemixAnalytics && window.digitalData) {
-    const segmentEvent = {
+    let segmentEvent = {
       productTitle: window.digitalData.page.pageInfo.productTitle,
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
@@ -18,6 +18,10 @@ export const trackClickEvent = ({ action, objectType }) => {
       objectType,
       successFlag: true,
     };
+
+    if (milestoneName) {
+      segmentEvent = { ...segmentEvent, milestoneName };
+    }
 
     window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
   }
