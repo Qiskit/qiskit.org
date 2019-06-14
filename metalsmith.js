@@ -10,8 +10,8 @@ Metalsmith(__dirname)
     siteurl: 'https://qiskit.org/community',
   })
   .source('./community-src/collections/')
-  .destination('./community-static/')
-  .clean(true)
+  .destination('./')
+  .clean(false) // Keep false or it will wipe out the dst folder
   .use(
     collections({
       events: 'events/*.md',
