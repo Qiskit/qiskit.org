@@ -1989,45 +1989,45 @@ still return the string) instead of returning just a string.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;latex_source&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<pre class="literal-block">
-% documentclass[preview]{standalone}
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% \documentclass[preview]{standalone}
 % If the image is too large to fit on this documentclass use
-documentclass[draft]{beamer}
+\documentclass[draft]{beamer}
 % img_width = 16, img_depth = 17
-usepackage[size=custom,height=24,width=28,scale=0.7]{beamerposter}
+\usepackage[size=custom,height=24,width=28,scale=0.7]{beamerposter}
 % instead and customize the height and width (in cm) to fit.
 % Large images may run out of memory quickly.
 % To fix this use the LuaLaTeX compiler, which dynamically
 % allocates memory.
-usepackage[braket, qm]{qcircuit}
-usepackage{amsmath}
-pdfmapfile{+sansmathaccent.map}
-% usepackage[landscape]{geometry}
+\usepackage[braket, qm]{qcircuit}
+\usepackage{amsmath}
+\pdfmapfile{+sansmathaccent.map}
+% \usepackage[landscape]{geometry}
 % Comment out the above line if using the beamer documentclass.
-begin{document}
-begin{equation*}
-    Qcircuit &#64;C=0.5em &#64;R=0.0em &#64;!R {
-            lstick{qa_{0}: ket{0}} &amp; qw &amp; qw barrier{7} &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; gate{H} &amp; qw barrier[-1.15em]{2} &amp; qw &amp; qw &amp; meter &amp; qw &amp; qw\
-            lstick{qa_{1}: ket{0}} &amp; gate{X} &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; gate{H} &amp; qw &amp; qw &amp; meter &amp; qw &amp; qw &amp; qw\
-            lstick{qa_{2}: ket{0}} &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; gate{H} &amp; qw &amp; meter &amp; qw &amp; qw &amp; qw &amp; qw\
-            lstick{qb_{0}: ket{0}} &amp; qw &amp; qw &amp; gate{H} &amp; ctrl{1} &amp; qw &amp; qswap qwx[4] &amp; qw barrier[-1.15em]{4} &amp; qw &amp; qw &amp; qw &amp; meter &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw\
-            lstick{qb_{1}: ket{0}} &amp; gate{X} &amp; qw &amp; gate{H} &amp; qswap &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; meter &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw\
-            lstick{qb_{2}: ket{0}} &amp; gate{X} &amp; qw &amp; gate{H} &amp; qswap qwx[-1] &amp; ctrl{1} &amp; qw &amp; qw &amp; qw &amp; meter &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw\
-            lstick{qb_{3}: ket{0}} &amp; qw &amp; qw &amp; gate{H} &amp; qw &amp; qswap &amp; ctrl{1} &amp; qw &amp; meter &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw\
-            lstick{qb_{4}: ket{0}} &amp; gate{X} &amp; qw &amp; gate{H} &amp; qw &amp; qswap qwx[-1] &amp; qswap &amp; meter &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw &amp; qw\
-            lstick{c1_{0}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw\
-            lstick{c1_{1}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw\
-            lstick{c1_{2}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw &amp; cw\
-            lstick{c2_{0}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw\
-            lstick{c2_{1}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw\
-            lstick{c2_{2}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw\
-            lstick{c2_{3}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw\
-            lstick{c2_{4}: 0} &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw cwx[-8] &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw &amp; cw\
+\begin{document}
+\begin{equation*}
+    \Qcircuit @C=0.5em @R=0.0em @!R {
+            \lstick{qa_{0}: \ket{0}} &amp; \qw &amp; \qw \barrier{7} &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \gate{H} &amp; \qw \barrier[-1.15em]{2} &amp; \qw &amp; \qw &amp; \meter &amp; \qw &amp; \qw\\
+            \lstick{qa_{1}: \ket{0}} &amp; \gate{X} &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \gate{H} &amp; \qw &amp; \qw &amp; \meter &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{qa_{2}: \ket{0}} &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \gate{H} &amp; \qw &amp; \meter &amp; \qw &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{qb_{0}: \ket{0}} &amp; \qw &amp; \qw &amp; \gate{H} &amp; \ctrl{1} &amp; \qw &amp; \qswap \qwx[4] &amp; \qw \barrier[-1.15em]{4} &amp; \qw &amp; \qw &amp; \qw &amp; \meter &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{qb_{1}: \ket{0}} &amp; \gate{X} &amp; \qw &amp; \gate{H} &amp; \qswap &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \meter &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{qb_{2}: \ket{0}} &amp; \gate{X} &amp; \qw &amp; \gate{H} &amp; \qswap \qwx[-1] &amp; \ctrl{1} &amp; \qw &amp; \qw &amp; \qw &amp; \meter &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{qb_{3}: \ket{0}} &amp; \qw &amp; \qw &amp; \gate{H} &amp; \qw &amp; \qswap &amp; \ctrl{1} &amp; \qw &amp; \meter &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{qb_{4}: \ket{0}} &amp; \gate{X} &amp; \qw &amp; \gate{H} &amp; \qw &amp; \qswap \qwx[-1] &amp; \qswap &amp; \meter &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw &amp; \qw\\
+            \lstick{c1_{0}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw\\
+            \lstick{c1_{1}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw\\
+            \lstick{c1_{2}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw &amp; \cw\\
+            \lstick{c2_{0}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw\\
+            \lstick{c2_{1}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw\\
+            \lstick{c2_{2}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw\\
+            \lstick{c2_{3}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw\\
+            \lstick{c2_{4}: 0} &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw \cwx[-8] &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw &amp; \cw\\
     }
-end{equation*}
+\end{equation*}
 
-end{document}
-</pre>
+\end{document}
+</pre></div>
+</div>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the latex source to a file</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;latex_source&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/tmp/circuit.tex&#39;</span><span class="p">);</span>
 </pre></div>
