@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
 
     
-    <title>marshmallow.schema &#8212; Qiskit 0.10.3 documentation</title>
+    <title>marshmallow.schema &#8212; Qiskit 0.10.4 documentation</title>
 
     <link rel="stylesheet" href="../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -476,7 +476,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">declared_fields</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_declared_fields</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">many</span> <span class="o">=</span> <span class="n">many</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">only</span> <span class="o">=</span> <span class="n">only</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span> <span class="o">=</span> <span class="n">exclude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">exclude</span><span class="p">)</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">exclude</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">prefix</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s1">&#39;The `prefix` argument is deprecated. Use a post_dump &#39;</span>
@@ -849,19 +849,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__apply_nested_option</span><span class="p">(</span><span class="s1">&#39;only&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">only</span><span class="p">,</span> <span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
             <span class="c1"># Remove the child field names from the only option.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">only</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_class</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">only</span><span class="p">])</span>
-        <span class="n">excludes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">exclude</span><span class="p">)</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">excludes</span><span class="p">:</span>
-            <span class="c1"># Apply the exclude option to nested fields.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__apply_nested_option</span><span class="p">(</span><span class="s1">&#39;exclude&#39;</span><span class="p">,</span> <span class="n">excludes</span><span class="p">,</span> <span class="s1">&#39;union&#39;</span><span class="p">)</span>
+                <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">only</span><span class="p">],</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">:</span>
+            <span class="c1"># Apply the exclude option to nested fields.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__apply_nested_option</span><span class="p">(</span><span class="s1">&#39;exclude&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span> <span class="s1">&#39;union&#39;</span><span class="p">)</span>
             <span class="c1"># Remove the parent field names from the exclude option.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_class</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">])</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">exclude</span><span class="p">:</span>
-            <span class="c1"># Remove the parent field names from the meta exclude option.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">exclude</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_class</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">exclude</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">])</span>
+                <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">],</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__apply_nested_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option_name</span><span class="p">,</span> <span class="n">field_names</span><span class="p">,</span> <span class="n">set_operation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply nested options to nested fields&quot;&quot;&quot;</span>
@@ -901,9 +897,7 @@
             <span class="n">field_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">declared_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
         <span class="c1"># If &quot;exclude&quot; option or param is specified, remove those fields</span>
-        <span class="n">excludes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">exclude</span><span class="p">)</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">excludes</span><span class="p">:</span>
-            <span class="n">field_names</span> <span class="o">=</span> <span class="n">field_names</span> <span class="o">-</span> <span class="n">excludes</span>
+        <span class="n">field_names</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__filter_fields</span><span class="p">(</span><span class="n">field_names</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">)</span>
         <span class="c1"># Set parents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__set_field_attrs</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
