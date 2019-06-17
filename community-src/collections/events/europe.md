@@ -4,7 +4,7 @@ dates: September 12-15, 2019
 tagline: Bringing together the Qiskit community
 description: A Quantum Meeting Point in the heart of the Alpes
 layout: qiskit-camp.hbs
-background: madrid
+background: europe
 nav:
   - text: When & where?
     go-to: '#when--where'
