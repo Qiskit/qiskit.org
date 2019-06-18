@@ -115,7 +115,7 @@ task('prpl-server:build', () => {
 
 exports['setup:prpl-server'] = series(
   'prpl-server:clean',
-  'add-ibm-stats-script',
+  // 'add-ibm-stats-script',
   'copy-static-files',
   'prpl-server:build',
 );
