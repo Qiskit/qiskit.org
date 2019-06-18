@@ -46,7 +46,7 @@ task('add-ibm-stats-script', () => {
         optimizely: false,
         googleAddServices: false,
         fullStory: false,
-        autoPageEventSpa: false,
+        autoPageEventSpa: true,
         autoFormEvents: false,
         autoPageView: false
       };
