@@ -46,9 +46,9 @@ task('add-ibm-stats-script', () => {
         optimizely: false,
         googleAddServices: false,
         fullStory: false,
-        autoPageEventSpa: true,
+        autoPageEventSpa: false,
         autoFormEvents: false,
-        autoPageView: true
+        autoPageView: false
       };
     </script>
     <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
