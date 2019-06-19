@@ -4,7 +4,7 @@
     :style="{ backgroundImage: `url(${image})` }"
   >
     <h3>{{ title }}</h3>
-    <section v-if="info" v-html="info"/>
+    <section v-if="info" v-html="info" />
     <a
       v-if="to"
       :href="to"
