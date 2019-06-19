@@ -41,7 +41,7 @@ async function embedCards(section, source: string) {
 
   async asyncData() {
     const root = 'events/index'
-    const sections = await loadToc(root);
+    const sections = await loadToc(root)
     for (const aSection of sections) {
       await embedCards(aSection, root)
     }
