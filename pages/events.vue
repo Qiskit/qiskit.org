@@ -1,12 +1,16 @@
 <template>
   <main>
-
+    <h2>Qiskit Camp</h2>
+    <Card class="event" />
+    <Card class="event" small />
+    <Card class="event" small />
   </main>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import Card from '~/components/Card.vue'
 
 async function loadSections(source: string): Promise<string[][]> {
   const sectionSources: string[] =
@@ -27,6 +31,10 @@ async function loadSections(source: string): Promise<string[][]> {
 }
 
 @Component({
+  components: {
+    Card
+  },
+
   async asyncData() {
     return {
       sections: await loadSections('index')
@@ -35,59 +43,16 @@ async function loadSections(source: string): Promise<string[][]> {
 })
 export default class extends Vue { }
 </script>
-
 <style>
 main {
   position: relative;
-  top: 90px;
+  top: 60px;
 }
 
-.stack-section > div {
-  display: flex;
-  flex-direction: row;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-}
-
-.stack-section > div > figure {
-  flex: 2;
-  margin-right: 3rem;
-}
-
-.stack-section > div > figure img {
-  max-width: 100%;
-}
-
-.stack-section > div > .content {
-  flex: 3;
-  line-height: 1.9em;
-  width: 100%;
-}
-
-.content h2 {
-  margin: 0 0 3rem;
-}
-
-.content a {
-  color: var(--secondary-color);
-}
-
-.stack-section:nth-child(2n) {
-  background-color: var(--secondary-color);
-}
-
-.stack-section:nth-child(2n) > div {
-  color: white;
-  flex-direction: row-reverse;
-}
-
-.stack-section:nth-child(2n) > div > figure {
-  margin-left: 3rem;
-  margin-right: 0;
-}
-
-.stack-section:nth-child(2n) > div > .content a {
-  color: white;
+.event {
+  margin-left: 10%;
+  margin-bottom: 2rem;
+  max-width: 30rem;
+  margin-right: 10%;
 }
 </style>

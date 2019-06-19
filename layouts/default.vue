@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="wrapper">
     <Menu>
-      <li><a href="#qiskit-camp">Gather together</a></li>
-      <li><a href="#qiskit-advocates-program">Get involved</a></li>
+      <li><a href="/">Community</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/advocates">Advocates</a></li>
     </Menu>
     <nuxt />
     <footer>
@@ -78,6 +79,25 @@ html {
   background-repeat: repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y;
   background-position: top calc(100vh + 890px) left 0, top calc(100vh + 930px) left 0, top calc(100vh + 970px) left 0,
     top 0 right 100px, top 0 right 0, top 0 right -100px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+h2::before {
+  content: "";
+  float: left;
+  width: 5%;
+  margin-top: 0.5rem;
+  margin-right: 5%;
+  border-top: 1px solid #0A1D8F;
+}
+
+h2 {
+  margin: 2rem 0 2.5rem;
+  color: #0A1D8F;
 }
 
 footer {
