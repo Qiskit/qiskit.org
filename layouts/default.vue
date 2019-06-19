@@ -2,24 +2,24 @@
   <div class="wrapper">
     <Menu>
       <li><a href="/">Community</a></li>
-      <li><a href="/events">Events</a></li>
-      <li><a href="/advocates">Advocates</a></li>
+      <li><a href="/events/">Events</a></li>
+      <li><a href="/advocates/">Advocates</a></li>
     </Menu>
     <nuxt />
-    <footer>
-      <p>Copyright IBM Corp. 2018-2019</p>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Menu from '~/components/Menu.vue'
+import Footer from '~/components/Footer.vue'
 import { Component } from 'vue-property-decorator'
 
 @Component({
   components: {
-    Menu
+    Menu,
+    Footer
   }
 })
 export default class extends Vue { };
@@ -98,16 +98,5 @@ h2::before {
 h2 {
   margin: 2rem 0 2.5rem;
   color: #0A1D8F;
-}
-
-footer {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 10rem;
-  text-align: center;
-  margin-top: 4rem;
-  background-color: var(--dark-color);
 }
 </style>

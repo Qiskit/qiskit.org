@@ -1,9 +1,18 @@
 <template>
   <main>
     <h2>Qiskit Camp</h2>
-    <Card class="event" />
-    <Card class="event" small />
-    <Card class="event" small />
+    <Card
+      title="Qiskit Camp Europe"
+      image="/images/events/promo-europe.jpg"
+      href="./europe"
+      info="Cosas Nazis"
+    />
+    <Card small />
+    <Card small />
+    <h2>Archives</h2>
+    <Card small />
+    <Card small />
+    <Card small />
   </main>
 </template>
 
@@ -49,10 +58,10 @@ main {
   top: 60px;
 }
 
-.event {
+.card {
   margin-left: 10%;
   margin-bottom: 2rem;
-  max-width: 30rem;
+  max-width: 40rem;
   margin-right: 10%;
 }
 </style>
