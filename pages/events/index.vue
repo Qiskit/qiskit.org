@@ -1,18 +1,17 @@
 <template>
   <main>
-    <h2>Qiskit Camp</h2>
-    <Card
-      title="Qiskit Camp Europe"
-      image="/images/events/promo-europe.jpg"
-      href="/events/europe"
-      info="Cosas Nazis"
-    />
-    <Card small />
-    <Card small />
-    <h2>Archives</h2>
-    <Card small />
-    <Card small />
-    <Card small />
+    <section
+      v-for="(section, index) in sections"
+      :key="`${section}-${index}`"
+    >
+      <h2>{{ section.title }}</h2>
+      <Card
+        title="Qiskit Camp Europe"
+        image="/images/events/promo-europe.jpg"
+        to="/events/europe"
+      />
+    </section>
+
   </main>
 </template>
 
@@ -21,22 +20,11 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import Card from '~/components/Card.vue'
 
-async function loadSections(source: string): Promise<string[][]> {
-  const sectionSources: string[] =
-    (await import(`~/src/${source}/toc.md`)).attributes
-
-  return Promise.all(
-    sectionSources.map(
-      async (sectionName) => {
-        const definition = await import(`~/src/${source}/${sectionName}`)
-        return [
-          sectionName,
-          definition.attributes.figure,
-          definition.html
-        ]
-      }
-    )
-  )
+async function loadToc(source: string): Promise<any> {
+  const root = `src/${source}`
+  const toc = (await import(`~/${root}/toc.md`)).attributes
+  toc.root = root
+  return toc
 }
 
 @Component({
@@ -46,7 +34,7 @@ async function loadSections(source: string): Promise<string[][]> {
 
   async asyncData() {
     return {
-      sections: await loadSections('index')
+      sections: await loadToc('events/index')
     }
   }
 })

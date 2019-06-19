@@ -1,11 +1,10 @@
 ---
 -
-  intro: qiskit-camp-intro.md
+  title: Qiskit Camp
   cards:
-    - qiskit-camp-intro.md
     - qiskit-camp-europe.md
 -
-  intro: event-archive-intro.md
+  title: Archive
   cards:
     - qiskit-hackathon-haifa.md
     - qiskit-hackathon-madrid.md

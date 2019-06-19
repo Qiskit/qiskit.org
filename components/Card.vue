@@ -3,10 +3,10 @@
     class="card"
     :style="{ backgroundImage: `url(${image})` }"
   >
-    <a :href="href">
+    <a :href="to">
       <h3>{{ title }}</h3>
       <section>
-        <p v-html="info"></p>
+        <slot />
       </section>
     </a>
   </article>
@@ -20,7 +20,7 @@ import { Component } from 'vue-property-decorator'
   props: {
     title: String,
     image: String,
-    href: {
+    to: {
       type: String,
       default: '#'
     },
