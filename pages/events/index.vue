@@ -4,7 +4,7 @@
     <Card
       title="Qiskit Camp Europe"
       image="/images/events/promo-europe.jpg"
-      href="./europe"
+      href="/events/europe"
       info="Cosas Nazis"
     />
     <Card small />

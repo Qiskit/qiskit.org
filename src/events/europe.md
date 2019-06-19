@@ -3,11 +3,10 @@ title: Qiskit Camp Europe
 dates: September 12-15, 2019
 tagline: Bringing together the Qiskit community
 description: A Quantum Meeting Point in the heart of the Alpes
-layout: qiskit-camp.hbs
 background: europe
 nav:
   - text: When & where?
-    goTo: '#when--where'
+    goTo: '#when-where'
   - text: Agenda
     goTo: '#agenda'
   - text: Code of Conduct

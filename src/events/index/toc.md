@@ -4,7 +4,6 @@
   cards:
     - qiskit-camp-intro.md
     - qiskit-camp-europe.md
-
 -
   intro: event-archive-intro.md
   cards:

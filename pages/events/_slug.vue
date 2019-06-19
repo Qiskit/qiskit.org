@@ -37,7 +37,7 @@ import Menu from '~/components/Menu.vue'
 import Footer from '~/components/Footer.vue'
 import { Context } from '@nuxt/vue-app'
 
-function getBackgroundUris(background: string) {
+function getBackgroundUris(background: string): [string, string] {
   const bgRoute = '/images/events/headers/'
   const lBackgroundUri = `${bgRoute}${background}-low-res.jpg`
   const hBackgroundUri = `${bgRoute}${background}-hi-res.jpg`
@@ -52,6 +52,9 @@ function getBackgroundUris(background: string) {
   },
   async asyncData(context: Context) {
     const sourceName = context.route.params.slug
+    if (sourceName === 'undefined') {
+      return
+    }
     const definition = await import(`~/src/events/${sourceName}.md`)
     const [lBackgroundUri, hBackgroundUri] =
       getBackgroundUris(definition.attributes.background)
@@ -116,8 +119,8 @@ html {
   font-family: 'IBM Plex Sans', sans-serif;
   /* min-fs + (max-fs - min-fs) * ((viewport-width - min-vw) / (max-vw - min-vw)) */
   font-size: calc(10px + (18 - 10) * ((900px - 340px) / (900 - 340)));
-  background-image: url('/img/dots.svg'), url('/img/dots.svg'), url('/img/dots.svg'),
-    url('/img/lines.svg'), url('/img/lines.svg'), url('/img/lines.svg');
+  background-image: url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'), url('/images/events/deco/dots.svg'),
+    url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg'), url('/images/events/deco/lines.svg');
   background-repeat: repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y;
   background-position: top calc(100vh + 890px) left 0, top calc(100vh + 930px) left 0, top calc(100vh + 970px) left 0,
     top 0 right 100px, top 0 right 0, top 0 right -100px;
@@ -135,17 +138,6 @@ h2::before {
 h2 {
   margin: 2rem 0 2.5rem;
   color: #0A1D8F;
-}
-
-footer {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 10rem;
-  text-align: center;
-  margin-top: 4rem;
-  background-color: var(--dark-color);
 }
 
 header {
@@ -239,10 +231,6 @@ header p {
   }
 }
 
-main.second-level {
-  padding-top: 4rem;
-}
-
 main .cta {
   border-color: black;
 }
@@ -271,7 +259,8 @@ main .clarification {
 }
 
 h2 {
-  margin: 4rem 0 2.5rem;
+  padding-top: 4rem;
+  margin: 0 0 2rem;
   color: #0A1D8F;
 }
 
@@ -282,14 +271,6 @@ h2::before {
   margin-top: 0.5rem;
   margin-right: 5%;
   border-top: 1px solid #0A1D8F;
-}
-
-.second-level h2 {
-  padding-left: 5%;
-}
-
-.second-level h2::before {
-  margin-left: -5%;
 }
 
 .agenda h2 {
@@ -346,42 +327,7 @@ td.multislot {
   font-style: italic;
 }
 
-footer {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 10rem;
-  text-align: center;
-  margin-top: 4rem;
-  background-color: #0A1D8F;
-}
-
-@media (max-width: 900px) {
-
-  .convertible-menu .hamburger {
-    display: block;
-  }
-
-  .convertible-menu ul {
-    text-align: right;
-    width: 100vw;
-    position: absolute;
-    background-color: white;
-    display: block;
-    height: auto;
-    border-bottom: 1px solid #0A1D8F;
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    transform: translateX(100%);
-  }
-
-  .convertible-menu input:checked ~ ul {
-    transform: translateX(0);
-  }
-
-  .convertible-menu ul li {
-    padding-right: 2.5%;
-  }
+@media (max-width: 800px) {
 
   .id-stub {
     top: -380px;
@@ -393,12 +339,6 @@ footer {
   .headlines {
     padding-top: 8rem;
     margin-bottom: -5rem;
-  }
-}
-
-@media (max-width: 320px) {
-  main.second-level {
-    padding-top: 8rem;
   }
 }
 
