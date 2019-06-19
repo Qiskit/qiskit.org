@@ -3,12 +3,14 @@
     class="card"
     :style="{ backgroundImage: `url(${image})` }"
   >
-    <a :href="to">
-      <h3>{{ title }}</h3>
-      <section>
-        <slot />
-      </section>
-    </a>
+    <h3>{{ title }}</h3>
+    <section v-if="info" v-html="info"/>
+    <a
+      v-if="to"
+      :href="to"
+      target="_blank"
+      rel="noopener"
+    />
   </article>
 </template>
 
@@ -22,19 +24,18 @@ import { Component } from 'vue-property-decorator'
     image: String,
     to: {
       type: String,
-      default: '#'
+      default: ''
     },
     info: String
   }
 })
-export default class extends Vue {
-};
+export default class extends Vue { };
 </script>
 
 <style scoped>
 .card {
   border: 1px solid #cccccc;
-  box-shadow: 0 0 2rem 0rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2rem 0rem rgba(0, 0, 0, 0.2);
   background-color: white;
   min-height: 15rem;
   position: relative;
@@ -71,7 +72,7 @@ export default class extends Vue {
 }
 
 .card section {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   position: absolute;
   bottom: 0;
   left: 0;
