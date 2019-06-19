@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs'
 import markdownIt from 'markdown-it'
 import miLinkAttributes from 'markdown-it-link-attributes'
 import miAnchor from 'markdown-it-anchor'
@@ -98,5 +99,13 @@ export default {
 
       return { x: 0, y: 0 }
     }
+  },
+
+  generate: {
+    routes: (function () {
+      return fs.readdirSync(path.resolve(__dirname, 'src', 'events'))
+        .filter(filename => path.extname(filename) === '.md')
+        .map(filename => `/events/${path.parse(filename).name}`)
+    })()
   }
 }
