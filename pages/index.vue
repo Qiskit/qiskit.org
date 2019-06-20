@@ -1,16 +1,42 @@
 <template>
   <main>
     <section
-      v-for="sec in sections"
-      :key="sec[0]"
-      class="stack-section"
+      v-for="(section, index) in sections"
+      :key="`section-${index}`"
     >
-      <div>
-        <figure>
-          <img alt="" :src="sec[1]">
-        </figure>
-        <div class="content" v-html="sec[2]" />
-      </div>
+      <h2
+        v-if="!!section.title"
+        :id="section.anchor"
+      >
+        {{ section.title }}
+      </h2>
+      <Card
+        v-for="(card, cardIndex) in section.major"
+        :key="`major-${cardIndex}`"
+        :title="card.attributes.title"
+        :image="card.attributes.image"
+        :to="card.attributes.to"
+        :info="card.html"
+        major
+      />
+      <Card
+        v-for="(card, cardIndex) in section.regular"
+        :key="`regular-${cardIndex}`"
+        :title="card.attributes.title"
+        :image="card.attributes.image"
+        :to="card.attributes.to"
+        :info="card.html"
+      />
+      <section class="minor">
+        <Card
+          v-for="(card, cardIndex) in section.minor"
+          :key="`minor-${cardIndex}`"
+          :title="card.attributes.title"
+          :image="card.attributes.image"
+          :to="card.attributes.to"
+          :info="card.html"
+        />
+      </section>
     </section>
   </main>
 </template>
@@ -18,87 +44,66 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import Card from '~/components/Card.vue'
 
-async function loadSections(source: string): Promise<string[][]> {
-  const sectionSources: string[] =
-    (await import(`~/src/${source}/toc.md`)).attributes
+async function loadToc(source: string): Promise<any> {
+  const toc = (await import(`~/src/${source}/toc.md`)).attributes
+  return toc
+}
 
-  return Promise.all(
-    sectionSources.map(
-      async (sectionName) => {
-        const definition = await import(`~/src/${source}/${sectionName}`)
-        return [
-          sectionName,
-          definition.attributes.figure,
-          definition.html
-        ]
-      }
-    )
-  )
+async function embedDocuments(section, source: string, collection: string) {
+  if (!section[collection]) { return [] }
+  section[collection] = await Promise.all(section[collection].map(
+    path => import(`~/src/${source}/${path}`)
+  ))
 }
 
 @Component({
+  components: {
+    Card
+  },
+
   async asyncData() {
+    const root = 'index'
+    const sections = await loadToc(root)
+    for (const aSection of sections) {
+      await embedDocuments(aSection, root, 'major')
+      await embedDocuments(aSection, root, 'regular')
+      await embedDocuments(aSection, root, 'minor')
+    }
     return {
-      sections: await loadSections('index')
+      sections
     }
   }
 })
 export default class extends Vue { }
 </script>
-
 <style>
 main {
   position: relative;
-  top: 90px;
+  top: 60px;
 }
 
-.stack-section > div {
-  display: flex;
-  flex-direction: row;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
+.minor {
+  display: grid;
+  grid-column-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  box-sizing: border-box;
+  margin-left: 10%;
+  margin-right: 10%;
+  max-width: 40rem;
 }
 
-.stack-section > div > figure {
-  flex: 2;
-  margin-right: 3rem;
-}
-
-.stack-section > div > figure img {
-  max-width: 100%;
-}
-
-.stack-section > div > .content {
-  flex: 3;
-  line-height: 1.9em;
-  width: 100%;
-}
-
-.content h2 {
-  margin: 0 0 3rem;
-}
-
-.content a {
-  color: var(--secondary-color);
-}
-
-.stack-section:nth-child(2n) {
-  background-color: var(--secondary-color);
-}
-
-.stack-section:nth-child(2n) > div {
-  color: white;
-  flex-direction: row-reverse;
-}
-
-.stack-section:nth-child(2n) > div > figure {
-  margin-left: 3rem;
+.minor .card {
+  margin-left: 0;
   margin-right: 0;
+  box-sizing: border-box;
 }
 
-.stack-section:nth-child(2n) > div > .content a {
-  color: white;
+.card {
+  margin-left: 10%;
+  margin-bottom: 2rem;
+  max-width: 40rem;
+  margin-right: 10%;
 }
 </style>
