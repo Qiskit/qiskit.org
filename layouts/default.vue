@@ -4,6 +4,13 @@
       <li><a href="/">Home</a></li>
       <li><a href="/events/">Events</a></li>
     </Menu>
+    <header>
+      <video src="/video/qiskit-camp-community.mp4" muted autoplay loop />
+      <section>
+        <img alt="Qiskit Logo" src="/images/qiskit-logo.png">
+        <h1>Welcome to the Qiskit Community!</h1>
+      </section>
+    </header>
     <nuxt />
     <Footer />
   </div>

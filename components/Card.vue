@@ -3,12 +3,15 @@
     class="card"
     :style="{ backgroundImage: `url(${image})` }"
   >
-    <h3>{{ title }}</h3>
+    <div class="stump" />
+    <h3 v-if="title">
+      {{ title }}
+    </h3>
     <section v-if="info" v-html="info" />
     <a
       v-if="to"
       :href="to"
-      target="_blank"
+      :target="isPointingOutside ? '_blank' : '_self'"
       rel="noopener"
     />
   </article>
@@ -29,7 +32,11 @@ import { Component } from 'vue-property-decorator'
     info: String
   }
 })
-export default class extends Vue { };
+export default class extends Vue {
+  get isPointingOutside() {
+    return this.$props.to.startsWith('http')
+  }
+};
 </script>
 
 <style scoped>
@@ -37,10 +44,14 @@ export default class extends Vue { };
   border: 1px solid #cccccc;
   box-shadow: 0 0 2rem 0rem rgba(0, 0, 0, 0.2);
   background-color: white;
-  min-height: 15rem;
   position: relative;
   transition: box-shadow 0.2s;
-  background-position: center;
+  background-position: top right;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .card[small] {
@@ -73,11 +84,15 @@ export default class extends Vue { };
 
 .card section {
   background-color: rgba(255, 255, 255, 0.9);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30%;
   padding: 1rem;
+  align-self: stretch;
+}
+
+.stump {
+  min-height: 5rem;
+}
+
+[major] .stump {
+  min-height: 15rem;
 }
 </style>
