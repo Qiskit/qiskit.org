@@ -4,7 +4,12 @@
       v-for="(section, index) in sections"
       :key="`section-${index}`"
     >
-      <h2>{{ section.title }}</h2>
+      <h2
+        v-if="!!section.title"
+        :id="section.anchor"
+      >
+        {{ section.title }}
+      </h2>
       <Card
         v-for="(card, cardIndex) in section.cards"
         :key="`card-${cardIndex}`"
@@ -12,6 +17,7 @@
         :image="`/images/events/${card.attributes.image}`"
         :to="card.attributes.to"
         :info="card.html"
+        major
       />
     </section>
   </main>
@@ -35,6 +41,8 @@ async function embedCards(section, source: string) {
 }
 
 @Component({
+  layout: 'secondary',
+
   components: {
     Card
   },

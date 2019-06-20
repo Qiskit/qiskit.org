@@ -4,6 +4,15 @@
       <li><a href="/">Home</a></li>
       <li><a href="/events/">Events</a></li>
     </Menu>
+    <header id="landing-header">
+      <video src="video/qiskit-camp-community.mp4" muted autoplay loop />
+      <section>
+        <img alt="Qiskit Logo" src="/images/qiskit-logo.png">
+        <div>
+          <h1>Welcome to the Qiskit Community!</h1>
+        </div>
+      </section>
+    </header>
     <nuxt />
     <Footer />
   </div>
@@ -47,7 +56,7 @@ export default class extends Vue { };
 }
 
 :root {
-  --secondary-color: rgb(138, 63, 252);
+  --secondary-color: rgb(103, 58, 183);
   --dark-color: rgb(33, 37, 43);
 }
 
@@ -85,6 +94,50 @@ html {
   flex-direction: column;
 }
 
+#landing-header {
+  position: relative;
+  top: 63px;
+  height: calc(100vh - 63px);
+  width: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color)
+}
+
+#landing-header video {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#landing-header > section {
+  position: relative;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#landing-header > section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#landing-header img {
+  height: 15vw;
+  min-height: 10rem;
+}
+
+#landing-header h1 {
+  margin-left: 1.5rem;
+}
+
 h2::before {
   content: "";
   float: left;
@@ -97,5 +150,30 @@ h2::before {
 h2 {
   margin: 2rem 0 2.5rem;
   color: #0A1D8F;
+}
+
+@media (max-width: 800px) {
+
+  #landing-header section {
+    display: block;
+    text-align: center;
+  }
+
+  #landing-header h1 {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+}
+
+@media (max-height: 390px) {
+  #landing-header h1 {
+    margin: 0;
+    margin-top: 0.5rem;
+  }
+
+  #landing-header section {
+    padding: 1rem;
+  }
 }
 </style>
