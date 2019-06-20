@@ -1,5 +1,5 @@
 ---
-title: Become and advocate
+title: Become an advocate
 image: /images/qiskit-advocates.jpg
 ---
 A global program that provides support to the individuals who actively work on assisting and growing the Qiskit community.
