@@ -5,6 +5,7 @@
       <li><a href="/events/">Events</a></li>
     </Menu>
     <header>
+      <video src="video/qiskit-camp-community.mp4" muted autoplay loop />
       <section>
         <img alt="Qiskit Logo" src="/images/qiskit-logo.png">
         <div>
@@ -106,7 +107,14 @@ header {
   background-color: var(--secondary-color)
 }
 
+header video {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 header > section {
+  position: relative;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 2rem;
