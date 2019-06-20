@@ -152,7 +152,6 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-self: center;
   text-shadow: 0px 3px 3px black;
 }
 
@@ -166,13 +165,12 @@ in the latest version of the browser. */
   }
 }
 
-.id-stub {
-  position: relative;
-  top: -85px;
-}
-
 header p {
   margin: 0.8rem;
+}
+
+header .headlines {
+  margin-top: 60px;
 }
 
 .interest {
@@ -192,7 +190,7 @@ header p {
 }
 
 .scroll-down {
-  margin-top: 6rem;
+  margin-top: 2rem;
   position: relative;
   font-style: italic;
 }
@@ -325,14 +323,6 @@ td.multislot {
 
 .author {
   font-style: italic;
-}
-
-@media (max-width: 800px) {
-
-  .id-stub {
-    top: -380px;
-  }
-
 }
 
 @media (max-width: 500px) {
