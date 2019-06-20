@@ -2,11 +2,11 @@
 title: Qiskit Camp Europe
 dates: September 12-15, 2019
 tagline: Bringing together the Qiskit community
-description: A Quantum Meeting Point in the heart of the Alpes
+description: A Quantum Meeting Point in the heart of the Alps
 background: europe
 nav:
-  - text: When & where?
-    goTo: '#when-where'
+  - text: Location
+    goTo: '#location'
   - text: Agenda
     goTo: '#agenda'
   - text: Code of Conduct
@@ -17,15 +17,17 @@ nav:
 
 Qiskit Camp brings together the quantum community for an immersive experience consisting of training sessions, deep technical talks, and a hackathon with the Qiskit core development team. Learn about new updates to Qiskit and meet the people building it.
 
-The 2019 Qiskit Camp Europe will be hosted near Zurich, Switzerland from September 12-15, in collaboration with [SQUID](https://qid.ethz.ch/). Invitations will be distributed prior to the event.
+The 2019 Qiskit Camp Europe will be hosted near Zurich, Switzerland from September 12-15. Invitations will be distributed prior to the event.
 
-## When & Where?
+## Locations
 
-### September, 12th - 15th
+Qiskit Camp Europe will make history as the first hackathon to ever take place at the Piz Gloria, a revolving restaurant at the top of Schilthorn Peak in Switzerland. Piz Gloria was originally made famous for being Blofeld's clinical facility in the James Bond movie [On Her Majesty's Secret Service](https://www.imdb.com/title/tt0064757/).
+
+Attendees will have accomodations in the scenic town of Mürren, a short gondola ride from the Piz Gloria.
 
 [Piz Gloria](https://www.schilthorn.ch/)<br/>The Schilthorn, Switzerland
 
-<iframe title="Piz Victoria" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3124.309098001504!2d7.835337833523298!3d46.55683910566589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478fa0aa0ef272f5%3A0xba9bb981f1a1b693!2sPiz+Gloria!5e0!3m2!1sen!2ses!4v1560537893059!5m2!1sen!2ses" style="border:0" allowfullscreen="" width="100%" height="450" frameborder="0"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d43892.612754946545!2d7.850263!3d46.5617639!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478fa0711eae731b%3A0x1d7962d4f9617d61!2sM%C3%BCrren%2C+3825+Lauterbrunnen%2C+Switzerland!5e0!3m2!1sen!2sus!4v1561052610870!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 ## Agenda
 
