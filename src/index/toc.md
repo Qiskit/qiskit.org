@@ -6,8 +6,8 @@
 -
   title: Gather together
   regular:
+    - qiskit-camps.md
     - local-events.md
-    - event-archive.md
 -
   title: Get involved
   major:
@@ -16,6 +16,6 @@
   title: Get help
   minor:
     - join-slack.md
-    - join-slack.md
-    - join-slack.md
+    - stack-exchange.md
+    - twitter.md
 ---

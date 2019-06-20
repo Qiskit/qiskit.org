@@ -47,7 +47,7 @@ export default class extends Vue { };
 }
 
 :root {
-  --secondary-color: rgb(138, 63, 252);
+  --secondary-color: rgb(103, 58, 183);
   --dark-color: rgb(33, 37, 43);
 }
 
