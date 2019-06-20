@@ -4,7 +4,7 @@
       <li><a href="/">Home</a></li>
       <li><a href="/events/">Events</a></li>
     </Menu>
-    <header>
+    <header id="landing-header">
       <video src="video/qiskit-camp-community.mp4" muted autoplay loop />
       <section>
         <img alt="Qiskit Logo" src="/images/qiskit-logo.png">
@@ -94,7 +94,7 @@ html {
   flex-direction: column;
 }
 
-header {
+#landing-header {
   position: relative;
   top: 63px;
   height: calc(100vh - 63px);
@@ -107,13 +107,13 @@ header {
   background-color: var(--secondary-color)
 }
 
-header video {
+#landing-header video {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-header > section {
+#landing-header > section {
   position: relative;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
@@ -123,18 +123,18 @@ header > section {
   justify-content: center;
 }
 
-header > section > div {
+#landing-header > section > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-header img {
+#landing-header img {
   height: 15vw;
   min-height: 10rem;
 }
 
-header h1 {
+#landing-header h1 {
   margin-left: 1.5rem;
 }
 
@@ -154,12 +154,12 @@ h2 {
 
 @media (max-width: 800px) {
 
-  header section {
+  #landing-header section {
     display: block;
     text-align: center;
   }
 
-  header h1 {
+  #landing-header h1 {
     margin: 0;
     margin-top: 2rem;
   }
@@ -167,12 +167,12 @@ h2 {
 }
 
 @media (max-height: 390px) {
-  header h1 {
+  #landing-header h1 {
     margin: 0;
     margin-top: 0.5rem;
   }
 
-  header section {
+  #landing-header section {
     padding: 1rem;
   }
 }
