@@ -122,7 +122,8 @@ header > section > div {
 }
 
 header img {
-  max-width: 15vw;
+  height: 15vw;
+  min-height: 10rem;
 }
 
 header h1 {
@@ -141,5 +142,30 @@ h2::before {
 h2 {
   margin: 2rem 0 2.5rem;
   color: #0A1D8F;
+}
+
+@media (max-width: 800px) {
+
+  header section {
+    display: block;
+    text-align: center;
+  }
+
+  header h1 {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+}
+
+@media (max-height: 390px) {
+  header h1 {
+    margin: 0;
+    margin-top: 0.5rem;
+  }
+
+  header section {
+    padding: 1rem;
+  }
 }
 </style>
