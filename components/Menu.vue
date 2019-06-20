@@ -62,7 +62,6 @@ nav ul {
 }
 
 nav li {
-  font-family: 'IBM Plex Mono', monospace;
   font-weight: bold;
   list-style: none;
   text-indent: 0;
