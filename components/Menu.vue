@@ -43,6 +43,7 @@ nav {
   justify-content: center;
   width: 100%;
   position: fixed;
+  top: 0;
   z-index: 100;
   box-shadow: 0px 0px 16px #2B2B2B;
   background-color: white;
