@@ -47,6 +47,7 @@ export default class extends Vue {
   position: relative;
   transition: box-shadow 0.2s;
   background-position: top right;
+  background-size: cover;
   font-size: 0.9rem;
   display: flex;
   flex-direction: column;
