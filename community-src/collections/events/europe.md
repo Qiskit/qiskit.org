@@ -18,7 +18,7 @@ nav:
 
 Qiskit Camp brings together the quantum community for an immersive experience consisting of training sessions, deep technical talks, and a hackathon with the Qiskit core development team. Learn about new updates to Qiskit and meet the people building it.
 
-The 2019 Qiskit Camp Europe will be hosted near Zurich, Switzerland from September 12-15, in collaboration with [SQUID](https://qid.ethz.ch/). Invitations will be distributed prior to the event.
+The 2019 Qiskit Camp Europe will be hosted near Zurich, Switzerland from September 12-15. Invitations will be distributed prior to the event.
 
 ## When & Where?
 
