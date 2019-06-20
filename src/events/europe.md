@@ -17,13 +17,13 @@ nav:
 
 Qiskit Camp brings together the quantum community for an immersive experience consisting of training sessions, deep technical talks, and a hackathon with the Qiskit core development team. Learn about new updates to Qiskit and meet the people building it.
 
-The 2019 Qiskit Camp Europe will be hosted near Zurich, Switzerland from September 12-15. Invitations will be distributed prior to the event. If you are new to Qiskit or simply want to increase your proficiency in quantum computing, [Squid](https://qid.ethz.ch/) is offering a week long camp from September 8-12, 2019.
+The 2019 Qiskit Camp Europe will be hosted near Zurich, Switzerland from September 12-15. Invitations will be distributed prior to the event. If you are new to Qiskit or simply want to increase your proficiency in quantum computing, [Squid](https://qid.ethz.ch/) is offering a one week summer school from September 8-12, 2019.
 
 ## Location
 
-Qiskit Camp Europe will make history as the first hackathon to take place at the [Piz Gloria](https://schilthorn.ch/en/Welcome), a revolving restaurant at the top of Schilthorn Peak in Switzerland. Piz Gloria was originally made famous for being Blofeld's clinical facility in the James Bond movie [On Her Majesty's Secret Service](https://www.imdb.com/title/tt0064757/).
+Qiskit Camp Europe will be the first hackathon to take place at [Piz Gloria](https://schilthorn.ch/en/Welcome), a revolving restaurant at the top of Schilthorn Peak in Switzerland. Piz Gloria was originally made famous for being Blofeld's clinical facility in the James Bond movie _On Her Majesty's Secret Service_.
 
-Attendees will have accomodations in the scenic town of Mürren, a short gondola ride from the Piz Gloria.
+Accomodations will be provided in the scenic town of Mürren, a short gondola ride from Piz Gloria.
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d43892.612754946545!2d7.850263!3d46.5617639!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478fa0711eae731b%3A0x1d7962d4f9617d61!2sM%C3%BCrren%2C+3825+Lauterbrunnen%2C+Switzerland!5e0!3m2!1sen!2sus!4v1561052610870!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
