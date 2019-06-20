@@ -25,8 +25,6 @@ Qiskit Camp Europe will make history as the first hackathon to take place at the
 
 Attendees will have accomodations in the scenic town of Mürren, a short gondola ride from the Piz Gloria.
 
-[Piz Gloria](https://www.schilthorn.ch/)<br/>The Schilthorn, Switzerland
-
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d43892.612754946545!2d7.850263!3d46.5617639!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478fa0711eae731b%3A0x1d7962d4f9617d61!2sM%C3%BCrren%2C+3825+Lauterbrunnen%2C+Switzerland!5e0!3m2!1sen!2sus!4v1561052610870!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 ## Agenda
