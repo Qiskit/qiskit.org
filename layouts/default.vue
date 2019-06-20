@@ -5,10 +5,11 @@
       <li><a href="/events/">Events</a></li>
     </Menu>
     <header>
-      <video src="/video/qiskit-camp-community.mp4" muted autoplay loop />
       <section>
         <img alt="Qiskit Logo" src="/images/qiskit-logo.png">
-        <h1>Welcome to the Qiskit Community!</h1>
+        <div>
+          <h1>Welcome to the Qiskit Community!</h1>
+        </div>
       </section>
     </header>
     <nuxt />
@@ -54,7 +55,7 @@ export default class extends Vue { };
 }
 
 :root {
-  --secondary-color: rgb(138, 63, 252);
+  --secondary-color: rgb(103, 58, 183);
   --dark-color: rgb(33, 37, 43);
 }
 
@@ -90,6 +91,42 @@ html {
 .wrapper {
   display: flex;
   flex-direction: column;
+}
+
+header {
+  position: relative;
+  top: 63px;
+  height: calc(100vh - 63px);
+  width: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color)
+}
+
+header > section {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+header > section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header img {
+  max-width: 15vw;
+}
+
+header h1 {
+  margin-left: 1.5rem;
 }
 
 h2::before {

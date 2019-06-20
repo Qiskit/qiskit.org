@@ -3,17 +3,17 @@
     class="card"
     :style="{ backgroundImage: `url(${image})` }"
   >
-    <div class="stump" />
-    <h3 v-if="title">
-      {{ title }}
-    </h3>
-    <section v-if="info" v-html="info" />
     <a
       v-if="to"
       :href="to"
       :target="isPointingOutside ? '_blank' : '_self'"
       rel="noopener"
     />
+    <div class="stump" />
+    <h3 v-if="title">
+      {{ title }}
+    </h3>
+    <section v-if="info" v-html="info" />
   </article>
 </template>
 
@@ -52,6 +52,7 @@ export default class extends Vue {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
+  background-color: var(--secondary-color, white);
 }
 
 .card[small] {
@@ -80,6 +81,10 @@ export default class extends Vue {
   margin: 1rem 0 0 0;
   background-color: white;
   display: inline-block;
+}
+
+.card h3:last-child {
+  padding-bottom: 1rem;
 }
 
 .card section {

@@ -84,14 +84,10 @@ main {
   top: 60px;
 }
 
-header {
-  height: 100vh;
-}
-
 .minor {
   display: grid;
   grid-column-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   box-sizing: border-box;
   margin-left: 10%;
   margin-right: 10%;

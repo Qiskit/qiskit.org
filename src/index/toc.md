@@ -1,9 +1,10 @@
 ---
 -
+  title: Save the date!
   major:
     - qiskit-camp-europe.md
 -
-  title: Gathering together
+  title: Gather together
   regular:
     - local-events.md
     - event-archive.md
@@ -12,7 +13,7 @@
   major:
     - advocate-program.md
 -
-  title: Need help?
+  title: Get help
   minor:
     - join-slack.md
     - join-slack.md
