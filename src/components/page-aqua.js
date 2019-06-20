@@ -305,17 +305,18 @@ class PageAqua extends localize(i18next)(LitElement) {
                 <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
               </a>
             </div>
+            <p>${i18next.t('pages.aqua.chemistryGuiDescription1')}</p>
+            <p>${i18next.t('pages.aqua.chemistryGuiDescription2')}</p>
+            <p>${i18next.t('pages.aqua.chemistryGuiDescription3')}</p>
+          </div>
+          <div class="illustration">
+            <h3>${i18next.t('pages.aqua.installTitle')}</h3>
             <code-sample type="bash">
               <template>
                 [python3] $ qiskit_aqua_ui
                 [python3] $ qiskit_chemistry_ui
               </template>
             </code-sample>
-            <p>${i18next.t('pages.aqua.chemistryGuiDescription1')}</p>
-            <p>${i18next.t('pages.aqua.chemistryGuiDescription2')}</p>
-            <p>${i18next.t('pages.aqua.chemistryGuiDescription3')}</p>
-          </div>
-          <div class="illustration">
             <img src="images/aqua/aqua-chemistry-gui.gif" .alt=${i18next.t('pages.aqua.chemistryGuiAltImage')}>
           </div>
         </div>
