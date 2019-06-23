@@ -55,6 +55,7 @@ class PageAqua extends localize(i18next)(LitElement) {
         section .description .badges vaadin-button {
           --ibmq-button-secondary-color: #000000;
           --ibmq-button-secondary-focus-color: #ffffff;
+          margin-bottom: 1em;
         }
 
         section .description img + img {
@@ -290,17 +291,32 @@ class PageAqua extends localize(i18next)(LitElement) {
         <div class="row limited-width">
           <div class="description">
             <h3>${i18next.t('pages.aqua.chemistryGui')}</h3>
+            <div class="badges">
+              <a
+                href="https://github.com/Qiskit/qiskit-aqua-interfaces"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                @click=${() => trackClickEvent({
+                  action: 'Qiskit Aqua GUI: GitHub Repository',
+                  objectType: 'Button'
+                })}
+              >
+                <vaadin-button theme="secondary small">${githubIcon} GitHub</vaadin-button>
+              </a>
+            </div>
+            <p>${i18next.t('pages.aqua.chemistryGuiDescription1')}</p>
+            <p>${i18next.t('pages.aqua.chemistryGuiDescription2')}</p>
+            <p>${i18next.t('pages.aqua.chemistryGuiDescription3')}</p>
+          </div>
+          <div class="illustration">
+            <h3>${i18next.t('pages.aqua.installTitle')}</h3>
             <code-sample type="bash">
               <template>
                 [python3] $ qiskit_aqua_ui
                 [python3] $ qiskit_chemistry_ui
               </template>
             </code-sample>
-            <p>${i18next.t('pages.aqua.chemistryGuiDescription1')}</p>
-            <p>${i18next.t('pages.aqua.chemistryGuiDescription2')}</p>
-            <p>${i18next.t('pages.aqua.chemistryGuiDescription3')}</p>
-          </div>
-          <div class="illustration">
             <img src="images/aqua/aqua-chemistry-gui.gif" .alt=${i18next.t('pages.aqua.chemistryGuiAltImage')}>
           </div>
         </div>
