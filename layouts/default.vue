@@ -111,6 +111,8 @@ html {
   position: absolute;
   right: 0;
   top: 0;
+  height: 100vh;
+  width: auto;
 }
 
 #landing-header > section {
