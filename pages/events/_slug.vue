@@ -325,13 +325,6 @@ td.multislot {
   font-style: italic;
 }
 
-@media (max-width: 500px) {
-  .headlines {
-    padding-top: 8rem;
-    margin-bottom: -5rem;
-  }
-}
-
 @media (max-height: 500px) {
   .headlines {
     font-size: 0.9em;
