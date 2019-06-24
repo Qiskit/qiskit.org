@@ -152,7 +152,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-shadow: 0px 3px 3px black;
+  text-shadow: -1px 0 black, 0 1px #000, 1px 0 black, 0 -1px black
 }
 
 /* Hack to target Safari only and disable the fixed effect which seems broken
