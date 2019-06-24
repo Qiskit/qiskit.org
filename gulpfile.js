@@ -48,7 +48,8 @@ task('add-ibm-stats-script', () => {
         fullStory: false,
         autoPageEventSpa: true,
         autoFormEvents: false,
-        autoPageView: true
+        autoPageView: true,
+        preventPageEvent: true
       };
     </script>
     <script async src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
@@ -114,7 +115,7 @@ task('prpl-server:build', () => {
 
 exports['setup:prpl-server'] = series(
   'prpl-server:clean',
-  'add-ibm-stats-script',
+  // 'add-ibm-stats-script',
   'copy-static-files',
   'prpl-server:build',
 );
