@@ -66,7 +66,7 @@ class PageFun extends localize(i18next)(LitElement) {
               <a href="https://qiskit.camp" target="_blank" rel="noopener" tabindex="-1">
                 <vaadin-button theme="secondary">Qiskit Camp 19</vaadin-button>
               </a>
-              <a href="/events/europe" target="_blank" rel="noopener" tabindex="-1">
+              <a href="https://community.qiskit.org/events/europe" target="_blank" rel="noopener" tabindex="-1">
                 <vaadin-button theme="secondary">Europe</vaadin-button>
               </a>
               <a href="./community" rel="noopener" tabindex="-1">
