@@ -83,6 +83,12 @@ export default {
           }
         }
       })
+    },
+
+    // TODO: Workaround for dealing with. Remove once its solved:
+    // https://github.com/nuxt/nuxt.js/issues/3877
+    splitChunks: {
+      layouts: true
     }
   },
 
