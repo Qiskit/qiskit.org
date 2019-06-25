@@ -17,11 +17,13 @@ nav:
 
 Qiskit Camps are an immersive experience that consists of training sessions, deep technical talks, and a hackathon alongside the Qiskit core development team. At Qiskit Camp, attendees can collaborate with both quantum researchers and computer scientists to connect with the larger global quantum community.
 
-The 2019 Qiskit Camp Europe will be hosted near Zürich, Switzerland from September 12-15. Invitations will be distributed prior to the event. If you are new to Qiskit or simply want to increase your proficiency in quantum computing, [Squid](https://qid.ethz.ch/) is offering a one week summer school from September 8-12, 2019.
+2019 Qiskit Camp Europe will be hosted near Zürich, Switzerland from 12–15 September. Invitations will be distributed prior to the event.
+
+Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing, should attend [Squid](https://qid.ethz.ch/)'s one week summer school from 8–12 September 2019 at ETH Zürich.
 
 ## Location
 
-Qiskit Camp Europe will be the first hackathon to take place at [Piz Gloria](https://schilthorn.ch/en/Welcome), a revolving restaurant at the top of Schilthorn Peak in Switzerland. Piz Gloria was originally made famous for being Blofeld's clinical facility in the James Bond movie _On Her Majesty's Secret Service_.
+Qiskit Camp Europe will be the first hackathon to take place at [Piz Gloria](https://schilthorn.ch/en/Welcome), a revolving restaurant at the top of Schilthorn Peak in Switzerland. Piz Gloria was originally made famous as Blofeld's clinical facility in the James Bond movie _On Her Majesty's Secret Service_.
 
 Accomodations will be provided in the scenic town of Mürren, a short gondola ride from Piz Gloria.
 
