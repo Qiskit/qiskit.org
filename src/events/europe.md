@@ -15,7 +15,7 @@ nav:
 
 ## What is Qiskit Camp?
 
-Qiskit Camp brings together the quantum community for an immersive experience consisting of training sessions, deep technical talks, and a hackathon with the Qiskit core development team. By attending Qiskit Camp, attendees are able to collaborate with quantum researchers and computer scientists and enjoy meaningful experiences resulting in a more connected global quantum community.
+Qiskit Camps are an immersive experience that consists of training sessions, deep technical talks, and a hackathon alongside the Qiskit core development team. At Qiskit Camp, attendees can collaborate with both quantum researchers and computer scientists to connect with the larger global quantum community.
 
 The 2019 Qiskit Camp Europe will be hosted near Zürich, Switzerland from September 12-15. Invitations will be distributed prior to the event. If you are new to Qiskit or simply want to increase your proficiency in quantum computing, [Squid](https://qid.ethz.ch/) is offering a one week summer school from September 8-12, 2019.
 
