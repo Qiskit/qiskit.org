@@ -57,7 +57,7 @@ export default class extends Vue { };
 
 :root {
   --secondary-color: rgb(103, 58, 183);
-  --dark-color: rgb(33, 37, 43);
+  --dark-color: rgb(30, 20, 60);
 }
 
 * {
@@ -104,22 +104,23 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--secondary-color)
+  background-color: var(--dark-color)
 }
 
 header video {
   position: absolute;
-  right: 0;
+  left: 50%;
   top: 0;
   height: 100vh;
   width: auto;
+  transform: translateX(-50%);
 }
 
 header > section {
   position: relative;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -132,8 +133,9 @@ header > section > div {
 }
 
 header img {
-  height: 15vw;
+  height: 10vw;
   min-height: 10rem;
+  max-height: 14rem;
 }
 
 header h1 {
