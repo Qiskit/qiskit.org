@@ -1735,20 +1735,19 @@ draw() method.</p>
 </div>
 <div class="section" id="controlling-output-from-circuit-draw">
 <h2>Controlling output from circuit.draw()<a class="headerlink" href="#controlling-output-from-circuit-draw" title="Permalink to this headline">¶</a></h2>
-<p>By default the draw method returns the rendered image as an object and
-does not output anything. The exact class returned depends on the output
+<p>By default, the draw method returns the rendered image as an object and
+does not output anything. The specific class returned depends on the output
 specified: <code class="docutils literal notranslate"><span class="pre">'text'</span></code>(the default output type) returns a <code class="docutils literal notranslate"><span class="pre">TextDrawer</span></code> object,
 <code class="docutils literal notranslate"><span class="pre">'mpl'</span></code> returns a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> object, and <code class="docutils literal notranslate"><span class="pre">latex</span></code> returns
 a <code class="docutils literal notranslate"><span class="pre">PIL.Image</span></code> object. Having the return types enables modifying or
 directly interacting with the rendered output from the drawers. Jupyter
 notebooks understand these return types and render it for us in this
-tutorial, but when running outside of jupyter you do not have this
-feature automatically. However, the <code class="docutils literal notranslate"><span class="pre">draw()</span></code> method has optional
-arguments to display or save the output. When specified the <code class="docutils literal notranslate"><span class="pre">filename</span></code>
-kwarg takes a path to save the rendered output to. Or if you’re using
-the <code class="docutils literal notranslate"><span class="pre">mpl</span></code> or <code class="docutils literal notranslate"><span class="pre">latex</span></code> outputs you can leverage the <code class="docutils literal notranslate"><span class="pre">interactive</span></code>
-kwarg to open the image in a new window (this will not always work from
-within a notebook but will be demonstrated anyway).</p>
+tutorial, but when running outside of a Jupyter notebook, you do not have this
+feature automatically. Instead, the <code class="docutils literal notranslate"><span class="pre">draw()</span></code> method has optional
+arguments to display or save the output. When <code class="docutils literal notranslate"><span class="pre">draw()</span></code> is specified,
+you can specify a path to save the rendered output to by using the <code class="docutils literal notranslate"><span class="pre">filename</span></code>
+kwarg. Or if you’re using the <code class="docutils literal notranslate"><span class="pre">mpl</span></code> or <code class="docutils literal notranslate"><span class="pre">latex</span></code> outputs, you can leverage
+the <code class="docutils literal notranslate"><span class="pre">interactive</span></code> kwarg to open the image in a new window.</p>
 </div>
 <div class="section" id="customizing-the-output">
 <h2>Customizing the output<a class="headerlink" href="#customizing-the-output" title="Permalink to this headline">¶</a></h2>
@@ -1756,11 +1755,11 @@ within a notebook but will be demonstrated anyway).</p>
 diagram rendered by the circuit.</p>
 <div class="section" id="disable-plot-barriers-and-reversing-bit-order">
 <h3>Disable Plot Barriers and Reversing Bit Order<a class="headerlink" href="#disable-plot-barriers-and-reversing-bit-order" title="Permalink to this headline">¶</a></h3>
-<p>The first two options are shared between all 3 backends and they let you
+<p>The first two options are available with all 3 backends and they let you
 configure both the bit orders and whether or not you draw barriers.
-These can be set by the <code class="docutils literal notranslate"><span class="pre">reverse_bits</span></code> kwarg and <code class="docutils literal notranslate"><span class="pre">plot_barriers</span></code>
-kwarg respectively. The examples below will work with any output
-backend, only <code class="docutils literal notranslate"><span class="pre">latex</span></code> is used for brevity.</p>
+You can set the bit orders and barriers with the <code class="docutils literal notranslate"><span class="pre">reverse_bits</span></code> kwarg
+and <code class="docutils literal notranslate"><span class="pre">plot_barriers</span></code> kwarg respectively. The following examples will work
+with any output backend, only <code class="docutils literal notranslate"><span class="pre">latex</span></code> is used for brevity.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw a new circuit with barriers and more registers</span>
 
 <span class="n">q_a</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;qa&#39;</span><span class="p">)</span>
@@ -1809,87 +1808,278 @@ backend, only <code class="docutils literal notranslate"><span class="pre">latex
 </div>
 <div class="section" id="backend-specific-customizations">
 <h3>Backend specific customizations<a class="headerlink" href="#backend-specific-customizations" title="Permalink to this headline">¶</a></h3>
-<p>There are also some options available to customize the output diagram
-which only work for a specific backend. The <code class="docutils literal notranslate"><span class="pre">line_length</span></code> kwarg for
-the <code class="docutils literal notranslate"><span class="pre">text</span></code> backend which can be used to set a maximum width for the
-output. When a diagram is wider than that it will wrap the diagram
-below. The <code class="docutils literal notranslate"><span class="pre">mpl</span></code> backend has the <code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg which is used to
-customize the output. The <code class="docutils literal notranslate"><span class="pre">scale</span></code> option is used by the <code class="docutils literal notranslate"><span class="pre">mpl</span></code> and
-<code class="docutils literal notranslate"><span class="pre">latex</span></code> backends to adjust the size of the output image, it’s a
-multiplicative adjustment factor used to scale the output size. The
-<code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg takes in a dict with many different options in it. It
-provides a high level of flexibility and enables things like changing
-colors, changing rendered text for different types of gates, different
-line styles, etc. The list of available options for this are:</p>
-<ul>
-<li><p class="first"><strong>textcolor</strong> (str): The color code to use for text. Defaults to
-<code class="docutils literal notranslate"><span class="pre">'#000000'</span></code></p>
-</li>
-<li><p class="first"><strong>subtextcolor</strong> (str): The color code to use for subtext. Defaults
-to <code class="docutils literal notranslate"><span class="pre">'#000000'</span></code></p>
-</li>
-<li><p class="first"><strong>linecolor</strong> (str): The color code to use for lines. Defaults to
-<code class="docutils literal notranslate"><span class="pre">'#000000'</span></code></p>
-</li>
-<li><p class="first"><strong>creglinecolor</strong> (str): The color code to use for classical register
-lines <code class="docutils literal notranslate"><span class="pre">'#778899'</span></code></p>
-</li>
-<li><p class="first"><strong>gatetextcolor</strong> (str): The color code to use for gate text
-<code class="docutils literal notranslate"><span class="pre">'#000000'</span></code></p>
-</li>
-<li><p class="first"><strong>gatefacecolor</strong> (str): The color code to use for gates. Defaults to
-<code class="docutils literal notranslate"><span class="pre">'#ffffff'</span></code></p>
-</li>
-<li><p class="first"><strong>barrierfacecolor</strong> (str): The color code to use for barriers.
-Defaults to <code class="docutils literal notranslate"><span class="pre">'#bdbdbd'</span></code></p>
-</li>
-<li><p class="first"><strong>backgroundcolor</strong> (str): The color code to use for the background.
-Defaults to <code class="docutils literal notranslate"><span class="pre">'#ffffff'</span></code></p>
-</li>
-<li><p class="first"><strong>fontsize</strong> (int): The font size to use for text. Defaults to 13</p>
-</li>
-<li><p class="first"><strong>subfontsize</strong> (int): The font size to use for subtext. Defaults to
-8</p>
-</li>
-<li><p class="first"><strong>displaytext</strong> (dict): A dictionary of the text to use for each
-element type in the output visualization. The default values are:</p>
-<p>{ ‘id’: ‘id’, ‘u0’: ‘U_0’, ‘u1’: ‘U_1’, ‘u2’: ‘U_2’, ‘u3’: ‘U_3’,
-‘x’: ‘X’, ‘y’: ‘Y’, ‘z’: ‘Z’, ‘h’: ‘H’, ‘s’: ‘S’, ‘sdg’: ‘S^dagger’,
-‘t’: ‘T’, ‘tdg’: ‘T^dagger’, ‘rx’: ‘R_x’, ‘ry’: ‘R_y’, ‘rz’: ‘R_z’,
-‘reset’: ‘\left|0rightrangle’ }</p>
-<p>You must specify all the necessary values if using this. There is no
-provision for passing an incomplete dict in.</p>
-</li>
-<li><p class="first"><strong>displaycolor</strong> (dict): The color codes to use for each circuit
-element. By default all values default to the value of
-<code class="docutils literal notranslate"><span class="pre">gatefacecolor</span></code> and the keys are the same as <code class="docutils literal notranslate"><span class="pre">displaytext</span></code>. Also,
-just like <code class="docutils literal notranslate"><span class="pre">displaytext</span></code> there is no provision for an incomplete
-dict passed in.</p>
-</li>
-<li><p class="first"><strong>latexdrawerstyle</strong> (bool): When set to True enable latex mode which
-will draw gates like the <code class="docutils literal notranslate"><span class="pre">latex</span></code> output modes.</p>
-</li>
-<li><p class="first"><strong>usepiformat</strong> (bool): When set to True use radians for output</p>
-</li>
-<li><p class="first"><strong>fold</strong> (int): The number of circuit elements to fold the circuit
-at. Defaults to 20</p>
-</li>
-<li><p class="first"><strong>cregbundle</strong> (bool): If set True bundle classical registers</p>
-</li>
-<li><p class="first"><strong>showindex</strong> (bool): If set True draw an index.</p>
-</li>
-<li><p class="first"><strong>compress</strong> (bool): If set True draw a compressed circuit</p>
-</li>
-<li><p class="first"><strong>figwidth</strong> (int): The maximum width (in inches) for the output
-figure.</p>
-</li>
-<li><p class="first"><strong>dpi</strong> (int): The DPI to use for the output image. Defaults to 150</p>
-</li>
-<li><p class="first"><strong>creglinestyle</strong> (str): The style of line to use for classical
-registers. Choices are <code class="docutils literal notranslate"><span class="pre">'solid'</span></code>, <code class="docutils literal notranslate"><span class="pre">'doublet'</span></code>, or any valid
-matplotlib <code class="docutils literal notranslate"><span class="pre">linestyle</span></code> kwarg value. Defaults to <code class="docutils literal notranslate"><span class="pre">doublet</span></code></p>
-</li>
-</ul>
+<p>You can customize the output diagram for specific backends.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">line_length</span></code> kwarg for the <code class="docutils literal notranslate"><span class="pre">text</span></code> backend
+to set a maximum width for the output. When a diagram is wider than
+the <code class="docutils literal notranslate"><span class="pre">line_length</span></code> kwarg, it will wrap the diagram to the next line.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">scale</span></code> option is used by both the <code class="docutils literal notranslate"><span class="pre">mpl</span></code> and
+<code class="docutils literal notranslate"><span class="pre">latex</span></code> backends to adjust the size of the output image. <code class="docutils literal notranslate"><span class="pre">scale</span></code> is a
+multiplicative adjustment factor used to scale the output size.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mpl</span></code> backend has the <code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg, which is used to
+customize the output. The <code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg takes in a dict with many
+different options. <code class="docutils literal notranslate"><span class="pre">style</span></code> provides a high level of flexibility and
+enables style formatting like changing colors, changing rendered text
+for different types of gates, different line styles, etc.</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">: <code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg configuration options</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">OPTION</th>
+<th class="head">DEFAULT VALUES</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>displaycolor(dict)</td>
+<td><div class="first last line-block">
+<div class="line">id:<code class="docutils literal notranslate"><span class="pre">#F0E442</span></code></div>
+<div class="line">u0:<code class="docutils literal notranslate"><span class="pre">#E7AB3B</span></code></div>
+<div class="line">u1:<code class="docutils literal notranslate"><span class="pre">#E7AB3B</span></code></div>
+<div class="line">u2:<code class="docutils literal notranslate"><span class="pre">#E7AB3B</span></code></div>
+<div class="line">u3:<code class="docutils literal notranslate"><span class="pre">#E7AB3B</span></code></div>
+<div class="line">x:<code class="docutils literal notranslate"><span class="pre">#58C698</span></code></div>
+<div class="line">y:<code class="docutils literal notranslate"><span class="pre">#58C698</span></code></div>
+<div class="line">z:<code class="docutils literal notranslate"><span class="pre">#58C698</span></code></div>
+<div class="line">h:<code class="docutils literal notranslate"><span class="pre">#70B7EB</span></code></div>
+<div class="line">s:<code class="docutils literal notranslate"><span class="pre">#E0722D</span></code></div>
+<div class="line">sdg:<code class="docutils literal notranslate"><span class="pre">#E0722D</span></code></div>
+<div class="line">t:<code class="docutils literal notranslate"><span class="pre">#E0722D</span></code></div>
+<div class="line">tdg:<code class="docutils literal notranslate"><span class="pre">#E0722D</span></code></div>
+<div class="line">rx:<code class="docutils literal notranslate"><span class="pre">#ffffff</span></code></div>
+<div class="line">ry:<code class="docutils literal notranslate"><span class="pre">#ffffff</span></code></div>
+<div class="line">rz:<code class="docutils literal notranslate"><span class="pre">#ffffff</span></code></div>
+<div class="line">reset:<code class="docutils literal notranslate"><span class="pre">#D188B4</span></code></div>
+<div class="line">target:<code class="docutils literal notranslate"><span class="pre">#70B7EB</span></code></div>
+<div class="line">meas:<code class="docutils literal notranslate"><span class="pre">#D188B4</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">The color codes to use for each circuit element. You must specify all the necessary values when using this dictionary. There is no provision for passing an incomplete dict and using values from the default otherwise.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>textcolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#000000</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for text</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>subtextcolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#000000</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for subtext</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>linecolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#000000</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for lines.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>creglinecolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#778899</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for classical register lines.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>gatetextcolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#000000</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for gate text.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>gatefacecolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#ffffff</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for gates.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>barrierfacecolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#bdbdbd</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for barriers.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>backgroundcolor(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#ffffff</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Color code for the diagram background.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>fontsize(int)</td>
+<td><div class="first last line-block">
+<div class="line">13</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Font size for text.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>subfontsize(int)</td>
+<td><div class="first last line-block">
+<div class="line">8</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">Font size to use for subtext.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>displaytext(dict)</td>
+<td><div class="first last line-block">
+<div class="line">id: id</div>
+<div class="line">u0: U_0</div>
+<div class="line">u1: U_1</div>
+<div class="line">u2: U_2</div>
+<div class="line">u3: U_3</div>
+<div class="line">x: X</div>
+<div class="line">y: Y</div>
+<div class="line">z: Z</div>
+<div class="line">h: H</div>
+<div class="line">s: S</div>
+<div class="line">sdg: <span class="math notranslate nohighlight">\(S^\dagger\)</span></div>
+<div class="line">t: T</div>
+<div class="line">tdg: <span class="math notranslate nohighlight">\(T^\dagger\)</span></div>
+<div class="line">rx: R_x</div>
+<div class="line">ry: R_y</div>
+<div class="line">rz: R_z</div>
+<div class="line">reset: <span class="math notranslate nohighlight">\(|0\rangle\)</span></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">A dictionary of the text to use for each element type in the output visualization. ou must specify all the necessary values when using this dictionary. There is no provision for passing an incomplete dict and using values from the default otherwise.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>latexdrawerstyle(bool)</td>
+<td><div class="first last line-block">
+<div class="line">FALSE</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, enable latex mode which will draw gates like the <code class="docutils literal notranslate"><span class="pre">latex</span></code> output modes.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>usepiformat(bool)</td>
+<td><div class="first last line-block">
+<div class="line">FALSE</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, use radians for output.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>fold(int)</td>
+<td><div class="first last line-block">
+<div class="line">20</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">The number of circuit elements to fold the circuit.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>cregbundle(bool)</td>
+<td><div class="first last line-block">
+<div class="line">FALSE</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">If set <code class="docutils literal notranslate"><span class="pre">True</span></code>, bundle classical registers.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>showindex(bool)</td>
+<td><div class="first last line-block">
+<div class="line">FALSE</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">If set <code class="docutils literal notranslate"><span class="pre">True</span></code>, draw an index.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>compress(bool)</td>
+<td><div class="first last line-block">
+<div class="line">FALSE</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">If set <code class="docutils literal notranslate"><span class="pre">True</span></code>, draw a compressed circuit.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>figwidth(int)</td>
+<td><div class="first last line-block">
+<div class="line">FALSE</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">The maximum width (in inches) for the output figure.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>dpi(int)</td>
+<td><div class="first last line-block">
+<div class="line">150</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">The DPI to use for the output image.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>creglinestyle(str)</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">doublet</span></code></div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">The style of line to use for classical registers. Choices are <code class="docutils literal notranslate"><span class="pre">'solid'</span></code>, <code class="docutils literal notranslate"><span class="pre">'doublet'</span></code>, or any valid matplotlib <code class="docutils literal notranslate"><span class="pre">linestyle</span></code> kwarg value.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set line length to 80 for above circuit</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 </pre></div>
