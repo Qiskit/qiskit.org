@@ -313,6 +313,12 @@ class PageAqua extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.aqua.installTitle')}</h3>
             <code-sample type="bash">
               <template>
+                [python3] $ pip install qiskit-aqua-interfaces
+              </template>
+            </code-sample>
+            <h3>${i18next.t('pages.aqua.invocationTitle')}</h3>
+            <code-sample type="bash">
+              <template>
                 [python3] $ qiskit_aqua_ui
                 [python3] $ qiskit_chemistry_ui
               </template>
