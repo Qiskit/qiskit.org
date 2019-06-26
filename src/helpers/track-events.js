@@ -14,7 +14,7 @@ export const trackClickEvent = ({ action, objectType, milestoneName }) => {
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
-      action: `Button Clicked: ${action}`,
+      action: `${window.location.href} - Button Clicked: ${action}`,
       objectType,
       successFlag: true,
     };
@@ -34,7 +34,7 @@ export const trackSelectCombo = data => {
       category: window.digitalData.page.pageInfo.analytics.category,
       url: window.location.href,
       path: window.location.pathname,
-      action: `Language Changed to: ${data.text}`,
+      action: `${window.location.href} - Language Changed to: ${data.text}`,
       objectType: 'Select Combobox',
       successFlag: true,
     };
