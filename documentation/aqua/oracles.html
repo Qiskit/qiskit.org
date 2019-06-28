@@ -1692,10 +1692,8 @@ constructs circuits for any arbitrary input logical expressions.
 A logical expression is composed of logical operators
 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (<code class="docutils literal notranslate"><span class="pre">AND</span></code>), <code class="docutils literal notranslate"><span class="pre">|</span></code> (<code class="docutils literal notranslate"><span class="pre">OR</span></code>), <code class="docutils literal notranslate"><span class="pre">~</span></code> (<code class="docutils literal notranslate"><span class="pre">NOT</span></code>), and <code class="docutils literal notranslate"><span class="pre">^</span></code> (<code class="docutils literal notranslate"><span class="pre">XOR</span></code>),
 as well as symbols for literals (variables).
-For example, <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">&amp;</span> <span class="pre">b'</span></code>, and <code class="docutils literal notranslate"><span class="pre">(v[0]</span> <span class="pre">|</span> <span class="pre">~v[1])</span> <span class="pre">^</span> <span class="pre">(~v[2]</span> <span class="pre">&amp;</span> <span class="pre">v[3])</span></code>.
-Aqua’s logical expression oracle`` relies on the
-<a class="reference external" href="https://pyeda.readthedocs.io">PyEda package</a>
-to try to parse any input strings, assuming no predetermined formats.</p>
+For example, <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">&amp;</span> <span class="pre">b'</span></code>, and <code class="docutils literal notranslate"><span class="pre">(v0</span> <span class="pre">|</span> <span class="pre">~v1)</span> <span class="pre">^</span> <span class="pre">(~v2</span> <span class="pre">&amp;</span> <span class="pre">v3)</span></code>
+are both valid string representation of boolean logical expressions.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">expression</span> <span class="p">:</span> <span class="nb">str</span>
 </pre></div>
 </div>
@@ -1759,25 +1757,21 @@ where a user would like to compare a built circuit against their input
 expression to examine and analyze details.
 However, this oftentimes leads to relatively deep circuits that possibly
 also involve many ancillary qubits.
-Aqua, therefore, provides the option to try to minimize the input
-logical expression before building its circuit.
-The minimization is carried out via <cite>PyEda</cite>,
-which internally uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Espresso_heuristic_logic_minimizer">Espresso heuristic logic minimizer</a>.</p>
+Aqua, therefore, provides the option to try to optimize the input
+logical expression before building its circuit.</p>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimization</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;off&#39;</span> <span class="o">|</span> <span class="s1">&#39;espresso&#39;</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimization</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span> <span class="o">|</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p>Currently, only the <code class="docutils literal notranslate"><span class="pre">'espresso'</span></code> optimization mode is supported by
-the logical expression oracle. When omitted, it will default to <code class="docutils literal notranslate"><span class="pre">off</span></code>,
-indicating no optimization.</p>
+<p>When omitted, it will default to <code class="docutils literal notranslate"><span class="pre">False</span></code>, indicating no optimization.</p>
 <p>Internally, the logical expression oracle relies heavily on <code class="docutils literal notranslate"><span class="pre">mct</span></code>,
 the Multiple-Control Toffoli operation, for circuit constructions.
-Aqua includes three different modes for <code class="docutils literal notranslate"><span class="pre">mct</span></code>, namely
-<code class="docutils literal notranslate"><span class="pre">'basic'</span></code>, <code class="docutils literal notranslate"><span class="pre">'advanced'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'noancilla'</span></code>:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mct_mode</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span> <span class="o">|</span> <span class="s1">&#39;advanced&#39;</span> <span class="o">|</span> <span class="s1">&#39;noancilla&#39;</span>
+Aqua includes multiple different modes for <code class="docutils literal notranslate"><span class="pre">mct</span></code>, namely
+<code class="docutils literal notranslate"><span class="pre">'basic'</span></code>, <code class="docutils literal notranslate"><span class="pre">'basic-dirty-ancilla'</span></code>, <code class="docutils literal notranslate"><span class="pre">'advanced'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'noancilla'</span></code>:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mct_mode</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span> <span class="o">|</span> <span class="s1">&#39;basic-dirty-ancilla&#39;</span> <span class="o">|</span> <span class="s1">&#39;advanced&#39;</span> <span class="o">|</span> <span class="s1">&#39;noancilla&#39;</span>
 </pre></div>
 </div>
-<p>More information on <code class="docutils literal notranslate"><span class="pre">mct</span></code> and its three modes can be found at <span class="xref std std-ref">mct</span>.</p>
+<p>More information on <code class="docutils literal notranslate"><span class="pre">mct</span></code> and its various modes can be found at <span class="xref std std-ref">mct</span>.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to the logical expression oracle declaratively inside Aqua,
@@ -1863,13 +1857,10 @@ of the input truth table; then an
 <a class="reference external" href="https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X">Exact Cover</a>
 is found among all prime implicants and truth table onset row entries.
 The exact cover is then used to build the corresponding oracle circuit.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimization</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;off&#39;</span> <span class="o">|</span> <span class="s1">&#39;qm-dlx&#39;</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimization</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span> <span class="o">|</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p>Currently, the only optimization mode supported by
-the truth table oracle is <code class="docutils literal notranslate"><span class="pre">'qm-dlx'</span></code>,
-which stands for Quine-McCluskey with Dancing Links (Knuth’s Algorithm X).
-When omitted, it will default to <code class="docutils literal notranslate"><span class="pre">off</span></code>, indicating no optimization.</p>
+<p>When omitted, it will default to False, indicating no optimization.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
 <p>When referring to the Truth Table Oracle declaratively inside Aqua,
