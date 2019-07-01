@@ -1686,7 +1686,7 @@ qubits are needed even for higher number of controls. This uses a
 technique of spliting multiple-control Toffoli operations, which is
 efficient up to 8 controls but gets inefficient in the number of required
 basic gates for values above. This technique relies on <code class="docutils literal notranslate"><span class="pre">mcu1</span></code>, see
-<span class="xref std std-ref">mcux</span> for more information.</p>
+<a class="reference internal" href="#mcu1-gate"><span class="std std-ref">mcu1 gate</span></a> for more information.</p>
 <p>Aqua’s MCT gate can be invoked from a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object
 using the <code class="docutils literal notranslate"><span class="pre">mct</span></code> API, which expects a list <code class="docutils literal notranslate"><span class="pre">q_controls</span></code> of control qubits,
 a target qubit <code class="docutils literal notranslate"><span class="pre">q_target</span></code>, and a list <code class="docutils literal notranslate"><span class="pre">q_ancilla</span></code> of ancillary qubits.
@@ -1708,20 +1708,6 @@ In Aqua, two such Relative-Phase Toffoli gates are provided,
 the 2-Control <code class="docutils literal notranslate"><span class="pre">rccx</span></code> and the 3-Control <code class="docutils literal notranslate"><span class="pre">rcccx</span></code>.
 Upon import, both can be directly invoked from QuantumCircuit objects
 similar to the traditional Toffoli <code class="docutils literal notranslate"><span class="pre">ccx</span></code> gate.</p>
-</div>
-<div class="topic" id="mcux">
-<p class="topic-title first">Multiple-Control U1 and U3 Rotation (MCU1 and MCU3) Gates</p>
-<p>The <em>Multiple-Control Rotation (mcu)</em> gates, implements a U1 (<cite>u1</cite>)
-and a U3 (<cite>u3</cite>) rotations on a single target qubit with an arbitrary
-number of control qubits. The MCU1 operation takes one rotation angle
-as input parameter, whereas the MCU3 operation takes three for arbitrary
-rotations. No ancillary qubits are needed. It is efficiently implemented
-by using a grey code sequence for up to 8 control qubits. For larger
-number of controls this implementation gets very inefficient.</p>
-<p>Aqua’s <code class="docutils literal notranslate"><span class="pre">mcu1</span></code> and <code class="docutils literal notranslate"><span class="pre">mcu3</span></code> operations can be invoked from a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>
-object and expect a list <code class="docutils literal notranslate"><span class="pre">control_qubits</span></code> of control qubits and a target
-qubit <code class="docutils literal notranslate"><span class="pre">target_qubit</span></code> as well as an angle <code class="docutils literal notranslate"><span class="pre">theta</span></code> for the mcu1 and
-additionally two angles <code class="docutils literal notranslate"><span class="pre">phi</span></code> and <code class="docutils literal notranslate"><span class="pre">lam</span></code> for the mcu3.</p>
 </div>
 <div class="topic" id="mcmt">
 <p class="topic-title first">Multiple-Control Multiple-Target (MCMT) Gate</p>
@@ -1766,17 +1752,42 @@ Upon import, Aqua’s <code class="docutils literal notranslate"><span class="pr
 <p>The controlled-RY, or <code class="docutils literal notranslate"><span class="pre">cry</span></code>, gate takes as input a rotation angle as well as the control and target qubits.
 Upon import, Aqua’s <code class="docutils literal notranslate"><span class="pre">cry</span></code> can be directly invoked from QuantumCircuit objects.</p>
 </div>
-<div class="topic" id="mcry-gate">
-<p class="topic-title first">Multiple-Control RY Gate</p>
-<p>As an extension to the <code class="docutils literal notranslate"><span class="pre">cry</span></code> gate, the Multiple-Control RY, or <code class="docutils literal notranslate"><span class="pre">mcry</span></code>, gate takes as input a rotation angle
-as well as multiple controls qubits, a target qubit, and the anccillary register/qubits.
-Upon import, Aqua’s <code class="docutils literal notranslate"><span class="pre">mcry</span></code> can be directly invoked from QuantumCircuit objects.</p>
+<div class="topic" id="mcr-gates">
+<p class="topic-title first">Multiple-Control Rotation (MCRX, MCRY, MCRZ) Gates</p>
+<p>The <em>Multiple-Control Rotation (mcrx, mcry, mcrz)</em> gates, implements
+rotations around X-, Y-, and Z-axis on a single target qubit with an
+arbitrary number of control qubits. The MCR operations take one rotation
+angle as input parameter. The <code class="docutils literal notranslate"><span class="pre">mcry</span></code> gate supports two modes of
+operation: <em>basic</em> and <em>noancilla</em>. Mode <em>basic</em> takes an
+additional ancillary register to perform the rotation. See <a class="reference internal" href="#mct"><span class="std std-ref">mct
+gate</span></a> for more information. In mode <em>noancilla</em> no ancillary
+qubits are needed. This is the standard mode for <code class="docutils literal notranslate"><span class="pre">mcrx</span></code> and <code class="docutils literal notranslate"><span class="pre">mcrz</span></code>
+gates. It is efficiently implemented by using a grey code sequence for up
+to 8 control qubits. For larger number of controls this implementation
+gets very inefficient.</p>
+<p>Aqua’s <code class="docutils literal notranslate"><span class="pre">mcrx</span></code>, <code class="docutils literal notranslate"><span class="pre">mcry</span></code>, and <code class="docutils literal notranslate"><span class="pre">mcrz</span></code> operations can be invoked from a
+<code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object and expect a list <code class="docutils literal notranslate"><span class="pre">control_qubits</span></code> of control
+qubits and a target qubit <code class="docutils literal notranslate"><span class="pre">target_qubit</span></code> as well as an angle <code class="docutils literal notranslate"><span class="pre">theta</span></code>
+for the <code class="docutils literal notranslate"><span class="pre">mcrx</span></code> and <code class="docutils literal notranslate"><span class="pre">mcry</span></code> operation or <code class="docutils literal notranslate"><span class="pre">lam</span></code> for the <code class="docutils literal notranslate"><span class="pre">mcrz</span></code>
+operation.</p>
+</div>
+<div class="topic" id="mcu1-gate">
+<p class="topic-title first">Multiple-Control U1 (MCU1) Gate</p>
+<p>The <em>Multiple-Control Rotation (mcu1)</em> gate, implements a U1 (<cite>u1</cite>)
+rotation (phase rotation) on a single target qubit with an arbitrary number
+of control qubits. The MCU1 operation takes one rotation angle as input
+parameter. No ancillary qubits are needed. It is efficiently implemented
+by using a grey code sequence for up to 8 control qubits. For larger
+number of controls this implementation gets very inefficient.</p>
+<p>Aqua’s <code class="docutils literal notranslate"><span class="pre">mcu1</span></code> operation can be invoked from a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>
+object and expect a list <code class="docutils literal notranslate"><span class="pre">control_qubits</span></code> of control qubits and a target
+qubit <code class="docutils literal notranslate"><span class="pre">target_qubit</span></code> as well as an angle <code class="docutils literal notranslate"><span class="pre">lam</span></code>.</p>
 </div>
 <div class="topic" id="logical-gates">
 <p class="topic-title first">Boolean Logical Gates</p>
 <p>Aqua also provides the logical <em>AND</em> and <em>OR</em> gates to mirror the corresponding classic logical operations.
 <em>OR</em> gates are converted to <em>AND</em> gates using De Morgan’s Law.
-<em>AND</em> gates are implemented using <span class="xref std std-ref">mct</span>.</p>
+<em>AND</em> gates are implemented using <a class="reference internal" href="#mct"><span class="std std-ref">mct gate</span></a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">AND</span></code> and <code class="docutils literal notranslate"><span class="pre">OR</span></code> gates can be invoked from a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object.
 They both expect a <code class="docutils literal notranslate"><span class="pre">qr_variables</span></code> register holding the variable qubits,
 a <code class="docutils literal notranslate"><span class="pre">qb_target</span></code> qubit for holding the result,
@@ -1830,7 +1841,8 @@ For each, an <code class="docutils literal notranslate"><span class="pre">approx
 to build the approximation circuits with the desired approximation degree.</p>
 <p>Besides being directly exposed as circuits,
 <code class="docutils literal notranslate"><span class="pre">qft</span></code> and <code class="docutils literal notranslate"><span class="pre">iqft</span></code> are also accessible as Aqua’s pluggable <code class="docutils literal notranslate"><span class="pre">components</span></code>.
-More detailed discussion on quantum Fourier transform can be found at <span class="xref std std-ref">iqft</span>.</p>
+More detailed discussion on quantum Fourier transform can be found at
+<a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>.</p>
 </div>
 <div class="topic" id="statevector-circuit">
 <p class="topic-title first">Arbitrary State Vector Circuit</p>
