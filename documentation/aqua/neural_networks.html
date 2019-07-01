@@ -1679,6 +1679,7 @@ developers interested in
 <p>Currently, Aqua supplies the following neural networks:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#classicaldiscriminator"><span class="std std-ref">Classical Discriminator</span></a></li>
+<li><a class="reference internal" href="#numpydiscriminator"><span class="std std-ref">Numpy Discriminator</span></a></li>
 <li><a class="reference internal" href="#quantumgenerator"><span class="std std-ref">Quantum Generator</span></a></li>
 </ul>
 <div class="section" id="classical-discriminator">
@@ -1714,6 +1715,40 @@ should always be set to <code class="docutils literal notranslate"><span class="
 <p>When referring to the classical discriminator declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
 dynamically discovers and loads it,
 is <code class="docutils literal notranslate"><span class="pre">ClassicalDiscriminator</span></code>.</p>
+</div>
+</div>
+<div class="section" id="numpy-discriminator">
+<span id="numpydiscriminator"></span><h2>Numpy Discriminator<a class="headerlink" href="#numpy-discriminator" title="Permalink to this headline">¶</a></h2>
+<p>This discriminator is given by a NumPy neural network.</p>
+<p>The network is targeted at being used as part of the
+<span class="xref std std-ref">Quantum Generative Adversarial Network (qGAN)</span> algorithm.
+Please refer to <a class="reference external" href="https://arxiv.org/abs/1904.00043">qGAN</a>  for further details on this algorithm.
+The discriminator takes an input vector where the number of represented features
+<span class="math notranslate nohighlight">\(n_features \geq 1\)</span> and outputs a label for the data sample, i.e. true/fake.</p>
+<p>The following allows a specific form to be configured in the
+<code class="docutils literal notranslate"><span class="pre">discriminative_network</span></code> section of the Aqua
+<a class="reference internal" href="execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a> when the <code class="docutils literal notranslate"><span class="pre">name</span></code> field
+is set to <code class="docutils literal notranslate"><span class="pre">NumpyDiscriminator</span></code>:</p>
+<ul>
+<li><p class="first">The dimension of the input vector <span class="math notranslate nohighlight">\(n_features\)</span>:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_features</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter takes an <code class="docutils literal notranslate"><span class="pre">int</span></code> value greater or equal than <code class="docutils literal notranslate"><span class="pre">1</span></code>.  The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</li>
+<li><p class="first">The dimension of the output vector <span class="math notranslate nohighlight">\(n_out\)</span>. For a binary label this
+should always be set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_out</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>This parameter takes an <code class="docutils literal notranslate"><span class="pre">int</span></code> value greater or equal than <code class="docutils literal notranslate"><span class="pre">1</span></code>.  The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Declarative Name</p>
+<p>When referring to the classical discriminator declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
+dynamically discovers and loads it,
+is <code class="docutils literal notranslate"><span class="pre">NumpyDiscriminator</span></code>.</p>
 </div>
 </div>
 <div class="section" id="quantum-generator">
