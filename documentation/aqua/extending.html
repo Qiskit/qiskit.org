@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1751,56 +1765,64 @@ By simply adding the code of an algorithm to the collection of existing algorith
 algorithm will be immediately recognized via dynamic lookup, and made available for use within the
 framework of Aqua. To develop and deploy any new algorithm, the new algorithm class should derive
 from the <code class="docutils literal notranslate"><span class="pre">QuantumAlgorithm</span></code> class. Along with all of its supporting modules, the new algorithm
-class should be installed under a suitable folder in the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua\algorithms</span></code> directory,
+class should be installed under a suitable folder in the <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/algorithms</span></code> directory,
 just like the existing algorithms, unless the dynamic-discovery approach has been chosen, in which
 case the algorithm can register itself as an Aqua algorithm irrespective of its installation
 folder in the file system.</p>
 </div>
+<div class="section" id="components">
+<h3>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h3>
+<p>New components such as <code class="docutils literal notranslate"><span class="pre">optimizers</span></code>, ‘’initial states`` etc can be derived from base classes
+found in their respective folders in <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components</span></code> folder and added there. A new
+component type can be added here in new folder for the type along with a new base class for it
+as well as concrete implementation(s).</p>
+<p>There now follows more information for a set of the some of the more popular component types:</p>
 <div class="section" id="optimizers">
-<span id="extending-optimizers"></span><h3>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this headline">¶</a></h3>
+<span id="extending-optimizers"></span><h4>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this headline">¶</a></h4>
 <p>New <a class="reference external" href="#optimizers">optimizers</a> for quantum variational algorithms should and derive from
 the <code class="docutils literal notranslate"><span class="pre">Optimizer</span></code> class.  They should also be installed in the
-<code class="docutils literal notranslate"><span class="pre">qiskit_aqua/components/optimizers</span></code> folder of the <code class="docutils literal notranslate"><span class="pre">aqua</span></code> repository clone, unless the
+<code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/optimizers</span></code> folder of the <code class="docutils literal notranslate"><span class="pre">aqua</span></code> repository clone, unless the
 dynamic-discovery approach has been chosen, in which case a new optimizer can register itself as
 an Aqua optimizer irrespective of its installation folder in the file system.</p>
 </div>
 <div class="section" id="variational-forms">
-<span id="extending-variational-forms"></span><h3>Variational Forms<a class="headerlink" href="#variational-forms" title="Permalink to this headline">¶</a></h3>
+<span id="extending-variational-forms"></span><h4>Variational Forms<a class="headerlink" href="#variational-forms" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="#variational_forms">Trial wave functions</a> for quantum variational algorithms, such as
 <a class="reference external" href="#variational-quantum-eigensolver-vqe">VQE</a> must derive from the <code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> class.
-They should also be installed under the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua/components/variational_forms</span></code> folder
+They should also be installed under the <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/variational_forms</span></code> folder
 unless the dynamic-discovery approach has been
 chosen, in which case a new trial wave function can register itself as an Aqua variational
 form irrespective of its installation folder in the file system.</p>
 </div>
 <div class="section" id="oracles">
-<span id="extending-oracles"></span><h3>Oracles<a class="headerlink" href="#oracles" title="Permalink to this headline">¶</a></h3>
+<span id="extending-oracles"></span><h4>Oracles<a class="headerlink" href="#oracles" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="#oracles">Oracles</a>, for use with algorithms such as
 <a class="reference external" href="#quantum-grover-search">Grover’s search</a>,
 should derive from the <code class="docutils literal notranslate"><span class="pre">Oracle</span></code> class.  They should also go under the
-<code class="docutils literal notranslate"><span class="pre">qiskit_aqua/components/oracles</span></code> folder,
+<code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/oracles</span></code> folder,
 unless the dynamic-discovery approach has been
 chosen, in which case a new oracle can register itself as an Aqua oracle irrespective of its
 installation folder in the file system.</p>
 </div>
 <div class="section" id="inverse-quantum-fourier-transforms-iqfts">
-<span id="extending-iqfts"></span><h3>Inverse Quantum Fourier Transforms (IQFTs)<a class="headerlink" href="#inverse-quantum-fourier-transforms-iqfts" title="Permalink to this headline">¶</a></h3>
+<span id="extending-iqfts"></span><h4>Inverse Quantum Fourier Transforms (IQFTs)<a class="headerlink" href="#inverse-quantum-fourier-transforms-iqfts" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="#iqfts">IQFTs</a>, for use for example for <a class="reference external" href="#quantum-phase-estimation-qpe">QPE</a>, must derive
-from the <code class="docutils literal notranslate"><span class="pre">IQFT</span></code> class. They should also be installed  under the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua/components/iqfts</span></code>
+from the <code class="docutils literal notranslate"><span class="pre">IQFT</span></code> class. They should also be installed  under the <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/iqfts</span></code>
 folder, unless the dynamic-discovery approach has been chosen, in which case a new IQFT can
 register itself as an Aqua IQFT irrespective of its installation folder in the file system.</p>
 </div>
 <div class="section" id="initial-states">
-<span id="extending-initial-states"></span><h3>Initial States<a class="headerlink" href="#initial-states" title="Permalink to this headline">¶</a></h3>
+<span id="extending-initial-states"></span><h4>Initial States<a class="headerlink" href="#initial-states" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="#initial_states">Initial states</a>, for algorithms such as
 <a class="reference external" href="#variational-quantum-eigensolver-vqe">VQE</a>,
 <a class="reference external" href="#quantum-phase-estimation-qpe">QPE</a>
 and <a class="reference external" href="#iterative-quantum-phase-estimation-iqpe">IQPE</a>, must derive from the <code class="docutils literal notranslate"><span class="pre">InitialState</span></code>
-class. They should also be installed under the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua/components/initial_states</span></code> folder,
+class. They should also be installed under the <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/initial_states</span></code> folder,
 unless the dynamic-discovery approach has been
 chosen, in which case a new initial state can register itself as an Aqua initial state irrespective
 of its installation
 folder in the file system.</p>
+</div>
 </div>
 </div>
 <div class="section" id="aqua-documentation-ui">

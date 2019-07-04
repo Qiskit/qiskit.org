@@ -50,7 +50,9 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A Collection of Circuits and Gates for Building Higher Level Circuits, Components and Algorithm" href="circuit_collection.html" />
+    <link rel="prev" title="Reciprocals" href="reciprocals.html" /> 
   </head>
 <body>
   <header>
@@ -105,7 +107,7 @@
       
       <nav class="mdl-navigation">
           <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html#qiskit-elements">Qiskit Elements</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-terra">Qiskit Terra</a></li>
@@ -406,8 +408,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Qiskit Aqua</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Qiskit Aqua</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
 <li class="toctree-l4"><a class="reference internal" href="overview.html#novel-features">Novel Features</a></li>
@@ -499,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -893,7 +902,7 @@
       
       <nav class="mdl-navigation">
           <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html#qiskit-elements">Qiskit Elements</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overview.html#qiskit-terra">Qiskit Terra</a></li>
@@ -1194,8 +1203,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Qiskit Aqua</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Qiskit Aqua</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="overview.html#modularity-and-extensibility">Modularity and Extensibility</a></li>
 <li class="toctree-l4"><a class="reference internal" href="overview.html#novel-features">Novel Features</a></li>
@@ -1287,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1655,25 +1671,20 @@
 neural network - classical neural network - or as parametrized quantum circuits
 - quantum neural network. Furthermore, neural networks can be defined with respect
 to a discriminative or generative task.</p>
-<p>Aqua provides an library for quantum and classical neural networks which can be used to build hybrid
-quantum classical AI models.</p>
+<p>Aqua provides an library for quantum and classical neural networks which can be used to
+build hybrid quantum classical AI models.</p>
 <div class="topic">
 <p class="topic-title first">Extending the Neural Network Library</p>
-<p>Consistent with its unique design, Aqua has a modular and
-extensible architecture. Algorithms and their supporting objects, such as
-feature-map techniques for Artificial Intelligence,
-are pluggable modules in Aqua.
-New feature maps are typically installed in the
-<code class="docutils literal notranslate"><span class="pre">qiskit_aqua/components/neural_networks</span></code>
-folder and derive from the <code class="docutils literal notranslate"><span class="pre">DiscriminativeNetwork</span></code> class for neural networks that are supposed to
-perform discriminative tasks and the <code class="docutils literal notranslate"><span class="pre">GenerativeNetwork</span></code> class for neural networks that are supposed to
-perform generative tasks.
-Aqua also allows for
-<a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new components can register themselves
-as Aqua extensions and be dynamically discovered at run time independent of their
-location in the file system.
-This is done in order to encourage researchers and
-developers interested in
+<p>Consistent with its unique design, Aqua has a modular and extensible architecture.
+Algorithms and their supporting objects, such as neural networks for Artificial Intelligence,
+are pluggable modules in Aqua.  New neural networks are typically installed in the
+<code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/neural_networks</span></code> folder and derive from the <code class="docutils literal notranslate"><span class="pre">DiscriminativeNetwork</span></code>
+class for neural networks that are supposed to perform discriminative tasks and the
+<code class="docutils literal notranslate"><span class="pre">GenerativeNetwork</span></code> class for neural networks that are supposed to perform generative tasks.
+Aqua also allows for <a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new components can
+register themselves as Aqua extensions and be dynamically discovered at run time independent
+of their location in the file system.
+This is done in order to encourage researchers and developers interested in
 <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> to extend the Aqua framework with their novel research contributions.</p>
 </div>
 <p>Currently, Aqua supplies the following neural networks:</p>
@@ -1712,9 +1723,8 @@ should always be set to <code class="docutils literal notranslate"><span class="
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to the classical discriminator declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
-dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">ClassicalDiscriminator</span></code>.</p>
+<p>When referring to the classical discriminator declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">ClassicalDiscriminator</span></code>.</p>
 </div>
 </div>
 <div class="section" id="numpy-discriminator">
@@ -1746,9 +1756,8 @@ should always be set to <code class="docutils literal notranslate"><span class="
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to the classical discriminator declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
-dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">NumpyDiscriminator</span></code>.</p>
+<p>When referring to the classical discriminator declaratively inside Aqua,
+its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">NumpyDiscriminator</span></code>.</p>
 </div>
 </div>
 <div class="section" id="quantum-generator">
@@ -1783,8 +1792,9 @@ of <span class="math notranslate nohighlight">\(n\)</span> qubits enables the re
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">generator_circuit</span>
 </pre></div>
 </div>
-<p>The generator circuit must either be given as UnivariateVariationalDistribution for univariate data or as
-MultivariateVariationalDistribution for multivariate data. See <span class="xref std std-ref">_random-distributions</span>.</p>
+<p>The generator circuit must either be given as UnivariateVariationalDistribution for
+univariate data or as MultivariateVariationalDistribution for multivariate data.
+See <span class="xref std std-ref">_random-distributions</span>.</p>
 </li>
 <li><p class="first">Initial parameters used for the generator circuit:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">init_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">param_0</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">param_m</span><span class="p">]</span>
@@ -1801,8 +1811,8 @@ MultivariateVariationalDistribution for multivariate data. See <span class="xref
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to the quantum generator declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
-dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">QuantumGenerator</span></code>.</p>
+<p>When referring to the quantum generator declaratively inside Aqua,
+its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">QuantumGenerator</span></code>.</p>
 </div>
 </div>
 </div>
@@ -1812,6 +1822,18 @@ dynamically discovers and loads it, is <code class="docutils literal notranslate
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="reciprocals.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Reciprocals</div>
+         </div>
+     </a>
+     <a id="button-next" href="circuit_collection.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>A Collection of Circuits and Gates for Building Higher Level Circuits, Components and Algorithm</div>
+        </div>
+     </a>
         
         </main>
     </div>

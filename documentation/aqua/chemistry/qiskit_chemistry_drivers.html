@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit_chemistry.html">Qiskit Chemistry</a><ul class="current">
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit_chemistry.html">Qiskit Chemistry</a><ul class="current">
@@ -1654,8 +1668,8 @@
   <div class="section" id="drivers">
 <span id="id1"></span><h1>Drivers<a class="headerlink" href="#drivers" title="Permalink to this headline">¶</a></h1>
 <p>Qiskit Chemistry requires a computational chemistry program or library, known as <em>driver</em>, to be
-installed on the system for the electronic-structure computation.  When launched via the Qiskit
-Chemistry <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-command-line"><span class="std std-ref">Command Line</span></a>,
+installed on the system for the electronic-structure computation.
+When launched via the Qiskit Chemistry <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-command-line"><span class="std std-ref">Command Line</span></a>,
 <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>, or <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-programmable-interface"><span class="std std-ref">Programmable Interface</span></a>,
 Qiskit Chemistry expects a driver to be specified, and a
 molecular configuration to be passed in the format compatible with that driver.
@@ -1898,6 +1912,7 @@ followed:</p>
    <span class="nb">set</span> <span class="p">{</span>
       <span class="n">basis</span> <span class="n">sto</span><span class="o">-</span><span class="mi">3</span><span class="n">g</span>
       <span class="n">scf_type</span> <span class="n">pk</span>
+      <span class="n">reference</span> <span class="n">rhf</span>
    <span class="p">}</span>
 <span class="o">&amp;</span><span class="n">end</span>
 </pre></div>
@@ -1921,7 +1936,8 @@ set the <code class="docutils literal notranslate"><span class="pre">name</span>
 <code class="docutils literal notranslate"><span class="pre">PYSCF</span></code> and then create a <code class="docutils literal notranslate"><span class="pre">pyscf</span></code> section in the input file as per the example below, which
 shows the configuration of a molecule of hydrogen, <span class="math notranslate nohighlight">\(H_2\)</span>.  Here, the molecule, basis set and
 other options are specified as key/value pairs, according to the syntax expected by PySCF. In PySCF,
-these are the arguments as passed to the <code class="docutils literal notranslate"><span class="pre">pyscf.gto.Mole</span></code> class.</p>
+these are the arguments as passed to the <code class="docutils literal notranslate"><span class="pre">pyscf.gto.Mole</span></code> class and to the method class
+<code class="docutils literal notranslate"><span class="pre">pyscf.scf.hf.SCF</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">atom</span></code> field can be in xyz format, as per the example below. Here each atom is identified by
 its symbol along with its position in the x, y, z coordinate space. Atoms are separated by the
 semicolon symbol.</p>
@@ -1930,18 +1946,30 @@ format. Here again atoms are separate by semicolon. This is an example for H2O (
 “H; O 1 1.08; H 2 1.08 1 107.5”. Dummy atom(s) using symbol ‘X’ may be added to allow or facilitate
 conversion to xyz coordinates, as used internally for processing, and are removed from the molecule
 following the conversion.</p>
+<p>The SCF method can be selected via <code class="docutils literal notranslate"><span class="pre">hf_method</span></code> as one of <code class="docutils literal notranslate"><span class="pre">rhf</span></code>, <code class="docutils literal notranslate"><span class="pre">rohf</span></code> or <code class="docutils literal notranslate"><span class="pre">uhf</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">conv_tol</span></code> field allows the convergence tolerance of the method to be set and <code class="docutils literal notranslate"><span class="pre">max_cycle</span></code>
+the maximum number of iterations. The <code class="docutils literal notranslate"><span class="pre">init_guess</span></code> allows the initial guess for the method
+to be configured, values are <code class="docutils literal notranslate"><span class="pre">minao</span></code> (the default) <code class="docutils literal notranslate"><span class="pre">1e</span></code> and <code class="docutils literal notranslate"><span class="pre">atom</span></code>. Please refer to
+<code class="docutils literal notranslate"><span class="pre">pyscf.scf.hf.SCF</span></code> init_guess_by_xxxx methods for more information on these.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">pyscf</span>
    <span class="n">atom</span><span class="o">=</span><span class="n">H</span> <span class="o">.</span><span class="mi">0</span> <span class="o">.</span><span class="mi">0</span> <span class="o">.</span><span class="mi">0</span><span class="p">;</span> <span class="n">H</span> <span class="o">.</span><span class="mi">0</span> <span class="o">.</span><span class="mi">0</span> <span class="mf">0.74</span>
    <span class="n">unit</span><span class="o">=</span><span class="n">Angstrom</span>
    <span class="n">charge</span><span class="o">=</span><span class="mi">0</span>
    <span class="n">spin</span><span class="o">=</span><span class="mi">0</span>
    <span class="n">basis</span><span class="o">=</span><span class="n">sto3g</span>
+   <span class="n">hf_method</span><span class="o">=</span><span class="n">rhf</span>
+   <span class="n">conv_tol</span><span class="o">=</span><span class="mf">1e-09</span>
+   <span class="n">max_cycle</span><span class="o">=</span><span class="mi">50</span>
+   <span class="n">init_guess</span><span class="o">=</span><span class="n">minao</span>
 <span class="o">&amp;</span><span class="n">end</span>
 </pre></div>
 </div>
-<p>Experienced chemists who already have existing PySCF control files can simply paste the contents of
-those files into the <code class="docutils literal notranslate"><span class="pre">pyscf</span></code> section of the input file.  This configuration can also be easily
-achieved using the Qiskit Chemistry <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>.</p>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">spin</span></code> in PySCF is 2S (multiplicity, that chemists often use, is defined as 2S + 1)</p>
+<p>The above parameter names, in matching to internal PySCF variables, was done explicitly to allow
+easy cross-reference of the functionality to within PySCF and to be more recognizable to
+experienced chemists who already program to the PySCF library.</p>
+<p>This configuration can also be easily created and edited using the
+Qiskit Chemistry <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>.</p>
 </div>
 <div class="section" id="pyquante">
 <span id="id5"></span><h2>PyQuante<a class="headerlink" href="#pyquante" title="Permalink to this headline">¶</a></h2>
@@ -1954,18 +1982,14 @@ Qiskit Chemistry is also installed.  Installing PyQuante2 according to the
 <a class="reference external" href="https://github.com/rpmuller/pyquante2/blob/master/README.md">installation instructions</a> while
 in the Python virtual environment where Qiskit Chemistry has also been installed will automatically
 make PyQuante2 dynamically discovered by Qiskit Chemistry at run time.</p>
-<p>The Qiskit Chemistry PyQuante2 driver wrapper contains two methods, in <code class="docutils literal notranslate"><span class="pre">transform.py</span></code>, taken from
-from <a class="reference external" href="http://pyquante.sourceforge.net/">Pyquante V1</a>, which is
-<a class="reference external" href="http://pyquante.sourceforge.net/#license">licensed</a>
-under a <a class="reference external" href="https://opensource.org/licenses/BSD-3-Clause">modified BSD license</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Like all the other drivers currently interfaced by Qiskit Chemistry,
 PyQuante2 provides enough intermediate data for Qiskit Chemistry to compute a molecule’s ground
-state molecular energy.  However, unlike the other drivers, the data computed by PyQuante is not sufficient for
-Qiskit Chemistry to compute a molecule’s dipole moment.  Therefore, PyQuante is currently
-the only driver interfaced by Qiskit Chemistry that does not allow for the computation of a molecule’s
-dipole moment.</p>
+state molecular energy.  However, unlike the other drivers, the data computed by PyQuante is
+not sufficient for Qiskit Chemistry to compute a molecule’s dipole moment.  Therefore, PyQuante
+is currently the only driver interfaced by Qiskit Chemistry that does not allow for the
+computation of a molecule’s dipole moment.</p>
 </div>
 <p>To use PyQuante to configure a molecule on which to do a chemistry experiment with Qiskit Chemistry,
 set the <code class="docutils literal notranslate"><span class="pre">name</span></code> field in the <code class="docutils literal notranslate"><span class="pre">driver</span></code> section of the <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-input-file"><span class="std std-ref">Input File</span></a> to
@@ -1983,18 +2007,26 @@ Here again atoms are separated by semicolons; within an atom the symbol and posi
 separated by spaces. This is an example for H2O (water): “H; O 1 1.08; H 2 1.08 1 107.5”. Dummy
 atom(s) using symbol ‘X’ may be added to allow or facilitate conversion to xyz coordinates, as used
 internally for processing, and are removed from the molecule following the conversion.</p>
+<p>The SCF method can be selected via <code class="docutils literal notranslate"><span class="pre">hf_method</span></code> as one of <code class="docutils literal notranslate"><span class="pre">rhf</span></code>, <code class="docutils literal notranslate"><span class="pre">rohf</span></code> or <code class="docutils literal notranslate"><span class="pre">uhf</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">tol</span></code> field allows the convergence tolerance of the method to be set and <code class="docutils literal notranslate"><span class="pre">maxiters</span></code>
+the maximum number of iterations as part of the <code class="docutils literal notranslate"><span class="pre">converge()</span></code> method. Please refer to
+<code class="docutils literal notranslate"><span class="pre">pyquante2.scf.hamiltonians.hamiltonian</span></code> for more detail.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">pyquante</span>
    <span class="n">atoms</span><span class="o">=</span><span class="n">H</span> <span class="o">.</span><span class="mi">0</span> <span class="o">.</span><span class="mi">0</span> <span class="o">.</span><span class="mi">0</span><span class="p">;</span> <span class="n">H</span> <span class="o">.</span><span class="mi">0</span> <span class="o">.</span><span class="mi">0</span> <span class="mf">0.74</span>
    <span class="n">units</span><span class="o">=</span><span class="n">Angstrom</span>
    <span class="n">charge</span><span class="o">=</span><span class="mi">0</span>
    <span class="n">multiplicity</span><span class="o">=</span><span class="mi">1</span>
    <span class="n">basis</span><span class="o">=</span><span class="n">sto3g</span>
+   <span class="n">hf_method</span><span class="o">=</span><span class="n">rhf</span>
+   <span class="n">tol</span><span class="o">=</span><span class="mf">1e-09</span>
+   <span class="n">maxiters</span><span class="o">=</span><span class="mi">50</span>
 <span class="o">&amp;</span><span class="n">end</span>
 </pre></div>
 </div>
-<p>Experienced chemists who already have existing PyQuante control files can simply paste the contents
-of those files into the <code class="docutils literal notranslate"><span class="pre">pyquante</span></code> section of the input file.  This configuration can also be
-easily achieved using the Qiskit Chemistry <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>.</p>
+<p>Above parameter names, in matching to internal PyQuante2 variables, was done explicitly to allow
+easy cross-reference of the functionality to within PyQuante2.</p>
+<p>This configuration can also be easily created and edited using the
+Qiskit Chemistry <a class="reference internal" href="qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>.</p>
 </div>
 <div class="section" id="hdf5">
 <span id="id6"></span><h2>HDF5<a class="headerlink" href="#hdf5" title="Permalink to this headline">¶</a></h2>
@@ -2004,7 +2036,7 @@ only to the extent necessary to compute some intermediate data which, combined w
 configuration, can later be used to form the input to one of the
 Aqua <a class="reference internal" href="../algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a>.</p>
 <p>As mentioned above, the intermediate data extracted from the classical computational software
-consists of the following:</p>
+includes the following:</p>
 <ol class="arabic simple">
 <li>One- and two-body integrals in Molecular Orbital (MO) basis</li>
 <li>Dipole integrals</li>
@@ -2024,6 +2056,9 @@ chemistry driver installed on their computers, or may have a different version o
 HDF5 is configured as a prebuilt driver in Aqua because it allows for chemistry input to be passed
 into the computation.  In fact, HDF5 is the only driver that does not require any installation
 other the installation of Qiskit Chemistry itself.</p>
+<p>In addition to the documentation below you may like to refer to our
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob /master/community/chemistry/hdf5_files_and_driver.ipynb">HDF5 tutorial</a> for more information and examples
+of usage.</p>
 <div class="section" id="generation-of-an-hdf5-input-file">
 <h3>Generation of an HDF5 Input File<a class="headerlink" href="#generation-of-an-hdf5-input-file" title="Permalink to this headline">¶</a></h3>
 <p>The most intuitive way to generate an HDF5 input file is by using the Qiskit Chemistry

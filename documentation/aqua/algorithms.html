@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1661,21 +1675,21 @@ different domains. Aqua uses
 of the quantum circuits modeling the specific problems.</p>
 <p>The following <a class="reference external" href="#quantum-algorithms">quantum algorithms</a> are part of Aqua:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">Variational Quantum Eigensolver (VQE)</span></li>
-<li><span class="xref std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></li>
-<li><span class="xref std std-ref">Evolution of Hamiltonian (EOH)</span></li>
-<li><span class="xref std std-ref">Quantum Phase Estimation (QPE)</span></li>
-<li><span class="xref std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></li>
-<li><span class="xref std std-ref">Amplitude Estimation</span></li>
-<li><span class="xref std std-ref">Quantum Grover Search</span></li>
-<li><span class="xref std std-ref">Deutsch Jozsa</span></li>
-<li><span class="xref std std-ref">Bernstein Vazirani</span></li>
-<li><span class="xref std std-ref">Simon</span></li>
-<li><span class="xref std std-ref">Quantum Support Vector Machine (QSVM)</span></li>
-<li><span class="xref std std-ref">Variational Quantum Classifier (VQC)</span></li>
-<li><span class="xref std std-ref">HHL algorithm for solving linear systems (HHL)</span></li>
-<li><span class="xref std std-ref">Shor’s Factoring Algorithm</span></li>
-<li><span class="xref std std-ref">Quantum Generative Adversarial Network (qGAN)</span></li>
+<li><a class="reference internal" href="#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a></li>
+<li><a class="reference internal" href="#qaoa"><span class="std std-ref">Quantum Approximate Optimization Algorithm (QAOA)</span></a></li>
+<li><a class="reference internal" href="#dynamics"><span class="std std-ref">Evolution of Hamiltonian (EOH)</span></a></li>
+<li><a class="reference internal" href="#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a></li>
+<li><a class="reference internal" href="#iqpe"><span class="std std-ref">Iterative Quantum Phase Estimation (IQPE)</span></a></li>
+<li><a class="reference internal" href="#ae"><span class="std std-ref">Amplitude Estimation</span></a></li>
+<li><a class="reference internal" href="#grover"><span class="std std-ref">Quantum Grover Search</span></a></li>
+<li><a class="reference internal" href="#djalgorithm"><span class="std std-ref">Deutsch-Jozsa</span></a></li>
+<li><a class="reference internal" href="#bvalgorithm"><span class="std std-ref">Bernstein-Vazirani</span></a></li>
+<li><a class="reference internal" href="#simonalgorithm"><span class="std std-ref">Simon</span></a></li>
+<li><a class="reference internal" href="#qsvm"><span class="std std-ref">Quantum Support Vector Machine (QSVM)</span></a></li>
+<li><a class="reference internal" href="#vqc"><span class="std std-ref">Variational Quantum Classifier (VQC)</span></a></li>
+<li><a class="reference internal" href="#hhl"><span class="std std-ref">HHL algorithm for solving linear systems (HHL)</span></a></li>
+<li><a class="reference internal" href="#shor"><span class="std std-ref">Shor’s Factory Algorithm (Shor)</span></a></li>
+<li><a class="reference internal" href="#qgan"><span class="std std-ref">Quantum Generative Adversarial Network(qGAN)</span></a></li>
 </ul>
 <p>Aqua includes  also some <a class="reference external" href="#classical-reference-algorithms">classical algorithms</a>
 for generating reference values. This feature of Aqua may be
@@ -1683,22 +1697,24 @@ useful to quantum algorithm researchers interested in generating, comparing and 
 results in the near term while experimenting with, developing and testing
 quantum algorithms:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">Exact Eigensolver</span></li>
-<li><span class="xref std std-ref">Exact LSsolver</span></li>
-<li><span class="xref std std-ref">CPLEX Ising</span></li>
-<li><span class="xref std std-ref">Support Vector Machine Radial Basis Function Kernel (SVM Classical)</span></li>
+<li><a class="reference internal" href="#exact-eigensolver"><span class="std std-ref">Exact Eigensolver</span></a></li>
+<li><a class="reference internal" href="#exact-lssolver"><span class="std std-ref">Exact LSsolver</span></a></li>
+<li><a class="reference internal" href="#cplex"><span class="std std-ref">CPLEX Ising</span></a></li>
+<li><a class="reference internal" href="#svm-rbf-kernel"><span class="std std-ref">Support Vector Machine Radial Basis Function Kernel (SVM Classical)</span></a></li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Extending the Algorithm Library</p>
 <p>Algorithms and many of the components they use have been designed to be
-pluggable. A new algorithm may be developed according to the specific Application Programming Interface (API)
+pluggable. A new algorithm may be developed according to the specific Application
+Programming Interface (API)
 provided by Aqua, and by simply adding its code to the collection of existing
 algorithms, that new algorithm  will be immediately recognized via dynamic lookup,
 and made available for use within the framework of Aqua.
-Specifically, to develop and deploy any new algorithm, the new algorithm class should derive from the <code class="docutils literal notranslate"><span class="pre">QuantumAlgorithm</span></code> class.
+Specifically, to develop and deploy any new algorithm, the new algorithm class should derive
+from the <code class="docutils literal notranslate"><span class="pre">QuantumAlgorithm</span></code> class.
 Along with any supporting  module, for immediate dynamic discovery, the new algorithm class
-can simply be placed in an appropriate folder in the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua\algorithms</span></code> directory, just like the
-existing algorithms.  Aqua also allows for
+can simply be placed in an appropriate folder in the <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/algorithms</span></code> directory,
+just like the existing algorithms.  Aqua also allows for
 <a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new components can register themselves
 as Aqua extensions and be dynamically discovered at run time independent of their
 location in the file system.
@@ -1743,29 +1759,34 @@ and <a class="reference internal" href="initial_states.html#initial-states"><spa
 </div>
 <p>If no value for <code class="docutils literal notranslate"><span class="pre">operator_mode</span></code> is specified, the default is <code class="docutils literal notranslate"><span class="pre">&quot;matrix&quot;</span></code>.</p>
 </li>
+</ul>
+<ul>
 <li><p class="first">The initial point for the search of the minimum eigenvalue:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">initial_point</span> <span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>An optional list of <code class="docutils literal notranslate"><span class="pre">float</span></code> values  may be provided as the starting point for the search of the minimum eigenvalue.
-This feature is particularly useful when there are reasons to believe that the
-solution point is close to a particular point, which can then be provided as the preferred initial point.  As an example,
-when building the dissociation profile of a molecule, it is likely that
-using the previous computed optimal solution as the starting initial point for the next interatomic distance is going
-to reduce the number of iterations necessary for the variational algorithm to converge.  Aqua provides
-<a class="reference external" href="https://github.com/Qiskit/aqua-tutorials/blob/master/chemistry/h2_vqe_initial_point.ipynb">a tutorial detailing this use case</a>.</p>
-<p>The length of the <code class="docutils literal notranslate"><span class="pre">initial_point</span></code> list value must match the number of the parameters expected by the variational form being used.
-If the user does not supply a preferred initial point, then VQE will look to the variational form for a preferred value.
+<p>An optional list of <code class="docutils literal notranslate"><span class="pre">float</span></code> values  may be provided as the starting point for the search
+of the minimum eigenvalue. This feature is particularly useful when there are reasons to
+believe that the solution point is close to a particular point, which can then be provided
+as the preferred initial point.  As an example, when building the dissociation profile of a
+molecule, it is likely that using the previous computed optimal solution as the starting
+initial point for the next interatomic distance is going to reduce the number of iterations
+necessary for the variational algorithm to converge.  Aqua provides an
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/community/chemistry/h2_vqe_initial_point.ipynb">initial point tutorial</a> detailing this use case.</p>
+<p>The length of the <code class="docutils literal notranslate"><span class="pre">initial_point</span></code> list value must match the number of the parameters
+expected by the variational form being used. If the user does not supply a preferred
+initial point, then VQE will look to the variational form for a preferred value.
 If the variational form returns <code class="docutils literal notranslate"><span class="pre">None</span></code>,
 then a random point will be generated within the parameter bounds set, as per above.
 If the variational form provides <code class="docutils literal notranslate"><span class="pre">None</span></code> as the lower bound, then VQE
-will default it to <span class="math notranslate nohighlight">\(-2\pi\)</span>; similarly, if the variational form returns <code class="docutils literal notranslate"><span class="pre">None</span></code> as the upper bound, the default value will be <span class="math notranslate nohighlight">\(2\pi\)</span>.</p>
+will default it to <span class="math notranslate nohighlight">\(-2\pi\)</span>; similarly, if the variational form returns <code class="docutils literal notranslate"><span class="pre">None</span></code>
+as the upper bound, the default value will be <span class="math notranslate nohighlight">\(2\pi\)</span>.</p>
 </li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to VQE declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">VQE</span></code>.</p>
+<p>When referring to VQE declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">VQE</span></code>.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">Problems Supported</p>
@@ -1807,12 +1828,14 @@ An initial state from Aqua’s <a class="reference internal" href="initial_state
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">initial_point</span> <span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>An optional list of <span class="math notranslate nohighlight">\(2p\)</span> <code class="docutils literal notranslate"><span class="pre">float</span></code> values  may be provided as the starting <code class="docutils literal notranslate"><span class="pre">beta</span></code> and <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameters
-(as identically named in the original <a class="reference external" href="https://arxiv.org/abs/1411.4028">QAOA paper</a>) for the QAOA variational form.
+<p>An optional list of <span class="math notranslate nohighlight">\(2p\)</span> <code class="docutils literal notranslate"><span class="pre">float</span></code> values  may be provided as the starting
+<code class="docutils literal notranslate"><span class="pre">beta</span></code> and <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameters  (as identically named in the original
+<a class="reference external" href="https://arxiv.org/abs/1411.4028">QAOA paper</a>) for the QAOA variational form.
 If such list is not provided, QAOA will simply start with the all-zero vector.</p>
-<p>An optional <code class="docutils literal notranslate"><span class="pre">Operator</span></code> may be provided as a custom mixer Hamiltonian. This allows, as discussed in <cite>this paper
-&lt;https://doi.org/10.1103/PhysRevApplied.5.034007&gt;</cite> for quantum annealing, and in <cite>this paper
-&lt;https://arxiv.org/abs/1709.03489&gt;</cite> for QAOA, to run constrained optimization problems where the mixer constrains
+<p>An optional <code class="docutils literal notranslate"><span class="pre">Operator</span></code> may be provided as a custom mixer Hamiltonian. This allows,
+as discussed in <cite>this paper &lt;https://doi.org/10.1103/PhysRevApplied.5.034007&gt;</cite>
+for quantum annealing, and in <cite>this paper &lt;https://arxiv.org/abs/1709.03489&gt;</cite> for QAOA,
+to run constrained optimization problems where the mixer constrains
 the evolution to a feasible subspace of the full Hilbert space.</p>
 </li>
 </ul>
@@ -1852,7 +1875,8 @@ via, for example, Lloyd’s method or Trotter-Suzuki decomposition.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evo_mode</span> <span class="o">=</span> <span class="s2">&quot;matrix&quot;</span> <span class="o">|</span> <span class="s2">&quot;circuit&quot;</span>
 </pre></div>
 </div>
-<p>Two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are permitted: <code class="docutils literal notranslate"><span class="pre">&quot;matrix&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;circuit&quot;</span></code>, with <code class="docutils literal notranslate"><span class="pre">&quot;circuit&quot;</span></code> being the default.</p>
+<p>Two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are permitted: <code class="docutils literal notranslate"><span class="pre">&quot;matrix&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;circuit&quot;</span></code>, with <code class="docutils literal notranslate"><span class="pre">&quot;circuit&quot;</span></code>
+being the default.</p>
 </li>
 <li><p class="first">The number of time slices:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_time_slices</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span>
@@ -1864,14 +1888,15 @@ via, for example, Lloyd’s method or Trotter-Suzuki decomposition.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">expansion_mode</span> <span class="o">=</span> <span class="s2">&quot;trotter&quot;</span> <span class="o">|</span> <span class="s2">&quot;suzuki&quot;</span>
 </pre></div>
 </div>
-<p>Two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are permitted: <code class="docutils literal notranslate"><span class="pre">&quot;trotter&quot;</span></code> (Lloyd’s method) or <code class="docutils literal notranslate"><span class="pre">&quot;suzuki&quot;</span></code> (for Trotter-Suzuki expansion),
-with  <code class="docutils literal notranslate"><span class="pre">&quot;trotter&quot;</span></code> being the default one.</p>
+<p>Two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are permitted: <code class="docutils literal notranslate"><span class="pre">&quot;trotter&quot;</span></code> (Lloyd’s method) or <code class="docutils literal notranslate"><span class="pre">&quot;suzuki&quot;</span></code>
+(for Trotter-Suzuki expansion), with  <code class="docutils literal notranslate"><span class="pre">&quot;trotter&quot;</span></code> being the default one.</p>
 </li>
 <li><p class="first">The expansion order:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">expansion_order</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p>This parameter sets the Trotter-Suzuki expansion order.  A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default value is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<p>This parameter sets the Trotter-Suzuki expansion order.  A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.
+The default value is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
 </li>
 </ul>
 <div class="topic">
@@ -1958,7 +1983,8 @@ ancillary qubits <code class="docutils literal notranslate"><span class="pre">nu
 Inverse Quantum Fourier Transform (IQFT) is not used for IQPE.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">For more details, please see <a class="reference external" href="https://arxiv.org/abs/quant-ph/0610214">arXiv:quant-ph/0610214</a>.</p>
+<p class="last">For more details,
+please see <a class="reference external" href="https://arxiv.org/abs/quant-ph/0610214">arXiv:quant-ph/0610214</a>.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
@@ -1972,7 +1998,7 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 </div>
 <div class="section" id="amplitude-estimation">
 <span id="ae"></span><h3>Amplitude Estimation<a class="headerlink" href="#amplitude-estimation" title="Permalink to this headline">¶</a></h3>
-<p><em>Amplitude Estimation</em> is a derivative of -  <span class="xref std std-ref">Quantum Phase Estimation (QPE)</span>
+<p><em>Amplitude Estimation</em> is a derivative of -  <a class="reference internal" href="#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>
 applied to a particular operator <span class="math notranslate nohighlight">\(A\)</span>.
 <span class="math notranslate nohighlight">\(A\)</span> is assumed to operate on <span class="math notranslate nohighlight">\(n + 1\)</span> qubits (plus possible ancillary qubits)
 where the <span class="math notranslate nohighlight">\(n\)</span> qubits represent the uncertainty (in the form of a random distribution from the
@@ -1985,9 +2011,9 @@ equal to the
 value of interest.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Consult the documentation on -  <span class="xref std std-ref">Quantum Phase Estimation (QPE)</span> for more details.
-Also, see <a class="reference external" href="https://arxiv.org/abs/1806.06893">arXiv:1806.06893</a> for more details on Amplitude Estimation
-as well as its applications on finance problems.</p>
+<p class="last">Consult the documentation on -  <a class="reference internal" href="#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a> for more details.
+Also, see <a class="reference external" href="https://arxiv.org/abs/1806.06893">arXiv:1806.06893</a> for more details on
+Amplitude Estimation as well as its applications on finance problems.</p>
 </div>
 <p>In addition to relying on a <code class="docutils literal notranslate"><span class="pre">QPE</span></code> component
 for building the Quantum Phase Estimation circuit,
@@ -2060,9 +2086,9 @@ indicates a hit or miss for any given record.  More formally, an
 <span class="math notranslate nohighlight">\(f\)</span> as specified above.  Given an input <span class="math notranslate nohighlight">\(x \in X\)</span>,
 <span class="math notranslate nohighlight">\(O_f\)</span> implements <span class="math notranslate nohighlight">\(f(x)\)</span>.  The details of how <span class="math notranslate nohighlight">\(O_f\)</span> works are
 unimportant; Grover’s search algorithm treats the oracle as a black box.
-Currently, Aqua provides a <span class="xref std std-ref">logic_expr_oracle</span> and a <span class="xref std std-ref">truth_table_oracle</span>,
+Currently, Aqua provides a <a class="reference internal" href="oracles.html#logical-expression-oracle"><span class="std std-ref">Logical Expression Oracle</span></a> and a <a class="reference internal" href="oracles.html#truth-table-oracle"><span class="std std-ref">Truth Table Oracle</span></a>,
 both of which can be used in Grover’s search tasks.
-In particular, the <span class="xref std std-ref">logic_expr_oracle</span>
+In particular, the <a class="reference internal" href="oracles.html#logical-expression-oracle"><span class="std std-ref">Logical Expression Oracle</span></a>
 can take as input a SAT problem instance in
 <a class="reference external" href="http://www.satcompetition.org/2009/format-benchmarks2009.html">DIMACS CNF
 format</a>
@@ -2333,8 +2359,9 @@ is not hermitian.</p>
 </ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Consult the documentation on <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>,  <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>, <a class="reference internal" href="eigs.html#eigs"><span class="std std-ref">Eigenvalues</span></a>, <a class="reference internal" href="reciprocals.html#reciprocals"><span class="std std-ref">Reciprocals</span></a>
-for more details. <a class="reference external" href="https://arxiv.org/abs/0811.3171">The original paper is accessible on arxiv.</a></p>
+<p class="last">Consult the documentation on <a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>,  <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>, <a class="reference internal" href="eigs.html#eigs"><span class="std std-ref">Eigenvalues</span></a>,
+<a class="reference internal" href="reciprocals.html#reciprocals"><span class="std std-ref">Reciprocals</span></a> for more details.
+<a class="reference external" href="https://arxiv.org/abs/0811.3171">The original paper is accessible on arxiv.</a></p>
 </div>
 <p>HHL requires eigenvalue estimation using QPE (<a class="reference internal" href="eigs.html#eigs"><span class="std std-ref">Eigenvalues</span></a>), the eigenvalue
 inversion (<a class="reference internal" href="reciprocals.html#reciprocals"><span class="std std-ref">Reciprocals</span></a>), and a matrix and initial state as part of its
@@ -2379,8 +2406,8 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 </div>
 <div class="section" id="quantum-generative-adversarial-network-qgan">
 <span id="qgan"></span><h3>Quantum Generative Adversarial Network(qGAN)<a class="headerlink" href="#quantum-generative-adversarial-network-qgan" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://arxiv.org/abs/1904.00043">qGAN</a> is a hybrid quantum-classical algorithm used for generative
-modelling tasks.
+<p><a class="reference external" href="https://arxiv.org/abs/1904.00043">qGAN</a> is a hybrid quantum-classical algorithm used
+for generative modelling tasks.
 The qGAN implementation in Aqua requires the definition of a variational form for the
 implementation of a quantum generator and a PyTorch neural network for the implementation
 of a classical discriminator.
@@ -2391,11 +2418,12 @@ Eventually, the quantum generator learns the training data’s underlying probab
 The trained quantum generator loads a quantum state which is a model of the target distribution.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">#</p>
+<p class="last">For more details, please see <a class="reference external" href="https://arxiv.org/abs/1904.00043">this paper</a></p>
 </div>
 <p>In summary, qGAN can be configured with the following parameters:</p>
 <ul>
-<li><p class="first">An <code class="docutils literal notranslate"><span class="pre">array</span></code> indicating the numbers of qubits for d qubit registers, where d is dimension of the training data:</p>
+<li><p class="first">An <code class="docutils literal notranslate"><span class="pre">array</span></code> indicating the numbers of qubits for d qubit registers, where d is dimension of
+the training data:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_qubits</span> <span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -2455,9 +2483,9 @@ near term to generate reference values while experimenting with, developing and 
 algorithms.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Aqua prevents associating a quantum device or simulator to any experiment that uses a classical
-algorithm.  The <code class="docutils literal notranslate"><span class="pre">&quot;backend&quot;</span></code> section of an experiment to be conducted via a classical algorithm is
-disabled.</p>
+<p class="last">Aqua prevents associating a quantum device or simulator to any experiment that uses a
+classical algorithm.  The <code class="docutils literal notranslate"><span class="pre">&quot;backend&quot;</span></code> section of an experiment to be conducted via a
+classical algorithm is disabled.</p>
 </div>
 <div class="section" id="exact-eigensolver">
 <span id="id4"></span><h3>Exact Eigensolver<a class="headerlink" href="#exact-eigensolver" title="Permalink to this headline">¶</a></h3>
@@ -2500,9 +2528,9 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 </div>
 <div class="section" id="cplex-ising">
 <span id="cplex"></span><h3>CPLEX Ising<a class="headerlink" href="#cplex-ising" title="Permalink to this headline">¶</a></h3>
-<p>This algorithm uses the <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.studio.help/Optimization_Studio/topics/COS_home.html">IBM ILOG CPLEX Optimization
+<p>This algorithm uses the <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0 /ilog.odms.studio.help/Optimization_Studio/topics/COS_home.html">IBM ILOG CPLEX Optimization
 Studio</a>,
-which should be installed along with its <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.cplex.help/CPLEX/GettingStarted/topics/set_up/Python_setup.html">Python API</a>
+which should be installed along with its <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.cplex.help /CPLEX/GettingStarted/topics/set_up/Python_setup.html">Python API</a>
 for this algorithm to be operational. This algorithm currently
 supports computing the energy of an Ising model Hamiltonian.</p>
 <p>CPLEX Ising can be configured with the following parameters:</p>
@@ -2544,7 +2572,7 @@ Aqua dynamically discovers and loads it, is <code class="docutils literal notran
 </div>
 </div>
 <div class="section" id="support-vector-machine-radial-basis-function-kernel-svm-classical">
-<span id="avm-rbf-kernel"></span><h3>Support Vector Machine Radial Basis Function Kernel (SVM Classical)<a class="headerlink" href="#support-vector-machine-radial-basis-function-kernel-svm-classical" title="Permalink to this headline">¶</a></h3>
+<span id="svm-rbf-kernel"></span><h3>Support Vector Machine Radial Basis Function Kernel (SVM Classical)<a class="headerlink" href="#support-vector-machine-radial-basis-function-kernel-svm-classical" title="Permalink to this headline">¶</a></h3>
 <p>SVM Classical uses a classical approach to experiment with feature map classification
 problems.
 SVM Classical can be configured with a <code class="docutils literal notranslate"><span class="pre">bool</span></code> parameter,

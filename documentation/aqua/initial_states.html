@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1662,8 +1676,8 @@ then provides a circuit that can take the starting point of all zero qubits to t
 <p>Consistent with its unique  design, Aqua has a modular and
 extensible architecture. Algorithms and their supporting objects, such as initial states for
 variational forms and <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>, are pluggable modules in Aqua.
-New initial states are typically installed in the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua/utils/initial_states</span></code> folder
-and derive from the <code class="docutils literal notranslate"><span class="pre">InitialState</span></code> class.  Aqua also allows for
+New initial states are typically installed in the <code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/initial_states</span></code>
+folder and derive from the <code class="docutils literal notranslate"><span class="pre">InitialState</span></code> class.  Aqua also allows for
 <a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new components can register themselves
 as Aqua extensions and be dynamically discovered at run time independent of their
 location in the file system.
@@ -1673,24 +1687,24 @@ developers interested in
 </div>
 <p>Aqua supplies the following three initial states:</p>
 <ol class="arabic simple">
-<li><span class="xref std std-ref">zero</span></li>
+<li><a class="reference internal" href="#zero"><span class="std std-ref">Zero</span></a></li>
 <li><a class="reference internal" href="#hartree-fock"><span class="std std-ref">Hartree-Fock</span></a></li>
-<li><span class="xref std std-ref">custom</span></li>
+<li><a class="reference internal" href="#custom-initial-states"><span class="std std-ref">Custom</span></a></li>
 </ol>
 <div class="section" id="zero">
-<h2>Zero<a class="headerlink" href="#zero" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Zero<a class="headerlink" href="#zero" title="Permalink to this headline">¶</a></h2>
 <p>This initial state is suitable for those situations in which the all-zeroes state is the desired
 starting state. This is the case for a <em>vacuum state</em> in physics or chemistry. The zero initial
 state has no parameters and is, therefore, not configurable.  Configuring the use of the zero
 initial state will create the zero state based solely on the number of qubits.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to the zero initial state declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">ZERO</span></code>.</p>
+<p>When referring to the zero initial state declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">ZERO</span></code>.</p>
 </div>
 </div>
 <div class="section" id="hartree-fock">
-<span id="id2"></span><h2>Hartree-Fock<a class="headerlink" href="#hartree-fock" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>Hartree-Fock<a class="headerlink" href="#hartree-fock" title="Permalink to this headline">¶</a></h2>
 <p>This initial state is specific for chemistry-related experiments. It corresponds to a molecule’s
 <em>Hartree-Fock state</em>. In computational physics and chemistry, the Hartree–Fock method is a way to
 approximate the determination of the wave function and the energy of a quantum many-body system in
@@ -1718,10 +1732,12 @@ the Hartree-Fock initial state to be configured:</p>
 <p>This parameter expects a positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value.</p>
 </li>
 <li><p class="first">The total number of particles for which the Hartree-Fock initial state is to be created:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_particles</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_particles</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p>This parameter expects a positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value.</p>
+<p>This parameter expects a list of two integers for number of alpha and beta electrons or,
+for closed shell backward compatibility, a single <code class="docutils literal notranslate"><span class="pre">int</span></code> value which will be divided by
+two internally to form number of alpha and beta electrons.</p>
 </li>
 <li><p class="first">The desired <a class="reference internal" href="chemistry/qiskit_chemistry_translators.html#translators"><span class="std std-ref">Translators</span></a> from fermions to qubits:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qubit_mapping</span> <span class="o">=</span> <span class="n">jordan_wigner</span> <span class="o">|</span> <span class="n">parity</span> <span class="o">|</span> <span class="n">bravyi_kitaev</span>
@@ -1798,7 +1814,7 @@ by which Aqua dynamically discovers and loads it, is <code class="docutils liter
 </div>
 <div class="section" id="custom">
 <span id="custom-initial-states"></span><h2>Custom<a class="headerlink" href="#custom" title="Permalink to this headline">¶</a></h2>
-<p>Should the <span class="xref std std-ref">zero</span> and <a class="reference internal" href="#hartree-fock"><span class="std std-ref">Hartree-Fock</span></a> pre-defined initial states not meet the user’s
+<p>Should the <a class="reference internal" href="#zero"><span class="std std-ref">Zero</span></a> and <a class="reference internal" href="#hartree-fock"><span class="std std-ref">Hartree-Fock</span></a> pre-defined initial states not meet the user’s
 needs for a particular quantum experiment, this option allows the user of Aqua to fully customize
 the initial state (e.g. for <a class="reference internal" href="variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a> and the <a class="reference internal" href="algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a> algorithm) by directly
 configuring a <em>custom probability distribution</em> for the state vector or even providing the
@@ -1815,7 +1831,7 @@ parameters:</p>
 values are supported:</p>
 <ol class="arabic simple">
 <li><code class="docutils literal notranslate"><span class="pre">&quot;zero&quot;</span></code> — This setting configures the state vector with the <em>zero probability
-distribution</em>, and is effectively equivalent to the <span class="xref std std-ref">zero</span> initial state.</li>
+distribution</em>, and is effectively equivalent to the <a class="reference internal" href="#zero"><span class="std std-ref">Zero</span></a> initial state.</li>
 <li><code class="docutils literal notranslate"><span class="pre">&quot;uniform&quot;</span></code> — This setting configures the state vector with the <em>uniform probability
 distribution</em>.  All the qubits
 are set in superposition, each of them being initialized to the Hadamard gate, which means
