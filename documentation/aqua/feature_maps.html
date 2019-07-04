@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1682,7 +1696,7 @@ extensible architecture. Algorithms and their supporting objects, such as
 feature-map techniques for Artificial Intelligence,
 are pluggable modules in Aqua.
 New feature maps are typically installed in the
-<code class="docutils literal notranslate"><span class="pre">qiskit_aqua/utils/feature_maps</span></code>
+<code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/feature_maps</span></code>
 folder and derive from the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> class.
 Aqua also allows for
 <a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new components can register themselves
@@ -1694,13 +1708,13 @@ developers interested in
 </div>
 <div class="topic">
 <p class="topic-title first">Entangler Map Associated with a Feature Map</p>
-<p>A feature map is associated with an entangler map, which specifies the entanglement of the qubits.
-An entangler map can be envisioned (and that is also how it is implemented in Aqua)
-as a dictionary <span class="math notranslate nohighlight">\(D\)</span> such that each entry in the dictionary has a source qubit
-index as the key <span class="math notranslate nohighlight">\(k\)</span>, with the corresponding value <span class="math notranslate nohighlight">\(D(k) = v\)</span> being a list of target qubit
-indexes to which qubit
-<span class="math notranslate nohighlight">\(k\)</span> is entangled.  Indexes are non-negative integer values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q - 1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span>
-is the total number of qubits.  The following Python dictionary shows a possible entangler map: <code class="docutils literal notranslate"><span class="pre">{0:</span> <span class="pre">[1,</span> <span class="pre">2],</span> <span class="pre">1:</span> <span class="pre">[3]}</span></code>.</p>
+<p>A feature map is associated with an entangler map, which specifies the entanglement
+of the qubits. An entangler map can be envisioned (and that is also how it is implemented
+in Aqua) as a dictionary <span class="math notranslate nohighlight">\(D\)</span> such that each entry in the dictionary has a source qubit
+index as the key <span class="math notranslate nohighlight">\(k\)</span>, with the corresponding value <span class="math notranslate nohighlight">\(D(k) = v\)</span> being a list of
+target qubit indexes to which qubit <span class="math notranslate nohighlight">\(k\)</span> is entangled.  Indexes are non-negative integer
+values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q - 1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.
+The following Python dictionary shows a possible entangler map: <code class="docutils literal notranslate"><span class="pre">{0:</span> <span class="pre">[1,</span> <span class="pre">2],</span> <span class="pre">1:</span> <span class="pre">[3]}</span></code>.</p>
 </div>
 <p>Currently, Aqua supplies the following feature maps:</p>
 <ul class="simple">
@@ -1715,8 +1729,7 @@ is the total number of qubits.  The following Python dictionary shows a possible
 <p>The First Order Expansion feature map transform data <span class="math notranslate nohighlight">\(\vec{x} \in \mathbb{R}^n\)</span>
 according to the following equation, and then concatenates the same circuit <span class="math notranslate nohighlight">\(d\)</span> times,
 where <span class="math notranslate nohighlight">\(d\)</span> is the depth of the circuit:</p>
-<blockquote>
-<div><span class="math notranslate nohighlight">\(U_{\Phi(\vec{x})}=\exp\left(i\sum_{S\subseteq[n]}\phi_S(\vec{x})\prod_{i\inS}Z_i\right)\)</span></div></blockquote>
+<p><span class="math notranslate nohighlight">\(U_{\Phi(\vec{x})}=\exp\left(i\sum_{S\subseteq [n]}\phi_S(\vec{x})\prod_{i\in S}Z_i\right)\)</span></p>
 <p>where <span class="math notranslate nohighlight">\(S \in \{ 0, 1, ..., n-1 \}, \phi_{i}(\vec{x}) = x_i\)</span>.</p>
 <p>The following allows a specific form to be configured in the
 <code class="docutils literal notranslate"><span class="pre">feature_map</span></code> section of the Aqua
@@ -1732,9 +1745,8 @@ is set to <code class="docutils literal notranslate"><span class="pre">FirstOrde
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to the First Order Expansion feature map declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
-dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">FirstOrderExpansion</span></code>.</p>
+<p>When referring to the First Order Expansion feature map declaratively inside Aqua,
+its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">FirstOrderExpansion</span></code>.</p>
 </div>
 </div>
 <div class="section" id="second-order-expansion">
@@ -1760,39 +1772,41 @@ is set to <code class="docutils literal notranslate"><span class="pre">SecondOrd
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entanglement</span> <span class="o">=</span> <span class="s2">&quot;full&quot;</span> <span class="o">|</span> <span class="s2">&quot;linear&quot;</span>
 </pre></div>
 </div>
-<p>Only two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are supported: <code class="docutils literal notranslate"><span class="pre">&quot;full&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;linear&quot;</span></code>, corresponding to the <em>full</em> (or <em>all-to-all</em>) and
-<em>linear</em> (or <em>next-neighbor coupling</em>) entangler maps, respectively.  With full entanglement, each qubit is entangled with
-all the
-others; with linear entanglement, qubit <span class="math notranslate nohighlight">\(i\)</span> is entangled with qubit <span class="math notranslate nohighlight">\(i + 1\)</span>, for all <span class="math notranslate nohighlight">\(i \in \{0, 1, ... ,
-q - 2\}\)</span>,
-where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.</p>
+<p>Only two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are supported: <code class="docutils literal notranslate"><span class="pre">&quot;full&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;linear&quot;</span></code>, corresponding to the <em>full</em>
+(or <em>all-to-all</em>) and <em>linear</em> (or <em>next-neighbor coupling</em>) entangler maps, respectively.
+With full entanglement, each qubit is entangled with all the others; with linear entanglement,
+qubit <span class="math notranslate nohighlight">\(i\)</span> is entangled with qubit <span class="math notranslate nohighlight">\(i + 1\)</span>, for all
+<span class="math notranslate nohighlight">\(i \in \{0, 1, ... , q - 2\}\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.</p>
 </li>
 <li><p class="first">A dictionary of lists of non-negative <code class="docutils literal notranslate"><span class="pre">int</span></code> values specifying the entangler map:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="o">...</span> <span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="o">...</span> <span class="p">,</span>
+                 <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly specified as the value of the
-<code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
+<p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly
+specified as the value of the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
 from full or linear is desired.
-As explained more generally above, the form of the map is a dictionary; each entry in the dictionary has a source qubit
-index as the key, with the corresponding value being a list of target qubit indexes to which the source qubit should
-be entangled.
-Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits,
-as in the following example:</p>
+As explained more generally above, the form of the map is a dictionary; each entry in the
+dictionary has a source qubit index as the key, with the corresponding value being a list of
+target qubit indexes to which the source qubit should be entangled.
+Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number
+of qubits, as in the following example:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.  In other words,
-qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <span class="math notranslate nohighlight">\(D(i)\)</span> of qubits mapped to qubit <span class="math notranslate nohighlight">\(i\)</span> itself.</p>
-<p class="last">Furthermore, by default, if
-the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>, where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it
-cannot also specify
-<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.  This
-restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code> boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside
-the
-<code class="docutils literal notranslate"><span class="pre">validate_entangler_map</span></code> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> Application Programming Interface (API).</p>
+<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.
+In other words, qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <span class="math notranslate nohighlight">\(D(i)\)</span> of qubits mapped to
+qubit <span class="math notranslate nohighlight">\(i\)</span> itself.</p>
+<p class="last">Furthermore, by default, if the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>,
+where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it  cannot also specify
+<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.
+This restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code>
+boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside the <code class="docutils literal notranslate"><span class="pre">validate_entangler_map</span></code> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>
+Application Programming Interface (API).</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1801,23 +1815,23 @@ Aqua and its domain specific applications
 (<a class="reference internal" href="chemistry/qiskit_chemistry.html#aqua-chemistry"><span class="std std-ref">Qiskit Chemistry</span></a>, <a class="reference internal" href="ai/qiskit_ai.html#aqua-ai"><span class="std std-ref">Qiskit Artificial Intelligence</span></a>, <a class="reference internal" href="optimization/qiskit_optimization.html#aqua-optimization"><span class="std std-ref">Qiskit Optimization</span></a> and <a class="reference internal" href="finance/qiskit_finance.html#aqua-finance"><span class="std std-ref">Qiskit Finance</span></a>)
 do not expose a configuration parameter in
 a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object to set
-the number of qubits that will be used in an experiment.  This is because, when it is used as a tool to execute
-experiments,
+the number of qubits that will be used in an experiment.  This is because, when it is used as
+a tool to execute experiments,
 Aqua is working at a higher, more abstract level.  In such cases, the number of qubits
-is computed internally at run time based on the particular experiment, and passed programmatically to construct the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object.
+is computed internally at run time based on the particular experiment, and passed
+programmatically to construct the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object.
 Manually configuring the entangler map, therefore,
 requires knowing the number of qubits <span class="math notranslate nohighlight">\(q\)</span>, since the qubit indexes allowed
-in the entangler map comfiguration can only take <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.  Providing an entangler
-map with indexes outside of this range will generate a run-time error.  Therefore, caution should be used when
-manually configuring the entangler map.</p>
+in the entangler map comfiguration can only take <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.
+Providing an entangler map with indexes outside of this range will generate a run-time error.
+Therefore, caution should be used when manually configuring the entangler map.</p>
 </div>
 </li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to SecondOrderExpansion declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers
-and loads it,
-is <code class="docutils literal notranslate"><span class="pre">SecondOrderExpansion</span></code>.</p>
+<p>When referring to SecondOrderExpansion declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">SecondOrderExpansion</span></code>.</p>
 </div>
 </div>
 <div class="section" id="pauli-z-expansion">
@@ -1858,56 +1872,56 @@ full entanglement, each qubit is entangled with  all the others; with linear ent
 where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.</p>
 </li>
 <li><p class="first">A dictionary of lists of non-negative <code class="docutils literal notranslate"><span class="pre">int</span></code> values specifying the entangler map:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="o">...</span> <span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="o">...</span> <span class="p">,</span>
+                 <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly specified as the value of the
-<code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
+<p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly
+specified as the value of the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
 from full or linear is desired.
-As explained more generally above, the form of the map is a dictionary; each entry in the dictionary has a source qubit
-index as the key, with the corresponding value being a list of target qubit indexes to which the source qubit should
-be entangled.
-Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits,
-as in the following example:</p>
+As explained more generally above, the form of the map is a dictionary; each entry in the
+dictionary has a source qubit index as the key, with the corresponding value being a list of
+target qubit indexes to which the source qubit should be entangled.
+Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number
+of qubits, as in the following example:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.  In other words,
-qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <span class="math notranslate nohighlight">\(D(i)\)</span> of qubits mapped to qubit <span class="math notranslate nohighlight">\(i\)</span> itself.</p>
-<p class="last">Furthermore, by default, if
-the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>, where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it
-cannot also specify
-<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.  This
-restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code> boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside
-the
-<code class="docutils literal notranslate"><span class="pre">validate_entangler_map</span></code> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> Application Programming Interface (API).</p>
+<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.
+In other words, qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <span class="math notranslate nohighlight">\(D(i)\)</span> of qubits mapped to qubit
+<span class="math notranslate nohighlight">\(i\)</span> itself.</p>
+<p class="last">Furthermore, by default, if the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>,
+where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it cannot also specify
+<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.
+This restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code>
+boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside the <cite>validate_entangler_map`</cite> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>
+Application Programming Interface (API).</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">When configured declaratively,
-Aqua and its domain specific applications
+<p class="last">When configured declaratively, Aqua and its domain specific applications
 (<a class="reference internal" href="chemistry/qiskit_chemistry.html#aqua-chemistry"><span class="std std-ref">Qiskit Chemistry</span></a>, <a class="reference internal" href="ai/qiskit_ai.html#aqua-ai"><span class="std std-ref">Qiskit Artificial Intelligence</span></a>, <a class="reference internal" href="optimization/qiskit_optimization.html#aqua-optimization"><span class="std std-ref">Qiskit Optimization</span></a> and <a class="reference internal" href="finance/qiskit_finance.html#aqua-finance"><span class="std std-ref">Qiskit Finance</span></a>)
-do not expose a configuration parameter in
-a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object to set
-the number of qubits that will be used in an experiment.  This is because, when it is used as a tool to execute
-experiments,
-Aqua is working at a higher, more abstract level.  In such cases, the number of qubits
-is computed internally at run time based on the particular experiment, and passed programmatically to construct the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object.
-Manually configuring the entangler map, therefore,
-requires knowing the number of qubits <span class="math notranslate nohighlight">\(q\)</span>, since the qubit indexes allowed
-in the entangler map comfiguration can only take <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.  Providing an entangler
-map with indexes outside of this range will generate a run-time error.  Therefore, caution should be used when
-manually configuring the entangler map.</p>
+do not expose a configuration parameter in a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object to set
+the number of qubits that will be used in an experiment.  This is because, when it is used
+as a tool to execute experiments, Aqua is working at a higher, more abstract level.
+In such cases, the number of qubits is computed internally at run time based on the particular
+experiment, and passed programmatically to construct the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object.
+Manually configuring the entangler map, therefore, requires knowing the number of qubits
+<span class="math notranslate nohighlight">\(q\)</span>, since the qubit indexes allowed in the entangler map comfiguration can only take
+<code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.  Providing an entangler
+map with indexes outside of this range will generate a run-time error.  Therefore, caution
+should be used when manually configuring the entangler map.</p>
 </div>
 </li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to PauliZExpansion declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers
-and loads it,
-is <code class="docutils literal notranslate"><span class="pre">PauliZExpansion</span></code>.</p>
+<p>When referring to PauliZExpansion declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">PauliZExpansion</span></code>.</p>
 </div>
 </div>
 <div class="section" id="pauli-expansion">
@@ -1936,70 +1950,71 @@ is set to <code class="docutils literal notranslate"><span class="pre">PauliExpa
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">paulis</span> <span class="o">=</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">string</span>
 </pre></div>
 </div>
-<p>This parameter takes a list of paulis (a pauli is a any combination of I, X, Y ,Z).  The default value is <code class="docutils literal notranslate"><span class="pre">['Z',</span> <span class="pre">'ZZ']</span></code>. Note that the order of pauli label is counted from right to left as the notation used in Pauli class in Qiskit Terra.</p>
+<p>This parameter takes a list of paulis (a pauli is a any combination of I, X, Y ,Z).
+The default value is <code class="docutils literal notranslate"><span class="pre">['Z',</span> <span class="pre">'ZZ']</span></code>. Note that the order of pauli label is counted from
+right to left as the notation used in Pauli class in Qiskit Terra.</p>
 </li>
 <li><p class="first">A <code class="docutils literal notranslate"><span class="pre">str</span></code> value representing the type of entanglement to use:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entanglement</span> <span class="o">=</span> <span class="s2">&quot;full&quot;</span> <span class="o">|</span> <span class="s2">&quot;linear&quot;</span>
 </pre></div>
 </div>
-<p>Only two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are supported: <code class="docutils literal notranslate"><span class="pre">&quot;full&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;linear&quot;</span></code>, corresponding to the <em>full</em> (or <em>all-to-all</em>) and
-<em>linear</em> (or <em>next-neighbor coupling</em>) entangler maps, respectively.  With full entanglement, each qubit is entangled with
-all the
-others; with linear entanglement, qubit <span class="math notranslate nohighlight">\(i\)</span> is entangled with qubit <span class="math notranslate nohighlight">\(i + 1\)</span>, for all <span class="math notranslate nohighlight">\(i \in \{0, 1, ... ,
-q - 2\}\)</span>,
-where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.</p>
+<p>Only two <code class="docutils literal notranslate"><span class="pre">str</span></code> values are supported: <code class="docutils literal notranslate"><span class="pre">&quot;full&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;linear&quot;</span></code>, corresponding to the <em>full</em>
+(or <em>all-to-all</em>) and <em>linear</em> (or <em>next-neighbor coupling</em>) entangler maps, respectively.
+With full entanglement, each qubit is entangled with all the
+others; with linear entanglement, qubit <span class="math notranslate nohighlight">\(i\)</span> is entangled with qubit <span class="math notranslate nohighlight">\(i + 1\)</span>,
+for all <span class="math notranslate nohighlight">\(i \in \{0, 1, ... ,  q - 2\}\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits.</p>
 </li>
 <li><p class="first">A dictionary of lists of non-negative <code class="docutils literal notranslate"><span class="pre">int</span></code> values specifying the entangler map:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="o">...</span> <span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                 <span class="o">...</span> <span class="p">,</span>
+                 <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]}</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly specified as the value of the
-<code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
+<p>The <code class="docutils literal notranslate"><span class="pre">entanglement</span></code> parameter defined above can be overridden by an entangler map explicitly
+specified as the value of the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter, if an entanglement map different
 from full or linear is desired.
-As explained more generally above, the form of the map is a dictionary; each entry in the dictionary has a source qubit
-index as the key, with the corresponding value being a list of target qubit indexes to which the source qubit should
-be entangled.
-Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number of qubits,
-as in the following example:</p>
+As explained more generally above, the form of the map is a dictionary; each entry in the
+dictionary has a source qubit index as the key, with the corresponding value being a list of
+target qubit indexes to which the source qubit should be entangled.
+Indexes are <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>, where <span class="math notranslate nohighlight">\(q\)</span> is the total number
+of qubits, as in the following example:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entangler_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.  In other words,
-qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <span class="math notranslate nohighlight">\(D(i)\)</span> of qubits mapped to qubit <span class="math notranslate nohighlight">\(i\)</span> itself.</p>
-<p class="last">Furthermore, by default, if
-the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>, where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it
-cannot also specify
-<span class="math notranslate nohighlight">\(j \in D(i)\)</span>.  A run-time error will be generated if double entanglement is configured.  This
-restriction can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code> boolean flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> inside
-the
-<code class="docutils literal notranslate"><span class="pre">validate_entangler_map</span></code> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> Application Programming Interface (API).</p>
+<p>The source qubit index is excluded from the list of its corresponding target qubit indexes.
+In other words, qubit <span class="math notranslate nohighlight">\(i\)</span> cannot be in the list <span class="math notranslate nohighlight">\(D(i)\)</span> of qubits mapped to
+qubit <span class="math notranslate nohighlight">\(i\)</span> itself.</p>
+<p class="last">Furthermore, by default, if the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> parameter specifies that <span class="math notranslate nohighlight">\(j \in D(i)\)</span>,
+where <span class="math notranslate nohighlight">\(i,j \in \{0, 1, q-1\}, i \neq j\)</span>, then it cannot also specify <span class="math notranslate nohighlight">\(j \in D(i)\)</span>.
+A run-time error will be generated if double entanglement is configured.  This restriction
+can be lifted programmatically by setting the <code class="docutils literal notranslate"><span class="pre">allow_double_entanglement</span></code> boolean flag to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> inside the <code class="docutils literal notranslate"><span class="pre">validate_entangler_map</span></code> method in the <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>
+Application Programming Interface (API).</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">When configured declaratively,
-Aqua and its domain specific applications
+<p class="last">When configured declaratively, Aqua and its domain specific applications
 (<a class="reference internal" href="chemistry/qiskit_chemistry.html#aqua-chemistry"><span class="std std-ref">Qiskit Chemistry</span></a>, <a class="reference internal" href="ai/qiskit_ai.html#aqua-ai"><span class="std std-ref">Qiskit Artificial Intelligence</span></a>, <a class="reference internal" href="optimization/qiskit_optimization.html#aqua-optimization"><span class="std std-ref">Qiskit Optimization</span></a> and <a class="reference internal" href="finance/qiskit_finance.html#aqua-finance"><span class="std std-ref">Qiskit Finance</span></a>)
-do not expose a configuration parameter in
-a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object to set
-the number of qubits that will be used in an experiment.  This is because, when it is used as a tool to execute
-experiments,
-Aqua is working at a higher, more abstract level.  In such cases, the number of qubits
-is computed internally at run time based on the particular experiment, and passed programmatically to construct the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object.
+do not expose a configuration parameter in a <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object to set
+the number of qubits that will be used in an experiment.  This is because, when it is used
+as a tool to execute experiments, Aqua is working at a higher, more abstract level.
+In such cases, the number of qubits is computed internally at run time based on the particular
+experiment, and passed programmatically to construct the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> object.
 Manually configuring the entangler map, therefore,
 requires knowing the number of qubits <span class="math notranslate nohighlight">\(q\)</span>, since the qubit indexes allowed
-in the entangler map comfiguration can only take <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.  Providing an entangler
-map with indexes outside of this range will generate a run-time error.  Therefore, caution should be used when
-manually configuring the entangler map.</p>
+in the entangler map comfiguration can only take <code class="docutils literal notranslate"><span class="pre">int</span></code> values from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(q-1\)</span>.
+Providing an entangler map with indexes outside of this range will generate a run-time error.
+Therefore, caution should be used when manually configuring the entangler map.</p>
 </div>
 </li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to PauliExpansion declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers
-and loads it,
-is <code class="docutils literal notranslate"><span class="pre">PauliExpansion</span></code>.</p>
+<p>When referring to PauliExpansion declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">PauliExpansion</span></code>.</p>
 </div>
 </div>
 <div class="section" id="raw-feature-vector">
@@ -2020,9 +2035,8 @@ A raw feature vector feature map is constructed with a single parameter:</p>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to the Raw Feature Vector feature map declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua
-dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">RawFeatureVector</span></code>.</p>
+<p>When referring to the Raw Feature Vector feature map declaratively inside Aqua,
+its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">RawFeatureVector</span></code>.</p>
 </div>
 </div>
 </div>

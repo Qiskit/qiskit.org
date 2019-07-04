@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1665,10 +1679,11 @@ attempts to find an optimal value among all possible solutions.</li>
 <div class="topic">
 <p class="topic-title first">Extending the Optimizer Library</p>
 <p>Consistent with its unique  design, Aqua has a modular and
-extensible architecture. Algorithms and their supporting objects, such as optimizers for quantum variational algorithms,
-are pluggable modules in Aqua.
-New optimizers for quantum variational algorithms are typically installed in the <code class="docutils literal notranslate"><span class="pre">qiskit_aqua/utils/optimizers</span></code> folder and derive from
-the <code class="docutils literal notranslate"><span class="pre">Optimizer</span></code> class.  Aqua also allows for
+extensible architecture. Algorithms and their supporting objects, such as optimizers for
+quantum variational algorithms,  are pluggable modules in Aqua.
+New optimizers for quantum variational algorithms are typically installed in the
+<code class="docutils literal notranslate"><span class="pre">qiskit/aqua/components/optimizers</span></code> folder and derive from the <code class="docutils literal notranslate"><span class="pre">Optimizer</span></code> class.
+Aqua also allows for
 <a class="reference internal" href="extending.html#aqua-dynamically-discovered-components"><span class="std std-ref">Dynamically Discovered Components</span></a>: new optimizers can register themselves
 as Aqua extensions and be dynamically discovered at run time independent of their
 location in the file system.
@@ -1678,8 +1693,8 @@ developers interested in
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><cite>Section :ref:`aqua-extending</cite> provides more
-details on how to extend Aqua with new components.</p>
+<p class="last">Section <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> provides more details
+on how to extend Aqua with new components.</p>
 </div>
 <div class="section" id="local-optimizers">
 <span id="id2"></span><h2>Local Optimizers<a class="headerlink" href="#local-optimizers" title="Permalink to this headline">¶</a></h2>
@@ -1764,32 +1779,28 @@ On the Convergence of Adam and Beyond. International Conference on Learning Repr
 </div>
 <p>This parameters takes a positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value.  The default is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p>
 </li>
-<li><p class="first">The tolerance for termination.
-.. code:: python</p>
-<blockquote>
-<div><p>tol : float</p>
-</div></blockquote>
+<li><p class="first">The tolerance for termination.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-06</span></code>.</p>
 </li>
-<li><p class="first">The learning rate:
-.. code:: python</p>
-<blockquote>
-<div><p>lr : float</p>
-</div></blockquote>
+<li><p class="first">The learning rate:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-03</span></code>.</p>
 </li>
-<li><p class="first">First hyper-parameter used for the evaluation of the first moment estimate.
-.. code:: python</p>
-<blockquote>
-<div><p>beta_1 : float</p>
-</div></blockquote>
+<li><p class="first">First hyper-parameter used for the evaluation of the first moment estimate.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_1</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">0.9</span></code>.</p>
 </li>
-<li><p class="first">Second hyper-parameter used for the evaluation of the second moment estimate.
-.. code:: python</p>
-<blockquote>
-<div><p>beta_2 : float</p>
-</div></blockquote>
+<li><p class="first">Second hyper-parameter used for the evaluation of the second moment estimate.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_2</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">0.99</span></code>.</p>
 </li>
 <li><p class="first">Noise factor used for reasons of numerical stability.</p>
@@ -1815,7 +1826,7 @@ the parameters will not be stored.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snapshot_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="ow">or</span> <span class="kc">None</span>
 </pre></div>
 </div>
-<p>The default value is <cite>‘’</cite>.</p>
+<p>The default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </li>
 </ul>
 <div class="topic">
@@ -1842,18 +1853,16 @@ Evaluating analytic gradients on quantum hardware. Phys. Rev. A 99, 032331.</p>
 </div>
 <p>This parameters takes a positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value.  The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
 </li>
-<li><p class="first">The learning rate:
-.. code:: python</p>
-<blockquote>
-<div><p>eta : float</p>
-</div></blockquote>
+<li><p class="first">The learning rate:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eta</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">3.0</span></code>.</p>
 </li>
-<li><p class="first">The tolerance for termination.
-.. code:: python</p>
-<blockquote>
-<div><p>tol : float</p>
-</div></blockquote>
+<li><p class="first">The tolerance for termination.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-06</span></code>.</p>
 </li>
 <li><p class="first">A Boolean value indicating whether or not to display convergence messages.</p>
@@ -1906,7 +1915,7 @@ termination.</p>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">1e-05</span></code>.</p>
 </li>
 <li><p class="first">The tolerance for termination:</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 <p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code> value,
@@ -1950,7 +1959,7 @@ COBYLA supports the following parameters:</p>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
 </li>
 <li><p class="first">The tolerance for termination:</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 <p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.
@@ -1985,6 +1994,12 @@ L-BFGS-B extends L-BFGS to handle simple, per-variable bound constraints.</p>
 <p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
 </li>
 <li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">15000</span></code>.</p>
+</li>
+<li><p class="first">Accuracy factor:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">factr</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
 </pre></div>
 </div>
@@ -2055,7 +2070,7 @@ be considered acceptable for convergence.</p>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">0.0001</span></code>.</p>
 </li>
 <li><p class="first">The tolerance for termination:</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 <p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
@@ -2146,7 +2161,7 @@ considered acceptable for convergence.</p>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">0.0001</span></code>.</p>
 </li>
 <li><p class="first">The tolerance for termination:</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 <p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
@@ -2190,7 +2205,7 @@ stopping criterion.</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">float</span></code> value is expected.  The default value is <code class="docutils literal notranslate"><span class="pre">1e-06</span></code>.</p>
 </li>
 <li><p class="first">The tolerance for termination:</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 <p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
@@ -2309,55 +2324,48 @@ it is also called Newton Conjugate-Gradient. It differs from the
 allows each variable to be given upper and lower bounds.</p>
 <p>The following parameters are supported:</p>
 <ul>
-<li><p class="first">The maximum number of iterations:
-.. code:: python</p>
-<blockquote>
-<div><p>maxiter = 1 | 2 | …</p>
-</div></blockquote>
+<li><p class="first">The maximum number of iterations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
 <p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
 </li>
-<li><p class="first">A Boolean value indicating whether or not to print convergence messages:
-.. code:: python</p>
-<blockquote>
-<div><p>disp : bool</p>
-</div></blockquote>
+<li><p class="first">A Boolean value indicating whether or not to print convergence messages:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span> <span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </li>
-<li><p class="first">Relative precision for finite difference calculations:
-.. code:: python</p>
-<blockquote>
-<div><p>accuracy : float</p>
-</div></blockquote>
+<li><p class="first">Relative precision for finite difference calculations:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
 </li>
 <li><p class="first">A tolerance value indicating the precision goal for the value of the objective function
-<code class="docutils literal notranslate"><span class="pre">f</span></code> in the stopping criterion.
-.. code:: python</p>
-<blockquote>
-<div><p>ftol : float</p>
-</div></blockquote>
+<code class="docutils literal notranslate"><span class="pre">f</span></code> in the stopping criterion.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ftol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 </li>
 <li><p class="first">A tolerance value indicating precision goal for the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> in the stopping criterion,
-after applying <code class="docutils literal notranslate"><span class="pre">x</span></code> scaling factors.
-.. code:: python</p>
-<blockquote>
-<div><p>xtol : float</p>
-</div></blockquote>
+after applying <code class="docutils literal notranslate"><span class="pre">x</span></code> scaling factors.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 </li>
 <li><p class="first">A tolerance value indicating precision goal for the value of the projected gradient <code class="docutils literal notranslate"><span class="pre">g</span></code> in
 the stopping criterion,
-after applying <code class="docutils literal notranslate"><span class="pre">x</span></code> scaling factors.
-.. code:: python</p>
-<blockquote>
-<div><p>gtol : float</p>
-</div></blockquote>
+after applying <code class="docutils literal notranslate"><span class="pre">x</span></code> scaling factors.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gtol</span> <span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 </li>
-<li><p class="first">The tolerance for termination:
-.. code:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
+<li><p class="first">The tolerance for termination:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 <p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.

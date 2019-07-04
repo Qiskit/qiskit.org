@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit_chemistry.html">Qiskit Chemistry</a><ul class="current">
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="qiskit_chemistry.html">Qiskit Chemistry</a><ul class="current">
@@ -1687,28 +1701,26 @@ Qiskit Chemistry, we highly recommend getting started with the GUI.
 Finally, Qiskit Chemistry can also be accessed
 <a class="reference external" href="#programmable-interface">programmatically</a> by users interested
 in customizing the experiments beyond what the command line and GUI can offer.</p>
+<p>The GUI and command line tools are provided as an optional install and can be installed
+using pip as follows:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span><span class="o">-</span><span class="n">interfaces</span>
+</pre></div>
+</div>
+<p>Note: if you are cloning the qiskit-aqua-interfaces from repo master then to get the scripts
+created, and to have necessary dependencies installed, you can change directory to the
+qiskit-aqua-interfaces folder and do <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code></p>
 <div class="section" id="gui">
 <span id="qiskit-chemistry-gui"></span><h3>GUI<a class="headerlink" href="#gui" title="Permalink to this headline">¶</a></h3>
 <p>The GUI provides an easy means to create an input file from scratch, or to load
 an existing input file, and then run that input file to experiment with a
 chemistry problem on a quantum machine.
-An input file is created,
-edited and saved with validation of parameter values.</p>
-<p>During the
-Qiskit Chemistry <a class="reference internal" href="qiskit_chemistry_installation.html#qiskit-chemistry-code-installation"><span class="std std-ref">Code Installation</span></a> via the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> command,
+An input file is created, edited and saved with validation of parameter values.</p>
+<p>When installing the Qiskit Chemistry GUI via the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit-aqua-interfaces</span></code> command,
 a script is created that allows you to start the GUI from the command line,
 as follows:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit_chemistry_ui</span>
 </pre></div>
 </div>
-<p>If you cloned Qiskit Chemistry directly from the
-<a class="reference external" href="https://github.com/Qiskit/qiskit-chemistry">GitHub repository</a> instead of using <code class="docutils literal notranslate"><span class="pre">pip</span>
-<span class="pre">install</span></code>, then the script above will not be present and the launching command should be instead:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">qiskit_chemistry_ui</span>
-</pre></div>
-</div>
-<p>This command must be launched from the root folder of the <code class="docutils literal notranslate"><span class="pre">qiskit-chemistry</span></code> repository
-clone.</p>
 <p>When executing an Qiskit Chemistry problem using the GUI, the user can choose
 to specify a <a class="reference external" href="http://json.org">JavaScript Object Notation (JSON)</a>
 output file name by selecting the <strong>Generate Algorithm Input</strong>
@@ -1721,18 +1733,10 @@ JSON <a class="reference internal" href="#input-file-for-direct-algorithm-invoca
 </div>
 <div class="section" id="command-line">
 <span id="qiskit-chemistry-command-line"></span><h3>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h3>
-<p>The Qiskit Chemistry pip <a class="reference internal" href="qiskit_chemistry_installation.html#qiskit-chemistry-code-installation"><span class="std std-ref">Code Installation</span></a> process
-will automatically install the following command-line tool:</p>
+<p>When installing qiskit-aqua-interfaces this also provisions the following command-line tool:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit_chemistry_cmd</span>
 </pre></div>
 </div>
-<p>If you cloned Qiskit Chemistry from its remote
-<a class="reference external" href="https://github.com/Qiskit/qiskit-chemistry">GitHub repository</a>
-instead of using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>, then the command-line interface can be executed as follows:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">qiskit_chemistry_cmd</span>
-</pre></div>
-</div>
-<p>from the root folder of the <code class="docutils literal notranslate"><span class="pre">qiskit-chemistry</span></code> repository clone.</p>
 <p>Here is a summary of the command-line options:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">qiskit_chemistry_cmd</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">output</span> <span class="o">|</span> <span class="o">-</span><span class="n">jo</span> <span class="n">json</span> <span class="n">output</span><span class="p">]</span> <span class="nb">input</span>
 
@@ -1759,10 +1763,13 @@ will serialize the quantum-algorithm to a JSON <a class="reference internal" hre
 <div class="section" id="programmable-interface">
 <span id="qiskit-chemistry-programmable-interface"></span><h3>Programmable Interface<a class="headerlink" href="#programmable-interface" title="Permalink to this headline">¶</a></h3>
 <p>Qiskit Chemistry also offers Application Programming Interfaces (APIs)
-to execute experiments programmatically. Numerous
-examples on how to do so
+to execute experiments programmatically. ls/tree/master/chemistry&gt;`__.
+Numerous examples on how to program an experiment in Qiskit Chemistry
 can be found in the
-<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/tree/master/chemistry">chemistry folder of the Qiskit Tutorials GitHub repository</a>.</p>
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials">Qiskit Tutorials GitHub repository</a>. The <cite>qiskit</cite> folder there
+is the top level for selected tutorials while the <cite>community</cite> folder has
+the remainder. In these look for <cite>chemistry</cite> folder which contains all the
+chemistry specific tutorials.</p>
 <div class="section" id="programming-an-experiment-step-by-step">
 <h4>Programming an Experiment Step by Step<a class="headerlink" href="#programming-an-experiment-step-by-step" title="Permalink to this headline">¶</a></h4>
 <p>It is very well possible to program an experiment step by step by invoking
@@ -1771,7 +1778,7 @@ classical computation software with a given molecular configuration,
 extracts from that execution the molecular structural data necessary to form
 the input to one of the Aqua quantum algorithms, and finally invokes that algorithm
 to build, compile and execute a circuit modeling the experiment on top of a quantum
-machine.  An example of this is available in the <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/community/aqua/chemistry/PySCF_end2end.ipynb">PySCF_end2end tutorial</a>.</p>
+machine.  An example of this is available in the <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master /community/chemistry/PySCFChemistryDriver.ipynb">PySCF Driver tutorial</a>.</p>
 </div>
 <div class="section" id="declarative-programming-interface">
 <h4>Declarative Programming Interface<a class="headerlink" href="#declarative-programming-interface" title="Permalink to this headline">¶</a></h4>
@@ -1790,7 +1797,9 @@ configuration of the desired experiment, and by then selecting <strong>Export Di
 from the <strong>File</strong> menu.  Assuming that the programmer assigns the
 exported dictionary to variable <code class="docutils literal notranslate"><span class="pre">qiskit_chemistry_dict</span></code>, then the
 experiment can be executed with the following two lines of code:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span> <span class="o">=</span> <span class="n">QiskitChemistry</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.chemistry</span> <span class="k">import</span> <span class="n">QiskitChemistry</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="n">QiskitChemistry</span><span class="p">()</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qiskit_chemistry_dict</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1811,17 +1820,25 @@ energy of a hydrogen molecule computed via the
 algorithm and compare that result against the reference value computed via the
 <a class="reference internal" href="../algorithms.html#exact-eigensolver"><span class="std std-ref">Exact Eigensolver</span></a>
 classical algorithm.  A comparison with the <a class="reference internal" href="../initial_states.html#hartree-fock"><span class="std std-ref">Hartree-Fock</span></a> energy is also offered.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="mf">0.735</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.chemistry</span> <span class="k">import</span> <span class="n">QiskitChemistry</span>
+
+<span class="n">distance</span> <span class="o">=</span> <span class="mf">0.735</span>
 <span class="n">molecule</span> <span class="o">=</span> <span class="s1">&#39;H .0 .0 0; H .0 .0 </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
 
 <span class="c1"># Input dictionaries to configure Qiskit Chemistry using QPE and Exact Eigensolver</span>
 <span class="n">qiskit_chemistry_qpe_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;driver&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;PYSCF&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;driver&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;PYSCF&#39;</span>
+    <span class="p">},</span>
     <span class="s1">&#39;PYSCF&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;atom&#39;</span><span class="p">:</span> <span class="n">molecule</span><span class="p">,</span>
         <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;sto3g&#39;</span>
     <span class="p">},</span>
-    <span class="s1">&#39;operator&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;hamiltonian&#39;</span><span class="p">,</span> <span class="s1">&#39;transformation&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;qubit_mapping&#39;</span><span class="p">:</span> <span class="s1">&#39;parity&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;operator&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;hamiltonian&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;transformation&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;qubit_mapping&#39;</span><span class="p">:</span> <span class="s1">&#39;parity&#39;</span>
+    <span class="p">},</span>
     <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;QPE&#39;</span><span class="p">,</span>
         <span class="s1">&#39;num_ancillae&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
@@ -1838,9 +1855,18 @@ classical algorithm.  A comparison with the <a class="reference internal" href="
 <span class="p">}</span>
 
 <span class="n">qiskit_chemistry_ees_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;driver&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;PYSCF&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;PYSCF&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;atom&#39;</span><span class="p">:</span> <span class="n">molecule</span><span class="p">,</span> <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;sto3g&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;operator&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;hamiltonian&#39;</span><span class="p">,</span> <span class="s1">&#39;transformation&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;qubit_mapping&#39;</span><span class="p">:</span> <span class="s1">&#39;parity&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;driver&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;PYSCF&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;PYSCF&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;atom&#39;</span><span class="p">:</span> <span class="n">molecule</span><span class="p">,</span>
+         <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;sto3g&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;operator&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;hamiltonian&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;transformation&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;qubit_mapping&#39;</span><span class="p">:</span> <span class="s1">&#39;parity&#39;</span>
+    <span class="p">},</span>
     <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ExactEigensolver&#39;</span><span class="p">,</span>
     <span class="p">},</span>
@@ -1851,14 +1877,17 @@ classical algorithm.  A comparison with the <a class="reference internal" href="
 <span class="n">result_ees</span> <span class="o">=</span> <span class="n">QiskitChemistry</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qiskit_chemistry_ees_dict</span><span class="p">)</span>
 
 <span class="c1"># Extract the energy values</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ground-truth ground-state energy is       </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_ees</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ground-state energy as computed by QPE is </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_qpe</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Hartree-Fock ground-state energy is       </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_ees</span><span class="p">[</span><span class="s1">&#39;hf_energy&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ground-truth ground-state energy is       </span><span class="si">{}</span><span class="s1">.&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_ees</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ground-state energy as computed by QPE is </span><span class="si">{}</span><span class="s1">.&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_qpe</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Hartree-Fock ground-state energy is       </span><span class="si">{}</span><span class="s1">.&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_ees</span><span class="p">[</span><span class="s1">&#39;hf_energy&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>More complex examples include
-<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/chemistry/lih_dissoc.ipynb">plotting the dissociation curve</a>
-or <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/chemistry/lih_uccsd.ipynb">comparing results obtained via different algorithms</a>.</p>
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/community/chemistry/lih_dissoc.ipynb">plotting the dissociation curve</a>
+or <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/community/chemistry/lih_uccsd.ipynb">comparing results obtained via different algorithms</a></p>
 </div>
 <div class="section" id="result-dictionary">
 <h4>Result Dictionary<a class="headerlink" href="#result-dictionary" title="Permalink to this headline">¶</a></h4>
@@ -1892,8 +1921,14 @@ external <em>ab-initio</em> <a class="reference internal" href="qiskit_chemistry
 explicitly control the processing and the quantum algorithm, used for
 the computation, instead of using defaulted values when none are
 supplied.</p>
-<p>Several sample input files can be found in the <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/tree/master/chemistry/input_files">chemistry folder of
-the Qiskit Tutorials GitHub repository</a>.</p>
+<p>Several sample input files can be found in the <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/tree/master/community/chemistry/input_files">chemistry folder of
+the Qiskit Tutorials GitHub repository</a></p>
+<p>The Qiskit Chemistry input file is a logical extension of the Aqua <a class="reference internal" href="../execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a>
+and adds sections <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">driver</span></code> and <code class="docutils literal notranslate"><span class="pre">operator</span></code> to define the chemistry part of the
+problem where the other sections such as <code class="docutils literal notranslate"><span class="pre">problem</span></code>, <code class="docutils literal notranslate"><span class="pre">algorithm</span></code> and <code class="docutils literal notranslate"><span class="pre">backend</span></code> come from
+Aqua which is used to solve the problem after the chemistry computation has been translated
+into a form suitable for Aqua to solver. As such, for further detail on these other sections
+please refer to the Aqua <a class="reference internal" href="../execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a>.</p>
 <p>An input file comprises the following main sections, although not all
 are mandatory:</p>
 <div class="section" id="name">
@@ -1902,7 +1937,7 @@ are mandatory:</p>
 describe the problem solved by the input file. For example:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">name</span>
    <span class="n">H2</span> <span class="n">molecule</span> <span class="n">experiment</span>
-   <span class="n">Ground</span> <span class="n">state</span> <span class="n">energy</span> <span class="n">computed</span> <span class="n">via</span> <span class="n">Variational</span> <span class="n">Quantum</span> <span class="n">Eigensolver</span>
+   <span class="n">Ground</span> <span class="n">state</span> <span class="n">energy</span> <span class="n">computation</span> <span class="k">with</span> <span class="n">VQE</span>
 <span class="o">&amp;</span><span class="n">end</span>
 </pre></div>
 </div>
@@ -2007,19 +2042,8 @@ Hamiltonian in the second quantization framework into the
 particle-hole picture, which offers
 a better starting point for the expansion of the trial wave function
 from the Hartree Fock reference state.
-For trial wave functions in Aqua, such as <a class="reference internal" href="../variational_forms.html#uccsd"><span class="std std-ref">Unitary Coupled Cluster Singles and Doubles (UCCSD)</span></a>, the
-p/h Hamiltonian can improve the speed of convergence of the
-<a class="reference internal" href="../algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a> algorithm in the calculation of the electronic ground state properties.
 More information on the particle-hole formalism can be found in
 <a class="reference external" href="https://arxiv.org/abs/1805.04340">arXiv:1805.04340</a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For the reasons mentioned above, when the transformation type is set to be particle hole,
-then the configuration of the initial qubit state offsetting the computation of the final result
-should be set to be the <a class="reference internal" href="../initial_states.html#hartree-fock"><span class="std std-ref">Hartree-Fock</span></a> energy of the molecule.  This can be done by setting the  <code class="docutils literal notranslate"><span class="pre">name</span></code>
-parameter in the <code class="docutils literal notranslate"><span class="pre">initial_state</span></code> section to <code class="docutils literal notranslate"><span class="pre">Hartree-Fock</span></code>, as explained in the documentation
-on <a class="reference internal" href="../initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>.</p>
-</div>
 </li>
 <li><p class="first">The desired <a class="reference internal" href="qiskit_chemistry_translators.html#translators"><span class="std std-ref">Translators</span></a> from fermions to qubits:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qubit_mapping</span> <span class="o">=</span> <span class="n">jordan_wigner</span> <span class="o">|</span> <span class="n">parity</span> <span class="o">|</span> <span class="n">bravyi_kitaev</span>
@@ -2054,16 +2078,6 @@ of precision.</p>
 the parity mapping, the value assigned to <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code> is ignored.</p>
 </div>
 </li>
-<li><p class="first">The maximum number of workers used when forming the input to the Aqua quantum algorithm:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_workers</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="o">...</span>
-</pre></div>
-</div>
-<p>Processing of the hamiltonian from fermionic to qubit can take
-advantage of multiple CPU cores to run parallel processes to carry
-out the transformation. The number of such worker processes used will
-not exceed the actual number of CPU cores or this <code class="docutils literal notranslate"><span class="pre">max_workers</span></code> positive integer,
-whichever is the smaller.  The default value for <code class="docutils literal notranslate"><span class="pre">max_worker</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
-</li>
 <li><p class="first">A Boolean value indicating whether or not to freeze the core orbitals in the computation:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">freeze_core</span> <span class="p">:</span> <span class="nb">bool</span>
 </pre></div>
@@ -2081,8 +2095,8 @@ into the final computed result. This approximation may be combined with
 </pre></div>
 </div>
 <p>The orbitals from the electronic structure can be simplified for the
-subsequent computation through the use of this parameter, which allows the user to specify a set of orbitals
-to be removed from the computation as
+subsequent computation through the use of this parameter, which allows the user to
+specify a set of orbitals to be removed from the computation as
 a list of <code class="docutils literal notranslate"><span class="pre">int</span></code> values, the default
 being an empty list.  Each value in the list corresponds to an orbital
 to be removed from the subsequent computation.
@@ -2103,8 +2117,7 @@ molecular energy computation, except for the fact that the offset is added back 
 into the final computed result.
 This is the same procedure as that one that takes place
 when <code class="docutils literal notranslate"><span class="pre">freeze_core</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, except that with <code class="docutils literal notranslate"><span class="pre">orbital_reduction</span></code>
-you can specify exactly the
-orbitals you want to freeze.</li>
+you can specify exactly the orbitals you want to freeze.</li>
 <li>Any orbitals in the list that are <em>unoccupied orbitals</em> are
 simply eliminated entirely from the subsequent computation.  No offset is computed or
 added back into the final computed result for these orbitals.</li>
@@ -2130,8 +2143,7 @@ orbitals:</p>
 </pre></div>
 </div>
 <p>Alternatively, the above code could be specified via the following,
-equivalent way,
-which simplifies
+equivalent way, which simplifies
 expressing the higher orbitals using the fact that the numbering is relative to the
 highest orbital:</p>
 <div class="code python last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">operator</span>
@@ -2147,197 +2159,35 @@ highest orbital:</p>
 <div class="section" id="algorithm">
 <h3><code class="docutils literal notranslate"><span class="pre">algorithm</span></code><a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
 <p>This is an optional section that allows you to specify which
-algorithm will be used by the computation.
-<a class="reference internal" href="../algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a> are provided by
-<a class="reference internal" href="../library.html#aqua-library"><span class="std std-ref">Aqua: A Library of Quantum Algorithms</span></a>.
-To compute reference values, Aqua also allows the use of
-<a class="reference internal" href="../algorithms.html#classical-reference-algorithms"><span class="std std-ref">Classical Reference Algorithms</span></a>.
-In the <code class="docutils literal notranslate"><span class="pre">algorithm</span></code> section, algorithms are disambiguated using the
-declarative names
-by which Aqua recognizes them, based on the JSON schema
-each algorithm must provide according to the Aqua <code class="docutils literal notranslate"><span class="pre">QuantumAlgorithm</span></code> API,
-as explained in the documentation on both
-quantum and classical reference algorithms.
-The declarative name is specified as the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">algorithm</span></code> section.
-The default value for the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">VQE</span></code>, corresponding
-to the <a class="reference internal" href="../algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>
-algorithm.</p>
-<p>An algorithm typically comes with a set of configuration parameters.
-For each of them, a default value is provided according to the
-<code class="docutils literal notranslate"><span class="pre">QuantumAlgorithm</span></code> API of Aqua.</p>
-<p>Furthermore, according to each algorithm, additional sections
-may become relevant to optionally
-configure that algorithm’s components.  For example, variational algorithms,
-such as <a class="reference internal" href="../algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>,
-allow the user to choose and configure an optimizer and a variational form
-from the <a class="reference internal" href="../optimizers.html#optimizers"><span class="std std-ref">Optimizers</span></a> and <a class="reference internal" href="../variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a> libraries, respectively,
-whereas <a class="reference internal" href="../algorithms.html#qpe"><span class="std std-ref">Quantum Phase Estimation (QPE)</span></a>
-allows the user to configure which Inverse Quantum Fourier Transform (IQFT) from the
-<a class="reference internal" href="../iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a> library to use.</p>
-<p>The documentation of <a class="reference internal" href="../library.html#aqua-library"><span class="std std-ref">Aqua: A Library of Quantum Algorithms</span></a>
-explains how to configure <a class="reference internal" href="../algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a> and any of the pluggable entities they may use,
-such as <a class="reference internal" href="../optimizers.html#optimizers"><span class="std std-ref">Optimizers</span></a>, <a class="reference internal" href="../variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a>, <a class="reference internal" href="../oracles.html#oracles"><span class="std std-ref">Oracles</span></a>, <a class="reference internal" href="../iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>, and
-<a class="reference internal" href="../initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>.</p>
-<p>Here is an example in which the <a class="reference internal" href="../algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a> algorithm
-is selected along with the <a class="reference internal" href="../optimizers.html#l-bfgs-b"><span class="std std-ref">Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</span></a> optimizer and the
-<a class="reference internal" href="../variational_forms.html#ryrz"><span class="std std-ref">RyRz</span></a> variational form:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">algorithm</span>
-   <span class="n">name</span><span class="o">=</span><span class="n">VQE</span>
-   <span class="n">shots</span><span class="o">=</span><span class="mi">1</span>
-   <span class="n">operator_mode</span><span class="o">=</span><span class="n">matrix</span>
-<span class="o">&amp;</span><span class="n">end</span>
-
-<span class="o">&amp;</span><span class="n">optimizer</span>
-   <span class="n">name</span><span class="o">=</span><span class="n">L_BFGS_B</span>
-   <span class="n">factr</span><span class="o">=</span><span class="mi">10</span>
-<span class="o">&amp;</span><span class="n">end</span>
-
-<span class="o">&amp;</span><span class="n">variational_form</span>
-   <span class="n">name</span><span class="o">=</span><span class="n">RYRZ</span>
-   <span class="n">entangler_map</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
-<span class="o">&amp;</span><span class="n">end</span>
-</pre></div>
-</div>
+algorithm will be used by the computation. Optional by virtue that it defaults
+to the VQE algorithm if not specified.</p>
+<p>For chemistry we would most likely be computing a <code class="docutils literal notranslate"><span class="pre">problem`</span></code> for the  <code class="docutils literal notranslate"><span class="pre">energy</span></code>
+or <code class="docutils literal notranslate"><span class="pre">excited_states</span></code> and hence using one of the algorithms suitable for this such as
+VQE.</p>
+<p>For more information on configuring an Aqua algorithm see the <code class="docutils literal notranslate"><span class="pre">algorithm</span></code> part of
+the Aqua <a class="reference internal" href="../execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a> for more detail.</p>
 </div>
 <div class="section" id="backend">
 <h3><code class="docutils literal notranslate"><span class="pre">backend</span></code><a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h3>
-<p>Aqua allows for configuring the <em>backend</em>, which is the quantum machine
-on which a quantum experiment will be run.
-This configuration requires specifying
-the <a class="reference external" href="https://www.qiskit.org/terra">Qiskit Terra</a> quantum computational
-provider and backend to be used for computation, which is done by assigning a <code class="docutils literal notranslate"><span class="pre">str</span></code> value to
-the <code class="docutils literal notranslate"><span class="pre">&quot;provider&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> parameters of the <code class="docutils literal notranslate"><span class="pre">&quot;backend&quot;</span></code> section:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;provider&quot;</span> <span class="p">:</span> <span class="n">string</span>
-<span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="n">string</span>
-</pre></div>
-</div>
-<p>The value of the <code class="docutils literal notranslate"><span class="pre">&quot;provider&quot;</span></code> parameter indicates the full name of a class derived from
-<code class="docutils literal notranslate"><span class="pre">&quot;BaseProvider&quot;</span></code> or global variable pointing to a instance of this class.
-The value of the <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> parameter indicates either a real-hardware
-quantum computer or a quantum simulator accessed from the provider.
-Terra comes with two predefined providers: <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.BasicAer&quot;</span></code> and  <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.IBMQ&quot;</span></code>.
-By installing <code class="docutils literal notranslate"><span class="pre">&quot;qiskit-aer&quot;</span></code>, the <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.Aer&quot;</span></code> provider gets included too.
-Each provider has its own set of simulators and <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.IBMQ&quot;</span></code> gives access to real-hardware
-quantum computer or simulators in the cloud.
-For the <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.IBMQ&quot;</span></code> provider, you need to configure it with a token and possibly url proxies.
-The Chemistry GUI greatly simplifies it via a user friendly interface,
-accessible through the <strong>Preferences…</strong> menu item.
-Otherwise you need to configure programmatically using Qiskit Terra &lt;<a class="reference external" href="https://www.qiskit.org/terra">https://www.qiskit.org/terra</a>&gt;`
-apis.</p>
-<div class="topic">
-<p class="topic-title first">Backend Configuration — Quantum vs. Classical Algorithms:</p>
-<p>Although Aqua is mostly a library of <a class="reference internal" href="../algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a>,
-it also includes a number of <a class="reference internal" href="../algorithms.html#classical-reference-algorithms"><span class="std std-ref">Classical Reference Algorithms</span></a>,
-which can be selected to generate reference values
-and compare and contrast results in quantum research experimentation.
-Since a classical algorithm runs on a classical computer,
-no backend should be configured when a classical algorithm
-is selected in the <code class="docutils literal notranslate"><span class="pre">algorithm</span></code> section.
-Accordingly, the Qiskit Chemistry <a class="reference internal" href="#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a> will automatically
-disable the <code class="docutils literal notranslate"><span class="pre">backend</span></code> configuration section
-whenever a non-quantum algorithm is selected.</p>
-</div>
-<p>Configuring the backend to use by an algorithm in the <a class="reference internal" href="../algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a> library
-requires setting the following parameters too:</p>
-<ul>
-<li><p class="first">The number of repetitions of each circuit to be used for sampling:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shots</span> <span class="p">:</span> <span class="nb">int</span>
-</pre></div>
-</div>
-<p>This parameter applies, in particular to the local QASM simulator and any real quantum device.
-The default value is <code class="docutils literal notranslate"><span class="pre">1024</span></code>.</p>
-</li>
-<li><p class="first">A <code class="docutils literal notranslate"><span class="pre">bool</span></code> value indicating whether or not the circuit should undergo optimization:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">skip_transpiler</span> <span class="p">:</span> <span class="nb">bool</span>
-</pre></div>
-</div>
-<p>The default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.  If <code class="docutils literal notranslate"><span class="pre">skip_transpiler</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then
-Qiskit will not perform circuit translation. If Qiskit Chemistry has been configured
-to run an experiment with a quantum algorithm that uses only basis gates,
-then no translation of the circuit into basis gates is required.
-Only in such cases is it safe to skip circuit translation.
-Skipping the translation phase when only basis gates are used may improve overall performance,
-especially when many circuits are used repeatedly, as it is the case with the <a class="reference internal" href="../algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>
-algorithm.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Use caution when setting <code class="docutils literal notranslate"><span class="pre">skip_transpiler</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>
-as if the quantum algorithm does not restrict itself to the set of basis
-gates supported by the backend, then the circuit will fail to run.</p>
-</div>
-</li>
-<li><p class="first">An optional dictionary can be supplied to control the backend’s noise model (see
-the Terra documentation on <a class="reference external" href="https://github.com/Qiskit/Qiskit-sdk-py/tree/master/src/qasm-simulator-cpp#noise-parameters">noise parameters</a>
-for more details):</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">noise_params</span> <span class="p">:</span> <span class="n">dictionary</span>
-</pre></div>
-</div>
-<p>This is a Python dictionary consisting of key/value pairs.  Configuring it is optional;
-the default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p>The following is an example of such a dictionary that can be used:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">noise_params</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;U&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;p_depol&quot;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
-                       <span class="s2">&quot;p_pauli&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
-                       <span class="s2">&quot;gate_time&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                       <span class="s2">&quot;U_error&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-                                  <span class="p">]</span>
-                    <span class="p">}</span>
-              <span class="p">}</span>
-</pre></div>
-</div>
-</li>
-</ul>
+<p>When Aqua algorithms are run on a simulator or a real device then this can be selected
+and configured using the <code class="docutils literal notranslate"><span class="pre">backend</span></code>. For more information on configuring this see the
+<code class="docutils literal notranslate"><span class="pre">backend</span></code> part of the Aqua <a class="reference internal" href="../execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a> for more detail.</p>
 </div>
 <div class="section" id="problem">
 <h3><code class="docutils literal notranslate"><span class="pre">problem</span></code><a class="headerlink" href="#problem" title="Permalink to this headline">¶</a></h3>
-<p>In Aqua,
-a <em>problem</em> specifies the type of experiment being run.  Configuring the problem is essential
-because it determines which algorithms are suitable for the specific experiment.</p>
-<div class="section" id="problem-categories">
-<h4>Problem Categories<a class="headerlink" href="#problem-categories" title="Permalink to this headline">¶</a></h4>
-<p>Aqua comes with a set of predefined problems.
-This set is extensible: new problems can be added,
-just like new algorithms can be plugged in to solve existing problems in a different way,
-or to solve new problems.
-Currently, a problem can be configured by assigning a <code class="docutils literal notranslate"><span class="pre">str</span></code> value to the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter
-of the <code class="docutils literal notranslate"><span class="pre">problem</span></code> section of the input file:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="n">energy</span> <span class="o">|</span> <span class="n">excited_states</span> <span class="o">|</span> <span class="n">ising</span> <span class="o">|</span> <span class="n">dynamics</span> <span class="o">|</span> <span class="n">search</span> <span class="o">|</span> <span class="n">classification</span>
-</pre></div>
-</div>
-<p>As shown above, <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">excited_states</span></code>, <code class="docutils literal notranslate"><span class="pre">ising</span></code>, <code class="docutils literal notranslate"><span class="pre">dynamics</span></code>,
-<code class="docutils literal notranslate"><span class="pre">search</span></code>, and <code class="docutils literal notranslate"><span class="pre">classification</span></code> are currently
-the only values accepted for <code class="docutils literal notranslate"><span class="pre">name</span></code> in Aqua, corresponding to the computation of
-<em>energy</em>, <em>excited states</em>, <em>Ising models</em>, <em>dynamics of evolution</em>, <em>search</em> and
-<em>Support Vector Machine (SVM) classification</em>, respectively.
-New problems, disambiguated by their
-<code class="docutils literal notranslate"><span class="pre">name</span></code> parameter, can be programmatically
-added to Aqua via the
-<code class="docutils literal notranslate"><span class="pre">AlgorithmInput</span></code> Application Programming Interface (API), and
-both <a class="reference internal" href="../algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a> and <span class="xref std std-ref">classical reference algorithms</span> library
-should programmatically list the problems it is suitable for in its JSON schema, embedded into
-the class implementing the <code class="docutils literal notranslate"><span class="pre">QuantumAlgorithm</span></code> API.  Typical choices of problems
-in chemistry include energy and excited states.</p>
-</div>
-<div class="section" id="generating-repeatable-experiments">
-<h4>Generating Repeatable Experiments<a class="headerlink" href="#generating-repeatable-experiments" title="Permalink to this headline">¶</a></h4>
-<p>Aspects of the computation may include use of random numbers. For instance,
-<a class="reference internal" href="../algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>
-is coded to use a random initial point if the variational form chosen from the
-<a class="reference internal" href="../variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a> library
-does not supply any
-preference based on the initial state and if the
-user does not explicitly supply an initial point.
-In this case, each run of VQE, for what would otherwise be a constant problem,
-can produce a different result, causing non-determinism and the inability to replicate
-the same result across different runs with
-identical configurations. Even though the final value might be numerically indistinguishable,
-the number of evaluations that led to the computation of that value may differ across runs.
-To enable repeatable experiments, with the exact same outcome, a <em>random seed</em> can be set,
-thereby forcing the same pseudo-random numbers to
-be generated every time the experiment is run:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random_seed</span> <span class="p">:</span> <span class="nb">int</span>
-</pre></div>
-</div>
-<p>The default value for this parameter is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>In Aqua, a <em>problem</em> specifies the type of experiment being run. Configuring the problem is
+essential because it determines which algorithms are suitable for the specific experiment.</p>
+<p>For chemistry we would most likely be computing an <code class="docutils literal notranslate"><span class="pre">energy</span></code> or <code class="docutils literal notranslate"><span class="pre">excited_states</span></code> problem.</p>
+<p>For more information on configuring an Aqua problem see the <code class="docutils literal notranslate"><span class="pre">problem</span></code> part of
+the Aqua <a class="reference internal" href="../execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a> for more detail.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">One aspect of the <code class="docutils literal notranslate"><span class="pre">problem</span></code> configuration will be highlighted though here and that
+is the <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> which allows any randomized aspects in the computation to be seeded
+the same way for each experiment such that the result is repeatable. One example is when
+using VQE with a random initial point as a start, this can lead to different outcomes
+depending on how things converge from that point. Starting with the same random point, by
+virtue of specifying a <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> will lead to a repeatable outcome.</p>
 </div>
 <div class="section" id="reconciling-chemistry-and-quantum-configuration">
 <h4>Reconciling Chemistry and Quantum Configuration<a class="headerlink" href="#reconciling-chemistry-and-quantum-configuration" title="Permalink to this headline">¶</a></h4>

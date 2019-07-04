@@ -501,6 +501,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1289,6 +1296,13 @@
 <li class="toctree-l4"><a class="reference internal" href="reciprocals.html#long-division">Long Division</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="neural_networks.html">Neural Networks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#classical-discriminator">Classical Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#numpy-discriminator">Numpy Discriminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1674,7 +1688,7 @@ and accurate computations.</li>
 Specifically, this section describes how Aqua can be accessed as a
 tool for experimenting with the execution of quantum algorithms.</p>
 <p>To see how you can extend Aqua with new components,
-please refer to <cite>Section “:ref:`aqua-extending</cite>”.</p>
+please refer to Section <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a>.</p>
 <div class="section" id="execution-modes">
 <h2>Execution Modes<a class="headerlink" href="#execution-modes" title="Permalink to this headline">¶</a></h2>
 <p>Aqua has both a <a class="reference external" href="#aqua-gui">Graphical User Interface (GUI)</a> and a <a class="reference external" href="#aqua-command-line">command
@@ -1693,6 +1707,14 @@ Finally, users configuring an Aqua experiment and researchers
 intersted in extending Aqua with new components can access
 the <a class="reference internal" href="#aqua-doc-ui"><span class="std std-ref">Documentation UI</span></a> for quickly inspecting the various components
 and their configuration parameters.</p>
+<p>The GUI and command line tools are provided as an optional install and can be installed
+using pip as follows:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span><span class="o">-</span><span class="n">interfaces</span>
+</pre></div>
+</div>
+<p>Note: if you are cloning the qiskit-aqua-interfaces from repo master then to get the scripts
+created, and to have necessary dependencies installed, you can change directory to the
+qiskit-aqua-interfaces folder and do <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code></p>
 <div class="section" id="gui">
 <span id="aqua-gui"></span><h3>GUI<a class="headerlink" href="#gui" title="Permalink to this headline">¶</a></h3>
 <p>The GUI provides an easy means to create from scratch, or load
@@ -1700,20 +1722,12 @@ an existing, <a class="reference external" href="#aqua-input-file">input file</a
 quantum algorithm.
 An input file for Aqua is assumed to be in JSON format.  Such a file is created,
 edited and saved with schema-based validation of parameter values.</p>
-<p>When installing
-Aqua via the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> command,
+<p>When installing the Aqua GUI via the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit-aqua-interfaces</span></code> command,
 a script is created that allows you to start the GUI from the command line,
 as follows:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit_aqua_ui</span>
 </pre></div>
 </div>
-<p>If you cloned Aqua directly from the
-<a class="reference external" href="https://github.com/Qiskit/aqua">GitHub repository</a> instead of using <code class="docutils literal notranslate"><span class="pre">pip</span>
-<span class="pre">install</span></code>, then the script above will not be present and the launching command should be instead:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">qiskit_aqua_ui</span><span class="o">/</span><span class="n">run</span>
-</pre></div>
-</div>
-<p>This command must be launched from the root folder of the <code class="docutils literal notranslate"><span class="pre">qiskit-aqua</span></code> repository clone.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Consult the documentation on the <a class="reference internal" href="installation.html#aqua-installation"><span class="std std-ref">Aqua Installation and Setup</span></a> for more details.</p>
@@ -1721,18 +1735,10 @@ as follows:</p>
 </div>
 <div class="section" id="command-line">
 <span id="aqua-command-line"></span><h3>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h3>
-<p>If installed via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>,
-Aqua comes with the following command-line tool:</p>
+<p>When installing qiskit-aqua-interfaces this also provisions the following command-line tool:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit_aqua_cmd</span>
 </pre></div>
 </div>
-<p>If you cloned Aqua from its remote
-<a class="reference external" href="https://github.com/QISKit/aqua">GitHub repository</a>
-instead of using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>, then the command-line interface can be executed as follows:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">qiskit_aqua_cmd</span>
-</pre></div>
-</div>
-<p>from the root folder of the <code class="docutils literal notranslate"><span class="pre">qiskit-aqua</span></code> repository clone.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Consult the documentation on the <a class="reference internal" href="installation.html#aqua-installation"><span class="std std-ref">Aqua Installation and Setup</span></a> for more details.</p>
@@ -1745,51 +1751,47 @@ is expected as a command-line parameter.</p>
 <span id="aqua-programmable-interface"></span><h3>Programmable Interface<a class="headerlink" href="#programmable-interface" title="Permalink to this headline">¶</a></h3>
 <p>Experiments can be run programmatically too. Numerous
 examples on how to program an experiment in Aqua
-can be found in the <code class="docutils literal notranslate"><span class="pre">aqua</span></code> folder of the
-<a class="reference external" href="https://github.com/QISKit/aqua-tutorials">Aqua Tutorials GitHub repository</a>.</p>
-<p>It should be noted at this point that Aqua is
-designed to be as much declarative as possible.  This is done in order
-to simplify the programmatic access to Aqua,
+can be found in the
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials">Qiskit Tutorials GitHub repository</a>. The <cite>qiskit</cite> folder there
+is the top level for selected tutorials while the <cite>community</cite> folder has
+the remainder. In these look for <cite>aqua</cite> folder as well as the other Aqua domain
+specific folders such as <cite>artificial_intelligence</cite>, <cite>finance</cite>, <cite>optimization</cite> and
+<cite>chemistry</cite>.</p>
+<p>It should be noted at this point that Aqua is designed to be expose as much of its
+function for use in this declarative manner as possible.
+This is done in order to simplify access to Aqua,
 minimize the chances for configuration errors, and help users
 who might not interested in writing a lot of code or
 learning new Application Programming Interfaces (APIs).</p>
-<p>There is
-nothing preventing a user from accessing the Aqua APIs and
-programming an experiment step by step, but a  more direct way to access Aqua programmatically
+<p>There is nothing preventing a user from accessing the Aqua APIs and
+programming an experiment step by step. There are tutorials showing this
+as well as a the declarative approach.</p>
+<p>Another way to work with Aqua
 is by obtaining a JSON algorithm input file, such as one of those
-available in the <code class="docutils literal notranslate"><span class="pre">aqua/input_files</span></code> subfolder of the
-<a class="reference external" href="https://github.com/QISKit/aqua-tutorials">Aqua Tutorials GitHub repository</a>.
+available in the <code class="docutils literal notranslate"><span class="pre">community/aqua/input_files</span></code> subfolder of the
+<a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials">Qiskit Tutorials GitHub repository</a>.
 Such files can be constructed manually, but a much more intuitive way to automatically
 construct one of these input files is
 via Aqua domain-specific applications.  For example,
-the <span class="xref std std-ref">aqua-chemistry-command-line</span>
-and <span class="xref std std-ref">aqua-chemistry-gui</span>
+the <a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-command-line"><span class="std std-ref">Command Line</span></a>
+and <a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>
 have options to serialize the input to the quantum algorithm for future reuse.
 The JSON file can then be pasted into a Python program and modified according to the
-needs of the developer, before invoking the <code class="docutils literal notranslate"><span class="pre">run_algorithm</span></code> API in <code class="docutils literal notranslate"><span class="pre">qiskit_aqua</span></code>.
+needs of the developer, before invoking the <code class="docutils literal notranslate"><span class="pre">run_algorithm</span></code> API in <code class="docutils literal notranslate"><span class="pre">qiskit.aqua</span></code>.
 This technique can be used, for example, to compare the results of two different algorithms.</p>
 </div>
 <div class="section" id="documentation-ui">
 <span id="aqua-doc-ui"></span><h3>Documentation UI<a class="headerlink" href="#documentation-ui" title="Permalink to this headline">¶</a></h3>
-<p>Aqua is a modular and extensible software framework, supporting two types of endusers:
+<p>Aqua is a modular and extensible software framework, supporting two types of end users:
 those who want to simply use Aqua as a tool to execute experiments, and those interested in
 extending Aqua with new components.  Users in either of these categories may find it useful
 to access the Aqua documentation UI, which shows all the pluggable components along with
 the schemas for their parameters.</p>
-<p>If installed via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>,
-Aqua comes with the following command-line tool
-to launch the Aqua documentation UI:</p>
+<p>If the qiskit-aqua-interfaces package has been installed then the following script would
+have been created to launch the Aqua documentation UI:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qiskit_aqua_browser</span>
 </pre></div>
 </div>
-<p>If you cloned Aqua from its remote
-<a class="reference external" href="https://github.com/QISKit/aqua">GitHub repository</a>
-instead of using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>, then the
-Aqua documentation UI can be launched as follows:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">qiskit_aqua_ui</span><span class="o">/</span><span class="n">browser</span>
-</pre></div>
-</div>
-<p>from the root folder of the <code class="docutils literal notranslate"><span class="pre">qiskit-aqua</span></code> repository clone.</p>
 </div>
 </div>
 <div class="section" id="input-file">
@@ -1809,9 +1811,9 @@ configuration-input correctness validation.  While it is certainly possible to
 generate a JSON input file manually, Aqua allows for a simple way
 for automatically generating such a JSON input file from the execution
 of a domain-specific application.</p>
-<p>For example, the Aqua Chemistry <cite>command-line tool
-:ref:`aqua-chemistry-command-line</cite>
-and <span class="xref std std-ref">aqua-chemistry-gui</span>
+<p>For example, the Aqua Chemistry
+<a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-command-line"><span class="std std-ref">Command Line</span></a> tool
+and <a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>
 both allow for automatically serializing the input to the quantum algorithm
 as a JSON <a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#input-file-for-direct-algorithm-invocation"><span class="std std-ref">Input File for Direct Algorithm Invocation</span></a>.
 Serializing the input to the quantum algorithm is useful in many scenarios
@@ -1835,8 +1837,8 @@ data extraction from the driver, and the translation of that data into input to 
 quantum algorithm.</li>
 </ul>
 <p>A number of sample JSON input files for Aqua are available in the
-<code class="docutils literal notranslate"><span class="pre">aqua/input_files</span></code>
-subfolder of the <a class="reference external" href="https://github.com/QISKit/aqua-tutorials">Aqua Tutorials GitHub repository</a>.</p>
+<code class="docutils literal notranslate"><span class="pre">community/aqua/input_files</span></code>
+subfolder of the <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials">Qiskit Tutorials GitHub repository</a>.</p>
 <p>An input file comprises the following main sections, although not all
 mandatory:</p>
 <div class="section" id="problem">
@@ -1849,15 +1851,25 @@ This set is extensible: new problems can be added,
 just like new algorithms can be plugged in to solve existing problems in a different way,
 or to solve new problems.</p>
 <p>Currently, a problem can be configured by assigning a <code class="docutils literal notranslate"><span class="pre">str</span></code> value to the <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> parameter:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;name&quot;</span> <span class="o">=</span> <span class="s2">&quot;energy&quot;</span> <span class="o">|</span> <span class="s2">&quot;excited_states&quot;</span> <span class="o">|</span> <span class="s2">&quot;ising&quot;</span> <span class="o">|</span> <span class="s2">&quot;dynamics&quot;</span> <span class="o">|</span> <span class="s2">&quot;search&quot;</span> <span class="o">|</span> <span class="s2">&quot;classification&quot;</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;name&quot;</span> <span class="o">=</span>   <span class="s2">&quot;energy&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;excited_states&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;ising&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;eoh&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;search&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;classification&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;distribution_learning_loading&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;linear_system&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;uncertainty&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;hiddenstringfinding&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;functionevaluation&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;factoring&quot;</span>
+         <span class="o">|</span> <span class="s2">&quot;periodfinding&quot;</span>
 </pre></div>
 </div>
-<p>As shown above, <code class="docutils literal notranslate"><span class="pre">&quot;energy&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;excited_states&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ising&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;dynamics&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;search&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;classification&quot;</span></code> are currently
-the only values accepted for <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code>, corresponding to the computation of
-<em>energy</em>, <em>excited states</em>, <em>Ising models</em>, <em>dynamics of evolution</em>, <em>search</em> and
-<em>Support Vector Machine (SVM) classification</em>, respectively.
-New problems, disambiguated by their
+<p>Some problems such as “energy” can be solved by more than one algorithm, while others
+may only pertain currently to a single algorithm. In the GUI the selection of a problem
+will then restrict the algorithm choice to those that can solve the selected problem.</p>
+<p>New problems, disambiguated by their
 <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> parameter, can be programmatically
 added to Aqua via the
 <code class="docutils literal notranslate"><span class="pre">AlgorithmInput</span></code> Application Programming Interface (API), and each quantum or classical
@@ -1885,23 +1897,23 @@ be generated every time the experiment is run:</p>
 </div>
 <div class="section" id="input">
 <h3><code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code><a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h3>
-<p>This section allows the user to specify the input to the Aqua algorithm.
-Such input is expected to be a qubit operator, expressed as the value of the
-<code class="docutils literal notranslate"><span class="pre">&quot;qubit_op&quot;</span></code> parameter, for problems of type energy, excited states, Ising models and
-dynamics of evolution.  For problems of type SVM classification, the input consists
+<p>This section allows the user to specify the input data to the Aqua algorithm.</p>
+<p>Such input is expected to be a qubit operator, expressed as the value of the
+<code class="docutils literal notranslate"><span class="pre">&quot;qubit_op&quot;</span></code> parameter, for problems of type <cite>energy</cite>, <cite>excited states</cite>, <cite>ising</cite> models
+and <cite>eoh</cite> (evolution of Hamiltonian)</p>
+<p>For problems of type <cite>classification</cite>, the input consists
 of a <em>training dataset</em> (a map linking each label to a list of data points),
 a <em>test dataset</em> (also a map linking each label to a list of data points), and
 the list of data points on which to apply classification.
 These are specified as the values of the parameters
-<code class="docutils literal notranslate"><span class="pre">&quot;training_datasets&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;test_datasets&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;datapoints&quot;</span></code>, respectively.
-The <code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code> section is disabled for problems of type search; for such problems,
-the input specification depends on the particular
-oracle chosen for the <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a> algorithm.
-Currently, Aqua provides an implementation of the satisfiability (SAT) oracle,
-which takes as input a SAT problem in
-<a class="reference external" href="http://www.satcompetition.org/2009/format-benchmarks2009.html">DIMACS CNF format</a>
-expressed as the value of the <code class="docutils literal notranslate"><span class="pre">&quot;cnf&quot;</span></code> parameter,
-and constructs the corresponding quantum circuit.</p>
+<code class="docutils literal notranslate"><span class="pre">&quot;training_datasets&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;test_datasets&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;datapoints&quot;</span></code>, respectively.</p>
+<p>The problem <cite>linear_system</cite> has <code class="docutils literal notranslate"><span class="pre">&quot;matrix&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;vector&quot;</span></code> to define its input.</p>
+<p>For <cite>distribution_learning_loading</cite> problem the input is <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;bounds&quot;</span></code>.</p>
+<p>For some problems the <code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code> section is not used, for example where the problem can be
+specified by a handful of parameters directly on the algorithm or a component thereof to define
+it. For instance on search, for the <a class="reference internal" href="algorithms.html#grover"><span class="std std-ref">Quantum Grover Search</span></a> algorithm, the problem would be configured
+into the oracle component required by grover and could be in the form of a logical expression
+dependent on the specific oracle type.</p>
 </div>
 <div class="section" id="algorithm">
 <h3><code class="docutils literal notranslate"><span class="pre">&quot;algorithm&quot;</span></code><a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
@@ -1980,9 +1992,10 @@ By installing <code class="docutils literal notranslate"><span class="pre">&quot
 Each provider has its own set of simulators and <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.IBMQ&quot;</span></code> gives access to real-hardware
 quantum computer or simulators in the cloud.
 For the <code class="docutils literal notranslate"><span class="pre">&quot;qiskit.IBMQ&quot;</span></code> provider, you need to configure it with a token and possibly url proxies.
-The Aqua <cite>GUI &lt;#aqua-gui&gt;</cite> greatly simplifies it via a user friendly interface,
+The Aqua <a class="reference external" href="#aqua-gui">GUI</a> greatly simplifies it via a user friendly interface,
 accessible through the <strong>Preferences…</strong> menu item.
-Otherwise you need to configure programmatically using Qiskit Terra &lt;<a class="reference external" href="https://www.qiskit.org/terra">https://www.qiskit.org/terra</a>&gt;` apis.</p>
+Otherwise you need to configure programmatically using
+<a class="reference external" href="https://www.qiskit.org/terra">Qiskit Terra</a> apis.</p>
 <div class="topic">
 <p class="topic-title first">Backend Configuration: Quantum vs. Classical Algorithms</p>
 <p>Although Aqua is mostly a library of
@@ -2030,7 +2043,8 @@ gates supported by the backend, then the circuit will fail to run.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;coupling_map&quot;</span> <span class="p">:</span> <span class="nb">list</span>
 </pre></div>
 </div>
-<p>This is a Python list consisting of the directed edges, each edge ([A, B]) points qubit A can connect to qubit B.  Configuring it is optional; the default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+<p>This is a Python list consisting of the directed edges, each edge ([A, B]) points qubit A can
+connect to qubit B.  Configuring it is optional; the default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.
 The following is an example of such a list that can be used:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;coupling_map&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 </pre></div>
@@ -2040,8 +2054,10 @@ The following is an example of such a list that can be used:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;basis_gates&quot;</span> <span class="p">:</span> <span class="n">string</span>
 </pre></div>
 </div>
-<p>This is a Python string consisting of basis gates, where are separated by comma.  Configuring it is optional; the default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-<code class="docutils literal notranslate"><span class="pre">None</span></code> denotes using the basis gates in the selected backend. The following is an example of such a dictionary that can be used:</p>
+<p>This is a Python string consisting of basis gates, where are separated by comma.
+Configuring it is optional; the default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> denotes using the basis gates in the selected backend. The following is an
+example of such a dictionary that can be used:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;basis_gates&quot;</span><span class="p">:</span> <span class="s2">&quot;u1,u2,u3,cx,id&quot;</span>
 </pre></div>
 </div>
