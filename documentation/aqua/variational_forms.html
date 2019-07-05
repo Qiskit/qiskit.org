@@ -507,7 +507,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1302,7 +1306,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1881,7 +1889,7 @@ bring any benefit; furthermore, theoretically, applying multiple Ry and Rz gates
 reduced to one Ry gate and one Rz gate with the summed rotation angles.</p>
 <p>The parameters of RyRz can be configured after selecting <code class="docutils literal notranslate"><span class="pre">RYRZ</span></code> as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
 field in the
-<code class="docutils literal notranslate"><span class="pre">variational_form</span></code> section of the Aqua <span class="xref std std-ref">input-file</span>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>,
+<code class="docutils literal notranslate"><span class="pre">variational_form</span></code> section of the Aqua <a class="reference internal" href="execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>,
 <code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>, and <code class="docutils literal notranslate"><span class="pre">skip_unentangled_qubits</span></code> — the same
 as those of <a class="reference internal" href="#ry"><span class="std std-ref">Ry</span></a>.</p>
 <div class="topic">
@@ -2062,19 +2070,19 @@ removal are reindexed and  partitioned according to the following:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>When the <code class="docutils literal notranslate"><span class="pre">auto_substitutions</span></code> flag in the <code class="docutils literal notranslate"><span class="pre">problem</span></code> section of the Aqua Chemistry
-<span class="xref std std-ref">aqua-chemistry-input-file</span>
+<p>When the <code class="docutils literal notranslate"><span class="pre">auto_substitutions</span></code> flag in the <code class="docutils literal notranslate"><span class="pre">problem</span></code> section of the Qiskit Chemistry
+<a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-input-file"><span class="std std-ref">Input File</span></a>
 is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, which is the default, the values of parameters
-<code class="docutils literal notranslate"><span class="pre">num_particles</span></code> and <code class="docutils literal notranslate"><span class="pre">num_orbitals</span></code> are automatically computed by Aqua Chemistry
+<code class="docutils literal notranslate"><span class="pre">num_particles</span></code> and <code class="docutils literal notranslate"><span class="pre">num_orbitals</span></code> are automatically computed by Qiskit Chemistry
 when <code class="docutils literal notranslate"><span class="pre">UCCSD</span></code> is selected as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">variational_forms</span></code>
 section. As such, their configuration is disabled; the user will not be required, or even
 allowed, to assign values to these two parameters.  This is also reflected in the
-<span class="xref std std-ref">aqua-chemistry-gui</span>, where these parameters will be grayed out and uneditable as long
+<a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>, where these parameters will be grayed out and uneditable as long
 as <code class="docutils literal notranslate"><span class="pre">auto_substitutions</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> in the <code class="docutils literal notranslate"><span class="pre">problem</span></code> section.
-Furthermore, Aqua Chemistry automatically sets
+Furthermore, Qiskit Chemistry automatically sets
 parameters <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code> in section <code class="docutils literal notranslate"><span class="pre">variational_form</span></code> when
 <code class="docutils literal notranslate"><span class="pre">UCCSD</span></code> is selected as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
-parameter.  Specifically, Aqua Chemistry sets <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code>
+parameter.  Specifically, Qiskit Chemistry sets <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code>
 to the values the user assigned to them in the <code class="docutils literal notranslate"><span class="pre">operator</span></code> section
 of the input file in order to enforce parameter/value matching across these different
 sections.  As a result, the user will only have to configure <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code>
@@ -2113,7 +2121,7 @@ the <a class="reference internal" href="chemistry/qiskit_chemistry_translators.h
 <p>The parameters of SwapRz can be configured after selecting <code class="docutils literal notranslate"><span class="pre">SWAPRZ</span></code> as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
 field in the
 <code class="docutils literal notranslate"><span class="pre">variational_form</span></code> section of the Aqua
-<span class="xref std std-ref">aqua-input file</span>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>. <code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>,
+<a class="reference internal" href="execution.html#aqua-input-file"><span class="std std-ref">Input File</span></a>.  These parameters are <code class="docutils literal notranslate"><span class="pre">depth</span></code>. <code class="docutils literal notranslate"><span class="pre">entanglement</span></code>, <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">skip_unentangled_qubits</span></code> — the same as those of <a class="reference internal" href="#ry"><span class="std std-ref">Ry</span></a>.</p>
 <p>Based on the notation introduced above for the entangler map associated with a variational form,
 for the case of none of qubits are unentangled to other qubits,

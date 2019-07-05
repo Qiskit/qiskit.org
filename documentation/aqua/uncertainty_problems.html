@@ -507,7 +507,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1302,7 +1306,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1678,7 +1686,7 @@ In quantum computing, <em>amplitude estimation</em> can be used instead, which c
 speed-up. Thus, millions of classical samples could be replaced by a few thousand quantum samples.</p>
 <p><em>Amplitude estimation</em> is a derivative of <em>quantum phase estimation</em> applied to a particular
 operator <span class="math notranslate nohighlight">\(A\)</span>. <span class="math notranslate nohighlight">\(A\)</span> is assumed to operate on (n+1) qubits (+ possible ancillas) where
-the n qubits represent the uncertainty (random distribution <span class="xref std std-ref">random_distribution</span>) and the
+the n qubits represent the uncertainty (random distribution <span class="xref std std-ref">random_distributions</span>) and the
 last qubit is used to represent the (normalized) objective value as its amplitude.
 In other words, <span class="math notranslate nohighlight">\(A\)</span> is constructed such that the probability of measuring a ‘1’ in the
 objective qubit is equal to the value of interest. An implementation of an uncertainty problem is
@@ -1703,17 +1711,22 @@ The standard implementation is just the identity and can be overridden when need
 <h2>European Call Option<a class="headerlink" href="#european-call-option" title="Permalink to this headline">¶</a></h2>
 <div class="topic">
 <p class="topic-title first">Expected Value</p>
-<p>Suppose a European call option with strike price <span class="math notranslate nohighlight">\(K\)</span> and an underlying asset whose spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span>
-follows a given random distribution.
+<p>Suppose a European call option with strike price <span class="math notranslate nohighlight">\(K\)</span> and an underlying asset whose spot
+price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> follows a given random distribution.
 The corresponding payoff function is defined as <span class="math notranslate nohighlight">\(\max \{ S - K, 0 \}\)</span>.</p>
-<p>The <em>European call option - expected value</em> uncertainty problem takes the following input parameters:</p>
+<p>The <em>European call option - expected value</em> uncertainty problem takes the
+following input parameters:</p>
 <ul class="simple">
-<li>univariate random distribution for spot price (<span class="xref std std-ref">random_distribution</span>)</li>
+<li>univariate random distribution for spot price (<span class="xref std std-ref">random_distributions</span>)</li>
 <li>strike price <span class="math notranslate nohighlight">\(K\)</span></li>
-<li>approximation scaling parameter <span class="math notranslate nohighlight">\(c_{approx}\)</span> which specifies how well the objective function is approximated (needs to be synced with the number of evaluation qubits in amplitude estimation). For more details on the approximation, see <a class="reference external" href="https://arxiv.org/abs/1806.06893">https://arxiv.org/abs/1806.06893</a>.</li>
+<li>approximation scaling parameter <span class="math notranslate nohighlight">\(c_{approx}\)</span> which specifies how well the
+objective function is approximated (needs to be synced with the number of evaluation
+qubits in amplitude estimation). For more details on the approximation,
+see <a class="reference external" href="https://arxiv.org/abs/1806.06893">https://arxiv.org/abs/1806.06893</a>.</li>
 </ul>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct circuit factory for random distribution</span>
-<span class="n">uncertainty_model</span> <span class="o">=</span> <span class="n">LogNormalDistribution</span><span class="p">(</span><span class="n">num_uncertainty_qubits</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">)</span>
+<span class="n">uncertainty_model</span> <span class="o">=</span> <span class="n">LogNormalDistribution</span><span class="p">(</span><span class="n">num_uncertainty_qubits</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span>
+                                          <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">)</span>
 
 <span class="c1"># set the strike price (should be within the low and the high value of the uncertainty)</span>
 <span class="n">strike_price</span> <span class="o">=</span> <span class="mi">2</span>
@@ -1732,11 +1745,12 @@ The corresponding payoff function is defined as <span class="math notranslate no
 </div>
 <div class="topic">
 <p class="topic-title first">Delta</p>
-<p>The $Delta$, of an option is defines as the derivative of the expected payfoff (respectively the price) with respect to the spot price.
+<p>The $Delta$, of an option is defines as the derivative of the expected payfoff
+(respectively the price) with respect to the spot price.
 For an European call option it can be defined as <span class="math notranslate nohighlight">\(\Delta = P\left[ S_T \geq K \right]\)</span>.</p>
 <p>The <em>European call option - Delta</em> uncertainty problem takes the following input parameters:</p>
 <ul class="simple">
-<li>univariate random distribution for spot price (<span class="xref std std-ref">random_distribution</span>)</li>
+<li>univariate random distribution for spot price (<span class="xref std std-ref">random_distributions</span>)</li>
 <li>the strike price <span class="math notranslate nohighlight">\(K\)</span></li>
 </ul>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">european_call_delta</span> <span class="o">=</span> <span class="n">EuropeanCallDelta</span><span class="p">(</span>
@@ -1752,27 +1766,35 @@ For an European call option it can be defined as <span class="math notranslate n
 <h2>Fixed-Income Asset Pricing<a class="headerlink" href="#fixed-income-asset-pricing" title="Permalink to this headline">¶</a></h2>
 <div class="topic">
 <p class="topic-title first">Expected Value</p>
-<p>Here, we seek to price a fixed-income asset knowing the distributions describing the relevant interest rates.
+<p>Here, we seek to price a fixed-income asset knowing the distributions describing the
+relevant interest rates.
 The cash flows <span class="math notranslate nohighlight">\(c_t\)</span> of the asset and the dates at which they occur are known.
 The total value <span class="math notranslate nohighlight">\(V\)</span> of the asset is thus the expectation value of:</p>
 <div class="math notranslate nohighlight">
 \[V = \sum_{t=1}^T \frac{c_t}{(1+r_t)^t}\]</div>
-<p>Each cash flow is treated as a zero coupon bond with a corresponding interest rate <span class="math notranslate nohighlight">\(r_t\)</span> that depends on its maturity.
-The user must specify the distribution modelling the uncertainty in each <span class="math notranslate nohighlight">\(r_t\)</span> (possibly correlated)
+<p>Each cash flow is treated as a zero coupon bond with a corresponding interest rate <span class="math notranslate nohighlight">\(r_t\)</span>
+that depends on its maturity. The user must specify the distribution modelling the uncertainty
+in each <span class="math notranslate nohighlight">\(r_t\)</span> (possibly correlated)
 as well as the number of qubits he wishes to use to sample each distribution.
-In this example we expand the value of the asset to first order in the interest rates <span class="math notranslate nohighlight">\(r_t\)</span>.
+In this example we expand the value of the asset to first order in the
+interest rates <span class="math notranslate nohighlight">\(r_t\)</span>.
 This corresponds to studying the asset in terms of its duration.</p>
 <p>The <em>Fixed-Income - Expected Value</em> uncertainty problem takes the following parameters:</p>
 <ul class="simple">
 <li>multivariate random distribution: <span class="math notranslate nohighlight">\(u\)</span></li>
-<li>affine map from the random distribution to interest rates (e.g. from a principal component analysis): <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(b\)</span></li>
+<li>affine map from the random distribution to interest rates (e.g. from a principal component
+analysis): <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(b\)</span></li>
 <li>cash flow: <span class="math notranslate nohighlight">\(c\)</span></li>
-<li>approximation scaling parameter <span class="math notranslate nohighlight">\(c_{approx}\)</span> which specifies how well the objective function is approximated (needs to be synced with the number of evaluation qubits in amplitude estimation). For more details on the approximation, see <a class="reference external" href="https://arxiv.org/abs/1806.06893">https://arxiv.org/abs/1806.06893</a>.</li>
+<li>approximation scaling parameter <span class="math notranslate nohighlight">\(c_{approx}\)</span> which specifies how well the objective
+function is approximated (needs to be synced with the number of evaluation qubits in
+amplitude estimation). For more details on the approximation,
+see <a class="reference external" href="https://arxiv.org/abs/1806.06893">https://arxiv.org/abs/1806.06893</a>.</li>
 </ul>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct corresponding distribution</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">MultivariateNormalDistribution</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 
-<span class="c1"># can be used in case a principal component analysis has been done to derive the random distribution,</span>
+<span class="c1"># can be used in case a principal component analysis</span>
+<span class="c1"># has been done to derive the random distribution,</span>
 <span class="c1"># ignored in this example</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
