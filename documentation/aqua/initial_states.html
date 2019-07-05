@@ -507,7 +507,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1302,7 +1306,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1720,7 +1728,7 @@ and a trial state to be evolved by the <a class="reference internal" href="algor
 For example, when the transformation type of a chemistry operator is set to be particle hole,
 then the configuration of the initial qubit state offsetting the computation of the final result
 should be set to be the Hartree-Fock energy of the molecule in the
-<span class="xref std std-ref">aqua-chemistry-input-file</span>. Hartree-Fock is also the preferred initial state when using the
+<a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-input-file"><span class="std std-ref">Input File</span></a>. Hartree-Fock is also the preferred initial state when using the
 <a class="reference internal" href="variational_forms.html#uccsd"><span class="std std-ref">Unitary Coupled Cluster Singles and Doubles (UCCSD)</span></a> and <a class="reference internal" href="variational_forms.html#swaprz"><span class="std std-ref">SwapRz</span></a> variational forms.</p>
 <p>The following parameters allow
 the Hartree-Fock initial state to be configured:</p>
@@ -1776,17 +1784,17 @@ the parity mapping, the value assigned to <code class="docutils literal notransl
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>When the <code class="docutils literal notranslate"><span class="pre">auto_substitutions</span></code> flag in the <code class="docutils literal notranslate"><span class="pre">problem</span></code> section of the
-<span class="xref std std-ref">aqua-chemistry-input-file</span>
+<a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-input-file"><span class="std std-ref">Input File</span></a>
 is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, which is the default, the values of parameters
-<code class="docutils literal notranslate"><span class="pre">num_particles</span></code> and <code class="docutils literal notranslate"><span class="pre">num_orbitals</span></code> are automatically computed by Aqua Chemistry
+<code class="docutils literal notranslate"><span class="pre">num_particles</span></code> and <code class="docutils literal notranslate"><span class="pre">num_orbitals</span></code> are automatically computed by Qiskit Chemistry
 when <code class="docutils literal notranslate"><span class="pre">Hartree-Fock</span></code> is selected as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter in the
 <code class="docutils literal notranslate"><span class="pre">InitialState</span></code> section. As such, their configuration is disabled; the user will not be
 required, or even allowed, to assign values to these two parameters. This is also reflected in
-the <span class="xref std std-ref">aqua-chemistry-gui</span>, where these parameters will be grayed out and uneditable as
+the <a class="reference internal" href="chemistry/qiskit_chemistry_execution.html#qiskit-chemistry-gui"><span class="std std-ref">GUI</span></a>, where these parameters will be grayed out and uneditable as
 long as <code class="docutils literal notranslate"><span class="pre">auto_substitutions</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> in the <code class="docutils literal notranslate"><span class="pre">problem</span></code> section. Furthermore,
-Aqua Chemistry automatically sets parameters <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code> in
+Qiskit Chemistry automatically sets parameters <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code> in
 section <code class="docutils literal notranslate"><span class="pre">initial_state</span></code> when <code class="docutils literal notranslate"><span class="pre">HartreeFock</span></code> is selected as the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code>
-parameter.  Specifically, Aqua Chemistry sets <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code>
+parameter.  Specifically, Qiskit Chemistry sets <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code> and <code class="docutils literal notranslate"><span class="pre">two_qubit_reduction</span></code>
 to the values the user assigned to them in the <code class="docutils literal notranslate"><span class="pre">operator</span></code> section
 of the input file in order to enforce parameter/value matching across these different
 sections.  As a result, the user will only have to configure <code class="docutils literal notranslate"><span class="pre">qubit_mapping</span></code>

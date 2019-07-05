@@ -507,7 +507,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1302,7 +1306,11 @@
 <li class="toctree-l4"><a class="reference internal" href="neural_networks.html#quantum-generator">Quantum Generator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_collection.html">Circuit Collection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#gates">Gates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="circuit_collection.html#circuits">Circuits</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
@@ -1671,9 +1679,9 @@
 use by quantum variational algorithms, such as <a class="reference internal" href="algorithms.html#vqe"><span class="std std-ref">Variational Quantum Eigensolver (VQE)</span></a>.
 Logically, these optimizers can be divided into two categories:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">Local Optimizers</span>: Given an optimization problem, a <em>local optimizer</em> is a function that
+<li><a class="reference internal" href="#local-optimizers"><span class="std std-ref">Local Optimizers</span></a>: Given an optimization problem, a <em>local optimizer</em> is a function that
 attempts to find an optimal value within the neighboring set of a candidate solution.</li>
-<li><span class="xref std std-ref">Global Optimizers</span>: Given an optimization problem, a <em>global optimizer</em> is a function that
+<li><a class="reference internal" href="#global-optimizers"><span class="std std-ref">Global Optimizers</span></a>: Given an optimization problem, a <em>global optimizer</em> is a function that
 attempts to find an optimal value among all possible solutions.</li>
 </ul>
 <div class="topic">
@@ -1702,27 +1710,25 @@ on how to extend Aqua with new components.</p>
 These optimizers are meant to be used in conjunction with quantum variational
 algorithms:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">ADAM</span></li>
-<li><span class="xref std std-ref">Analytic Quantum Gradient Descent (AQGD)</span></li>
-<li><span class="xref std std-ref">Conjugate Gradient (CG) Method</span></li>
-<li><span class="xref std std-ref">Constrained Optimization BY Linear Approximation (COBYLA)</span></li>
-<li><span class="xref std std-ref">Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</span></li>
+<li><a class="reference internal" href="#adam-amsgrad"><span class="std std-ref">ADAM</span></a></li>
+<li><a class="reference internal" href="#aqgd"><span class="std std-ref">Analytic Quantum Gradient Descent (AQGD)</span></a></li>
+<li><a class="reference internal" href="#cg"><span class="std std-ref">Conjugate Gradient (CG) Method</span></a></li>
+<li><a class="reference internal" href="#cobyla"><span class="std std-ref">Constrained Optimization BY Linear Approximation (COBYLA)</span></a></li>
+<li><a class="reference internal" href="#l-bfgs-b"><span class="std std-ref">Limited-memory Broyden-Fletcher-Goldfarb-Shanno Bound (L-BFGS-B)</span></a></li>
 <li><a class="reference internal" href="#nelder-mead"><span class="std std-ref">Nelder-Mead</span></a></li>
-<li><span class="xref std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span></li>
+<li><a class="reference internal" href="#p-bfgs"><span class="std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span></a></li>
 <li><a class="reference internal" href="#powell"><span class="std std-ref">Powell</span></a></li>
-<li><span class="xref std std-ref">Sequential Least SQuares Programming (SLSQP)</span></li>
-<li><span class="xref std std-ref">Simultaneous Perturbation Stochastic Approximation (SPSA)</span></li>
-<li><span class="xref std std-ref">Truncated Newton (TNC)</span></li>
+<li><a class="reference internal" href="#slsqp"><span class="std std-ref">Sequential Least SQuares Programming (SLSQP)</span></a></li>
+<li><a class="reference internal" href="#spsa"><span class="std std-ref">Simultaneous Perturbation Stochastic Approximation (SPSA)</span></a></li>
+<li><a class="reference internal" href="#tnc"><span class="std std-ref">Truncated Newton (TNC)</span></a></li>
 </ul>
-<p>Except for <span class="xref std std-ref">ADAM</span>, <span class="xref std std-ref">Analytic Quantum Gradient Descent (AQGD)</span> and
-<span class="xref std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span>, all these
+<p>Except for <a class="reference internal" href="#adam-amsgrad"><span class="std std-ref">ADAM</span></a>, <a class="reference internal" href="#aqgd"><span class="std std-ref">Analytic Quantum Gradient Descent (AQGD)</span></a> and <a class="reference internal" href="#p-bfgs"><span class="std std-ref">Parallel Broyden-Fletcher-Goldfarb-Shann (P-BFGS)</span></a>, all these
 optimizers are directly based on the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> optimization function in the
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html">SciPy</a>
 Python library. They all have a common pattern for parameters. Specifically, the <code class="docutils literal notranslate"><span class="pre">tol</span></code>
 parameter, whose value must be a <code class="docutils literal notranslate"><span class="pre">float</span></code> indicating <em>tolerance for termination</em>,
 is from the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>  method itself, while the remaining parameters are
-from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.show_options.html">options
-dictionary</a>,
+from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.show_options.html">options dictionary</a>,
 which may be referred to for further information.</p>
 <div class="topic">
 <p class="topic-title first">Transparent Parallelization of Gradient-based Local Opitmizers</p>
@@ -1881,8 +1887,8 @@ Evaluating analytic gradients on quantum hardware. Phys. Rev. A 99, 032331.</p>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to AQGD declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and
-loads it, is <code class="docutils literal notranslate"><span class="pre">AQGD</span></code>.</p>
+<p>When referring to AQGD declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">AQGD</span></code>.</p>
 </div>
 <hr class="docutils" />
 </div>
@@ -1930,8 +1936,8 @@ otherwise, it is set to <code class="docutils literal notranslate"><span class="
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to CG declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">CG</span></code>.</p>
+<p>When referring to CG declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">CG</span></code>.</p>
 </div>
 </div>
 <div class="section" id="constrained-optimization-by-linear-approximation-cobyla">
@@ -1962,14 +1968,14 @@ COBYLA supports the following parameters:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+otherwise, it is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to COBYLA declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">COBYLA</span></code>.</p>
+<p>When referring to COBYLA declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">COBYLA</span></code>.</p>
 </div>
 </div>
 <div class="section" id="limited-memory-broyden-fletcher-goldfarb-shanno-bound-l-bfgs-b">
@@ -2005,7 +2011,7 @@ L-BFGS-B extends L-BFGS to handle simple, per-variable bound constraints.</p>
 </div>
 <p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.  The default is <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p>
 </li>
-<li><p class="first">An <code class="docutils literal notranslate"><span class="pre">int</span></code> value controlling the frequency of the printed output showing the  optimizer’s
+<li><p class="first">An <code class="docutils literal notranslate"><span class="pre">int</span></code> value controlling the frequency of the printed output showing the optimizer’s
 operations:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">iprint</span> <span class="p">:</span> <span class="nb">int</span>
 </pre></div>
@@ -2026,8 +2032,8 @@ operations:</p>
 </div>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to L-BFGS-B declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">L_BFGS_B</span></code>.</p>
+<p>When referring to L-BFGS-B declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">L_BFGS_B</span></code>.</p>
 </div>
 </div>
 <div class="section" id="nelder-mead">
@@ -2073,8 +2079,8 @@ be considered acceptable for convergence.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adaptive</span> <span class="p">:</span> <span class="nb">bool</span>
 </pre></div>
 </div>
@@ -2085,8 +2091,8 @@ The default is <code class="docutils literal notranslate"><span class="pre">None
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to Nelder-Mead declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">NELDER_MEAD</span></code>.</p>
+<p>When referring to Nelder-Mead declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">NELDER_MEAD</span></code>.</p>
 </div>
 </div>
 <div class="section" id="parallel-broyden-fletcher-goldfarb-shann-p-bfgs">
@@ -2164,14 +2170,14 @@ considered acceptable for convergence.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>This parameter is optional.  If specified, the value of this parameter must be of type <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </li>
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to Powell declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">POWELL</span></code>.</p>
+<p>When referring to Powell declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">POWELL</span></code>.</p>
 </div>
 </div>
 <div class="section" id="sequential-least-squares-programming-slsqp">
@@ -2208,8 +2214,8 @@ stopping criterion.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </li>
 <li><p class="first">Step size used for numerical approximation of the Jacobian.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="p">:</span> <span class="nb">float</span>
@@ -2220,8 +2226,8 @@ The default is <code class="docutils literal notranslate"><span class="pre">None
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to SLSQP declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">SLSQP</span></code>.</p>
+<p>When referring to SLSQP declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">SLSQP</span></code>.</p>
 </div>
 </div>
 <div class="section" id="simultaneous-perturbation-stochastic-approximation-spsa">
@@ -2241,8 +2247,8 @@ measurements of the objective function, regardless of the dimension of the optim
 <p class="first admonition-title">Note</p>
 <p class="last">SPSA can be used in the presence of noise, and it is therefore indicated in situations
 involving measurement uncertainty on a quantum computation when finding a minimum. If you are
-executing a variational algorithm using a Quantum ASseMbly Language (QASM) simulator or a real device,
-SPSA would be the most recommended choice among the optimizers provided here.</p>
+executing a variational algorithm using a Quantum ASseMbly Language (QASM) simulator or a real
+device, SPSA would be the most recommended choice among the optimizers provided here.</p>
 </div>
 <p>The optimization process includes a calibration phase, which requires additional
 functional evaluations.  Overall, the following parameters are supported:</p>
@@ -2259,7 +2265,8 @@ There are two function evaluations per trial:</p>
 </pre></div>
 </div>
 <p>A positive <code class="docutils literal notranslate"><span class="pre">int</span></code> value is expected.
-SPSA will store optimization outcomes every <code class="docutils literal notranslate"><span class="pre">save_steps</span></code> trial steps.  The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+SPSA will store optimization outcomes every <code class="docutils literal notranslate"><span class="pre">save_steps</span></code> trial steps.
+The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 </li>
 <li><p class="first">The number of last updates of the variables to average on for the
 final objective function:</p>
@@ -2311,8 +2318,8 @@ is <code class="docutils literal notranslate"><span class="pre">True</span></cod
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to SPSA declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">SPSA</span></code>.</p>
+<p>When referring to SPSA declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">SPSA</span></code>.</p>
 </div>
 </div>
 <div class="section" id="truncated-newton-tnc">
@@ -2320,7 +2327,7 @@ is <code class="docutils literal notranslate"><span class="pre">SPSA</span></cod
 <p>TNC uses a truncated Newton algorithm to minimize a function with
 variables subject to bounds. This algorithm uses gradient information;
 it is also called Newton Conjugate-Gradient. It differs from the
-<span class="xref std std-ref">Conjugate Gradient (CG) Method</span> method as it wraps a C implementation and
+<a class="reference internal" href="#cg"><span class="std std-ref">Conjugate Gradient (CG) Method</span></a> method as it wraps a C implementation and
 allows each variable to be given upper and lower bounds.</p>
 <p>The following parameters are supported:</p>
 <ul>
@@ -2368,8 +2375,8 @@ after applying <code class="docutils literal notranslate"><span class="pre">x</s
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tol</span> <span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>This parameter is optional.  If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>, otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-The default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<p>This parameter is optional. If specified, the value of this parameter must be a <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+otherwise, it is  <code class="docutils literal notranslate"><span class="pre">None</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </li>
 <li><p class="first">Step size used for numerical approximation of the Jacobian.
 .. code:: python</p>
@@ -2381,15 +2388,15 @@ The default is <code class="docutils literal notranslate"><span class="pre">None
 </ul>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
-<p>When referring to TNC declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>, by which Aqua dynamically discovers and loads it,
-is <code class="docutils literal notranslate"><span class="pre">TNC</span></code>.</p>
+<p>When referring to TNC declaratively inside Aqua, its code <code class="docutils literal notranslate"><span class="pre">name</span></code>,
+by which Aqua dynamically discovers and loads it, is <code class="docutils literal notranslate"><span class="pre">TNC</span></code>.</p>
 </div>
 </div>
 </div>
 <div class="section" id="global-optimizers">
 <span id="id5"></span><h2>Global Optimizers<a class="headerlink" href="#global-optimizers" title="Permalink to this headline">¶</a></h2>
-<p>Aqua supports a number of classical global optimizers,
-all based on the open-source <a class="reference external" href="https://nlopt.readthedocs.io">NonLinear optimization (NLopt) library</a>.
+<p>Aqua supports a number of classical global optimizers, all based on the open-source
+<a class="reference external" href="https://nlopt.readthedocs.io">NonLinear optimization (NLopt) library</a>.
 Each of these optimizers uses the corresponding named optimizer from NLopt.
 This package has native code implementations and must be
 installed locally for these global optimizers to be accessible by Aqua.
@@ -2399,8 +2406,8 @@ in the <code class="docutils literal notranslate"><span class="pre">nlopt</span>
 <p class="topic-title first">Installation of NLopt</p>
 <p>The <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/#download-and-installation">NLopt download and installation instructions</a>
 describe how to install NLopt.</p>
-<p>If you running Aqua on Windows, then you might want to refer to the specific <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/NLopt_on_Windows/">instructions for
-NLopt on Windows</a>.</p>
+<p>If you running Aqua on Windows, then you might want to refer to the specific
+<a class="reference external" href="https://nlopt.readthedocs.io/en/latest/NLopt_on_Windows/">instructions for NLopt on Windows</a>.</p>
 <p>If you are running Aqua on a Unix-like system, first ensure that your environment is set
 to the Python executable for which the qiskit_aqua package is installed and running.
 Now, having downloaded and unpacked the NLopt archive file
@@ -2410,16 +2417,18 @@ Now, having downloaded and unpacked the NLopt archive file
 <span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>
 </pre></div>
 </div>
-<p>The above makes and installs the shared libraries and Python interface in <cite>/usr/local</cite>. To have these be used
-by Aqua, the following commands can be entered to augment the dynamic library load path and python path respectively,
-assuming that you choose to leave these entities where they were built and installed as per above commands and that you
+<p>The above makes and installs the shared libraries and Python interface in <cite>/usr/local</cite>.
+To have these be used by Aqua, the following commands can be entered to augment the dynamic
+library load path and python path respectively, assuming that you choose to leave these
+entities where they were built and installed as per above commands and that you
 are running Python 3.6:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span>export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64
 export PYTHONPATH=/usr/local/lib/python3.6/site-packages:${PYTHONPATH}
 </pre></div>
 </div>
-<p>The two <code class="docutils literal notranslate"><span class="pre">export</span></code> commands above can be pasted into the <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> file in the user’s home directory for
-automatic execution.  Now you can run Aqua and these optimizers should be available for you to use.</p>
+<p>The two <code class="docutils literal notranslate"><span class="pre">export</span></code> commands above can be pasted into the <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> file in the user’s
+home directory for automatic execution.  Now you can run Aqua and these optimizers should be
+available for you to use.</p>
 </div>
 <div class="topic">
 <p class="topic-title first">The <code class="docutils literal notranslate"><span class="pre">max_evals</span></code> Parameter</p>
@@ -2435,15 +2444,15 @@ object function evaluation.  The default value is <code class="docutils literal 
 </div>
 <p>Currently, Aqua supplies the following global optimizers from NLOpt:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">Controller Random Search (CRS) with Local Mutation</span></li>
-<li><span class="xref std std-ref">DIviding RECTangles algorithm - Locally based (DIRECT-L)</span></li>
-<li><span class="xref std std-ref">DIviding RECTangles algorithm - Locally based - RANDomized (DIRECT-L-RAND)</span></li>
-<li><span class="xref std std-ref">Evolutionary Strategy algorithm with CaucHy distribution (ESCH)</span></li>
-<li><span class="xref std std-ref">Improved Stochastic Ranking Evolution Strategy (ISRES)</span></li>
+<li><a class="reference internal" href="#crs"><span class="std std-ref">Controller Random Search (CRS) with Local Mutation</span></a></li>
+<li><a class="reference internal" href="#direct-l"><span class="std std-ref">DIviding RECTangles algorithm - Locally based (DIRECT-L)</span></a></li>
+<li><span class="xref std std-ref">direct-l-rand)</span></li>
+<li><a class="reference internal" href="#esch"><span class="std std-ref">Evolutionary Strategy algorithm with CaucHy distribution (ESCH)</span></a></li>
+<li><a class="reference internal" href="#isres"><span class="std std-ref">Improved Stochastic Ranking Evolution Strategy (ISRES)</span></a></li>
 </ul>
 <div class="section" id="controller-random-search-crs-with-local-mutation">
 <span id="crs"></span><h3>Controller Random Search (CRS) with Local Mutation<a class="headerlink" href="#controller-random-search-crs-with-local-mutation" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#controlled-random-search-crs-with-local-mutation">CRS with local mutation</a>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms /#controlled-random-search-crs-with-local-mutation">CRS with local mutation</a>
 is part of the family of the CRS optimizers.
 The CRS optimizers start with a random population of points, and randomly evolve these points by
 heuristic rules. In the case of CRS with local mutation, the evolution is a randomized version of
@@ -2458,8 +2467,8 @@ by which Aqua dynamically discovers and loads it, is <code class="docutils liter
 <span id="direct-l"></span><h3>DIviding RECTangles algorithm - Locally based (DIRECT-L)<a class="headerlink" href="#dividing-rectangles-algorithm-locally-based-direct-l" title="Permalink to this headline">¶</a></h3>
 <p>DIviding RECTangles (DIRECT) is a deterministic-search algorithms based on systematic division of
 the search domain into increasingly smaller hyperrectangles.
-The <a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#direct-and-direct-l">DIRECT-L</a> version
-is a variant of DIRECT that makes the algorithm more biased towards local search,
+The <a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#direct-and-direct-l">DIRECT-L</a>
+version is a variant of DIRECT that makes the algorithm more biased towards local search,
 so that it is more efficient for functions with few local minima.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
@@ -2469,8 +2478,8 @@ by which Aqua dynamically discovers and loads it, is <code class="docutils liter
 </div>
 <div class="section" id="dividing-rectangles-algorithm-locally-based-randomized-direct-l-rand">
 <span id="direct-l-rand"></span><h3>DIviding RECTangles algorithm - Locally based - RANDomized (DIRECT-L-RAND)<a class="headerlink" href="#dividing-rectangles-algorithm-locally-based-randomized-direct-l-rand" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#direct-and-direct-l">DIRECT-L-RAND</a> is a variant of
-<span class="xref std std-ref">DIviding RECTangles algorithm - Locally based (DIRECT-L)</span>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#direct-and-direct-l">DIRECT-L-RAND</a>
+is a variant of <a class="reference internal" href="#direct-l"><span class="std std-ref">DIviding RECTangles algorithm - Locally based (DIRECT-L)</span></a>
 that uses some randomization to help decide which dimension to halve next in the case of near-ties.</p>
 <div class="topic">
 <p class="topic-title first">Declarative Name</p>
@@ -2491,7 +2500,7 @@ by which Aqua dynamically discovers and loads it, is <code class="docutils liter
 </div>
 <div class="section" id="improved-stochastic-ranking-evolution-strategy-isres">
 <span id="isres"></span><h3>Improved Stochastic Ranking Evolution Strategy (ISRES)<a class="headerlink" href="#improved-stochastic-ranking-evolution-strategy-isres" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#isres-improved-stochastic-ranking-evolution-strategy">ISRES</a>
+<p><a class="reference external" href="http://nlopt.readthedocs.io/en/latest/NLopt_Algorithms /#isres-improved-stochastic-ranking-evolution-strategy">ISRES</a>
 is an algorithm for nonlinearly-constrained global optimization.
 It has heuristics to escape local optima, even though convergence to a global optima is not
 guaranteed. The evolution strategy is based on a combination of a mutation rule and differential
