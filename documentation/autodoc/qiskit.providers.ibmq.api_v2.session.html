@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="qiskit.providers.ibmq.circuits package" href="qiskit.providers.ibmq.circuits.html" />
-    <link rel="prev" title="qiskit.providers.ibmq.api_v2.ibmqclient module" href="qiskit.providers.ibmq.api_v2.ibmqclient.html" /> 
+    <link rel="prev" title="qiskit.providers.ibmq.api_v2.exceptions module" href="qiskit.providers.ibmq.api_v2.exceptions.html" /> 
   </head>
 <body>
   <header>
@@ -1707,7 +1707,7 @@
         
   <div class="section" id="module-qiskit.providers.ibmq.api_v2.session">
 <span id="qiskit-providers-ibmq-api-v2-session-module"></span><h1>qiskit.providers.ibmq.api_v2.session module<a class="headerlink" href="#module-qiskit.providers.ibmq.api_v2.session" title="Permalink to this headline">¶</a></h1>
-<p>Session customized for IBM Q access.</p>
+<p>Session customized for IBM Q Experience access.</p>
 <dl class="class">
 <dt id="qiskit.providers.ibmq.api_v2.session.RetrySession">
 <em class="property">class </em><code class="descname">RetrySession</code><span class="sig-paren">(</span><em>base_url</em>, <em>access_token=None</em>, <em>retries=5</em>, <em>backoff_factor=0.5</em>, <em>verify=True</em>, <em>proxies=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/session.html#RetrySession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.session.RetrySession" title="Permalink to this definition">¶</a></dt>
@@ -1724,8 +1724,32 @@ on urllib3 and handling of specific parameters based on
 
 <dl class="method">
 <dt id="qiskit.providers.ibmq.api_v2.session.RetrySession.request">
-<code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/session.html#RetrySession.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.session.RetrySession.request" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>url</em>, <em>bare=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/session.html#RetrySession.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.session.RetrySession.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a Request, prepending the base url.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method</strong> (<em>string</em>) – method for the new <cite>Request</cite> object.</li>
+<li><strong>url</strong> (<em>string</em>) – URL for the new <cite>Request</cite> object.</li>
+<li><strong>bare</strong> (<em>bool</em>) – if <cite>True</cite>, do not send IBM Q specific information
+(access token) in the request or modify the <cite>url</cite>.</li>
+<li><strong>kwargs</strong> (<em>dict</em>) – additional arguments for the request.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Request object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.providers.ibmq.api.utils.html#qiskit.providers.ibmq.api.utils.Request" title="qiskit.providers.ibmq.api.utils.Request">Request</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RequestsApiError</span></code> – if the request failed.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -1737,10 +1761,10 @@ on urllib3 and handling of specific parameters based on
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.providers.ibmq.api_v2.ibmqclient.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.providers.ibmq.api_v2.exceptions.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>qiskit.providers.ibmq.api_v2.ibmqclient module</div>
+            <div>qiskit.providers.ibmq.api_v2.exceptions module</div>
          </div>
      </a>
      <a id="button-next" href="qiskit.providers.ibmq.circuits.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">

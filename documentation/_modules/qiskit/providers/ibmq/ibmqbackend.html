@@ -180,14 +180,15 @@
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">ValidationError</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseBackend</span><span class="p">,</span> <span class="n">JobStatus</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.utils</span> <span class="k">import</span> <span class="n">update_qobj_config</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="p">(</span><span class="n">BackendStatus</span><span class="p">,</span> <span class="n">BackendProperties</span><span class="p">,</span>
                                      <span class="n">PulseDefaults</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">.api</span> <span class="k">import</span> <span class="n">ApiError</span>
-<span class="kn">from</span> <span class="nn">.api.apijobstatus</span> <span class="k">import</span> <span class="n">ApiJobStatus</span>
+<span class="kn">from</span> <span class="nn">.api_v2.clients</span> <span class="k">import</span> <span class="n">BaseClient</span>
+<span class="kn">from</span> <span class="nn">.apiconstants</span> <span class="k">import</span> <span class="n">ApiJobStatus</span><span class="p">,</span> <span class="n">ApiJobKind</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">IBMQBackendError</span><span class="p">,</span> <span class="n">IBMQBackendValueError</span>
-<span class="kn">from</span> <span class="nn">.ibmqjob</span> <span class="k">import</span> <span class="n">IBMQJob</span>
+<span class="kn">from</span> <span class="nn">.job</span> <span class="k">import</span> <span class="n">IBMQJob</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">update_qobj_config</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -213,8 +214,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">group</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">project</span>
 
+        <span class="c1"># Attributes used by caching functions.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span> <span class="o">=</span> <span class="kc">None</span>
+
 <div class="viewcode-block" id="IBMQBackend.run"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run qobj asynchronously.</span>
+        <span class="sd">&quot;&quot;&quot;Run a Qobj asynchronously.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            qobj (Qobj): description of job</span>
@@ -222,21 +227,33 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            IBMQJob: an instance derived from BaseJob</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">qobj</span><span class="o">=</span><span class="n">qobj</span><span class="p">)</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">BaseClient</span><span class="p">):</span>
+            <span class="c1"># Default to using object storage and websockets for new API.</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;use_object_storage&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                      <span class="s1">&#39;use_websockets&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+        <span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">qobj</span><span class="o">=</span><span class="n">qobj</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+
         <span class="k">return</span> <span class="n">job</span></div>
 
-<div class="viewcode-block" id="IBMQBackend.properties"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQBackend.properties"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the online backend properties.</span>
 
-<span class="sd">        The return is via QX API call.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            refresh (bool): if True, the return is via a QX API call.</span>
+<span class="sd">                Otherwise, a cached version is returned.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            BackendProperties: The properties of the backend.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">api_properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">backend_properties</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="c1"># pylint: disable=arguments-differ</span>
+        <span class="k">if</span> <span class="n">refresh</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">api_properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">backend_properties</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span> <span class="o">=</span> <span class="n">BackendProperties</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">api_properties</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">BackendProperties</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">api_properties</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span></div>
 
 <div class="viewcode-block" id="IBMQBackend.status"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the online backend status.</span>
@@ -256,19 +273,28 @@
             <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span>
                 <span class="s2">&quot;Couldn&#39;t get backend status: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="IBMQBackend.defaults"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.defaults">[docs]</a>    <span class="k">def</span> <span class="nf">defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQBackend.defaults"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.defaults">[docs]</a>    <span class="k">def</span> <span class="nf">defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the pulse defaults for the backend.</span>
 
+<span class="sd">        Args:</span>
+<span class="sd">            refresh (bool): if True, the return is via a QX API call.</span>
+<span class="sd">                Otherwise, a cached version is returned.</span>
+
 <span class="sd">        Returns:</span>
-<span class="sd">            PulseDefaults: the pulse defaults for the backend. IF the backend</span>
-<span class="sd">            does not support defaults, it returns ``None``.</span>
+<span class="sd">            PulseDefaults: the pulse defaults for the backend. If the backend</span>
+<span class="sd">                does not support defaults, it returns ``None``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">backend_defaults</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">backend_defaults</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">open_pulse</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        <span class="k">if</span> <span class="n">backend_defaults</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">PulseDefaults</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">backend_defaults</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">refresh</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">api_defaults</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">backend_defaults</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">api_defaults</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span> <span class="o">=</span> <span class="n">PulseDefaults</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">api_defaults</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">return</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span></div>
 
 <div class="viewcode-block" id="IBMQBackend.jobs"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.jobs">[docs]</a>    <span class="k">def</span> <span class="nf">jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">db_filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the jobs submitted to this backend.</span>
@@ -279,8 +305,12 @@
 <span class="sd">        in the returned list.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            limit (int): number of jobs to retrieve</span>
-<span class="sd">            skip (int): starting index of retrieval</span>
+<span class="sd">            limit (int): number of jobs to retrieve. Note that the limit</span>
+<span class="sd">                specified can be overridden by limits set by the API for</span>
+<span class="sd">                performance reasons, and might result in fewer jobs being</span>
+<span class="sd">                returned. In those cases, the `skip` parameter can be used</span>
+<span class="sd">                for pagination.</span>
+<span class="sd">            skip (int): starting index for the job retrieval.</span>
 <span class="sd">            status (None or qiskit.providers.JobStatus or str): only get jobs</span>
 <span class="sd">                with this status, where status is e.g. `JobStatus.RUNNING` or</span>
 <span class="sd">                `&#39;RUNNING&#39;`</span>
@@ -341,13 +371,23 @@
                                                   <span class="nb">filter</span><span class="o">=</span><span class="n">api_filter</span><span class="p">)</span>
         <span class="n">job_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">job_info</span> <span class="ow">in</span> <span class="n">job_info_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;q-object&#39;</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">job_kind</span> <span class="o">=</span> <span class="n">ApiJobKind</span><span class="p">(</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="c1"># Discard pre-qobj jobs.</span>
                 <span class="k">break</span>
 
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">BaseClient</span><span class="p">):</span>
+                <span class="c1"># Default to using websockets for new API.</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;use_websockets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">job_kind</span> <span class="o">==</span> <span class="n">ApiJobKind</span><span class="o">.</span><span class="n">QOBJECT_STORAGE</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;use_object_storage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
             <span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span>
                           <span class="n">creation_date</span><span class="o">=</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;creationDate&#39;</span><span class="p">),</span>
-                          <span class="n">api_status</span><span class="o">=</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">))</span>
+                          <span class="n">api_status</span><span class="o">=</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">),</span>
+                          <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">job_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">job_list</span></div>
@@ -373,17 +413,28 @@
                                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">job_info</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]))</span>
 
             <span class="c1"># Check for jobs from a different backend.</span>
-            <span class="k">if</span> <span class="n">job_info</span><span class="p">[</span><span class="s1">&#39;backend&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">():</span>
+            <span class="n">job_backend_name</span> <span class="o">=</span> <span class="n">job_info</span><span class="p">[</span><span class="s1">&#39;backend&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">job_backend_name</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">():</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Job &quot;</span><span class="si">{}</span><span class="s1">&quot; belongs to another backend than the one queried. &#39;</span>
                               <span class="s1">&#39;The query was made on backend &quot;</span><span class="si">{}</span><span class="s1">&quot;, &#39;</span>
                               <span class="s1">&#39;but the job actually belongs to backend &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span>
-                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">job_info</span><span class="p">[</span><span class="s1">&#39;backend&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">job_backend_name</span><span class="p">))</span>
                 <span class="k">raise</span> <span class="n">IBMQBackendError</span><span class="p">(</span><span class="s1">&#39;Failed to get job &quot;</span><span class="si">{}</span><span class="s1">&quot;: &#39;</span>
                                        <span class="s1">&#39;job does not belong to backend &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span>
-                                       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">job_info</span><span class="p">[</span><span class="s1">&#39;backend&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]))</span>
+                                       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
 
             <span class="c1"># Check for pre-qobj jobs.</span>
-            <span class="k">if</span> <span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;q-object&#39;</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">job_kind</span> <span class="o">=</span> <span class="n">ApiJobKind</span><span class="p">(</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">BaseClient</span><span class="p">):</span>
+                    <span class="c1"># Default to using websockets for new API.</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;use_websockets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">job_kind</span> <span class="o">==</span> <span class="n">ApiJobKind</span><span class="o">.</span><span class="n">QOBJECT_STORAGE</span><span class="p">:</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;use_object_storage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The result of job </span><span class="si">{}</span><span class="s1"> is in a no longer supported format. &#39;</span>
                               <span class="s1">&#39;Please send the job using Qiskit 0.8+.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">),</span>
                               <span class="ne">DeprecationWarning</span><span class="p">)</span>
@@ -395,14 +446,16 @@
 
         <span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span>
                       <span class="n">creation_date</span><span class="o">=</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;creationDate&#39;</span><span class="p">),</span>
-                      <span class="n">api_status</span><span class="o">=</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">))</span>
+                      <span class="n">api_status</span><span class="o">=</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">),</span>
+                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">job</span></div>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">credentials_info</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hub</span><span class="p">:</span>
-            <span class="n">credentials_info</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
-                                                   <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+            <span class="n">credentials_info</span> <span class="o">=</span> <span class="s2">&quot;hub=&#39;</span><span class="si">{}</span><span class="s2">&#39;, group=&#39;</span><span class="si">{}</span><span class="s2">&#39;, project=&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">{}</span><span class="s2">(&#39;</span><span class="si">{}</span><span class="s2">&#39;) from IBMQ(</span><span class="si">{}</span><span class="s2">)&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">credentials_info</span><span class="p">)</span></div>
 
@@ -410,7 +463,7 @@
 <div class="viewcode-block" id="IBMQSimulator"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQSimulator">[docs]</a><span class="k">class</span> <span class="nc">IBMQSimulator</span><span class="p">(</span><span class="n">IBMQBackend</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Backend class interfacing with an IBMQ simulator.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="IBMQSimulator.properties"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQSimulator.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQSimulator.properties"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQSimulator.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the online backend properties.</span>
 
 <span class="sd">        Returns:</span>

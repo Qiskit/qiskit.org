@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.providers.ibmq.api.websocket module &#8212; Qiskit 0.11.0 documentation</title>
+    <title>qiskit.providers.ibmq.job.utils module &#8212; Qiskit 0.11.0 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -51,8 +51,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.providers.ibmq.api_v2 package" href="qiskit.providers.ibmq.api_v2.html" />
-    <link rel="prev" title="qiskit.providers.ibmq.api.utils module" href="qiskit.providers.ibmq.api.utils.html" /> 
+    <link rel="next" title="qiskit.providers.ibmq.utils package" href="qiskit.providers.ibmq.utils.html" />
+    <link rel="prev" title="qiskit.providers.ibmq.job.ibmqjob module" href="qiskit.providers.ibmq.job.ibmqjob.html" /> 
   </head>
 <body>
   <header>
@@ -1705,146 +1705,63 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.providers.ibmq.api.websocket">
-<span id="qiskit-providers-ibmq-api-websocket-module"></span><h1>qiskit.providers.ibmq.api.websocket module<a class="headerlink" href="#module-qiskit.providers.ibmq.api.websocket" title="Permalink to this headline">¶</a></h1>
-<p>Utilities for IBM Q API connector.</p>
-<dl class="class">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketClient">
-<em class="property">class </em><code class="descname">WebsocketClient</code><span class="sig-paren">(</span><em>websocket_url</em>, <em>access_token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/websocket.html#WebsocketClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Client for websocket communication with the IBMQ API.</p>
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketClient.websocket_url">
-<code class="descname">websocket_url</code><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketClient.websocket_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>URL for websocket communication with IBM Q.</p>
+  <div class="section" id="module-qiskit.providers.ibmq.job.utils">
+<span id="qiskit-providers-ibmq-job-utils-module"></span><h1>qiskit.providers.ibmq.job.utils module<a class="headerlink" href="#module-qiskit.providers.ibmq.job.utils" title="Permalink to this headline">¶</a></h1>
+<p>Utilities for working with IBM Q Jobs.</p>
+<dl class="function">
+<dt id="qiskit.providers.ibmq.job.utils.build_error_report">
+<code class="descname">build_error_report</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/job/utils.html#build_error_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.job.utils.build_error_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build an user-friendly error report for a failed job.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results</strong> (<em>dict</em>) – result section of the job response.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the error report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketClient.access_token">
-<code class="descname">access_token</code><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketClient.access_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>access token for IBMQ.</p>
+<dl class="function">
+<dt id="qiskit.providers.ibmq.job.utils.current_utc_time">
+<code class="descname">current_utc_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/job/utils.html#current_utc_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.job.utils.current_utc_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current time in UTC format.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">current time in UTC format.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketClient.connect">
-<code class="descname">connect</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/websocket.html#WebsocketClient.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketClient.connect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Authenticate against the websocket server, returning the connection.</p>
+<dl class="function">
+<dt id="qiskit.providers.ibmq.job.utils.is_job_queued">
+<code class="descname">is_job_queued</code><span class="sig-paren">(</span><em>api_job_status_response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/job/utils.html#is_job_queued"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.job.utils.is_job_queued" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether a job has been queued or not.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">an open websocket connection.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>api_job_status_response</strong> (<em>dict</em>) – status response of the job.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Connect</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WebsocketError</span></code> – if the connection to the websocket server failed
-due to connection or authentication errors.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketClient.get_job_status">
-<code class="descname">get_job_status</code><span class="sig-paren">(</span><em>job_id</em>, <em>timeout=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/websocket.html#WebsocketClient.get_job_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketClient.get_job_status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the status of a job.</p>
-<p>Reads status messages from the API, which are issued at regular
-intervals (20 seconds). When a final state is reached, the server
-closes the socket.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>job_id</strong> (<em>str</em>) – id of the job.</li>
-<li><strong>timeout</strong> (<em>int</em>) – timeout, in seconds.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>the API response for the status of a job, as a dict that</dt>
-<dd><p class="first last">contains at least the keys <code class="docutils literal notranslate"><span class="pre">status</span></code> and <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
-</dd>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>a pair indicating if the job is queued and in which</dt>
+<dd>position.</dd>
 </dl>
-</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">dict</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">WebsocketError</span></code> – if the websocket connection ended unexpectedly.</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">WebsocketTimeoutError</span></code> – if the timeout has been reached.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Pair[boolean, int]</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketMessage">
-<em class="property">class </em><code class="descname">WebsocketMessage</code><span class="sig-paren">(</span><em>type_</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/websocket.html#WebsocketMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketMessage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Container for a message sent or received via websockets.</p>
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketMessage.type_">
-<code class="descname">type_</code><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketMessage.type_" title="Permalink to this definition">¶</a></dt>
-<dd><p>message type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketMessage.data">
-<code class="descname">data</code><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketMessage.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>message data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketMessage.as_json">
-<code class="descname">as_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/websocket.html#WebsocketMessage.as_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketMessage.as_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a json representation of the message.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="qiskit.providers.ibmq.api.websocket.WebsocketMessage.from_bytes">
-<em class="property">classmethod </em><code class="descname">from_bytes</code><span class="sig-paren">(</span><em>json_string</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/websocket.html#WebsocketMessage.from_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.websocket.WebsocketMessage.from_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instantiate a message from a bytes response.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -1854,16 +1771,16 @@ closes the socket.</p>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.providers.ibmq.api.utils.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.providers.ibmq.job.ibmqjob.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>qiskit.providers.ibmq.api.utils module</div>
+            <div>qiskit.providers.ibmq.job.ibmqjob module</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.providers.ibmq.api_v2.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.providers.ibmq.utils.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.providers.ibmq.api_v2 package</div>
+            <div>qiskit.providers.ibmq.utils package</div>
         </div>
      </a>
         

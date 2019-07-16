@@ -184,7 +184,6 @@
 <span class="kn">from</span> <span class="nn">qiskit.validation.exceptions</span> <span class="k">import</span> <span class="n">ModelValidationError</span>
 
 <span class="kn">from</span> <span class="nn">.api</span> <span class="k">import</span> <span class="n">IBMQConnector</span>
-<span class="kn">from</span> <span class="nn">.api_v2</span> <span class="k">import</span> <span class="n">IBMQClient</span>
 <span class="kn">from</span> <span class="nn">.ibmqbackend</span> <span class="k">import</span> <span class="n">IBMQBackend</span><span class="p">,</span> <span class="n">IBMQSimulator</span>
 
 
@@ -236,21 +235,12 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            ConnectionError: if the authentication resulted in error.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># TODO: add more robust detection.</span>
-        <span class="c1"># Check if the URL belongs to auth services of the new API.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;quantum-computing.ibm.com/api&#39;</span> <span class="ow">in</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span> <span class="ow">and</span>
-                <span class="s1">&#39;auth&#39;</span> <span class="ow">in</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">IBMQClient</span><span class="p">(</span><span class="n">api_token</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
-                              <span class="n">auth_url</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-
         <span class="k">try</span><span class="p">:</span>
             <span class="n">config_dict</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
             <span class="p">}</span>
             <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">proxies</span><span class="p">:</span>
                 <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">proxies</span>
-            <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">websocket_url</span><span class="p">:</span>
-                <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;websocket_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">websocket_url</span>
             <span class="k">return</span> <span class="n">IBMQConnector</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">,</span>
                                  <span class="n">credentials</span><span class="o">.</span><span class="n">verify</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>

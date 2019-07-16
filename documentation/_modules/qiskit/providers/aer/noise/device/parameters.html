@@ -190,8 +190,8 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list: A list of tuples (name, qubits, time, error). If gate</span>
-<span class="sd">        error or gate_time information is not available None will be</span>
-<span class="sd">        returned for value.</span>
+<span class="sd">              error or gate_time information is not available None</span>
+<span class="sd">              will be returned for value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">gates</span><span class="p">:</span>
@@ -223,8 +223,8 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list: A list of tuples (name, qubits, value). If gate</span>
-<span class="sd">        error information is not available None will be returned for</span>
-<span class="sd">        value.</span>
+<span class="sd">              error information is not available None will be returned for</span>
+<span class="sd">              value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">gates</span><span class="p">:</span>
@@ -248,8 +248,8 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list: A list of tuples (name, qubits, value). If gate</span>
-<span class="sd">        time information is not available None will be returned for</span>
-<span class="sd">        value.</span>
+<span class="sd">              time information is not available None will be returned for</span>
+<span class="sd">              value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">gates</span><span class="p">:</span>
@@ -274,10 +274,11 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list: A list of readout error values for qubits. If readout</span>
-<span class="sd">        error information is not available None will be returned for value.</span>
+<span class="sd">              error information is not available None will be returned</span>
+<span class="sd">              for value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">qubit_props</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">qubits</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">qubit_props</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">qubits</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default value</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">_check_for_item</span><span class="p">(</span><span class="n">qubit_props</span><span class="p">,</span> <span class="s1">&#39;readout_error&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">):</span>
@@ -302,7 +303,8 @@
 <span class="sd">        Numpy.inf will be used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">qubit_props</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">qubits</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">qubit_props</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">qubits</span><span class="p">:</span>
+        <span class="c1"># pylint: disable=invalid-name</span>
         <span class="c1"># Default values</span>
         <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">inf</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">inf</span>
 
@@ -340,7 +342,7 @@
 <span class="k">def</span> <span class="nf">_check_for_item</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Search list for item with given name.&quot;&quot;&quot;</span>
     <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">filtered</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">filtered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>

@@ -210,8 +210,8 @@
             <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">obj</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">imag</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;as_dict&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;to_dict&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div></div>
 
 
@@ -237,6 +237,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span> <span class="o">=</span> <span class="n">controller</span>
 
+    <span class="c1"># pylint: disable=arguments-differ</span>
 <div class="viewcode-block" id="AerBackend.run"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.backends.aerbackend.html#qiskit.providers.aer.backends.aerbackend.AerBackend.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run a qobj on the backend.&quot;&quot;&quot;</span>
         <span class="c1"># Submit job</span>
@@ -276,7 +277,7 @@
         <span class="n">original_config</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">config</span>
         <span class="c1"># Convert to dictionary and add new parameters</span>
         <span class="c1"># from noise model and backend options</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">original_config</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">original_config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">backend_options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">backend_options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>

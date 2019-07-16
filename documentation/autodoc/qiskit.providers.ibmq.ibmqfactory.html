@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.providers.ibmq.ibmqjob module &#8212; Qiskit 0.11.0 documentation</title>
+    <title>qiskit.providers.ibmq.ibmqfactory module &#8212; Qiskit 0.11.0 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -1705,232 +1705,204 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.providers.ibmq.ibmqjob">
-<span id="qiskit-providers-ibmq-ibmqjob-module"></span><h1>qiskit.providers.ibmq.ibmqjob module<a class="headerlink" href="#module-qiskit.providers.ibmq.ibmqjob" title="Permalink to this headline">¶</a></h1>
-<p>IBMQJob module</p>
-<p>This module is used for creating asynchronous job objects for the
-IBM Q Experience.</p>
+  <div class="section" id="module-qiskit.providers.ibmq.ibmqfactory">
+<span id="qiskit-providers-ibmq-ibmqfactory-module"></span><h1>qiskit.providers.ibmq.ibmqfactory module<a class="headerlink" href="#module-qiskit.providers.ibmq.ibmqfactory" title="Permalink to this headline">¶</a></h1>
+<p>Factory and credentials manager for IBM Q Experience.</p>
 <dl class="class">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob">
-<em class="property">class </em><code class="descname">IBMQJob</code><span class="sig-paren">(</span><em>backend</em>, <em>job_id</em>, <em>api</em>, <em>qobj=None</em>, <em>creation_date=None</em>, <em>api_status=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="qiskit.providers.basejob.html#qiskit.providers.basejob.BaseJob" title="qiskit.providers.basejob.BaseJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.basejob.BaseJob</span></code></a></p>
-<p>Representation of a job that will be execute on a IBMQ backend.</p>
-<p>Represent the jobs that will be executed on IBM-Q simulators and real
-devices. Jobs are intended to be created calling <code class="docutils literal notranslate"><span class="pre">run()</span></code> on a particular
-backend.</p>
-<p>Creating a <code class="docutils literal notranslate"><span class="pre">Job</span></code> instance does not imply running it. You need to do it in
-separate steps:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span> <span class="c1"># It won&#39;t block.</span>
-</pre></div>
-</div>
-<p>An error while submitting a job will cause the next call to <code class="docutils literal notranslate"><span class="pre">status()</span></code> to
-raise. If submitting the job successes, you can inspect the job’s status by
-using <code class="docutils literal notranslate"><span class="pre">status()</span></code>. Status can be one of <code class="docutils literal notranslate"><span class="pre">JobStatus</span></code> members:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.backends.jobstatus</span> <span class="k">import</span> <span class="n">JobStatus</span>
-
-<span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">job_status</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="c1"># It won&#39;t block. It will query the backend API.</span>
-    <span class="k">if</span> <span class="n">job_status</span> <span class="ow">is</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The job is still running&#39;</span><span class="p">)</span>
-
-<span class="k">except</span> <span class="n">JobError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something wrong happened!: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>A call to <code class="docutils literal notranslate"><span class="pre">status()</span></code> can raise if something happens at the API level that
-prevents Qiskit from determining the status of the job. An example of this
-is a temporary connection lose or a network failure.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">submit()</span></code> and <code class="docutils literal notranslate"><span class="pre">status()</span></code> methods are examples of non-blocking API.
-<code class="docutils literal notranslate"><span class="pre">Job</span></code> instances also have <cite>id()</cite> and <code class="docutils literal notranslate"><span class="pre">result()</span></code> methods which will
-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">IBMQJob</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">job_id</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">id</span><span class="p">()</span> <span class="c1"># It will block until completing submission.</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The job </span><span class="si">{}</span><span class="s1"> was successfully submitted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
-
-    <span class="n">job_result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="c1"># It will block until finishing.</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The job finished with result </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_result</span><span class="p">))</span>
-
-<span class="k">except</span> <span class="n">JobError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something wrong happened!: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Both methods can raise if something ath the API level happens that prevent
-Qiskit from determining the status of the job.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>When querying the API for getting the status, two kinds of errors are
-possible. The most severe is the one preventing Qiskit from getting a
-response from the backend. This can be caused by a network failure or a
-temporary system break. In these cases, calling <code class="docutils literal notranslate"><span class="pre">status()</span></code> will raise.</p>
-<p class="last">If Qiskit successfully retrieves the status of a job, it could be it
-finished with errors. In that case, <code class="docutils literal notranslate"><span class="pre">status()</span></code> will simply return
-<code class="docutils literal notranslate"><span class="pre">JobStatus.ERROR</span></code> and you can call <code class="docutils literal notranslate"><span class="pre">error_message()</span></code> to get more
-info.</p>
-</div>
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob._executor">
-<code class="descname">_executor</code><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob._executor" title="Permalink to this definition">¶</a></dt>
-<dd><p>executor to handle asynchronous jobs</p>
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory">
+<em class="property">class </em><code class="descname">IBMQFactory</code><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Factory and credentials manager for IBM Q Experience.</p>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.active_account">
+<code class="descname">active_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.active_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.active_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the IBM Q Experience v2 account currently in the session.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">futures.Executor</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information about the account currently in the session.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if an IBM Q Experience v1 account is already in
+use.</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.cancel">
-<code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.cancel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attempt to cancel a job.</p>
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.active_accounts">
+<code class="descname">active_accounts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.active_accounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.active_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all IBM Q Experience v1 accounts currently in the session.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated, and is only available when using</dt>
+<dd>v1 accounts.</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if job can be cancelled, else False. Note this operation
-might not be possible depending on the environment.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>a list with information about the accounts currently</dt>
+<dd>in the session.</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[dict]</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – if there was some unexpected failure in the server.</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if the method is used with an IBM Q Experience
+v2 account.</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.creation_date">
-<code class="descname">creation_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.creation_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.creation_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return creation date.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.error_message">
-<code class="descname">error_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.error_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.error_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provide details about the reason of failure.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>Some IBMQ job results can be read only once. A second attempt to
-query the API for the job will fail, as the job is “consumed”.</p>
-<p class="last">The first call to this method in an <code class="docutils literal notranslate"><span class="pre">IBMQJob</span></code> instance will query
-the API and consume the job if it errored at some point (otherwise
-it will return <code class="docutils literal notranslate"><span class="pre">None</span></code>). Subsequent calls to that instance’s method
-will also return the failure details, since they are cached.
-However, attempting to retrieve the error details again in another
-instance or session might fail due to the job having been consumed.</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An error report if the job errored or <code class="docutils literal notranslate"><span class="pre">None</span></code> otherwise.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.job_id">
-<code class="descname">job_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.job_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.job_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return backend determined id.</p>
-<p>If the Id is not set because the job is already initializing, this call
-will block until we have an Id.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.properties">
-<code class="descname">properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.properties" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the backend properties for this job.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the backend properties used for this job.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.models.backendproperties.html#qiskit.providers.models.backendproperties.BackendProperties" title="qiskit.providers.models.backendproperties.BackendProperties">BackendProperties</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.qobj">
-<code class="descname">qobj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.qobj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.qobj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the Qobj submitted for this job.</p>
-<p>Note that this method might involve querying the API for results if the
-Job has been created in a previous Qiskit session.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the Qobj submitted for this job.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.qobj.qobj.html#qiskit.qobj.qobj.Qobj" title="qiskit.qobj.qobj.Qobj">Qobj</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.queue_position">
-<code class="descname">queue_position</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.queue_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.queue_position" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the position in the server queue.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Position in the queue.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.validation.fields.html#qiskit.validation.fields.Number" title="qiskit.validation.fields.Number">Number</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.result">
-<code class="descname">result</code><span class="sig-paren">(</span><em>timeout=None</em>, <em>wait=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the result of the job.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>Some IBMQ job results can be read only once. A second attempt to
-query the API for the job will fail, as the job is “consumed”.</p>
-<p class="last">The first call to this method in an <code class="docutils literal notranslate"><span class="pre">IBMQJob</span></code> instance will query
-the API and consume the job if it finished successfully (otherwise
-it will raise a <code class="docutils literal notranslate"><span class="pre">JobError</span></code> exception without consumming the job).
-Subsequent calls to that instance’s method will also return the
-results, since they are cached. However, attempting to retrieve the
-results again in another instance or session might fail due to the
-job having been consumed.</p>
-</div>
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.backends">
+<code class="descname">backends</code><span class="sig-paren">(</span><em>name=None</em>, <em>filters=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.backends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.backends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all backends accessible via IBMQ provider, subject to optional filtering.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated. Please use an IBM Q Experience v2</dt>
+<dd><p class="first">account, and:</p>
+<p>provider = IBMQ.get_provider(…)
+provider.backends()</p>
+<p class="last">instead.</p>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>timeout</strong> (<em>float</em>) – number of seconds to wait for job</li>
-<li><strong>wait</strong> (<em>int</em>) – time between queries to IBM Q server</li>
+<li><strong>name</strong> (<em>str</em>) – backend name to filter by</li>
+<li><strong>filters</strong> (<em>callable</em>) – more complex filters, such as lambda functions
+e.g. IBMQ.backends(filters=lambda b: b.configuration[‘n_qubits’] &gt; 5)</li>
+<li><strong>kwargs</strong> – simple filters specifying a true/false criteria in the
+backend configuration or backend status or provider credentials
+e.g. IBMQ.backends(n_qubits=5, operational=True, hub=’internal’)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Result object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of backends available that match the filter</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">qiskit.Result</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[<a class="reference internal" href="qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend" title="qiskit.providers.ibmq.ibmqbackend.IBMQBackend">IBMQBackend</a>]</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – if attempted to recover a result on a failed job.</p>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.delete_account">
+<em class="property">static </em><code class="descname">delete_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.delete_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.delete_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the saved account from disk.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if no valid IBM Q Experience v2 credentials found.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.delete_accounts">
+<code class="descname">delete_accounts</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.delete_accounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.delete_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete saved IBM Q Experience v1 accounts from disk, subject to optional filtering.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated, and only available when using</dt>
+<dd>v1 accounts.</dd>
+</dl>
+<p>The filter kwargs can be <cite>token</cite>, <cite>url</cite>, <cite>hub</cite>, <cite>group</cite>, <cite>project</cite>.
+If no filter is passed, all accounts will be deleted from disk.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if the method is used with an IBM Q Experience v2
+account, or if no account matched the filter.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.disable_account">
+<code class="descname">disable_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.disable_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.disable_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable the account in the current session.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if IBM Q Experience API v1 credentials are found,
+or if no account is in use in the session.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.disable_accounts">
+<code class="descname">disable_accounts</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.disable_accounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.disable_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable IBM Q Experience v1 accounts in the current session.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated, and only available when using</dt>
+<dd>v1 accounts.</dd>
+</dl>
+<p>The filter kwargs can be <cite>token</cite>, <cite>url</cite>, <cite>hub</cite>, <cite>group</cite>, <cite>project</cite>.
+If no filter is passed, all accounts in the current session will be disabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if the method is used with an IBM Q Experience v2
+account, or if no account matched the filter.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.enable_account">
+<code class="descname">enable_account</code><span class="sig-paren">(</span><em>token</em>, <em>url='https://auth.quantum-computing.ibm.com/api'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.enable_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.enable_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authenticate against IBM Q Experience for use during this session.</p>
+<dl class="docutils">
+<dt>Note: with version 0.3 of this qiskit-ibmq-provider package, use of</dt>
+<dd>the legacy Quantum Experience and Qconsole (also known
+as the IBM Q Experience v1) credentials is deprecated. The new
+default is to use the IBM Q Experience v2 credentials.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>token</strong> (<em>str</em>) – IBM Q Experience API token.</li>
+<li><strong>url</strong> (<em>str</em>) – URL for the IBM Q Experience authentication server.</li>
+<li><strong>**kwargs</strong> (<em>dict</em>) – additional settings for the connection:
+* proxies (dict): proxy configuration.
+* verify (bool): verify the server’s TLS certificate.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the provider for the default open access project.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.providers.ibmq.accountprovider.html#qiskit.providers.ibmq.accountprovider.AccountProvider" title="qiskit.providers.ibmq.accountprovider.AccountProvider">AccountProvider</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if an IBM Q Experience v2 account is already in
+use, or if attempting using both IBM Q Experience v1 and v2
+accounts.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQApiUrlError</span></code> – if the input token and url are for an IBM Q
+Experience v2 account, but the url is not a valid
+authentication URL.</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -1938,33 +1910,227 @@ job having been consumed.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.status">
-<code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the API to update the status.</p>
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.get_backend">
+<code class="descname">get_backend</code><span class="sig-paren">(</span><em>name=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.get_backend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.get_backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a single backend matching the specified filtering.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated. Please use an IBM Q Experience v2</dt>
+<dd><p class="first">account, and:</p>
+<p>provider = IBMQ.get_provider(…)
+provider.get_backend(‘name’)</p>
+<p class="last">instead.</p>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The status of the job, once updated.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – name of the backend.</li>
+<li><strong>**kwargs</strong> (<em>dict</em>) – dict used for filtering.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">qiskit.providers.JobStatus</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a backend matching the filtering.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – if there was an exception in the future being executed
-or the server sent an unknown answer.</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="qiskit.providers.basebackend.html#qiskit.providers.basebackend.BaseBackend" title="qiskit.providers.basebackend.BaseBackend">BaseBackend</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QiskitBackendNotFoundError</span></code> – if no backend could be found or
+more than one backend matches the filtering criteria.</p>
+</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.providers.ibmq.ibmqjob.IBMQJob.submit">
-<code class="descname">submit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqjob.html#IBMQJob.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqjob.IBMQJob.submit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Submit job to IBM-Q.</p>
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.get_provider">
+<code class="descname">get_provider</code><span class="sig-paren">(</span><em>hub=None</em>, <em>group=None</em>, <em>project=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.get_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.get_provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a provider for a single hub/group/project combination.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">JobError</span></code> – If we have already submitted the job.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">provider that match the specified criteria.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.accountprovider.html#qiskit.providers.ibmq.accountprovider.AccountProvider" title="qiskit.providers.ibmq.accountprovider.AccountProvider">AccountProvider</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQProviderError</span></code> – if no provider matches the specified criteria,
+or more than one provider match the specified criteria.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.load_account">
+<code class="descname">load_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.load_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.load_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authenticate against IBM Q Experience from stored credentials.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the provider for the default open access project.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.accountprovider.html#qiskit.providers.ibmq.accountprovider.AccountProvider" title="qiskit.providers.ibmq.accountprovider.AccountProvider">AccountProvider</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if an IBM Q Experience v1 account is already in
+use, or no IBM Q Experience v2 accounts can be found.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.load_accounts">
+<code class="descname">load_accounts</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.load_accounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.load_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load IBM Q Experience v1 accounts found in the system into current session.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated, and only available when using</dt>
+<dd>v1 accounts.</dd>
+</dl>
+<p>Automatically load the accounts found in the system. This method
+looks for credentials in the following locations, in order, and
+returns as soon as credentials are found:</p>
+<ol class="arabic simple">
+<li>in the <cite>Qconfig.py</cite> file in the current working directory.</li>
+<li>in the environment variables.</li>
+<li>in the <cite>qiskitrc</cite> configuration file</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if the method is used with an IBM Q Experience v2
+account, or if no credentials are found.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQApiUrlError</span></code> – if any of the credentials stored belong to a v2 account.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.providers">
+<code class="descname">providers</code><span class="sig-paren">(</span><em>hub=None</em>, <em>group=None</em>, <em>project=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.providers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.providers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of providers with optional filtering.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hub</strong> (<em>str</em>) – name of the hub.</li>
+<li><strong>group</strong> (<em>str</em>) – name of the group.</li>
+<li><strong>project</strong> (<em>str</em>) – name of the project.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>list of providers that match the specified</dt>
+<dd><p class="first last">criteria.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list[<a class="reference internal" href="qiskit.providers.ibmq.accountprovider.html#qiskit.providers.ibmq.accountprovider.AccountProvider" title="qiskit.providers.ibmq.accountprovider.AccountProvider">AccountProvider</a>]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.save_account">
+<em class="property">static </em><code class="descname">save_account</code><span class="sig-paren">(</span><em>token</em>, <em>url='https://auth.quantum-computing.ibm.com/api'</em>, <em>overwrite=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.save_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.save_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the account to disk for future use.</p>
+<dl class="docutils">
+<dt>Note: IBM Q Experience v1 credentials are being deprecated. Please</dt>
+<dd>use IBM Q Experience v2 credentials instead.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>token</strong> (<em>str</em>) – IBM Q Experience API token.</li>
+<li><strong>url</strong> (<em>str</em>) – URL for the IBM Q Experience authentication server.</li>
+<li><strong>overwrite</strong> (<em>bool</em>) – overwrite existing credentials.</li>
+<li><strong>**kwargs</strong> (<em>dict</em>) – <ul>
+<li>proxies (dict): Proxy configuration for the API.</li>
+<li>verify (bool): If False, ignores SSL certificates errors</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.stored_account">
+<em class="property">static </em><code class="descname">stored_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.stored_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.stored_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the account stored on disk.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dictionary with information about the account stored on disk.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if no valid IBM Q Experience v2 credentials found.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.stored_accounts">
+<code class="descname">stored_accounts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.stored_accounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.stored_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all IBM Q Experience v1 accounts stored to disk.</p>
+<dl class="docutils">
+<dt>Note: this method is being deprecated, and only available when using</dt>
+<dd>v1 accounts.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>a list with information about the accounts stored</dt>
+<dd>on disk.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[dict]</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQAccountError</span></code> – if the method is used with an IBM Q Experience v2 account.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="qiskit.providers.ibmq.ibmqfactory.IBMQFactory.update_account">
+<em class="property">static </em><code class="descname">update_account</code><span class="sig-paren">(</span><em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqfactory.html#IBMQFactory.update_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.update_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interactive helper from migrating stored credentials to IBM Q Experience v2.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> (<em>bool</em>) – if <cite>True</cite>, disable interactive prompts and perform
+the changes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">if the updating is possible, credentials for the API
+version 2; and <cite>None</cite> otherwise.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.api.utils.html#qiskit.providers.ibmq.api.utils.Credentials" title="qiskit.providers.ibmq.api.utils.Credentials">Credentials</a></td>
 </tr>
 </tbody>
 </table>

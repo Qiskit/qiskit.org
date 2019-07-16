@@ -51,7 +51,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.providers.ibmq.api_v2.exceptions module" href="qiskit.providers.ibmq.api_v2.exceptions.html" />
+    <link rel="next" title="qiskit.providers.ibmq.api_v2.rest.version_finder module" href="qiskit.providers.ibmq.api_v2.rest.version_finder.html" />
     <link rel="prev" title="qiskit.providers.ibmq.api_v2.rest.job module" href="qiskit.providers.ibmq.api_v2.rest.job.html" /> 
   </head>
 <body>
@@ -1707,7 +1707,7 @@
         
   <div class="section" id="module-qiskit.providers.ibmq.api_v2.rest.root">
 <span id="qiskit-providers-ibmq-api-v2-rest-root-module"></span><h1>qiskit.providers.ibmq.api_v2.rest.root module<a class="headerlink" href="#module-qiskit.providers.ibmq.api_v2.rest.root" title="Permalink to this headline">¶</a></h1>
-<p>Root REST adapter for the IBM Q Api version 2.</p>
+<p>Root REST adapter for the IBM Q Experience v2 API.</p>
 <dl class="class">
 <dt id="qiskit.providers.ibmq.api_v2.rest.root.Api">
 <em class="property">class </em><code class="descname">Api</code><span class="sig-paren">(</span><em>session</em>, <em>prefix_url=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/rest/root.html#Api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api" title="Permalink to this definition">¶</a></dt>
@@ -1715,7 +1715,7 @@
 <p>Rest adapter for general endpoints.</p>
 <dl class="attribute">
 <dt id="qiskit.providers.ibmq.api_v2.rest.root.Api.URL_MAP">
-<code class="descname">URL_MAP</code><em class="property"> = {'backends': '/Backends/v/1', 'circuit': '/QCircuitApiModels', 'hubs': '/Network', 'jobs': '/Jobs', 'jobs_status': '/Jobs/status', 'version': '/version'}</em><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api.URL_MAP" title="Permalink to this definition">¶</a></dt>
+<code class="descname">URL_MAP</code><em class="property"> = {'backends': '/devices/v/1', 'circuit': '/qcircuit', 'hubs': '/Network', 'jobs': '/Jobs', 'jobs_status': '/Jobs/status', 'version': '/version'}</em><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api.URL_MAP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1816,8 +1816,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.providers.ibmq.api_v2.rest.root.Api.run_job">
-<code class="descname">run_job</code><span class="sig-paren">(</span><em>backend_name</em>, <em>qobj_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/rest/root.html#Api.run_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api.run_job" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.providers.ibmq.api_v2.rest.root.Api.submit_job">
+<code class="descname">submit_job</code><span class="sig-paren">(</span><em>backend_name</em>, <em>qobj_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/rest/root.html#Api.submit_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api.submit_job" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit a job for executing.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1840,9 +1840,33 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="qiskit.providers.ibmq.api_v2.rest.root.Api.submit_job_object_storage">
+<code class="descname">submit_job_object_storage</code><span class="sig-paren">(</span><em>backend_name</em>, <em>shots=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/rest/root.html#Api.submit_job_object_storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api.submit_job_object_storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a job for executing, using object storage.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>backend_name</strong> (<em>str</em>) – the name of the backend.</li>
+<li><strong>shots</strong> (<em>int</em>) – number of shots.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">json response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="qiskit.providers.ibmq.api_v2.rest.root.Api.version">
 <code class="descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/rest/root.html#Api.version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.rest.root.Api.version" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the api versions.</p>
+<dd><p>Return the API versions.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1860,10 +1884,10 @@
             <div>qiskit.providers.ibmq.api_v2.rest.job module</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.providers.ibmq.api_v2.exceptions.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.providers.ibmq.api_v2.rest.version_finder.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.providers.ibmq.api_v2.exceptions module</div>
+            <div>qiskit.providers.ibmq.api_v2.rest.version_finder module</div>
         </div>
      </a>
         

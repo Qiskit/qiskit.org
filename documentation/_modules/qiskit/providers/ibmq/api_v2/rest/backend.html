@@ -172,7 +172,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Backend REST adapter for the IBM Q Api version 2.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Backend REST adapter for the IBM Q Experience v2 API.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">RestAdapterBase</span>
 
@@ -181,8 +181,9 @@
     <span class="sd">&quot;&quot;&quot;Rest adapter for backend related endpoints.&quot;&quot;&quot;</span>
 
     <span class="n">URL_MAP</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="s1">&#39;/properties&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pulse_defaults&#39;</span><span class="p">:</span> <span class="s1">&#39;/defaults&#39;</span><span class="p">,</span>
         <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;/queue/status&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="s1">&#39;/properties&#39;</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
@@ -193,7 +194,23 @@
 <span class="sd">            backend_name (str): name of the backend.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">backend_name</span> <span class="o">=</span> <span class="n">backend_name</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s1">&#39;/Backends/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s1">&#39;/devices/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backend_name</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Backend.properties"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.backend.html#qiskit.providers.ibmq.api_v2.rest.backend.Backend.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return backend properties.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="c1"># Adjust name of the backend.</span>
+        <span class="k">if</span> <span class="n">response</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;backend_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_name</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="Backend.pulse_defaults"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.backend.html#qiskit.providers.ibmq.api_v2.rest.backend.Backend.pulse_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">pulse_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return backend pulse defaults.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;pulse_defaults&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Backend.status"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.backend.html#qiskit.providers.ibmq.api_v2.rest.backend.Backend.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return backend status.&quot;&quot;&quot;</span>
@@ -218,18 +235,7 @@
         <span class="k">if</span> <span class="s1">&#39;busy&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
             <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;dedicated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;busy&#39;</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="n">ret</span></div>
-
-<div class="viewcode-block" id="Backend.properties"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.backend.html#qiskit.providers.ibmq.api_v2.rest.backend.Backend.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return backend properties.&quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-        <span class="c1"># Adjust name of the backend.</span>
-        <span class="k">if</span> <span class="n">response</span><span class="p">:</span>
-            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;backend_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_name</span>
-
-        <span class="k">return</span> <span class="n">response</span></div></div>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
 </pre></div>
 
         </div>

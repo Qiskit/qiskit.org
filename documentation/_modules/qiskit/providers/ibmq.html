@@ -175,14 +175,15 @@
 <span class="sd">&quot;&quot;&quot;Backends provided by IBM Quantum Experience.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">.ibmqfactory</span> <span class="k">import</span> <span class="n">IBMQFactory</span>
 <span class="kn">from</span> <span class="nn">.ibmqprovider</span> <span class="k">import</span> <span class="n">IBMQProvider</span>
 <span class="kn">from</span> <span class="nn">.ibmqbackend</span> <span class="k">import</span> <span class="n">IBMQBackend</span>
-<span class="kn">from</span> <span class="nn">.ibmqjob</span> <span class="k">import</span> <span class="n">IBMQJob</span>
+<span class="kn">from</span> <span class="nn">.job</span> <span class="k">import</span> <span class="n">IBMQJob</span>
 
 <span class="kn">from</span> <span class="nn">.version</span> <span class="k">import</span> <span class="n">__version__</span>
 
 <span class="c1"># Global instance to be used as the entry point for convenience.</span>
-<span class="n">IBMQ</span> <span class="o">=</span> <span class="n">IBMQProvider</span><span class="p">()</span>
+<span class="n">IBMQ</span> <span class="o">=</span> <span class="n">IBMQFactory</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="least_busy"><a class="viewcode-back" href="../../../autodoc/qiskit.providers.ibmq.html#qiskit.providers.ibmq.least_busy">[docs]</a><span class="k">def</span> <span class="nf">least_busy</span><span class="p">(</span><span class="n">backends</span><span class="p">):</span>

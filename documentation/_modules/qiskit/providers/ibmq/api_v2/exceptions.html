@@ -172,8 +172,9 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Exceptions related to the IBM Q Api.&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.api</span> <span class="k">import</span> <span class="n">ApiError</span> <span class="k">as</span> <span class="n">ApiErrorV1</span>
+<span class="sd">&quot;&quot;&quot;Exceptions related to the IBM Q Experience API.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">..api</span> <span class="k">import</span> <span class="n">ApiError</span> <span class="k">as</span> <span class="n">ApiErrorV1</span>
 
 
 <div class="viewcode-block" id="ApiError"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.exceptions.html#qiskit.providers.ibmq.api_v2.exceptions.ApiError">[docs]</a><span class="k">class</span> <span class="nc">ApiError</span><span class="p">(</span><span class="n">ApiErrorV1</span><span class="p">):</span>
@@ -186,6 +187,31 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_exception</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">original_exception</span> <span class="o">=</span> <span class="n">original_exception</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WebsocketError"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.exceptions.html#qiskit.providers.ibmq.api_v2.exceptions.WebsocketError">[docs]</a><span class="k">class</span> <span class="nc">WebsocketError</span><span class="p">(</span><span class="n">ApiError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exceptions related to websockets.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="WebsocketIBMQProtocolError"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.exceptions.html#qiskit.providers.ibmq.api_v2.exceptions.WebsocketIBMQProtocolError">[docs]</a><span class="k">class</span> <span class="nc">WebsocketIBMQProtocolError</span><span class="p">(</span><span class="n">WebsocketError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exceptions related to IBM Q protocol error.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="WebsocketAuthenticationError"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.exceptions.html#qiskit.providers.ibmq.api_v2.exceptions.WebsocketAuthenticationError">[docs]</a><span class="k">class</span> <span class="nc">WebsocketAuthenticationError</span><span class="p">(</span><span class="n">WebsocketError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exception caused during websocket authentication.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="WebsocketTimeoutError"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.exceptions.html#qiskit.providers.ibmq.api_v2.exceptions.WebsocketTimeoutError">[docs]</a><span class="k">class</span> <span class="nc">WebsocketTimeoutError</span><span class="p">(</span><span class="n">WebsocketError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Timeout during websocket communication.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="AuthenticationLicenseError"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.exceptions.html#qiskit.providers.ibmq.api_v2.exceptions.AuthenticationLicenseError">[docs]</a><span class="k">class</span> <span class="nc">AuthenticationLicenseError</span><span class="p">(</span><span class="n">ApiError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exception due to user not accepting latest license agreement via web.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
 </pre></div>
 
         </div>

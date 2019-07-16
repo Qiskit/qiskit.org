@@ -187,6 +187,7 @@
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">circuit2superop</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">standard_instruction_channel</span>
 <span class="kn">from</span> <span class="nn">.errorutils</span> <span class="k">import</span> <span class="n">standard_instruction_operator</span>
+<span class="kn">from</span> <span class="nn">...utils.helpers</span> <span class="k">import</span> <span class="n">deprecation</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -201,6 +202,7 @@
 <span class="sd">             module.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="c1"># pylint: disable=invalid-name</span>
     <span class="n">ATOL</span> <span class="o">=</span> <span class="n">ATOL_DEFAULT</span>
     <span class="n">RTOL</span> <span class="o">=</span> <span class="n">RTOL_DEFAULT</span>
     <span class="n">MAX_TOL</span> <span class="o">=</span> <span class="mf">1e-4</span>
@@ -443,6 +445,16 @@
                 <span class="n">position</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;of error outcomes </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="QuantumError.as_dict"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DEPRECATED: Use to_dict()</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: The current error as a dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">deprecation</span><span class="p">(</span><span class="s2">&quot;QuantumError::as_dict() method is deprecated and will be removed after 0.3.&quot;</span>
+                    <span class="s2">&quot;Use &#39;.to_dict()&#39; instead&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QuantumError.to_dict"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.quantum_error.html#qiskit.providers.aer.noise.errors.quantum_error.QuantumError.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the current error as a dictionary.&quot;&quot;&quot;</span>
         <span class="n">error</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;qerror&quot;</span><span class="p">,</span>
@@ -503,10 +515,10 @@
                     <span class="n">last_instr</span> <span class="o">=</span> <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">last_name</span> <span class="o">=</span> <span class="n">last_instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-                    <span class="n">can_combine</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
-                                   <span class="ow">or</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">can_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">last_name</span><span class="p">)</span>
-                            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
+                    <span class="n">can_combine</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">]</span> <span class="ow">or</span>
+                                   <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">can_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">last_name</span><span class="p">)</span> <span class="ow">and</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
                         <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compose_instr</span><span class="p">(</span>
                             <span class="n">last_instr</span><span class="p">,</span> <span class="n">instr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -634,10 +646,10 @@
                     <span class="n">last_instr</span> <span class="o">=</span> <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">last_name</span> <span class="o">=</span> <span class="n">last_instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-                    <span class="n">can_combine</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
-                                   <span class="ow">or</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">can_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">last_name</span><span class="p">)</span>
-                            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
+                    <span class="n">can_combine</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">]</span> <span class="ow">or</span>
+                                   <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">can_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">last_name</span><span class="p">)</span> <span class="ow">and</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_check_instr</span><span class="p">(</span><span class="n">name</span><span class="p">)):</span>
                         <span class="n">combined_circuit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_instr</span><span class="p">(</span>
                             <span class="n">last_instr</span><span class="p">,</span> <span class="n">instr</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -677,12 +689,12 @@
                     <span class="c1"># remove from lists</span>
                     <span class="n">kraus_instr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                     <span class="n">prob_i</span> <span class="o">=</span> <span class="n">kraus_probs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                    <span class="n">p</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">+</span> <span class="n">prob_i</span>
-                    <span class="n">kraus</span> <span class="o">=</span> <span class="p">(</span><span class="n">prob</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">Kraus</span><span class="p">(</span>
-                        <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">prob_i</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span>
+                    <span class="n">sum_prob</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">+</span> <span class="n">prob_i</span>
+                    <span class="n">kraus</span> <span class="o">=</span> <span class="p">(</span><span class="n">prob</span> <span class="o">/</span> <span class="n">sum_prob</span><span class="p">)</span> <span class="o">*</span> <span class="n">Kraus</span><span class="p">(</span>
+                        <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">prob_i</span> <span class="o">/</span> <span class="n">sum_prob</span><span class="p">)</span> <span class="o">*</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span>
                     <span class="c1"># update instruction</span>
                     <span class="n">instr</span><span class="p">[</span><span class="s1">&#39;param&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kraus</span><span class="o">.</span><span class="n">data</span>
-                    <span class="n">prob</span> <span class="o">=</span> <span class="n">p</span>
+                    <span class="n">prob</span> <span class="o">=</span> <span class="n">sum_prob</span>
             <span class="c1"># append combined instruction to circuits</span>
             <span class="n">new_circuits</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">instr</span><span class="p">])</span>
             <span class="n">new_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>

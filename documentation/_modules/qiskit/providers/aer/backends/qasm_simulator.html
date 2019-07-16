@@ -179,6 +179,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
 <span class="kn">from</span> <span class="nn">.aerbackend</span> <span class="k">import</span> <span class="n">AerBackend</span>
+<span class="c1"># pylint: disable=import-error</span>
 <span class="kn">from</span> <span class="nn">.qasm_controller_wrapper</span> <span class="k">import</span> <span class="n">qasm_controller_execute</span>
 <span class="kn">from</span> <span class="nn">..aererror</span> <span class="k">import</span> <span class="n">AerError</span>
 <span class="kn">from</span> <span class="nn">..version</span> <span class="k">import</span> <span class="n">__version__</span>
@@ -316,9 +317,9 @@
         <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A C++ simulator with realistic noise for qobj files&#39;</span><span class="p">,</span>
         <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">,</span> <span class="s1">&#39;cu1&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;sdg&#39;</span><span class="p">,</span>
             <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;tdg&#39;</span><span class="p">,</span> <span class="s1">&#39;ccx&#39;</span><span class="p">,</span> <span class="s1">&#39;swap&#39;</span><span class="p">,</span> <span class="s1">&#39;multiplexer&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">,</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;initialize&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span>
+            <span class="s1">&#39;initialize&#39;</span><span class="p">,</span> <span class="s1">&#39;kraus&#39;</span><span class="p">,</span> <span class="s1">&#39;roerror&#39;</span>
         <span class="p">],</span>
         <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[{</span>
             <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;TODO&#39;</span><span class="p">,</span>
@@ -344,9 +345,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">clifford_instructions</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">,</span> <span class="s2">&quot;CX&quot;</span><span class="p">,</span> <span class="s2">&quot;cx&quot;</span><span class="p">,</span> <span class="s2">&quot;cz&quot;</span><span class="p">,</span> <span class="s2">&quot;swap&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="s2">&quot;reset&quot;</span><span class="p">,</span> <span class="s2">&quot;measure&quot;</span>
+            <span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="s2">&quot;reset&quot;</span><span class="p">,</span> <span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="s1">&#39;roerror&#39;</span>
         <span class="p">]</span>
-        <span class="n">unsupported_ch_instructions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">]</span>
+        <span class="n">unsupported_ch_instructions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;u2&quot;</span><span class="p">,</span> <span class="s2">&quot;u3&quot;</span><span class="p">,</span> <span class="s2">&quot;cu1&quot;</span><span class="p">]</span>
         <span class="c1"># Check if noise model is Clifford:</span>
         <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;automatic&quot;</span>
         <span class="k">if</span> <span class="n">backend_options</span> <span class="ow">and</span> <span class="s2">&quot;method&quot;</span> <span class="ow">in</span> <span class="n">backend_options</span><span class="p">:</span>
@@ -356,7 +357,7 @@
 
         <span class="k">if</span> <span class="n">clifford_noise</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;stabilizer&quot;</span> <span class="ow">and</span> <span class="n">noise_model</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">noise_model</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()[</span><span class="s1">&#39;errors&#39;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">noise_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s1">&#39;errors&#39;</span><span class="p">]:</span>
                     <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;qerror&#39;</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">error</span><span class="p">[</span><span class="s2">&quot;instructions&quot;</span><span class="p">]:</span>
                             <span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="n">circ</span><span class="p">:</span>
@@ -403,19 +404,19 @@
                                                    <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">system_memory</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;automatic&quot;</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="n">err_string</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">63</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, and has too many qubits to fall &#39;</span>
-                                           <span class="s1">&#39;back to the extended_stabilizer &#39;</span>
-                                           <span class="s1">&#39;method.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err_string</span><span class="p">))</span>
-                        <span class="k">if</span> <span class="ow">not</span> <span class="n">ch_supported</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, and contains instructions &#39;</span>
-                                           <span class="s1">&#39;not supported by the extended_etabilizer &#39;</span>
-                                           <span class="s1">&#39;method.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err_string</span><span class="p">))</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                            <span class="s1">&#39;The QasmSimulator will automatically &#39;</span>
-                            <span class="s1">&#39;switch to the Extended Stabilizer backend, based on &#39;</span>
-                            <span class="s1">&#39;the memory requirements.&#39;</span><span class="p">)</span></div>
+
+                    <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">63</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, and has too many qubits to fall &#39;</span>
+                                       <span class="s1">&#39;back to the extended_stabilizer &#39;</span>
+                                       <span class="s1">&#39;method.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err_string</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">ch_supported</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, and contains instructions &#39;</span>
+                                       <span class="s1">&#39;not supported by the extended_etabilizer &#39;</span>
+                                       <span class="s1">&#39;method.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err_string</span><span class="p">))</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="s1">&#39;The QasmSimulator will automatically &#39;</span>
+                        <span class="s1">&#39;switch to the Extended Stabilizer backend, based on &#39;</span>
+                        <span class="s1">&#39;the memory requirements.&#39;</span><span class="p">)</span></div>
 </pre></div>
 
         </div>

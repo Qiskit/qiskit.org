@@ -51,8 +51,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.providers.ibmq.api_v2.ibmqclient module" href="qiskit.providers.ibmq.api_v2.ibmqclient.html" />
-    <link rel="prev" title="qiskit.providers.ibmq.api_v2.rest.root module" href="qiskit.providers.ibmq.api_v2.rest.root.html" /> 
+    <link rel="next" title="qiskit.providers.ibmq.api_v2.session module" href="qiskit.providers.ibmq.api_v2.session.html" />
+    <link rel="prev" title="qiskit.providers.ibmq.api_v2.rest.version_finder module" href="qiskit.providers.ibmq.api_v2.rest.version_finder.html" /> 
   </head>
 <body>
   <header>
@@ -1707,12 +1707,19 @@
         
   <div class="section" id="module-qiskit.providers.ibmq.api_v2.exceptions">
 <span id="qiskit-providers-ibmq-api-v2-exceptions-module"></span><h1>qiskit.providers.ibmq.api_v2.exceptions module<a class="headerlink" href="#module-qiskit.providers.ibmq.api_v2.exceptions" title="Permalink to this headline">¶</a></h1>
-<p>Exceptions related to the IBM Q Api.</p>
+<p>Exceptions related to the IBM Q Experience API.</p>
 <dl class="exception">
 <dt id="qiskit.providers.ibmq.api_v2.exceptions.ApiError">
 <em class="property">exception </em><code class="descname">ApiError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/exceptions.html#ApiError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.exceptions.ApiError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="qiskit.providers.ibmq.api.exceptions.html#qiskit.providers.ibmq.api.exceptions.ApiError" title="qiskit.providers.ibmq.api.exceptions.ApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api.exceptions.ApiError</span></code></a></p>
 <p>Generic IBM Q API error.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api_v2.exceptions.AuthenticationLicenseError">
+<em class="property">exception </em><code class="descname">AuthenticationLicenseError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/exceptions.html#AuthenticationLicenseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.exceptions.AuthenticationLicenseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.ibmq.api_v2.exceptions.ApiError" title="qiskit.providers.ibmq.api_v2.exceptions.ApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api_v2.exceptions.ApiError</span></code></a></p>
+<p>Exception due to user not accepting latest license agreement via web.</p>
 </dd></dl>
 
 <dl class="exception">
@@ -1722,6 +1729,34 @@
 <p>Exception re-raising a RequestException.</p>
 </dd></dl>
 
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api_v2.exceptions.WebsocketAuthenticationError">
+<em class="property">exception </em><code class="descname">WebsocketAuthenticationError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/exceptions.html#WebsocketAuthenticationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketAuthenticationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketError" title="qiskit.providers.ibmq.api_v2.exceptions.WebsocketError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api_v2.exceptions.WebsocketError</span></code></a></p>
+<p>Exception caused during websocket authentication.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api_v2.exceptions.WebsocketError">
+<em class="property">exception </em><code class="descname">WebsocketError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/exceptions.html#WebsocketError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.ibmq.api_v2.exceptions.ApiError" title="qiskit.providers.ibmq.api_v2.exceptions.ApiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api_v2.exceptions.ApiError</span></code></a></p>
+<p>Exceptions related to websockets.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api_v2.exceptions.WebsocketIBMQProtocolError">
+<em class="property">exception </em><code class="descname">WebsocketIBMQProtocolError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/exceptions.html#WebsocketIBMQProtocolError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketIBMQProtocolError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketError" title="qiskit.providers.ibmq.api_v2.exceptions.WebsocketError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api_v2.exceptions.WebsocketError</span></code></a></p>
+<p>Exceptions related to IBM Q protocol error.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="qiskit.providers.ibmq.api_v2.exceptions.WebsocketTimeoutError">
+<em class="property">exception </em><code class="descname">WebsocketTimeoutError</code><span class="sig-paren">(</span><em>usr_msg=None</em>, <em>dev_msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/exceptions.html#WebsocketTimeoutError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketTimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.ibmq.api_v2.exceptions.WebsocketError" title="qiskit.providers.ibmq.api_v2.exceptions.WebsocketError"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api_v2.exceptions.WebsocketError</span></code></a></p>
+<p>Timeout during websocket communication.</p>
+</dd></dl>
+
 </div>
 
 
@@ -1729,16 +1764,16 @@
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.providers.ibmq.api_v2.rest.root.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.providers.ibmq.api_v2.rest.version_finder.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>qiskit.providers.ibmq.api_v2.rest.root module</div>
+            <div>qiskit.providers.ibmq.api_v2.rest.version_finder module</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.providers.ibmq.api_v2.ibmqclient.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.providers.ibmq.api_v2.session.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.providers.ibmq.api_v2.ibmqclient module</div>
+            <div>qiskit.providers.ibmq.api_v2.session module</div>
         </div>
      </a>
         
