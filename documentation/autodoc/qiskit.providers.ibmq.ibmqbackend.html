@@ -51,7 +51,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.providers.ibmq.ibmqjob module" href="qiskit.providers.ibmq.ibmqjob.html" />
+    <link rel="next" title="qiskit.providers.ibmq.ibmqfactory module" href="qiskit.providers.ibmq.ibmqfactory.html" />
     <link rel="prev" title="qiskit.providers.ibmq.exceptions module" href="qiskit.providers.ibmq.exceptions.html" /> 
   </head>
 <body>
@@ -1715,16 +1715,22 @@
 <p>Backend class interfacing with an IBMQ backend.</p>
 <dl class="method">
 <dt id="qiskit.providers.ibmq.ibmqbackend.IBMQBackend.defaults">
-<code class="descname">defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.defaults" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaults</code><span class="sig-paren">(</span><em>refresh=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.defaults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the pulse defaults for the backend.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the pulse defaults for the backend. IF the backend
-does not support defaults, it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>refresh</strong> (<em>bool</em>) – if True, the return is via a QX API call.
+Otherwise, a cached version is returned.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.models.pulsedefaults.html#qiskit.providers.models.pulsedefaults.PulseDefaults" title="qiskit.providers.models.pulsedefaults.PulseDefaults">PulseDefaults</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>the pulse defaults for the backend. If the backend</dt>
+<dd>does not support defaults, it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.models.pulsedefaults.html#qiskit.providers.models.pulsedefaults.PulseDefaults" title="qiskit.providers.models.pulsedefaults.PulseDefaults">PulseDefaults</a></td>
 </tr>
 </tbody>
 </table>
@@ -1743,8 +1749,12 @@ in the returned list.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>limit</strong> (<em>int</em>) – number of jobs to retrieve</li>
-<li><strong>skip</strong> (<em>int</em>) – starting index of retrieval</li>
+<li><strong>limit</strong> (<em>int</em>) – number of jobs to retrieve. Note that the limit
+specified can be overridden by limits set by the API for
+performance reasons, and might result in fewer jobs being
+returned. In those cases, the <cite>skip</cite> parameter can be used
+for pagination.</li>
+<li><strong>skip</strong> (<em>int</em>) – starting index for the job retrieval.</li>
 <li><strong>status</strong> (<em>None</em><em> or </em><em>qiskit.providers.JobStatus</em><em> or </em><em>str</em>) – only get jobs
 with this status, where status is e.g. <cite>JobStatus.RUNNING</cite> or
 <cite>‘RUNNING’</cite></li>
@@ -1776,7 +1786,7 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of IBMQJob instances</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list(<a class="reference internal" href="qiskit.providers.ibmq.ibmqjob.html#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.ibmqjob.IBMQJob">IBMQJob</a>)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list(<a class="reference internal" href="qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.job.ibmqjob.IBMQJob">IBMQJob</a>)</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQBackendValueError</span></code> – status keyword value unrecognized</p>
@@ -1788,16 +1798,18 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 
 <dl class="method">
 <dt id="qiskit.providers.ibmq.ibmqbackend.IBMQBackend.properties">
-<code class="descname">properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.properties" title="Permalink to this definition">¶</a></dt>
+<code class="descname">properties</code><span class="sig-paren">(</span><em>refresh=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the online backend properties.</p>
-<p>The return is via QX API call.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The properties of the backend.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>refresh</strong> (<em>bool</em>) – if True, the return is via a QX API call.
+Otherwise, a cached version is returned.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.models.backendproperties.html#qiskit.providers.models.backendproperties.BackendProperties" title="qiskit.providers.models.backendproperties.BackendProperties">BackendProperties</a></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The properties of the backend.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.models.backendproperties.html#qiskit.providers.models.backendproperties.BackendProperties" title="qiskit.providers.models.backendproperties.BackendProperties">BackendProperties</a></td>
 </tr>
 </tbody>
 </table>
@@ -1815,7 +1827,7 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">class instance</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.ibmqjob.html#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.ibmqjob.IBMQJob">IBMQJob</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.job.ibmqjob.IBMQJob">IBMQJob</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IBMQBackendError</span></code> – if retrieval failed</td>
 </tr>
@@ -1826,7 +1838,7 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 <dl class="method">
 <dt id="qiskit.providers.ibmq.ibmqbackend.IBMQBackend.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>qobj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run qobj asynchronously.</p>
+<dd><p>Run a Qobj asynchronously.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1835,7 +1847,7 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance derived from BaseJob</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.ibmqjob.html#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.ibmqjob.IBMQJob">IBMQJob</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.job.ibmqjob.IBMQJob">IBMQJob</a></td>
 </tr>
 </tbody>
 </table>
@@ -1874,7 +1886,7 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 <p>Backend class interfacing with an IBMQ simulator.</p>
 <dl class="method">
 <dt id="qiskit.providers.ibmq.ibmqbackend.IBMQSimulator.properties">
-<code class="descname">properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQSimulator.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQSimulator.properties" title="Permalink to this definition">¶</a></dt>
+<code class="descname">properties</code><span class="sig-paren">(</span><em>refresh=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQSimulator.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQSimulator.properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the online backend properties.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1904,7 +1916,7 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">an instance derived from BaseJob</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.providers.ibmq.ibmqjob.html#qiskit.providers.ibmq.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.ibmqjob.IBMQJob">IBMQJob</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob" title="qiskit.providers.ibmq.job.ibmqjob.IBMQJob">IBMQJob</a></p>
 </td>
 </tr>
 </tbody>
@@ -1926,10 +1938,10 @@ states <code class="docutils literal notranslate"><span class="pre">00</span></c
             <div>qiskit.providers.ibmq.exceptions module</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.providers.ibmq.ibmqjob.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.providers.ibmq.ibmqfactory.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.providers.ibmq.ibmqjob module</div>
+            <div>qiskit.providers.ibmq.ibmqfactory module</div>
         </div>
      </a>
         

@@ -189,6 +189,9 @@
 <span class="sd">        qobj (Qobj): a Qobj object.</span>
 <span class="sd">        exp_index (int): The index of the experiment in the qobj.</span>
 <span class="sd">        instruction (QasmQobjInstruction): instruction to insert.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        qobj(Qobj): The Qobj object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">[</span><span class="n">exp_index</span><span class="p">]</span><span class="o">.</span><span class="n">instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">qobj</span></div>
@@ -200,8 +203,11 @@
 <span class="sd">    Args:</span>
 <span class="sd">        qobj (Qobj): a Qobj object</span>
 <span class="sd">        exp_index (int): The index of the experiment in the qobj.</span>
-<span class="sd">        instruction(QasmQobjInstruction): instruction to insert.</span>
+<span class="sd">        item (QasmQobjInstruction): instruction to insert.</span>
 <span class="sd">        pos (int): the position to insert the item.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        qobj(Qobj): The Qobj object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qobj</span><span class="o">.</span><span class="n">experiments</span><span class="p">[</span><span class="n">exp_index</span><span class="p">]</span><span class="o">.</span><span class="n">instructions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">qobj</span></div>
@@ -276,7 +282,7 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">registers</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of qubits does not match number of registers&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;measure&#39;</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
-                           <span class="n">register</span><span class="o">=</span><span class="n">registers</span><span class="p">)</span></div>
+                               <span class="n">register</span><span class="o">=</span><span class="n">registers</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="reset_instr"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.aer.utils.qobj_utils.html#qiskit.providers.aer.utils.qobj_utils.reset_instr">[docs]</a><span class="k">def</span> <span class="nf">reset_instr</span><span class="p">(</span><span class="n">qubits</span><span class="p">):</span>
@@ -356,6 +362,12 @@
 <span class="sd">    Args:</span>
 <span class="sd">        qobj (Qobj): a qobj to insert snapshots into</span>
 <span class="sd">        snapshot (QasmQobjInstruction): a snapshot instruction.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        qobj(Qobj): The Qobj object</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: if the name of the instruction is not an snapshot</span>
 
 <span class="sd">    Additional Information:</span>
 <span class="sd">    &quot;&quot;&quot;</span>

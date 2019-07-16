@@ -219,7 +219,8 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        NoiseError: if number of qubits is not supported or approximation</span>
-<span class="sd">        failsed.</span>
+<span class="sd">                    failsed.</span>
+<span class="sd">        RuntimeError: If there&#39;s no information about the noise type</span>
 
 <span class="sd">    Additional Information</span>
 <span class="sd">    ----------------------</span>
@@ -231,18 +232,22 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">QuantumError</span><span class="p">):</span>
         <span class="n">error</span> <span class="o">=</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Only 1-qubit noises can be converted, </span><span class="si">{}</span><span class="s2">-qubit &quot;</span>
+    <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Only 1-qubit and 2-qubit noises can be converted, </span><span class="si">{}</span><span class="s2">-qubit &quot;</span>
                          <span class="s2">&quot;noise found in model&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">))</span>
 
     <span class="n">error_kraus_operators</span> <span class="o">=</span> <span class="n">Kraus</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">to_quantumchannel</span><span class="p">())</span><span class="o">.</span><span class="n">data</span>
     <span class="n">transformer</span> <span class="o">=</span> <span class="n">NoiseTransformer</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">operator_string</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">no_info_error</span> <span class="o">=</span> <span class="s2">&quot;No information about noise type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">operator_string</span><span class="p">)</span>
         <span class="n">operator_string</span> <span class="o">=</span> <span class="n">operator_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">operator_string</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">transformer</span><span class="o">.</span><span class="n">named_operators</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">no_info_error</span><span class="p">)</span>
+        <span class="n">operator_lists</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">named_operators</span><span class="p">[</span><span class="n">operator_string</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">operator_lists</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="s2">&quot;No information about noise type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">operator_string</span><span class="p">))</span>
-        <span class="n">operator_dict</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">named_operators</span><span class="p">[</span><span class="n">operator_string</span><span class="p">]</span>
+                <span class="n">no_info_error</span> <span class="o">+</span> <span class="s2">&quot; for </span><span class="si">{}</span><span class="s2"> qubits&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span><span class="p">))</span>
+        <span class="n">operator_dict</span> <span class="o">=</span> <span class="n">operator_lists</span><span class="p">[</span><span class="n">error</span><span class="o">.</span><span class="n">number_of_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">operator_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">names</span><span class="p">,</span> <span class="n">operator_list</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">operator_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
     <span class="k">if</span> <span class="n">operator_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -254,8 +259,7 @@
         <span class="n">identity_prob</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">identity_prob</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">identity_prob</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="s2">&quot;Approximated channel operators probabilities sum to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span>
-                <span class="nb">format</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">identity_prob</span><span class="p">))</span>
+                <span class="s2">&quot;Channel probabilities sum to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">identity_prob</span><span class="p">))</span>
         <span class="n">quantum_error_spec</span> <span class="o">=</span> <span class="p">[([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span> <span class="n">identity_prob</span><span class="p">)]</span>
         <span class="n">op_circuit_list</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">transformer</span><span class="o">.</span><span class="n">operator_circuit</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
@@ -300,8 +304,8 @@
 <span class="sd">    For further information see `NoiseTransformer.named_operators`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">#We need to iterate over all the errors in the noise model.</span>
-    <span class="c1">#No nice interface for this now, easiest way is to mimic as_dict</span>
+    <span class="c1"># We need to iterate over all the errors in the noise model.</span>
+    <span class="c1"># No nice interface for this now, easiest way is to mimic as_dict</span>
 
     <span class="n">error_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># Add default quantum errors</span>
@@ -311,7 +315,7 @@
             <span class="n">operator_string</span><span class="o">=</span><span class="n">operator_string</span><span class="p">,</span>
             <span class="n">operator_dict</span><span class="o">=</span><span class="n">operator_dict</span><span class="p">,</span>
             <span class="n">operator_list</span><span class="o">=</span><span class="n">operator_list</span><span class="p">)</span>
-        <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">operation</span><span class="p">]</span>
         <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_dict</span><span class="p">)</span>
 
@@ -323,7 +327,7 @@
                 <span class="n">operator_string</span><span class="o">=</span><span class="n">operator_string</span><span class="p">,</span>
                 <span class="n">operator_dict</span><span class="o">=</span><span class="n">operator_dict</span><span class="p">,</span>
                 <span class="n">operator_list</span><span class="o">=</span><span class="n">operator_list</span><span class="p">)</span>
-            <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+            <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
             <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">operation</span><span class="p">]</span>
             <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;gate_qubits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">_str2qubits</span><span class="p">(</span><span class="n">qubits_str</span><span class="p">)]</span>
             <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_dict</span><span class="p">)</span>
@@ -337,7 +341,7 @@
                     <span class="n">operator_string</span><span class="o">=</span><span class="n">operator_string</span><span class="p">,</span>
                     <span class="n">operator_dict</span><span class="o">=</span><span class="n">operator_dict</span><span class="p">,</span>
                     <span class="n">operator_list</span><span class="o">=</span><span class="n">operator_list</span><span class="p">)</span>
-                <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+                <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
                 <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">operation</span><span class="p">]</span>
                 <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;gate_qubits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">_str2qubits</span><span class="p">(</span><span class="n">qubits_str</span><span class="p">)]</span>
                 <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;noise_qubits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">_str2qubits</span><span class="p">(</span><span class="n">noise_str</span><span class="p">)]</span>
@@ -350,7 +354,7 @@
             <span class="n">operator_string</span><span class="o">=</span><span class="n">operator_string</span><span class="p">,</span>
             <span class="n">operator_dict</span><span class="o">=</span><span class="n">operator_dict</span><span class="p">,</span>
             <span class="n">operator_list</span><span class="o">=</span><span class="n">operator_list</span><span class="p">)</span>
-        <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_dict</span><span class="p">)</span>
 
     <span class="c1"># Add local readout error</span>
@@ -360,7 +364,7 @@
             <span class="n">operator_string</span><span class="o">=</span><span class="n">operator_string</span><span class="p">,</span>
             <span class="n">operator_dict</span><span class="o">=</span><span class="n">operator_dict</span><span class="p">,</span>
             <span class="n">operator_list</span><span class="o">=</span><span class="n">operator_list</span><span class="p">)</span>
-        <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="n">error_dict</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">error_dict</span><span class="p">[</span><span class="s2">&quot;gate_qubits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">_str2qubits</span><span class="p">(</span><span class="n">qubits_str</span><span class="p">)]</span>
         <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_dict</span><span class="p">)</span>
 
@@ -373,23 +377,76 @@
     <span class="k">return</span> <span class="n">approx_noise_model</span></div>
 
 
+<div class="viewcode-block" id="pauli_operators"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.pauli_operators">[docs]</a><span class="k">def</span> <span class="nf">pauli_operators</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list: a list of Pauli operators for 1 and 2 qubits</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pauli_1_qubit</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]</span>
+    <span class="p">}</span>
+    <span class="n">pauli_2_qubit</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;XI&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;YI&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;ZI&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;IX&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;IY&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;IZ&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;XX&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;YY&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;ZZ&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;XY&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;XZ&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;YX&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;YZ&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;ZX&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+        <span class="s1">&#39;ZY&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">pauli_1_qubit</span><span class="p">,</span> <span class="n">pauli_2_qubit</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="reset_operators"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.reset_operators">[docs]</a><span class="k">def</span> <span class="nf">reset_operators</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list: a list of reset operators for 1 and 2 qubits</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reset_0_to_0</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]</span>
+    <span class="n">reset_0_to_1</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]</span>
+    <span class="n">reset_1_to_0</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}]</span>
+    <span class="n">reset_1_to_1</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}]</span>
+    <span class="n">id_0</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]</span>
+    <span class="n">id_1</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}]</span>
+
+    <span class="n">reset_1_qubit</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">reset_0_to_0</span><span class="p">,</span>
+        <span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="n">reset_0_to_1</span>
+    <span class="p">}</span>
+
+    <span class="n">reset_2_qubit</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;p0&#39;</span><span class="p">:</span> <span class="n">reset_0_to_0</span> <span class="o">+</span> <span class="n">id_1</span><span class="p">,</span>
+        <span class="s1">&#39;q0&#39;</span><span class="p">:</span> <span class="n">reset_0_to_1</span> <span class="o">+</span> <span class="n">id_1</span><span class="p">,</span>
+        <span class="s1">&#39;p1&#39;</span><span class="p">:</span> <span class="n">reset_1_to_0</span> <span class="o">+</span> <span class="n">id_0</span><span class="p">,</span>
+        <span class="s1">&#39;q1&#39;</span><span class="p">:</span> <span class="n">reset_1_to_1</span> <span class="o">+</span> <span class="n">id_0</span><span class="p">,</span>
+        <span class="s1">&#39;p0_p1&#39;</span><span class="p">:</span> <span class="n">reset_0_to_0</span> <span class="o">+</span> <span class="n">reset_1_to_0</span><span class="p">,</span>
+        <span class="s1">&#39;p0_q1&#39;</span><span class="p">:</span> <span class="n">reset_0_to_0</span> <span class="o">+</span> <span class="n">reset_1_to_1</span><span class="p">,</span>
+        <span class="s1">&#39;q0_p1&#39;</span><span class="p">:</span> <span class="n">reset_0_to_1</span> <span class="o">+</span> <span class="n">reset_1_to_0</span><span class="p">,</span>
+        <span class="s1">&#39;q0_q1&#39;</span><span class="p">:</span> <span class="n">reset_0_to_1</span> <span class="o">+</span> <span class="n">reset_1_to_1</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">reset_1_qubit</span><span class="p">,</span> <span class="n">reset_2_qubit</span><span class="p">]</span></div>
+
+
 <div class="viewcode-block" id="NoiseTransformer"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer">[docs]</a><span class="k">class</span> <span class="nc">NoiseTransformer</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Transforms one quantum channel to another based on a specified criteria.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">named_operators</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;pauli&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
-                <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>
-                <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]</span>
-            <span class="p">},</span>
-            <span class="s1">&#39;reset&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}],</span>  <span class="c1"># reset to |0&gt;</span>
-                <span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
-                      <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;qubits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]</span>  <span class="c1"># reset to |1&gt;</span>
-            <span class="p">},</span>
-            <span class="s1">&#39;clifford&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">j</span><span class="p">,</span> <span class="n">single_qubit_clifford_instructions</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
-                              <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)])</span>
+            <span class="s1">&#39;pauli&#39;</span><span class="p">:</span> <span class="n">pauli_operators</span><span class="p">(),</span>
+            <span class="s1">&#39;reset&#39;</span><span class="p">:</span> <span class="n">reset_operators</span><span class="p">(),</span>
+            <span class="s1">&#39;clifford&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="n">j</span><span class="p">:</span> <span class="n">single_qubit_clifford_instructions</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">)}]</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fidelity_data</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">use_honesty_constraint</span> <span class="o">=</span> <span class="kc">True</span>
@@ -417,7 +474,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            operator (operator): operator representation. Can be a noise</span>
 <span class="sd">                circuit or a matrix or a list of matrices.</span>
-<span class="sd">        Output:</span>
+<span class="sd">        Returns:</span>
 <span class="sd">            List: The operator, converted to noise circuit representation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -437,32 +494,34 @@
                                    <span class="n">noise_kraus_operators</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            noise_kraus_operators: a list of matrices (Kraus operators) for the input channel</span>
-<span class="sd">            transform_channel_operators: a list of matrices or tuples of matrices</span>
-<span class="sd">            representing Kraus operators that can construct the output channel</span>
-<span class="sd">            e.g. [X,Y,Z] represent the Pauli channel</span>
-<span class="sd">            and [(|0&gt;&lt;0|, |0&gt;&lt;1|), |1&gt;&lt;0|, |1&gt;&lt;1|)] represents the relaxation channel</span>
+<span class="sd">            noise_kraus_operators (List): a list of matrices (Kraus operators) for the input channel</span>
+<span class="sd">            transform_channel_operators (List): a list of matrices or tuples of matrices</span>
+<span class="sd">                representing Kraus operators that can construct the output channel</span>
+<span class="sd">                e.g. [X,Y,Z] represent the Pauli channel</span>
+<span class="sd">                and [(|0&gt;&lt;0|, |0&gt;&lt;1|), |1&gt;&lt;0|, |1&gt;&lt;1|)] represents the relaxation channel</span>
 
-<span class="sd">        Output:</span>
-<span class="sd">            A list of amplitudes that define the output channel.</span>
-<span class="sd">            In the case the input is a list [A1, A2, ..., An] of transform matrices</span>
-<span class="sd">            and [E0, E1, ..., Em] of noise kraus operators, the output is</span>
-<span class="sd">            a list [p1, p2, ..., pn] of probabilities such that:</span>
-<span class="sd">            1) p_i &gt;= 0</span>
-<span class="sd">            2) p1 + ... + pn &lt;= 1</span>
-<span class="sd">            3) [sqrt(p1)A1, sqrt(p2)A2, ..., sqrt(pn)An, sqrt(1-(p1 + ... + pn))I] is</span>
-<span class="sd">                a list of kraus operators that define the output channel</span>
-<span class="sd">                (which is &quot;close&quot; to the input chanel given by [E0, ..., Em])</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List: A list of amplitudes that define the output channel.</span>
+<span class="sd">                In the case the input is a list [A1, A2, ..., An] of transform matrices</span>
+<span class="sd">                and [E0, E1, ..., Em] of noise kraus operators, the output is</span>
+<span class="sd">                a list [p1, p2, ..., pn] of probabilities such that:</span>
+<span class="sd">                1) p_i &gt;= 0</span>
+<span class="sd">                2) p1 + ... + pn &lt;= 1</span>
+<span class="sd">                3) [sqrt(p1)A1, sqrt(p2)A2, ..., sqrt(pn)An, sqrt(1-(p1 + ... + pn))I] is</span>
+<span class="sd">                    a list of kraus operators that define the output channel</span>
+<span class="sd">                    (which is &quot;close&quot; to the input chanel given by [E0, ..., Em])</span>
 
-<span class="sd">            This channel can be thought of as choosing the operator Ai in probability pi and applying</span>
-<span class="sd">            this operator to the quantum state.</span>
+<span class="sd">                This channel can be thought of as choosing the operator Ai in probability pi and</span>
+<span class="sd">                applying this operator to the quantum state.</span>
 
-<span class="sd">            More generally, if the input is a list of tuples (not neccesarily of the same size):</span>
-<span class="sd">            [(A1, B1, ...), (A2, B2, ...), ... (An, Bn, ...)] then the output is</span>
-<span class="sd">            still a list [p1, p2, ..., pn] and now the output channel is defined by the operators</span>
-<span class="sd">            [sqrt(p1)A1, sqrt(p1)B1, ..., sqrt(pn)An, sqrt(pn)Bn, ..., sqrt(1-(p1 + ... + pn))I]</span>
+<span class="sd">                More generally, if the input is a list of tuples (not neccesarily of the same size):</span>
+<span class="sd">                [(A1, B1, ...), (A2, B2, ...), ... (An, Bn, ...)] then the output is</span>
+<span class="sd">                still a list [p1, p2, ..., pn] and now the output channel is defined by theo</span>
+<span class="sd">                perators:</span>
+<span class="sd">                [sqrt(p1)A1, sqrt(p1)B1, ..., sqrt(pn)An, sqrt(pn)Bn, ..., sqrt(1-(p1 + ... + pn))I]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">noise_kraus_operators</span> <span class="o">=</span> <span class="n">noise_kraus_operators</span>
+        <span class="c1"># pylint: disable=invalid-name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transform_channel_operators</span> <span class="o">=</span> <span class="n">transform_channel_operators</span>
         <span class="n">full_transform_channel_operators</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepare_channel_operator_list</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transform_channel_operators</span><span class="p">)</span>
@@ -475,18 +534,37 @@
 
 <div class="viewcode-block" id="NoiseTransformer.prepare_channel_operator_list"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.prepare_channel_operator_list">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">prepare_channel_operator_list</span><span class="p">(</span><span class="n">ops_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepares a list of channel operators</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ops_list (List): The list of operators to prepare</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List: The channel operator list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># convert to sympy matrices and verify that each singleton is</span>
         <span class="c1"># in a tuple; also add identity matrix</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[[</span><span class="n">sympy</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)]]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ops</span> <span class="ow">in</span> <span class="n">ops_list</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ops</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ops</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">ops</span><span class="p">]</span>
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">])</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># grab the dimensions from the first element</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[[</span><span class="n">sympy</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)]]</span> <span class="o">+</span> <span class="n">result</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
+    <span class="c1"># pylint: disable=invalid-name</span>
 <div class="viewcode-block" id="NoiseTransformer.prepare_honesty_constraint"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.prepare_honesty_constraint">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_honesty_constraint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform_channel_operators_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepares the honesty constraint</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            transform_channel_operators_list (list): A list of tuples of matrices which represent</span>
+<span class="sd">            Kraus operators.</span>
+<span class="sd">         &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_honesty_constraint</span><span class="p">:</span>
             <span class="k">return</span>
+
         <span class="n">goal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fidelity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_kraus_operators</span><span class="p">)</span>
         <span class="n">coefficients</span> <span class="o">=</span> <span class="p">[</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fidelity</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span> <span class="k">for</span> <span class="n">ops</span> <span class="ow">in</span> <span class="n">transform_channel_operators_list</span>
@@ -494,26 +572,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fidelity_data</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;goal&#39;</span><span class="p">:</span> <span class="n">goal</span><span class="p">,</span>
             <span class="s1">&#39;coefficients&#39;</span><span class="p">:</span>
-            <span class="n">coefficients</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># coefficients[0] corresponds to I</span>
+                <span class="n">coefficients</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># coefficients[0] corresponds to I</span>
         <span class="p">}</span></div>
 
     <span class="c1"># methods relevant to the transformation to quadratic programming instance</span>
 
 <div class="viewcode-block" id="NoiseTransformer.fidelity"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.fidelity">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">fidelity</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">E</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">channel</span><span class="p">])</span></div>
+        <span class="sd">&quot;&quot;&quot; Calculates channel fidelity &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">E</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">channel</span><span class="p">])</span></div>
 
+    <span class="c1"># pylint: disable=invalid-name</span>
 <div class="viewcode-block" id="NoiseTransformer.generate_channel_matrices"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.generate_channel_matrices">[docs]</a>    <span class="k">def</span> <span class="nf">generate_channel_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform_channel_operators_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generates a list of 4x4 symbolic matrices describing the channel defined from the given operators</span>
+<span class="sd">        Generates a list of 4x4 symbolic matrices describing the channel defined from the given</span>
+<span class="sd">        operators</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">             transform_channel_operators_list: a list of tuples of matrices which represent Kraus operators</span>
+<span class="sd">             transform_channel_operators_list (list): A list of tuples of matrices which represent</span>
+<span class="sd">             Kraus operators.</span>
 <span class="sd">             The identity matrix is assumed to be the first element in the list</span>
 <span class="sd">             [(I, ), (A1, B1, ...), (A2, B2, ...), ..., (An, Bn, ...)]</span>
-<span class="sd">             e.g. for a Pauli channel, the matrices are</span>
+<span class="sd">             e.g. for a Pauli channel, the matrices are:</span>
 <span class="sd">             [(I,), (X,), (Y,), (Z,)]</span>
-<span class="sd">             for relaxation they are</span>
+<span class="sd">             for relaxation they are:</span>
 <span class="sd">             [(I, ), (|0&gt;&lt;0|, |0&gt;&lt;1|), |1&gt;&lt;0|, |1&gt;&lt;1|)]</span>
 
 <span class="sd">        We consider this input to symbolically represent a channel in the following manner:</span>
@@ -524,10 +606,12 @@
 <span class="sd">        This is the channel C symbolically represented by the operators</span>
 
 
-<span class="sd">        Output:</span>
-<span class="sd">            A list of 4x4 complex matrices ([D1, D2, ..., Dn], E) such that:</span>
-<span class="sd">            The matrix x1*D1 + ... + xn*Dn + E represents the operation of the channel C on the density operator</span>
-<span class="sd">            we find it easier to work with this representation of C when performing the combinatorial optimization</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A list of 4x4 complex matrices ([D1, D2, ..., Dn], E) such that:</span>
+<span class="sd">            The matrix x1*D1 + ... + xn*Dn + E represents the operation of the channel C</span>
+<span class="sd">            on the density operator.</span>
+<span class="sd">            we find it easier to work with this representation of C when performing the</span>
+<span class="sd">            combinatorial optimization.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">symbols_string</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
@@ -546,7 +630,7 @@
         <span class="n">symbolic_operators</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">op</span> <span class="k">for</span> <span class="n">ops</span> <span class="ow">in</span> <span class="n">symbolic_operators_list</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">ops</span>
         <span class="p">]</span>
-        <span class="c1"># channel_matrix_representation() peforms the required linear</span>
+        <span class="c1"># channel_matrix_representation() performs the required linear</span>
         <span class="c1"># algebra to find the representing matrices.</span>
         <span class="n">operators_channel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_matrix_representation</span><span class="p">(</span>
             <span class="n">symbolic_operators</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">exp</span><span class="p">)</span>
@@ -555,26 +639,54 @@
 
 <div class="viewcode-block" id="NoiseTransformer.compute_channel_operation"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_channel_operation">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">compute_channel_operation</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">operators</span><span class="p">):</span>
-        <span class="c1"># Given a quantum state&#39;s density function rho, the effect of the</span>
-        <span class="c1"># channel on this state is</span>
-        <span class="c1"># rho -&gt; \sum_{i=1}^n E_i * rho * E_i^\dagger</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a quantum state&#39;s density function rho, the effect of the</span>
+<span class="sd">        channel on this state is:</span>
+<span class="sd">        rho -&gt; sum_{i=1}^n E_i * rho * E_i^dagger</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rho (number): Density function</span>
+<span class="sd">            operators (list): List of operators</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            number: The result of applying the list of operators</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">E</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">E</span><span class="o">.</span><span class="n">H</span> <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">operators</span><span class="p">],</span>
                    <span class="n">sympy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">operators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rows</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="NoiseTransformer.flatten_matrix"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.flatten_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">flatten_matrix</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            m (Matrix): The matrix to flatten</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A row vector repesenting the flattened matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="p">[</span><span class="n">element</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">m</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="NoiseTransformer.channel_matrix_representation"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.channel_matrix_representation">[docs]</a>    <span class="k">def</span> <span class="nf">channel_matrix_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operators</span><span class="p">):</span>
-        <span class="c1"># We convert the operators to a matrix by applying the channel to</span>
-        <span class="c1"># the four basis elements of the 2x2 matrix space representing</span>
-        <span class="c1"># density operators; this is standard linear algebra</span>
-        <span class="n">standard_base</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
-            <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
-            <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
-            <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-        <span class="p">]</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                We convert the operators to a matrix by applying the channel to</span>
+<span class="sd">                the four basis elements of the 2x2 matrix space representing</span>
+<span class="sd">                density operators; this is standard linear algebra</span>
+
+<span class="sd">                Args:</span>
+<span class="sd">                    operators (list): The list of operators to transform into a Matrix</span>
+
+<span class="sd">                Returns:</span>
+<span class="sd">                    sympy.Matrix: The matrx representation of the operators</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">operators</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">standard_base</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">basis_element_ij</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="o">*</span><span class="n">shape</span><span class="p">)</span>
+                <span class="n">basis_element_ij</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">standard_base</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">basis_element_ij</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">flatten_matrix</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">compute_channel_operation</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">operators</span><span class="p">))</span>
@@ -585,26 +697,28 @@
             <span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">             channel: a 4x4 symbolic matrix</span>
-<span class="sd">             symbols: the symbols x1, ..., xn which may occur in the matrix</span>
+<span class="sd">             channel (Matrix): a 4x4 symbolic matrix</span>
+<span class="sd">             symbols (list): the symbols x1, ..., xn which may occur in the matrix</span>
 
-<span class="sd">        Output:</span>
-<span class="sd">            A list of 4x4 complex matrices ([D1, D2, ..., Dn], E) such that:</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A list of 4x4 complex matrices ([D1, D2, ..., Dn], E) such that:</span>
 <span class="sd">            channel == x1*D1 + ... + xn*Dn + E</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">([</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_matrix_from_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span>
-        <span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_const_matrix_from_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">symbols</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_matrix_from_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_const_matrix_from_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">symbols</span><span class="p">)</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="NoiseTransformer.get_matrix_from_channel"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.get_matrix_from_channel">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_matrix_from_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extract the numeric parameter matrix.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract the numeric parameter matrix.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            channel (matrix): a 4x4 symbolic matrix.</span>
 <span class="sd">            symbol (list): a symbol xi</span>
 
-<span class="sd">        Returns</span>
+<span class="sd">        Returns:</span>
 <span class="sd">            matrix: a 4x4 numeric matrix.</span>
 
 <span class="sd">        Additional Information</span>
@@ -622,14 +736,15 @@
 
 <div class="viewcode-block" id="NoiseTransformer.get_const_matrix_from_channel"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.get_const_matrix_from_channel">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_const_matrix_from_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extract the numeric constant matrix.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract the numeric constant matrix.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            channel (matrix): a 4x4 symbolic matrix.</span>
 <span class="sd">            symbols (list): The full list [x1, ..., xn] of symbols</span>
 <span class="sd">                used in the matrix.</span>
 
-<span class="sd">        Returns</span>
+<span class="sd">        Returns:</span>
 <span class="sd">            matrix: a 4x4 numeric matrix.</span>
 
 <span class="sd">        Additional Information</span>
@@ -647,10 +762,25 @@
 
 <div class="viewcode-block" id="NoiseTransformer.transform_by_given_channel"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.transform_by_given_channel">[docs]</a>    <span class="k">def</span> <span class="nf">transform_by_given_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_matrices</span><span class="p">,</span>
                                    <span class="n">const_channel_matrix</span><span class="p">):</span>
-        <span class="c1"># This method creates the quadratic programming instance for</span>
-        <span class="c1"># minimizing the Hilbert-Schmidt norm of the matrix (A-B) obtained</span>
-        <span class="c1"># as the difference of the input noise channel and the output</span>
-        <span class="c1"># channel we wish to determine.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method creates objective function representing the</span>
+<span class="sd">        Hilbert-Schmidt norm of the matrix (A-B) obtained</span>
+<span class="sd">        as the difference of the input noise channel and the output</span>
+<span class="sd">        channel we wish to determine.</span>
+
+<span class="sd">        This function is represented by a matrix P and a vector q, such that</span>
+<span class="sd">        f(x) = 1/2(x*P*x)+q*x</span>
+<span class="sd">        where x is the vector we wish to minimize, where x represents</span>
+<span class="sd">        probabilities for the noise operators that construct the output channel</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel_matrices (list): A list of 4x4 symbolic matrices</span>
+<span class="sd">            const_channel_matrix (matrix): a 4x4 constant matrix</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: a list of the optimal probabilities for the channel matrices,</span>
+<span class="sd">            determined by the quadratic program solver</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">target_channel</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="p">(</span><span class="n">Kraus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_kraus_operators</span><span class="p">))</span>
         <span class="n">target_channel_matrix</span> <span class="o">=</span> <span class="n">target_channel</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">T</span>
 
@@ -660,6 +790,16 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solve_quadratic_program</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NoiseTransformer.compute_P"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_P">[docs]</a>    <span class="k">def</span> <span class="nf">compute_P</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">As</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method creates the matrix P in the</span>
+<span class="sd">        f(x) = 1/2(x*P*x)+q*x</span>
+<span class="sd">        representation of the objective function</span>
+<span class="sd">        Args:</span>
+<span class="sd">            As (list): list of symbolic matrices repersenting the channel matrices</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            matrix: The matrix P for the description of the quadaric program</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vs</span> <span class="o">=</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vs</span><span class="p">)</span>
         <span class="n">P</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -668,6 +808,17 @@
         <span class="k">return</span> <span class="n">P</span></div>
 
 <div class="viewcode-block" id="NoiseTransformer.compute_q"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_q">[docs]</a>    <span class="k">def</span> <span class="nf">compute_q</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method creates the vector q for the</span>
+<span class="sd">        f(x) = 1/2(x*P*x)+q*x</span>
+<span class="sd">        representation of the objective function</span>
+<span class="sd">        Args:</span>
+<span class="sd">            As (list): list of symbolic matrices repersenting the quadratic program</span>
+<span class="sd">            C (matrix): matrix representing the the constant channel matrix</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: The vector q for the description of the quadaric program</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vs</span> <span class="o">=</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
         <span class="n">vC</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vs</span><span class="p">)</span>
@@ -676,9 +827,30 @@
             <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">vC</span><span class="p">),</span> <span class="n">vs</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">q</span></div>
 
-    <span class="c1"># the following method is the only place in the code where we rely on the cvxopt library</span>
-    <span class="c1"># should we consider another library, only this method needs to change</span>
 <div class="viewcode-block" id="NoiseTransformer.solve_quadratic_program"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.utils.noise_transformation.html#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.solve_quadratic_program">[docs]</a>    <span class="k">def</span> <span class="nf">solve_quadratic_program</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function solved the quadratic program to minimize the objective function</span>
+<span class="sd">        f(x) = 1/2(x*P*x)+q*x</span>
+<span class="sd">        subject to the additional constraints</span>
+<span class="sd">        Gx &lt;= h</span>
+
+<span class="sd">        Where P, q are given and G,h are computed to ensure that x represents</span>
+<span class="sd">        a probability vector and subject to honesty constraints if required</span>
+<span class="sd">        Args:</span>
+<span class="sd">            P (matrix): A matrix representing the P component of the objective function</span>
+<span class="sd">            q (list): A vector representing the q component of the objective function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: The solution of the quadratic program (represents probabilites)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ImportError: If cvxopt external module is not installed</span>
+
+<span class="sd">        Additional information</span>
+<span class="sd">        ======================</span>
+<span class="sd">        This method is the only place in the code where we rely on the cvxopt library</span>
+<span class="sd">        should we consider another library, only this method needs to change</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">cvxopt</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>

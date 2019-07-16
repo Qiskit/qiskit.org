@@ -351,7 +351,7 @@
             <span class="c1"># Pauli strings go from qubit-0 on left to qubit-N on right</span>
             <span class="c1"># but pauli ops are tensor product of qubit-N on left to qubit-0 on right</span>
             <span class="c1"># We also drop identity operators to reduce dimension of matrix multiplication</span>
-            <span class="n">mat</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pauli</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">):</span>
                 <span class="n">pauli_str</span> <span class="o">=</span> <span class="n">pauli</span><span class="o">.</span><span class="n">to_label</span><span class="p">()</span>
@@ -363,7 +363,7 @@
                     <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">pstr</span> <span class="o">!=</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid Pauli string.&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mat</span> <span class="ow">is</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mat</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">prob_identity</span> <span class="o">+=</span> <span class="n">prob</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">circ</span> <span class="o">=</span> <span class="n">make_unitary_instruction</span><span class="p">(</span>
@@ -391,6 +391,7 @@
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">}</span>
         <span class="k">if</span> <span class="n">pauli</span> <span class="o">==</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">}</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Invalid Pauli string.&quot;</span><span class="p">)</span>
 
     <span class="n">prob_identity</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">pauli_circuits</span> <span class="o">=</span> <span class="p">[]</span>
@@ -426,12 +427,12 @@
     <span class="k">return</span> <span class="n">error</span>
 
 
-<div class="viewcode-block" id="depolarizing_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.depolarizing_error">[docs]</a><span class="k">def</span> <span class="nf">depolarizing_error</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="depolarizing_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.depolarizing_error">[docs]</a><span class="k">def</span> <span class="nf">depolarizing_error</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Depolarizing quantum error channel.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        prob (double): completely depolarizing channel error probability.</span>
+<span class="sd">        param (double): depolarizing error parameter.</span>
 <span class="sd">        num_qubits (int): the number of qubits for the error channel.</span>
 <span class="sd">        standard_gates (bool): if True return the operators as standard qobj</span>
 <span class="sd">                               Pauli gate instructions. If false return as</span>
@@ -443,21 +444,32 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        NoiseError: If noise parameters are invalid.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">prob</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">prob</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span>
-            <span class="s2">&quot;Depolarizing probability must be in between 0 and 1.&quot;</span><span class="p">)</span>
+<span class="sd">    Additional Information:</span>
+<span class="sd">        The depolarizing channel is defined as:</span>
+<span class="sd">            E(ρ) = (1 - λ) ρ + λ * (I / 2 ** n)</span>
+<span class="sd">            with 0 &lt;= λ &lt;= 4 ** n / (4 ** n - 1)</span>
+<span class="sd">        where λ is the depolarizing error param and n is the number of</span>
+<span class="sd">        qubits.</span>
+<span class="sd">        If λ = 0 this is the identity channel E(ρ) = ρ</span>
+<span class="sd">        If λ = 1 this is a completely depolarizing channel E(ρ) = I / 2 ** n</span>
+<span class="sd">        if λ = 4 ** n / (4 ** n - 1) this is a uniform Pauli error channel</span>
+<span class="sd">            E(ρ) = sum_j P_j ρ P_j / (4 ** n - 1) for all P_j != I.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">num_qubits</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;num_qubits must be a positive integer.&quot;</span><span class="p">)</span>
+    <span class="c1"># Check that the depolarizing parameter gives a valid CPTP</span>
+    <span class="n">num_terms</span> <span class="o">=</span> <span class="mi">4</span><span class="o">**</span><span class="n">num_qubits</span>
+    <span class="n">max_param</span> <span class="o">=</span> <span class="n">num_terms</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">param</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">param</span> <span class="o">&gt;</span> <span class="n">max_param</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Depolarizing parameter must be in between 0 &quot;</span>
+                         <span class="s2">&quot;and </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_param</span><span class="p">))</span>
 
     <span class="c1"># Rescale completely depolarizing channel error probs</span>
     <span class="c1"># with the identity component removed</span>
-    <span class="n">num_terms</span> <span class="o">=</span> <span class="mi">4</span><span class="o">**</span><span class="n">num_qubits</span>  <span class="c1"># terms in completely depolarizing channel</span>
-    <span class="n">prob_error</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">/</span> <span class="n">num_terms</span>
-    <span class="n">prob_iden</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span>
-        <span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob_error</span>  <span class="c1"># subtract off non-identity terms</span>
-    <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">prob_iden</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="n">prob_error</span><span class="p">]</span>
+    <span class="n">prob_iden</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">param</span> <span class="o">/</span> <span class="n">max_param</span>
+    <span class="n">prob_pauli</span> <span class="o">=</span> <span class="n">param</span> <span class="o">/</span> <span class="n">num_terms</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">prob_iden</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_terms</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="n">prob_pauli</span><span class="p">]</span>
     <span class="c1"># Generate pauli strings. The order doesn&#39;t matter as long</span>
     <span class="c1"># as the all identity string is first.</span>
     <span class="n">paulis</span> <span class="o">=</span> <span class="p">[</span>
@@ -504,6 +516,7 @@
     <span class="k">return</span> <span class="n">QuantumError</span><span class="p">(</span><span class="n">noise_ops</span><span class="p">)</span></div>
 
 
+<span class="c1"># pylint: disable=invalid-name</span>
 <div class="viewcode-block" id="thermal_relaxation_error"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.aer.noise.errors.standard_errors.html#qiskit.providers.aer.noise.errors.standard_errors.thermal_relaxation_error">[docs]</a><span class="k">def</span> <span class="nf">thermal_relaxation_error</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">excited_state_population</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Single-qubit thermal relaxation quantum error channel.</span>

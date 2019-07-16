@@ -172,7 +172,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Root REST adapter for the IBM Q Api version 2.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Root REST adapter for the IBM Q Experience v2 API.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
 
@@ -185,11 +185,11 @@
     <span class="sd">&quot;&quot;&quot;Rest adapter for general endpoints.&quot;&quot;&quot;</span>
 
     <span class="n">URL_MAP</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;backends&#39;</span><span class="p">:</span> <span class="s1">&#39;/Backends/v/1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;backends&#39;</span><span class="p">:</span> <span class="s1">&#39;/devices/v/1&#39;</span><span class="p">,</span>
         <span class="s1">&#39;hubs&#39;</span><span class="p">:</span> <span class="s1">&#39;/Network&#39;</span><span class="p">,</span>
         <span class="s1">&#39;jobs&#39;</span><span class="p">:</span> <span class="s1">&#39;/Jobs&#39;</span><span class="p">,</span>
         <span class="s1">&#39;jobs_status&#39;</span><span class="p">:</span> <span class="s1">&#39;/Jobs/status&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;circuit&#39;</span><span class="p">:</span> <span class="s1">&#39;/QCircuitApiModels&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;circuit&#39;</span><span class="p">:</span> <span class="s1">&#39;/qcircuit&#39;</span><span class="p">,</span>
         <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;/version&#39;</span>
     <span class="p">}</span>
 
@@ -247,9 +247,9 @@
             <span class="n">query</span><span class="p">[</span><span class="s1">&#39;where&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extra_filter</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-            <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;filter&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="k">if</span> <span class="n">query</span> <span class="k">else</span> <span class="kc">None</span><span class="p">})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+            <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;filter&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">query</span><span class="p">)})</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Api.run_job"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.root.html#qiskit.providers.ibmq.api_v2.rest.root.Api.run_job">[docs]</a>    <span class="k">def</span> <span class="nf">run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">qobj_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="Api.submit_job"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.root.html#qiskit.providers.ibmq.api_v2.rest.root.Api.submit_job">[docs]</a>    <span class="k">def</span> <span class="nf">submit_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">qobj_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Submit a job for executing.</span>
 
 <span class="sd">        Args:</span>
@@ -265,6 +265,27 @@
             <span class="s1">&#39;qObject&#39;</span><span class="p">:</span> <span class="n">qobj_dict</span><span class="p">,</span>
             <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">backend_name</span><span class="p">},</span>
             <span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="n">qobj_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;shots&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Api.submit_job_object_storage"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.root.html#qiskit.providers.ibmq.api_v2.rest.root.Api.submit_job_object_storage">[docs]</a>    <span class="k">def</span> <span class="nf">submit_job_object_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a job for executing, using object storage.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backend_name (str): the name of the backend.</span>
+<span class="sd">            shots (int): number of shots.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: json response.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;jobs&#39;</span><span class="p">)</span>
+
+        <span class="c1"># TODO: &quot;shots&quot; is currently required by the API.</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">backend_name</span><span class="p">},</span>
+            <span class="s1">&#39;shots&#39;</span><span class="p">:</span> <span class="n">shots</span><span class="p">,</span>
+            <span class="s1">&#39;allowObjectStorage&#39;</span><span class="p">:</span> <span class="kc">True</span>
         <span class="p">}</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
@@ -289,7 +310,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Api.version"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.root.html#qiskit.providers.ibmq.api_v2.rest.root.Api.version">[docs]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the api versions.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the API versions.&quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div></div>
 </pre></div>

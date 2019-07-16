@@ -178,8 +178,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.api.websocket</span> <span class="k">import</span> <span class="n">WebsocketClient</span>
-<span class="kn">from</span> <span class="nn">.apijobstatus</span> <span class="k">import</span> <span class="n">ApiJobStatus</span>
+<span class="kn">from</span> <span class="nn">..apiconstants</span> <span class="k">import</span> <span class="n">ApiJobStatus</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">CredentialsError</span><span class="p">,</span> <span class="n">BadBackendError</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">Request</span>
 
@@ -277,11 +276,11 @@
         <span class="sd">&quot;&quot;&quot;Check if the user has permission in QX platform.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">credential</span><span class="o">.</span><span class="n">get_token</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="IBMQConnector.run_job"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.run_job">[docs]</a>    <span class="k">def</span> <span class="nf">run_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQConnector.submit_job"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.submit_job">[docs]</a>    <span class="k">def</span> <span class="nf">submit_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj_dict</span><span class="p">,</span> <span class="n">backend_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run a Qobj in a IBMQ backend.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            qobj (dict): Qobj to be run, in dictionary form.</span>
+<span class="sd">            qobj_dict (dict): Qobj to be run, in dictionary form.</span>
 <span class="sd">            backend_name (str): backend name.</span>
 
 <span class="sd">        Raises:</span>
@@ -298,7 +297,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_type</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">BadBackendError</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;qObject&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="p">,</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;qObject&#39;</span><span class="p">:</span> <span class="n">qobj_dict</span><span class="p">,</span>
                 <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">backend_type</span><span class="p">}}</span>
 
         <span class="n">url</span> <span class="o">=</span> <span class="n">get_job_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
@@ -345,11 +344,10 @@
         <span class="k">if</span> <span class="s1">&#39;calibration&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">:</span>
             <span class="n">job</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;calibration&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s1">&#39;qObjectResult&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">:</span>
-            <span class="c1"># If the job is using Qobj, return the qObjectResult directly,</span>
-            <span class="c1"># which should contain a valid Result.</span>
-            <span class="k">return</span> <span class="n">job</span>
-        <span class="k">elif</span> <span class="s1">&#39;qasms&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">:</span>
+        <span class="c1"># The &quot;kind&quot; field indicates the type of the job (empty for qasm jobs)</span>
+        <span class="n">job_type</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">job_type</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;qasms&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">):</span>
             <span class="c1"># Fallback for pre-Qobj jobs.</span>
             <span class="k">for</span> <span class="n">qasm</span> <span class="ow">in</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;qasms&#39;</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;result&#39;</span> <span class="ow">in</span> <span class="n">qasm</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]):</span>
@@ -473,8 +471,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_type</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">BadBackendError</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
 
-        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/Backends/&#39;</span> <span class="o">+</span> <span class="n">backend_type</span> <span class="o">+</span> <span class="s1">&#39;/queue/status&#39;</span><span class="p">,</span>
-                              <span class="n">with_token</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/Backends/&#39;</span> <span class="o">+</span> <span class="n">backend_type</span> <span class="o">+</span> <span class="s1">&#39;/queue/status&#39;</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="c1"># Adjust fields according to the specs (BackendStatus).</span>
@@ -572,18 +569,81 @@
 
         <span class="k">return</span> <span class="n">response</span></div>
 
-<div class="viewcode-block" id="IBMQConnector.websocket_client"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.websocket_client">[docs]</a>    <span class="k">def</span> <span class="nf">websocket_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a websocket client for interacting with IBMQ.</span>
+<div class="viewcode-block" id="IBMQConnector.circuit_job_get"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.circuit_job_get">[docs]</a>    <span class="k">def</span> <span class="nf">circuit_job_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return information about a Circuit job.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the id of the job.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            WebsocketClient: an IBMQ websocket client.</span>
+<span class="sd">            dict: job information.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">WebsocketClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;websocket_url&#39;</span><span class="p">],</span>
-                               <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">credential</span><span class="o">.</span><span class="n">get_token</span><span class="p">())</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_credentials</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Not credentials valid&#39;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Job ID not specified&#39;</span><span class="p">}</span>
+
+        <span class="c1"># TODO: by API constraints, always use the URL without h/g/p.</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/Jobs/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="n">job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;calibration&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">:</span>
+            <span class="n">job</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;calibration&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;qObjectResult&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">:</span>
+            <span class="c1"># If the job is using Qobj, return the qObjectResult directly,</span>
+            <span class="c1"># which should contain a valid Result.</span>
+            <span class="k">return</span> <span class="n">job</span>
+        <span class="k">elif</span> <span class="s1">&#39;qasms&#39;</span> <span class="ow">in</span> <span class="n">job</span><span class="p">:</span>
+            <span class="c1"># Fallback for pre-Qobj jobs.</span>
+            <span class="k">for</span> <span class="n">qasm</span> <span class="ow">in</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;qasms&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;result&#39;</span> <span class="ow">in</span> <span class="n">qasm</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]):</span>
+                    <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+                    <span class="k">del</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]:</span>
+                        <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                    <span class="k">del</span> <span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">job</span></div>
+
+<div class="viewcode-block" id="IBMQConnector.circuit_job_status"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.circuit_job_status">[docs]</a>    <span class="k">def</span> <span class="nf">circuit_job_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the status of a Circuits job.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job_id (str): the id of the job.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: job status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_credentials</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Not credentials valid&#39;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Job ID not specified&#39;</span><span class="p">}</span>
+
+        <span class="c1"># TODO: by API constraints, always use the URL without h/g/p.</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/Jobs/</span><span class="si">{}</span><span class="s1">/status&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">status</span></div>
 
 <div class="viewcode-block" id="IBMQConnector.api_version"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api.ibmqconnector.html#qiskit.providers.ibmq.api.ibmqconnector.IBMQConnector.api_version">[docs]</a>    <span class="k">def</span> <span class="nf">api_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the API Version of the QX Platform.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/version&#39;</span><span class="p">)</span></div></div>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/version&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Parse the response, making sure a dict is returned in all cases.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;new_api&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="s1">&#39;api&#39;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;new_api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="n">response</span></div></div>
 </pre></div>
 
         </div>

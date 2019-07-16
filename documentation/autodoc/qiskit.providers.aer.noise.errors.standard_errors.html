@@ -1782,14 +1782,14 @@ channel is:</p>
 
 <dl class="function">
 <dt id="qiskit.providers.aer.noise.errors.standard_errors.depolarizing_error">
-<code class="descname">depolarizing_error</code><span class="sig-paren">(</span><em>prob</em>, <em>num_qubits</em>, <em>standard_gates=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/errors/standard_errors.html#depolarizing_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.errors.standard_errors.depolarizing_error" title="Permalink to this definition">¶</a></dt>
+<code class="descname">depolarizing_error</code><span class="sig-paren">(</span><em>param</em>, <em>num_qubits</em>, <em>standard_gates=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/errors/standard_errors.html#depolarizing_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.errors.standard_errors.depolarizing_error" title="Permalink to this definition">¶</a></dt>
 <dd><p>Depolarizing quantum error channel.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>prob</strong> (<em>double</em>) – completely depolarizing channel error probability.</li>
+<li><strong>param</strong> (<em>double</em>) – depolarizing error parameter.</li>
 <li><strong>num_qubits</strong> (<em>int</em>) – the number of qubits for the error channel.</li>
 <li><strong>standard_gates</strong> (<em>bool</em>) – if True return the operators as standard qobj
 Pauli gate instructions. If false return as
@@ -1809,6 +1809,22 @@ unitary matrix qobj instructions.
 </tr>
 </tbody>
 </table>
+<dl class="docutils">
+<dt>Additional Information:</dt>
+<dd><dl class="first docutils">
+<dt>The depolarizing channel is defined as:</dt>
+<dd>E(ρ) = (1 - λ) ρ + λ * (I / 2 ** n)
+with 0 &lt;= λ &lt;= 4 ** n / (4 ** n - 1)</dd>
+</dl>
+<p>where λ is the depolarizing error param and n is the number of
+qubits.
+If λ = 0 this is the identity channel E(ρ) = ρ
+If λ = 1 this is a completely depolarizing channel E(ρ) = I / 2 ** n
+if λ = 4 ** n / (4 ** n - 1) this is a uniform Pauli error channel</p>
+<blockquote class="last">
+<div>E(ρ) = sum_j P_j ρ P_j / (4 ** n - 1) for all P_j != I.</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">

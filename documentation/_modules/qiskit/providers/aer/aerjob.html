@@ -176,7 +176,6 @@
 
 <span class="kn">from</span> <span class="nn">concurrent</span> <span class="k">import</span> <span class="n">futures</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">functools</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseJob</span><span class="p">,</span> <span class="n">JobStatus</span><span class="p">,</span> <span class="n">JobError</span>
@@ -211,7 +210,7 @@
 <span class="sd">        _executor (futures.Executor): executor to handle asynchronous jobs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span>
+    <span class="n">_executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">job_id</span><span class="p">)</span>

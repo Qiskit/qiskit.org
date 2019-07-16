@@ -1726,43 +1726,126 @@ used in a Clifford simulator.</p>
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.channel_matrix_representation">
 <code class="descname">channel_matrix_representation</code><span class="sig-paren">(</span><em>operators</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.channel_matrix_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.channel_matrix_representation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>We convert the operators to a matrix by applying the channel to
+the four basis elements of the 2x2 matrix space representing
+density operators; this is standard linear algebra</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>operators</strong> (<em>list</em>) – The list of operators to transform into a Matrix</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The matrx representation of the operators</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">sympy.Matrix</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_P">
 <code class="descname">compute_P</code><span class="sig-paren">(</span><em>As</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.compute_P"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_P" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method creates the matrix P in the
+f(x) = 1/2(x*P*x)+q*x
+representation of the objective function
+:param As: list of symbolic matrices repersenting the channel matrices
+:type As: list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The matrix P for the description of the quadaric program</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">matrix</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_channel_operation">
 <em class="property">static </em><code class="descname">compute_channel_operation</code><span class="sig-paren">(</span><em>rho</em>, <em>operators</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.compute_channel_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_channel_operation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Given a quantum state’s density function rho, the effect of the
+channel on this state is:
+rho -&gt; sum_{i=1}^n E_i * rho * E_i^dagger</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rho</strong> (<em>number</em>) – Density function</li>
+<li><strong>operators</strong> (<em>list</em>) – List of operators</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The result of applying the list of operators</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">number</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_q">
 <code class="descname">compute_q</code><span class="sig-paren">(</span><em>As</em>, <em>C</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.compute_q"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.compute_q" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method creates the vector q for the
+f(x) = 1/2(x*P*x)+q*x
+representation of the objective function
+:param As: list of symbolic matrices repersenting the quadratic program
+:type As: list
+:param C: matrix representing the the constant channel matrix
+:type C: matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The vector q for the description of the quadaric program</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.fidelity">
 <em class="property">static </em><code class="descname">fidelity</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.fidelity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.fidelity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates channel fidelity</p>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.flatten_matrix">
 <em class="property">static </em><code class="descname">flatten_matrix</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.flatten_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.flatten_matrix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m</strong> (<em>Matrix</em>) – The matrix to flatten</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A row vector repesenting the flattened matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.generate_channel_matrices">
 <code class="descname">generate_channel_matrices</code><span class="sig-paren">(</span><em>transform_channel_operators_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.generate_channel_matrices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.generate_channel_matrices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a list of 4x4 symbolic matrices describing the channel defined from the given operators</p>
+<dd><p>Generates a list of 4x4 symbolic matrices describing the channel defined from the given
+operators</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>transform_channel_operators_list</strong> – a list of tuples of matrices which represent Kraus operators</li>
+<li><strong>transform_channel_operators_list</strong> (<em>list</em>) – A list of tuples of matrices which represent</li>
+<li><strong>operators.</strong> (<a class="reference internal" href="qiskit.quantum_info.operators.channel.kraus.html#qiskit.quantum_info.operators.channel.kraus.Kraus" title="qiskit.quantum_info.operators.channel.kraus.Kraus"><em>Kraus</em></a>) – </li>
 <li><strong>identity matrix is assumed to be the first element in the list</strong> (<em>The</em>) – </li>
 <li><strong>[</strong> (I, ), (<a href="#id1"><span class="problematic" id="id2">|0&gt;&lt;0|</span></a>, <a href="#id3"><span class="problematic" id="id4">|0&gt;&lt;1|</span></a>), <a href="#id5"><span class="problematic" id="id6">|1&gt;&lt;0|</span></a>, <a href="#id7"><span class="problematic" id="id8">|1&gt;&lt;1|</span></a>) – </li>
 <li><strong>for a Pauli channel</strong><strong>, </strong><strong>the matrices are</strong> (<em>e.g.</em>) – </li>
@@ -1780,12 +1863,20 @@ such that xi &gt;=0 and x0 = 1-(x1 + … + xn)
 Now consider the quantum channel defined via the Kraus operators
 {sqrt(x0)I, sqrt(x1)A1, sqrt(x1)B1, …, sqrt(xn)An, sqrt(xn)Bn, …}
 This is the channel C symbolically represented by the operators</p>
-<dl class="docutils">
-<dt>Output:</dt>
-<dd>A list of 4x4 complex matrices ([D1, D2, …, Dn], E) such that:
-The matrix x1*D1 + … + xn*Dn + E represents the operation of the channel C on the density operator
-we find it easier to work with this representation of C when performing the combinatorial optimization</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of 4x4 complex matrices ([D1, D2, …, Dn], E) such that:
+The matrix x1*D1 + … + xn*Dn + E represents the operation of the channel C
+on the density operator.
+we find it easier to work with this representation of C when performing the
+combinatorial optimization.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -1795,19 +1886,21 @@ we find it easier to work with this representation of C when performing the comb
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>channel</strong> – a 4x4 symbolic matrix</li>
-<li><strong>symbols</strong> – the symbols x1, …, xn which may occur in the matrix</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>channel</strong> (<em>Matrix</em>) – a 4x4 symbolic matrix</li>
+<li><strong>symbols</strong> (<em>list</em>) – the symbols x1, …, xn which may occur in the matrix</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of 4x4 complex matrices ([D1, D2, …, Dn], E) such that:
+channel == x1*D1 + … + xn*Dn + E</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
 </td>
 </tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>Output:</dt>
-<dd>A list of 4x4 complex matrices ([D1, D2, …, Dn], E) such that:
-channel == x1*D1 + … + xn*Dn + E</dd>
-</dl>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -1818,19 +1911,21 @@ channel == x1*D1 + … + xn*Dn + E</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>channel</strong> (<em>matrix</em>) – a 4x4 symbolic matrix.</li>
 <li><strong>symbols</strong> (<em>list</em>) – The full list [x1, …, xn] of symbols
 used in the matrix.</li>
 </ul>
 </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a 4x4 numeric matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>Returns</dt>
-<dd>matrix: a 4x4 numeric matrix.</dd>
-</dl>
 <p>Each entry of the 4x4 symbolic input channel matrix is assumed to
 be a polynomial of the form a1x1 + … + anxn + c. The corresponding
 entry in the output numeric matrix is c.</p>
@@ -1844,18 +1939,20 @@ entry in the output numeric matrix is c.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>channel</strong> (<em>matrix</em>) – a 4x4 symbolic matrix.</li>
 <li><strong>symbol</strong> (<em>list</em>) – a symbol xi</li>
 </ul>
 </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a 4x4 numeric matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>Returns</dt>
-<dd>matrix: a 4x4 numeric matrix.</dd>
-</dl>
 <p>Each entry of the 4x4 symbolic input channel matrix is assumed to
 be a polynomial of the form a1x1 + … + anxn + c. The corresponding
 entry in the output numeric matrix is ai.</p>
@@ -1872,12 +1969,12 @@ entry in the output numeric matrix is ai.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The operator, converted to noise circuit representation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.List" title="qiskit.validation.fields.containers.List">List</a></td>
+</tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>Output:</dt>
-<dd>List: The operator, converted to noise circuit representation.</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1902,22 +1999,99 @@ circuit or a matrix or a list of matrices.</td>
 <dl class="staticmethod">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.prepare_channel_operator_list">
 <em class="property">static </em><code class="descname">prepare_channel_operator_list</code><span class="sig-paren">(</span><em>ops_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.prepare_channel_operator_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.prepare_channel_operator_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Prepares a list of channel operators
+:param ops_list: The list of operators to prepare
+:type ops_list: List</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The channel operator list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.List" title="qiskit.validation.fields.containers.List">List</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.prepare_honesty_constraint">
 <code class="descname">prepare_honesty_constraint</code><span class="sig-paren">(</span><em>transform_channel_operators_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.prepare_honesty_constraint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.prepare_honesty_constraint" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Prepares the honesty constraint</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>transform_channel_operators_list</strong> (<em>list</em>) – A list of tuples of matrices which represent</li>
+<li><strong>operators.</strong> (<a class="reference internal" href="qiskit.quantum_info.operators.channel.kraus.html#qiskit.quantum_info.operators.channel.kraus.Kraus" title="qiskit.quantum_info.operators.channel.kraus.Kraus"><em>Kraus</em></a>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.solve_quadratic_program">
 <code class="descname">solve_quadratic_program</code><span class="sig-paren">(</span><em>P</em>, <em>q</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.solve_quadratic_program"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.solve_quadratic_program" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This function solved the quadratic program to minimize the objective function
+f(x) = 1/2(x*P*x)+q*x
+subject to the additional constraints
+Gx &lt;= h</p>
+<p>Where P, q are given and G,h are computed to ensure that x represents
+a probability vector and subject to honesty constraints if required
+:param P: A matrix representing the P component of the objective function
+:type P: matrix
+:param q: A vector representing the q component of the objective function
+:type q: list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The solution of the quadratic program (represents probabilites)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> – If cvxopt external module is not installed</td>
+</tr>
+</tbody>
+</table>
+<p>This method is the only place in the code where we rely on the cvxopt library
+should we consider another library, only this method needs to change</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.transform_by_given_channel">
 <code class="descname">transform_by_given_channel</code><span class="sig-paren">(</span><em>channel_matrices</em>, <em>const_channel_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#NoiseTransformer.transform_by_given_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.transform_by_given_channel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method creates objective function representing the
+Hilbert-Schmidt norm of the matrix (A-B) obtained
+as the difference of the input noise channel and the output
+channel we wish to determine.</p>
+<p>This function is represented by a matrix P and a vector q, such that
+f(x) = 1/2(x*P*x)+q*x
+where x is the vector we wish to minimize, where x represents
+probabilities for the noise operators that construct the output channel</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>channel_matrices</strong> (<em>list</em>) – A list of 4x4 symbolic matrices</li>
+<li><strong>const_channel_matrix</strong> (<em>matrix</em>) – a 4x4 constant matrix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of the optimal probabilities for the channel matrices,
+determined by the quadratic program solver</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.utils.noise_transformation.NoiseTransformer.transform_by_operator_list">
@@ -1926,37 +2100,44 @@ circuit or a matrix or a list of matrices.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>noise_kraus_operators</strong> – a list of matrices (Kraus operators) for the input channel</li>
-<li><strong>transform_channel_operators</strong> – a list of matrices or tuples of matrices</li>
-<li><strong>Kraus operators that can construct the output channel</strong> (<em>representing</em>) – </li>
-<li><strong>[</strong><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong><strong>] </strong><strong>represent the Pauli channel</strong> (<em>e.g.</em>) – </li>
-<li><strong>[</strong> (<em>and</em>) – </li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>noise_kraus_operators</strong> (<a class="reference internal" href="qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.List" title="qiskit.validation.fields.containers.List"><em>List</em></a>) – a list of matrices (Kraus operators) for the input channel</li>
+<li><strong>transform_channel_operators</strong> (<a class="reference internal" href="qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.List" title="qiskit.validation.fields.containers.List"><em>List</em></a>) – a list of matrices or tuples of matrices
+representing Kraus operators that can construct the output channel
+e.g. [X,Y,Z] represent the Pauli channel
+and [(<a href="#id9"><span class="problematic" id="id10">|0&gt;&lt;0|</span></a>, <a href="#id11"><span class="problematic" id="id12">|0&gt;&lt;1|</span></a>), <a href="#id13"><span class="problematic" id="id14">|1&gt;&lt;0|</span></a>, <a href="#id15"><span class="problematic" id="id16">|1&gt;&lt;1|</span></a>)] represents the relaxation channel</li>
 </ul>
 </td>
 </tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Output:</dt>
-<dd><p class="first">A list of amplitudes that define the output channel.
-In the case the input is a list [A1, A2, …, An] of transform matrices
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A list of amplitudes that define the output channel.</dt>
+<dd><p class="first">In the case the input is a list [A1, A2, …, An] of transform matrices
 and [E0, E1, …, Em] of noise kraus operators, the output is
 a list [p1, p2, …, pn] of probabilities such that:
 1) p_i &gt;= 0
 2) p1 + … + pn &lt;= 1
 3) [sqrt(p1)A1, sqrt(p2)A2, …, sqrt(pn)An, sqrt(1-(p1 + … + pn))I] is</p>
 <blockquote>
-<div>a list of kraus operators that define the output channel
-(which is “close” to the input chanel given by [E0, …, Em])</div></blockquote>
-<p>This channel can be thought of as choosing the operator Ai in probability pi and applying
-this operator to the quantum state.</p>
+<div><p>a list of kraus operators that define the output channel
+(which is “close” to the input chanel given by [E0, …, Em])</p>
+</div></blockquote>
+<p>This channel can be thought of as choosing the operator Ai in probability pi and
+applying this operator to the quantum state.</p>
 <p class="last">More generally, if the input is a list of tuples (not neccesarily of the same size):
 [(A1, B1, …), (A2, B2, …), … (An, Bn, …)] then the output is
-still a list [p1, p2, …, pn] and now the output channel is defined by the operators
+still a list [p1, p2, …, pn] and now the output channel is defined by theo
+perators:
 [sqrt(p1)A1, sqrt(p1)B1, …, sqrt(pn)An, sqrt(pn)Bn, …, sqrt(1-(p1 + … + pn))I]</p>
 </dd>
 </dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="qiskit.validation.fields.containers.html#qiskit.validation.fields.containers.List" title="qiskit.validation.fields.containers.List">List</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -2027,8 +2208,9 @@ output channel (Default: None).</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if number of qubits is not supported or approximation</li>
-<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">failsed.</span></code></li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if number of qubits is not supported or approximation
+failsed.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code> – If there’s no information about the noise type</li>
 </ul>
 </td>
 </tr>
@@ -2038,6 +2220,36 @@ output channel (Default: None).</li>
 if a string is given, dict is overwritten; if a dict is given, list is
 overwritten possible values for string are ‘pauli’, ‘reset’, ‘clifford’
 For further information see <cite>NoiseTransformer.named_operators</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.aer.noise.utils.noise_transformation.pauli_operators">
+<code class="descname">pauli_operators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#pauli_operators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.pauli_operators" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list of Pauli operators for 1 and 2 qubits</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qiskit.providers.aer.noise.utils.noise_transformation.reset_operators">
+<code class="descname">reset_operators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/utils/noise_transformation.html#reset_operators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.utils.noise_transformation.reset_operators" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list of reset operators for 1 and 2 qubits</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

@@ -425,21 +425,28 @@
     <span class="c1"># with dim = 2 ** N for an N-qubit gate error.</span>
 
     <span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">num_qubits</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">thermal_relaxation</span><span class="p">:</span>
         <span class="c1"># Model gate error entirely as depolarizing error</span>
-        <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">error_param</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">error_param</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">num_qubits</span>
+            <span class="n">depol_param</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">/</span> <span class="p">(</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">depol_param</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Model gate error as thermal relaxation and depolarizing</span>
         <span class="c1"># error.</span>
         <span class="c1"># Get depolarizing probability</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span>
+            <span class="n">depol_param</span> <span class="o">=</span> <span class="n">_depol_error_value_one_qubit</span><span class="p">(</span>
                 <span class="n">error_param</span><span class="p">,</span> <span class="n">gate_time</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">t2</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">q0_t1</span><span class="p">,</span> <span class="n">q0_t2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
             <span class="n">q1_t1</span><span class="p">,</span> <span class="n">q1_t2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">relax_params</span><span class="p">[</span><span class="n">qubits</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">p_depol</span> <span class="o">=</span> <span class="n">_depol_error_value_two_qubit</span><span class="p">(</span>
+            <span class="n">depol_param</span> <span class="o">=</span> <span class="n">_depol_error_value_two_qubit</span><span class="p">(</span>
                 <span class="n">error_param</span><span class="p">,</span>
                 <span class="n">gate_time</span><span class="p">,</span>
                 <span class="n">qubit0_t1</span><span class="o">=</span><span class="n">q0_t1</span><span class="p">,</span>
@@ -450,9 +457,15 @@
             <span class="k">raise</span> <span class="n">NoiseError</span><span class="p">(</span><span class="s2">&quot;Device noise model only supports &quot;</span>
                              <span class="s2">&quot;1 and 2-qubit gates when using &quot;</span>
                              <span class="s2">&quot;thermal_relaxation=True.&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">p_depol</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">depol_param</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># If the device reports an error_param greater than the maximum</span>
+        <span class="c1"># allowed for a depolarzing error model we will get a non-physical</span>
+        <span class="c1"># depolarizing parameter.</span>
+        <span class="c1"># In this case we truncate it to 1 so that the error channel is a</span>
+        <span class="c1"># completely depolarizing channel E(rho) = id / d</span>
+        <span class="n">depol_param</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">depol_param</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="n">error</span> <span class="o">=</span> <span class="n">depolarizing_error</span><span class="p">(</span>
-            <span class="n">p_depol</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">),</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
+            <span class="n">depol_param</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">standard_gates</span><span class="o">=</span><span class="n">standard_gates</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error</span>
 
 
@@ -503,7 +516,7 @@
 
 
 <span class="k">def</span> <span class="nf">_depol_error_value_one_qubit</span><span class="p">(</span><span class="n">error_param</span><span class="p">,</span> <span class="n">gate_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="n">inf</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return 2-qubit depolarizing channel probability for device model&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return 2-qubit depolarizing channel parameter for device model&quot;&quot;&quot;</span>
     <span class="c1"># Check trivial case where there is no gate error</span>
     <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -527,7 +540,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="c1"># Otherwise we calculate the depolarizing error probability to account</span>
+    <span class="c1"># Otherwise we calculate the depolarizing error parameter to account</span>
     <span class="c1"># for the difference between the relaxation error and gate error</span>
     <span class="k">if</span> <span class="n">t1</span> <span class="o">==</span> <span class="n">inf</span><span class="p">:</span>
         <span class="n">par1</span> <span class="o">=</span> <span class="mi">1</span>
@@ -537,8 +550,8 @@
         <span class="n">par2</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">par2</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gate_time</span> <span class="o">/</span> <span class="n">t2</span><span class="p">)</span>
-    <span class="n">p_depol</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">par1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">par2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">p_depol</span>
+    <span class="n">depol_param</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">par1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">par2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">depol_param</span>
 
 
 <span class="k">def</span> <span class="nf">_depol_error_value_two_qubit</span><span class="p">(</span><span class="n">error_param</span><span class="p">,</span>
@@ -547,7 +560,7 @@
                                  <span class="n">qubit0_t2</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
                                  <span class="n">qubit1_t1</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
                                  <span class="n">qubit1_t2</span><span class="o">=</span><span class="n">inf</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return 2-qubit depolarizing channel probability for device model&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return 2-qubit depolarizing channel parameter for device model&quot;&quot;&quot;</span>
     <span class="c1"># Check trivial case where there is no gate error</span>
     <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -565,8 +578,10 @@
 
     <span class="k">if</span> <span class="n">gate_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">gate_time</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">gate_time</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">qubit0_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">qubit0_t2</span> <span class="o">==</span> <span class="n">inf</span>
-                          <span class="ow">and</span> <span class="n">qubit1_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span> <span class="n">qubit1_t2</span> <span class="o">==</span> <span class="n">inf</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">gate_time</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">qubit0_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span>
+                          <span class="n">qubit0_t2</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span>
+                          <span class="n">qubit1_t1</span> <span class="o">==</span> <span class="n">inf</span> <span class="ow">and</span>
+                          <span class="n">qubit1_t2</span> <span class="o">==</span> <span class="n">inf</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">error_param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">error_param</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">/</span> <span class="mi">3</span>
         <span class="k">else</span><span class="p">:</span>
@@ -593,8 +608,8 @@
     <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">q0_par1</span> <span class="o">+</span> <span class="n">q1_par1</span> <span class="o">+</span> <span class="n">q0_par1</span> <span class="o">*</span> <span class="n">q1_par1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">q0_par2</span> <span class="o">*</span> <span class="n">q1_par2</span> <span class="o">+</span>
         <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">q0_par2</span> <span class="o">+</span> <span class="n">q1_par2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">q1_par1</span> <span class="o">*</span> <span class="n">q0_par2</span> <span class="o">+</span> <span class="n">q0_par1</span> <span class="o">*</span> <span class="n">q1_par2</span><span class="p">))</span>
-    <span class="n">p_depol</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
-    <span class="k">return</span> <span class="n">p_depol</span>
+    <span class="n">depol_param</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">error_param</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="k">return</span> <span class="n">depol_param</span>
 </pre></div>
 
         </div>

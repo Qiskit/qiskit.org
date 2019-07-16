@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.providers.ibmq.api.apijobstatus module &#8212; Qiskit 0.11.0 documentation</title>
+    <title>qiskit.providers.ibmq.api_v2.clients.version module &#8212; Qiskit 0.11.0 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -51,8 +51,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.providers.ibmq.api.exceptions module" href="qiskit.providers.ibmq.api.exceptions.html" />
-    <link rel="prev" title="qiskit.providers.ibmq.api package" href="qiskit.providers.ibmq.api.html" /> 
+    <link rel="next" title="qiskit.providers.ibmq.api_v2.clients.websocket module" href="qiskit.providers.ibmq.api_v2.clients.websocket.html" />
+    <link rel="prev" title="qiskit.providers.ibmq.api_v2.clients.base module" href="qiskit.providers.ibmq.api_v2.clients.base.html" /> 
   </head>
 <body>
   <header>
@@ -1705,67 +1705,42 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="module-qiskit.providers.ibmq.api.apijobstatus">
-<span id="qiskit-providers-ibmq-api-apijobstatus-module"></span><h1>qiskit.providers.ibmq.api.apijobstatus module<a class="headerlink" href="#module-qiskit.providers.ibmq.api.apijobstatus" title="Permalink to this headline">¶</a></h1>
-<p>Values used by the API for a job status.</p>
+  <div class="section" id="module-qiskit.providers.ibmq.api_v2.clients.version">
+<span id="qiskit-providers-ibmq-api-v2-clients-version-module"></span><h1>qiskit.providers.ibmq.api_v2.clients.version module<a class="headerlink" href="#module-qiskit.providers.ibmq.api_v2.clients.version" title="Permalink to this headline">¶</a></h1>
+<p>Client for determining the version of an IBM Q Experience service.</p>
 <dl class="class">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus">
-<em class="property">class </em><code class="descname">ApiJobStatus</code><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api/apijobstatus.html#ApiJobStatus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>Possible values used by the API for a job status.</p>
-<p>The enum names represent the strings returned by the API verbatim in
-several endpoints (<cite>status()</cite>, websocket information, etc). The general
-flow is:</p>
-<p><cite>CREATING -&gt; CREATED -&gt; VALIDATING -&gt; VALIDATED -&gt; RUNNING -&gt; COMPLETED</cite></p>
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.CANCELLED">
-<code class="descname">CANCELLED</code><em class="property"> = 'CANCELLED'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.CANCELLED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.COMPLETED">
-<code class="descname">COMPLETED</code><em class="property"> = 'COMPLETED'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.COMPLETED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.CREATED">
-<code class="descname">CREATED</code><em class="property"> = 'CREATED'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.CREATED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.CREATING">
-<code class="descname">CREATING</code><em class="property"> = 'CREATING'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.CREATING" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.ERROR_CREATING_JOB">
-<code class="descname">ERROR_CREATING_JOB</code><em class="property"> = 'ERROR_CREATING_JOB'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.ERROR_CREATING_JOB" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.ERROR_RUNNING_JOB">
-<code class="descname">ERROR_RUNNING_JOB</code><em class="property"> = 'ERROR_RUNNING_JOB'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.ERROR_RUNNING_JOB" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.ERROR_VALIDATING_JOB">
-<code class="descname">ERROR_VALIDATING_JOB</code><em class="property"> = 'ERROR_VALIDATING_JOB'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.ERROR_VALIDATING_JOB" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.RUNNING">
-<code class="descname">RUNNING</code><em class="property"> = 'RUNNING'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.RUNNING" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.VALIDATED">
-<code class="descname">VALIDATED</code><em class="property"> = 'VALIDATED'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.VALIDATED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.VALIDATING">
-<code class="descname">VALIDATING</code><em class="property"> = 'VALIDATING'</em><a class="headerlink" href="#qiskit.providers.ibmq.api.apijobstatus.ApiJobStatus.VALIDATING" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="qiskit.providers.ibmq.api_v2.clients.version.VersionClient">
+<em class="property">class </em><code class="descname">VersionClient</code><span class="sig-paren">(</span><em>url</em>, <em>**request_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/clients/version.html#VersionClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.clients.version.VersionClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.providers.ibmq.api_v2.clients.base.html#qiskit.providers.ibmq.api_v2.clients.base.BaseClient" title="qiskit.providers.ibmq.api_v2.clients.base.BaseClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.api_v2.clients.base.BaseClient</span></code></a></p>
+<p>Client for determining the version of an IBM Q Experience service.</p>
+<dl class="method">
+<dt id="qiskit.providers.ibmq.api_v2.clients.version.VersionClient.version">
+<code class="descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/api_v2/clients/version.html#VersionClient.version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.api_v2.clients.version.VersionClient.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version info.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a dict with information about the API version,
+with the following keys:<blockquote>
+<div><ul class="simple">
+<li><cite>new_api</cite> (bool): whether the new API is being used</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>And the following optional keys:</dt>
+<dd><ul class="first last simple">
+<li><cite>api-*</cite> (str): the versions of each individual API component</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -1776,16 +1751,16 @@ flow is:</p>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.providers.ibmq.api.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.providers.ibmq.api_v2.clients.base.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>qiskit.providers.ibmq.api package</div>
+            <div>qiskit.providers.ibmq.api_v2.clients.base module</div>
          </div>
      </a>
-     <a id="button-next" href="qiskit.providers.ibmq.api.exceptions.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.providers.ibmq.api_v2.clients.websocket.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.providers.ibmq.api.exceptions module</div>
+            <div>qiskit.providers.ibmq.api_v2.clients.websocket module</div>
         </div>
      </a>
         

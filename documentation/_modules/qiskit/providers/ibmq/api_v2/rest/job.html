@@ -172,7 +172,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Job REST adapter for the IBM Q Api version 2.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Job REST adapter for the IBM Q Experience v2 API.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
 
@@ -183,10 +183,14 @@
     <span class="sd">&quot;&quot;&quot;Rest adapter for job related endpoints.&quot;&quot;&quot;</span>
 
     <span class="n">URL_MAP</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;cancel&#39;</span><span class="p">:</span> <span class="s1">&#39;cancel&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;callback_upload&#39;</span><span class="p">:</span> <span class="s1">&#39;/jobDataUploaded&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cancel&#39;</span><span class="p">:</span> <span class="s1">&#39;/cancel&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;download_url&#39;</span><span class="p">:</span> <span class="s1">&#39;/jobDownloadUrl&#39;</span><span class="p">,</span>
         <span class="s1">&#39;self&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
         <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;/status&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="s1">&#39;/properties&#39;</span>
+        <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="s1">&#39;/properties&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;result_url&#39;</span><span class="p">:</span> <span class="s1">&#39;/resultDownloadUrl&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;upload_url&#39;</span><span class="p">:</span> <span class="s1">&#39;/jobUploadUrl&#39;</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
@@ -222,24 +226,72 @@
 
         <span class="k">return</span> <span class="n">response</span></div>
 
+<div class="viewcode-block" id="Job.callback_upload"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.callback_upload">[docs]</a>    <span class="k">def</span> <span class="nf">callback_upload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Notify the API after uploading a Qobj via object storage.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;callback_upload&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Job.cancel"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Cancel a job.&quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;cancel&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Job.download_url"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.download_url">[docs]</a>    <span class="k">def</span> <span class="nf">download_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return an object storage URL for downloading the Qobj.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;download_url&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Job.properties"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the backend properties of a job.&quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="Job.result_url"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.result_url">[docs]</a>    <span class="k">def</span> <span class="nf">result_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return an object storage URL for downloading results.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;result_url&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Job.status"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the status of a job.&quot;&quot;&quot;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Job.upload_url"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.upload_url">[docs]</a>    <span class="k">def</span> <span class="nf">upload_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return an object storage URL for uploading the Qobj.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;upload_url&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Job.put_object_storage"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.put_object_storage">[docs]</a>    <span class="k">def</span> <span class="nf">put_object_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">qobj_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Upload a Qobj via object storage.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url (str): object storage URL.</span>
+<span class="sd">            qobj_dict (dict): the qobj to be uploaded, in dict form.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: text response, that will be empty if the request was</span>
+<span class="sd">                successful.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">qobj_dict</span><span class="p">,</span> <span class="n">bare</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span></div>
+
+<div class="viewcode-block" id="Job.get_object_storage"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.Job.get_object_storage">[docs]</a>    <span class="k">def</span> <span class="nf">get_object_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get via object_storage.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url (str): object storage URL.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: json response.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bare</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div></div>
 
 
 <div class="viewcode-block" id="build_url_filter"><a class="viewcode-back" href="../../../../../../autodoc/qiskit.providers.ibmq.api_v2.rest.job.html#qiskit.providers.ibmq.api_v2.rest.job.build_url_filter">[docs]</a><span class="k">def</span> <span class="nf">build_url_filter</span><span class="p">(</span><span class="n">excluded_fields</span><span class="p">,</span> <span class="n">included_fields</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a URL filter based on included and excluded fields.</span>
+
+<span class="sd">    If a field appears in both excluded_fields and included_fields, it</span>
+<span class="sd">    is ultimately included.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        excluded_fields (list[str]): names of the fields to explicitly</span>
@@ -252,20 +304,22 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">excluded_fields</span> <span class="o">=</span> <span class="n">excluded_fields</span> <span class="ow">or</span> <span class="p">[]</span>
     <span class="n">included_fields</span> <span class="o">=</span> <span class="n">included_fields</span> <span class="ow">or</span> <span class="p">[]</span>
-    <span class="n">fields_bool</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">field_flags</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="c1"># Build a map of fields to bool.</span>
     <span class="k">for</span> <span class="n">field_</span> <span class="ow">in</span> <span class="n">excluded_fields</span><span class="p">:</span>
-        <span class="n">fields_bool</span><span class="p">[</span><span class="n">field_</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">field_flags</span><span class="p">[</span><span class="n">field_</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">field_</span> <span class="ow">in</span> <span class="n">included_fields</span><span class="p">:</span>
-        <span class="n">fields_bool</span><span class="p">[</span><span class="n">field_</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Set the included fields. If a field_ here was also in</span>
+        <span class="c1"># excluded_fields, it is overwritten here.</span>
+        <span class="n">field_flags</span><span class="p">[</span><span class="n">field_</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">fields_bool</span><span class="p">:</span>
-        <span class="n">fields_bool</span><span class="p">[</span><span class="s1">&#39;calibration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields_bool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">field_flags</span><span class="p">:</span>
+        <span class="n">field_flags</span><span class="p">[</span><span class="s1">&#39;calibration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_flags</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">fields_bool</span><span class="p">:</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="n">fields_bool</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">field_flags</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="n">field_flags</span><span class="p">}</span>
 
     <span class="k">return</span> <span class="n">ret</span></div>
 </pre></div>

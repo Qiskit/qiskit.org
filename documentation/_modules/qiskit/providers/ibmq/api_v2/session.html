@@ -172,21 +172,23 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;Session customized for IBM Q access.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Session customized for IBM Q Experience access.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">requests</span> <span class="k">import</span> <span class="n">Session</span><span class="p">,</span> <span class="n">RequestException</span>
 <span class="kn">from</span> <span class="nn">requests.adapters</span> <span class="k">import</span> <span class="n">HTTPAdapter</span>
 <span class="kn">from</span> <span class="nn">urllib3.util.retry</span> <span class="k">import</span> <span class="n">Retry</span>
 
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">RequestsApiError</span>
+<span class="kn">from</span> <span class="nn">..version</span> <span class="k">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">ibmq_provider_version</span>
 
 <span class="n">STATUS_FORCELIST</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Internal Server Error</span>
     <span class="mi">502</span><span class="p">,</span>  <span class="c1"># Bad Gateway</span>
     <span class="mi">503</span><span class="p">,</span>  <span class="c1"># Service Unavailable</span>
     <span class="mi">504</span><span class="p">,</span>  <span class="c1"># Gateway Timeout</span>
 <span class="p">)</span>
-<span class="n">CLIENT_APPLICATION</span> <span class="o">=</span> <span class="s1">&#39;qiskit-api-py&#39;</span>
+<span class="n">CLIENT_APPLICATION</span> <span class="o">=</span> <span class="s1">&#39;ibmqprovider/&#39;</span> <span class="o">+</span> <span class="n">ibmq_provider_version</span>
+<span class="n">CUSTOM_HEADER_ENV_VAR</span> <span class="o">=</span> <span class="s1">&#39;QE_CUSTOM_CLIENT_APP_HEADER&#39;</span>
 
 
 <div class="viewcode-block" id="RetrySession"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.session.html#qiskit.providers.ibmq.api_v2.session.RetrySession">[docs]</a><span class="k">class</span> <span class="nc">RetrySession</span><span class="p">(</span><span class="n">Session</span><span class="p">):</span>
@@ -219,6 +221,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_retry</span><span class="p">(</span><span class="n">retries</span><span class="p">,</span> <span class="n">backoff_factor</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_session_parameters</span><span class="p">(</span><span class="n">verify</span><span class="p">,</span> <span class="n">proxies</span> <span class="ow">or</span> <span class="p">{},</span> <span class="n">auth</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;RetrySession destructor. Closes the session.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -259,24 +265,61 @@
 <span class="sd">            proxies (dict): proxy URLs mapped by protocol.</span>
 <span class="sd">            auth (AuthBase): authentication handler.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;X-Qx-Client-Application&#39;</span><span class="p">:</span> <span class="n">CLIENT_APPLICATION</span><span class="p">})</span>
+        <span class="n">client_app_header</span> <span class="o">=</span> <span class="n">CLIENT_APPLICATION</span>
+
+        <span class="c1"># Append custom header to the end if specified</span>
+        <span class="n">custom_header</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="n">CUSTOM_HEADER_ENV_VAR</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">custom_header</span><span class="p">:</span>
+            <span class="n">client_app_header</span> <span class="o">+=</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">custom_header</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;X-Qx-Client-Application&#39;</span><span class="p">:</span> <span class="n">client_app_header</span><span class="p">})</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="n">auth</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verify</span> <span class="o">=</span> <span class="n">verify</span>
 
-<div class="viewcode-block" id="RetrySession.request"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.session.html#qiskit.providers.ibmq.api_v2.session.RetrySession.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructs a Request, prepending the base url.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="RetrySession.request"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.api_v2.session.html#qiskit.providers.ibmq.api_v2.session.RetrySession.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">bare</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructs a Request, prepending the base url.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            method (string): method for the new `Request` object.</span>
+<span class="sd">            url (string): URL for the new `Request` object.</span>
+<span class="sd">            bare (bool): if `True`, do not send IBM Q specific information</span>
+<span class="sd">                (access token) in the request or modify the `url`.</span>
+<span class="sd">            kwargs (dict): additional arguments for the request.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Request: Request object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            RequestsApiError: if the request failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=arguments-differ</span>
-        <span class="n">full_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">url</span>
+        <span class="k">if</span> <span class="n">bare</span><span class="p">:</span>
+            <span class="n">final_url</span> <span class="o">=</span> <span class="n">url</span>
+            <span class="c1"># Explicitly pass `None` as the `access_token` param, disabling it.</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">final_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">url</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">full_url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">final_url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">RequestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="c1"># Wrap the requests exceptions into a IBM Q custom one, for</span>
             <span class="c1"># compatibility.</span>
             <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ex</span><span class="o">.</span><span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">error_json</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot;. </span><span class="si">{}</span><span class="s2">, Error code: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">error_json</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">],</span> <span class="n">error_json</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+                    <span class="c1"># the response did not contain the expected json.</span>
+                    <span class="k">pass</span>
+
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">)</span>
 

@@ -1715,7 +1715,7 @@
 <p>Noise model class for Qiskit Aer simulators.</p>
 <dl class="attribute">
 <dt id="qiskit.providers.aer.noise.noise_model.NoiseModel.QASMSIMULATOR_BASIS_GATES">
-<code class="descname">QASMSIMULATOR_BASIS_GATES</code><em class="property"> = ['u1', 'u2', 'u3', 'cx', 'cz', 'id', 'x', 'y', 'z', 'h', 's', 'sdg', 't', 'tdg', 'ccx', 'swap', 'multiplexer', 'snapshot', 'unitary', 'reset', 'initialize', 'kraus']</em><a class="headerlink" href="#qiskit.providers.aer.noise.noise_model.NoiseModel.QASMSIMULATOR_BASIS_GATES" title="Permalink to this definition">¶</a></dt>
+<code class="descname">QASMSIMULATOR_BASIS_GATES</code><em class="property"> = ['u1', 'u2', 'u3', 'cx', 'cz', 'cu1', 'id', 'x', 'y', 'z', 'h', 's', 'sdg', 't', 'tdg', 'ccx', 'swap', 'multiplexer', 'snapshot', 'unitary', 'reset', 'initialize', 'kraus', 'roerror']</em><a class="headerlink" href="#qiskit.providers.aer.noise.noise_model.NoiseModel.QASMSIMULATOR_BASIS_GATES" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1878,7 +1878,8 @@ already has an error [Default: True]</li>
 <dl class="method">
 <dt id="qiskit.providers.aer.noise.noise_model.NoiseModel.as_dict">
 <code class="descname">as_dict</code><span class="sig-paren">(</span><em>serializable=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.noise_model.NoiseModel.as_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return dictionary for noise model.</p>
+<dd><p>DEPRECATED: Use to_dict()
+Returns a dictionary for noise model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1949,6 +1950,25 @@ that can be serializable by the stdlib <cite>json</cite> module.</td>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>(</strong><strong>list</strong><strong>[</strong><strong>str</strong><strong>] </strong><strong>or</strong> (<em>instructions</em>) – list[Instruction]): the instructions error applies to.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NoiseError</span></code> – if the input instructions are not valid.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.providers.aer.noise.noise_model.NoiseModel.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><em>serializable=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/noise/noise_model.html#NoiseModel.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.aer.noise.noise_model.NoiseModel.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dictionary for noise model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>serializable</strong> (<em>bool</em>) – if <cite>True</cite>, return a dict containing only types
+that can be serializable by the stdlib <cite>json</cite> module.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dictionary for a noise model.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
 </tr>
 </tbody>
 </table>
