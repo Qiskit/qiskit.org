@@ -1951,12 +1951,12 @@ an IBM Q account as explained in the <a class="reference internal" href="../inst
 section of the Qiskit installation instructions.</p>
 <p>Load your IBM Q account credentials by calling</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
+<span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Once your account has been loaded, you can view the list of devices available to you.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Available backends:&quot;</span><span class="p">)</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+<span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Available backends:
@@ -1978,7 +1978,7 @@ a device with the least busy queue which can support our program (has at least 3
 qubits).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="kn">import</span> <span class="n">least_busy</span>
 
-<span class="n">large_enough_devices</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span><span class="p">)</span>
+<span class="n">large_enough_devices</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span><span class="p">)</span>
 <span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">large_enough_devices</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The best backend is &quot;</span> <span class="o">+</span> <span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
 </pre></div>
@@ -2026,7 +2026,7 @@ until the job has finished before releasing the cell.</p>
 <p>The IBM Q provider also comes with a remote optimized simulator called
 <code class="docutils literal notranslate"><span class="pre">ibmq_qasm_simulator</span></code>. This remote simulator is capable of simulating up to 32
 qubits. It can be used the same way as the remote real backends.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">backend_hpc</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">backend_hpc</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of shots to run the program (experiment);</span>

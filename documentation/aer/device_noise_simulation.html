@@ -1737,8 +1737,8 @@ model is generated using the calibration information reported in the
 <p>We will use a real hardware device in the <code class="docutils literal notranslate"><span class="pre">IBMQ</span></code> provider as an
 example. First we must load our account credentials, and then select a
 backend from the provider.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[&lt;IBMQBackend(&#39;ibmqx4&#39;) from IBMQ()&gt;,
@@ -1754,7 +1754,7 @@ the Qiskit Aer <code class="docutils literal notranslate"><span class="pre">Qasm
 <code class="docutils literal notranslate"><span class="pre">coupling_map</span></code> for the device from its <code class="docutils literal notranslate"><span class="pre">configuration</span></code> to use when
 compiling circuits for simulation to most closely mimic the gates that
 will be executed on a real device</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_16_melbourne&#39;</span><span class="p">)</span>
 <span class="n">properties</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span>
 <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">coupling_map</span>
 </pre></div>

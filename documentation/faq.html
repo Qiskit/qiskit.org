@@ -1727,7 +1727,7 @@ for real quantum devices.</p>
 <ul class="simple">
 <li>For real devices:</li>
 </ul>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;&lt;backend_name&gt;&#39;</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;&lt;backend_name&gt;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For example, if you want to run a job on the <code class="docutils literal notranslate"><span class="pre">'ibmqx4'</span></code> backend, the
@@ -1736,7 +1736,7 @@ following code would throw the error message:</p>
 </pre></div>
 </div>
 <p>Instead, the code should be written as</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_backend</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">my_backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
