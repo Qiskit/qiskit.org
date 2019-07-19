@@ -1773,9 +1773,8 @@ installation.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When upgrading from qiskit &lt; 0.6 to the latest version you first must
-uninstall the old version of qiskit with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">qiskit</span></code> before
-you can install the latest version.</p>
+<p class="last">When upgrading from Qiskit &lt; 0.6 to the latest version, uninstall the old
+version of Qiskit with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">qiskit</span></code> and then install the latest version.</p>
 </div>
 <p>There are optional dependencies that are required to use all the visualization
 functions available in Qiskit. You can install these optional
@@ -1801,7 +1800,7 @@ might need to update your IBM Q Experience credentials so that you can use the n
 Experience V2. See <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/#updating-your-ibm-q-experience-credentials">Updating your IBM Q Experience Credentials</a>.</p>
 </div>
 <p>To configure your account, you create a local configuration file which includes an API key</p>
-<p><strong>1</strong> <a class="reference external" href="https://quantum-computing.ibm.com/login">Create a free IBM Q Experience account</a>.</p>
+<p><strong>1.</strong> <a class="reference external" href="https://quantum-computing.ibm.com/login">Create a free IBM Q Experience account</a>.</p>
 <p><strong>2.</strong>  Navigate to <strong>My Account</strong> to view your account settings.</p>
 <img alt="Image of where to find the section 'My accounts'." src="_images/install_my_account.png" />
 <p><strong>3.</strong> Click on <strong>Copy token</strong> to copy the token to your clipboard.
@@ -1820,34 +1819,39 @@ how to manage multiple IBM Q account credentials.</p>
 </div>
 <div class="section" id="checking-which-version-is-installed">
 <h2>Checking Which Version is Installed<a class="headerlink" href="#checking-which-version-is-installed" title="Permalink to this headline">¶</a></h2>
-<p>Since the Qiskit project is actually a constellation of different elements
-simply printing the version string can be misleading. When you run</p>
+<p>Since the Qiskit package includes a constellation of different elements,
+simply printing the version by running <code class="docutils literal notranslate"><span class="pre">qiskit.__version__</span></code> can be misleading as it
+returns only the version for the <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> package. This is because
+the <code class="docutils literal notranslate"><span class="pre">qiskit</span></code> namespace in Python doesn’t come from the Qiskit package, but
+instead is part of the <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> package.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiskit</span>
 <span class="n">qiskit</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
-<p>This only gives you the version for the qiskit-terra package. This is because
-the <code class="docutils literal notranslate"><span class="pre">qiskit</span></code> namespace in python doesn’t come from the qiskit package, but
-instead is part of the qiskit-terra package.</p>
-<p>Instead if you would like to see the version of all the qiskit elements
-installed in your environment you can use the <code class="docutils literal notranslate"><span class="pre">__qiskit_version</span></code> attribute.
-This will return a dictionary of the different qiskit packages and the
-installed versions. For example, running</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>0.8.2
+</pre></div>
+</div>
+<p>To see the versions of all the Qiskit elements in your environment you can use
+the <code class="docutils literal notranslate"><span class="pre">__qiskit_version__</span></code> attribute.
+For example, running the following command will return a dictionary
+that includes the versions for each of the installed Qiskit packages.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiskit</span>
 <span class="n">qiskit</span><span class="o">.</span><span class="n">__qiskit_version__</span>
 </pre></div>
 </div>
-<p>will return a dictionary like</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;qiskit&#39;: &#39;0.10.1&#39;,
- &#39;qiskit-terra&#39;: &#39;0.8.0&#39;,
- &#39;qiskit-ignis&#39;: &#39;0.1.1&#39;,
- &#39;qiskit-aer&#39;: &#39;0.2.0&#39;,
- &#39;qiskit-ibmq-provider&#39;: &#39;0.2.2&#39;,
- &#39;qiskit-aqua&#39;: &#39;0.5.0&#39;}
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;qiskit&#39;: &#39;0.11.0&#39;,
+&#39;qiskit-terra&#39;: &#39;0.8.2&#39;,
+&#39;qiskit-ignis&#39;: &#39;0.1.1&#39;,
+&#39;qiskit-aer&#39;: &#39;0.2.3&#39;,
+&#39;qiskit-ibmq-provider&#39;: &#39;0.3.0&#39;,
+&#39;qiskit-aqua&#39;: &#39;0.5.2&#39;}
 </pre></div>
 </div>
-<p>If you’re filing an issue or need to share your installed qiskit versions for
-something you should use the <code class="docutils literal notranslate"><span class="pre">__qiskit_version__</span></code> attribute.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you’re filing an issue or need to share your installed Qiskit versions for
+something, use the <code class="docutils literal notranslate"><span class="pre">__qiskit_version__</span></code> attribute.</p>
+</div>
 </div>
 </div>
 
