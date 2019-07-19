@@ -150,8 +150,9 @@ class PageAer extends localize(i18next)(LitElement) {
                 from qiskit.providers.aer import noise
 
                 # Choose a real device to simulate
-                IBMQ.load_accounts()
-                device = IBMQ.get_backend('ibmq_16_melbourne')
+                IBMQ.load_account()
+                provider = IBMQ.get_provider(hub='ibm-q')
+                device = provider.get_backend('ibmq_16_melbourne')
                 properties = device.properties()
                 coupling_map = device.configuration().coupling_map
 

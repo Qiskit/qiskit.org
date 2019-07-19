@@ -285,7 +285,7 @@ class PageHome extends localize(i18next)(LitElement) {
                   rel="noopener"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
-                    action: 'Read about Qiskit 0.10',
+                    action: 'Read about Qiskit 0.11',
                     objectType: 'Button'
                   })}
                 >
