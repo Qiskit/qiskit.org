@@ -280,7 +280,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsQiskit9Description')}</p>
               <div class="actions">
                 <a
-                  href="https://medium.com/qiskit/whats-new-in-qiskit-0-9-e875f96ca695"
+                  href="https://github.com/Qiskit/qiskit/releases/tag/0.11.0"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
