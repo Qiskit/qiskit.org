@@ -1,81 +1,34 @@
 <template>
   <main>
-    <section id="whyJoin" class="join">
-      <h3 class="section-title">
-        Why Join
-      </h3>
-      <div class="gallery-text">
-        <div class="gallery-text-column">
-          <div class="gallery-text-content">
-            <img src="images/icons/apply01.svg">
-            <div>
-              <h3 class="gallery-text-subtitle">
-                Funding for your projects and work
-              </h3>
-              <p>Advocates can request funding or events and projects</p>
-            </div>
-          </div>
-          <div class="gallery-text-content">
-            <img src="images/icons/apply03.svg">
-            <div>
-              <h3 class="gallery-text-subtitle">
-                Prioritized access to hardware
-              </h3>
-              <p>Advocates will receive prioritized access to publicly available hardware</p>
-            </div>
-          </div>
+    <header>
+      <section>
+        <div>
+          <h1>{{ attributes.title }}</h1>
+          <p class="header-subtitle">
+            {{ attributes.tagline }}
+          </p>
         </div>
-        <div class="gallery-text-column">
-          <div class="gallery-text-content">
-            <img src="images/icons/apply02.svg">
-            <div>
-              <h3 class="gallery-text-subtitle">
-                Network with experts and enthusiasts
-              </h3>
-              <p>Advocates will be added to a group of quantum experts and will receive ~~~~(??).</p>
-            </div>
-          </div>
-          <div class="gallery-text-content">
-            <img src="images/icons/apply04.svg">
-            <div>
-              <h3 class="gallery-text-subtitle">
-                Increased visibility for your work
-              </h3>
-              <p>All advocates will have the opportunity to have their work supported by IBM</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="apply">
-      <h3 class="section-title">
-        Steps to apply
-      </h3>
-      <ol>
-        <li>Fill the form below</li>
-        <li>Click the link to attend test</li>
-        <li>Learn, Do the test and get certified!</li>
-      </ol>
-      <div class="button-container">
-        <button onclick="alert('Redirect to apply form')">
-          Apply Now!
-        </button>
-      </div>
-    </section>
+      </section>
+    </header>
+    <MdContent
+      :render-fn="renderFn"
+      :static-render-fns="staticRenderFns"
+    />
     <section
       v-for="(section, index) in sections"
       :key="`section-${index}`"
+      class="advocates"
     >
-      <h3
+      <h2
         v-if="!!section.title"
         :id="section.anchor"
         class="section-title"
       >
         {{ section.title }}
-      </h3>
+      </h2>
       <div class="card-container">
-        <AdvocateCard
-          v-for="(card, cardIndex) in section.regular"
+        <AdvocateProfile
+          v-for="(card, cardIndex) in section.collections.regular"
           :key="`card-${cardIndex}`"
           :name="card.attributes.name"
           :image="`/images/advocates/${card.attributes.image}`"
@@ -91,38 +44,29 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import AdvocateCard from '~/components/AdvocateCard.vue'
-
-async function loadToc(source: string): Promise<any> {
-  const toc = (await import(`~/src/${source}/toc.md`)).attributes
-  return toc
-}
-
-async function embedDocuments(section, source: string, collection: string) {
-  if (!section[collection]) { return [] }
-  section[collection] = await Promise.all(section[collection].map(
-    path => import(`~/src/${source}/${path}`)
-  ))
-}
+import AdvocateProfile from '~/components/AdvocateProfile.vue'
+import Button from '~/components/Button.vue'
+import MdContent from '~/components/MdContent.vue'
 
 @Component({
-  layout: 'advocate',
+  layout: 'secondary',
 
-  components: { AdvocateCard },
+  components: { AdvocateProfile, Button, MdContent },
 
-  async asyncData() {
-    const root = 'advocates/index'
-    const sections = await loadToc(root)
-    for (const aSection of sections) {
-      await embedDocuments(aSection, root, 'regular')
-    }
+  async asyncData(ctx) {
+    const index = await import(`~/content/advocates/index/${'master.md'}`)
+    const sections = await ctx.app.deepLoadCardToc('profiles.md', {
+      basePath: 'advocates/index/'
+    })
 
     return {
-      sections
+      sections,
+      attributes: index.attributes,
+      renderFn: index.vue.render,
+      staticRenderFns: index.vue.staticRenderFns
     }
   }
 })
-
 export default class extends Vue { }
 </script>
 
@@ -131,28 +75,199 @@ main {
   position: relative;
   top: 60px;
 }
-</style>
 
-<style scoped>
+header {
+  height: calc(100vh - 63px);
+  width: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/images/advocates/advocates-decoration.svg);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+header > section {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+header > section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header img {
+  height: 100vw;
+  position: absolute;
+  width: auto;
+  top: 10px;
+}
+
+header h1 {
+  font-size: 50px;
+  margin-left: 1.5rem;
+  text-align: center;
+}
+
+header .header-subtitle {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+
+  header section {
+    display: block;
+    text-align: center;
+  }
+
+  header h1 {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+}
+
+@media (max-height: 390px) {
+  header h1 {
+    margin: 0;
+    margin-top: 0.5rem;
+  }
+
+  header section {
+    padding: 1rem;
+  }
+}
+
+section > h2 {
+  color: black;
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  margin-top: 1em;
+}
+
+section > h2::before {
+  content: none;
+}
+
+.join > h2,
+.apply > h2 {
+  color: white;
+}
+
+.join,
+.apply,
+.advocates {
+  padding: 0 5%;
+}
+
+.join {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--secondary-color);
+  color: #FFFFFF;
+}
+
+.join > ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2rem;
+  margin: 1rem 3rem 1rem 0;
+}
+
+.join > ul > li {
+  margin: 1em 1em 2em;
+}
+
+.join > ul > li > p:first-of-type {
+  float: left;
+}
+
+.join > ul > li > p > img {
+  padding-right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0;
+}
+
 .card-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .advocate-card {
   padding: 1em;
-  box-shadow: 10px 10px 11px -10px var(--gray-shadow);
-  border: 1px solid var(--gray-shadow);
+  box-shadow: 10px 10px 11px -10px var(--shadow-color);
+  border: 1px solid var(--shadow-color);
   width: 25%;
   margin: 0.5em;
 }
 
+.apply {
+  background-color: var(--gray-color);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  padding-bottom: 3rem;
+}
+
+.apply > ol {
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  margin-bottom: 2rem;
+}
+
+.apply > ol > li {
+  margin: 0.5em;
+  position: relative;
+  counter-increment: my-awesome-counter;
+  --size: 1.5rem;
+}
+
+.apply > ol > li::before {
+  content: counter(my-awesome-counter);
+  color: var(--gray-color);
+  font-size: 1rem;
+  font-weight: bold;
+  position: relative;
+  margin-right: 0.5rem;
+  display: inline-block;
+  line-height: var(--size);
+  width: var(--size);
+  height: var(--size);
+  background: white;
+  border-radius: 50%;
+  text-align: center;
+}
+
 @media (max-width: 800px) {
+  .join > ul {
+    display: block;
+  }
+
   .card-container {
     flex-direction: column;
     align-items: center;
   }
+
   .advocate-card {
     width: 70%;
   }

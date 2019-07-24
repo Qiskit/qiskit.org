@@ -18,24 +18,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
-@Component({
-  props: {
-    name: String,
-    image: String,
-    location: String,
-    areas: String
-  }
-})
-export default class extends Vue { }
+@Component
+export default class extends Vue {
+  @Prop(String) name
+  @Prop(String) image
+  @Prop(String) location
+  @Prop(String) areas
+}
 </script>
 
-<style>
-:root {
-  --gray-shadow: rgba(148,148,148,1);
-}
-
+<style scoped>
 .advocate-card {
   display: flex;
   flex-direction: column;
