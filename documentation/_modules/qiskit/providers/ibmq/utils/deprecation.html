@@ -178,8 +178,9 @@
 
 <span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.exceptions</span> <span class="k">import</span> <span class="n">IBMQAccountError</span>
 
-<span class="n">UPDATE_ACCOUNT_TEXT</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Please use IBMQ.update_account() to update your &#39;</span>
-                       <span class="s1">&#39;stored credentials.&#39;</span><span class="p">)</span>
+<span class="n">UPDATE_ACCOUNT_TEXT</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;Please update your accounts and programs by following the instructions here:</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="s1">&#39;https://github.com/Qiskit/qiskit-ibmq-provider#updating-to-the-new-ibm-q-experience&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="deprecated"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.utils.deprecation.html#qiskit.providers.ibmq.utils.deprecation.deprecated">[docs]</a><span class="k">def</span> <span class="nf">deprecated</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -194,7 +195,9 @@
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="p">:</span>
+        <span class="c1"># The special case of load_accounts is here for backward</span>
+        <span class="c1"># compatibility when using v2 credentials.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="ow">and</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">!=</span> <span class="s1">&#39;load_accounts&#39;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span>
                 <span class="s1">&#39;IBMQ.</span><span class="si">{}</span><span class="s1">() is not available when using an IBM Q Experience &#39;</span>
                 <span class="s1">&#39;v2 account. Please use IBMQ.</span><span class="si">{}</span><span class="s1">() (note the singular form) &#39;</span>
@@ -203,8 +206,9 @@
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="s1">&#39;IBMQ.</span><span class="si">{}</span><span class="s1">() is being deprecated. Please use IBM Q Experience v2 &#39;</span>
             <span class="s1">&#39;credentials and IBMQ.</span><span class="si">{}</span><span class="s1">() (note the singular form) instead. You can &#39;</span>
-            <span class="s1">&#39;use IBMQ.update_account() to update your stored credentials, &#39;</span>
-            <span class="s1">&#39;if applicable.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="s1">&#39;find the instructions to make the updates here: </span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;https://github.com/Qiskit/qiskit-ibmq-provider#updating-to-the-new-ibm-q-experience&#39;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
             <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 

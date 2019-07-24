@@ -255,6 +255,12 @@
         <span class="n">ret</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">configs_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">raw_config</span> <span class="ow">in</span> <span class="n">configs_list</span><span class="p">:</span>
+            <span class="c1"># Make sure the raw_config is of proper type</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">raw_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;An error occurred when retrieving backend &quot;</span>
+                               <span class="s2">&quot;information. Some backends might not be available.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">raw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;open_pulse&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
                     <span class="n">config</span> <span class="o">=</span> <span class="n">PulseBackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span>

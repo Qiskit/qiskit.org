@@ -295,20 +295,21 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span></div>
 
-<div class="viewcode-block" id="IBMQBackend.jobs"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.jobs">[docs]</a>    <span class="k">def</span> <span class="nf">jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">db_filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IBMQBackend.jobs"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.ibmq.ibmqbackend.html#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.jobs">[docs]</a>    <span class="k">def</span> <span class="nf">jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">db_filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the jobs submitted to this backend.</span>
 
 <span class="sd">        Return the jobs submitted to this backend, with optional filtering and</span>
-<span class="sd">        pagination. Note that jobs submitted with earlier versions of Qiskit</span>
+<span class="sd">        pagination. Note that the API has a limit for the number of jobs</span>
+<span class="sd">        returned in a single call, and this function might involve making</span>
+<span class="sd">        several calls to the API. See also the `skip` parameter for more control</span>
+<span class="sd">        over pagination.</span>
+
+<span class="sd">        Note that jobs submitted with earlier versions of Qiskit</span>
 <span class="sd">        (in particular, those that predate the Qobj format) are not included</span>
 <span class="sd">        in the returned list.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            limit (int): number of jobs to retrieve. Note that the limit</span>
-<span class="sd">                specified can be overridden by limits set by the API for</span>
-<span class="sd">                performance reasons, and might result in fewer jobs being</span>
-<span class="sd">                returned. In those cases, the `skip` parameter can be used</span>
-<span class="sd">                for pagination.</span>
+<span class="sd">            limit (int): number of jobs to retrieve.</span>
 <span class="sd">            skip (int): starting index for the job retrieval.</span>
 <span class="sd">            status (None or qiskit.providers.JobStatus or str): only get jobs</span>
 <span class="sd">                with this status, where status is e.g. `JobStatus.RUNNING` or</span>
@@ -342,6 +343,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            IBMQBackendValueError: status keyword value unrecognized</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Build the filter for the query.</span>
         <span class="n">backend_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
         <span class="n">api_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;backend.name&#39;</span><span class="p">:</span> <span class="n">backend_name</span><span class="p">}</span>
         <span class="k">if</span> <span class="n">status</span><span class="p">:</span>
@@ -366,10 +368,32 @@
         <span class="k">if</span> <span class="n">db_filter</span><span class="p">:</span>
             <span class="c1"># status takes precedence over db_filter for same keys</span>
             <span class="n">api_filter</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">db_filter</span><span class="p">,</span> <span class="o">**</span><span class="n">api_filter</span><span class="p">}</span>
-        <span class="n">job_info_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_status_jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="n">skip</span><span class="p">,</span>
-                                                  <span class="nb">filter</span><span class="o">=</span><span class="n">api_filter</span><span class="p">)</span>
+
+        <span class="c1"># Retrieve the requested number of jobs, using pagination. The API</span>
+        <span class="c1"># might limit the number of jobs per request.</span>
+        <span class="n">job_responses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">current_page_limit</span> <span class="o">=</span> <span class="n">limit</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">job_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_status_jobs</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">current_page_limit</span><span class="p">,</span>
+                                                 <span class="n">skip</span><span class="o">=</span><span class="n">skip</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">api_filter</span><span class="p">)</span>
+            <span class="n">job_responses</span> <span class="o">+=</span> <span class="n">job_page</span>
+            <span class="n">skip</span> <span class="o">=</span> <span class="n">skip</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">job_page</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">job_page</span><span class="p">:</span>
+                <span class="c1"># Stop if there are no more jobs returned by the API.</span>
+                <span class="k">break</span>
+
+            <span class="k">if</span> <span class="n">limit</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">job_responses</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">limit</span><span class="p">:</span>
+                    <span class="c1"># Stop if we have reached the limit.</span>
+                    <span class="k">break</span>
+                <span class="n">current_page_limit</span> <span class="o">=</span> <span class="n">limit</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">job_responses</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_page_limit</span> <span class="o">=</span> <span class="mi">0</span>
+
         <span class="n">job_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">job_info</span> <span class="ow">in</span> <span class="n">job_info_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">job_info</span> <span class="ow">in</span> <span class="n">job_responses</span><span class="p">:</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">job_kind</span> <span class="o">=</span> <span class="n">ApiJobKind</span><span class="p">(</span><span class="n">job_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
