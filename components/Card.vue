@@ -19,20 +19,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
-@Component({
-  props: {
-    title: String,
-    image: String,
-    to: {
-      type: String,
-      default: ''
-    },
-    info: String
-  }
-})
+@Component
 export default class extends Vue {
+  @Prop(String) title
+  @Prop(String) image
+  @Prop({ default: '' }) to
+  @Prop(String) info
+
   get isPointingOutside() {
     return this.$props.to.startsWith('http')
   }
