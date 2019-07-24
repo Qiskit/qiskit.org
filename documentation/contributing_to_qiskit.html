@@ -869,7 +869,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installing-terra-from-source">Installing Terra from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#installing-aer-from-source">Installing Aer from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-ignis-from-source">Installing Ignis from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-aqua-from-source">Installing Aqua from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-chemistry-from-source">Install Chemistry from Source</a></li>
@@ -1693,7 +1696,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#installing-terra-from-source">Installing Terra from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#installing-aer-from-source">Installing Aer from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-ignis-from-source">Installing Ignis from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-aqua-from-source">Installing Aqua from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-chemistry-from-source">Install Chemistry from Source</a></li>
@@ -1773,9 +1779,9 @@ built from the master branch of <a class="reference external" href="https://gith
 </li>
 <li><p class="first"><a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/installation.html">Install Sphinx</a>.</p>
 </li>
-<li><p class="first">Install the <cite>Material Design HTML Theme for Sphinx</cite> by running the following
+<li><p class="first">Install the required dependencies by running the following
 in a terminal window:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install sphinx_materialdesign_theme
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
 </pre></div>
 </div>
 </li>
@@ -2023,10 +2029,6 @@ macOS</div>
 <div class="docutils container">
 Windows</div>
 </div>
-<div class="item sphinx-data-tab-2-3 docutils container">
-<div class="docutils container">
-Custom options during wheel builds</div>
-</div>
 </div>
 <div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-2-0 active docutils container">
 <ol class="arabic" start="3">
@@ -2060,7 +2062,7 @@ you can build a python wheel manually.</p>
 </pre></div>
 </div>
 <p>If you need to set a custom option during the wheel build you can refer to
-<span class="xref std std-ref">aer_wheel_build_options</span>.</p>
+<a class="reference internal" href="#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
 <p>After you build the python wheel it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
 Aer repository. The exact version will depend</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dist</span>
@@ -2075,14 +2077,14 @@ Aer under development.</p>
 <div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-2-1 docutils container">
 <ol class="arabic" start="3">
 <li><p class="first">Install dependencies.</p>
-<p>To use the <a class="reference external" href="https://clang.llvm.org/">Clang</a> compiler on macOS, you need to install an extra library for
-supporting <a class="reference external" href="https://www.openmp.org/">OpenMP</a>.  You can use <a class="reference external" href="https://brew.sh/">brew</a> to install this and other
-dependencies.</p>
+<p>To use the <a class="reference external" href="https://clang.llvm.org/">Clang</a> compiler on macOS, you need to install
+an extra library for supporting <a class="reference external" href="https://www.openmp.org/">OpenMP</a>.  You can use <a class="reference external" href="https://brew.sh/">brew</a>
+to install this and other dependencies.</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">libomp</span>
 </pre></div>
 </div>
-<p>You then also have to install a BLAS implementation, <a class="reference external" href="https://www.openblas.net/">OpenBLAS</a> is the
-default choice.</p>
+<p>You then also have to install a BLAS implementation, <a class="reference external" href="https://www.openblas.net/">OpenBLAS</a>
+is the default choice.</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">openblas</span>
 </pre></div>
 </div>
@@ -2106,7 +2108,7 @@ for your environment you can build a python wheel manually.</p>
 </pre></div>
 </div>
 <p>If you need to set a custom option during the wheel build you can refer to
-<span class="xref std std-ref">aer_wheel_build_options</span>.</p>
+<a class="reference internal" href="#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
 <p>After you build the python wheel it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
 Aer repository. The exact version will depend</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dist</span>
@@ -2119,7 +2121,8 @@ Aer under development.</p>
 </ol>
 </div>
 <div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-2-2 docutils container">
-<p>On Windows you need to use <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a> or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> to install all the
+<p>On Windows you need to use <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a>
+or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> to install all the
 dependencies.</p>
 <ol class="arabic" start="3">
 <li><p class="first">Install compiler requirements</p>
@@ -2145,7 +2148,7 @@ that instead.</p>
 </pre></div>
 </div>
 <p>If you need to set a custom option during the wheel build you can refer to
-<span class="xref std std-ref">aer_wheel_build_options</span>.</p>
+<a class="reference internal" href="#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
 <p>After you build the python wheel it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
 Aer repository. The exact version will depend</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dist</span>
@@ -2157,10 +2160,13 @@ Aer under development.</p>
 </li>
 </ol>
 </div>
-<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-2-3 docutils container">
-<p>The Aer build system uses <a class="reference external" href="https://scikit-build.readthedocs.io/en/latest/index.html">scikit-build</a> to run the compilation when building
-it with the python interface. It acts as an interface for <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/">setuptools</a> to
-call <a class="reference external" href="https://cmake.org/">CMake</a> and compile the binaries for your local system.</p>
+</div>
+<div class="section" id="custom-options-during-wheel-builds">
+<span id="aer-wheel-build-options"></span><h4>Custom options during wheel builds<a class="headerlink" href="#custom-options-during-wheel-builds" title="Permalink to this headline">¶</a></h4>
+<p>The Aer build system uses <a class="reference external" href="https://scikit-build.readthedocs.io/en/latest/index.html">scikit-build</a>
+to run the compilation when building it with the python interface. It acts as an interface for
+<a class="reference external" href="https://setuptools.readthedocs.io/en/latest/">setuptools</a> to call <a class="reference external" href="https://cmake.org/">CMake</a>
+and compile the binaries for your local system.</p>
 <p>Due to the complexity of compiling the binaries you may need to pass options
 to a certain part of the build process. The way to pass variables is:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span> <span class="p">[</span><span class="n">skbuild_opts</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span> <span class="p">[</span><span class="n">cmake_opts</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span> <span class="n">build_tool_opts</span><span class="p">]]</span>
@@ -2169,14 +2175,14 @@ to a certain part of the build process. The way to pass variables is:</p>
 <p>where the elements within square brackets <cite>[]</cite> are optional, and
 <code class="docutils literal notranslate"><span class="pre">skbuild_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">cmake_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">build_tool_opts</span></code> are to be replaced by
 flags of your choice. A list of <em>CMake</em> options is available here:
-<a class="reference external" href="https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options">https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options</a> . For
+<a class="reference external" href="https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options">https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options</a>. For
 example, you could run something like:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_wheel</span> <span class="o">--</span> <span class="o">--</span> <span class="o">-</span><span class="n">j8</span>
 </pre></div>
 </div>
 <p>This is passing the flag <cite>-j8</cite> to the underlying build system (which in this
-case is <a class="reference external" href="https://www.gnu.org/software/automake/">Automake</a>) telling it that you want to build in parallel using 8
-processes.</p>
+case is <a class="reference external" href="https://www.gnu.org/software/automake/">Automake</a>) telling it that you want
+to build in parallel using 8 processes.</p>
 <p>For example, a common use case for these flags on linux is to specify a
 specific version of the C++ compiler to use (normally if the default is too
 old).</p>
@@ -2195,8 +2201,6 @@ need to specify your platform name and turn off static linking.</p>
 use in the package metadata, <code class="docutils literal notranslate"><span class="pre">-DSTATIC_LINKING</span></code> is a flag to CMake being used
 to disable static linking, and <code class="docutils literal notranslate"><span class="pre">-j8</span></code> is a flag to Automake being used to use
 8 processes for compilation.</p>
-</div>
-</div>
 <p>A list of common options depending on platform are:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -2245,6 +2249,7 @@ should be used or not</td>
 <p class="last">Some of these options are not platform specific, if a platform is listed
 this is just outlining it’s commonly used in that environment. Refer to the
 tool documentation for more information.</p>
+</div>
 </div>
 </div>
 <div class="section" id="installing-ignis-from-source">

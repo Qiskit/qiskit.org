@@ -863,7 +863,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#install-chemistry-from-source">Install Chemistry from Source</a></li>
@@ -1687,7 +1690,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#install-chemistry-from-source">Install Chemistry from Source</a></li>
@@ -1755,10 +1761,14 @@ Otherwise, a cached version is returned.</td>
 
 <dl class="method">
 <dt id="qiskit.providers.ibmq.ibmqbackend.IBMQBackend.jobs">
-<code class="descname">jobs</code><span class="sig-paren">(</span><em>limit=50</em>, <em>skip=0</em>, <em>status=None</em>, <em>db_filter=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.jobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.jobs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">jobs</code><span class="sig-paren">(</span><em>limit=10</em>, <em>skip=0</em>, <em>status=None</em>, <em>db_filter=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/ibmq/ibmqbackend.html#IBMQBackend.jobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.ibmq.ibmqbackend.IBMQBackend.jobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the jobs submitted to this backend.</p>
 <p>Return the jobs submitted to this backend, with optional filtering and
-pagination. Note that jobs submitted with earlier versions of Qiskit
+pagination. Note that the API has a limit for the number of jobs
+returned in a single call, and this function might involve making
+several calls to the API. See also the <cite>skip</cite> parameter for more control
+over pagination.</p>
+<p>Note that jobs submitted with earlier versions of Qiskit
 (in particular, those that predate the Qobj format) are not included
 in the returned list.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1766,11 +1776,7 @@ in the returned list.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>limit</strong> (<em>int</em>) – number of jobs to retrieve. Note that the limit
-specified can be overridden by limits set by the API for
-performance reasons, and might result in fewer jobs being
-returned. In those cases, the <cite>skip</cite> parameter can be used
-for pagination.</li>
+<li><strong>limit</strong> (<em>int</em>) – number of jobs to retrieve.</li>
 <li><strong>skip</strong> (<em>int</em>) – starting index for the job retrieval.</li>
 <li><strong>status</strong> (<em>None</em><em> or </em><em>qiskit.providers.JobStatus</em><em> or </em><em>str</em>) – only get jobs
 with this status, where status is e.g. <cite>JobStatus.RUNNING</cite> or
