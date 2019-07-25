@@ -33,7 +33,7 @@ a {
 }
 
 a[call-to-action] {
-  background-color: var(--ibm-color);
+  background-color: var(--ibm-blue);
   color: white;
 }
 
