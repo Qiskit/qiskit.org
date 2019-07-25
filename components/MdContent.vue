@@ -13,7 +13,7 @@ export default class extends Vue {
       : createElement('div', 'Rendering...')
   }
 
-  beforeMount() {
+  created() {
     /* eslint no-new-func: "off" */
     this.$data.templateRender =
       (new Function(this.$props.renderFn)()).bind(this)

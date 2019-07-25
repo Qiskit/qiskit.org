@@ -10,6 +10,9 @@ interface SlimCardSection {
   /** Id for the section. */
   anchor?: string
 
+  /** Base path for the section. */
+  basepath: string
+
   /** Each collection is a map of a unique id and a list of cards to embed. */
   collections?: Map<string, string[]>
 }
@@ -38,9 +41,12 @@ export default ({ app }) => {
   async function embedDocumentsInPlace(section: SlimCardSection, basepath: string) {
     if (typeof section.collections === 'undefined') { return }
     for (const aCollection of Object.keys(section.collections)) {
+      const sectionBasepath =
+        typeof section.basepath !== 'undefined' ? section.basepath : basepath
+
       section.collections[aCollection] =
         await Promise.all(section.collections[aCollection].map(
-          path => import(`~/content/${basepath}${path}`)
+          path => import(`~/content/${sectionBasepath}${path}`)
         ))
     }
   }
