@@ -21,7 +21,7 @@
             },
           };
           window._analytics = {
-            segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H',
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
             coremetrics: false,
             optimizely: false,
             googleAddServices: false,
@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.providers.ibmq.ibmqsingleprovider &#8212; Qiskit 0.11.0 documentation</title>
+    <title>qiskit.providers.ibmq.ibmqsingleprovider &#8212; Qiskit 0.11.1 documentation</title>
 
     <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -72,7 +72,6 @@
         <a class="external" id="tutorialsLink" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>Documentation</a>
         <a class="external" href="/vscode">Tools</a>
-        <a class="external" href="/community">Community</a>
       </nav>
     </div>
   </header>
@@ -263,6 +262,12 @@
         <span class="n">configs_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">raw_config</span> <span class="ow">in</span> <span class="n">configs_list</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Make sure the raw_config is of proper type</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">raw_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;An error occurred when retrieving backend &quot;</span>
+                                   <span class="s2">&quot;information. Some backends might not be available.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
                 <span class="k">if</span> <span class="n">raw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;open_pulse&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
                     <span class="n">config</span> <span class="o">=</span> <span class="n">PulseBackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
