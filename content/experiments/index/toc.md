@@ -4,7 +4,7 @@
   basepath: experiments/
   collections:
     cards:
-      - qonway-game-of-life.md
+      - qiskit-blocks.md
 -
   title: Qiskit Experiments
   basepath: experiments/
@@ -13,7 +13,5 @@
       - qonway-game-of-life.md
       - quantum-toy-piano.md
       - tictacq.md
-      - quantum-toy-piano.md
-      - qonway-game-of-life.md
-      - quantum-toy-piano.md
+      - qiskit-blocks.md
 ---
