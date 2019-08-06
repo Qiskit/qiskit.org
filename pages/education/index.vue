@@ -27,6 +27,7 @@
           :to="card.attributes.to"
           :info="card.html"
           major
+          centered-background
         />
       </div>
     </section>
@@ -47,6 +48,7 @@
           :to="card.attributes.to"
           :info="card.html"
           major
+          centered-background
         />
       </div>
     </section>

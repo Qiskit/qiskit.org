@@ -1,6 +1,4 @@
 ---
-title: Dedicated hardware
+title: Dedicated Hardware
 image: /images/education/dedicatedhardware.jpg
-to: '#'
 ---
-Copy goes here...
