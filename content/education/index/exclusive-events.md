@@ -1,6 +1,4 @@
 ---
-title: Exclusive events
+title: Exclusive Events
 image: /images/education/exclusiveevents.jpg
-to: '#'
 ---
-Copy goes here...

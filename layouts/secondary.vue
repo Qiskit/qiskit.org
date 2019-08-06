@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <Menu>
-      <li><a href="/">Home</a></li>
+      <!--<li><a href="/">Home</a></li>
       <li><a href="/events/">Events</a></li>
-      <!-- <li><a href="/advocates">Advocates</a></li> -->
+      <li><a href="/advocates">Advocates</a></li> -->
     </Menu>
     <nuxt />
     <Footer />

@@ -1,6 +1,5 @@
 ---
 title: Textbook
-image: /images/events/promo-europe.jpg
+image: /images/education/textbook.jpg
 to: '#'
 ---
-Copy goes here...

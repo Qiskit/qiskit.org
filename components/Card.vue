@@ -51,6 +51,10 @@ export default class extends Vue {
   background-color: var(--secondary-color, white);
 }
 
+.card[centered-background] {
+  background-position: center;
+}
+
 .card[small] {
   min-height: 7.5rem;
 }
