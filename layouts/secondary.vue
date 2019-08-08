@@ -14,7 +14,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 
-import Menu from '~/components/Menu.vue'
+import Menu from '~/components/BlankMenu.vue'
 import Footer from '~/components/Footer.vue'
 
 @Component({ components: { Menu, Footer } })

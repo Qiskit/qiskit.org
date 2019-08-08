@@ -92,7 +92,7 @@ main {
 }
 
 header {
-  height: calc(100vh - 63px);
+  height: 600px;
   width: auto;
   overflow: hidden;
   display: flex;
@@ -157,6 +157,7 @@ header .header-subtitle {
 
   header iframe {
     margin: 0;
+    width: 100%;
   }
 
   header h1 {
