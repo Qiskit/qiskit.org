@@ -1,8 +1,9 @@
 <template>
   <nav>
     <section class="ibm-research">
-      <a href="https://qiskit.org" class="text-logo" target="_blank" rel="noopener"><img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit</a>
+      <a href="https://qiskit.org" class="text-logo" rel="noopener"><img class="logo" alt="Qiskit logo" src="https://qiskit.camp/img/qiskit-logo.png">&nbsp;Qiskit</a>
     </section>
+    <!--
     <div class="convertible-menu">
       <input class="hamburger" type="checkbox">
       <span class="hamburger" />
@@ -12,6 +13,7 @@
         <slot />
       </ul>
     </div>
+    -->
   </nav>
 </template>
 
