@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Variational Quantum Eigensolver and Molecular Simulations</title>
+<title>vqe_and_molecular_simulations</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13117,8 +13117,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Variational-Quantum-Eigensolver-and-Molecular-Simulations">Variational Quantum Eigensolver and Molecular Simulations<a class="anchor-link" href="#Variational-Quantum-Eigensolver-and-Molecular-Simulations">&#182;</a></h1><p>In this tutorial, we introduce the Variational Quantum Eigensolver (VQE), motivate its use, explain the necessary theory, and demonstrate its implemention in finding the ground state energy of molecules.</p>
-<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><p><strong>@TODO</strong></p>
-<ol>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ol>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#varmethod">The Variational Method of Quantum Mechanics</a><ol>
 <li><a href="#backgroundmath">Mathematical Background</a></li>
@@ -13127,10 +13126,10 @@ div#notebook {
 </li>
 <li><a href="#vqe">The Variational Quantum Eigensolver</a><ol>
 <li><a href="#varforms">Variational Forms</a></li>
-<li><a href="#simplevarform">Constructing a Simple Variational Form</a></li>
-<li><a href="#commonvarforms">Structure of Common Variational Forms</a></li>
+<li><a href="#simplevarform">Simple Variational Forms</a></li>
 <li><a href="#optimization">Parameter Optimization</a></li>
-<li></li>
+<li><a href="#example">Example with a Single Qubit Variational Form</a></li>
+<li><a href="#commonvarforms">Structure of Common Variational Forms</a></li>
 </ol>
 </li>
 <li><a href="#implementation">VQE Implementation in Qiskit</a><ol>
@@ -13148,12 +13147,12 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a id="introduction" /><a class="anchor-link" href="#Introduction">&#182;</a></h2><p>In many applications it is important to find the minimum eigenvalue of a matrix. For example, in chemistry, the minimum eigenvalue of a Hermitian matrix describing characterizing the molecule (called the Hamiltonian) is the ground state energy of that system. In the future, the quantum phase estimation algorithm may be used to find the minimum eigenvalue. However, its implementation on useful problems requires circuit depths exceeding the limits of harware available in the NISQ era. Thus, in 2014, Peruzzo <em>et al.</em> proposed VQE to estimate the ground state energy of a molecule, using circuits with depths feasible for execution on current quantum hardware [1].</p>
-<p>Formally stated, given a Hermitian matrix $H$, with an unknown minimum eigenvalue $\lambda_{min}$ associated with an eigenstate $|\psi_{min}\rangle$, VQE provides an estimate for the minimum eigenvalue, $\lambda_{\theta}$, with the property:</p>
+<h2 id="Introduction">Introduction<a id="introduction" /><a class="anchor-link" href="#Introduction">&#182;</a></h2><p>In many applications it is important to find the minimum eigenvalue of a matrix. For example, in chemistry, the minimum eigenvalue of a Hermitian matrix characterizing the molecule is the ground state energy of that system. In the future, the quantum phase estimation algorithm may be used to find the minimum eigenvalue. However, its implementation on useful problems requires circuit depths exceeding the limits of hardware available in the NISQ era. Thus, in 2014, Peruzzo <em>et al.</em> proposed VQE to estimate the ground state energy of a molecule using much shallower circuits [1].</p>
+<p>Formally stated, given a Hermitian matrix $H$ with an unknown minimum eigenvalue $\lambda_{min}$, associated with the eigenstate $|\psi_{min}\rangle$, VQE provides an estimate $\lambda_{\theta}$ bounding $\lambda_{min}$:</p>
 \begin{align*}
     \lambda_{min} \le \lambda_{\theta} \equiv \langle \psi(\theta) |H|\psi(\theta) \rangle
 \end{align*}<p></p>
-<p>where $|\psi(\theta)\rangle$ is the eigenstate associated with $\lambda_{\theta}$. By applying a parameterized circuit, represented by the transformation $U(\theta)$, to some arbitary starting state $|\psi\rangle$, the algorithm obtains an estimate $U(\theta)|\psi\rangle \equiv |\psi(\theta)\rangle$ of $|\psi_{min}\rangle$. The estimate is iteratively optimized by a classical controller on $\theta$ over the expecation value $\langle \psi(\theta) |H|\psi(\theta) \rangle$.</p>
+<p>where $|\psi(\theta)\rangle$ is the eigenstate associated with $\lambda_{\theta}$. By applying a parameterized circuit, represented by $U(\theta)$, to some arbitrary starting state $|\psi\rangle$, the algorithm obtains an estimate $U(\theta)|\psi\rangle \equiv |\psi(\theta)\rangle$ on $|\psi_{min}\rangle$. The estimate is iteratively optimized by a classical controller changing the parameter $\theta$ minimizing the expectation value of $\langle \psi(\theta) |H|\psi(\theta) \rangle$.</p>
 
 </div>
 </div>
@@ -13161,31 +13160,28 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Variational-Method-of-Quantum-Mechanics">The Variational Method of Quantum Mechanics<a id="varmethod" /><a class="anchor-link" href="#The-Variational-Method-of-Quantum-Mechanics">&#182;</a></h2><h3 id="Mathematical-Background">Mathematical Background<a id="#backgroundmath" /><a class="anchor-link" href="#Mathematical-Background">&#182;</a></h3><p>VQE is an application of the variational method of quantum mechanics. To better understand the variational method, some preliminary mathematical background is provided. An eigenvector, $|\psi_i\rangle$ of a matrix $A$, is defined as a vector that, up to a scalar multiplicative constant (the eigenvalue, $\lambda_i$), is invariant under transformation by $A$. That is,</p>
+<h2 id="The-Variational-Method-of-Quantum-Mechanics">The Variational Method of Quantum Mechanics<a id="varmethod" /><a class="anchor-link" href="#The-Variational-Method-of-Quantum-Mechanics">&#182;</a></h2><h3 id="Mathematical-Background">Mathematical Background<a id="backgroundmath" /><a class="anchor-link" href="#Mathematical-Background">&#182;</a></h3><p>VQE is an application of the variational method of quantum mechanics. To better understand the variational method, some preliminary mathematical background is provided. An eigenvector, $|\psi_i\rangle$, of a matrix $A$ is invariant under transformation by $A$ up to a scalar multiplicative constant (the eigenvalue $\lambda_i$). That is,</p>
 \begin{align*}
     A |\psi_i\rangle = \lambda_i |\psi_i\rangle
 \end{align*}<p>Furthermore, a matrix $H$ is Hermitian when it is equal to its own conjugate transpose.</p>
 \begin{align*}
     H = H^{\dagger}
-\end{align*}<p>The spectral theorem states that the eigenvalues of a Hermitian matrix must be real. Thus, any eigenvalue of $H$ has the property that $\lambda_i = \lambda_i^*$. As any measurable quantity must by definition be real, Hermitian matrices are suitable for describing the Hamiltonians of quantum systems. In terms of $H$'s eigenvectors,</p>
+\end{align*}<p>The spectral theorem states that the eigenvalues of a Hermitian matrix must be real. Thus, any eigenvalue of $H$ has the property that $\lambda_i = \lambda_i^*$. As any measurable quantity must be real, Hermitian matrices are suitable for describing the Hamiltonians of quantum systems. Moreover, $H$ may be expressed as</p>
 \begin{align*}
     H = \sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i |
-\end{align*}<p>where each $\lambda_i$ is the eigenvalue corresponding to the eigenvector $|\psi_i\rangle$. Let $|\psi\rangle$ represent an arbitary quantum state. Then, the expection value of the observable $H$ on the state $|\psi\rangle$ is given by</p>
+\end{align*}<p>where each $\lambda_i$ is the eigenvalue corresponding to the eigenvector $|\psi_i\rangle$. Furthermore, the expectation value of the observable $H$ on an arbitrary quantum state $|\psi\rangle$ is given by</p>
 \begin{align}
-    \langle H \rangle_{\psi} &amp;\equiv \langle \psi | H | \psi \rangle\\
-    &amp;= \langle \psi | \left(\sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i |\right) |\psi\rangle\\
-    &amp;= \langle \psi | \left(\sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i | \psi\rangle\right) 
-\end{align}<p>projecting $|\psi\rangle$ onto its representation as a weighted sum of the eigenvectors of $H$.</p>
+    \langle H \rangle_{\psi} &amp;\equiv \langle \psi | H | \psi \rangle
+\end{align}<p>Substituting $H$ with its representation as a weighted sum of its eigenvectors,</p>
 \begin{align}
-    \langle H \rangle_{\psi} &amp;= \langle \psi | \left(\sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i | \psi\rangle\right)\\
-    &amp;= \sum_{i = 1}^{N} \langle \psi | \lambda_i |\psi_i\rangle \langle \psi_i | \psi\rangle \\
+    \langle H \rangle_{\psi} = \langle \psi | H | \psi \rangle &amp;= \langle \psi | \left(\sum_{i = 1}^{N} \lambda_i |\psi_i\rangle \langle \psi_i |\right) |\psi\rangle\\
     &amp;= \sum_{i = 1}^{N} \lambda_i \langle \psi | \psi_i\rangle \langle \psi_i | \psi\rangle \\
     &amp;= \sum_{i = 1}^{N} \lambda_i | \langle \psi_i | \psi\rangle |^2
-\end{align}<p>Observe that the last equation indicates that the expecation value of any state for an observable can be expressed as a linear combination of the eigenvalues associated with $H$. Moreover, each of the weights in the linear combination is greater than or equal to 0, as $| \langle \psi_i | \psi\rangle |^2 \ge 0$. Thus, it is clear that</p>
+\end{align}<p>The last equation demonstrates that the expectation value of an observable on any state can be expressed as a linear combination using the eigenvalues associated with $H$ as the weights. Moreover, each of the weights in the linear combination is greater than or equal to 0, as $| \langle \psi_i | \psi\rangle |^2 \ge 0$ and so it is clear that</p>
 \begin{align}
     \lambda_{min} \le \langle H \rangle_{\psi} = \langle \psi | H | \psi \rangle = \sum_{i = 1}^{N} \lambda_i | \langle \psi_i | \psi\rangle |^2
-\end{align}<p>The the above equation is known as the <strong>variational principle</strong> [2]. It is important to note that this implies that the expectation value of any wavefunction will always be at least the mininum eigenvalue associated with $H$. Moreover, the expecation value of state $|\psi_{min}\rangle$ is given by $\langle \psi_{min}|H|\psi_{min}\rangle = \langle \psi_{min}|\lambda_{min}|\psi_{min}\rangle = \lambda_{min}$. Thus, as expected, $\langle H \rangle_{\psi_{min}}=\lambda_{min}$.</p>
-<h3 id="Bounding-the-Ground-State">Bounding the Ground State<a id="#groundstate" /><a class="anchor-link" href="#Bounding-the-Ground-State">&#182;</a></h3><p>When the Hamiltonian of a system is described by the Hermitian matrix $H$, the ground state energy of that system, $E_{gs}$, is the smallest eigenvalue associated with $H$. By arbitarily selecting a wavefunction $|\psi \rangle$ (called an <em>ansatz</em>) as an initial guess approximating $|\psi_{min}\rangle$, calculating its expecation value, $\langle H \rangle_{\psi}$, and iteratively updating the wavefunction, arbitarily tight bounds on the ground state energy of a Hamiltonian may be obtained.</p>
+\end{align}<p>The above equation is known as the <strong>variational method</strong> (in some texts it is also known as the variational principle) [2]. It is important to note that this implies that the expectation value of any wave function will always be at least the minimum eigenvalue associated with $H$. Moreover, the expectation value of state $|\psi_{min}\rangle$ is given by $\langle \psi_{min}|H|\psi_{min}\rangle = \langle \psi_{min}|\lambda_{min}|\psi_{min}\rangle = \lambda_{min}$. Thus, as expected, $\langle H \rangle_{\psi_{min}}=\lambda_{min}$.</p>
+<h3 id="Bounding-the-Ground-State">Bounding the Ground State<a id="groundstate" /><a class="anchor-link" href="#Bounding-the-Ground-State">&#182;</a></h3><p>When the Hamiltonian of a system is described by the Hermitian matrix $H$ the ground state energy of that system, $E_{gs}$, is the smallest eigenvalue associated with $H$. By arbitrarily selecting a wave function $|\psi \rangle$ (called an <em>ansatz</em>) as an initial guess approximating $|\psi_{min}\rangle$, calculating its expectation value, $\langle H \rangle_{\psi}$, and iteratively updating the wave function, arbitrarily tight bounds on the ground state energy of a Hamiltonian may be obtained.</p>
 
 </div>
 </div>
@@ -13193,24 +13189,27 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Variational-Quantum-Eigensolver">The Variational Quantum Eigensolver<a id="vqe" /><a class="anchor-link" href="#The-Variational-Quantum-Eigensolver">&#182;</a></h2><h3 id="Variational-Forms">Variational Forms<a id="varforms" /><a class="anchor-link" href="#Variational-Forms">&#182;</a></h3><p>A systematic approach to varying the ansatz is required to implement the variational method on a quantum computer. VQE does so through the use of a parameterized circuit with a fixed form. Such a circuit is often called a <em>variational form</em>, and its action may be represented by the linear transformation $U(\theta)$. The variational form is applied to a starting state $|\psi\rangle$ (such as the vacuum state $|0\rangle$, or the Hatree Fock state) and generates an output state $U(\theta)|\psi\rangle\equiv |\psi(\theta)\rangle$. Iterative optimization over $|\psi(\theta)\rangle$ aims to yield an expecation value $\langle \psi(\theta)|H|\psi(\theta)\rangle \approx E_{gs} \equiv \lambda_{min}$. Ideally, $|\psi(\theta)\rangle$ will be close to $|\psi_{min}\rangle$ (where 'closeness' is characterized by either state fidelity, or manhattan distance) although in practice, useful bounds on $E_{gs}$ can be obtained even if this is not the case.</p>
-<p>Moreover, a fixed variational form with a polynomial number of paramters can only generate transformations to a polynomially sized subspace of all the states in an exponentially sized Hilbert space. Consequently, various variational forms exist. Some, such as RY and RYRZ are heuristically desiged, without consideration of the target domain. Others, such as UCCSD, utilize domain specific knowledge to generate close approximations based on the problem's structure.</p>
-<h3 id="Simple-Variational-Forms">Simple Variational Forms<a id="simplevarform" /><a class="anchor-link" href="#Simple-Variational-Forms">&#182;</a></h3><p>When constructing a variational form we must balance two opposing goals. Ideally, our $n$ qubit variational form should be able to generate any possible state $|\psi\rangle$ where $|\psi\rangle \in \mathbb{C}^N$ and $N=2^n$. However, we would like the variational form to use as few parameters as possible. Here, we aim to give intuition for the construction of variational forms satisfying our first goal, while disregarding the second goal for the sake of simplicity.</p>
-<p>Consider the case where $n=1$. Recall that the U3 gate may be written as $U3(\theta, \phi, \lambda)$ and that up to a global phase, any possible single qubit transformation may be implemented by appropriately setting the parameters $\theta, \phi$ and $\lambda$. Consequently, for the single qubit case, a variational form capable of generating any possible state is given by the circuit:</p>
+<h2 id="The-Variational-Quantum-Eigensolver">The Variational Quantum Eigensolver<a id="vqe" /><a class="anchor-link" href="#The-Variational-Quantum-Eigensolver">&#182;</a></h2><h3 id="Variational-Forms">Variational Forms<a id="varforms" /><a class="anchor-link" href="#Variational-Forms">&#182;</a></h3><p>A systematic approach to varying the ansatz is required to implement the variational method on a quantum computer. VQE does so through the use of a parameterized circuit with a fixed form. Such a circuit is often called a <em>variational form</em>, and its action may be represented by the linear transformation $U(\theta)$. A variational form is applied to a starting state $|\psi\rangle$ (such as the vacuum state $|0\rangle$, or the Hartree Fock state) and generates an output state $U(\theta)|\psi\rangle\equiv |\psi(\theta)\rangle$. Iterative optimization over $|\psi(\theta)\rangle$ aims to yield an expectation value $\langle \psi(\theta)|H|\psi(\theta)\rangle \approx E_{gs} \equiv \lambda_{min}$. Ideally, $|\psi(\theta)\rangle$ will be close to $|\psi_{min}\rangle$ (where 'closeness' is characterized by either state fidelity, or Manhattan distance) although in practice, useful bounds on $E_{gs}$ can be obtained even if this is not the case.</p>
+<p>Moreover, a fixed variational form with a polynomial number of parameters can only generate transformations to a polynomially sized subspace of all the states in an exponentially sized Hilbert space. Consequently, various variational forms exist. Some, such as Ry and RyRz are heuristically designed, without consideration of the target domain. Others, such as UCCSD, utilize domain specific knowledge to generate close approximations based on the problem's structure. The structure of common variational forms is discussed in greater depth later in this document.</p>
+<h3 id="Simple-Variational-Forms">Simple Variational Forms<a id="simplevarform" /><a class="anchor-link" href="#Simple-Variational-Forms">&#182;</a></h3><p>When constructing a variational form we must balance two opposing goals. Ideally, our $n$ qubit variational form would be able to generate any possible state $|\psi\rangle$ where $|\psi\rangle \in \mathbb{C}^N$ and $N=2^n$. However, we would like the variational form to use as few parameters as possible. Here, we aim to give intuition for the construction of variational forms satisfying our first goal, while disregarding the second goal for the sake of simplicity.</p>
+<p>Consider the case where $n=1$. The U3 gate takes three parameters, $\theta, \phi$ and $\lambda$, and represents the following transformation:</p>
+\begin{align}
+    U3(\theta, \phi, \lambda) = \begin{pmatrix}\cos(\frac{\theta}{2}) &amp; -e^{i\lambda}\sin(\frac{\theta}{2}) \\ e^{i\phi}\sin(\frac{\theta}{2}) &amp; e^{i\lambda + i\phi}\cos(\frac{\theta}{2}) \end{pmatrix}
+\end{align}<p>Up to a global phase, any possible single qubit transformation may be implemented by appropriately setting these parameters. Consequently, for the single qubit case, a variational form capable of generating any possible state is given by the circuit:</p>
 <p><img src="./images/U3_var_form.png"
      alt="U3 Variational Form"
-     style="width:30%"/></p>
-<p>Moreover, this universal 'variational form' only has 3 parameters and thus can be efficiently optimized. It is worth emphasising that the ability to generate an arbitrary state ensures that during the optimization process, the variational form does not limit the set of attainable states over which the expectation value of $H$ can be taken. Ideally, this ensures that the minimum expectation value is limited only by the capabilities of the classiscal optimizer.</p>
-<p>A less trivial, universal, variational form may be derived for the 2 qubit case, where two body interactions, and thus entanglement, must be considered to achieve universality. Based on the work presented by <em>Shende et al.</em> [3] the following is an example of a universal paramterized 2 qubit circuit:</p>
+     width="350"/></p>
+<p>Moreover, this universal 'variational form' only has 3 parameters and thus can be efficiently optimized. It is worth emphasising that the ability to generate an arbitrary state ensures that during the optimization process, the variational form does not limit the set of attainable states over which the expectation value of $H$ can be taken. Ideally, this ensures that the minimum expectation value is limited only by the capabilities of the classical optimizer.</p>
+<p>A less trivial universal variational form may be derived for the 2 qubit case, where two body interactions, and thus entanglement, must be considered to achieve universality. Based on the work presented by <em>Shende et al.</em> [3] the following is an example of a universal parameterized 2 qubit circuit:</p>
 <p><img src="./images/two_qubit_var_form.png"
      alt="Two Qubit Variational Form"
-     style="width:75%"/></p>
-<p>While this is not the minimum possible 2 qubit universal circuit, there are a total of 24 parameters. Therefore, by optimizing the parameters of the above circuit, any state, in principal, may be obtained. Allow the transformation performed by the above circuit to be represented by $U(\theta)$. When optimized variationally, the expecation value of $H$ is minimized when $U(\theta)|\psi\rangle \equiv |\psi(\theta)\rangle \approx |\psi_{min}\rangle$. By formulation, $U(\theta)$ may produce a transformation to any possible state, and so this variational form may obtain an arbitrarily tight bound on two qubit ground state energies, only limited by the capabilities of the classical optimizer.</p>
-<h3 id="Parameter-Optimization">Parameter Optimization<a id="optimization" /><a class="anchor-link" href="#Parameter-Optimization">&#182;</a></h3><p>Once an efficiently parameterized variational form has been selected, its parameters must be optimized so as to minimize the expecation value of the target Hamiltonian in accordance with the variational method. The parameter optimization process has various challenges. For example, quantum hardware has various types of noise and so objective function (energy) evaluation may not neccessarily reflect the true objective function. Additionally, some optimizers perform a number of objective function evaluations dependent on the number of parameters being optimized. An appropriate optimizer should be selected dependant on the application.</p>
-<p>A popular optimization strategy is gradient decent. Gradient decent updates each optimizer in the direction yielding the largest local change in energy. Consequently, the number of evaluations performed depends on the number of optimization parameters. This allows the algorithm to quickly find a local optimum in the search space. While an intuitive optimization strategy, it is not recommended for optimizing the parameters of a quantum circuit in VQE.</p>
-<p>An appropriate optimizer selection for a noisy objective function is the <em>Simultaneous Perturbation Stochastic Approximation</em> optimizer (SPSA). SPSA approximates the gradient of the objective function while utilizing only two measurements. It does so by concurrently perturbing all of the parameters in a random fashion, in constrast to gradient decent where each parameter is perturbed independently. When utilizing VQE in either a noisy simulator or on real hardware, SPSA is a recommended as the classical optimizer.</p>
-<p>When noise is not present in the cost function evaluation (such as when using VQE with a statevector simulator), a wide variety of classical optimizers may be useful. Two such optimizers supported by Qiskit Aqua are the <em>Sequential Least Squares Programming</em> optimizer (SLSQP) and the <em>Constrained Optimization by Linear Approximation</em> optimizer (COBYLA).</p>
-<h3 id="Example-with-a-Single-Qubit-Variational-Form">Example with a Single Qubit Variational Form<a class="anchor-link" href="#Example-with-a-Single-Qubit-Variational-Form">&#182;</a></h3><p>We will now use the single qubit variational form to solve a problem similar to groundstate energy estimation. Specifically, we are given a random probability vector $\vec{x}$ and wish to determine a possible parameterization for our single qubit variational form such that it outputs a probability distribution that is close to $\vec{x}$ (where closeness is defined in terms of the Manhattan distance between the two probability vectors).</p>
+     width="800"/></p>
+<p>Allow the transformation performed by the above circuit to be represented by $U(\theta)$. When optimized variationally, the expectation value of $H$ is minimized when $U(\theta)|\psi\rangle \equiv |\psi(\theta)\rangle \approx |\psi_{min}\rangle$. By formulation, $U(\theta)$ may produce a transformation to any possible state, and so this variational form may obtain an arbitrarily tight bound on two qubit ground state energies, only limited by the capabilities of the classical optimizer.</p>
+<h3 id="Parameter-Optimization">Parameter Optimization<a id="optimization" /><a class="anchor-link" href="#Parameter-Optimization">&#182;</a></h3><p>Once an efficiently parameterized variational form has been selected, in accordance with the variational method, its parameters must be optimized to minimize the expectation value of the target Hamiltonian. The parameter optimization process has various challenges. For example, quantum hardware has various types of noise and so objective function evaluation (energy calculation) may not necessarily reflect the true objective function. Additionally, some optimizers perform a number of objective function evaluations dependent on cardinality of the parameter set. An appropriate optimizer should be selected by considering the requirements of a application.</p>
+<p>A popular optimization strategy is gradient decent where each parameter is updated in the direction yielding the largest local change in energy. Consequently, the number of evaluations performed depends on the number of optimization parameters present. This allows the algorithm to quickly find a local optimum in the search space. However, this optimization strategy often gets stuck at poor local optima, and is relatively expensive in terms of the number of circuit evaluations performed. While an intuitive optimization strategy, it is not recommended for use in VQE.</p>
+<p>An appropriate optimizer for optimizing a noisy objective function is the <em>Simultaneous Perturbation Stochastic Approximation</em> optimizer (SPSA). SPSA approximates the gradient of the objective function with only two measurements. It does so by concurrently perturbing all of the parameters in a random fashion, in contrast to gradient decent where each parameter is perturbed independently. When utilizing VQE in either a noisy simulator or on real hardware, SPSA is a recommended as the classical optimizer.</p>
+<p>When noise is not present in the cost function evaluation (such as when using VQE with a statevector simulator), a wide variety of classical optimizers may be useful. Two such optimizers supported by Qiskit Aqua are the <em>Sequential Least Squares Programming</em> optimizer (SLSQP) and the <em>Constrained Optimization by Linear Approximation</em> optimizer (COBYLA). It is worth noting that COBYLA only performs one objective function evaluation per optimization iteration (and thus the number of evaluations is independent of the parameter set's cardinality). Therefore, if the objective function is noise-free and minimizing the number of performed evaluations is desirable, it is recommended to try COBYLA.</p>
+<h3 id="Example-with-a-Single-Qubit-Variational-Form">Example with a Single Qubit Variational Form<a id="example" /><a class="anchor-link" href="#Example-with-a-Single-Qubit-Variational-Form">&#182;</a></h3><p>We will now use the simple single qubit variational form to solve a problem similar to ground state energy estimation. Specifically, we are given a random probability vector $\vec{x}$ and wish to determine a possible parameterization for our single qubit variational form such that it outputs a probability distribution that is close to $\vec{x}$ (where closeness is defined in terms of the Manhattan distance between the two probability vectors).</p>
 <p>We first create the random probability vector in python:</p>
 
 </div>
@@ -13218,7 +13217,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13243,7 +13242,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
@@ -13271,7 +13270,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
@@ -13311,7 +13310,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.aqua.components.optimizers</span> <span class="k">import</span> <span class="n">COBYLA</span>
@@ -13349,9 +13348,9 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Target Distribution: [0.51357006 0.48642994]
-Obtained Distribution: [0.5181, 0.4819]
-Output Error (Manhattan Distance): 0.003459881261160813
-Parameters Found: [1.5986381  1.1003381  1.64729269]
+Obtained Distribution: [0.5182, 0.4818]
+Output Error (Manhattan Distance): 0.0001401187388391789
+Parameters Found: [1.59966854 0.66273002 0.28432001]
 </pre>
 </div>
 </div>
@@ -13363,10 +13362,106 @@ Parameters Found: [1.5986381  1.1003381  1.64729269]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Structure-of-Common-Variational-Forms">Structure of Common Variational Forms<a id="commonvarforms" /><a class="anchor-link" href="#Structure-of-Common-Variational-Forms">&#182;</a></h3><p>As already discussed, it is not possible for a polynomially parameterized variational form to generate a transformation to any state. Thus, variational forms are designed following two distinct approaches. The first approach uses domain (or application) specific knowledge to limit the set of possible output states. The second approach uses a heuristic circuit without prior domain or application specific knowledge.</p>
-<p>The first approach exploites characteristics of the problem domain to restrict the set of transformations that may be required. For example, when calculating the ground state energy of a molecule, the number of particles in the system is known <em>a priori</em>. Therefore, if a starting state with the correct number of particles is used, by limiting the variational form to only producing particle preserving transformations, the number of parameters required to span the new transformation subspace can be greatly reduced. Indeed, by utilizing similar information from Coupled-Cluster theory, the variational form UCCSD can obtain very accurate results for molecular ground state energy estimation when starting from the Hatree-Fock state. Another example illustrating the exploitation of domain-specific knowledge to produce a variational form can be found by considering the set of circuits realizable on real quantum hardware. Extant quantum computers, such as those based on super conducting qubits, have limited qubit connectivity. That is, it is not possible to implement 2-qubit gates on arbitrary qubit pairs (without inserting swap gates). Thus, variational forms have been constructed for specific quantum computer architectures where the circuits are specfically tuned to maximally exploit the natively available gates of a given quantum device. Such a variational form was used in 2017 to successfully implement VQE for the estimation of the ground state energies of molecules as large as BeH$_2$ on an IBM quantum computer [4].</p>
-<p>In the second approach, gates are layered in such a way as to allow good approximations of a large variety states. <strong>@TODO</strong></p>
-<p>-Explain configuration of each of these variational forms: i.e. full vs linear entanglement, etc</p>
+<h3 id="Structure-of-Common-Variational-Forms">Structure of Common Variational Forms<a id="commonvarforms" /><a class="anchor-link" href="#Structure-of-Common-Variational-Forms">&#182;</a></h3><p>As already discussed, it is not possible for a polynomially parameterized variational form to generate a transformation to any state. Variational forms can be grouped into two categories, depending on how they deal with this limitation. The first category of variational forms use domain or application specific knowledge to limit the set of possible output states. The second approach uses a heuristic circuit without prior domain or application specific knowledge.</p>
+<p>The first category of variational forms exploit characteristics of the problem domain to restrict the set of transformations that may be required. For example, when calculating the ground state energy of a molecule, the number of particles in the system is known <em>a priori</em>. Therefore, if a starting state with the correct number of particles is used, by limiting the variational form to only producing particle preserving transformations, the number of parameters required to span the new transformation subspace can be greatly reduced. Indeed, by utilizing similar information from Coupled-Cluster theory, the variational form UCCSD can obtain very accurate results for molecular ground state energy estimation when starting from the Hartree Fock state. Another example illustrating the exploitation of domain-specific knowledge follows from considering the set of circuits realizable on real quantum hardware. Extant quantum computers, such as those based on super conducting qubits, have limited qubit connectivity. That is, it is not possible to implement 2-qubit gates on arbitrary qubit pairs (without inserting swap gates). Thus, variational forms have been constructed for specific quantum computer architectures where the circuits are specifically tuned to maximally exploit the natively available connectivity and gates of a given quantum device. Such a variational form was used in 2017 to successfully implement VQE for the estimation of the ground state energies of molecules as large as BeH$_2$ on an IBM quantum computer [4].</p>
+<p>In the second approach, gates are layered such that good approximations on a wide range of states may be obtained. Qiskit Aqua supports three such variational forms: RyRz, Ry and SwapRz (we will only discuss the first two). All of these variational forms accept multiple user-specified configurations. Three essential configurations are the number of qubits in the system, the depth setting, and the entanglement setting. A single layer of a variational form specifies a certain pattern of single qubit rotations and CX gates. The depth setting says how many times the variational form should repeat this pattern. By increasing the depth setting, at the cost of increasing the number of parameters that must be optimized, the set of states the variational form can generate increases. Finally, the entanglement setting selects the configuration, and implicitly the number, of CX gates. For example, when the entanglement setting is linear, CX gates are applied to adjacent qubit pairs in order (and thus $n-1$ CX gates are added per layer). When the entanglement setting is full, a CX gate is applied to each qubit pair in each layer. The circuits for RyRz corresponding to <code>entanglement="full"</code> and <code>entanglement="linear"</code> can be seen by executing the following code snippet:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.aqua.components.variational_forms</span> <span class="k">import</span> <span class="n">RYRZ</span>
+<span class="n">entanglements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;full&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">entanglement</span> <span class="ow">in</span> <span class="n">entanglements</span><span class="p">:</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">RYRZ</span><span class="p">(</span><span class="n">num_qubits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">entanglement</span><span class="o">=</span><span class="n">entanglement</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">entanglement</span> <span class="o">==</span> <span class="s2">&quot;linear&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=============Linear Entanglement:=============&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=============Full Entanglement:=============&quot;</span><span class="p">)</span>
+    <span class="c1"># We initialize all parameters to 0 for this demonstration</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">construct_circuit</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">form</span><span class="o">.</span><span class="n">num_parameters</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">line_length</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=============Linear Entanglement:=============
+        ┌───────────┐┌───────┐                      ┌───────────┐  ┌───────┐                »
+q_0: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├──────────────────■───┤ U3(0,0,0) ├──┤ U1(0) ├────────────────»
+        ├───────────┤├───────┤┌──────────────┐┌─┴─┐┌┴───────────┴─┐└───────┘ ┌───────────┐  »
+q_1: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├┤ U2(0,3.1416) ├┤ X ├┤ U2(0,3.1416) ├────■─────┤ U3(0,0,0) ├──»
+        ├───────────┤├───────┤├──────────────┤└───┘└──────────────┘  ┌─┴─┐  ┌┴───────────┴─┐»
+q_2: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├┤ U2(0,3.1416) ├───────────────────────┤ X ├──┤ U2(0,3.1416) ├»
+        ├───────────┤├───────┤├──────────────┤                       └───┘  └──────────────┘»
+q_3: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├┤ U2(0,3.1416) ├──────────────────────────────────────────────»
+        └───────────┘└───────┘└──────────────┘                                              »
+«                                                     ░ 
+«q_0: ────────────────────────────────────────────────░─
+«     ┌───────┐                                       ░ 
+«q_1: ┤ U1(0) ├───────────────────────────────────────░─
+«     └───────┘ ┌───────────┐    ┌───────┐            ░ 
+«q_2: ────■─────┤ U3(0,0,0) ├────┤ U1(0) ├────────────░─
+«       ┌─┴─┐  ┌┴───────────┴─┐┌─┴───────┴─┐┌───────┐ ░ 
+«q_3: ──┤ X ├──┤ U2(0,3.1416) ├┤ U3(0,0,0) ├┤ U1(0) ├─░─
+«       └───┘  └──────────────┘└───────────┘└───────┘ ░ 
+
+=============Full Entanglement:=============
+        ┌───────────┐┌───────┐                                                               »
+q_0: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├──────────────────■────■────────────────────■──────────────────»
+        ├───────────┤├───────┤┌──────────────┐┌─┴─┐  │  ┌──────────────┐  │                  »
+q_1: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├┤ U2(0,3.1416) ├┤ X ├──┼──┤ U2(0,3.1416) ├──┼──────────────────»
+        ├───────────┤├───────┤├──────────────┤└───┘┌─┴─┐└──────────────┘  │  ┌──────────────┐»
+q_2: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├┤ U2(0,3.1416) ├─────┤ X ├──────────────────┼──┤ U2(0,3.1416) ├»
+        ├───────────┤├───────┤├──────────────┤     └───┘                ┌─┴─┐└──────────────┘»
+q_3: |0&gt;┤ U3(0,0,0) ├┤ U1(0) ├┤ U2(0,3.1416) ├──────────────────────────┤ X ├────────────────»
+        └───────────┘└───────┘└──────────────┘                          └───┘                »
+«      ┌───────────┐     ┌───────┐                                                              »
+«q_0: ─┤ U3(0,0,0) ├─────┤ U1(0) ├──────────────────────────────────────────────────────────────»
+«      └───────────┘     └───────┘                          ┌───────────┐     ┌───────┐         »
+«q_1: ───────────────────────■──────────■───────────────────┤ U3(0,0,0) ├─────┤ U1(0) ├─────────»
+«     ┌──────────────┐     ┌─┴─┐        │  ┌──────────────┐ └───────────┘     └───────┘         »
+«q_2: ┤ U2(0,3.1416) ├─────┤ X ├────────┼──┤ U2(0,3.1416) ├──────────────────────────────────■──»
+«     ├──────────────┤┌────┴───┴─────┐┌─┴─┐└──────────────┘┌──────────────┐┌──────────────┐┌─┴─┐»
+«q_3: ┤ U2(0,3.1416) ├┤ U2(0,3.1416) ├┤ X ├────────────────┤ U2(0,3.1416) ├┤ U2(0,3.1416) ├┤ X ├»
+«     └──────────────┘└──────────────┘└───┘                └──────────────┘└──────────────┘└───┘»
+«                                            ░ 
+«q_0: ───────────────────────────────────────░─
+«                                            ░ 
+«q_1: ───────────────────────────────────────░─
+«      ┌───────────┐    ┌───────┐            ░ 
+«q_2: ─┤ U3(0,0,0) ├────┤ U1(0) ├────────────░─
+«     ┌┴───────────┴─┐┌─┴───────┴─┐┌───────┐ ░ 
+«q_3: ┤ U2(0,3.1416) ├┤ U3(0,0,0) ├┤ U1(0) ├─░─
+«     └──────────────┘└───────────┘└───────┘ ░ 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Assume the depth setting is set to $d$. Then, RyRz has $n\times (d+1)\times 2$ parameters, Ry with linear entanglement has $2n\times(d + \frac{1}{2})$ parameters, and Ry with full entanglement has $d\times n\times \frac{(n + 1)}{2} + n$ parameters.</p>
 
 </div>
 </div>
@@ -13374,15 +13469,15 @@ Parameters Found: [1.5986381  1.1003381  1.64729269]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="VQE-Implementation-in-Qiskit">VQE Implementation in Qiskit<a id="implementation" /><a class="anchor-link" href="#VQE-Implementation-in-Qiskit">&#182;</a></h2><p>This section illustrates an implementaiton of VQE using the programmatic approach. Qiskit Aqua also enables a declarative implementation, however, it reveals less information about the underlying algorithm. This code, specifically the preparation of qubit operators, is based on the code found in the Qiskit Tutorials repository (and as of July 2019, may be found here: github.com/Qiskit/qiskit-tutorials).</p>
-<p>Begin by importing the following libraries:</p>
+<h2 id="VQE-Implementation-in-Qiskit">VQE Implementation in Qiskit<a id="implementation" /><a class="anchor-link" href="#VQE-Implementation-in-Qiskit">&#182;</a></h2><p>This section illustrates an implementation of VQE using the programmatic approach. Qiskit Aqua also enables a declarative implementation, however, it reveals less information about the underlying algorithm. This code, specifically the preparation of qubit operators, is based on the code found in the Qiskit Tutorials repository (and as of July 2019, may be found at: <a href="https://github.com/Qiskit/qiskit-tutorials">https://github.com/Qiskit/qiskit-tutorials</a> ).</p>
+<p>The following libraries must first be imported.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.aqua.algorithms</span> <span class="k">import</span> <span class="n">VQE</span><span class="p">,</span> <span class="n">ExactEigensolver</span>
@@ -13410,14 +13505,14 @@ Parameters Found: [1.5986381  1.1003381  1.64729269]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Running-VQE-on-a-Statevector-Simulator">Running VQE on a Statevector Simulator<a id="implementationstatevec" /><a class="anchor-link" href="#Running-VQE-on-a-Statevector-Simulator">&#182;</a></h3><p>We demonstrate the calculation of the groundstate energy for LiH at various interatomic distances. A driver for the molecule must be created at each such distance. Note that in this experiment, to reduce the number of qubits used, we freeze the core and remove two unoccupied orbitals. First, we define a function that takes an interatomic distance and returns the appropriate qubit operator, $H$, as well as some other information about the operator.</p>
+<h3 id="Running-VQE-on-a-Statevector-Simulator">Running VQE on a Statevector Simulator<a id="implementationstatevec" /><a class="anchor-link" href="#Running-VQE-on-a-Statevector-Simulator">&#182;</a></h3><p>We demonstrate the calculation of the ground state energy for LiH at various interatomic distances. A driver for the molecule must be created at each such distance. Note that in this experiment, to reduce the number of qubits used, we freeze the core and remove two unoccupied orbitals. First, we define a function that takes an interatomic distance and returns the appropriate qubit operator, $H$, as well as some other information about the operator.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_qubit_op</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
@@ -13454,8 +13549,8 @@ Parameters Found: [1.5986381  1.1003381  1.64729269]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The qubit operator is used to calculate the exact energy. Subsequently, the initial state $|\psi\rangle$ is created, which the VQE instance uses to produce the final ansatz $\min_{\theta}(|\psi(\theta)\rangle)$. The exact result and the VQE result at each interatomic distance is stored. Observe that the result given by <code>vqe.run(backend)['energy'] + shift</code> is equivalent the quantity $\min_{\theta}\left(\langle \psi(\theta)|H|\psi(\theta)\rangle\right)$, where the minimum is not neccessarily the global mininum.</p>
-<p>When initializing the VQE instance with <code>VQE(qubitOp, var_form, optimizer, 'matrix')</code> the expecation value of $H$ is calculated by taking the expecation of the state generated by the variational form, $|\psi(\theta)\rangle$, over the matrix representation of $H$. In contrast, when the VQE instance is initialized with <code>VQE(qubitOp, var_form, optimizer, 'paulis')</code> the expecation value is computed by averaging the expecation values of each Pauli term in the sum of Pauli terms the fermionic Hamiltonian was mapped to.</p>
+<p>First, the exact ground state energy is calculated using the qubit operator and a classical exact eigensolver. Subsequently, the initial state $|\psi\rangle$ is created, which the VQE instance uses to produce the final ansatz $\min_{\theta}(|\psi(\theta)\rangle)$. The exact result and the VQE result at each interatomic distance is stored. Observe that the result given by <code>vqe.run(backend)['energy'] + shift</code> is equivalent the quantity $\min_{\theta}\left(\langle \psi(\theta)|H|\psi(\theta)\rangle\right)$, where the minimum is not necessarily the global minimum.</p>
+<p>When initializing the VQE instance with <code>VQE(qubitOp, var_form, optimizer, 'matrix')</code> the expectation value of $H$ on $|\psi(\theta)\rangle$ is directly calculated through matrix multiplication. However, when using an actual quantum device, or a true simulator such as the <code>qasm_simulator</code> with <code>VQE(qubitOp, var_form, optimizer, 'paulis')</code> the calculation of the expectation value is more complicated. A Hamiltonian may be represented as a sum of a Pauli strings, with each Pauli term acting on a qubit as specified by the mapping being used. Each Pauli string has a corresponding circuit appended to the circuit corresponding to $|\psi(\theta)\rangle$. Subsequently, each of these circuits is executed, and all of the results are used to determine the expectation value of $H$ on $|\psi(\theta)\rangle$. In the following example, we initialize the VQE instance with <code>matrix</code> mode, and so the expectation value is directly calculated through matrix multiplication.</p>
 <p>Note that the following code snippet may take a few minutes to run to completion.</p>
 
 </div>
@@ -13463,7 +13558,7 @@ Parameters Found: [1.5986381  1.1003381  1.64729269]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s2">&quot;statevector_simulator&quot;</span><span class="p">)</span>
@@ -13513,38 +13608,38 @@ Parameters Found: [1.5986381  1.1003381  1.64729269]
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Interatomic Distance: 0.5 VQE Result: -7.039710219020506 Exact Energy: -7.039732521635202
 Interatomic Distance: 0.6 VQE Result: -7.313344302334236 Exact Energy: -7.313345828761008
-Interatomic Distance: 0.7 VQE Result: -7.500921095743192 Exact Energy: -7.500922090905931
-Interatomic Distance: 0.8 VQE Result: -7.630976914468914 Exact Energy: -7.630978249333208
-Interatomic Distance: 0.9 VQE Result: -7.7208107952020795 Exact Energy: -7.720812412134775
-Interatomic Distance: 1.0 VQE Result: -7.782240655298441 Exact Energy: -7.782242402637009
+Interatomic Distance: 0.7 VQE Result: -7.500921095743192 Exact Energy: -7.500922090905936
+Interatomic Distance: 0.8 VQE Result: -7.630976914468914 Exact Energy: -7.630978249333209
+Interatomic Distance: 0.9 VQE Result: -7.7208107952020795 Exact Energy: -7.720812412134773
+Interatomic Distance: 1.0 VQE Result: -7.782240655298441 Exact Energy: -7.782242402637011
 Interatomic Distance: 1.1 VQE Result: -7.823597493320795 Exact Energy: -7.82359927636281
-Interatomic Distance: 1.2 VQE Result: -7.850696622934822 Exact Energy: -7.850698377596025
-Interatomic Distance: 1.3 VQE Result: -7.867561602181376 Exact Energy: -7.8675632901100565
-Interatomic Distance: 1.4 VQE Result: -7.876999876757721 Exact Energy: -7.877001491818372
-Interatomic Distance: 1.5 VQE Result: -7.8810141736656405 Exact Energy: -7.881015715646997
-Interatomic Distance: 1.6 VQE Result: -7.881070662952161 Exact Energy: -7.881072044030919
-Interatomic Distance: 1.7 VQE Result: -7.878267162143656 Exact Energy: -7.878268167584992
-Interatomic Distance: 1.8 VQE Result: -7.873440112155302 Exact Energy: -7.87344029313283
-Interatomic Distance: 1.9 VQE Result: -7.86723366674701 Exact Energy: -7.86723396481603
+Interatomic Distance: 1.2 VQE Result: -7.850696622934822 Exact Energy: -7.850698377596024
+Interatomic Distance: 1.3 VQE Result: -7.867561602181376 Exact Energy: -7.867563290110052
+Interatomic Distance: 1.4 VQE Result: -7.876999876757721 Exact Energy: -7.877001491818373
+Interatomic Distance: 1.5 VQE Result: -7.8810141736656405 Exact Energy: -7.881015715646992
+Interatomic Distance: 1.6 VQE Result: -7.881070662952161 Exact Energy: -7.88107204403092
+Interatomic Distance: 1.7 VQE Result: -7.878267162143656 Exact Energy: -7.878268167584993
+Interatomic Distance: 1.8 VQE Result: -7.873440112155302 Exact Energy: -7.873440293132828
+Interatomic Distance: 1.9 VQE Result: -7.86723366674701 Exact Energy: -7.8672339648160285
 Interatomic Distance: 2.0 VQE Result: -7.860152327529411 Exact Energy: -7.86015320737878
-Interatomic Distance: 2.1 VQE Result: -7.852595105536979 Exact Energy: -7.852595827876737
-Interatomic Distance: 2.2 VQE Result: -7.844878726366329 Exact Energy: -7.844879093009718
-Interatomic Distance: 2.3 VQE Result: -7.837257439448259 Exact Energy: -7.837257967615503
-Interatomic Distance: 2.4 VQE Result: -7.829935045088515 Exact Energy: -7.829937002623393
+Interatomic Distance: 2.1 VQE Result: -7.852595105536979 Exact Energy: -7.852595827876738
+Interatomic Distance: 2.2 VQE Result: -7.844878726366329 Exact Energy: -7.844879093009722
+Interatomic Distance: 2.3 VQE Result: -7.837257439448259 Exact Energy: -7.8372579676155025
+Interatomic Distance: 2.4 VQE Result: -7.829935045088515 Exact Energy: -7.829937002623394
 Interatomic Distance: 2.5 VQE Result: -7.823070191557451 Exact Energy: -7.82307664213409
-Interatomic Distance: 2.6 VQE Result: -7.816782591999657 Exact Energy: -7.816795150472928
+Interatomic Distance: 2.6 VQE Result: -7.816782591999657 Exact Energy: -7.816795150472929
 Interatomic Distance: 2.7 VQE Result: -7.8111534373726 Exact Energy: -7.811168284803366
-Interatomic Distance: 2.8 VQE Result: -7.806218299266321 Exact Energy: -7.806229560089847
-Interatomic Distance: 2.9 VQE Result: -7.801962397475152 Exact Energy: -7.801973602332551
-Interatomic Distance: 3.0 VQE Result: -7.798352412318197 Exact Energy: -7.798363430915128
+Interatomic Distance: 2.8 VQE Result: -7.806218299266321 Exact Energy: -7.806229560089845
+Interatomic Distance: 2.9 VQE Result: -7.801962397475152 Exact Energy: -7.8019736023325486
+Interatomic Distance: 3.0 VQE Result: -7.798352412318197 Exact Energy: -7.7983634309151295
 Interatomic Distance: 3.1 VQE Result: -7.795326815750017 Exact Energy: -7.795340451637537
 Interatomic Distance: 3.2 VQE Result: -7.792800698225245 Exact Energy: -7.792834806738612
-Interatomic Distance: 3.3 VQE Result: -7.790603799019874 Exact Energy: -7.790774009971015
-Interatomic Distance: 3.4 VQE Result: -7.788715354695274 Exact Energy: -7.789088897991479
-Interatomic Distance: 3.5 VQE Result: -7.787215781080283 Exact Energy: -7.787716973466146
-Interatomic Distance: 3.6 VQE Result: -7.786080393658009 Exact Energy: -7.786603763673839
-Interatomic Distance: 3.7 VQE Result: -7.785203497342158 Exact Energy: -7.7857029124998824
-Interatomic Distance: 3.8 VQE Result: -7.7844795319924325 Exact Energy: -7.784975591698872
+Interatomic Distance: 3.3 VQE Result: -7.790603799019874 Exact Energy: -7.790774009971014
+Interatomic Distance: 3.4 VQE Result: -7.788715354695274 Exact Energy: -7.789088897991478
+Interatomic Distance: 3.5 VQE Result: -7.787215781080283 Exact Energy: -7.787716973466144
+Interatomic Distance: 3.6 VQE Result: -7.786080393658009 Exact Energy: -7.786603763673838
+Interatomic Distance: 3.7 VQE Result: -7.785203497342158 Exact Energy: -7.785702912499886
+Interatomic Distance: 3.8 VQE Result: -7.7844795319924325 Exact Energy: -7.784975591698873
 Interatomic Distance: 3.9 VQE Result: -7.783853361693722 Exact Energy: -7.7843896116723315
 All energies have been calculated
 </pre>
@@ -13598,7 +13693,7 @@ All energies have been calculated
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As the VQE results are very close to the exact results, only the VQE energy curve is shown.</p>
+<p>Note that the VQE results are very close to the exact results, and so the exact energy curve is hidden by the VQE curve.</p>
 
 </div>
 </div>
@@ -13614,7 +13709,7 @@ All energies have been calculated
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">driver</span> <span class="o">=</span> <span class="n">PySCFDriver</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;H .0 .0 -0.3625; H .0 .0 0.3625&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">UnitsType</span><span class="o">.</span><span class="n">ANGSTROM</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;sto3g&#39;</span><span class="p">)</span>
@@ -13632,14 +13727,14 @@ All energies have been calculated
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we load a device coupling map and noise model from the IBMQ provider and create a quantum instance, configuring it with error mitigation:</p>
+<p>Now, we load a device coupling map and noise model from the IBMQ provider and create a quantum instance, enabling error mitigation:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
@@ -13662,14 +13757,15 @@ All energies have been calculated
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, we must configure the optimizer, the variational form, and the VQE instance. As the effects of noise are more prominent when the variational form has more two qubit gates and a deeper circuit, we use a heuristic variational form (RYRZ) rather than UCCSD as RYRZ has a much shallower circuit and uses substantially fewer two qubit gates.</p>
+<p>Finally, we must configure the optimizer, the variational form, and the VQE instance. As the effects of noise increase as the number of two qubit gates circuit depth increase, we use a heuristic variational form (RYRZ) rather than UCCSD as RYRZ has a much shallower circuit than UCCSD and uses substantially fewer two qubit gates.</p>
+<p>The following code may take a few minutes to run to completion.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">exact_solution</span> <span class="o">=</span> <span class="n">ExactEigensolver</span><span class="p">(</span><span class="n">qubitOp</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -13695,8 +13791,8 @@ All energies have been calculated
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Exact Result: -1.8671209783412703
-VQE Result: -1.8372878775852501
+<pre>Exact Result: -1.86712097834127
+VQE Result: -1.8220854070067132
 </pre>
 </div>
 </div>
@@ -13708,7 +13804,7 @@ VQE Result: -1.8372878775852501
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When noise mitigation is enabled, even though the result does not fall within chemical accuracy (defined as being within 0.0016Å of the exact result), it is fairly close to the exact solution.</p>
+<p>When noise mitigation is enabled, even though the result does not fall within chemical accuracy (defined as being within 0.0016 Hartree of the exact result), it is fairly close to the exact solution.</p>
 
 </div>
 </div>
@@ -13717,7 +13813,9 @@ VQE Result: -1.8372878775852501
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Problems">Problems<a id="problems" /><a class="anchor-link" href="#Problems">&#182;</a></h2><ol>
-<li><strong>@TODO</strong></li>
+<li>You are given a Hamiltonian $H$ with the promise that its ground state is close to a maximally entangled $n$ qubit state. Explain which variational form (or forms) is likely to efficiently and accurately learn the the ground state energy of $H$. You may also answer by creating your own variational form, and explaining why it is appropriate for use with this Hamiltonian. </li>
+<li>Calculate the number of circuit evaluations performed per optimization iteration, when using the COBYLA optimizer, the <code>qasm_simulator</code> with 1000 shots, and a Hamiltonian with 60 Pauli strings.</li>
+<li>Use VQE to estimate the ground state energy of BeH$_2$ with an interatomic distance of $1.3$Å. You may re-use the function <code>get_qubit_op(dist)</code> by replacing <code>atom="Li .0 .0 .0; H .0 .0 " + str(dist)</code> with <code>atom="Be .0 .0 .0; H .0 .0 -" + str(dist) + "; H .0 .0 " + str(dist)</code> and invoking the function with <code>get_qubit_op(1.3)</code>. Note that removing the unoccupied orbitals does not preserve chemical precision for this molecule. However, to get the number of qubits  required down to 6 (and thereby allowing efficient simulation on most laptops), the loss of precision is acceptable. While beyond the scope of this exercise, the interested reader may use qubit tapering operations to reduce the number of required qubits to 7, without losing any chemical precision.</li>
 </ol>
 
 </div>
@@ -13735,19 +13833,6 @@ VQE Result: -1.8372878775852501
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
