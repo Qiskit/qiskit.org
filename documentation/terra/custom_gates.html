@@ -1667,26 +1667,26 @@ attaches it to the circuit at the specified <code class="docutils literal notran
 independent <code class="docutils literal notranslate"><span class="pre">QuantumCircuits</span></code> and, through the <code class="docutils literal notranslate"><span class="pre">to_instruction</span></code> method,
 converted to <code class="docutils literal notranslate"><span class="pre">Instructions</span></code> to be appended to a target circuit at a given
 location.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span># Build a sub-circuit
-sub_q = QuantumRegister(2)
-sub_circ = QuantumCircuit(sub_q, name=&#39;sub_circ&#39;)
-sub_circ.h(sub_q[0])
-sub_circ.crz(1, sub_q[0], sub_q[1])
-sub_circ.barrier()
-sub_circ.iden(sub_q[1])
-sub_circ.u3(1, 2, -2, sub_q[0])
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a sub-circuit</span>
+<span class="n">sub_q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sub_circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">sub_q</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sub_circ&#39;</span><span class="p">)</span>
+<span class="n">sub_circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">sub_q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sub_circ</span><span class="o">.</span><span class="n">crz</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">sub_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="n">sub_circ</span><span class="o">.</span><span class="n">iden</span><span class="p">(</span><span class="n">sub_q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">sub_circ</span><span class="o">.</span><span class="n">u3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-# Convert to a gate and stick it into an arbitrary place in the bigger circuit
-sub_inst = sub_circ.to_instruction()
+<span class="c1"># Convert to a gate and stick it into an arbitrary place in the bigger circuit</span>
+<span class="n">sub_inst</span> <span class="o">=</span> <span class="n">sub_circ</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
 
-​q = QuantumRegister(3, &#39;q&#39;)
-circ = QuantumCircuit(q)
-circ.h(qr[0])
-circ.cx(qr[0], qr[1])
-circ.cx(qr[1], qr[2])
-circ.append(sub_inst, [q[1], q[2]])
+<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+<span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">circ</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_inst</span><span class="p">,</span> <span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
 
-circ.draw(output=&#39;mpl&#39;)
+<span class="n">circ</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="Quantum circuit with one custom two-qubit gate." src="../_images/custom_gates_1.png" />
