@@ -3,10 +3,13 @@
     <header>
       <section>
         <div>
-          <h1>{{ attributes.title }}</h1>
-          <p class="header-subtitle">
-            {{ attributes.tagline }}
-          </p>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/_EweJlth2Sk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+          <div>
+            <h1>{{ attributes.title }}</h1>
+            <p class="header-subtitle">
+              {{ attributes.tagline }}
+            </p>
+          </div>
         </div>
       </section>
     </header>
@@ -96,11 +99,11 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(/images/advocates/advocates-decoration.svg);
-  background-color: white;
+  background-color: #242a2e;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  color: white;
 }
 
 header > section {
@@ -114,8 +117,13 @@ header > section {
 
 header > section > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+}
+
+header iframe {
+  margin-right: 2rem;
 }
 
 header img {
@@ -127,16 +135,13 @@ header img {
 
 header h1 {
   font-size: 50px;
-  margin-left: 1.5rem;
-  text-align: center;
 }
 
 header .header-subtitle {
   font-weight: bold;
   font-size: 1rem;
-  text-align: center;
   max-width: 30rem;
-  margin: 0 auto;
+  margin: 1.5rem auto 0;
 }
 
 @media (max-width: 800px) {
@@ -144,6 +149,14 @@ header .header-subtitle {
   header section {
     display: block;
     text-align: center;
+  }
+
+  header > section > div {
+    display: block;
+  }
+
+  header iframe {
+    margin: 0;
   }
 
   header h1 {

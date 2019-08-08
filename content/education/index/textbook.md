@@ -1,5 +1,5 @@
 ---
 title: Textbook
 image: /images/education/textbook.jpg
-to: '#'
+to: '/textbook'
 ---
