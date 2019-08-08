@@ -152,6 +152,9 @@ header .header-subtitle {
 }
 
 @media (max-width: 800px) {
+  header {
+    height: 700px;
+  }
 
   header section {
     display: block;
