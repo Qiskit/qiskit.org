@@ -20,7 +20,7 @@
         </div>
       </section>
     </header>
-    <section class="benefits">
+    <section class="recommendations">
       <h2
         v-if="!!sections[0].title"
         :id="sections[0].anchor"
@@ -41,7 +41,7 @@
         />
       </div>
     </section>
-    <section class="recommendations">
+    <section class="benefits">
       <h2
         v-if="!!sections[1].title"
         :id="sections[1].anchor"
@@ -99,7 +99,7 @@ main {
 }
 
 header {
-  height: 600px;
+  height: 425px;
   width: auto;
   overflow: hidden;
   display: flex;
