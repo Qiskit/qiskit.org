@@ -77,6 +77,18 @@ import MdContent from '~/components/MdContent.vue'
 
   components: { Card, Button, MdContent },
 
+  head() {
+    const self = this as any
+    const title = self.attributes.title
+    const description = self.attributes.tagline
+    return {
+      title,
+      meta: [
+        { hid: 'description', name: 'description', content: description }
+      ]
+    }
+  },
+
   async asyncData(ctx) {
     const index = await import(`~/content/education/index/${'master.md'}`)
     const sections = await ctx.app.deepLoadCardToc('toc.md', {
