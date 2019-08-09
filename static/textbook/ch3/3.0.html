@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>deutschjosza</title>
+<title>3.0</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -16333,30 +16333,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Deutsch-Josza-Algorithm-and-its-Qiskit-Implementation">Deutsch-Josza Algorithm and its Qiskit Implementation<a class="anchor-link" href="#Deutsch-Josza-Algorithm-and-its-Qiskit-Implementation">&#182;</a></h1><p>In this section, we first introduce the Deutsch-Josza problem, and classical and quantum algorithms to solve it. We then implement the quantum algorithm using Qiskit, and run on a simulator and device.</p>
-<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ol>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#djproblem">Deutsch-Josza Problem</a></li>
-<li><a href="#djalgorithm">Deutsch-Josza Algorithm</a></li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><a href="#example">Example</a></li>
-</ol>
-<ol>
-<li><a href="#implementation">Qiskit Implementation</a><ul>
-<li><a href="#simulation">Simulation</a></li>
-<li><a href="#device">Device</a></li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><a href="#problems">Problems</a></li>
-</ol>
-<ol>
-<li><a href="#references">References</a></li>
-</ol>
+<h1 id="3.0-Quantum-Teleportation">3.0 Quantum Teleportation<a class="anchor-link" href="#3.0-Quantum-Teleportation">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This notebook demonstrates quantum teleportation. We first use Qiskit's built-in simulator to test our quantum circuit, and then try it out on a real quantum computer.</p>
 
 </div>
 </div>
@@ -16364,9 +16348,18 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Introduction-">1. Introduction <a id="introduction" /><a class="anchor-link" href="#1.-Introduction-">&#182;</a></h2><p>The Deutsch-Josza algorithm, first introduced in Reference [1], was the first example of a quantum algorithm that performs better than the best classical algorithm. It showed that there can be advantages in using a quantum computer as a computational tool for a specific problem.</p>
-<h3 id="1a.-Deutsch-Josza-Problem--">1a. Deutsch-Josza Problem <a id="djproblem"> </a><a class="anchor-link" href="#1a.-Deutsch-Josza-Problem--">&#182;</a></h3><p>We are given a hidden function Boolean $f$, which takes as as input a string of bits, and returns either $0$ or $1$, that is $f(\{x_0,x_1,x_2,...\}) \rightarrow 0 \textrm{ or } 1$. For a string of $n$ bits, there are a total of $2^n$ combinations. The Boolean function is guaranteed to either be balanced or constant, where a constant function returns all $0$'s or all $1$'s for any input, while a balanced function returns $0$'s and $1$'s for exactly half of all inputs. Our task is to determine whether the given function is balanced or constant.</p>
-<p>Note that the Deutsch-Josza problem is an $n$-bit extension of the single bit Deutsch problem.</p>
+<h2 id="The-concept">The concept<a class="anchor-link" href="#The-concept">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alice wants to send quantum information to Bob. Specifically, suppose she wants to send the state
+$\vert\psi\rangle = \alpha\vert0\rangle + \beta\vert1\rangle$
+to Bob. This entails passing on information about $\alpha$ and $\beta$ to Bob.</p>
+<p>The no-cloning theorem [1] tells us that Alice can't simply generate a copy of $\vert\psi\rangle$ and give the copy to Bob. Copying a state is only possible with a classical computation.</p>
+<p>However, by taking advantage of two classical bits and entanglement, Alice can transfer the state $\vert\psi\rangle$ to Bob. Let's see how this works in some detail.</p>
 
 </div>
 </div>
@@ -16374,9 +16367,24 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1b.-Deutsch-Josza-Algorithm--">1b. Deutsch-Josza Algorithm <a id="djalgorithm"> </a><a class="anchor-link" href="#1b.-Deutsch-Josza-Algorithm--">&#182;</a></h3><h4 id="Classical-Solution">Classical Solution<a class="anchor-link" href="#Classical-Solution">&#182;</a></h4><p>Classically, in the best case, two queries to the oracle can determine if the hidden Boolean function, $f(x)$, is balanced: eg. $f(0,0,0,... \rightarrow 0)$ and $f(1,0,0,... \rightarrow 1)$.  In the worst case, if we continue to see the same output for each input we try, we will have to check exactly $2^{n-1}+1$ inputs to be certain that $f(x)$ is constant: eg. for a $4$-bit string, if we checked $8$ out of the $16$ possible combinations, getting all $0$'s, it is still possible that the $9^\textrm{th}$ input returns a $1$ and $f(x)$ is balanced. Probabilistically, this is a very unlikely event. In fact, if we get the same result continually in succession, we can express the probability that the function is constant as a function of $k$ inputs as:
-$$ P_\textrm{constant}(k) = 1 - \frac{1}{2^{k-1}} \qquad \textrm{for } k \leq 2^{n-1}$$
-Realistically, we could opt to truncate our classical algorithm early, say if we were over x% confident. But if we want to be 100% confident, we would need to check $2^{n-1}+1$ inputs.</p>
+<h2 id="How-does-quantum-teleportation-work?">How does quantum teleportation work?<a class="anchor-link" href="#How-does-quantum-teleportation-work?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Step 1: Alice and Bob create an entangled Bell pair. Each one of them holds on to one of the two qubits in the Bell pair.</p>
+<p>In quantum circuit language, the way to create a Bell pair between two qubits is to first transfer one of them to the Bell basis ($|+\rangle$ and $|-\rangle$) by using a Hadamard gate, and then to apply a CNOT gate onto the other qubit controlled by the one in the Bell basis. Let's say Alice owns $q_1$ and Bob owns $q_2$ after they part ways.</p>
+<p>Step 2: Alice applies a CNOT gate on $q_1$, controlled by $\vert\psi\rangle$.</p>
+<p>Step 3: Next, Alice applies a Hadamard gate to $|\psi\rangle$, and applies a measurement to both qubits that she owns.</p>
+<p>Step 4: Then, it's time for a phone call to Bob. She tells Bob the outcome of her two qubit measurement. Depending on what she says, Bob does this to his qubit, $q_2$:</p>
+<p>00 $\rightarrow$ Do nothing</p>
+<p>01 $\rightarrow$ Apply $X$ gate</p>
+<p>10 $\rightarrow$ Apply $Z$ gate</p>
+<p>11 $\rightarrow$ Apply $ZX$ gate</p>
+<p>Note that this transfer of information is classical.</p>
+<p>And voila! At the end of this protocol, Alice's qubit has now teleported to Bob.</p>
 
 </div>
 </div>
@@ -16384,112 +16392,14 @@ Realistically, we could opt to truncate our classical algorithm early, say if we
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Quantum-Solution">Quantum Solution<a class="anchor-link" href="#Quantum-Solution">&#182;</a></h4><p>Using a quantum computer, we can solve this problem with 100% confidence after only one call to the function $f(x)$, provided we have the function $f$ implemented as a quantum oracle, which maps the state $\vert x\rangle \vert y\rangle $ to $ \vert x\rangle \vert y \oplus f(x)\rangle$, where $\oplus$ is addition modulo $2$. Below is the generic circuit for the Deutsh-Josza algorithm.</p>
-<p><img src="images/deutsch_steps.png" width="600"></p>
-<p>Now, let's go through the steps of the algorithm:</p>
-<ol>
-   <li>
-        Prepare two quantum registers. The first is an $n$-qubit reqister initialised to $\vert 0 \rangle$, and the second is a one-qubit register initialised to $\vert 1\rangle$:
-        $$\vert \psi_0 \rangle = \vert0\rangle^{\otimes n} \vert 1\rangle$$
-   </li>
-
-   <li>
-        Apply a Hadamard gate to each qubit:
-        $$\vert \psi_1 \rangle = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1} \vert x\rangle \vert 0\rangle - \vert 1 \rangle$$
-   </li>
-
-   <li>
-        Apply the quantum oracle $\vert x\rangle \vert y\rangle $ to $ \vert x\rangle \vert y \oplus f(x)\rangle$:
-        \begin{aligned}
-            \lvert \psi_2 \rangle  
-                & = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1} \vert x\rangle (\vert f(x)\rangle - \vert 1 \oplus f(x)\rangle) \\  
-                & = \frac{1}{\sqrt{2^{n+1}}}\sum_{x=0}^{2^n-1}(-1)^{f(x)}|x\rangle ( |0\rangle - |1\rangle ) 
-        \end{aligned}
-        since each $x,f(x)$ is either $0$ or $1$.
-   </li>
-
-   <li>
-       At this point the second single qubit register may be ignored. Apply a Hadamard gate to each qubit in the first register:
-        \begin{aligned}
-            \lvert \psi_3 \rangle 
-                & = \frac{1}{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)}
-                    \left[ \sum_{y=0}^{2^n-1}(-1)^{x \cdot y} 
-                    \vert y \rangle \right] \\
-                & = \frac{1}{2^n}\sum_{y=0}^{2^n-1}
-                    \left[ \sum_{x=0}^{2^n-1}(-1)^{f(x)}(-1)^{x \cdot y} \right]
-                    \vert y \rangle
-        \end{aligned}
-        where $x \cdot y = x_0y_0 \oplus x_1y_1 \oplus \ldots \oplus x_{n-1}y_{n-1}$ is the sum of the bitwise product.
-   </li>
-
-   <li>
-       Measure the first register. Notice that the probability of measuring $\vert 0 \rangle ^{\otimes n} = \lvert \frac{1}{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)} \rvert^2$, which evaluates to $1$ if $f(x)$ is constant and $0$ if $f(x)$ is balanced. 
-   </li>
-
-</ol><p>Why does this work?</p>
-<p>$\qquad$ When the hidden Boolean function is constant, the quantum states before and after querying the oracle are the same. The inverse of the Hadamard gate is the Hadamard gate itself. Thus, by Step 4, we essentially reverse Step 2 to obtain the initial quantum state of all-zero at the first register.</p>
-<p>$\qquad$ When the hidden Boolean function is balanced, the quantum state after querying the oracle is orthogonal to the quantum state before querying the oracle. Thus, by Step 4, when reverting the operation, we must end up with a quantum state that is orthogonal to the initial quantum state of all-zero at the first register. This means we should never obtain the all-zero state.</p>
-
+<h2 id="How-will-we-test-this-result-on-a-real-quantum-computer?">How will we test this result on a real quantum computer?<a class="anchor-link" href="#How-will-we-test-this-result-on-a-real-quantum-computer?">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Quantum-Oracle">Quantum Oracle<a class="anchor-link" href="#Quantum-Oracle">&#182;</a></h5><p>The key to the Deutsch-Josza Algorithm is the implementation of the quantum oracle.</p>
-<p>For a constant function, it is simple:</p>
-<p>$\qquad$ 1. if f(x) = 0, then apply the $I$ gate to the qubit in register 2.<br>
-$\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
-<p>For a balanced function, it is more complicated:</p>
-<p>$\qquad$ There are $2^{n}-2$ different configurations for an $n$-qubit balanced function. These can be defined by one of the bitstrings from $1$ to $2^n-1$ inclusive. Given a particular bitstring, $a$, the oracle is the bitwise product of $x$ and $a$, which is implemented as a multi-qubit f-controlled-NOT gate with the second register, as per Reference [2].</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Example--">2. Example  <a id="example" /><a class="anchor-link" href="#2.-Example--">&#182;</a></h2><p>Let's go through a specfic example for a two bit balanced function with $a = 3$.</p>
-<ol>
-    <li> The first register of two qubits is initialized to zero and the second register qubit to one 
-    $$\lvert \psi_0 \rangle = \lvert 0 0 \rangle_1 \lvert 1 \rangle_2 $$ 
-   </li>
-
-   <li> Apply Hadamard on all qubits
-    $$\lvert \psi_1 \rangle = \frac{1}{2} \left( \lvert 0 0 \rangle_1 + \lvert 0 1 \rangle_1 + \lvert 1 0 \rangle_1 + \lvert 1 1 \rangle_1 \right) \frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  $$ 
-   </li>
-
-   <li> For $a=3$, (11 in binary) the oracle function can be implemented as $\text{Q}_f = CX_{1a}CX_{2a}$, 
-       \begin{align*}
-            \lvert \psi_2 \rangle =  \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 0 \rangle_2 - \lvert 1 \oplus 0 \oplus 0 \rangle_2 \right) \\
-                  + \lvert 0 1 \rangle_1 \left( \lvert 0 \oplus 0 \oplus 1 \rangle_2 - \lvert 1 \oplus 0 \oplus 1 \rangle_2 \right) \\
-                  + \lvert 1 0 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 0 \rangle_2 - \lvert 1 \oplus 1 \oplus 0 \rangle_2 \right) \\
-                  + \lvert 1 1 \rangle_1 \left( \lvert 0 \oplus 1 \oplus 1 \rangle_2 - \lvert 1 \oplus 1 \oplus 1 \rangle_2 \right) \right]
-        \end{align*}
-   </li>
-
-   Thus
-       \begin{aligned}
-        \lvert \psi_2 \rangle & = \frac{1}{2\sqrt{2}} \left[ \lvert 0 0 \rangle_1 \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) - \lvert 0 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert  1 \rangle_2 \right) - \lvert 1 0 \rangle_1  \left( \lvert 0  \rangle_2 - \lvert 1 \rangle_2 \right) + \lvert 1 1 \rangle_1  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \right] \\
-        & = \frac{1}{2} \left( \lvert 0 0 \rangle_1 - \lvert 0 1 \rangle_1 - \lvert 1 0 \rangle_1 + \lvert 1 1 \rangle_1 \right) \frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)  \\
-        & = \frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_{10} - \lvert 1 \rangle_{10} \right)\frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_{11} - \lvert 1 \rangle_{11} \right)\frac{1}{\sqrt{2}} \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right)
-        \end{aligned}
-   </li>
-
-   <li> Apply Hadamard on the first register
-        $$ \lvert \psi_3\rangle = \lvert 1 \rangle_{10} \lvert 1 \rangle_{11}  \left( \lvert 0 \rangle_2 - \lvert 1 \rangle_2 \right) $$
-   </li>
-
-   <li> Measuring the first two qubits will give the non-zero $11$, indicating a balanced function.
-   </li>
-</ol>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Qiskit-Implementation-">3. Qiskit Implementation <a id="implementation" /><a class="anchor-link" href="#3.-Qiskit-Implementation-">&#182;</a></h2><p>We now implement the Deutsch-Josza algorithm for the example of a two bit balanced function with $a = 3$.</p>
+<p>In this notebook, we will give Alice a secret state $\vert\psi\rangle$. This state will be generated by applying a series of unitary gates on a qubit that is initialized to the ground state, $\vert0\rangle$. Go ahead and fill in the secret unitary that will be applied to $\vert0\rangle$ before passing on the qubit to Alice.</p>
 
 </div>
 </div>
@@ -16499,18 +16409,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># initialization</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1"># importing Qiskit</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span><span class="p">,</span> <span class="n">BasicAer</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="k">import</span> <span class="n">least_busy</span>
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">execute</span>
-
-<span class="c1"># import basic plot tools</span>
-<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">secret_unitary</span> <span class="o">=</span> <span class="s1">&#39;hz&#39;</span>
 </pre></div>
 
     </div>
@@ -16518,24 +16417,49 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the quantum teleportation circuit works, then at the output of the protocol discussed above will be the same state passed on to Alice. Then, we can undo the applied secret_unitary (by applying its conjugate transpose), to yield the $\vert0\rangle$ that we started with.</p>
+<p>We will then do repeated measurements of Bob's qubit to see how many times it gives 0 and how many times it gives 1.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-do-we-expect?">What do we expect?<a class="anchor-link" href="#What-do-we-expect?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the ideal case, and assuming our teleportation protocol works, we will always measure 0 from Bob's qubit because we started off with $|0\rangle$.</p>
+<p>In a real quantum computer, errors in the gates will cause a small fraction of the results to be 1. We'll see how it looks.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-Simulating-the-teleportation-protocol">1. Simulating the teleportation protocol<a class="anchor-link" href="#1.-Simulating-the-teleportation-protocol">&#182;</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set the length of the $n$-bit string. </span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="c1"># set the oracle, b for balanced, c for constant</span>
-<span class="n">oracle</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span>
-
-<span class="c1"># if the oracle is balanced, set b</span>
-<span class="k">if</span> <span class="n">oracle</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># np.random.randint(1,2**n) uncomment for a random value</span>
-
-<span class="c1"># if the oracle is constant, set c = 0 or 1 randomly.</span>
-<span class="k">if</span> <span class="n">oracle</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># make the imports that are necessary for our work</span>
+<span class="kn">import</span> <span class="nn">qiskit</span> <span class="k">as</span> <span class="nn">qk</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">execute</span><span class="p">,</span> <span class="n">Aer</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
 </pre></div>
 
     </div>
@@ -16548,50 +16472,21 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Creating registers</span>
-<span class="c1"># n qubits for querying the oracle and one qubit for storing the answer</span>
-<span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-
-<span class="n">djCircuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
-<span class="n">barriers</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="c1"># Since all qubits are initialized to |0&gt;, we need to flip the second register qubit to the the |1&gt; state</span>
-<span class="n">djCircuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-
-<span class="c1"># Apply barrier </span>
-<span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
-    <span class="n">djCircuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
-
-<span class="c1"># Apply Hadamard gates to all qubits</span>
-<span class="n">djCircuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>    
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># simple function that applies a series of unitary gates from a given string</span>
+<span class="k">def</span> <span class="nf">apply_secret_unitary</span><span class="p">(</span><span class="n">secret_unitary</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">quantum_circuit</span><span class="p">,</span> <span class="n">dagger</span><span class="p">):</span>
+    <span class="n">functionmap</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">quantum_circuit</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+                    <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">quantum_circuit</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                    <span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="n">quantum_circuit</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+                    <span class="s1">&#39;h&#39;</span><span class="p">:</span><span class="n">quantum_circuit</span><span class="o">.</span><span class="n">h</span><span class="p">,</span>                    
+                    <span class="s1">&#39;t&#39;</span><span class="p">:</span><span class="n">quantum_circuit</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>                    
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">dagger</span><span class="p">:</span> <span class="n">functionmap</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quantum_circuit</span><span class="o">.</span><span class="n">tdg</span>
     
-<span class="c1"># Apply barrier </span>
-<span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
-    <span class="n">djCircuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
-
-<span class="c1"># Query the oracle </span>
-<span class="k">if</span> <span class="n">oracle</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="c1"># if the oracle is constant, return c</span>
-    <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">djCircuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">dagger</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">functionmap</span><span class="p">[</span><span class="n">unitary</span><span class="p">](</span><span class="n">qubit</span><span class="p">)</span> <span class="k">for</span> <span class="n">unitary</span> <span class="ow">in</span> <span class="n">secret_unitary</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">djCircuit</span><span class="o">.</span><span class="n">iden</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-<span class="k">else</span><span class="p">:</span> <span class="c1"># otherwise, the oracle is balanced and it returns the inner product of the input with b (non-zero bitstring) </span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)):</span>
-            <span class="n">djCircuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-
-<span class="c1"># Apply barrier </span>
-<span class="k">if</span> <span class="n">barriers</span><span class="p">:</span>
-    <span class="n">djCircuit</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
-
-<span class="c1"># Apply Hadamard gates to the first register after querying the oracle</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">djCircuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-<span class="c1"># Measure the first register</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">djCircuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="p">[</span><span class="n">functionmap</span><span class="p">[</span><span class="n">unitary</span><span class="p">](</span><span class="n">qubit</span><span class="p">)</span> <span class="k">for</span> <span class="n">unitary</span> <span class="ow">in</span> <span class="n">secret_unitary</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
 </pre></div>
 
     </div>
@@ -16604,7 +16499,41 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">djCircuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create the quantum circuit</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39; Qubit ordering as follows (classical registers will just contain measured values of the corresponding qubits):</span>
+<span class="sd">q[0]: qubit to be teleported (Alice&#39;s first qubit. It was given to her after the application of a secret unitary </span>
+<span class="sd">      which she doesn&#39;t know)</span>
+<span class="sd">q[1]: Alice&#39;s second qubit</span>
+<span class="sd">q[2]: Bob&#39;s qubit, which will be the destination for the teleportation</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># Apply the secret unitary that we are using to generate the state to teleport. You can change it to any unitary</span>
+<span class="n">apply_secret_unitary</span><span class="p">(</span><span class="n">secret_unitary</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qc</span><span class="p">,</span> <span class="n">dagger</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># Next, generate the entangled pair between Alice and Bob (Remember: Hadamard followed by CX generates a Bell pair)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="c1"># Next, apply the teleportation protocol. </span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">In principle, if the teleportation protocol worked, we have q[2] = secret_unitary|0&gt;</span>
+<span class="sd">As a result, we should be able to recover q[2] = |0&gt; by applying the reverse of secret_unitary</span>
+<span class="sd">since for a unitary u, u^dagger u = I.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">apply_secret_unitary</span><span class="p">(</span><span class="n">secret_unitary</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">qc</span><span class="p">,</span> <span class="n">dagger</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -16622,10 +16551,8 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 
 
 
-<div class="output_png output_subarea output_execute_result">
-<img src="data:image/png;base64,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
-"
->
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;qiskit.circuit.measure.Measure at 0x117a3a668&gt;</pre>
 </div>
 
 </div>
@@ -16637,7 +16564,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3b.-Experiment-with-Simulators-">3b. Experiment with Simulators <a id="simulation" /><a class="anchor-link" href="#3b.-Experiment-with-Simulators-">&#182;</a></h3><p>We can run the above circuit on the simulator.</p>
+<p>It's always a good idea to draw the circuit that we have generated in code. Let's draw it below.</p>
 
 </div>
 </div>
@@ -16647,13 +16574,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use local simulator</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
-<span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">djCircuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -16672,7 +16593,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 
 
 <div class="output_png output_subarea output_execute_result">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -16682,34 +16603,19 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the result of the measurement is $11$ as expected.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3a.-Experiment-with-Real-Devices-">3a. Experiment with Real Devices <a id="device" /><a class="anchor-link" href="#3a.-Experiment-with-Real-Devices-">&#182;</a></h3><p>We can run the circuit on the real device as shown below.</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load our saved IBMQ accounts and get the least busy backend device with less than or equal to 5 qubits</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
-<span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
-<span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="ow">and</span> 
-                                   <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">operational</span><span class="o">==</span><span class="kc">True</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;least busy backend: &quot;</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job_sim</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">sim_result</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="n">measurement_result</span> <span class="o">=</span> <span class="n">sim_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measurement_result</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">measurement_result</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -16726,81 +16632,20 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>least busy backend:  ibmqx4
+<pre>{&#39;000&#39;: 252, &#39;001&#39;: 268, &#39;011&#39;: 247, &#39;010&#39;: 257}
 </pre>
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our circuit on the least busy backend. Monitor the execution of the job in the queue</span>
-<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="k">import</span> <span class="n">job_monitor</span>
-
-<span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span>
-<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">djCircuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
-
-<span class="n">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Job Status: job has successfully run
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the results of the computation</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="n">answer</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-
-<span class="n">plot_histogram</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
 
 <div class="output_png output_subarea output_execute_result">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdAAAAFGCAYAAADaYs5eAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDMuMC4zLCBodHRwOi8vbWF0cGxvdGxpYi5vcmcvnQurowAAIABJREFUeJzt3X+clWWd//HXR9ASRWtkIkhJWVxCShx/4S/UVNKy1Fyz0l2r3UKtNNda2/yWqFtumab2w1RW11+5pmVbWW5mpKxEZoiogaihIIKmaOhCCo6f7x/3GRrGGZxzM3POmZnX8/GYB+fc93Xu+Zy5OPOe+76v+7ojM5EkSdXZqN4FSJLUFxmgkiSVYIBKklSCASpJUgkGqCRJJRigkiSVYIBKklSCASpJUgkGqCRJJQyudwH1tNVWW+WoUaPqXYYkqYHce++9z2Rm82u1G9ABOmrUKKZPn17vMiRJDaSpqWlRd9p5CFeSpBIMUEmSSjBAJUkqwQCVJKkEA1SSpBIMUEmSSjBAJUkqwQCVJKkEA1SSpBIMUEmSSjBAJUkqwQCVJKkEA1SSpBIMUEmSSjBAJUkqwQCVJKkEA1SSpBIMUEmSSjBAJUkqwQCVJKkEA1SSpBIMUEmSSjBAJUkqwQCVKm677TZ23313dtllFy688MJXrf/Od77DHnvswT777MMRRxzB448/vnbdkiVLOPLII5k4cSJ77LEHixcvBmDKlCnsvvvu7LXXXnz6059mzZo1NXs/knqXASoBra2tnHbaadxwww3MmjWLH/7whzz44IPrtNlxxx2ZPn06d955J4cddhhTp05du+7EE0/kpJNO4q677uK2225j2LBhAHzgAx/grrvuYubMmbz44otcc801NX1fknqPASoBs2fPZrvttmPbbbdlk0024cgjj+SWW25Zp82kSZMYMmQIALvuuitLly4F4MEHH+Tll1/mne98JwCbb7752naTJ08mIogIdt5557WvkdT3GaASsGzZMt7ylresfT5y5EiWLVvWZftrr72Wgw46CIA//vGPbLnllhx33HHst99+nHHGGbS2tq7Tfs2aNdxwww0ceOCBvfMGJNWcASpV6YYbbmDOnDmcdNJJALz88svMmjWLs88+m1/96lc89thjXHfddeu85nOf+xx77rkne+65Zz1KltQLBte7AKkRjBgxgieeeGLt86VLlzJixIhXtbv99ts5//zzufnmm3nd614HFHur73jHO9h2220BOPTQQ/n973+/9jVf+9rXWL58ORdccEHvvglJNeUeqATsvPPOLFy4kEWLFrF69WpuuukmDjnkkHXa3HfffZx66qlcd911NDc3r/PaFStW8MwzzwAwY8YMxo4dC8DVV1/N9OnTmTZtGhtt5MdN6k8iM+tdQ920tLTk9OnT612GGsQvf/lLTj/9dFpbWzn22GP57Gc/yznnnENLSwvvfve7ef/738+8efMYPnw4AFtvvfXaQ7W//vWv+dKXvkRmstNOO3HBBRewySab0NzczDbbbMPmm28OwHvf+15OO+20ur1HSa+tqalpdmbu+lrtDFADVJLUTncD1GNKkhrahkxwMWzYMPbdd1/23XdfjjnmmLXLp02bxi677EJTUxPLly+vyftQ/+MgIkkNq22Ci5tuuomRI0dy4IEHcsghh/C2t71tbZu2CS6GDBnCFVdcwdSpU7niiisA2HTTTZkxY8artjtx4kQOPvhg3ve+99Xsvaj/cQ9UUsPakAku1mfHHXdk1KhRvVKzBg4DVFLD2pAJLgBefPFFDjjgACZPnszPfvazXq1VA4+HcCX1C20TXNx8881rl82dO5eRI0fy2GOPcfjhh7PDDjuw3Xbb1bFK9SfugdbJhgyMAHj++ecZP378OpdErF69mlNOOYXddtuNiRMn8pOf/KTX34fUm6qd4OK6665bO8EFFHusANtuuy377LMP9913X+8XrQHDAK2DDb3zB8A555zDXnvttc6y888/n+bmZu6++25mzZrF3nvv3evvRepNGzLBxZ///GdeeuklAJYvX85dd921doILqScYoHWwoQMj7r33Xp5++um1d/9o873vfY9TTjkFgI022oitttqql9+J1LsGDx7Mueeey1FHHcUee+zBEUccwbhx4zjnnHPWfmamTp3KypUr+djHPrbO5SoLFizggAMOYNKkSRx22GF85jOfWTt699JLL2X8+PEsXbqUSZMmcfLJJ9ftParv8hxoHXQ2MGL27Nldtm8/MOKVV17hS1/6Epdccgl33HHH2jYrVqwAij3TmTNnsu2223Luuefypje9qZfehVQbkydPZvLkyessO/3009c+/tGPftTp6yZOnMjMmTM7XXf88cdz/PHH91yRGpDc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
 "
 >
 </div>
@@ -16814,7 +16659,7 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As we can see, most of the results are $11$. The other results are due to errors in the quantum computation.</p>
+<p><strong>Note that the results on the x-axis in the histogram above are ordered as $c_2c_1c_0$. We can see that only results where $c_2 = 0$ appear, indicating that the teleporation protocol has worked.</strong></p>
 
 </div>
 </div>
@@ -16822,31 +16667,26 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Problems-">4. Problems <a id="problems" /><a class="anchor-link" href="#4.-Problems-">&#182;</a></h2><ol>
-<li>The above <a href="#implementation">implementation</a> of Deutsch-Josza is for a balanced function with a two bit input of 3. Modify the implementation for a constant function. Are the results what you expect? Explain.</li>
-<li>The above <a href="#implementation">implementation</a> of Deutsch-Josza is for a balanced function with a two bit random input. Modify the implementation for a balanced function with a 4 bit input of 13. Are the results what you expect? Explain.</li>
-</ol>
-
+<h2 id="2.-Teleportation-on-a-real-quantum-computer">2. Teleportation on a real quantum computer<a class="anchor-link" href="#2.-Teleportation-on-a-real-quantum-computer">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-References-">5. References <a id="references" /><a class="anchor-link" href="#5.-References-">&#182;</a></h2><ol>
-<li>David Deutsch and Richard Jozsa (1992). "Rapid solutions of problems by quantum computation". Proceedings of the Royal Society of London A. 439: 553–558.  <a href="https://doi.org/10.1098%2Frspa.1992.0167">doi:10.1098/rspa.1992.0167</a>.</li>
-<li>R. Cleve; A. Ekert; C. Macchiavello; M. Mosca (1998). "Quantum algorithms revisited". Proceedings of the Royal Society of London A. 454: 339–354. <a href="https://doi.org/10.1098%2Frspa.1998.0164">doi:10.1098/rspa.1998.0164</a>.</li>
-</ol>
+<p>You will now see how the teleportation algorithm works on a real quantum computer. Recall that we need one qubit for $\vert\psi\rangle$, one qubit for Alice, and one qubit for Bob, for a total of three qubits.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qiskit</span><span class="o">.</span><span class="n">__qiskit_version__</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># First, see what devices we are allowed to use by loading our saved accounts</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -16856,6 +16696,64 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;IBMQBackend(&#39;ibmqx4&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmqx2&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmq_16_melbourne&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmq_qasm_simulator&#39;) from IBMQ()&gt;,
+ &lt;IBMQBackend(&#39;ibmq_20_tokyo&#39;) from IBMQ(ibm-q-internal, yrk, main)&gt;,
+ &lt;IBMQBackend(&#39;ibmq_poughkeepsie&#39;) from IBMQ(ibm-q-internal, yrk, main)&gt;,
+ &lt;IBMQBackend(&#39;ibmq_qasm_simulator&#39;) from IBMQ(ibm-q-internal, yrk, main)&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the least-busy backend at IBM and run the quantum circuit there</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="k">import</span> <span class="n">least_busy</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">simulator</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">8192</span><span class="p">)</span>
+<span class="n">exp_result</span> <span class="o">=</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="n">exp_measurement_result</span> <span class="o">=</span> <span class="n">exp_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exp_measurement_result</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">exp_measurement_result</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&#39;000&#39;: 2005, &#39;001&#39;: 1761, &#39;011&#39;: 1476, &#39;101&#39;: 330, &#39;111&#39;: 290, &#39;010&#39;: 1724, &#39;110&#39;: 271, &#39;100&#39;: 335}
+</pre>
+</div>
+</div>
 
 <div class="output_area">
 
@@ -16864,15 +16762,54 @@ $\qquad$ 2. if f(x) = 1, then apply the $X$ gate to the qubit in register 2.</p>
 
 
 
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;qiskit&#39;: &#39;0.10.4&#39;,
- &#39;qiskit-terra&#39;: &#39;0.8.2&#39;,
- &#39;qiskit-ignis&#39;: &#39;0.1.1&#39;,
- &#39;qiskit-aer&#39;: &#39;0.2.1&#39;,
- &#39;qiskit-ibmq-provider&#39;: &#39;0.2.2&#39;,
- &#39;qiskit-aqua&#39;: &#39;0.5.1&#39;}</pre>
+<div class="output_png output_subarea output_execute_result">
+<img src="data:image/png;base64,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8OHDOf300/npT3+alNzVGeIO4Grfvn1Nsdy7dy/pcrVK9UBFJGGjRo1i1KgDp6m+/vrra+63a9eOe++9t9FtfPe73z3g8e9+97tmy9eYZGSvb5vNLRk9uLZt2/KXv/yFjh07sm/fPs455xxGjhzJaaed1uz56xtsVVZW1mCb2gO4unXrxquvvsrEiRPZuHEjd9xxR01BNTO+8IUvYGZcfvnlXHHFFc2evSHqgYqIZIBk9ODMrGZQ1L59+9i/f3/a9O7qGjx4MIsWLWLevHlMnz6dPXv2AOE1P/vss8yaNYt77rmHhQsbujZJ81MBFRHJAIdzCg7Aq6++yumnn86wYcO45ZZbagpqVVUVpaWlFBQUMGLECAYPPuRlMGNJZAAXcMAArtoKCgro0KFDzcXI8/LygHAB7XPPPfegXm0yaReuiCRMFwPPPNU9uNWrV/PVr36VkSNH0q5dO1q1asWCBQvYsWMHl156KStXrqR///7N/v8fzgCu9evX06NHD7Kysnj77bdZs2YNvXr1YteuXXz00Ud06tSJXbt28be//Y1vf/vbzZ69ISqgInLUSeYXgGQV/8M5Bae22j244uLimuVdunRh2LBhPPPMM0kpoLUHW1VVVXHxxRfXDOAqLi7mnHPO4ZJLLuGaa66hpKSErl271hwX//vf/8706dNp3bo1xxxzDDfffDPdunVj3bp1XHrppUDosY4fP56RI0c2e/YGX1OL/U8iIhJbMnpw27Zto3Xr1nTp0oXdu3fz7LPP8vWvfz1pryHuAK4LLriACy644KDl+fn5PP/8882es6lUQEVEMkAyenArVqzg2muvpaqqio8++oixY8dy9tlnp/iVZg4VUBGRDNHcPbiioiKee+65Zs95tFABFRGRFnGkDT7TaSwiIiIxqAcqIpJBjrReXCZTD1RERCQGFVAREZEYVEBFRERiUAEVERGJQQVUREQkBhVQERGRGFRARUREYlABFRERiUEFVEREJAYVUBERkRhUQEVERGJQARUREYlBBVRERCQGFVAREZEYVEBFRERiUAEVERGJQQVUREQkBhVQERGRGFRARUREYlABFRERiUEFVEREJAYVUBERkRhUQEVERGJQARUREYlBBVRERCQGFVAREZEYWryAmtm1ZvaWme0xszIzG36I9mdG7faYWbmZXXO42xQRETlcLVpAzewC4FZg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
+"
+>
 </div>
 
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>As we see here, there are a few results that contain the case when $c_2 = 1$ in a real quantum computer. These arise due to errors in the gates that were applied. Another source of error is the way we're checking for teleportation - we need the series of operators on $q_2$ to be exactly the inverse unitary of those that we applied to $q_0$ at the beginning.</strong></p>
+<p>In contrast, our simulator in the earlier part of the notebook had zero errors in its gates, and allowed error-free teleportation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">error_rate_percent</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">exp_measurement_result</span><span class="p">[</span><span class="n">result</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">exp_measurement_result</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">])</span> \
+                    <span class="o">*</span> <span class="mf">100.</span><span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">exp_measurement_result</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">error_rate_percent</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>14.9658203125
+</pre>
+</div>
 </div>
 
 </div>

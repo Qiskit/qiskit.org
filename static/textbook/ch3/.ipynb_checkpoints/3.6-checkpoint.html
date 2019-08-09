@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>grover_search</title>
+<title>3.6-checkpoint</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -16333,25 +16333,29 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Grover's-Algorithm-and-its-Qiskit-Implementation">Grover's Algorithm and its Qiskit Implementation<a class="anchor-link" href="#Grover's-Algorithm-and-its-Qiskit-Implementation">&#182;</a></h1><p>In this section, we introduce Grover's algorithm and how it can be used to solve unstructured search problems. We then implement the quantum algorithm using Qiskit, and run on a simulator and device.</p>
+<h1 id="3.6-Grover's-Algorithm">3.6 Grover's Algorithm<a class="anchor-link" href="#3.6-Grover's-Algorithm">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this section, we introduce Grover's algorithm and how it can be used to solve unstructured search problems. We then implement the quantum algorithm using Qiskit, and run on a simulator and device.</p>
 <h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ol>
-<li><a href="#introduction">Introduction</a></li>
-</ol>
-<ol>
-<li><a href="#example">Example</a></li>
-</ol>
-<ol>
-<li><a href="#implementation">Qiskit Implementation</a><ul>
+<li><p><a href="#introduction">Introduction</a></p>
+</li>
+<li><p><a href="#example">Example</a></p>
+</li>
+<li><p><a href="#implementation">Qiskit Implementation</a></p>
+<ul>
 <li><a href="#simulation">Simulation</a></li>
 <li><a href="#device">Device</a></li>
 </ul>
 </li>
-</ol>
-<ol>
-<li><a href="#problems">Problems</a></li>
-</ol>
-<ol>
-<li><a href="#references">References</a></li>
+<li><p><a href="#problems">Problems</a></p>
+</li>
+<li><p><a href="#references">References</a></p>
+</li>
 </ol>
 
 </div>
@@ -16396,7 +16400,7 @@ rescaling.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="2.-Example--">2. Example  <a id="example" /><a class="anchor-link" href="#2.-Example--">&#182;</a></h2><p>Let's go through the example of Grover's algorithm for 3 qubits with two marked states $\lvert101\rangle$ and $\lvert110\rangle$, following the implementation found in Reference [2]. The quantum circuit to solve the problem using a phase oracle is:</p>
 <p><img src="images/grover_example.png"  width="300"></p>
-<div align="center" style="font-weight: bold">**TODO: CREATE NEW IMAGE**</div><ol>
+<ol>
 <li> 
   Apply Hadamard gates to $3$ qubits initialised to $\lvert000\rangle$ to create a uniform superposition:
   $$\lvert \psi_1 \rangle = \frac{1}{\sqrt{8}} \left( 
