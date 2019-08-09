@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>1.5</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -16333,7 +16333,39 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Learn-Quantum-Computation-using-Qiskit">Learn Quantum Computation using Qiskit<a class="anchor-link" href="#Learn-Quantum-Computation-using-Qiskit">&#182;</a></h1><p>A university quantum algorithms/computation course supplement based on Qiskit</p>
+<h1 id="1.5-States-for-Many-Qubits">1.5 States for Many Qubits<a class="anchor-link" href="#1.5-States-for-Many-Qubits">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We've already seen how to write down the state of a single qubit. Now we can look at how to do it when we have more than just one.</p>
+<p>Let's start by looking at bits. The state of a single bit is expressed as <code>0</code> or <code>1</code>. For two bits we can have <code>00</code>, <code>01</code>, <code>10</code> or <code>11</code>, where each digit tells us the state of one of the bits. For more bits, we just use longer strings of bit values, known as 'bit strings'.</p>
+<p>The conversion to qubits is quite straightforward: we simply put a $|$ and $\rangle$ around bit strings. For example, to describe two qubits, both of which are in state $|0\rangle$, we write $|00\rangle$. The four possible bit strings for two bits are then converted into four orthogonal states, which together completely specify the state of two qubits:</p>
+$$
+|a\rangle = a_{00}|00\rangle+ a_{01}|01\rangle+a_{10}|10\rangle+ a_{11}|11\rangle = \begin{pmatrix} a_{00} \\\\ a_{01} \\\\ a_{10} \\\\ a_{11} \end{pmatrix}.
+$$<p>As in the single-qubit case, the elements of this vector are complex numbers. We require the state to be normalized so that $\langle a|a\rangle = 1$, and probabilites are given by the Born rule ($p_{00}^{zz} = |\langle00|a\rangle |^2$, etc).</p>
 
 </div>
 </div>
@@ -16341,73 +16373,70 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img width=300px align="right" src="./ch0/images/qiskit-textbook.jpg"></p>
-<h3 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h3><p><br /></p>
-<p><strong>Chapter 0. Introduction and Prerequisites</strong><br /></p>
-<p>&nbsp; &nbsp; 0.0 <a href="./ch0/0.0.html">Hello World!</a><br />
-&nbsp; &nbsp; 0.1 <a href="./ch0/0.1.html">Python and Jupyter Notebooks</a><br />
-&nbsp; &nbsp; 0.2 <a href="./ch0/0.2.html">Qiskit</a><br /></p>
-<p><strong>Chapter 1. Quantum States and Qubits</strong><br /></p>
-<p>&nbsp; &nbsp; 1.0 <a href="./ch1/1.0.html">Introduction</a><br />
-&nbsp; &nbsp; 1.1 <a href="./ch1/1.1.html">The Atoms of Computation</a><br />
-&nbsp; &nbsp; 1.2 <a href="./ch1/1.2.html">The Unique Properties of Qubits</a><br />
-&nbsp; &nbsp; 1.3 <a href="./ch1/1.3.html">Writing Down Qubit States</a><br />
-&nbsp; &nbsp; 1.4 <a href="./ch1/1.4.html">Pauli Matrices and the Bloch Sphere</a><br />
-&nbsp; &nbsp; 1.5 <a href="./ch1/1.5.html">States for Many Qubits</a><br /></p>
-<p><strong>Chapter 2. Single-Qubit and Multi-Qubit Gates</strong><br /></p>
-<p>&nbsp; &nbsp; 2.0 <a href="./ch2/2.0.html">Introduction</a><br />
-&nbsp; &nbsp; 2.1 <a href="./ch2/2.1.html">Quantum Gates</a><br />
-&nbsp; &nbsp; 2.2 <a href="./ch2/2.2.html">Fun with Matrices</a><br />
-&nbsp; &nbsp; 2.3 <a href="./ch2/2.3.html">The Standard Gate Set</a><br />
-&nbsp; &nbsp; 2.4 <a href="./ch2/2.4.html">Proving Universality</a><br />
-&nbsp; &nbsp; 2.5 <a href="./ch2/2.5.html">Basic Circuit Identities</a><br /></p>
-<p><strong>Problems</strong><br /></p>
-<p>&nbsp; &nbsp; <a href="./chEx/Ex1.html">Set 1 -- Classical Logic Gates with Quantum Circuits</a><br />
-&nbsp; &nbsp; <a href="./chEx/Ex2.html">Set 2 -- Basic Synthesis of Single-Qubit Gates</a><br />
-&nbsp; &nbsp; <a href="./chEx/Ex3.html">Set 3 -- Building the Best <code>AND</code> Gate</a><br /></p>
-<p><strong>Chapter 3. Quantum Algorithms</strong><br /></p>
-<p>&nbsp; &nbsp; 3.0 Quantum Teleportation<br />
-&nbsp; &nbsp; 3.1 Deutsch-Josza Algorithm<br />
-&nbsp; &nbsp; 3.2 Bernstein-Vazirani Algorithm<br />
-&nbsp; &nbsp; 3.3 Simon's Algorithm<br />
-&nbsp; &nbsp; 3.4 Quantum Fourier Transform<br />
-&nbsp; &nbsp; 3.5 Quantum Phase Estimation<br />
-&nbsp; &nbsp; 3.6 Shor's Algorithm<br />
-&nbsp; &nbsp; 3.7 Grover's Algorithm<br /></p>
-<p><strong>Chapter 4. Quantum Algorithms for Applications</strong><br /></p>
-<p>&nbsp; &nbsp; 4.0 Overview of Quantum Algorithms for NISQ Hardware<br />
-&nbsp; &nbsp; 4.1 Mapping the Ising Model onto a Superconducting Quantum Computer<br />
-&nbsp; &nbsp; 4.2 Simulating Molecules using VQE<br />
-&nbsp; &nbsp; 4.3 Solving Combinatorial Optimization Problems using QAOA<br />
-&nbsp; &nbsp; 4.4 Solving Linear Systems of Equations using HHL <br />
-&nbsp; &nbsp; 4.5 Solving Satisfiability Problems using Grover's Algorithm<br />
-&nbsp; &nbsp; 4.6 Securing Communications using BB84<br /></p>
-<p><strong>Chapter 5. Investigating Quantum Hardware Using Qiskit</strong><br /></p>
-<p>&nbsp; &nbsp; 5.0 Decoherence and Energy Relaxation: Measuring T2 and T1<br />
-&nbsp; &nbsp; 5.1 <a href="./ch5/5.1.html">Calibrating Qubits with OpenPulse</a><br />
-&nbsp; &nbsp; 5.2 Optimizing Microwave Pulses for High-Fidelity Qubit Operations<br />
-&nbsp; &nbsp; 5.3 <a href="./ch5/5.3.html">Transpiling Quantum Circuits</a><br />
-&nbsp; &nbsp; 5.4 Error Correction and Measurement Error Mitigation <br />
-&nbsp; &nbsp; 5.5 Randomized Benchmarking<br />
-&nbsp; &nbsp; 5.6 Measuring Quantum Volume<br />
-&nbsp; &nbsp; 5.7 State and Process Tomography<br /></p>
-<div style='text-align: right'><a href="http://community.qiskit.org/education">Return to IBM Q Community Education Page</a></div>
+<p>When designing quantum software, there are times when we will want to look at the state of our qubits. This can be done in Qiskit using the 'statevector simulator'.</p>
+<p>For example, here is the state vector for a simple circuit on two qubits.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up circuit (no measurements required)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># set up simulator that returns statevectors</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
+
+<span class="c1"># run the circuit to get the state vector</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">()</span>
+
+<span class="c1"># now we use some fanciness to display it in latex</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">Latex</span>
+<span class="k">def</span> <span class="nf">state2latex</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="n">state_latex</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">begin</span><span class="si">{pmatrix}</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">amplitude</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
+        <span class="n">state_latex</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">amplitude</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\\\</span><span class="s1">&#39;</span>
+    <span class="n">state_latex</span>  <span class="o">=</span> <span class="n">state_latex</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">state_latex</span> <span class="o">+=</span> <span class="s1">&#39;\end</span><span class="si">{pmatrix}</span><span class="s1">&#39;</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">state_latex</span><span class="p">))</span>
+
+<span class="n">state2latex</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_markdown rendered_html output_subarea ">
+\begin{pmatrix}(0.5000000000000001+0j)\\(0.5+0j)\\(0.3536941345835999+0.353412590552683j)\\(0.35369413458359983+0.3534125905526829\end{pmatrix}
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Contributors-in-Alphabetical-Order">Contributors in Alphabetical Order<a class="anchor-link" href="#Contributors-in-Alphabetical-Order">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>Learn Quantum Computation using Qiskit</code> is the work of several individuals. If you use it in your work, cite it using <a href="http://github.com/Qiskit/qiskit-textbook/blob/master/qiskit-textbook.bib">this bib file</a> or directly as</p>
-<blockquote><p><code>Abraham Asfaw, Sergey Bravyi, Lauren Capelluto, Almudena Carrera Vazquez, Jay Gambetta, Shelly Garion, Leron Gil, David McKay, Zlatko Minev, Paul Nation, Anna Phan, Arthur Rattew, Javad Shabani, John Smolin, Kristan Temme, James Wootton. "Learn Quantum Computation using Qiskit." (August 2019). Retrieved from http://community.qiskit.org/textbook</code></p>
-</blockquote>
+<p>Note that Python uses $j$ to denote $\sqrt{-1}$, rather than $i$ as we use.</p>
 
 </div>
 </div>
@@ -16415,14 +16444,81 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="License-and-Usage">License and Usage<a class="anchor-link" href="#License-and-Usage">&#182;</a></h3>
+<h3 id="The-tensor-product">The tensor product<a class="anchor-link" href="#The-tensor-product">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The materials and associated source code of this open-source textbook are licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+<p>Suppose we have two qubits, with one in state $|a\rangle = a_0 |0\rangle + a_1 |1\rangle$ and the other in state $|b\rangle = b_0 |0\rangle + b_1 |1\rangle$, and we want to create the two-qubit state that describes them both.</p>
+<p>To see how to do this, we can use the Born rule as a guide. We know that the probability of getting a <code>0</code> is $| a_0 |^2$ and $| b_0 |^2$ for the other. The probability of getting <code>00</code> is therefore $| a_0 |^2 | b_0 |^2 = | a_0 b_0 |^2$. Working backwards from this probability, it makes sense for the $|00\rangle$ state to have the amplitude $a_{0}b_0$.Repeating this principle, the whole state becomes.</p>
+$$
+a_{0}b_0|00\rangle+ a_{0}b_1|01\rangle+a_{1}b_0|10\rangle+ a_{1}b_1|11\rangle.
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is exactly the result we would get when using the 'tensor product' [1], which is a standard method for combining vectors and matrices in a way that preserves all the information they contain. Using the notation of the tensor product, we can write this state as $|a\rangle \otimes |b\rangle$.</p>
+<p>We also make use of the tensor product to represent the action of single-qubit matrices on these multiqubit vectors. For example, here's an $X$ that acts only on the qubit on the right:</p>
+$$
+I \otimes X=  \begin{pmatrix} 1&amp;0 \\\\ 0&amp;1 \end{pmatrix} \otimes \begin{pmatrix} 0&amp;1 \\\\ 1&amp;0 \end{pmatrix} = \begin{pmatrix} 0&amp;1&amp;0&amp;0 \\\\ 1&amp;0&amp;0&amp;0\\\\0&amp;0&amp;0&amp;1\\\\0&amp;0&amp;1&amp;0 \end{pmatrix}, ~~~ I= \begin{pmatrix} 1&amp;0 \\\\ 0&amp;1 \end{pmatrix}.
+$$<p>This was made by combining the $X$ matrix for the qubit on the right with the single-qubit identity operator, $I$, for the qubit on the left. The identity operator is the unique operator that does absolutely nothing to a vector. The two-qubit operation resulting from the tensor product allows us to calculate expectation values for x measurements of the qubit on the left, in exactly the same way as before.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Entangled-states">Entangled states<a class="anchor-link" href="#Entangled-states">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using the tensor product we can construct matrices such as $X \otimes X$, $Z \otimes Z$, $Z \otimes X$, and so on. The expectation values of these also represent probabilities. For example, for a general two qubit state $|a\rangle$,</p>
+$$
+\langle a|Z\otimes Z|a\rangle = P^{zz}_{0} - P^{zz}_{1}.
+$$<p>The $zz$ in $P^{zz}_{0}$ and $P^{zz}_{1}$ refers to the fact that these probabilities describe the outcomes when a z measurement is made on both qubits.  A quantity such as $\langle a|Z\otimes X|a\rangle$ will reflect similar probabilities for different choices of measurements on the qubits.</p>
+<p>The $0$ and $1$ of $P^{zz}_{0}$ and $P^{zz}_{1}$ refer to whether there are an even (for $0$) or odd (for $1$) number of <code>1</code> outcomes in the output. So $P^{zz}_{0}$ is the probability that the result is either <code>00</code> or <code>11</code>, and $P^{zz}_{01}$  is the probability that the result is either <code>01</code> or <code>10</code>.</p>
+<p>These multiqubit Pauli operators can be used to analyze a new kind of state, that cannot be described as a simple tensor product of two independent qubit states. For example,</p>
+$$
+|\Phi^+\rangle =\frac{1}{\sqrt{2}}\left(|00\rangle+|11\rangle\right).
+$$<p>This represents a quantum form of correlated state, known as an entangled state. The correlations can be easily seen from the fact that only the <code>00</code> and <code>11</code> outcomes are possible when making z measurements of both qubits, and so the outcomes of these measurements will always agree. This can also be seen from the fact that</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$
+\langle \Phi^+|Z\otimes Z|\Phi^+\rangle = 1, \quad \therefore P^{zz}_{0} = 1 .
+$$</p>
+<p>These aren't the only correlations in this state. If you use x measurements, you'd fine that the results still always agree. For y measurements, they always disagree. So we find that $\langle \Phi^+|X\otimes X|\Phi^+\rangle = 1$ and $\langle \Phi^+|Y\otimes Y|\Phi^+\rangle = -1$. There are a lot of correlations in this little state!</p>
+<p>For more qubits, we can get ever larger multiqubit Pauli operators. In this case, the probabilities such as $P^{zz\ldots zz}_{0}$ and $P^{zz\ldots zz}_{1}$ are understood in the same way as for two qubits: they reflect the cases where the total output bit string consists of an even or odd number of <code>1</code>s, respectively. We can use these to quantify even more complex correlations.</p>
+<p>The generation of complex entangled states is a neccessary part of gaining a quantum advantage. The use of large vectors and multiqubit correlation functions is therefore important if we want to mathematically analyze what our qubits are doing.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="References">References<a class="anchor-link" href="#References">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>[1] For more on tensor products, see:
+ Michael A. Nielsen and Isaac L. Chuang. 2011. <em>Quantum Computation and Quantum Information: 10th Anniversary Edition (10th ed.).</em> Cambridge University Press: New York, NY, USA.</p>
 
 </div>
 </div>
