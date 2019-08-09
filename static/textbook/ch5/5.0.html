@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>5.0</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -16333,7 +16333,36 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Learn-Quantum-Computation-using-Qiskit">Learn Quantum Computation using Qiskit<a class="anchor-link" href="#Learn-Quantum-Computation-using-Qiskit">&#182;</a></h1><p>A university quantum algorithms/computation course supplement based on Qiskit</p>
+<h1 id="An-introduction-to-open-quantum-systems-">An introduction to open quantum systems <a class="anchor-link" href="#An-introduction-to-open-quantum-systems-">&#182;</a></h1><h3 id="6.1-Qubit-decoherence-mechanisms:-energy-relaxation-($T_{1}$)-and-dephasing-($T_{2}$)">6.1 Qubit decoherence mechanisms: energy relaxation ($T_{1}$) and dephasing ($T_{2}$)<a class="anchor-link" href="#6.1-Qubit-decoherence-mechanisms:-energy-relaxation-($T_{1}$)-and-dephasing-($T_{2}$)">&#182;</a></h3><h4 id="Z.K.-Minev,-IBM-TJ-Watson-Research-Center">Z.K. Minev, IBM TJ Watson Research Center<a class="anchor-link" href="#Z.K.-Minev,-IBM-TJ-Watson-Research-Center">&#182;</a></h4><h4 id="Abstract">Abstract<a class="anchor-link" href="#Abstract">&#182;</a></h4><p>In this brief chapter, we promote our closed-system treatment of a quantum bit (qubit) to an open-system one. Here, you will learn the basic ideas of open-system evolution. Our focus is on unwanted, incoherent processes. These are unavoidable in a physical system and are thus necessary to understand for any practical quantum computation. A "real" qubit does not exist in isolation, but rather as a physical system embedded in an environment. Due to the unavoidable coupling with the environment (here, considered unmonitored) the qubit evolution is profoundly affected. Typically, the coupling results in two chief decoherence mechanisms that limit qubit performance: unwanted loss of energy and loss of coherence. These are characterized by the energy-relaxation lifetime ($T_{1}$) and the total dephasing time ($T_{2}$), respectively. We will explain these with a simple toy model based on the simplest possible quantum trajectory (used in the qiskit Aer simulator). We obtain the standard Linbdlad form of the master equation, which governs the evolution of the average quantum state (the density matrix). We explain how to characterize $T_{1}$ and $T_{2}$ noise. Finally, we comment on related notions such as $T_{2}^{*}$, $T_{2}^{E}$, and a hot, thermal environment. Finally, we will measure $T_{1}$ and $T_{2}$ on a real quantum device.</p>
+<hr>
+
+<h4 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h4><ul>
+<li><a href="#61-qubit-decoherence-mechanisms-energy-relaxation-t_1-and-dephasing-t_2">6.1 Qubit decoherence mechanisms: energy relaxation ($T_{1}$) and dephasing ($T_{2}$)</a><ul>
+<li>Introduction<ul>
+<li><a href="#qubit-and-environment">Qubit and environment.</a></li>
+<li><a href="#environmental-noise-model-microscopic-origin">Environmental noise model: microscopic origin.</a></li>
+<li><a href="#description-of-just-the-qubit-system-that-accounts-for-the-coupling-to-the-environment">Description of just the qubit system that accounts for the coupling to the environment.</a><ul>
+<li><a href="#review-of-preliminaries-bloch-vector-representation">Review of preliminaries: Bloch-vector representation.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#the-bit-flip-quantum-channel-random-kicks">The bit-flip quantum channel: random kicks</a><ul>
+<li><a href="#model-to-kick-or-not-to-kick">Model: to kick or not to kick</a><ul>
+<li><a href="#average-state-evolution">Average state evolution</a></li>
+<li><a href="#bloch-picture">Bloch picture</a></li>
+</ul>
+</li>
+<li><a href="#time-evolution">Time evolution</a></li>
+</ul>
+</li>
+<li><a href="#the-amplitude-damping-channel-energy-lossleftt_1right">The amplitude damping channel: energy loss$\left(T_{1}\right)$</a></li>
+<li><a href="#phase-damping-t_phi">Phase damping $T_{\phi}$</a></li>
+<li><a href="#both-amplitude-t_1-and-phase-damping-t_phi">Both amplitude $T_{1}$ and phase damping $T_{\phi}$</a></li>
+</ul>
+</li>
+<li><a href="#ignis">ignis</a></li>
+</ul>
 
 </div>
 </div>
@@ -16341,73 +16370,50 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img width=300px align="right" src="./ch0/images/qiskit-textbook.jpg"></p>
-<h3 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h3><p><br /></p>
-<p><strong>Chapter 0. Introduction and Prerequisites</strong><br /></p>
-<p>&nbsp; &nbsp; 0.0 <a href="./ch0/0.0.html">Hello World!</a><br />
-&nbsp; &nbsp; 0.1 <a href="./ch0/0.1.html">Python and Jupyter Notebooks</a><br />
-&nbsp; &nbsp; 0.2 <a href="./ch0/0.2.html">Qiskit</a><br /></p>
-<p><strong>Chapter 1. Quantum States and Qubits</strong><br /></p>
-<p>&nbsp; &nbsp; 1.0 <a href="./ch1/1.0.html">Introduction</a><br />
-&nbsp; &nbsp; 1.1 <a href="./ch1/1.1.html">The Atoms of Computation</a><br />
-&nbsp; &nbsp; 1.2 <a href="./ch1/1.2.html">The Unique Properties of Qubits</a><br />
-&nbsp; &nbsp; 1.3 <a href="./ch1/1.3.html">Writing Down Qubit States</a><br />
-&nbsp; &nbsp; 1.4 <a href="./ch1/1.4.html">Pauli Matrices and the Bloch Sphere</a><br />
-&nbsp; &nbsp; 1.5 <a href="./ch1/1.5.html">States for Many Qubits</a><br /></p>
-<p><strong>Chapter 2. Single-Qubit and Multi-Qubit Gates</strong><br /></p>
-<p>&nbsp; &nbsp; 2.0 <a href="./ch2/2.0.html">Introduction</a><br />
-&nbsp; &nbsp; 2.1 <a href="./ch2/2.1.html">Quantum Gates</a><br />
-&nbsp; &nbsp; 2.2 <a href="./ch2/2.2.html">Fun with Matrices</a><br />
-&nbsp; &nbsp; 2.3 <a href="./ch2/2.3.html">The Standard Gate Set</a><br />
-&nbsp; &nbsp; 2.4 <a href="./ch2/2.4.html">Proving Universality</a><br />
-&nbsp; &nbsp; 2.5 <a href="./ch2/2.5.html">Basic Circuit Identities</a><br /></p>
-<p><strong>Problems</strong><br /></p>
-<p>&nbsp; &nbsp; <a href="./chEx/Ex1.html">Set 1 -- Classical Logic Gates with Quantum Circuits</a><br />
-&nbsp; &nbsp; <a href="./chEx/Ex2.html">Set 2 -- Basic Synthesis of Single-Qubit Gates</a><br />
-&nbsp; &nbsp; <a href="./chEx/Ex3.html">Set 3 -- Building the Best <code>AND</code> Gate</a><br /></p>
-<p><strong>Chapter 3. Quantum Algorithms</strong><br /></p>
-<p>&nbsp; &nbsp; 3.0 Quantum Teleportation<br />
-&nbsp; &nbsp; 3.1 Deutsch-Josza Algorithm<br />
-&nbsp; &nbsp; 3.2 Bernstein-Vazirani Algorithm<br />
-&nbsp; &nbsp; 3.3 Simon's Algorithm<br />
-&nbsp; &nbsp; 3.4 Quantum Fourier Transform<br />
-&nbsp; &nbsp; 3.5 Quantum Phase Estimation<br />
-&nbsp; &nbsp; 3.6 Shor's Algorithm<br />
-&nbsp; &nbsp; 3.7 Grover's Algorithm<br /></p>
-<p><strong>Chapter 4. Quantum Algorithms for Applications</strong><br /></p>
-<p>&nbsp; &nbsp; 4.0 Overview of quantum algorithms for NISQ hardware<br />
-&nbsp; &nbsp; 4.1 Mapping the Ising model onto a superconducting quantum computer<br />
-&nbsp; &nbsp; 4.2 Simulating molecules using VQE<br />
-&nbsp; &nbsp; 4.3 Solving combinatorial optimization problems using QAOA<br />
-&nbsp; &nbsp; 4.4 Solving linear systems of equations using HHL <br />
-&nbsp; &nbsp; 4.5 Solving satisfiability problems using Grover's algorithm<br />
-&nbsp; &nbsp; 4.6 Securing communications using BB84<br /></p>
-<p><strong>Chapter 5. Investigating Quantum Hardware Using Qiskit</strong><br /></p>
-<p>&nbsp; &nbsp; 5.0 Decoherence and Energy Relaxation: Measuring T2 and T1<br />
-&nbsp; &nbsp; 5.1 <a href="./ch5/5.1.html">Calibrating Qubits with OpenPulse</a><br />
-&nbsp; &nbsp; 5.2 Optimizing Microwave Pulses for High-Fidelity Qubit Operations<br />
-&nbsp; &nbsp; 5.3 <a href="./ch5/5.3.html">Transpiling Quantum Circuits</a><br />
-&nbsp; &nbsp; 5.4 Error Correction and Measurement Error Mitigation <br />
-&nbsp; &nbsp; 5.5 Randomized Benchmarking<br />
-&nbsp; &nbsp; 5.6 Measuring Quantum Volume<br />
-&nbsp; &nbsp; 5.7 State and Process Tomography<br /></p>
-<div style='text-align: right'><a href="http://community.qiskit.org/education">Return to IBM Q Community Education Page</a></div>
+<h1 id="Open-quantum-system-evolution:-a-simple-model">Open quantum system evolution: a simple model<a class="anchor-link" href="#Open-quantum-system-evolution:-a-simple-model">&#182;</a></h1><h6 id="Qubit-and-environment.">Qubit and environment.<a class="anchor-link" href="#Qubit-and-environment.">&#182;</a></h6><p>For simplicity and definitiveness of example, let us begin by restricting our attention to the simplest possible quantum system one that has two levels. A qubit <sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup> cannot exist in isolation. It is part of a larger world that it is unavoidably coupled to. The coupling is an interaction between the qubit degree of freedom and the rest of the world, which we will refer to as the <em>environment</em>. Sometimes, the environment is also referred to as the <em>bath</em> or <em>reservoir.</em> As it consists of the rest of the world, we consider it large, or <em>macroscopic</em> composed of many degrees of freedom, which for all practical purposes we have no knowledge of or control over.</p>
+<h6 id="Environmental-noise-model:-microscopic-origin.">Environmental noise model: microscopic origin.<a class="anchor-link" href="#Environmental-noise-model:-microscopic-origin.">&#182;</a></h6><p>Let us begin with a semi-classical picture. If the environmental degrees of freedom are uncontrolled, we may imagine that each of them them jiggles about stochastically. However, as a degree jiggles, if it is coupled to the qubit, it effects a force on the qubit due to the system-environment coupling. The result is a stochastic force applied on the qubit that alters its states in an unknown manner. Even if the environmental degrees of freedom are very weakly coupled to the qubit, their multitude and continuous existence <sup class="footnote-ref" id="fnref-2"><a href="#fn-2">2</a></sup> can lead to a signifiant alteration of the qubit dynamics. The coupling, which can serve to jiggle the qubit about stochastically, also acts in the reverse direction. Any energy (or information) stored in the system can leak out of the qubit into the environment <sup class="footnote-ref" id="fnref-3"><a href="#fn-3">3</a></sup>. In summary, unavoidable coupling between our small qubit system and the <em>macroscopic</em> environment rapidly leads to loss of quantum coherence for the qubit a process known as <em>decoherence.</em></p>
+<h6 id="Description-of-just-the-qubit-system-that-accounts-for-the-coupling-to-the-environment.">Description of just the qubit system that accounts for the coupling to the environment.<a class="anchor-link" href="#Description-of-just-the-qubit-system-that-accounts-for-the-coupling-to-the-environment.">&#182;</a></h6><p>Since we cannot track the environment, we will focus on a description of just the qubit system. The effect of the environment will be factored in an average sense we will discuss the density matrix $\rho$ rather than the pure state $\left|\psi\right\rangle$. We could at this stage write down a quantum description of both the system and the environment, considered as an infinite number of quantum degrees of freedom, and proceed to trace out the environment under some assumptions. This canonical approach is explicated in many textbooks, including Niselen and Chuang or Carmichael. Let us rather take a different tack. This is a slightly simpler approach that will lead to the same final result, while teaching us some new basic concepts along the way.</p>
+<h5 id="Review-of-preliminaries:-Bloch-vector-representation.">Review of preliminaries: Bloch-vector representation.<a class="anchor-link" href="#Review-of-preliminaries:-Bloch-vector-representation.">&#182;</a></h5><p>Before proceeding to look at the ensemble, average behavior that results from the interaction with the environment, let us review the description of the density matrix in terms of the Bloch vector representation. Let us briefly review the Bloch vector of a qubit. It consists of three components, denoted $x,y$, and $z$, which find values in the range bounded by -1 and +1. Each corresponds to the expectation value of a Pauli operator $(X,Y,Z)$. For example $x=\operatorname{Tr}\left(X\rho\right).$ Note that $x$ is a scalar variable, while $X$ is a quantum operator. These three components represent all informationally orthogonal directions. Together they specify the quantum state fully. For convenience, they can be grouped into a vector $\vec{r}\left(t\right)=\left(x\left(t\right),y\left(t\right),z\left(t\right)\right)$. The density matrix expressed in terms of the Bloch vector components is $$\begin{aligned}
+\rho &amp; =\frac{1}{2}\begin{pmatrix}1+z &amp; x-iy\\
+x+iy &amp; 1-z
+\end{pmatrix}\\
+ &amp; =\frac{1}{2}\left(I+xX+yY+zZ\right)\\
+ &amp; =\frac{1}{2}\left(I+\vec{r}\cdot\vec{\sigma}\right)\,,\end{aligned}$$ where in the last line, for notational convenience, we expressed the inner product between the vector of expectations $\vec{r}$ and the vector of Pauli operators $\vec{\sigma}=\left(X,Y,Z\right).$ Note that there is no global phase when discussing the density matrix. The Bloch vector length $\left|\vec{r}\right|_{2}=\sqrt{x^{2}+y^{2}+z^{2}}$ is a number between zero and one. One indicates that the state is pure, while zero indicates that the state is completely mixed. It is important to keep in mind that the ground state ($\left|g\right\rangle$) is denoted by $z=+1$, while the excited state ($\left|e\right\rangle$) is represented by $z=-1$. This may at first seem at adds with your intuition.</p>
+<h4 id="The-bit-flip-quantum-channel:-random-kicks">The bit-flip quantum channel: random kicks<a class="anchor-link" href="#The-bit-flip-quantum-channel:-random-kicks">&#182;</a></h4><h6 id="Model:-to-kick-or-not-to-kick">Model: to kick or not to kick<a class="anchor-link" href="#Model:-to-kick-or-not-to-kick">&#182;</a></h6><p>Consider the following elementary model of the interaction between the qubit and the environment. Suppose that at each instant in time the environment can only perform one of two possible actions on the qubit either it does nothing ($I$) or it flips the qubit bit ($X$). Consider the case in which the environment does nothing we can think of this as the environment applying the identity gate $I$ to the qubit. This case occurs with a probability that we will denote $1-p$ <sup class="footnote-ref" id="fnref-4"><a href="#fn-4">4</a></sup>. Denoting time by $t$ and the time increment by $\mathrm{d}t$, the quantum state $\rho$ at time $t+\mathrm{d}t$ (conditioned on the identity gate $I$ having been applied by the environment) is $$\rho_{I}\left(t+\mathrm{d}t\right)=I\rho\left(t\right)I\,,\qquad\mathbb{P}\left(I\right)=1-p\,,$$ where we have expressed the probability of the identity gate occurring as $\mathbb{P}\left(I\right)=1-p$. If $p=0$, then the environment always applies the identity and never performs a random action. This is the case of a closed quantum system. For all time, an initial pure state $\rho\left(0\right)=\left|\psi\right\rangle \left\langle \psi\right|$ will remain pure.</p>
+<p>What happens in the remainder of the instances, corresponding to the probability $\mathbb{P}\left(X\right)\equiv p$? Let's say the environment randomly applies the bit-flip gate $X$ to the qubit. The resulting state at time $t+\mathrm{d}t$ is now $$\rho_{X}\left(t+\mathrm{d}t\right)=X\rho\left(t\right)X\,,\qquad\mathbb{P}\left(X\right)=p\,.$$ If the qubit was initialized in $\left|0\right\rangle \left\langle 0\right|$, it will at the next time step be found in $\left|1\right\rangle \left\langle 1\right|$ with probability $p$.</p>
+<h5 id="Average-state-evolution">Average state evolution<a class="anchor-link" href="#Average-state-evolution">&#182;</a></h5><p>Since we cannot keep track of the environment, we must average these various possible outcomes together to obtain the (unconditional) ensemble state $$\begin{aligned}
+\rho\left(t+\mathrm{d}t\right) &amp; =\mathbb{P}\left(I\right)\rho_{I}\left(t+\mathrm{d}t\right)+\mathbb{P}\left(X\right)\rho_{X}\left(t+\mathrm{d}t\right)\\
+ &amp; =\left(1-p\right)\rho_{I}\left(t+\mathrm{d}t\right)+p\rho_{X}\left(t+\mathrm{d}t\right)\\
+ &amp; =\left(1-p\right)\rho\left(t\right)+pX\rho\left(t\right)X\,.\end{aligned}$$ Note the interpretation of the last line in terms of a null and non-null operation weighted by some probabilities that sum to one. We will see this form repeatedly.</p>
+<h6 id="[[A-bit-of-nomenclature]{.upright}]{.medium}">[[A bit of nomenclature]{.upright}]{.medium}<a class="anchor-link" href="#[[A-bit-of-nomenclature]{.upright}]{.medium}">&#182;</a></h6><p>It is sometime useful to describe the environment operation on the density matrix as an operation called a <em>channel</em>. We can write it as $$\rho\left(t+\mathrm{d}t\right)=\mathcal{E}\left[\rho\left(t\right)\right]\,,$$ where the calligraphic symbol $\mathcal{E}$ denotes the channel map. Since it acts on density matrices, rather than wave-vectors, we call it, rather than an operator, a <em>superoperator</em>. Note that the channel, a map from $\rho\left(t\right)$ to $\rho\left(t+\mathrm{d}t\right)$, is linear in $\rho$.</p>
+<p><img src="_imgs/a.png" alt="image"></p>
+<p>Technically, what we wrote down in the preceding discussion is called a Kraus decomposition of a quantum channel. The channel here is the ensemble operation of the environment on the qubit. The Kraus operators are the probability-weighted identify and bit-flip gates. Let us not dwell on the technical aspect here, we will encounter it again soon enough. Rather, let us provide a more clear picture of the action of the above map.</p>
+<h5 id="Bloch-picture">Bloch picture<a class="anchor-link" href="#Bloch-picture">&#182;</a></h5><p>In terms of the Bloch representation, see the section entitled "Review of preliminaries: Bloch-vector representation," the action of the environment is to perform either$I$ or $X$ on the qubit resulting in: $$\begin{aligned}
+\mathrm{I:}\qquad &amp; \vec{r}_{I}\left(t+\mathrm{d}t\right)=\left(x\left(t\right),y\left(t\right),z\left(t\right)\right)\,,\\
+\mathrm{X:}\qquad &amp; \vec{r}_{X}\left(t+\mathrm{d}t\right)=\left(x\left(t\right),-y\left(t\right),-z\left(t\right)\right)\,.\end{aligned}$$ The bit-flip environment randomly flips the $y$ and $z$ Bloch components. Thus, on average, $$\vec{r}\left(t+\mathrm{d}t\right)=\left(x\left(t\right),\left(1-2p\right)y\left(t\right),\left(1-2p\right)z\left(t\right)\right)\,.$$ We observe that the states along $x$ are unaffected. However, the states in the $y-z$ plane are subjected to a decay. <sup class="footnote-ref" id="fnref-5"><a href="#fn-5">5</a></sup></p>
+<h6 id="Time-evolution">Time evolution<a class="anchor-link" href="#Time-evolution">&#182;</a></h6><p>What happens as time goes on? In other words, as we apply the quantum map repeatedly, and eventually continuously in time. First, let us divide time into $n$ even chunks of size $\mathrm{d}t$, where $n$ is an integer; $t=n\mathrm{d}t$. The evolution of the Bloch vector becomes (this follows directly from the display equation above) $$\vec{r}\left(t\right)=\left(x\left(0\right),\left(1-2p\right)^{n}y\left(0\right),\left(1-2p\right)^{n}z\left(0\right)\right)\,.$$ Equivalently, we could have written the density matrix in terms of the channel map, $\rho\left(t\right)=\mathcal{E}^{n}\left[\rho\left(0\right)\right]$, where $\mathcal{E}^{n}$ denotes the repeated application of the channel $n$ times.</p>
+<p>To take the continuum limit, we need to first express $p$ in terms of a time rate. Let $p=\gamma\mathrm{d}t$, where $\gamma$ is finite and is the bit-flip rate. Using the limit identity $\lim_{n\rightarrow\inf}\left(1-\frac{a}{n}\right)^{n}=e^{-n},$ one finds (try this exercise yourself) $$\vec{r}\left(t\right)=\left(x\left(0\right),e^{-2\gamma t}y\left(0\right),e^{-2\gamma t}z\left(0\right)\right)\,.$$ What does equation this mean? We observe the exponential decay <sup class="footnote-ref" id="fnref-6"><a href="#fn-6">6</a></sup> of the initial information stored in the $y$ and $z$ Bloch components. The information is scrambled by the environment, until we no longer know what has happened to it. This is a type of decoherence. The decay of the $z$ component describes the loss of polarization of the qubit. The decay time of this component is called the $T_{1}$ time, i.e., in this simple model $T_{1}=\frac{2}{\gamma}$.</p>
+<p>However, the simple bit-flip model we have examined so far is not quite the processed that is typically observed in lab. We will cover the standard $T_{1}$ energy loss process in the following section by repeating the above analysis.</p>
+<h4 id="The-amplitude-damping-channel:-energy-loss$\left(T_{1}\right)$">The amplitude damping channel: energy loss$\left(T_{1}\right)$<a class="anchor-link" href="#The-amplitude-damping-channel:-energy-loss$\left(T_{1}\right)$">&#182;</a></h4><p>Consider the physical case of the leakage (emission) of a photon from a qubit into the environment, and its detection by the environment. The total loss of a photon of energy of the in the qubit should annihilate the excited ground state. Thus instead of a bit-flip, in this model, the environment applies the annihilation (lowering) operator on the qubit, $$\sigma_{-}\equiv\left|0\right\rangle \left\langle 1\right|=\frac{1}{2}\left(X+iY\right)=\begin{pmatrix}0 &amp; 1\\
+0 &amp; 0
+\end{pmatrix}\,.$$ Note that this can no longer occur with fixed probability. If the atom is in the ground state, there should be no possibility for the environment to have detected a leaked photon from the excited states. Hence the probability to apply $\sigma_{-}$ should be zero. In general, the probability to annihilate the excited state ($\left|1\right\rangle$) will dictated by the excited state population, namely $p_{\mathrm{click}}=p\mathrm{Tr}\left[\left|1\right\rangle \left\langle 1\right|\rho\right]=p\mathrm{Tr}\left[\sigma_{-}^{\dagger}.\sigma_{-}\rho\right]$, where $p$ is a proportionality factor between zero and one. One can show <sup class="footnote-ref" id="fnref-7"><a href="#fn-7">7</a></sup> that the correct random operations applied by the environment on the qubit for this scenario are the following two Kraus maps $$A_{0}=\begin{pmatrix}1 &amp; 0\\
+0 &amp; \sqrt{1-p}
+\end{pmatrix}\,,\qquad A_{1}=\sqrt{p}\sigma_{-}\,.$$ The probability of a click is thus succinctly expressed as $p_{\mathrm{click}}=\operatorname{Tr}\left[A_{1}^{\dagger}A_{1}\rho\right]=\frac{p}{2}\left(1-z\right)=\rho_{11}$, where $\frac{1}{2}\left(1-z\right)$ is the population of the $\left|1\right\rangle$ state, denoted $\rho_{11}$. The probability of no-click event is $p_{\mathrm{no-click}}=\operatorname{Tr}\left[A_{0}^{\dagger}A_{0}\rho\right]=1-\rho_{11}$. Combining these two weighted operators the amplitude damping ($T_{1})$ noise map is $$\mathcal{A}\left(\rho\right)=A_{0}\rho A_{0}^{\dagger}+A_{1}\rho A_{1}^{\dagger}\,,$$ which can be expressed in terms of its action on the Bloch vector components, $$\vec{r}\left(t+\mathrm{d}t\right)=\left(\sqrt{1-p}x\left(t\right),\sqrt{1-p}y\left(t\right),\left(1-p\right)z\left(t\right)+p\right)\,.$$ We leave it as an exercise to show that the repeated application of the noise map leads to $$\vec{r}\left(t+\mathrm{d}t\right)=\left(\left(1-p\right)^{n/2}x\left(t\right),\left(1-p\right)^{n/2}y\left(t\right),1+\left(1-p\right)^{n}z\left(t\right)\right)\,.$$ Using the limit results from the last section, you can show that in the continuous limit, setting $p=\frac{1}{T_{1}}\mathrm{d}t$, $$\vec{r}\left(t+\mathrm{d}t\right)=\left(e^{-t/2T_{1}}x\left(0\right),e^{-t/2T_{1}}y\left(0\right),1+e^{-t/T_{1}}z\left(0\right)\right)\,.$$ Observe the exponential decay of the population with a time constant $T_{1}$, called the energy relaxation time, to the ground state $\lim_{t\rightarrow\infty}z\left(t\right)=+1$. The coherence $x$ and $y$ Bloch components decay with a time constant $T_{2}=2T_{1}$.</p>
+<h4 id="Phase-damping-$T_{\phi}$">Phase damping $T_{\phi}$<a class="anchor-link" href="#Phase-damping-$T_{\phi}$">&#182;</a></h4><p>If the environment randomly flips the phase of the qubit, the Kraus operators would be <sup class="footnote-ref" id="fnref-8"><a href="#fn-8">8</a></sup></p>
+$$A_{0}=\sqrt{1-p}I\,,\qquad A_{1}=\sqrt{p}Z\,,$$<p>in which case, we leave it as an exercise to the reader, one finds $$\vec{r}\left(t+\mathrm{d}t\right)=\left(e^{-t/T_{\phi}}x\left(0\right),e^{-t/T_{1}}y\left(0\right),z\left(0\right)\right)\,,$$ where $p=\mathrm{d}t/T_{\phi}$.</p>
+<h4 id="Both-amplitude-$T_{1}$-and-phase-damping-$T_{\phi}$">Both amplitude $T_{1}$ and phase damping $T_{\phi}$<a class="anchor-link" href="#Both-amplitude-$T_{1}$-and-phase-damping-$T_{\phi}$">&#182;</a></h4><p>Combining the above two processes, one finds (exercise), $$\vec{r}\left(t+\mathrm{d}t\right)=\left(e^{-t/T_{2}}x\left(0\right),e^{-t/T_{2}}y\left(0\right),1+e^{-t/T_{1}}z\left(0\right)\right)\,.$$ where $$\frac{1}{T_{2}}\equiv\frac{1}{T_{\phi}}+\frac{1}{2T_{1}}\,.$$</p>
+<h3 id="ignis">ignis<a class="anchor-link" href="#ignis">&#182;</a></h3><h1 id="Footnotes">Footnotes<a class="anchor-link" href="#Footnotes">&#182;</a></h1><div class="footnotes">
+<hr>
+<ol><li id="fn-1"><p>A physical qubit might be an atom in free space or a superconducting circuit in a box<a href="#fnref-1" class="footnote">&#8617;</a></p></li>
+<li id="fn-2"><p>We imagine that the coupling to the environment is present at all times and in this discussion unchanging. This will be related when we discuss low-frequency noise and $T_{2}^{E}$.<a href="#fnref-2" class="footnote">&#8617;</a></p></li>
+<li id="fn-3"><p>Here, we assume that the environment is not monitored directly by the observer. Hence, we will specialize to an unconditioned monitoring. By 'unconditioned' we mean that we will throw away any measurement record and only talk about the average evolution of the quantum system, not that conditioned on the record.<a href="#fnref-3" class="footnote">&#8617;</a></p></li>
+<li id="fn-4"><p>Since we will label this outcome $I$, formally, we can write that the probability of the identity outcome is $\mathbb{P}\left(I\right)=p$.<a href="#fnref-4" class="footnote">&#8617;</a></p></li>
+<li id="fn-5"><p>Since $0\leq p\leq1$, if $p=0$ or $p=1$, the process is deterministic. The noise is maximal for $p=\frac{1}{2}$, a completely random coin.<a href="#fnref-5" class="footnote">&#8617;</a></p></li>
+<li id="fn-6"><p>The exponential decay is the result of the stochastic Poison Markov process assumed in our model.<a href="#fnref-6" class="footnote">&#8617;</a></p></li>
+<li id="fn-7"><p>Carmichael, Howard J., An Open Systems Approach to Quantum Optics (Springer, Berlin, Heidelberg, 1993).<a href="#fnref-7" class="footnote">&#8617;</a></p></li>
+<li id="fn-8"><p>Alternatively, $A_{0}=\sqrt{1-p}I\,,\qquad A_{1}=\sqrt{p}\frac{1}{2}\left(I+Z\right)=\sqrt{p}\left|g\vphantom{g}\right\rangle \left\langle \vphantom{g}g\right|,\qquad A_{2}=\sqrt{p}\frac{1}{2}\left(I-Z\right)=\sqrt{p}\left|e\vphantom{e}\right\rangle \left\langle \vphantom{e}e\right|$<a href="#fnref-8" class="footnote">&#8617;</a></p></li>
+</ol>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Contributors-in-Alphabetical-Order">Contributors in Alphabetical Order<a class="anchor-link" href="#Contributors-in-Alphabetical-Order">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>Learn Quantum Computation using Qiskit</code> is the work of several individuals. If you use it in your work, cite it using <a href="http://github.com/Qiskit/qiskit-textbook/blob/master/qiskit-textbook.bib">this bib file</a> or directly as</p>
-<blockquote><p><code>Abraham Asfaw, Sergey Bravyi, Lauren Capelluto, Almudena Carrera Vazquez, Jay Gambetta, Shelly Garion, Leron Gil, David McKay, Zlatko Minev, Paul Nation, Anna Phan, Arthur Rattew, Javad Shabani, John Smolin, Kristan Temme, James Wootton. "Learn Quantum Computation using Qiskit." (August 2019). Retrieved from http://community.qiskit.org/textbook</code></p>
-</blockquote>
 
 </div>
 </div>
@@ -16415,17 +16421,61 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="License-and-Usage">License and Usage<a class="anchor-link" href="#License-and-Usage">&#182;</a></h3>
+<h1 id="II.-Measuring-$T_1$-and-$T_2$:-Qiskit-ignis">II. Measuring $T_1$ and $T_2$: Qiskit ignis<a class="anchor-link" href="#II.-Measuring-$T_1$-and-$T_2$:-Qiskit-ignis">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The materials and associated source code of this open-source textbook are licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+<p>How to use ignis to measure</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$\def\ket#1{\left|#1\right\rangle}$
+$\def\bra#1{\left\langle #1\right|}$
+$\def\mathrm{d}t{\mathrm{d}t}$ 
+$\def\operatorname{Tr}{\operatorname{Tr}}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
