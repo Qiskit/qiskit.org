@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>Exercise for 1.1</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -16330,102 +16330,345 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Learn-Quantum-Computation-using-Qiskit">Learn Quantum Computation using Qiskit<a class="anchor-link" href="#Learn-Quantum-Computation-using-Qiskit">&#182;</a></h1><p>A university quantum algorithms/computation course supplement based on Qiskit</p>
+<h1 id="Solutions:-Classical-logic-gates-with-quantum-circuits">Solutions: Classical logic gates with quantum circuits<a class="anchor-link" href="#Solutions:-Classical-logic-gates-with-quantum-circuits">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="NOT-gate">NOT gate<a class="anchor-link" href="#NOT-gate">&#182;</a></h2><p>This function takes a binary string input (<code>'0'</code> or <code>'1'</code>) and returns the opposite binary output'.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img width=300px align="right" src="./ch0/images/qiskit-textbook.jpg"></p>
-<h3 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h3><p><br /></p>
-<p><strong>Chapter 0. Introduction and Prerequisites</strong><br /></p>
-<p>&nbsp; &nbsp; 0.0 <a href="./ch0/0.0.html">Hello World!</a><br />
-&nbsp; &nbsp; 0.1 <a href="./ch0/0.1.html">Python and Jupyter Notebooks</a><br />
-&nbsp; &nbsp; 0.2 <a href="./ch0/0.2.html">Qiskit</a><br /></p>
-<p><strong>Chapter 1. Quantum States and Qubits</strong><br /></p>
-<p>&nbsp; &nbsp; 1.0 <a href="./ch1/1.0.html">Introduction</a><br />
-&nbsp; &nbsp; 1.1 <a href="./ch1/1.1.html">The Atoms of Computation</a><br />
-&nbsp; &nbsp; 1.2 <a href="./ch1/1.2.html">The Unique Properties of Qubits</a><br />
-&nbsp; &nbsp; 1.3 <a href="./ch1/1.3.html">Writing Down Qubit States</a><br />
-&nbsp; &nbsp; 1.4 <a href="./ch1/1.4.html">Pauli Matrices and the Bloch Sphere</a><br />
-&nbsp; &nbsp; 1.5 <a href="./ch1/1.5.html">States for Many Qubits</a><br /></p>
-<p><strong>Chapter 2. Single-Qubit and Multi-Qubit Gates</strong><br /></p>
-<p>&nbsp; &nbsp; 2.0 <a href="./ch2/2.0.html">Introduction</a><br />
-&nbsp; &nbsp; 2.1 <a href="./ch2/2.1.html">Quantum Gates</a><br />
-&nbsp; &nbsp; 2.2 <a href="./ch2/2.2.html">Fun with Matrices</a><br />
-&nbsp; &nbsp; 2.3 <a href="./ch2/2.3.html">The Standard Gate Set</a><br />
-&nbsp; &nbsp; 2.4 <a href="./ch2/2.4.html">Proving Universality</a><br />
-&nbsp; &nbsp; 2.5 <a href="./ch2/2.5.html">Basic Circuit Identities</a><br /></p>
-<p><strong>Problems</strong><br /></p>
-<p>&nbsp; &nbsp; <a href="./chEx/Ex1.html">Set 1 -- Classical Logic Gates with Quantum Circuits</a><br />
-&nbsp; &nbsp; <a href="./chEx/Ex2.html">Set 2 -- Basic Synthesis of Single-Qubit Gates</a><br />
-&nbsp; &nbsp; <a href="./chEx/Ex3.html">Set 3 -- Building the Best <code>AND</code> Gate</a><br /></p>
-<p><strong>Chapter 3. Quantum Algorithms</strong><br /></p>
-<p>&nbsp; &nbsp; 3.0 Quantum Teleportation<br />
-&nbsp; &nbsp; 3.1 Deutsch-Josza Algorithm<br />
-&nbsp; &nbsp; 3.2 Bernstein-Vazirani Algorithm<br />
-&nbsp; &nbsp; 3.3 Simon's Algorithm<br />
-&nbsp; &nbsp; 3.4 Quantum Fourier Transform<br />
-&nbsp; &nbsp; 3.5 Quantum Phase Estimation<br />
-&nbsp; &nbsp; 3.6 Shor's Algorithm<br />
-&nbsp; &nbsp; 3.7 Grover's Algorithm<br /></p>
-<p><strong>Chapter 4. Quantum Algorithms for Applications</strong><br /></p>
-<p>&nbsp; &nbsp; 4.0 Overview of Quantum Algorithms for NISQ Hardware<br />
-&nbsp; &nbsp; 4.1 Mapping the Ising Model onto a Superconducting Quantum Computer<br />
-&nbsp; &nbsp; 4.2 Simulating Molecules using VQE<br />
-&nbsp; &nbsp; 4.3 Solving Combinatorial Optimization Problems using QAOA<br />
-&nbsp; &nbsp; 4.4 Solving Linear Systems of Equations using HHL <br />
-&nbsp; &nbsp; 4.5 Solving Satisfiability Problems using Grover's Algorithm<br />
-&nbsp; &nbsp; 4.6 Securing Communications using BB84<br /></p>
-<p><strong>Chapter 5. Investigating Quantum Hardware Using Qiskit</strong><br /></p>
-<p>&nbsp; &nbsp; 5.0 Decoherence and Energy Relaxation: Measuring T2 and T1<br />
-&nbsp; &nbsp; 5.1 <a href="./ch5/5.1.html">Calibrating Qubits with OpenPulse</a><br />
-&nbsp; &nbsp; 5.2 Optimizing Microwave Pulses for High-Fidelity Qubit Operations<br />
-&nbsp; &nbsp; 5.3 <a href="./ch5/5.3.html">Transpiling Quantum Circuits</a><br />
-&nbsp; &nbsp; 5.4 Error Correction and Measurement Error Mitigation <br />
-&nbsp; &nbsp; 5.5 Randomized Benchmarking<br />
-&nbsp; &nbsp; 5.6 Measuring Quantum Volume<br />
-&nbsp; &nbsp; 5.7 State and Process Tomography<br /></p>
-<div style='text-align: right'><a href="http://community.qiskit.org/education">Return to IBM Q Community Education Page</a></div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NOT</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+
+  <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a qubit in which to encode the inout</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+  <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+  
+  <span class="c1"># We encode &#39;0&#39; as the qubit state |0⟩, and &#39;1&#39; as |1⟩</span>
+  <span class="c1"># Since the qubit is initially |0⟩, we don&#39;t need to do anything for an input of &#39;0&#39;</span>
+  <span class="c1"># For an input of &#39;1&#39;, we do an x to rotate the |0⟩ to |1⟩</span>
+  <span class="k">if</span> <span class="nb">input</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="c1">#</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+    
+  <span class="c1"># Now we&#39;ve encoded the input, we can do a NOT on it using x</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+  
+  <span class="c1"># Finally, we extract the |0⟩/|1⟩ output of the qubit and encode it in the bit c[0]</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+  
+  <span class="c1"># We&#39;ll run the program on a simulator</span>
+  <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+  <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  
+  <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Contributors-in-Alphabetical-Order">Contributors in Alphabetical Order<a class="anchor-link" href="#Contributors-in-Alphabetical-Order">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>Learn Quantum Computation using Qiskit</code> is the work of several individuals. If you use it in your work, cite it using <a href="http://github.com/Qiskit/qiskit-textbook/blob/master/qiskit-textbook.bib">this bib file</a> or directly as</p>
-<blockquote><p><code>Abraham Asfaw, Sergey Bravyi, Lauren Capelluto, Almudena Carrera Vazquez, Jay Gambetta, Shelly Garion, Leron Gil, David McKay, Zlatko Minev, Paul Nation, Anna Phan, Arthur Rattew, Javad Shabani, John Smolin, Kristan Temme, James Wootton. "Learn Quantum Computation using Qiskit." (August 2019). Retrieved from http://community.qiskit.org/textbook</code></p>
-</blockquote>
+<h2 id="XOR-gate">XOR gate<a class="anchor-link" href="#XOR-gate">&#182;</a></h2><p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'0'</code> when the inputs are equal and  <code>'1'</code> otherwise.</p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">XOR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+  
+  <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># a qubit in which to encode the inout</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+  <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+  
+  <span class="k">if</span> <span class="n">input1</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+  <span class="k">if</span> <span class="n">input2</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+  
+  <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># just needs a cnot</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># output from qubit 1 is measured</span>
+  
+  <span class="c1"># We&#39;ll run the program on a simulator</span>
+  <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+  <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  
+  <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="License-and-Usage">License and Usage<a class="anchor-link" href="#License-and-Usage">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The materials and associated source code of this open-source textbook are licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+<h2 id="AND-gate">AND gate<a class="anchor-link" href="#AND-gate">&#182;</a></h2><p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'1'</code> only when both the inputs are <code>'1'</code>.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">AND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+  
+  <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># a qubit in which to encode the inout</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+  <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+  
+  <span class="k">if</span> <span class="n">input1</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+  <span class="k">if</span> <span class="n">input2</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+  
+  <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># just needs a ccx controlled on qubits 0 and 1 and targeted on 2</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># output from qubit 2 is measured</span>
+  
+  <span class="c1"># We&#39;ll run the program on a simulator</span>
+  <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+  <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  
+  <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="NAND-gate">NAND gate<a class="anchor-link" href="#NAND-gate">&#182;</a></h2><p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'0'</code> only when both the inputs are <code>'1'</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NAND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+  
+  <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># a qubit in which to encode the inout</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+  <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+  
+  <span class="k">if</span> <span class="n">input1</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+  <span class="k">if</span> <span class="n">input2</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+    
+  <span class="c1"># can be done with an AND followed by a NOT</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the AND just needs a ccx controlled on qubits 0 and 1 and targeted on 2</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the NOT is done to the qubit containing the output</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># output from qubit 2 is measured</span>
+  
+  <span class="c1"># We&#39;ll run the program on a simulator</span>
+  <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+  <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  
+  <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="OR-gate">OR gate<a class="anchor-link" href="#OR-gate">&#182;</a></h2><p>Takes two binary strings as input and gives one as output.</p>
+<p>The output is <code>'1'</code> if either input is <code>'1'</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">OR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+  
+  <span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># a qubit in which to encode the inout</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># a bit to store the output</span>
+  <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="c1"># this is where the quantum program goes</span>
+  
+  <span class="k">if</span> <span class="n">input1</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+  <span class="k">if</span> <span class="n">input2</span><span class="o">==</span><span class="s1">&#39;1&#39;</span><span class="p">:</span>
+    <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+    
+  <span class="c1"># can be done with NOTs on the inputs and output of an AND</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the AND just needs a ccx controlled on qubits 0 and 1 and targeted on 2</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the NOT is done to the qubit containing the output</span>
+  <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># output from qubit 2 is measured</span>
+  
+  <span class="c1"># We&#39;ll run the program on a simulator</span>
+  <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+  <span class="c1"># Since the output will be deterministic, we can use just a single shot to get it</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span><span class="n">backend</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  
+  <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tests">Tests<a class="anchor-link" href="#Tests">&#182;</a></h2><p>The following code runs the functions above for all possible inputs, so that you can check whether they work.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the NOT gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    NOT with input&#39;</span><span class="p">,</span><span class="nb">input</span><span class="p">,</span><span class="s1">&#39;gives output&#39;</span><span class="p">,</span><span class="n">NOT</span><span class="p">(</span><span class="nb">input</span><span class="p">))</span>
+  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the XOR gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    NOT with inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;gives output&#39;</span><span class="p">,</span><span class="n">XOR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the AND gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    NOT with inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;gives output&#39;</span><span class="p">,</span><span class="n">AND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the NAND gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    NOT with inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;gives output&#39;</span><span class="p">,</span><span class="n">NAND</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Results for the OR gate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">input1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">input2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    NOT with inputs&#39;</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">,</span><span class="s1">&#39;gives output&#39;</span><span class="p">,</span><span class="n">OR</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Results for the NOT gate
+    NOT with input 0 gives output 1
+    NOT with input 1 gives output 0
+
+Results for the XOR gate
+    NOT with inputs 0 0 gives output 0
+    NOT with inputs 0 1 gives output 1
+    NOT with inputs 1 0 gives output 1
+    NOT with inputs 1 1 gives output 0
+
+Results for the AND gate
+    NOT with inputs 0 0 gives output 0
+    NOT with inputs 0 1 gives output 0
+    NOT with inputs 1 0 gives output 0
+    NOT with inputs 1 1 gives output 1
+
+Results for the NAND gate
+    NOT with inputs 0 0 gives output 1
+    NOT with inputs 0 1 gives output 1
+    NOT with inputs 1 0 gives output 1
+    NOT with inputs 1 1 gives output 0
+
+Results for the OR gate
+    NOT with inputs 0 0 gives output 0
+    NOT with inputs 0 1 gives output 1
+    NOT with inputs 1 0 gives output 1
+    NOT with inputs 1 1 gives output 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
