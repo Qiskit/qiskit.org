@@ -54,6 +54,13 @@ export function init(outlet) {
       },
     },
     {
+      path: '/education',
+      component: 'page-education',
+      action: () => {
+        window.location.replace('https://community.qiskit.org/education');
+      },
+    },
+    {
       path: '/documentation',
       component: 'page-documentation',
       action: () => {
