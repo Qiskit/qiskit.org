@@ -81,6 +81,9 @@ task('copy-googleverif', () =>
 task('copy-documentation', () =>
   src('documentation/**').pipe(dest(`${buildPath}documentation`)),
 );
+task('copy-education', () =>
+  src('education/**').pipe(dest(`${buildPath}education`)),
+);
 task('copy-modelq', () => src('modelq/**').pipe(dest(`${buildPath}modelq`)));
 task('copy-robots', () => src('robots.txt').pipe(dest(`${buildPath}`)));
 task(
@@ -88,6 +91,7 @@ task(
   parallel(
     'copy-license',
     'copy-documentation',
+    'copy-education',
     'copy-modelq',
     'copy-robots',
     'copy-googleverif',
