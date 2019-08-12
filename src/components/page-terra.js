@@ -139,16 +139,13 @@ class PageTerra extends localize(i18next)(LitElement) {
             >
               <!-- htmlmin:ignore -->
               <template>
-                from qiskit import QuantumRegister, ClassicalRegister
                 from qiskit import QuantumCircuit, Aer, execute
 
-                q = QuantumRegister(2)
-                c = ClassicalRegister(2)
-                qc = QuantumCircuit(q, c)
+                qc = QuantumCircuit(2, 2)
 
-                qc.h(q[0])
-                qc.cx(q[0], q[1])
-                qc.measure(q, c)
+                qc.h(0)
+                qc.cx(0, 1)
+                qc.measure([0, 1], [0, 1])
 
                 backend = Aer.get_backend('qasm_simulator')
                 job_sim = execute(qc, backend)
