@@ -154,7 +154,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 rb_opts = {}
                 rb_opts['length_vector'] = [1, 10, 20, 50, 75, 100, 125]
                 rb_opts['nseeds'] = 5
-                rb_opts['rb_pattern'] = [[0,1]]
+                rb_opts['rb_pattern'] = [[0, 1]]
                 rb_circs, xdata = randomized_benchmarking_seq(**rb_opts)
 
                 # Run on a noisy simulator
