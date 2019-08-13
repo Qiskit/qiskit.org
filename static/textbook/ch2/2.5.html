@@ -13254,7 +13254,7 @@ $$<p>We can think of this as multiplying the state by $-1$, but only when it is 
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 <p>And there we have it: we've turned around the CNOT. All that is needed is a Hadamard on both qubits before and after.</p>
-<p>The rest of this subsection is dedicated to another explantion of how to turn around a CNOT, with a bit of math (introduced in the 'Fun with qubits' article of the next chapter), and some different insight. Feel free to skip over it.</p>
+<p>The rest of this subsection is dedicated to another explanation of how to turn around a CNOT, with a bit of math (introduced in the 'Fun with qubits' article of the next chapter), and some different insight. Feel free to skip over it.</p>
 <p>Here is another way to write the CNOT gate:</p>
 $$
 {\rm CX}_{c,t} = |0\rangle \langle0| \otimes I + |1\rangle \langle1| \otimes X.
@@ -13272,7 +13272,7 @@ $$<p>With these, we can factorize the parts of the CNOT expressed with the $|0\r
 $$
 {\rm CX}_{c,t} = I \otimes |+\rangle \langle+| \, \,  + \, \, Z \otimes |-\rangle \langle-|
 $$<p>This gives us a whole new way to interpret the effect of the CNOT. The $Z \otimes |-\rangle \langle-| $ term addresses the parts of a superposition for which qubit $t$ is in state $|-\rangle$ and then applies a $Z$ gate to qubit $c$. The other term similarly does nothing to qubit $c$ when qubit $t$ is in state $|+\rangle.$</p>
-<p>In this new interpretation, it is qubit $t$ that acts as the control. It is the $|+\rangle$ and $|-\rangle$ states that decide whether an action is performed, and that action is the gate $Z$. This sounds like a very different gate to our familar CNOT, and yet it is the CNOT. These are two equally true descriptions of its effects.</p>
+<p>In this new interpretation, it is qubit $t$ that acts as the control. It is the $|+\rangle$ and $|-\rangle$ states that decide whether an action is performed, and that action is the gate $Z$. This sounds like a very different gate to our familiar CNOT, and yet it is the CNOT. These are two equally true descriptions of its effects.</p>
 <p>Among the many uses of this property is the method to turn around a CNOT. For example, consider applying a Hadamard to qubit $c$ both before and after this CNOT:</p>
 <div class="highlight"><pre><span></span><span class="n">h</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 <span class="n">cx</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
@@ -13310,7 +13310,7 @@ $$<p>This gives us a whole new way to interpret the effect of the CNOT. The $Z \
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We have already seen how to build controlled $\pi$ rotations from a single CNOT gate. Now we'll look at how to build any controlled rotation.</p>
-<p>First, let's consider arbitary rotations around the y axis. Specifically, consider the following sequence of gates.</p>
+<p>First, let's consider arbitrary rotations around the y axis. Specifically, consider the following sequence of gates.</p>
 <div class="highlight"><pre><span></span><span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span> <span class="n">q</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
@@ -13385,7 +13385,7 @@ $$<p>We then use controlled-Z gates to cause the first of these relations to hap
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The qubits in current devices are subject to noise, which basically consists of gates that are done by mistake. Simple things like temperature, stray magnetic fields or activity on neighboring qubits can make things happen that we didn't intend.</p>
-<p>For large applications of quantum computers, it will be neccesary to encode our qubits in a way that protects them from this noise. This is done by making gates much harder to do by mistake, or to implement in a manner that is slightly wrong.</p>
+<p>For large applications of quantum computers, it will be necessary to encode our qubits in a way that protects them from this noise. This is done by making gates much harder to do by mistake, or to implement in a manner that is slightly wrong.</p>
 <p>This is unfortunate for the single-qubit rotations $R_x(\theta)$, $R_y(\theta)$ and $R_z(\theta)$. It is impossible to implent an angle $\theta$ with perfect accuracy, such that you are sure that you are not accidentally implementing something like $\theta + 0.0000001$. There will always be a limit to the accuracy we can achieve, and it will always be larger than is tolerable when we account for the build-up of imperfections over large circuits. We will therefore not be able to implement these rotations directly in fault-tolerant quantum computers, but will instead need to build them in a much more deliberate manner.</p>
 <p>Fault-tolerant schemes typically perform these rotations using multiple applications of just two gates: $H$ and $T$.</p>
 <p>The T gate is expressed in Qasm as</p>
