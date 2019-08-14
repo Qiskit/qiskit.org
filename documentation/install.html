@@ -111,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-systems">Access IBM Q Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-qiskit-terra-standalone">Installing Qiskit-Terra Standalone</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
@@ -882,6 +883,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#access-ibm-q-systems">Access IBM Q Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-qiskit-terra-standalone">Installing Qiskit-Terra Standalone</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
@@ -1678,12 +1680,6 @@ where you want to work.</p>
 packages in your virtual environment.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">During installation, you might see the warning message
-<code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">build</span> <span class="pre">qiskit</span></code>. This is a non-fatal error that does not affect
-installation.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">When upgrading from Qiskit &lt; 0.7 to the latest version, uninstall the old
 version of Qiskit with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">qiskit</span></code> and then install the latest version.</p>
 </div>
@@ -1763,6 +1759,23 @@ that includes the versions for each of the installed Qiskit packages.</p>
 <p class="last">If you’re filing an issue or need to share your installed Qiskit versions for
 something, use the <code class="docutils literal notranslate"><span class="pre">__qiskit_version__</span></code> attribute.</p>
 </div>
+</div>
+<div class="section" id="installing-qiskit-terra-standalone">
+<h2>Installing Qiskit-Terra Standalone<a class="headerlink" href="#installing-qiskit-terra-standalone" title="Permalink to this headline">¶</a></h2>
+<p>If you intend to just install qiskit-terra as a standalone component, by
+default qiskit-terra will emit a <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code> if qiskit-aer or
+qiskit-ibmq-provider can not be found. This is done because the more
+common case is to have users who intend to use the additional elements
+but not realize their not installed, or have the installation fail.</p>
+<p>If you wish to suppress these warnings this is easy to do by adding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">,</span>
+                        <span class="n">module</span><span class="o">=</span><span class="s1">&#39;qiskit&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>before any <code class="docutils literal notranslate"><span class="pre">qiskit</span></code> imports in your code. That will suppress just the
+warning about the missing qiskit-aer and qiskit-ibmq-provider, but still
+display any other warnings from qiskit or other packages.</p>
 </div>
 </div>
 
