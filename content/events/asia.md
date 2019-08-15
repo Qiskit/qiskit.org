@@ -19,11 +19,11 @@ Qiskit Camps are an immersive experience that consists of training sessions, dee
 
 2019 Qiskit Camp Asia will be hosted near Tokyo, Japan from 18-21 November. Invitations will be distributed prior to the event.
 
-Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing, contact us at [hello@qiskit.camp] (hello@qiskit.camp).
+Attendees that are new to Qiskit, or simply want to increase their proficiency in quantum computing, contact us at [hello@qiskit.camp](hello@qiskit.camp).
 
 ## Location
 
-Qiskit Camp Asia will take place at [Hoshino Resorts Risonare Yatsugatake] (https://risonare.com/yatsugatake/en/) in Japan. The Hoshino Resort is surrounded by Yamanashi Wine country and has views of Mount Fuji. 
+Qiskit Camp Asia will take place at [Hoshino Resorts Risonare Yatsugatake](https://risonare.com/yatsugatake/en/) in Japan. The Hoshino Resort is surrounded by Yamanashi Wine country and has views of Mount Fuji. 
 
 129-1 Kobuchisawachō, Hokuto-shi, Yamanashi-ken 408-0044, Japan
 
@@ -33,25 +33,25 @@ Qiskit Camp Asia will take place at [Hoshino Resorts Risonare Yatsugatake] (http
 
 This is an initial schedule, subject to change.
 
-### 19 November
+### 18 November
 
 -	Arrival at Hoshino Resort Venue
 -	Welcome Reception
 -	Dinner
 
-### 20 November
+### 19 November
 
 -	Breakfast and Team Formation
 -	Hackathon Begins
 
-### 21 November
+### 20 November
 
 -	Hackathon Continues
 -	Project Presentations
 -	Award Ceremony
 -	Celebration Dinner
 
-### 22 November 
+### 21 November 
 
 -	Departure from Hoshino Resort Venue 
 -	Optional Activities Available
