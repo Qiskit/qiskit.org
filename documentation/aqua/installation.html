@@ -372,8 +372,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Qiskit Aqua</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Qiskit Aqua</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-qiskit-aqua-standalone">Installing Qiskit-Aqua Standalone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-from-source">Installing from Source</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="execution.html">Configuring and Running an Experiment</a><ul>
@@ -471,8 +472,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
 </ul>
 </li>
@@ -596,7 +595,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#install-chemistry-from-source">Install Chemistry from Source</a></li>
 </ul>
 </li>
 </ul>
@@ -1143,8 +1141,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Qiskit Aqua</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="library.html">Aqua: A Library of Quantum Algorithms</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Qiskit Aqua</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-qiskit-aqua-standalone">Installing Qiskit-Aqua Standalone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-from-source">Installing from Source</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="execution.html">Configuring and Running an Experiment</a><ul>
@@ -1242,8 +1241,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="chemistry/qiskit_chemistry.html">Qiskit Chemistry</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html">Installation and Setup</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#dependencies">Dependencies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#code-installation">Code Installation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="chemistry/qiskit_chemistry_installation.html#installation-of-chemistry-drivers">Installation of Chemistry Drivers</a></li>
 </ul>
 </li>
@@ -1367,7 +1364,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#install-chemistry-from-source">Install Chemistry from Source</a></li>
 </ul>
 </li>
 </ul>
@@ -1621,48 +1617,41 @@
 <p>Aqua can be used as a tool to execute <a class="reference external" href="#quantum-algorithms.html">quantum algorithms</a>.
 With the appropriate input, a quantum algorithm will run on top of the underlying
 <a class="reference external" href="https://qiskit.org/terra">Terra</a>
-platform, which will generate, compile and execute a circuit modeling the input problem.
+platform, which will compile and execute circuits from Aqua modeling the input problem.
 Aqua can also be used as the foundation for domain-specific applications, such as
-<a class="reference internal" href="chemistry/qiskit_chemistry.html#aqua-chemistry"><span class="std std-ref">Qiskit Chemistry</span></a>, <a class="reference internal" href="ai/qiskit_ai.html#aqua-ai"><span class="std std-ref">Qiskit AI</span></a> and <a class="reference internal" href="optimization/qiskit_optimization.html#aqua-optimization"><span class="std std-ref">Qiskit Optimization</span></a>.
-This section describes how to install and setup Aqua based on the user’s goals.</p>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>At least <a class="reference external" href="https://www.python.org/downloads/">Python 3.5 or
-later</a> is needed to use
-Aqua. In addition, <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/install.html">Jupyter
-Notebook</a> is
-recommended for interacting with the tutorials. For this reason, we
-recommend installing the <a class="reference external" href="https://www.anaconda.com/download/">Anaconda
-3</a> Python distribution, as it
-comes with all of these dependencies pre-installed.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">Since Aqua is built upon <a class="reference external" href="https://qiskit.org/terra">Terra</a>,
-you are encouraged to look over the
-<a class="reference external" href="https://qiskit.org/documentation/install.html">Terra
-installation and setup instructions</a>.</p>
-</div>
-</div>
+<a class="reference internal" href="chemistry/qiskit_chemistry.html#aqua-chemistry"><span class="std std-ref">Qiskit Chemistry</span></a>, <a class="reference internal" href="finance/qiskit_finance.html#aqua-finance"><span class="std std-ref">Qiskit Finance</span></a>, <a class="reference internal" href="ai/qiskit_ai.html#aqua-ai"><span class="std std-ref">Qiskit AI</span></a> and <a class="reference internal" href="optimization/qiskit_optimization.html#aqua-optimization"><span class="std std-ref">Qiskit Optimization</span></a>.
+This section describes how to install and setup Aqua.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>The best way to install Aqua when the goal is to use it as a tool or as a library
-of quantum algorithms is via the <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>  package management system:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit_aqua</span>
+<p>The best way to install Aqua, when the goal is to use it as a tool or as a library
+of quantum algorithms, is via the <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>
+package management system. Qiskit provides a meta-package that installs the set of
+Qiskit Elements, including Qiskit Aqua and its domain code for Chemistry, Finance, AI
+and Optimization.</p>
+<p>Please see <a class="reference internal" href="../install.html"><span class="doc">Installing Qiskit</span></a> for detailed installation instructions</p>
+</div>
+<div class="section" id="installing-qiskit-aqua-standalone">
+<h2>Installing Qiskit-Aqua Standalone<a class="headerlink" href="#installing-qiskit-aqua-standalone" title="Permalink to this headline">¶</a></h2>
+<p>While we recommend following the prior installation section above, it is possible
+to install Qiskit Aqua directly, which will also install its dependencies such
+as Qiskit-Terra and Qiskit-Ignis, but it will not install other optional aspects such as
+qiskit-aer and qiskit-ibmq-provider.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">aqua</span>
 </pre></div>
 </div>
 <p>pip will handle all dependencies automatically and you will always
 install the latest (and well-tested) release version.</p>
+</div>
+<div class="section" id="installing-from-source">
+<h2>Installing from Source<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h2>
 <p>A different class of users — namely, quantum researchers and developers — might be more
 interested in exploring the source code of Aqua and <a class="reference internal" href="extending.html#aqua-extending"><span class="std std-ref">Contributing to Aqua</span></a> by providing
 new components, such as <a class="reference internal" href="algorithms.html#quantum-algorithms"><span class="std std-ref">Quantum Algorithms</span></a>, <a class="reference internal" href="optimizers.html#optimizers"><span class="std std-ref">Optimizers</span></a>, <a class="reference internal" href="variational_forms.html#variational-forms"><span class="std std-ref">Variational Forms</span></a>,
-<a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>, <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a> and <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>.
-The best way to install Aqua when the goal is to extend its capabilities is by cloning
-the <a class="reference external" href="https://github.com/Qiskit/aqua">Aqua repository</a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We recommend using <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">Python virtual environments</a>
-to cleanly separate Qiskit from other applications and improve your experience.</p>
-</div>
+<a class="reference internal" href="iqfts.html#iqfts"><span class="std std-ref">Quantum Fourier Transforms</span></a>, <a class="reference internal" href="oracles.html#oracles"><span class="std std-ref">Oracles</span></a> and <a class="reference internal" href="initial_states.html#initial-states"><span class="std std-ref">Initial States</span></a>.</p>
+<p>If you want to explore the code more directly and experiment with it, and even contribute
+to the Qiskit community by developing and contributing code then you should work with
+clones of the master branches of the Qiskit repositories. For detailed instructions on how
+to do this see <a class="reference internal" href="../contributing_to_qiskit.html#install-install-from-source-label"><span class="std std-ref">Build Qiskit packages from source</span></a>.</p>
 </div>
 </div>
 
