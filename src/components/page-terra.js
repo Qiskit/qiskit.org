@@ -96,10 +96,6 @@ class PageTerra extends localize(i18next)(LitElement) {
                 <div class="title">Transpiler</div>
                 <div class="subtitle">Optimization passes, pass manager</div>
               </div>
-              <div class="element">
-                <div class="title">QObj</div>
-                <div class="subtitle">OpenQASM, OpenPulse</div>
-              </div>
               <div class="group">
                 <div class="element">
                   <div class="title">Backend</div>
