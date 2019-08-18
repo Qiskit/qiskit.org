@@ -788,37 +788,6 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p><strong>Q: Why do I receive the error message</strong> <code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'str'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span>
-<span class="pre">attribute</span> <span class="pre">'configuration'</span></code> <strong>when I try to execute or compile a circuit on a
-backend?</strong></p>
-<p><strong>A:</strong> The backend parameter of these two functions takes in a <code class="docutils literal notranslate"><span class="pre">BaseBackend</span></code> type,
-which can be returned by calling one of these methods, one for simulators and one
-for real quantum devices.</p>
-<ul class="simple">
-<li>For simulators:</li>
-</ul>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;&lt;backend_name&gt;&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li>For real devices:</li>
-</ul>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;&lt;backend_name&gt;&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>For example, if you want to run a job on the <code class="docutils literal notranslate"><span class="pre">'ibmqx4'</span></code> backend, the
-following code would throw the error message:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Instead, the code should be written as</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
-<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">my_backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p><strong>Q: Why do I receive the error message</strong> <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">Instance</span> <span class="pre">of</span> <span class="pre">QuantumCircuit</span> <span class="pre">has</span> <span class="pre">no</span>
 <span class="pre">member</span></code> <strong>when adding gates to a circuit?</strong></p>
 <p><strong>A:</strong> This is a pylint error, which is a Linter for Python. Linters analyze
