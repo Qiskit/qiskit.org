@@ -157,13 +157,16 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-status">Module Status</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#basic-aer-provider">Basic Aer Provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#aer-provider">Aer Provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider">IBM Q Provider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providers">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aer-provider">Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ibm-q-provider">IBM Q Provider</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#community-extensions">Community Extensions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#providers">Providers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Providers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#additional-providers">Additional providers</a></li>
 </ul>
 </li>
@@ -509,13 +512,16 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-status">Module Status</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#basic-aer-provider">Basic Aer Provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#aer-provider">Aer Provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider">IBM Q Provider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#providers">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aer-provider">Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ibm-q-provider">IBM Q Provider</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#community-extensions">Community Extensions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#providers">Providers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Providers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#additional-providers">Additional providers</a></li>
 </ul>
 </li>
@@ -1092,17 +1098,29 @@ that have become stable and the table below is our attempt to label them</p>
 </tbody>
 </table>
 </div>
+<div class="section" id="providers">
+<h3>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h3>
+<p>There are three providers that come with the default installation of Qiskit</p>
 <div class="section" id="basic-aer-provider">
-<h3>Basic Aer Provider<a class="headerlink" href="#basic-aer-provider" title="Permalink to this headline">¶</a></h3>
-<p>This is stable the addition here a name change of the folder to basicaer in version 0.8</p>
+<h4>Basic Aer Provider<a class="headerlink" href="#basic-aer-provider" title="Permalink to this headline">¶</a></h4>
+<p>This provider simulates ideal quantum circuits and has three backends.
+As Aer becomes more stable and can work on any operating system this
+provider will be removed.</p>
 </div>
 <div class="section" id="aer-provider">
-<h3>Aer Provider<a class="headerlink" href="#aer-provider" title="Permalink to this headline">¶</a></h3>
-<p>TBD</p>
+<h4>Aer Provider<a class="headerlink" href="#aer-provider" title="Permalink to this headline">¶</a></h4>
+<p>This is a more advance simulator that is written in C++. It runs faster than Basic Aer
+and also allows you to add noise to your circuits. This allow you to explore what
+happens to your circuits for realistic
+models of the experiments and design experiments that might be more resilient
+to the noise in today’s quantum computers.</p>
 </div>
 <div class="section" id="ibm-q-provider">
-<h3>IBM Q Provider<a class="headerlink" href="#ibm-q-provider" title="Permalink to this headline">¶</a></h3>
-<p>TBD</p>
+<h4>IBM Q Provider<a class="headerlink" href="#ibm-q-provider" title="Permalink to this headline">¶</a></h4>
+<p>This provider gives you access to real experiments. You will need an IBM Q Experience
+account to use it.  It also has an online HPC simulator that can be used. It is a
+hosted version of the Aer Provider.</p>
+</div>
 </div>
 </div>
 <div class="section" id="community-extensions">
@@ -1110,8 +1128,8 @@ that have become stable and the table below is our attempt to label them</p>
 <p>Qiskit has been designed with modularity in mind. It is extensible in many
 different ways; on the page, we highlight the ways in which the Qiskit community
 has engaged with Qiskit and developed extensions and packages on top of it.</p>
-<div class="section" id="providers">
-<h3>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Providers<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The Qiskit base provider is an entity that provides access to a group
 of different backends (for example, backends available through IBM Q).
 It interacts with those backends to do many things: find out which ones
