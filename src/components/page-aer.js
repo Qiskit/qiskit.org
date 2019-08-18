@@ -106,16 +106,9 @@ class PageAer extends localize(i18next)(LitElement) {
                   </div>
                 </div>
               </div>
-              <div class="group">
-                <div class="element">
-                  <div class="title">Backend</div>
-                  <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator</div>
-                </div>
-                <span class="separator"></span>
-                <div class="element">
-                  <div class="title">Provider</div>
-                  <div class="subtitle">Aer</div>
-                </div>
+              <div class="element">
+                <div class="title">Backends</div>
+                <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator</div>
               </div>
               <div class="element">
                 <div class="title">Job</div>
