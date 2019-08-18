@@ -90,28 +90,18 @@ class PageTerra extends localize(i18next)(LitElement) {
             <div class="stack-list">
               <div class="element">
                 <div class="title">Terra inputs</div>
-                <div class="subtitle">Quantum circuit, pulse scheduler</div>
+                <div class="subtitle">Quantum circuit, pulse schedule</div>
               </div>
               <div class="element">
                 <div class="title">Transpiler</div>
-                <div class="subtitle">Optimization passes, pass manager</div>
-              </div>
-              <div class="group">
-                <div class="element">
-                  <div class="title">Backend</div>
-                  <div class="subtitle">Device, simulator</div>
-                </div>
-                <span class="separator"></span>
-                <div class="element">
-                  <div class="title">Provider</div>
-                  <div class="subtitle">Local, IBM Q, third party</div>
-                </div>
+                <div class="subtitle">Pass manager, optimization passes</div>
               </div>
               <div class="element">
-                <div class="title">Job</div>
+                <div class="title">Providers</div>
+                <div class="subtitle">Aer, IBM Q, third party</div>
               </div>
               <div class="element dot">
-                <div class="title">Result</div>
+                <div class="title">Visualization</div>
                 <div class="subtitle">Counts, Statevector, Unitary</div>
               </div>
             </div>
