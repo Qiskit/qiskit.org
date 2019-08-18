@@ -919,16 +919,16 @@ subsequent sections:</p>
 <span class="n">simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
 
 <span class="c1"># Create a Quantum Circuit acting on the q register</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Add a H gate on qubit 0</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Add a CX (CNOT) gate on control qubit 0 and target qubit 1</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Map the quantum measurement to the classical bits</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># Execute the circuit on the qasm simulator</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
@@ -941,13 +941,27 @@ subsequent sections:</p>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total count for 00 and 11 are:&quot;</span><span class="p">,</span><span class="n">counts</span><span class="p">)</span>
 
 <span class="c1"># Draw the circuit</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total count for 00 and 11 are: {&#39;00&#39;: 479, &#39;11&#39;: 521}
 </pre></div>
 </div>
 <img alt="Quantum Circuit with an H gate and controlled nots." src="_images/getting_started_1_1.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The default backend for qiskit.visualization.circuit_drawer()/QuantumCircuit.draw() is the text backend.
+However, depending on your local environment you may want to change these defaults to something better
+suited for your use case. This is done with the user config file.  By default the user config file
+should be located in ~/.qiskit/settings.conf and is a .ini file.</p>
+<p>For example, a settings.conf file for setting a Matplotlib drawer is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[default]
+circuit_drawer = mpl
+</pre></div>
+</div>
+<p class="last">You can use any of the valid circuit drawer backends as the value for this config, this includes
+text, mpl, latex, and latex_source.</p>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a histogram</span>
 <span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
@@ -987,7 +1001,7 @@ It holds all your quantum operations.</li>
 <div class="section" id="step-2-initialize-variables">
 <h3>Step 2 : Initialize Variables<a class="headerlink" href="#step-2-initialize-variables" title="Permalink to this headline">¶</a></h3>
 <p>Consider the next line of code</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Here, you are initializing with 2 qubits in the zero state; with 2
@@ -1003,7 +1017,7 @@ classical bits set to zero; and <code class="docutils literal notranslate"><span
 <p>Consider the following three lines of code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The gates are added to the circuit one-by-one to form the Bell state</p>
@@ -1013,7 +1027,7 @@ classical bits set to zero; and <code class="docutils literal notranslate"><span
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.h(0)</span></code>: A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0,
 which puts it into a <strong>superposition state</strong>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,1)</span></code>: A controlled-Not operation
+<li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,</span> <span class="pre">1)</span></code>: A controlled-Not operation
 (<span class="math notranslate nohighlight">\(C_{X}\)</span>) on control qubit 0 and target qubit 1, putting the qubits in
 an <strong>entangled state</strong>.</li>
 <li><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.measure([0,1],</span> <span class="pre">[0,1])</span></code>: if you pass
@@ -1026,7 +1040,7 @@ measurement result will be stored in the ith classical bit.</li>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> to view the circuit that you have designed
 in the <span class="xref std std-ref">various forms</span> used in many
 textbooks and research articles.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="Quantum circuit to make a Bell state." src="_images/getting_started_1_1.png" />
@@ -1080,10 +1094,9 @@ the estimated probabilities change.</p>
 <h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
 <p>Now that you have learnt the basics, consider these learning resources:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/start_here.ipynb">Notebook tutorials</a></li>
-<li><a class="reference external" href="https://www.youtube.com/channel/UClBNq7mCMf5xm8baE_VMl3A/featured">Video tutorials</a></li>
-<li><a class="reference external" href="https://www.research.ibm.com/ibm-q/technology/experience/">Interactive tutorials in IBM Q Experience</a></li>
-<li><a class="reference internal" href="faq.html#faq"><span class="std std-ref">Frequently Asked Questions</span></a></li>
+<li><a class="reference external" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb">Notebook tutorials</a></li>
+<li><a class="reference external" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">Video tutorials</a></li>
+<li>:ref:`  API References &lt;autodoc/qiskit&gt;`</li>
 </ul>
 </div>
 </div>
