@@ -109,13 +109,8 @@ class PageIgnis extends localize(i18next)(LitElement) {
                 <div class="subtitle">Compile circuits</div>
               </div>
               <div class="element">
-                <div class="title">Execute Circuits</div>
-                <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator
-                </div>
-              </div>
-              <div class="element">
-                <div class="title">Result</div>
-                <div class="subtitle">Counts, Memory, Statevector, Unitary, Snapshots</div>
+                <div class="title">Providers</div>
+                <div class="subtitle">Qiskit Aer, IBM Q, Third Party</div>
               </div>
               <div class="element dot">
                 <div class="title">Fitter/Filter</div>
