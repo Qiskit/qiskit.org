@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
@@ -182,7 +183,7 @@
 <span class="kn">from</span> <span class="nn">.backends.unitary_simulator</span> <span class="k">import</span> <span class="n">UnitarySimulator</span>
 
 
-<div class="viewcode-block" id="AerProvider"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.aer.aerprovider.html#qiskit.providers.aer.aerprovider.AerProvider">[docs]</a><span class="k">class</span> <span class="nc">AerProvider</span><span class="p">(</span><span class="n">BaseProvider</span><span class="p">):</span>
+<div class="viewcode-block" id="AerProvider"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerProvider.html#qiskit.providers.aer.AerProvider">[docs]</a><span class="k">class</span> <span class="nc">AerProvider</span><span class="p">(</span><span class="n">BaseProvider</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Provider for Qiskit Aer backends.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -193,10 +194,10 @@
                           <span class="n">StatevectorSimulator</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="p">),</span>
                           <span class="n">UnitarySimulator</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="p">)]</span>
 
-<div class="viewcode-block" id="AerProvider.get_backend"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.aer.aerprovider.html#qiskit.providers.aer.aerprovider.AerProvider.get_backend">[docs]</a>    <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AerProvider.get_backend"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerProvider.html#qiskit.providers.aer.AerProvider.get_backend">[docs]</a>    <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AerProvider.backends"><a class="viewcode-back" href="../../../../autodoc/qiskit.providers.aer.aerprovider.html#qiskit.providers.aer.aerprovider.AerProvider.backends">[docs]</a>    <span class="k">def</span> <span class="nf">backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AerProvider.backends"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerProvider.html#qiskit.providers.aer.AerProvider.backends">[docs]</a>    <span class="k">def</span> <span class="nf">backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># pylint: disable=arguments-differ</span>
         <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backends</span>
         <span class="k">if</span> <span class="n">name</span><span class="p">:</span>

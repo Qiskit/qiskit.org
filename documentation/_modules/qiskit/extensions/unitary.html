@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -191,7 +192,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.exceptions</span> <span class="k">import</span> <span class="n">ExtensionError</span>
 
 
-<div class="viewcode-block" id="UnitaryGate"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.UnitaryGate">[docs]</a><span class="k">class</span> <span class="nc">UnitaryGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<div class="viewcode-block" id="UnitaryGate"><a class="viewcode-back" href="../../../api/qiskit.extensions.UnitaryGate.html#qiskit.circuit.UnitaryGate">[docs]</a><span class="k">class</span> <span class="nc">UnitaryGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class for representing unitary gates&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -236,23 +237,23 @@
         <span class="c1"># up to global phase?</span>
         <span class="k">return</span> <span class="n">matrix_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">other</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ignore_phase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<div class="viewcode-block" id="UnitaryGate.to_matrix"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.UnitaryGate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UnitaryGate.to_matrix"><a class="viewcode-back" href="../../../api/qiskit.extensions.UnitaryGate.html#qiskit.circuit.UnitaryGate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return matrix for unitary&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="UnitaryGate.inverse"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.UnitaryGate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UnitaryGate.inverse"><a class="viewcode-back" href="../../../api/qiskit.extensions.UnitaryGate.html#qiskit.circuit.UnitaryGate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the adjoint of the Unitary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjoint</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="UnitaryGate.conjugate"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.UnitaryGate.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UnitaryGate.conjugate"><a class="viewcode-back" href="../../../api/qiskit.extensions.UnitaryGate.html#qiskit.circuit.UnitaryGate.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the conjugate of the Unitary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">UnitaryGate</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">()))</span></div>
 
-<div class="viewcode-block" id="UnitaryGate.adjoint"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.UnitaryGate.adjoint">[docs]</a>    <span class="k">def</span> <span class="nf">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UnitaryGate.adjoint"><a class="viewcode-back" href="../../../api/qiskit.extensions.UnitaryGate.html#qiskit.circuit.UnitaryGate.adjoint">[docs]</a>    <span class="k">def</span> <span class="nf">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the adjoint of the unitary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="UnitaryGate.transpose"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.UnitaryGate.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UnitaryGate.transpose"><a class="viewcode-back" href="../../../api/qiskit.extensions.UnitaryGate.html#qiskit.circuit.UnitaryGate.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the transpose of the unitary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">UnitaryGate</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">()))</span></div>
 
@@ -269,11 +270,11 @@
                                       <span class="s2">&quot;a </span><span class="si">{}</span><span class="s2">-qubit unitary&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="unitary"><a class="viewcode-back" href="../../../autodoc/qiskit.extensions.unitary.html#qiskit.circuit.compositegate.unitary">[docs]</a><span class="k">def</span> <span class="nf">unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply u2 to q.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
         <span class="n">qubits</span> <span class="o">=</span> <span class="n">qubits</span><span class="p">[:]</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UnitaryGate</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">),</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UnitaryGate</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">),</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">unitary</span> <span class="o">=</span> <span class="n">unitary</span>

@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
@@ -184,11 +185,11 @@
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
 
 
-<div class="viewcode-block" id="RemoveDiagonalGatesBeforeMeasure"><a class="viewcode-back" href="../../../../autodoc/qiskit.transpiler.passes.remove_diagonal_gates_before_measure.html#qiskit.transpiler.passes.remove_diagonal_gates_before_measure.RemoveDiagonalGatesBeforeMeasure">[docs]</a><span class="k">class</span> <span class="nc">RemoveDiagonalGatesBeforeMeasure</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoveDiagonalGatesBeforeMeasure"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.RemoveDiagonalGatesBeforeMeasure.html#qiskit.transpiler.passes.RemoveDiagonalGatesBeforeMeasure">[docs]</a><span class="k">class</span> <span class="nc">RemoveDiagonalGatesBeforeMeasure</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Remove diagonal gates (like RZ, T, Z, etc) before a measurement.</span>
 <span class="sd">    Including diagonal 2Q gates.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="RemoveDiagonalGatesBeforeMeasure.run"><a class="viewcode-back" href="../../../../autodoc/qiskit.transpiler.passes.remove_diagonal_gates_before_measure.html#qiskit.transpiler.passes.remove_diagonal_gates_before_measure.RemoveDiagonalGatesBeforeMeasure.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoveDiagonalGatesBeforeMeasure.run"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.RemoveDiagonalGatesBeforeMeasure.html#qiskit.transpiler.passes.RemoveDiagonalGatesBeforeMeasure.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a new circuit that has been optimized.&quot;&quot;&quot;</span>
         <span class="n">diagonal_1q_gates</span> <span class="o">=</span> <span class="p">(</span><span class="n">RZGate</span><span class="p">,</span> <span class="n">ZGate</span><span class="p">,</span> <span class="n">TGate</span><span class="p">,</span> <span class="n">SGate</span><span class="p">,</span> <span class="n">TdgGate</span><span class="p">,</span> <span class="n">SdgGate</span><span class="p">,</span> <span class="n">U1Gate</span><span class="p">)</span>
         <span class="n">diagonal_2q_gates</span> <span class="o">=</span> <span class="p">(</span><span class="n">CzGate</span><span class="p">,</span> <span class="n">CrzGate</span><span class="p">,</span> <span class="n">Cu1Gate</span><span class="p">,</span> <span class="n">RZZGate</span><span class="p">)</span>

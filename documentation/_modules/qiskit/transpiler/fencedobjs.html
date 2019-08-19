@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -177,7 +178,7 @@
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">TranspilerAccessError</span>
 
 
-<div class="viewcode-block" id="FencedObject"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.fencedobjs.html#qiskit.transpiler.fencedobjs.FencedObject">[docs]</a><span class="k">class</span> <span class="nc">FencedObject</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">FencedObject</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Given an instance and a list of attributes to fence, raises a TranspilerAccessError when one</span>
 <span class="sd">    of these attributes is accessed.&quot;&quot;&quot;</span>
 
@@ -210,16 +211,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_attributes_to_fence&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">TranspilerAccessError</span><span class="p">(</span><span class="s2">&quot;The fenced </span><span class="si">%s</span><span class="s2"> has the property </span><span class="si">%s</span><span class="s2"> protected&quot;</span> <span class="o">%</span>
-                                        <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_wrapped&#39;</span><span class="p">)),</span> <span class="n">name</span><span class="p">))</span></div>
+                                        <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_wrapped&#39;</span><span class="p">)),</span> <span class="n">name</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="FencedPropertySet"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.fencedobjs.html#qiskit.transpiler.fencedobjs.FencedPropertySet">[docs]</a><span class="k">class</span> <span class="nc">FencedPropertySet</span><span class="p">(</span><span class="n">FencedObject</span><span class="p">):</span>
+<div class="viewcode-block" id="FencedPropertySet"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FencedPropertySet.html#qiskit.transpiler.FencedPropertySet">[docs]</a><span class="k">class</span> <span class="nc">FencedPropertySet</span><span class="p">(</span><span class="n">FencedObject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; A property set that cannot be written (via __setitem__) &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">property_set_instance</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">property_set_instance</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;__setitem__&#39;</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="FencedDAGCircuit"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.fencedobjs.html#qiskit.transpiler.fencedobjs.FencedDAGCircuit">[docs]</a><span class="k">class</span> <span class="nc">FencedDAGCircuit</span><span class="p">(</span><span class="n">FencedObject</span><span class="p">):</span>
+<div class="viewcode-block" id="FencedDAGCircuit"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FencedDAGCircuit.html#qiskit.transpiler.FencedDAGCircuit">[docs]</a><span class="k">class</span> <span class="nc">FencedDAGCircuit</span><span class="p">(</span><span class="n">FencedObject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; A dag circuit that cannot be modified (via remove_op_node) &quot;&quot;&quot;</span>
     <span class="c1"># FIXME: add more fenced methods of the dag after dagcircuit rewrite</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag_circuit_instance</span><span class="p">):</span>

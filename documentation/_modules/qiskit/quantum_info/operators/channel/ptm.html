@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
@@ -199,7 +200,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.transformations</span> <span class="k">import</span> <span class="n">_to_ptm</span>
 
 
-<div class="viewcode-block" id="PTM"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM">[docs]</a><span class="k">class</span> <span class="nc">PTM</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM">[docs]</a><span class="k">class</span> <span class="nc">PTM</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Initialize a quantum channel Pauli-Transfer Matrix operator.</span>
 
 <span class="sd">        Args:</span>
@@ -274,21 +275,21 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PTM.conjugate"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.conjugate"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the conjugate of the QuantumChannel.&quot;&quot;&quot;</span>
         <span class="c1"># Since conjugation is basis dependent we transform</span>
         <span class="c1"># to the SuperOp representation to compute the</span>
         <span class="c1"># conjugate channel</span>
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="PTM.transpose"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.transpose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the transpose of the QuantumChannel.&quot;&quot;&quot;</span>
         <span class="c1"># Since conjugation is basis dependent we transform</span>
         <span class="c1"># to the SuperOp representation to compute the</span>
         <span class="c1"># conjugate channel</span>
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="PTM.compose"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.compose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the composition channel self∘other.</span>
 
 <span class="sd">        Args:</span>
@@ -329,7 +330,7 @@
         <span class="n">output_dim</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_output_dim</span>
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">),</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PTM.power"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.power">[docs]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.power"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.power">[docs]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The matrix power of the channel.</span>
 
 <span class="sd">        Args:</span>
@@ -346,7 +347,7 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="PTM.tensor"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.tensor">[docs]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.tensor"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.tensor">[docs]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel self ⊗ other.</span>
 
 <span class="sd">        Args:</span>
@@ -360,7 +361,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PTM.expand"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.expand"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel other ⊗ self.</span>
 
 <span class="sd">        Args:</span>
@@ -374,7 +375,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PTM.add"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.add"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
 
 <span class="sd">        Args:</span>
@@ -394,7 +395,7 @@
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PTM.subtract"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.subtract">[docs]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.subtract"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.subtract">[docs]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self - other.</span>
 
 <span class="sd">        Args:</span>
@@ -414,7 +415,7 @@
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PTM.multiply"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.ptm.html#qiskit.quantum_info.operators.channel.ptm.PTM.multiply">[docs]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="PTM.multiply"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.multiply">[docs]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
 
 <span class="sd">        Args:</span>

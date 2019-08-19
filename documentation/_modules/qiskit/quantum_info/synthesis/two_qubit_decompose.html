@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
@@ -195,7 +196,7 @@
 <span class="n">_CUTOFF_PRECISION</span> <span class="o">=</span> <span class="mf">1e-12</span>
 
 
-<div class="viewcode-block" id="euler_angles_1q"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.euler_angles_1q">[docs]</a><span class="k">def</span> <span class="nf">euler_angles_1q</span><span class="p">(</span><span class="n">unitary_matrix</span><span class="p">):</span>
+<div class="viewcode-block" id="euler_angles_1q"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.euler_angles_1q.html#qiskit.quantum_info.synthesis.euler_angles_1q">[docs]</a><span class="k">def</span> <span class="nf">euler_angles_1q</span><span class="p">(</span><span class="n">unitary_matrix</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Euler angles for a single-qubit gate.</span>
 
 <span class="sd">    Find angles (theta, phi, lambda) such that</span>
@@ -241,7 +242,7 @@
     <span class="k">return</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamb</span></div>
 
 
-<div class="viewcode-block" id="decompose_two_qubit_product_gate"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.decompose_two_qubit_product_gate">[docs]</a><span class="k">def</span> <span class="nf">decompose_two_qubit_product_gate</span><span class="p">(</span><span class="n">special_unitary_matrix</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">decompose_two_qubit_product_gate</span><span class="p">(</span><span class="n">special_unitary_matrix</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Decompose U = Ul⊗Ur where U in SU(4), and Ul, Ur in SU(2).</span>
 <span class="sd">    Throws QiskitError if this isn&#39;t possible.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -270,7 +271,7 @@
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;decompose_two_qubit_product_gate: decomposition failed: &quot;</span>
                           <span class="s2">&quot;deviation too large: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">deviation</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span></div>
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span>
 
 
 <span class="n">_B</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -286,7 +287,7 @@
                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="TwoQubitWeylDecomposition"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitWeylDecomposition">[docs]</a><span class="k">class</span> <span class="nc">TwoQubitWeylDecomposition</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">TwoQubitWeylDecomposition</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Decompose two-qubit unitary U = (K1l⊗K1r).Exp(i a xx + i b yy + i c zz).(K2l⊗K2r) ,</span>
 <span class="sd">    where U ∈ U(4), (K1l|K1r|K2l|K2r) ∈ SU(2), and we stay in the &quot;Weyl Chamber&quot;</span>
 <span class="sd">    𝜋/4 ≥ a ≥ b ≥ |c|</span>
@@ -395,34 +396,34 @@
             <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K1r</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K2l</span><span class="p">),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K2r</span><span class="p">)))</span></div>
+            <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K2r</span><span class="p">)))</span>
 
 
-<div class="viewcode-block" id="Ud"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.Ud">[docs]</a><span class="k">def</span> <span class="nf">Ud</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Ud</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generates the array Exp(i(a xx + b yy + c zz))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)],</span>
                      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">),</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
                      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
-                     <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div>
+                     <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="trace_to_fid"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.trace_to_fid">[docs]</a><span class="k">def</span> <span class="nf">trace_to_fid</span><span class="p">(</span><span class="n">trace</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">trace_to_fid</span><span class="p">(</span><span class="n">trace</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Average gate fidelity is Fbar = (d + |Tr (Utarget.U^dag)|^2) / d(d+1)</span>
 <span class="sd">    M. Horodecki, P. Horodecki and R. Horodecki, PRA 60, 1888 (1999)&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">20</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">20</span>
 
 
-<div class="viewcode-block" id="rz_array"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.rz_array">[docs]</a><span class="k">def</span> <span class="nf">rz_array</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">rz_array</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return numpy array for Rz(theta).</span>
 
 <span class="sd">    Rz(theta) = diag(exp(-i*theta/2),exp(i*theta/2))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
-                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="TwoQubitBasisDecomposer"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitBasisDecomposer">[docs]</a><span class="k">class</span> <span class="nc">TwoQubitBasisDecomposer</span><span class="p">():</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer">[docs]</a><span class="k">class</span> <span class="nc">TwoQubitBasisDecomposer</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;A class for decomposing 2-qubit unitaries into minimal number of uses of a 2-qubit</span>
 <span class="sd">    basis gate.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -496,7 +497,7 @@
                                   <span class="bp">self</span><span class="o">.</span><span class="n">decomp2_supercontrolled</span><span class="p">,</span>
                                   <span class="bp">self</span><span class="o">.</span><span class="n">decomp3_supercontrolled</span><span class="p">]</span>
 
-<div class="viewcode-block" id="TwoQubitBasisDecomposer.traces"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitBasisDecomposer.traces">[docs]</a>    <span class="k">def</span> <span class="nf">traces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.traces"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.traces">[docs]</a>    <span class="k">def</span> <span class="nf">traces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Give the expected traces |Tr(U.Utarget^dag)| for different number of basis gates&quot;&quot;&quot;</span>
         <span class="c1"># Future gotcha: extending this to non-supercontrolled basis.</span>
         <span class="c1"># Careful: closest distance between a1,b1,c1 and a2,b2,c2 may be between reflections.</span>
@@ -509,7 +510,7 @@
                 <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">c</span><span class="p">),</span>
                 <span class="mi">4</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp0"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitBasisDecomposer.decomp0">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp0"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp0">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">decomp0</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decompose target ~Ud(x, y, z) with 0 uses of the basis gate.</span>
 <span class="sd">        Result Ur has trace:</span>
@@ -521,7 +522,7 @@
 
         <span class="k">return</span> <span class="n">U0r</span><span class="p">,</span> <span class="n">U0l</span></div>
 
-<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp1"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitBasisDecomposer.decomp1">[docs]</a>    <span class="k">def</span> <span class="nf">decomp1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp1"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp1">[docs]</a>    <span class="k">def</span> <span class="nf">decomp1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decompose target ~Ud(x, y, z) with 1 uses of the basis gate ~Ud(a, b, c).</span>
 <span class="sd">        Result Ur has trace:</span>
 <span class="sd">        |Tr(Ur.Utarget^dag)| = 4|cos(x-a)cos(y-b)cos(z-c) + j sin(x-a)sin(y-b)sin(z-c)|,</span>
@@ -534,7 +535,7 @@
 
         <span class="k">return</span> <span class="n">U1r</span><span class="p">,</span> <span class="n">U1l</span><span class="p">,</span> <span class="n">U0r</span><span class="p">,</span> <span class="n">U0l</span></div>
 
-<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp2_supercontrolled"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitBasisDecomposer.decomp2_supercontrolled">[docs]</a>    <span class="k">def</span> <span class="nf">decomp2_supercontrolled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp2_supercontrolled"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp2_supercontrolled">[docs]</a>    <span class="k">def</span> <span class="nf">decomp2_supercontrolled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decompose target ~Ud(x, y, z) with 2 uses of the basis gate.</span>
 <span class="sd">        For supercontrolled basis ~Ud(pi/4, b, 0), all b, result Ur has trace:</span>
 <span class="sd">        |Tr(Ur.Utarget^dag)| = 4cos(z)</span>
@@ -554,7 +555,7 @@
 
         <span class="k">return</span> <span class="n">U2r</span><span class="p">,</span> <span class="n">U2l</span><span class="p">,</span> <span class="n">U1r</span><span class="p">,</span> <span class="n">U1l</span><span class="p">,</span> <span class="n">U0r</span><span class="p">,</span> <span class="n">U0l</span></div>
 
-<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp3_supercontrolled"><a class="viewcode-back" href="../../../../autodoc/qiskit.quantum_info.synthesis.two_qubit_decompose.html#qiskit.quantum_info.synthesis.two_qubit_decompose.TwoQubitBasisDecomposer.decomp3_supercontrolled">[docs]</a>    <span class="k">def</span> <span class="nf">decomp3_supercontrolled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.decomp3_supercontrolled"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.decomp3_supercontrolled">[docs]</a>    <span class="k">def</span> <span class="nf">decomp3_supercontrolled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decompose target with 3 uses of the basis.</span>
 <span class="sd">        This is an exact decomposition for supercontrolled basis ~Ud(pi/4, b, 0), all b,</span>
 <span class="sd">        and any target. No guarantees for non-supercontrolled basis.&quot;&quot;&quot;</span>
@@ -570,7 +571,7 @@
 
         <span class="k">return</span> <span class="n">U3r</span><span class="p">,</span> <span class="n">U3l</span><span class="p">,</span> <span class="n">U2r</span><span class="p">,</span> <span class="n">U2l</span><span class="p">,</span> <span class="n">U1r</span><span class="p">,</span> <span class="n">U1l</span><span class="p">,</span> <span class="n">U0r</span><span class="p">,</span> <span class="n">U0l</span></div>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">basis_fidelity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.__call__"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">basis_fidelity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decompose a two-qubit unitary over fixed basis + SU(2) using the best approximation given</span>
 <span class="sd">        that each basis application has a finite fidelity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -609,7 +610,7 @@
         <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="o">*</span><span class="n">decomposition_angles</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">best_nbasis</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
         <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="o">*</span><span class="n">decomposition_angles</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">best_nbasis</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
-        <span class="k">return</span> <span class="n">return_circuit</span></div>
+        <span class="k">return</span> <span class="n">return_circuit</span></div></div>
 
 
 <span class="n">two_qubit_cnot_decompose</span> <span class="o">=</span> <span class="n">TwoQubitBasisDecomposer</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">())</span>
