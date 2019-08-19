@@ -276,8 +276,8 @@ class PageHome extends localize(i18next)(LitElement) {
         <div class="row limited-width">
           <div class="column">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsQiskitTitle')}</h3>
-              <p>${i18next.t('pages.home.newsQiskitDescription')}</p>
+              <h3>${i18next.t('pages.home.newsBox1Title')}</h3>
+              <p>${i18next.t('pages.home.newsBox1Description2')}</p>
               <div class="actions">
                 <a
                   href="https://qiskit.org/documentation/release_notes.html#qiskit-0-11"
@@ -285,29 +285,29 @@ class PageHome extends localize(i18next)(LitElement) {
                   rel="noopener"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
-                    action: 'Read about Qiskit 0.11',
+                    action: 'Qiskit 0.11 Release Notes',
                     objectType: 'Button'
                   })}
                 >
-                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsQiskitButton')}</vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsBox1Button')}</vaadin-button>
                 </a>
               </div>
             </div>
           </div>
           <div class="column video">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsGetStartedTitle')}</h3>
-              <p>${i18next.t('pages.home.newsGetStartedDescription')}</p>
+              <h3>${i18next.t('pages.home.newsBox2Title')}</h3>
+              <p>${i18next.t('pages.home.newsBox2Description')}</p>
               <div class="actions">
                 <a
-                  href="https://quantum-computing.ibm.com/login"
+                  href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
-                    action: 'IBM Q Experience, Getting Started',
+                    action: 'Coding with Qiskit Video Series',
                     objectType: 'Button'
                   })}
                 >
-                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsGetStartedButton')}</vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsBox2Button')}</vaadin-button>
                 </a>
               </div>
             </div>
