@@ -276,11 +276,11 @@ class PageHome extends localize(i18next)(LitElement) {
         <div class="row limited-width">
           <div class="column">
             <div class="description">
-              <h3>${i18next.t('pages.home.newsQiskit9Title')}</h3>
-              <p>${i18next.t('pages.home.newsQiskit9Description')}</p>
+              <h3>${i18next.t('pages.home.newsQiskitTitle')}</h3>
+              <p>${i18next.t('pages.home.newsQiskitDescription')}</p>
               <div class="actions">
                 <a
-                  href="https://github.com/Qiskit/qiskit/releases/tag/0.11.0"
+                  href="https://qiskit.org/documentation/release_notes.html#qiskit-0-11"
                   target="_blank"
                   rel="noopener"
                   tabindex="-1"
@@ -289,7 +289,7 @@ class PageHome extends localize(i18next)(LitElement) {
                     objectType: 'Button'
                   })}
                 >
-                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsQiskit9Button')}</vaadin-button>
+                  <vaadin-button theme="secondary">${i18next.t('pages.home.newsQiskitButton')}</vaadin-button>
                 </a>
               </div>
             </div>
