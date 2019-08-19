@@ -93,7 +93,7 @@ class PageAer extends localize(i18next)(LitElement) {
                 <div class="subtitle">Quantum Circuit</div>
               </div>
               <div class="element">
-                <div class="title">Noise model (QasmSimulator only)</div>
+                <div class="title">Noise Simulation (QasmSimulator Only)</div>
                 <div class="subtitle">NoiseModel, QuantumErrors, ReadoutErrors</div>
               </div>
               <div class="element">
