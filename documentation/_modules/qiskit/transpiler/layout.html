@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -186,7 +187,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">LayoutError</span>
 
 
-<div class="viewcode-block" id="Layout"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout">[docs]</a><span class="k">class</span> <span class="nc">Layout</span><span class="p">():</span>
+<div class="viewcode-block" id="Layout"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout">[docs]</a><span class="k">class</span> <span class="nc">Layout</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Two-ways dict to represent a Layout.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -208,7 +209,7 @@
             <span class="n">str_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">str_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="s2">&quot;Layout({</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">})&quot;</span>
 
-<div class="viewcode-block" id="Layout.from_dict"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.from_dict"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populates a Layout from a dictionary.</span>
 <span class="sd">        The dictionary must be a bijective mapping between</span>
@@ -267,7 +268,7 @@
                 <span class="k">continue</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_v2p</span><span class="p">[</span><span class="n">virtual</span><span class="p">]</span> <span class="o">=</span> <span class="n">physical</span></div>
 
-<div class="viewcode-block" id="Layout.order_based_on_type"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.order_based_on_type">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Layout.order_based_on_type"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.order_based_on_type">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">order_based_on_type</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;decides which one is physical/virtual based on the type. Returns (virtual, physical)&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">Layout</span><span class="o">.</span><span class="n">is_virtual</span><span class="p">(</span><span class="n">value2</span><span class="p">):</span>
@@ -281,7 +282,7 @@
                               <span class="s1">&#39; or the other way around.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value1</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">value2</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">virtual</span><span class="p">,</span> <span class="n">physical</span></div>
 
-<div class="viewcode-block" id="Layout.is_virtual"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.is_virtual">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Layout.is_virtual"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.is_virtual">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_virtual</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks if value has the format of a virtual qubit &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span>
@@ -324,7 +325,7 @@
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_p2v</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Layout.copy"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.copy"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a copy of a Layout instance.&quot;&quot;&quot;</span>
         <span class="n">layout_copy</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
 
@@ -333,7 +334,7 @@
 
         <span class="k">return</span> <span class="n">layout_copy</span></div>
 
-<div class="viewcode-block" id="Layout.add"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">virtual_bit</span><span class="p">,</span> <span class="n">physical_bit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.add"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">virtual_bit</span><span class="p">,</span> <span class="n">physical_bit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a map element between `bit` and `physical_bit`. If `physical_bit` is not</span>
 <span class="sd">        defined, `bit` will be mapped to a new physical bit (extending the length of the</span>
@@ -349,7 +350,7 @@
             <span class="n">physical_bit</span> <span class="o">=</span> <span class="n">physical_candidate</span>
         <span class="bp">self</span><span class="p">[</span><span class="n">virtual_bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">physical_bit</span></div>
 
-<div class="viewcode-block" id="Layout.add_register"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.add_register">[docs]</a>    <span class="k">def</span> <span class="nf">add_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reg</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.add_register"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.add_register">[docs]</a>    <span class="k">def</span> <span class="nf">add_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds at the end physical_qubits that map each bit in reg.</span>
 <span class="sd">        Args:</span>
@@ -358,7 +359,7 @@
         <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">reg</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bit</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Layout.get_registers"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.get_registers">[docs]</a>    <span class="k">def</span> <span class="nf">get_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.get_registers"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.get_registers">[docs]</a>    <span class="k">def</span> <span class="nf">get_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the registers in the layout [QuantumRegister(2, &#39;qr0&#39;), QuantumRegister(3, &#39;qr1&#39;)]</span>
 <span class="sd">        Returns:</span>
@@ -366,21 +367,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">reg</span> <span class="k">for</span> <span class="n">reg</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()}</span></div>
 
-<div class="viewcode-block" id="Layout.get_virtual_bits"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.get_virtual_bits">[docs]</a>    <span class="k">def</span> <span class="nf">get_virtual_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.get_virtual_bits"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.get_virtual_bits">[docs]</a>    <span class="k">def</span> <span class="nf">get_virtual_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dictionary where the keys are virtual (qu)bits and the</span>
 <span class="sd">        values are physical (qu)bits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v2p</span></div>
 
-<div class="viewcode-block" id="Layout.get_physical_bits"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.get_physical_bits">[docs]</a>    <span class="k">def</span> <span class="nf">get_physical_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.get_physical_bits"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.get_physical_bits">[docs]</a>    <span class="k">def</span> <span class="nf">get_physical_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dictionary where the keys are physical (qu)bits and the</span>
 <span class="sd">        values are virtual (qu)bits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p2v</span></div>
 
-<div class="viewcode-block" id="Layout.swap"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.swap">[docs]</a>    <span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.swap"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.swap">[docs]</a>    <span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Swaps the map between left and right.</span>
 <span class="sd">        Args:</span>
 <span class="sd">            left (tuple or int): Item to swap with right.</span>
@@ -394,7 +395,7 @@
         <span class="bp">self</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
         <span class="bp">self</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span></div>
 
-<div class="viewcode-block" id="Layout.combine_into_edge_map"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.combine_into_edge_map">[docs]</a>    <span class="k">def</span> <span class="nf">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">another_layout</span><span class="p">):</span>
+<div class="viewcode-block" id="Layout.combine_into_edge_map"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.combine_into_edge_map">[docs]</a>    <span class="k">def</span> <span class="nf">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">another_layout</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Combines self and another_layout into an &quot;edge map&quot;.</span>
 
 <span class="sd">        For example::</span>
@@ -423,7 +424,7 @@
 
         <span class="k">return</span> <span class="n">edge_map</span></div>
 
-<div class="viewcode-block" id="Layout.generate_trivial_layout"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.generate_trivial_layout">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Layout.generate_trivial_layout"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.generate_trivial_layout">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">generate_trivial_layout</span><span class="p">(</span><span class="o">*</span><span class="n">regs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a trivial (&quot;one-to-one&quot;) Layout with the registers in `regs`.</span>
@@ -437,7 +438,7 @@
             <span class="n">layout</span><span class="o">.</span><span class="n">add_register</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">layout</span></div>
 
-<div class="viewcode-block" id="Layout.from_intlist"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.from_intlist">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Layout.from_intlist"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.from_intlist">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_intlist</span><span class="p">(</span><span class="n">int_list</span><span class="p">,</span> <span class="o">*</span><span class="n">qregs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Converts a list of integers to a Layout</span>
 <span class="sd">        mapping virtual qubits (index of the list) to</span>
@@ -472,7 +473,7 @@
                 <span class="n">out</span><span class="p">[</span><span class="n">int_item</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">out</span></div>
 
-<div class="viewcode-block" id="Layout.from_tuplelist"><a class="viewcode-back" href="../../../autodoc/qiskit.transpiler.layout.html#qiskit.transpiler.layout.Layout.from_tuplelist">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Layout.from_tuplelist"><a class="viewcode-back" href="../../../api/qiskit.transpiler.Layout.html#qiskit.transpiler.Layout.from_tuplelist">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_tuplelist</span><span class="p">(</span><span class="n">tuple_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populates a Layout from a list containing virtual</span>

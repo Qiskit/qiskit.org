@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -179,7 +180,7 @@
 <span class="kn">from</span> <span class="nn">.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
 
 
-<div class="viewcode-block" id="InstructionSet"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet">[docs]</a><span class="k">class</span> <span class="nc">InstructionSet</span><span class="p">:</span>
+<div class="viewcode-block" id="InstructionSet"><a class="viewcode-back" href="../../../api/qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet">[docs]</a><span class="k">class</span> <span class="nc">InstructionSet</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Instruction collection, and their contexts.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -200,7 +201,7 @@
         <span class="sd">&quot;&quot;&quot;Return instruction at index&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-<div class="viewcode-block" id="InstructionSet.add"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+<div class="viewcode-block" id="InstructionSet.add"><a class="viewcode-back" href="../../../api/qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add an instruction and its context (where it&#39;s attached).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;attempt to add non-Instruction&quot;</span> <span class="o">+</span>
@@ -209,19 +210,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">qargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="InstructionSet.inverse"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InstructionSet.inverse"><a class="viewcode-back" href="../../../api/qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert all instructions.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="InstructionSet.q_if"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.q_if">[docs]</a>    <span class="k">def</span> <span class="nf">q_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qregs</span><span class="p">):</span>
+<div class="viewcode-block" id="InstructionSet.q_if"><a class="viewcode-back" href="../../../api/qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet.q_if">[docs]</a>    <span class="k">def</span> <span class="nf">q_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qregs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add controls to all instructions.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
             <span class="n">gate</span><span class="o">.</span><span class="n">q_if</span><span class="p">(</span><span class="o">*</span><span class="n">qregs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="InstructionSet.c_if"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.instructionset.html#qiskit.circuit.instructionset.InstructionSet.c_if">[docs]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<div class="viewcode-block" id="InstructionSet.c_if"><a class="viewcode-back" href="../../../api/qiskit.circuit.InstructionSet.html#qiskit.circuit.InstructionSet.c_if">[docs]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add classical control register to all instructions.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
             <span class="n">gate</span><span class="o">.</span><span class="n">c_if</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>

@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -196,7 +197,7 @@
 <span class="kn">from</span> <span class="nn">.dagnode</span> <span class="k">import</span> <span class="n">DAGNode</span>
 
 
-<div class="viewcode-block" id="DAGCircuit"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit">[docs]</a><span class="k">class</span> <span class="nc">DAGCircuit</span><span class="p">:</span>
+<div class="viewcode-block" id="DAGCircuit"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit">[docs]</a><span class="k">class</span> <span class="nc">DAGCircuit</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Quantum circuit as a directed acyclic graph.</span>
 
@@ -258,27 +259,27 @@
                       <span class="s1">&#39;in favor of access through the DAGCircuit API. &#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span> <span class="o">=</span> <span class="n">multi_graph</span>
 
-<div class="viewcode-block" id="DAGCircuit.to_networkx"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.to_networkx">[docs]</a>    <span class="k">def</span> <span class="nf">to_networkx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.to_networkx"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.to_networkx">[docs]</a>    <span class="k">def</span> <span class="nf">to_networkx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a copy of the DAGCircuit in networkx format.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_qubits"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_qubits">[docs]</a>    <span class="k">def</span> <span class="nf">get_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_qubits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_qubits">[docs]</a>    <span class="k">def</span> <span class="nf">get_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. Use qubits().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_qubits() is being replaced by qubits()&#39;</span><span class="p">,</span>
                       <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.qubits"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.qubits">[docs]</a>    <span class="k">def</span> <span class="nf">qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.qubits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.qubits">[docs]</a>    <span class="k">def</span> <span class="nf">qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a list of qubits as (QuantumRegister, index) pairs.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_bits"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_bits">[docs]</a>    <span class="k">def</span> <span class="nf">get_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_bits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_bits">[docs]</a>    <span class="k">def</span> <span class="nf">get_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. Use clbits().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_bits() is being replaced by clbits()&#39;</span><span class="p">,</span>
                       <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clbits</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.clbits"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.clbits">[docs]</a>    <span class="k">def</span> <span class="nf">clbits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.clbits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.clbits">[docs]</a>    <span class="k">def</span> <span class="nf">clbits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a list of bits as (ClassicalRegister, index) pairs.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span></div>
 
@@ -291,7 +292,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">)</span>
 
     <span class="c1"># TODO: unused function. is it needed?</span>
-<div class="viewcode-block" id="DAGCircuit.rename_register"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.rename_register">[docs]</a>    <span class="k">def</span> <span class="nf">rename_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regname</span><span class="p">,</span> <span class="n">newname</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.rename_register"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.rename_register">[docs]</a>    <span class="k">def</span> <span class="nf">rename_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regname</span><span class="p">,</span> <span class="n">newname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Rename a classical or quantum register throughout the circuit.</span>
 
 <span class="sd">        regname = existing register name string</span>
@@ -339,12 +340,12 @@
             <span class="k">if</span> <span class="n">regname</span> <span class="ow">in</span> <span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
                 <span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">regname</span><span class="p">,</span> <span class="n">newname</span><span class="p">,</span> <span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.remove_all_ops_named"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.remove_all_ops_named">[docs]</a>    <span class="k">def</span> <span class="nf">remove_all_ops_named</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opname</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.remove_all_ops_named"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.remove_all_ops_named">[docs]</a>    <span class="k">def</span> <span class="nf">remove_all_ops_named</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove all operation nodes with the given name.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_nodes</span><span class="p">(</span><span class="n">opname</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.add_qreg"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.add_qreg">[docs]</a>    <span class="k">def</span> <span class="nf">add_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qreg</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.add_qreg"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.add_qreg">[docs]</a>    <span class="k">def</span> <span class="nf">add_qreg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qreg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add all wires in a quantum register.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qreg</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;not a QuantumRegister instance.&quot;</span><span class="p">)</span>
@@ -354,7 +355,7 @@
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qreg</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_wire</span><span class="p">((</span><span class="n">qreg</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.add_creg"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.add_creg">[docs]</a>    <span class="k">def</span> <span class="nf">add_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">creg</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.add_creg"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.add_creg">[docs]</a>    <span class="k">def</span> <span class="nf">add_creg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">creg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add all wires in a classical register.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">creg</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;not a ClassicalRegister instance.&quot;</span><span class="p">)</span>
@@ -477,7 +478,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_id_to_node</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_node_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_node</span>
 
-<div class="viewcode-block" id="DAGCircuit.apply_operation_back"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.apply_operation_back">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.apply_operation_back"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.apply_operation_back">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply an operation to the output of the circuit.</span>
 
 <span class="sd">        Args:</span>
@@ -523,7 +524,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_to_node</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_node_id</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.apply_operation_front"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.apply_operation_front">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.apply_operation_front"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.apply_operation_front">[docs]</a>    <span class="k">def</span> <span class="nf">apply_operation_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply an operation to the input of the circuit.</span>
 
 <span class="sd">        Args:</span>
@@ -659,7 +660,7 @@
             <span class="n">new_condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">wire_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">bit0</span><span class="p">,</span> <span class="n">bit0</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">condition</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">new_condition</span>
 
-<div class="viewcode-block" id="DAGCircuit.extend_back"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.extend_back">[docs]</a>    <span class="k">def</span> <span class="nf">extend_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">edge_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.extend_back"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.extend_back">[docs]</a>    <span class="k">def</span> <span class="nf">extend_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">edge_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add `dag` at the end of `self`, using `edge_map`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">edge_map</span> <span class="o">=</span> <span class="n">edge_map</span> <span class="ow">or</span> <span class="p">{}</span>
@@ -675,7 +676,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">edge_map</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.compose_back"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.compose_back">[docs]</a>    <span class="k">def</span> <span class="nf">compose_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">edge_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.compose_back"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.compose_back">[docs]</a>    <span class="k">def</span> <span class="nf">compose_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">edge_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply the input circuit to the output of this circuit.</span>
 
 <span class="sd">        The two bases must be &quot;compatible&quot; or an exception occurs.</span>
@@ -738,7 +739,7 @@
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;bad node type </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">nd</span><span class="o">.</span><span class="n">type</span><span class="p">)</span></div>
 
     <span class="c1"># FIXME: this does not work as expected. it is also not used anywhere</span>
-<div class="viewcode-block" id="DAGCircuit.compose_front"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.compose_front">[docs]</a>    <span class="k">def</span> <span class="nf">compose_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">edge_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.compose_front"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.compose_front">[docs]</a>    <span class="k">def</span> <span class="nf">compose_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_circuit</span><span class="p">,</span> <span class="n">edge_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply the input circuit to the input of this circuit.</span>
 
 <span class="sd">        The two bases must be &quot;compatible&quot; or an exception occurs.</span>
@@ -801,11 +802,11 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">DAGCircuitError</span><span class="p">(</span><span class="s2">&quot;bad node type </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">nd</span><span class="o">.</span><span class="n">type</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.size"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.size"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the number of operations.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">order</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.depth"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.depth">[docs]</a>    <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.depth"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.depth">[docs]</a>    <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the circuit depth.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            int: the circuit depth</span>
@@ -818,19 +819,19 @@
         <span class="n">depth</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">dag_longest_path_length</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">depth</span> <span class="k">if</span> <span class="n">depth</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.width"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.width">[docs]</a>    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.width"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.width">[docs]</a>    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the total number of qubits used by the circuit.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cbits</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.num_cbits"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.num_cbits">[docs]</a>    <span class="k">def</span> <span class="nf">num_cbits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.num_cbits"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.num_cbits">[docs]</a>    <span class="k">def</span> <span class="nf">num_cbits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the total number of bits used by the circuit.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">creg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.num_tensor_factors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.num_tensor_factors">[docs]</a>    <span class="k">def</span> <span class="nf">num_tensor_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.num_tensor_factors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.num_tensor_factors">[docs]</a>    <span class="k">def</span> <span class="nf">num_tensor_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute how many components the circuit can decompose into.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">number_weakly_connected_components</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.qasm"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.qasm">[docs]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.qasm"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.qasm">[docs]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. use qiskit.converters.dag_to_circuit() then call</span>
 <span class="sd">        qasm() on the obtained QuantumCircuit instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -935,7 +936,7 @@
         <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">is_isomorphic</span><span class="p">(</span><span class="n">slf</span><span class="p">,</span> <span class="n">oth</span><span class="p">,</span>
                                 <span class="n">node_match</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">DAGNode</span><span class="o">.</span><span class="n">semantic_eq</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]))</span>
 
-<div class="viewcode-block" id="DAGCircuit.topological_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.topological_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">topological_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.topological_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.topological_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">topological_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Yield nodes in topological order.</span>
 
@@ -945,7 +946,7 @@
         <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">lexicographical_topological_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">,</span>
                                                    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">qargs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.topological_op_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.topological_op_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">topological_op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.topological_op_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.topological_op_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">topological_op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Yield op nodes in topological order.</span>
 
@@ -954,7 +955,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">nd</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">topological_nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">nd</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.substitute_node_with_dag"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.substitute_node_with_dag">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_node_with_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">input_dag</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.substitute_node_with_dag"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.substitute_node_with_dag">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_node_with_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">input_dag</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Replace one node with dag.</span>
 
 <span class="sd">        Args:</span>
@@ -1074,7 +1075,7 @@
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_map</span><span class="p">[</span><span class="n">w</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.node"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.node">[docs]</a>    <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.node"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.node">[docs]</a>    <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the node in the dag.</span>
 
 <span class="sd">        Args:</span>
@@ -1085,7 +1086,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.nodes">[docs]</a>    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.nodes">[docs]</a>    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Iterator for node values.</span>
 
 <span class="sd">        Yield:</span>
@@ -1094,7 +1095,7 @@
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
             <span class="k">yield</span> <span class="n">node</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.edges"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.edges">[docs]</a>    <span class="k">def</span> <span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.edges"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.edges">[docs]</a>    <span class="k">def</span> <span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Iterator for node values.</span>
 
 <span class="sd">        Yield:</span>
@@ -1103,7 +1104,7 @@
         <span class="k">for</span> <span class="n">source_node</span><span class="p">,</span> <span class="n">dest_node</span><span class="p">,</span> <span class="n">edge_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">source_node</span><span class="p">,</span> <span class="n">dest_node</span><span class="p">,</span> <span class="n">edge_data</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_op_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_op_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_op_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_op_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;Deprecated. Use op_nodes().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_op_nodes() is being replaced by op_nodes().&#39;</span>
@@ -1123,7 +1124,7 @@
             <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.op_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.op_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.op_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.op_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">op_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the list of &quot;op&quot; nodes in the dag.</span>
 
 <span class="sd">        Args:</span>
@@ -1139,7 +1140,7 @@
                     <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_gate_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_gate_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_gate_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_gate_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_gate_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_gate_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. Use gate_nodes().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_gate_nodes() is being replaced by gate_nodes().&#39;</span>
                       <span class="s1">&#39;Returning a list of node_ids/(node_id, data) tuples is also &#39;</span>
@@ -1159,7 +1160,7 @@
             <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.gate_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.gate_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">gate_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.gate_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.gate_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">gate_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the list of gate nodes in the dag.</span>
 
 <span class="sd">        Returns:</span>
@@ -1171,7 +1172,7 @@
                 <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_named_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_named_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_named_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_named_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_named_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_named_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. Use named_nodes().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_named_nodes() is being replaced by named_nodes()&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;Returning a list of node_ids is also deprecated, named_nodes() &#39;</span>
@@ -1184,7 +1185,7 @@
                 <span class="n">named_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_node_id</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">named_nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.named_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.named_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">named_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.named_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.named_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">named_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the set of &quot;op&quot; nodes with the given name.&quot;&quot;&quot;</span>
         <span class="n">named_nodes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
@@ -1192,7 +1193,7 @@
                 <span class="n">named_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">named_nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_2q_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_2q_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_2q_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_2q_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_2q_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_2q_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. Use twoQ_gates().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_2q_nodes() is being replaced by twoQ_gates()&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;Returning a list of data_dicts is also deprecated, twoQ_gates() &#39;</span>
@@ -1206,7 +1207,7 @@
 
         <span class="k">return</span> <span class="n">two_q_nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.twoQ_gates"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.twoQ_gates">[docs]</a>    <span class="k">def</span> <span class="nf">twoQ_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.twoQ_gates"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.twoQ_gates">[docs]</a>    <span class="k">def</span> <span class="nf">twoQ_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get list of 2-qubit gates. Ignore snapshot, barriers, and the like.&quot;&quot;&quot;</span>
         <span class="n">two_q_gates</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gate_nodes</span><span class="p">():</span>
@@ -1214,7 +1215,7 @@
                 <span class="n">two_q_gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">two_q_gates</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.get_3q_or_more_nodes"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.get_3q_or_more_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_3q_or_more_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.get_3q_or_more_nodes"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.get_3q_or_more_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_3q_or_more_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deprecated. Use threeQ_or_more_gates().&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The method get_3q_or_more_nodes() is being replaced by&#39;</span>
                       <span class="s1">&#39; threeQ_or_more_gates()&#39;</span><span class="p">,</span>
@@ -1228,7 +1229,7 @@
                 <span class="n">three_q_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node</span><span class="o">.</span><span class="n">_node_id</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">data_dict</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">three_q_nodes</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.threeQ_or_more_gates"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.threeQ_or_more_gates">[docs]</a>    <span class="k">def</span> <span class="nf">threeQ_or_more_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.threeQ_or_more_gates"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.threeQ_or_more_gates">[docs]</a>    <span class="k">def</span> <span class="nf">threeQ_or_more_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get list of 3-or-more-qubit gates: (id, data).&quot;&quot;&quot;</span>
         <span class="n">three_q_gates</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gate_nodes</span><span class="p">():</span>
@@ -1236,7 +1237,7 @@
                 <span class="n">three_q_gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">three_q_gates</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.successors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.successors">[docs]</a>    <span class="k">def</span> <span class="nf">successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.successors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.successors">[docs]</a>    <span class="k">def</span> <span class="nf">successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns list of the successors of a node as DAGNodes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling successors() with a node id is deprecated,&#39;</span>
@@ -1246,7 +1247,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.predecessors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.predecessors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns list of the predecessors of a node as DAGNodes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling predecessors() with a node id is deprecated,&#39;</span>
@@ -1256,7 +1257,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.quantum_predecessors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.quantum_predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">quantum_predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.quantum_predecessors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.quantum_predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">quantum_predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns list of the predecessors of a node that are</span>
 <span class="sd">        connected by a quantum edge as DAGNodes.&quot;&quot;&quot;</span>
 
@@ -1267,7 +1268,7 @@
                 <span class="n">predecessors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predecessor</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">predecessors</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.ancestors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.ancestors">[docs]</a>    <span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.ancestors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.ancestors">[docs]</a>    <span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns set of the ancestors of a node as DAGNodes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling ancestors() with a node id is deprecated,&#39;</span>
@@ -1277,7 +1278,7 @@
 
         <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">ancestors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.descendants"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.descendants">[docs]</a>    <span class="k">def</span> <span class="nf">descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.descendants"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.descendants">[docs]</a>    <span class="k">def</span> <span class="nf">descendants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns set of the descendants of a node as DAGNodes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling descendants() with a node id is deprecated,&#39;</span>
@@ -1287,7 +1288,7 @@
 
         <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">descendants</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.bfs_successors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.bfs_successors">[docs]</a>    <span class="k">def</span> <span class="nf">bfs_successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.bfs_successors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.bfs_successors">[docs]</a>    <span class="k">def</span> <span class="nf">bfs_successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns an iterator of tuples of (DAGNode, [DAGNodes]) where the DAGNode is the current node</span>
 <span class="sd">        and [DAGNode] is its successors in  BFS order.</span>
@@ -1300,7 +1301,7 @@
 
         <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">bfs_successors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.quantum_successors"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.quantum_successors">[docs]</a>    <span class="k">def</span> <span class="nf">quantum_successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.quantum_successors"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.quantum_successors">[docs]</a>    <span class="k">def</span> <span class="nf">quantum_successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns list of the successors of a node that are</span>
 <span class="sd">        connected by a quantum edge as DAGNodes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1317,7 +1318,7 @@
                 <span class="n">successors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">successor</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">successors</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.remove_op_node"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.remove_op_node">[docs]</a>    <span class="k">def</span> <span class="nf">remove_op_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.remove_op_node"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.remove_op_node">[docs]</a>    <span class="k">def</span> <span class="nf">remove_op_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove an operation node n.</span>
 
 <span class="sd">        Add edges from predecessors to successors.</span>
@@ -1341,7 +1342,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">pred_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">succ_map</span><span class="p">[</span><span class="n">w</span><span class="p">],</span>
                                        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">wire</span><span class="o">=</span><span class="n">w</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.remove_ancestors_of"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.remove_ancestors_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_ancestors_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.remove_ancestors_of"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.remove_ancestors_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_ancestors_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove all of the ancestor operation nodes of node.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling remove_ancestors_of() with a node id is deprecated,&#39;</span>
@@ -1356,7 +1357,7 @@
             <span class="k">if</span> <span class="n">anc_node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">anc_node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.remove_descendants_of"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.remove_descendants_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_descendants_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.remove_descendants_of"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.remove_descendants_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_descendants_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove all of the descendant operation nodes of node.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling remove_descendants_of() with a node id is deprecated,&#39;</span>
@@ -1369,7 +1370,7 @@
             <span class="k">if</span> <span class="n">desc_node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">desc_node</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.remove_nonancestors_of"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.remove_nonancestors_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nonancestors_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.remove_nonancestors_of"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.remove_nonancestors_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nonancestors_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove all of the non-ancestors operation nodes of node.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling remove_nonancestors_of() with a node id is deprecated,&#39;</span>
@@ -1383,7 +1384,7 @@
             <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.remove_nondescendants_of"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.remove_nondescendants_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nondescendants_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.remove_nondescendants_of"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.remove_nondescendants_of">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nondescendants_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove all of the non-descendants operation nodes of node.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Calling remove_nondescendants_of() with a node id is deprecated,&#39;</span>
@@ -1397,7 +1398,7 @@
             <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;op&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">remove_op_node</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.layers"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.layers">[docs]</a>    <span class="k">def</span> <span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.layers"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.layers">[docs]</a>    <span class="k">def</span> <span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Yield a shallow view on a layer of this DAGCircuit for all d layers of this circuit.</span>
 
 <span class="sd">        A layer is a circuit whose gates act on disjoint qubits, i.e.</span>
@@ -1467,7 +1468,7 @@
             <span class="n">new_layer</span><span class="o">.</span><span class="n">_multi_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">wires</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
             <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="n">new_layer</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">support_list</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.serial_layers"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.serial_layers">[docs]</a>    <span class="k">def</span> <span class="nf">serial_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.serial_layers"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.serial_layers">[docs]</a>    <span class="k">def</span> <span class="nf">serial_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Yield a layer for all gates of this circuit.</span>
 
 <span class="sd">        A serial layer is a circuit with one gate. The layers have the</span>
@@ -1497,7 +1498,7 @@
             <span class="n">l_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;graph&quot;</span><span class="p">:</span> <span class="n">new_layer</span><span class="p">,</span> <span class="s2">&quot;partition&quot;</span><span class="p">:</span> <span class="n">support_list</span><span class="p">}</span>
             <span class="k">yield</span> <span class="n">l_dict</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.multigraph_layers"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.multigraph_layers">[docs]</a>    <span class="k">def</span> <span class="nf">multigraph_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.multigraph_layers"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.multigraph_layers">[docs]</a>    <span class="k">def</span> <span class="nf">multigraph_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Yield layers of the multigraph.&quot;&quot;&quot;</span>
         <span class="n">predecessor_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># Dict[node, predecessors not visited]</span>
         <span class="n">cur_layer</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_map</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
@@ -1522,7 +1523,7 @@
             <span class="n">cur_layer</span> <span class="o">=</span> <span class="n">next_layer</span>
             <span class="n">next_layer</span> <span class="o">=</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.collect_runs"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.collect_runs">[docs]</a>    <span class="k">def</span> <span class="nf">collect_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namelist</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.collect_runs"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.collect_runs">[docs]</a>    <span class="k">def</span> <span class="nf">collect_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namelist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a set of non-conditional runs of &quot;op&quot; nodes with the given names.</span>
 
 <span class="sd">        For example, &quot;... h q[0]; cx q[0],q[1]; cx q[0],q[1]; h q[1]; ..&quot;</span>
@@ -1557,7 +1558,7 @@
                     <span class="n">group_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
         <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">group_list</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.nodes_on_wire"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.nodes_on_wire">[docs]</a>    <span class="k">def</span> <span class="nf">nodes_on_wire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wire</span><span class="p">,</span> <span class="n">only_ops</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.nodes_on_wire"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.nodes_on_wire">[docs]</a>    <span class="k">def</span> <span class="nf">nodes_on_wire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wire</span><span class="p">,</span> <span class="n">only_ops</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterator for nodes that affect a given wire</span>
 
@@ -1591,7 +1592,7 @@
                     <span class="n">more_nodes</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">break</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.count_ops"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.count_ops">[docs]</a>    <span class="k">def</span> <span class="nf">count_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.count_ops"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.count_ops">[docs]</a>    <span class="k">def</span> <span class="nf">count_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Count the occurrences of operation names.</span>
 
 <span class="sd">        Returns a dictionary of counts keyed on the operation name.</span>
@@ -1605,7 +1606,7 @@
                 <span class="n">op_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">op_dict</span></div>
 
-<div class="viewcode-block" id="DAGCircuit.properties"><a class="viewcode-back" href="../../../autodoc/qiskit.dagcircuit.dagcircuit.html#qiskit.dagcircuit.dagcircuit.DAGCircuit.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DAGCircuit.properties"><a class="viewcode-back" href="../../../api/qiskit.dagcircuit.DAGCircuit.html#qiskit.dagcircuit.DAGCircuit.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a dictionary of circuit properties.&quot;&quot;&quot;</span>
         <span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span>
                    <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">(),</span>

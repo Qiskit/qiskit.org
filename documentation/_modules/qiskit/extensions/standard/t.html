@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
@@ -187,7 +188,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.u1</span> <span class="k">import</span> <span class="n">U1Gate</span>
 
 
-<div class="viewcode-block" id="TGate"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.TGate">[docs]</a><span class="k">class</span> <span class="nc">TGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<div class="viewcode-block" id="TGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.TGate.html#qiskit.circuit.TGate">[docs]</a><span class="k">class</span> <span class="nc">TGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;T Gate: pi/4 rotation around Z axis.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -207,17 +208,17 @@
             <span class="n">definition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
 
-<div class="viewcode-block" id="TGate.inverse"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.TGate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TGate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.TGate.html#qiskit.circuit.TGate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">TdgGate</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TGate.to_matrix"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.TGate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TGate.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.TGate.html#qiskit.circuit.TGate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the S gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="p">)</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="TdgGate"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.TdgGate">[docs]</a><span class="k">class</span> <span class="nc">TdgGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<div class="viewcode-block" id="TdgGate"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.TdgGate.html#qiskit.circuit.TdgGate">[docs]</a><span class="k">class</span> <span class="nc">TdgGate</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;T Gate: -pi/4 rotation around Z axis.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -237,28 +238,28 @@
             <span class="n">definition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
 
-<div class="viewcode-block" id="TdgGate.inverse"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.TdgGate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TdgGate.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.TdgGate.html#qiskit.circuit.TdgGate.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">TGate</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="TdgGate.to_matrix"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.TdgGate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TdgGate.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.TdgGate.html#qiskit.circuit.TdgGate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the S gate.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">)</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="t"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.t">[docs]</a><span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="nd">@_op_expand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">t</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply T to q.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span>
 
 
-<div class="viewcode-block" id="tdg"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.t.html#qiskit.circuit.compositegate.tdg">[docs]</a><span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="nd">@_op_expand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">tdg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply Tdg to q.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TdgGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TdgGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
