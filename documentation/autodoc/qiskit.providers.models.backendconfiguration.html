@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.providers.models.backendconfiguration module &#8212; Qiskit 0.11.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qiskit.providers.models.backendproperties module" href="qiskit.providers.models.backendproperties.html" />
+    <link rel="prev" title="qiskit.providers.models package" href="qiskit.providers.models.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">Workflow Step–by–Step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../the_elements.html">The Qiskit Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#terra">Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#aer">Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#ignis">Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#aqua">Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development_strategy.html">Development Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aqua">Qiskit Aqua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#versioning">Versioning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#meta-package-version">Meta-package Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#adding-new-elements">Adding New Elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#patch-version-increases">Patch Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#minor-version-increases">Minor Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#major-version-increases">Major Version Increases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#module-status">Module Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#providers">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#aer-provider">Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#ibm-q-provider">IBM Q Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#community-extensions">Community Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#id1">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#additional-providers">Additional providers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#transpiler">Transpiler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#additional-passes">Additional passes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#tools">Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#additional-tools">Additional Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_to_qiskit.html">Contributing to Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-11-1">Qiskit 0.11.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-8">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-2">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ignis-0-1">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-5">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-3">IBM Q Provider 0.3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-11">Qiskit 0.11</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id1">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id2">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#improvements">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id3">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id4">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id5">IBM Q Provider 0.3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#updating-to-the-new-ibm-q-experience-v2">Updating to the new IBM Q Experience v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#updating-your-programs">Updating your programs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-10">Qiskit 0.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id6">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id7">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id8">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id9">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-2">IBM Q Provider 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id10">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-9">Qiskit 0.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id11">Terra 0.8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#highlights">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id12">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#compatibility-considerations">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id13">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id14">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id15">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id16">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id17">Ignis 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id18">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id19">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id20">Aqua 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id21">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id22">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id23">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-1">IBM Q Provider 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id24">New Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-8">Qiskit 0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-7">Terra 0.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-1">Aer 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id25">Ignis 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-7">Qiskit 0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id26">Terra 0.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id27">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id28">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id29">Aer 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id30">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-4">Aqua 0.4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id31">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id32">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-6">Qiskit 0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-6">Terra 0.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id33">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id34">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-5">Qiskit 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-5">Terra 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id35">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id36">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">API References</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.aqua.html">qiskit.aqua package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.assembler.html">qiskit.assembler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.chemistry.html">qiskit.chemistry package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.compiler.html">qiskit.compiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.compiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.pulse.html">qiskit.pulse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.test.html">qiskit.test package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.visualization.html">qiskit.visualization package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit._util.html">qiskit._util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.exceptions.html">qiskit.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.execute.html">qiskit.execute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.user_config.html">qiskit.user_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.util.html">qiskit.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.version.html">qiskit.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#workflow-step-by-step">Workflow Step–by–Step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../the_elements.html">The Qiskit Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#terra">Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#aer">Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#ignis">Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the_elements.html#aqua">Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development_strategy.html">Development Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-aqua">Qiskit Aqua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#versioning">Versioning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#meta-package-version">Meta-package Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#adding-new-elements">Adding New Elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#patch-version-increases">Patch Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#minor-version-increases">Minor Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#major-version-increases">Major Version Increases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#module-status">Module Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#providers">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#aer-provider">Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#ibm-q-provider">IBM Q Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development_strategy.html#community-extensions">Community Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#id1">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#additional-providers">Additional providers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#transpiler">Transpiler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#additional-passes">Additional passes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../development_strategy.html#tools">Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development_strategy.html#additional-tools">Additional Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing_to_qiskit.html">Contributing to Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-11-1">Qiskit 0.11.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-8">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-2">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ignis-0-1">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-5">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-3">IBM Q Provider 0.3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-11">Qiskit 0.11</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id1">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id2">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#improvements">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id3">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id4">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id5">IBM Q Provider 0.3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#updating-to-the-new-ibm-q-experience-v2">Updating to the new IBM Q Experience v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#updating-your-programs">Updating your programs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-10">Qiskit 0.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id6">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id7">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id8">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id9">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-2">IBM Q Provider 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id10">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-9">Qiskit 0.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id11">Terra 0.8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#highlights">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id12">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#compatibility-considerations">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id13">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id14">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id15">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id16">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id17">Ignis 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id18">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id19">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id20">Aqua 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id21">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id22">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id23">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#ibm-q-provider-0-1">IBM Q Provider 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id24">New Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-8">Qiskit 0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-7">Terra 0.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aer-0-1">Aer 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id25">Ignis 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-7">Qiskit 0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id26">Terra 0.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id27">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id28">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#id29">Aer 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id30">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#aqua-0-4">Aqua 0.4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id31">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id32">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-6">Qiskit 0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-6">Terra 0.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id33">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id34">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../release_notes.html#qiskit-0-5">Qiskit 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../release_notes.html#terra-0-5">Terra 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id35">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../release_notes.html#id36">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="qiskit.html">API References</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="qiskit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit.aqua.html">qiskit.aqua package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.assembler.html">qiskit.assembler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.assembler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.chemistry.html">qiskit.chemistry package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.compiler.html">qiskit.compiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.compiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.dagcircuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.extensions.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.mapper.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="qiskit.providers.html">qiskit.providers package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.pulse.html">qiskit.pulse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.pulse.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qasm.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.qobj.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.test.html">qiskit.test package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.test.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.transpiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.visualization.html">qiskit.visualization package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qiskit.visualization.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qiskit._util.html">qiskit._util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.exceptions.html">qiskit.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.execute.html">qiskit.execute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.user_config.html">qiskit.user_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.util.html">qiskit.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit.version.html">qiskit.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="module-qiskit.providers.models.backendconfiguration">
+<span id="qiskit-providers-models-backendconfiguration-module"></span><h1>qiskit.providers.models.backendconfiguration module<a class="headerlink" href="#module-qiskit.providers.models.backendconfiguration" title="Permalink to this headline">¶</a></h1>
+<p>Model and schema for backend configuration.</p>
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration">
+<em class="property">class </em><code class="descname">BackendConfiguration</code><span class="sig-paren">(</span><em>backend_name</em>, <em>backend_version</em>, <em>n_qubits</em>, <em>basis_gates</em>, <em>gates</em>, <em>local</em>, <em>simulator</em>, <em>conditional</em>, <em>open_pulse</em>, <em>memory</em>, <em>max_shots</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#BackendConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseModel" title="qiskit.validation.base.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseModel</span></code></a></p>
+<p>Model for BackendConfiguration.</p>
+<p>Please note that this class only describes the required fields. For the
+full description of the model, please check <code class="docutils literal notranslate"><span class="pre">BackendConfigurationSchema</span></code>.
+.. attribute:: backend_name</p>
+<blockquote>
+<div><p>backend name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.backend_version">
+<code class="descname">backend_version</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.backend_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend version in the form X.Y.Z.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.n_qubits">
+<code class="descname">n_qubits</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.n_qubits" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of qubits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.basis_gates">
+<code class="descname">basis_gates</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.basis_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of basis gates names on the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.gates">
+<code class="descname">gates</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of basis gates on the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#qiskit.providers.models.backendconfiguration.GateConfig" title="qiskit.providers.models.backendconfiguration.GateConfig">GateConfig</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.local">
+<code class="descname">local</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.local" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend is local or remote.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.simulator">
+<code class="descname">simulator</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.simulator" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend is a simulator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.conditional">
+<code class="descname">conditional</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.conditional" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports conditional operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.open_pulse">
+<code class="descname">open_pulse</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.open_pulse" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports open pulse.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.memory">
+<code class="descname">memory</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports memory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.max_shots">
+<code class="descname">max_shots</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.max_shots" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum number of shots supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.schema">
+<code class="descname">schema</code><em class="property"> = &lt;BackendConfigurationSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfiguration.shallow_schema">
+<code class="descname">shallow_schema</code><em class="property"> = &lt;BackendConfigurationSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration.shallow_schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfigurationSchema">
+<em class="property">class </em><code class="descname">BackendConfigurationSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#BackendConfigurationSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfigurationSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseSchema" title="qiskit.validation.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseSchema</span></code></a></p>
+<p>Schema for BackendConfiguration.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfigurationSchema.model_cls">
+<code class="descname">model_cls</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfigurationSchema.model_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration" title="qiskit.providers.models.backendconfiguration.BackendConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackendConfiguration</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.BackendConfigurationSchema.opts">
+<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.BackendConfigurationSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfig">
+<em class="property">class </em><code class="descname">GateConfig</code><span class="sig-paren">(</span><em>name</em>, <em>parameters</em>, <em>qasm_def</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#GateConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseModel" title="qiskit.validation.base.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseModel</span></code></a></p>
+<p>Model for GateConfig.</p>
+<p>Please note that this class only describes the required fields. For the
+full description of the model, please check <code class="docutils literal notranslate"><span class="pre">GateConfigSchema</span></code>.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfig.name">
+<code class="descname">name</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>the gate name as it will be referred to in Qasm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfig.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfig.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>variable names for the gate parameters (if any).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfig.qasm_def">
+<code class="descname">qasm_def</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfig.qasm_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>definition of this gate in terms of Qasm primitives U
+and CX.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfig.schema">
+<code class="descname">schema</code><em class="property"> = &lt;GateConfigSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfig.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfig.shallow_schema">
+<code class="descname">shallow_schema</code><em class="property"> = &lt;GateConfigSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfig.shallow_schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfigSchema">
+<em class="property">class </em><code class="descname">GateConfigSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#GateConfigSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfigSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseSchema" title="qiskit.validation.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseSchema</span></code></a></p>
+<p>Schema for GateConfig.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfigSchema.model_cls">
+<code class="descname">model_cls</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfigSchema.model_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.GateConfig" title="qiskit.providers.models.backendconfiguration.GateConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">GateConfig</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.GateConfigSchema.opts">
+<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.GateConfigSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration">
+<em class="property">class </em><code class="descname">PulseBackendConfiguration</code><span class="sig-paren">(</span><em>backend_name</em>, <em>backend_version</em>, <em>n_qubits</em>, <em>basis_gates</em>, <em>gates</em>, <em>local</em>, <em>simulator</em>, <em>conditional</em>, <em>open_pulse</em>, <em>memory</em>, <em>max_shots</em>, <em>n_uchannels</em>, <em>u_channel_lo</em>, <em>meas_levels</em>, <em>qubit_lo_range</em>, <em>meas_lo_range</em>, <em>dt</em>, <em>dtm</em>, <em>rep_times</em>, <em>meas_kernels</em>, <em>discriminators</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#PulseBackendConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration" title="qiskit.providers.models.backendconfiguration.BackendConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.models.backendconfiguration.BackendConfiguration</span></code></a></p>
+<p>Model for PulseBackendConfiguration.</p>
+<p>Please note that this class only describes the required fields. For the
+full description of the model, please check <code class="docutils literal notranslate"><span class="pre">PulseBackendConfigurationSchema</span></code>.
+.. attribute:: backend_name</p>
+<blockquote>
+<div><p>backend name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.backend_version">
+<code class="descname">backend_version</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.backend_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend version in the form X.Y.Z.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.n_qubits">
+<code class="descname">n_qubits</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.n_qubits" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of qubits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.basis_gates">
+<code class="descname">basis_gates</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.basis_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of basis gates names on the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.gates">
+<code class="descname">gates</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of basis gates on the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#qiskit.providers.models.backendconfiguration.GateConfig" title="qiskit.providers.models.backendconfiguration.GateConfig">GateConfig</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.local">
+<code class="descname">local</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.local" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend is local or remote.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.simulator">
+<code class="descname">simulator</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.simulator" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend is a simulator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.conditional">
+<code class="descname">conditional</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.conditional" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports conditional operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.open_pulse">
+<code class="descname">open_pulse</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.open_pulse" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports open pulse.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.memory">
+<code class="descname">memory</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports memory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.max_shots">
+<code class="descname">max_shots</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.max_shots" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum number of shots supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.n_uchannels">
+<code class="descname">n_uchannels</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.n_uchannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of u-channels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.u_channel_lo">
+<code class="descname">u_channel_lo</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.u_channel_lo" title="Permalink to this definition">¶</a></dt>
+<dd><p>U-channel relationship on device los.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[<a class="reference internal" href="#qiskit.providers.models.backendconfiguration.UchannelLO" title="qiskit.providers.models.backendconfiguration.UchannelLO">UchannelLO</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.meas_levels">
+<code class="descname">meas_levels</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.meas_levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported measurement levels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.qubit_lo_range">
+<code class="descname">qubit_lo_range</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.qubit_lo_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Qubit lo ranges for each qubit
+with form (min, max) in GHz.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[list[float]]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.meas_lo_range">
+<code class="descname">meas_lo_range</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.meas_lo_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measurement lo ranges for each qubit
+with form (min, max) in GHz.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[list[float]]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.dt">
+<code class="descname">dt</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.dt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Qubit drive channel timestep in nanoseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.dtm">
+<code class="descname">dtm</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.dtm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measurement drive channel timestep in nanoseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.rep_times">
+<code class="descname">rep_times</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.rep_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported repition times for device in microseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[float]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.meas_kernels">
+<code class="descname">meas_kernels</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.meas_kernels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported measurement kernels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.discriminators">
+<code class="descname">discriminators</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.discriminators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported discriminators.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">**kwargs</code></dt>
+<dd><p>Optional fields.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.schema">
+<code class="descname">schema</code><em class="property"> = &lt;PulseBackendConfigurationSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.shallow_schema">
+<code class="descname">shallow_schema</code><em class="property"> = &lt;PulseBackendConfigurationSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration.shallow_schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema">
+<em class="property">class </em><code class="descname">PulseBackendConfigurationSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#PulseBackendConfigurationSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema" title="qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema</span></code></a></p>
+<p>Schema for pulse backend</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema.hamiltonian">
+<code class="descname">hamiltonian</code><em class="property"> = &lt;PulseHamiltonianSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema.hamiltonian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema.model_cls">
+<code class="descname">model_cls</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema.model_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfiguration" title="qiskit.providers.models.backendconfiguration.PulseBackendConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">PulseBackendConfiguration</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema.opts">
+<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseBackendConfigurationSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.PulseHamiltonianSchema">
+<em class="property">class </em><code class="descname">PulseHamiltonianSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#PulseHamiltonianSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseHamiltonianSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseSchema" title="qiskit.validation.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseSchema</span></code></a></p>
+<p>Schema for PulseHamiltonian.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.PulseHamiltonianSchema.opts">
+<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.PulseHamiltonianSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration">
+<em class="property">class </em><code class="descname">QasmBackendConfiguration</code><span class="sig-paren">(</span><em>backend_name</em>, <em>backend_version</em>, <em>n_qubits</em>, <em>basis_gates</em>, <em>gates</em>, <em>local</em>, <em>simulator</em>, <em>conditional</em>, <em>open_pulse</em>, <em>memory</em>, <em>max_shots</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#QasmBackendConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.BackendConfiguration" title="qiskit.providers.models.backendconfiguration.BackendConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.models.backendconfiguration.BackendConfiguration</span></code></a></p>
+<p>Model for QasmBackendConfiguration.</p>
+<p>Please note that this class only describes the required fields. For the
+full description of the model, please check <code class="docutils literal notranslate"><span class="pre">QasmBackendConfigurationSchema</span></code>.
+.. attribute:: backend_name</p>
+<blockquote>
+<div><p>backend name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.backend_version">
+<code class="descname">backend_version</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.backend_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend version in the form X.Y.Z.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.n_qubits">
+<code class="descname">n_qubits</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.n_qubits" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of qubits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.basis_gates">
+<code class="descname">basis_gates</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.basis_gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of basis gates names on the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.gates">
+<code class="descname">gates</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.gates" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of basis gates on the backend.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#qiskit.providers.models.backendconfiguration.GateConfig" title="qiskit.providers.models.backendconfiguration.GateConfig">GateConfig</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.local">
+<code class="descname">local</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.local" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend is local or remote.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.simulator">
+<code class="descname">simulator</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.simulator" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend is a simulator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.conditional">
+<code class="descname">conditional</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.conditional" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports conditional operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.open_pulse">
+<code class="descname">open_pulse</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.open_pulse" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports open pulse.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.memory">
+<code class="descname">memory</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>backend supports memory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.max_shots">
+<code class="descname">max_shots</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.max_shots" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum number of shots supported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">**kwargs</code></dt>
+<dd><p>Optional fields.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.schema">
+<code class="descname">schema</code><em class="property"> = &lt;QasmBackendConfigurationSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.shallow_schema">
+<code class="descname">shallow_schema</code><em class="property"> = &lt;QasmBackendConfigurationSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration.shallow_schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema">
+<em class="property">class </em><code class="descname">QasmBackendConfigurationSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#QasmBackendConfigurationSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.BackendConfigurationSchema" title="qiskit.providers.models.backendconfiguration.BackendConfigurationSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.providers.models.backendconfiguration.BackendConfigurationSchema</span></code></a></p>
+<p>Schema for Qasm backend.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema.model_cls">
+<code class="descname">model_cls</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema.model_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfiguration" title="qiskit.providers.models.backendconfiguration.QasmBackendConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">QasmBackendConfiguration</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema.opts">
+<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.QasmBackendConfigurationSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLO">
+<em class="property">class </em><code class="descname">UchannelLO</code><span class="sig-paren">(</span><em>q</em>, <em>scale</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#UchannelLO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseModel" title="qiskit.validation.base.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseModel</span></code></a></p>
+<p>Model for GateConfig.</p>
+<p>Please note that this class only describes the required fields. For the
+full description of the model, please check <code class="docutils literal notranslate"><span class="pre">GateConfigSchema</span></code>.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLO.q">
+<code class="descname">q</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLO.q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Qubit that scale corresponds too.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLO.scale">
+<code class="descname">scale</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLO.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale factor for qubit frequency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">complex</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLO.schema">
+<code class="descname">schema</code><em class="property"> = &lt;UchannelLOSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLO.schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLO.shallow_schema">
+<code class="descname">shallow_schema</code><em class="property"> = &lt;UchannelLOSchema(many=False, strict=True)&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLO.shallow_schema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLOSchema">
+<em class="property">class </em><code class="descname">UchannelLOSchema</code><span class="sig-paren">(</span><em>extra=None</em>, <em>only=None</em>, <em>exclude=()</em>, <em>prefix=''</em>, <em>strict=None</em>, <em>many=False</em>, <em>context=None</em>, <em>load_only=()</em>, <em>dump_only=()</em>, <em>partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/models/backendconfiguration.html#UchannelLOSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLOSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qiskit.validation.base.html#qiskit.validation.base.BaseSchema" title="qiskit.validation.base.BaseSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.validation.base.BaseSchema</span></code></a></p>
+<p>Schema for uchannel LO.</p>
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLOSchema.model_cls">
+<code class="descname">model_cls</code><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLOSchema.model_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#qiskit.providers.models.backendconfiguration.UchannelLO" title="qiskit.providers.models.backendconfiguration.UchannelLO"><code class="xref py py-class docutils literal notranslate"><span class="pre">UchannelLO</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qiskit.providers.models.backendconfiguration.UchannelLOSchema.opts">
+<code class="descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#qiskit.providers.models.backendconfiguration.UchannelLOSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="qiskit.providers.models.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>qiskit.providers.models package</div>
+         </div>
+     </a>
+     <a id="button-next" href="qiskit.providers.models.backendproperties.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>qiskit.providers.models.backendproperties module</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.providers.ibmq.job.ibmqjob &#8212; Qiskit 0.11.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.providers.ibmq.job.ibmqjob</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;IBMQJob module</span>
+
+<span class="sd">This module is used for creating asynchronous job objects for the</span>
+<span class="sd">IBM Q Experience.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">concurrent</span> <span class="k">import</span> <span class="n">futures</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="k">import</span> <span class="n">BaseJob</span><span class="p">,</span> <span class="n">JobError</span><span class="p">,</span> <span class="n">JobTimeoutError</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.jobstatus</span> <span class="k">import</span> <span class="n">JOB_FINAL_STATES</span><span class="p">,</span> <span class="n">JobStatus</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendProperties</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="n">Qobj</span><span class="p">,</span> <span class="n">validate_qobj_against_schema</span>
+<span class="kn">from</span> <span class="nn">qiskit.result</span> <span class="k">import</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.events.pubsub</span> <span class="k">import</span> <span class="n">Publisher</span>
+
+<span class="kn">from</span> <span class="nn">..api</span> <span class="k">import</span> <span class="n">ApiError</span>
+<span class="kn">from</span> <span class="nn">..apiconstants</span> <span class="k">import</span> <span class="n">ApiJobStatus</span>
+<span class="kn">from</span> <span class="nn">..api_v2.exceptions</span> <span class="k">import</span> <span class="n">WebsocketTimeoutError</span><span class="p">,</span> <span class="n">WebsocketError</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">current_utc_time</span><span class="p">,</span> <span class="n">build_error_report</span><span class="p">,</span> <span class="n">is_job_queued</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="IBMQJob"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob">[docs]</a><span class="k">class</span> <span class="nc">IBMQJob</span><span class="p">(</span><span class="n">BaseJob</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Representation of a job that will be execute on a IBMQ backend.</span>
+
+<span class="sd">    Represent the jobs that will be executed on IBM-Q simulators and real</span>
+<span class="sd">    devices. Jobs are intended to be created calling ``run()`` on a particular</span>
+<span class="sd">    backend.</span>
+
+<span class="sd">    Creating a ``Job`` instance does not imply running it. You need to do it in</span>
+<span class="sd">    separate steps::</span>
+
+<span class="sd">        job = IBMQJob(...)</span>
+<span class="sd">        job.submit() # It won&#39;t block.</span>
+
+<span class="sd">    An error while submitting a job will cause the next call to ``status()`` to</span>
+<span class="sd">    raise. If submitting the job successes, you can inspect the job&#39;s status by</span>
+<span class="sd">    using ``status()``. Status can be one of ``JobStatus`` members::</span>
+
+<span class="sd">        from qiskit.backends.jobstatus import JobStatus</span>
+
+<span class="sd">        job = IBMQJob(...)</span>
+<span class="sd">        job.submit()</span>
+
+<span class="sd">        try:</span>
+<span class="sd">            job_status = job.status() # It won&#39;t block. It will query the backend API.</span>
+<span class="sd">            if job_status is JobStatus.RUNNING:</span>
+<span class="sd">                print(&#39;The job is still running&#39;)</span>
+
+<span class="sd">        except JobError as ex:</span>
+<span class="sd">            print(&quot;Something wrong happened!: {}&quot;.format(ex))</span>
+
+<span class="sd">    A call to ``status()`` can raise if something happens at the API level that</span>
+<span class="sd">    prevents Qiskit from determining the status of the job. An example of this</span>
+<span class="sd">    is a temporary connection lose or a network failure.</span>
+
+<span class="sd">    The ``submit()`` and ``status()`` methods are examples of non-blocking API.</span>
+<span class="sd">    ``Job`` instances also have `id()` and ``result()`` methods which will</span>
+<span class="sd">    block::</span>
+
+<span class="sd">        job = IBMQJob(...)</span>
+<span class="sd">        job.submit()</span>
+
+<span class="sd">        try:</span>
+<span class="sd">            job_id = job.id() # It will block until completing submission.</span>
+<span class="sd">            print(&#39;The job {} was successfully submitted&#39;.format(job_id))</span>
+
+<span class="sd">            job_result = job.result() # It will block until finishing.</span>
+<span class="sd">            print(&#39;The job finished with result {}&#39;.format(job_result))</span>
+
+<span class="sd">        except JobError as ex:</span>
+<span class="sd">            print(&quot;Something wrong happened!: {}&quot;.format(ex))</span>
+
+<span class="sd">    Both methods can raise if something ath the API level happens that prevent</span>
+<span class="sd">    Qiskit from determining the status of the job.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        When querying the API for getting the status, two kinds of errors are</span>
+<span class="sd">        possible. The most severe is the one preventing Qiskit from getting a</span>
+<span class="sd">        response from the backend. This can be caused by a network failure or a</span>
+<span class="sd">        temporary system break. In these cases, calling ``status()`` will raise.</span>
+
+<span class="sd">        If Qiskit successfully retrieves the status of a job, it could be it</span>
+<span class="sd">        finished with errors. In that case, ``status()`` will simply return</span>
+<span class="sd">        ``JobStatus.ERROR`` and you can call ``error_message()`` to get more</span>
+<span class="sd">        info.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        _executor (futures.Executor): executor to handle asynchronous jobs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">api</span><span class="p">,</span> <span class="n">qobj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">creation_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">api_status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">use_object_storage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_websockets</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;IBMQJob init function.</span>
+
+<span class="sd">        We can instantiate jobs from two sources: A QObj, and an already submitted job returned by</span>
+<span class="sd">        the API servers.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backend (BaseBackend): The backend instance used to run this job.</span>
+<span class="sd">            job_id (str or None): The job ID of an already submitted job.</span>
+<span class="sd">                Pass `None` if you are creating a new job.</span>
+<span class="sd">            api (IBMQConnector or BaseClient): object for connecting to the API.</span>
+<span class="sd">            qobj (Qobj): The Quantum Object. See notes below</span>
+<span class="sd">            creation_date (str): When the job was run.</span>
+<span class="sd">            api_status (str): `status` field directly from the API response.</span>
+<span class="sd">            use_object_storage (bool): if `True`, signals that the Job will</span>
+<span class="sd">                _attempt_ to use object storage for submitting jobs and</span>
+<span class="sd">                retrieving results.</span>
+<span class="sd">            use_websockets (bool): if `True`, signals that the Job will</span>
+<span class="sd">                _attempt_ to use websockets when pooling for final status.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            It is mandatory to pass either ``qobj`` or ``job_id``. Passing a ``qobj``</span>
+<span class="sd">            will ignore ``job_id`` and will create an instance to be submitted to the</span>
+<span class="sd">            API server for job creation. Passing only a `job_id` will create an instance</span>
+<span class="sd">            representing an already-created job retrieved from the API server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">job_id</span><span class="p">)</span>
+
+        <span class="c1"># Properties common to all Jobs.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_creation_date</span> <span class="o">=</span> <span class="n">creation_date</span> <span class="ow">or</span> <span class="n">current_utc_time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_future_captured_exception</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Properties used for caching.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue_position</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Properties used for deciding the underlying API features to use.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_object_storage</span> <span class="o">=</span> <span class="n">use_object_storage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_websockets</span> <span class="o">=</span> <span class="n">use_websockets</span>
+
+        <span class="k">if</span> <span class="n">qobj</span><span class="p">:</span>
+            <span class="n">validate_qobj_against_schema</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span> <span class="o">=</span> <span class="n">qobj</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">INITIALIZING</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># In case of not providing a `qobj`, it is assumed the job already</span>
+            <span class="c1"># exists in the API (with `job_id`).</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="c1"># Some API calls (`get_status_jobs`, `get_status_job`) provide</span>
+            <span class="c1"># enough information to recreate the `Job`. If that is the case, try</span>
+            <span class="c1"># to make use of that information during instantiation, as</span>
+            <span class="c1"># `self.status()` involves an extra call to the API.</span>
+            <span class="k">if</span> <span class="n">api_status</span> <span class="o">==</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">VALIDATING</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">VALIDATING</span>
+            <span class="k">elif</span> <span class="n">api_status</span> <span class="o">==</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+            <span class="k">elif</span> <span class="n">api_status</span> <span class="o">==</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">CANCELLED</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">CANCELLED</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">api_status</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">ERROR_CREATING_JOB</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                                <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">ERROR_VALIDATING_JOB</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                                <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">ERROR_RUNNING_JOB</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">INITIALIZING</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+
+<div class="viewcode-block" id="IBMQJob.qobj"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.qobj">[docs]</a>    <span class="k">def</span> <span class="nf">qobj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the Qobj submitted for this job.</span>
+
+<span class="sd">        Note that this method might involve querying the API for results if the</span>
+<span class="sd">        Job has been created in a previous Qiskit session.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Qobj: the Qobj submitted for this job.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span><span class="p">:</span>
+            <span class="c1"># Populate self._qobj_payload by retrieving the results.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_job</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">Qobj</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQJob.properties"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the backend properties for this job.</span>
+
+<span class="sd">        The properties might not be available if the job hasn&#39;t completed,</span>
+<span class="sd">        in which case None is returned.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            BackendProperties: the backend properties used for this job, or None if</span>
+<span class="sd">                properties are not available.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_submission</span><span class="p">()</span>
+
+        <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">job_properties</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+
+        <span class="c1"># Backend properties of a job might not be available if the job hasn&#39;t</span>
+        <span class="c1"># completed. This is to ensure the properties returned are up to date.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">properties</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">BackendProperties</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></div>
+
+    <span class="c1"># pylint: disable=arguments-differ</span>
+<div class="viewcode-block" id="IBMQJob.result"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.result">[docs]</a>    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the result of the job.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Some IBMQ job results can be read only once. A second attempt to</span>
+<span class="sd">            query the API for the job will fail, as the job is &quot;consumed&quot;.</span>
+
+<span class="sd">            The first call to this method in an ``IBMQJob`` instance will query</span>
+<span class="sd">            the API and consume the job if it finished successfully (otherwise</span>
+<span class="sd">            it will raise a ``JobError`` exception without consuming the job).</span>
+<span class="sd">            Subsequent calls to that instance&#39;s method will also return the</span>
+<span class="sd">            results, since they are cached. However, attempting to retrieve the</span>
+<span class="sd">            results again in another instance or session might fail due to the</span>
+<span class="sd">            job having been consumed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">           timeout (float): number of seconds to wait for job</span>
+<span class="sd">           wait (int): time between queries to IBM Q server</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            qiskit.Result: Result object</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobError: if attempted to recover a result on a failed job.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_completion</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">)</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s1">&#39;Invalid job state. The job should be DONE but &#39;</span>
+                           <span class="s1">&#39;it is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">status</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_object_storage</span><span class="p">:</span>
+                <span class="c1"># Retrieve the results via object storage.</span>
+                <span class="n">result_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">job_result_object_storage</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">result_response</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">job_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_job</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">job_response</span><span class="p">[</span><span class="s1">&#39;qObjectResult&#39;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span></div>
+
+<div class="viewcode-block" id="IBMQJob.cancel"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attempt to cancel a job.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This function waits for a job ID to become available if the job</span>
+<span class="sd">            has been submitted but not yet queued.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if job can be cancelled, else False. Note this operation</span>
+<span class="sd">            might not be possible depending on the environment.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobError: if there was some unexpected failure in the server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Wait for the job ID to become available.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_submission</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">cancel_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span>
+        <span class="k">except</span> <span class="n">ApiError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s1">&#39;Error cancelling job: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">error</span><span class="o">.</span><span class="n">usr_msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQJob.status"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Query the API to update the status.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            qiskit.providers.JobStatus: The status of the job, once updated.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobError: if there was an exception in the future being executed</span>
+<span class="sd">                          or the server sent an unknown answer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Implies self._job_id is None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future_captured_exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_future_captured_exception</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="ow">in</span> <span class="n">JOB_FINAL_STATES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># TODO: See result values</span>
+            <span class="n">api_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_status_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_status</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+        <span class="c1"># pylint: disable=broad-except</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span></div>
+
+    <span class="k">def</span> <span class="nf">_update_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_response</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update the job status from an API status.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            api_response (dict): API response for a status query.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobError: if the API response could not be parsed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;status&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">api_response</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s1">&#39;Unrecognized answer from server: </span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">api_response</span><span class="p">)))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">api_status</span> <span class="o">=</span> <span class="n">ApiJobStatus</span><span class="p">(</span><span class="n">api_response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s1">&#39;Unrecognized status from server: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">api_response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]))</span>
+
+        <span class="k">if</span> <span class="n">api_status</span> <span class="ow">is</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">VALIDATING</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">VALIDATING</span>
+
+        <span class="k">elif</span> <span class="n">api_status</span> <span class="ow">is</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">RUNNING</span>
+            <span class="n">queued</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue_position</span> <span class="o">=</span> <span class="n">is_job_queued</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">queued</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">QUEUED</span>
+
+        <span class="k">elif</span> <span class="n">api_status</span> <span class="ow">is</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">DONE</span>
+
+        <span class="k">elif</span> <span class="n">api_status</span> <span class="ow">is</span> <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">CANCELLED</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">CANCELLED</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">elif</span> <span class="n">api_status</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">ERROR_CREATING_JOB</span><span class="p">,</span>
+                            <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">ERROR_VALIDATING_JOB</span><span class="p">,</span>
+                            <span class="n">ApiJobStatus</span><span class="o">.</span><span class="n">ERROR_RUNNING_JOB</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
+
+<div class="viewcode-block" id="IBMQJob.error_message"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.error_message">[docs]</a>    <span class="k">def</span> <span class="nf">error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provide details about the reason of failure.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Some IBMQ job results can be read only once. A second attempt to</span>
+<span class="sd">            query the API for the job will fail, as the job is &quot;consumed&quot;.</span>
+
+<span class="sd">            The first call to this method in an ``IBMQJob`` instance will query</span>
+<span class="sd">            the API and consume the job if it errored at some point (otherwise</span>
+<span class="sd">            it will return ``None``). Subsequent calls to that instance&#39;s method</span>
+<span class="sd">            will also return the failure details, since they are cached.</span>
+<span class="sd">            However, attempting to retrieve the error details again in another</span>
+<span class="sd">            instance or session might fail due to the job having been consumed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: An error report if the job errored or ``None`` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_completion</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span><span class="p">:</span>
+            <span class="n">job_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_job</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s1">&#39;qObjectResult&#39;</span> <span class="ow">in</span> <span class="n">job_response</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="n">job_response</span><span class="p">[</span><span class="s1">&#39;qObjectResult&#39;</span><span class="p">][</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span> <span class="o">=</span> <span class="n">build_error_report</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;qasms&#39;</span> <span class="ow">in</span> <span class="n">job_response</span><span class="p">:</span>
+                <span class="n">qasm_statuses</span> <span class="o">=</span> <span class="p">[</span><span class="n">qasm</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">qasm</span> <span class="ow">in</span> <span class="n">job_response</span><span class="p">[</span><span class="s1">&#39;qasms&#39;</span><span class="p">]]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span> <span class="o">=</span> <span class="s1">&#39;Job resulted in the following QASM status(es): &#39;</span> \
+                                      <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">qasm_statuses</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span> <span class="o">=</span> <span class="n">job_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;An unknown error occurred.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span></div>
+
+<div class="viewcode-block" id="IBMQJob.queue_position"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.queue_position">[docs]</a>    <span class="k">def</span> <span class="nf">queue_position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the position in the server queue.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number: Position in the queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue_position</span></div>
+
+<div class="viewcode-block" id="IBMQJob.creation_date"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.creation_date">[docs]</a>    <span class="k">def</span> <span class="nf">creation_date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return creation date.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_creation_date</span></div>
+
+<div class="viewcode-block" id="IBMQJob.job_id"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.job_id">[docs]</a>    <span class="k">def</span> <span class="nf">job_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the job ID assigned by the API.</span>
+
+<span class="sd">        If the job ID is not set because the job is still initializing, this</span>
+<span class="sd">        call will block until a job ID is available or the timeout is reached.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (float): number of seconds to wait for the job ID.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: the job ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_submission</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span></div>
+
+<div class="viewcode-block" id="IBMQJob.submit"><a class="viewcode-back" href="../../../../../autodoc/qiskit.providers.ibmq.job.ibmqjob.html#qiskit.providers.ibmq.job.ibmqjob.IBMQJob.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit job to IBM-Q.</span>
+
+<span class="sd">        Events:</span>
+<span class="sd">            ibmq.job.start: The job has started.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobError: If we have already submitted the job.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Validation against the schema should be done here and not</span>
+        <span class="c1"># during initialization. Once done, we should document that the method</span>
+        <span class="c1"># can raise QobjValidationError.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s2">&quot;We have already submitted the job!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_submit_callback</span><span class="p">)</span>
+        <span class="n">Publisher</span><span class="p">()</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;ibmq.job.start&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_submit_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit qobj job to IBM-Q.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary with the response of the submitted job</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">backend_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+
+        <span class="n">submit_info</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_object_storage</span><span class="p">:</span>
+            <span class="c1"># Attempt to use object storage.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">submit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">job_submit_object_storage</span><span class="p">(</span>
+                    <span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">,</span>
+                    <span class="n">qobj_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+                <span class="c1"># Fall back to submitting the Qobj via POST if object storage</span>
+                <span class="c1"># failed.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Submitting the job via object storage failed: &#39;</span>
+                            <span class="s1">&#39;retrying via regular POST upload.&#39;</span><span class="p">)</span>
+                <span class="c1"># Disable object storage for this job.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_use_object_storage</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">submit_info</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">submit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">submit_job</span><span class="p">(</span>
+                    <span class="n">backend_name</span><span class="o">=</span><span class="n">backend_name</span><span class="p">,</span>
+                    <span class="n">qobj_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+                <span class="c1"># Undefined error during submission:</span>
+                <span class="c1"># Capture and keep it for raising it when calling status().</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_future_captured_exception</span> <span class="o">=</span> <span class="n">err</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Error in the job after submission:</span>
+        <span class="c1"># Transition to the `ERROR` final state.</span>
+        <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">submit_info</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">submit_info</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">submit_info</span>
+
+        <span class="c1"># Submission success.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_creation_date</span> <span class="o">=</span> <span class="n">submit_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;creationDate&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">QUEUED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span> <span class="o">=</span> <span class="n">submit_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">submit_info</span>
+
+    <span class="k">def</span> <span class="nf">_wait_for_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Blocks until the job is complete and returns the job content from the</span>
+<span class="sd">        API, consuming it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (float): number of seconds to wait for job.</span>
+<span class="sd">            wait (int): time between queries to IBM Q server.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            dict: a dictionary with the contents of the job.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobError: if there is an error while requesting the results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_completion</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">wait</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">job_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_job</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_object_storage</span><span class="p">:</span>
+                    <span class="c1"># Attempt to use object storage.</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">job_download_qobj_object_storage</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_qobj_payload</span> <span class="o">=</span> <span class="n">job_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;qObject&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">except</span> <span class="n">ApiError</span> <span class="k">as</span> <span class="n">api_err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">api_err</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">job_response</span>
+
+    <span class="k">def</span> <span class="nf">_get_job</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Query the API for retrieving the job complete state, consuming it.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: a dictionary with the contents of the result.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobTimeoutError: if the job does not return results before a</span>
+<span class="sd">                specified timeout.</span>
+<span class="sd">            JobError: if something wrong happened in some of the server API</span>
+<span class="sd">                calls.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span>
+                <span class="s1">&#39;Job result impossible to retrieve. The job was cancelled.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_wait_for_completion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait until the job progress to a final state such as DONE or ERROR.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (float or None): seconds to wait for job. If None, wait</span>
+<span class="sd">                indefinitely.</span>
+<span class="sd">            wait (float): seconds between queries.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobTimeoutError: if the job does not return results before a</span>
+<span class="sd">                specified timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_submission</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="c1"># Attempt to use websocket if available.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_websockets</span><span class="p">:</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_final_status_websocket</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="k">except</span> <span class="n">WebsocketError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Error checking job status using websocket, &#39;</span>
+                               <span class="s1">&#39;retrying using HTTP.&#39;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">JobTimeoutError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Timeout checking job status using websocket, &#39;</span>
+                               <span class="s1">&#39;retrying using HTTP&#39;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+
+            <span class="c1"># Adjust timeout for HTTP retry.</span>
+            <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">timeout</span> <span class="o">-=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+        <span class="c1"># Use traditional http requests if websocket not available or failed.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_final_status</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">wait</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_wait_for_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Waits for the request to return a job ID&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s2">&quot;You have to submit the job before doing a job related operation!&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">submit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future_captured_exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future_captured_exception</span>
+            <span class="k">except</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">JobTimeoutError</span><span class="p">(</span>
+                    <span class="s2">&quot;Timeout waiting for the job being submitted: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">submit_info</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">ERROR</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_api_error_msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">submit_info</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span>
+                <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">submit_info</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]))</span>
+
+    <span class="k">def</span> <span class="nf">_wait_for_final_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait until the job progress to a final state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (float or None): seconds to wait for job. If None, wait</span>
+<span class="sd">                indefinitely.</span>
+<span class="sd">            wait (float): seconds between queries.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobTimeoutError: if the job does not return results before a</span>
+<span class="sd">                specified timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">JOB_FINAL_STATES</span><span class="p">:</span>
+            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">elapsed_time</span> <span class="o">&gt;=</span> <span class="n">timeout</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">JobTimeoutError</span><span class="p">(</span>
+                    <span class="s1">&#39;Timeout while waiting for job </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">))</span>
+
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;status = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1"> seconds)&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="n">elapsed_time</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_wait_for_final_status_websocket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait until the job progress to a final state using websockets.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (float or None): seconds to wait for job. If None, wait</span>
+<span class="sd">                indefinitely.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            JobTimeoutError: if the job does not return results before a</span>
+<span class="sd">                specified timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Avoid the websocket invocation if already in a final state.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="ow">in</span> <span class="n">JOB_FINAL_STATES</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">status_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">job_final_status_websocket</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_status</span><span class="p">(</span><span class="n">status_response</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">WebsocketTimeoutError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JobTimeoutError</span><span class="p">(</span>
+                <span class="s1">&#39;Timeout while waiting for job </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">))</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+  </body>
+</html>

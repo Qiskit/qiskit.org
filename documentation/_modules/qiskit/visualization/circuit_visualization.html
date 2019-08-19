@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.visualization.circuit_visualization &#8212; Qiskit 0.11.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.visualization.circuit_visualization</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="c1"># TODO: Remove after 0.7 and the deprecated methods are removed</span>
+<span class="c1"># pylint: disable=unused-argument</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Two quantum circuit drawers based on:</span>
+<span class="sd">    0. Ascii art</span>
+<span class="sd">    1. LaTeX</span>
+<span class="sd">    2. Matplotlib</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">user_config</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">latex</span> <span class="k">as</span> <span class="n">_latex</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">text</span> <span class="k">as</span> <span class="n">_text</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">matplotlib</span> <span class="k">as</span> <span class="n">_matplotlib</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="circuit_drawer"><a class="viewcode-back" href="../../../autodoc/qiskit.visualization.circuit_visualization.html#qiskit.visualization.circuit_visualization.circuit_drawer">[docs]</a><span class="k">def</span> <span class="nf">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                   <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                   <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">line_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw a quantum circuit to different formats (set by output parameter):</span>
+<span class="sd">    0. text: ASCII art TextDrawing that can be printed in the console.</span>
+<span class="sd">    1. latex: high-quality images, but heavy external software dependencies</span>
+<span class="sd">    2. matplotlib: purely in Python with no external dependencies</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit (QuantumCircuit): the quantum circuit to draw</span>
+<span class="sd">        scale (float): scale of image to draw (shrink if &lt; 1)</span>
+<span class="sd">        filename (str): file path to save image to</span>
+<span class="sd">        style (dict or str): dictionary of style or file name of style file.</span>
+<span class="sd">            This option is only used by the `mpl`, `latex`, and `latex_source`</span>
+<span class="sd">            output types. If a str is passed in that is the path to a json</span>
+<span class="sd">            file which contains that will be open, parsed, and then used just</span>
+<span class="sd">            as the input dict.</span>
+<span class="sd">        output (str): Select the output method to use for drawing the circuit.</span>
+<span class="sd">            Valid choices are `text`, `latex`, `latex_source`, `mpl`. By</span>
+<span class="sd">            default the &#39;text&#39; drawer is used unless a user config file has</span>
+<span class="sd">            an alternative backend set as the default. If the output is passed</span>
+<span class="sd">            in that backend will always be used.</span>
+<span class="sd">        interactive (bool): when set true show the circuit in a new window</span>
+<span class="sd">            (for `mpl` this depends on the matplotlib backend being used</span>
+<span class="sd">            supporting this). Note when used with either the `text` or the</span>
+<span class="sd">            `latex_source` output type this has no effect and will be silently</span>
+<span class="sd">            ignored.</span>
+<span class="sd">        line_length (int): Sets the length of the lines generated by `text`</span>
+<span class="sd">            output type. This useful when the drawing does not fit in the</span>
+<span class="sd">            console. If None (default), it will try to guess the console width</span>
+<span class="sd">            using shutil.get_terminal_size(). However, if you&#39;re running in</span>
+<span class="sd">            jupyter the default line length is set to 80 characters. If you</span>
+<span class="sd">            don&#39;t want pagination at all, set `line_length=-1`.</span>
+<span class="sd">        reverse_bits (bool): When set to True reverse the bit order inside</span>
+<span class="sd">            registers for the output visualization.</span>
+<span class="sd">        plot_barriers (bool): Enable/disable drawing barriers in the output</span>
+<span class="sd">            circuit. Defaults to True.</span>
+<span class="sd">        justify (string): Options are `left`, `right` or `none`, if anything</span>
+<span class="sd">            else is supplied it defaults to left justified. It refers to where</span>
+<span class="sd">            gates should be placed in the output circuit if there is an option.</span>
+<span class="sd">            `none` results in each gate being placed in its own column. Currently</span>
+<span class="sd">            only supported by text drawer.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        PIL.Image: (output `latex`) an in-memory representation of the image</span>
+<span class="sd">            of the circuit diagram.</span>
+<span class="sd">        matplotlib.figure: (output `mpl`) a matplotlib figure object for the</span>
+<span class="sd">            circuit diagram.</span>
+<span class="sd">        String: (output `latex_source`). The LaTeX source code.</span>
+<span class="sd">        TextDrawing: (output `text`). A drawing that can be printed as ascii art</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        VisualizationError: when an invalid output method is selected</span>
+<span class="sd">        ImportError: when the output methods requieres non-installed libraries.</span>
+
+<span class="sd">    .. _style-dict-doc:</span>
+
+<span class="sd">    The style dict kwarg contains numerous options that define the style of the</span>
+<span class="sd">    output circuit visualization. While the style dict is used by the `mpl`,</span>
+<span class="sd">    `latex`, and `latex_source` outputs some options in that are only used</span>
+<span class="sd">    by the `mpl` output. These options are defined below, if it is only used by</span>
+<span class="sd">    the `mpl` output it is marked as such:</span>
+
+<span class="sd">        textcolor (str): The color code to use for text. Defaults to</span>
+<span class="sd">            `&#39;#000000&#39;` (`mpl` only)</span>
+<span class="sd">        subtextcolor (str): The color code to use for subtext. Defaults to</span>
+<span class="sd">            `&#39;#000000&#39;` (`mpl` only)</span>
+<span class="sd">        linecolor (str): The color code to use for lines. Defaults to</span>
+<span class="sd">            `&#39;#000000&#39;` (`mpl` only)</span>
+<span class="sd">        creglinecolor (str): The color code to use for classical register lines</span>
+<span class="sd">            `&#39;#778899&#39;`(`mpl` only)</span>
+<span class="sd">        gatetextcolor (str): The color code to use for gate text `&#39;#000000&#39;`</span>
+<span class="sd">            (`mpl` only)</span>
+<span class="sd">        gatefacecolor (str): The color code to use for gates. Defaults to</span>
+<span class="sd">            `&#39;#ffffff&#39;` (`mpl` only)</span>
+<span class="sd">        barrierfacecolor (str): The color code to use for barriers. Defaults to</span>
+<span class="sd">            `&#39;#bdbdbd&#39;` (`mpl` only)</span>
+<span class="sd">        backgroundcolor (str): The color code to use for the background.</span>
+<span class="sd">            Defaults to `&#39;#ffffff&#39;` (`mpl` only)</span>
+<span class="sd">        fontsize (int): The font size to use for text. Defaults to 13 (`mpl`</span>
+<span class="sd">            only)</span>
+<span class="sd">        subfontsize (int): The font size to use for subtext. Defaults to 8</span>
+<span class="sd">            (`mpl` only)</span>
+<span class="sd">        displaytext (dict): A dictionary of the text to use for each element</span>
+<span class="sd">            type in the output visualization. The default values are:</span>
+<span class="sd">            {</span>
+<span class="sd">                &#39;id&#39;: &#39;id&#39;,</span>
+<span class="sd">                &#39;u0&#39;: &#39;U_0&#39;,</span>
+<span class="sd">                &#39;u1&#39;: &#39;U_1&#39;,</span>
+<span class="sd">                &#39;u2&#39;: &#39;U_2&#39;,</span>
+<span class="sd">                &#39;u3&#39;: &#39;U_3&#39;,</span>
+<span class="sd">                &#39;x&#39;: &#39;X&#39;,</span>
+<span class="sd">                &#39;y&#39;: &#39;Y&#39;,</span>
+<span class="sd">                &#39;z&#39;: &#39;Z&#39;,</span>
+<span class="sd">                &#39;h&#39;: &#39;H&#39;,</span>
+<span class="sd">                &#39;s&#39;: &#39;S&#39;,</span>
+<span class="sd">                &#39;sdg&#39;: &#39;S^\\dagger&#39;,</span>
+<span class="sd">                &#39;t&#39;: &#39;T&#39;,</span>
+<span class="sd">                &#39;tdg&#39;: &#39;T^\\dagger&#39;,</span>
+<span class="sd">                &#39;rx&#39;: &#39;R_x&#39;,</span>
+<span class="sd">                &#39;ry&#39;: &#39;R_y&#39;,</span>
+<span class="sd">                &#39;rz&#39;: &#39;R_z&#39;,</span>
+<span class="sd">                &#39;reset&#39;: &#39;\\left|0\\right\\rangle&#39;</span>
+<span class="sd">            }</span>
+<span class="sd">            You must specify all the necessary values if using this. There is</span>
+<span class="sd">            no provision for passing an incomplete dict in. (`mpl` only)</span>
+<span class="sd">        displaycolor (dict): The color codes to use for each circuit element.</span>
+<span class="sd">            By default all values default to the value of `gatefacecolor` and</span>
+<span class="sd">            the keys are the same as `displaytext`. Also, just like</span>
+<span class="sd">            `displaytext` there is no provision for an incomplete dict passed</span>
+<span class="sd">            in. (`mpl` only)</span>
+<span class="sd">        latexdrawerstyle (bool): When set to True enable latex mode which will</span>
+<span class="sd">            draw gates like the `latex` output modes. (`mpl` only)</span>
+<span class="sd">        usepiformat (bool): When set to True use radians for output (`mpl`</span>
+<span class="sd">            only)</span>
+<span class="sd">        fold (int): The number of circuit elements to fold the circuit at.</span>
+<span class="sd">            Defaults to 20 (`mpl` only)</span>
+<span class="sd">        cregbundle (bool): If set True bundle classical registers (`mpl` only)</span>
+<span class="sd">        showindex (bool): If set True draw an index. (`mpl` only)</span>
+<span class="sd">        compress (bool): If set True draw a compressed circuit (`mpl` only)</span>
+<span class="sd">        figwidth (int): The maximum width (in inches) for the output figure.</span>
+<span class="sd">            (`mpl` only)</span>
+<span class="sd">        dpi (int): The DPI to use for the output image. Defaults to 150 (`mpl`</span>
+<span class="sd">            only)</span>
+<span class="sd">        margin (list): `mpl` only</span>
+<span class="sd">        creglinestyle (str): The style of line to use for classical registers.</span>
+<span class="sd">            Choices are `&#39;solid&#39;`, `&#39;doublet&#39;`, or any valid matplotlib</span>
+<span class="sd">            `linestyle` kwarg value. Defaults to `doublet`(`mpl` only)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">user_config</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+    <span class="c1"># Get default from config file else use text</span>
+    <span class="n">default_output</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">default_output</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;circuit_drawer&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">default_output</span>
+
+    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;text&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_text_circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                                    <span class="n">line_length</span><span class="o">=</span><span class="n">line_length</span><span class="p">,</span>
+                                    <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                    <span class="n">plotbarriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                    <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;latex&#39;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">_latex_circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                                      <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                                      <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                      <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                      <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;latex_source&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_generate_latex_source</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                                      <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                                      <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                                      <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                      <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                      <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;mpl&#39;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">_matplotlib_circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                                           <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                                           <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                           <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                           <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">VisualizationError</span><span class="p">(</span>
+            <span class="s1">&#39;Invalid output type </span><span class="si">%s</span><span class="s1"> selected. The only valid choices &#39;</span>
+            <span class="s1">&#39;are latex, latex_source, text, and mpl&#39;</span> <span class="o">%</span> <span class="n">output</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">image</span> <span class="ow">and</span> <span class="n">interactive</span><span class="p">:</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Plot style sheet option</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="qx_color_scheme"><a class="viewcode-back" href="../../../autodoc/qiskit.visualization.circuit_visualization.html#qiskit.visualization.circuit_visualization.qx_color_scheme">[docs]</a><span class="k">def</span> <span class="nf">qx_color_scheme</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return default style for matplotlib_circuit_drawer (IBM QX style).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Style file for matplotlib_circuit_drawer (IBM QX Composer style)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;textcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gatetextcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subtextcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;linecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;creglinecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#b9b9b9&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gatefacecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;barrierfacecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#bdbdbd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;backgroundcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fold&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+        <span class="s2">&quot;subfontsize&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;figwidth&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;dpi&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+        <span class="s2">&quot;displaytext&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u0&quot;</span><span class="p">:</span> <span class="s2">&quot;U_0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u1&quot;</span><span class="p">:</span> <span class="s2">&quot;U_1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u2&quot;</span><span class="p">:</span> <span class="s2">&quot;U_2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u3&quot;</span><span class="p">:</span> <span class="s2">&quot;U_3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="s2">&quot;S^</span><span class="se">\\</span><span class="s2">dagger&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tdg&quot;</span><span class="p">:</span> <span class="s2">&quot;T^</span><span class="se">\\</span><span class="s2">dagger&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="s2">&quot;R_x&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="s2">&quot;R_y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="s2">&quot;R_z&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;reset&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">left|0</span><span class="se">\\</span><span class="s2">right</span><span class="se">\\</span><span class="s2">rangle&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;displaycolor&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffca64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u0&quot;</span><span class="p">:</span> <span class="s2">&quot;#f69458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u1&quot;</span><span class="p">:</span> <span class="s2">&quot;#f69458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u2&quot;</span><span class="p">:</span> <span class="s2">&quot;#f69458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;u3&quot;</span><span class="p">:</span> <span class="s2">&quot;#f69458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;#a6ce38&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;#a6ce38&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="s2">&quot;#a6ce38&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="s2">&quot;#00bff2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="s2">&quot;#00bff2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="s2">&quot;#00bff2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;#ff6666&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tdg&quot;</span><span class="p">:</span> <span class="s2">&quot;#ff6666&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffca64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffca64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffca64&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;reset&quot;</span><span class="p">:</span> <span class="s2">&quot;#d7ddda&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;#00bff2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;meas&quot;</span><span class="p">:</span> <span class="s2">&quot;#f070aa&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;latexdrawerstyle&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;usepiformat&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;cregbundle&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;plotbarrier&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;showindex&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;compress&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+        <span class="s2">&quot;creglinestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;reversebits&quot;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">}</span></div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># _text_circuit_drawer</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span> <span class="nf">_text_circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">plotbarriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vertically_compressed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draws a circuit using ascii art.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        circuit (QuantumCircuit): Input circuit</span>
+<span class="sd">        filename (str): optional filename to write the result</span>
+<span class="sd">        line_length (int): Optional. Breaks the circuit drawing to this length. This</span>
+<span class="sd">                   useful when the drawing does not fit in the console. If</span>
+<span class="sd">                   None (default), it will try to guess the console width using</span>
+<span class="sd">                   shutil.get_terminal_size(). If you don&#39;t want pagination</span>
+<span class="sd">                   at all, set line_length=-1.</span>
+<span class="sd">        reverse_bits (bool): Rearrange the bits in reverse order.</span>
+<span class="sd">        plotbarriers (bool): Draws the barriers when they are there.</span>
+<span class="sd">        justify (str) : `left`, `right` or `none`. Defaults to `left`. Says how</span>
+<span class="sd">                        the circuit should be justified.</span>
+<span class="sd">        vertically_compressed (bool): Default is `True`. It merges the lines so the</span>
+<span class="sd">                                      drawing will take less vertical room.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        TextDrawing: An instances that, when printed, draws the circuit in ascii art.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qregs</span><span class="p">,</span> <span class="n">cregs</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">_get_layered_instructions</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                                                        <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                                        <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+    <span class="n">text_drawing</span> <span class="o">=</span> <span class="n">_text</span><span class="o">.</span><span class="n">TextDrawing</span><span class="p">(</span><span class="n">qregs</span><span class="p">,</span> <span class="n">cregs</span><span class="p">,</span> <span class="n">ops</span><span class="p">)</span>
+    <span class="n">text_drawing</span><span class="o">.</span><span class="n">plotbarriers</span> <span class="o">=</span> <span class="n">plotbarriers</span>
+    <span class="n">text_drawing</span><span class="o">.</span><span class="n">line_length</span> <span class="o">=</span> <span class="n">line_length</span>
+    <span class="n">text_drawing</span><span class="o">.</span><span class="n">vertically_compressed</span> <span class="o">=</span> <span class="n">vertically_compressed</span>
+
+    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="n">text_drawing</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text_drawing</span>
+
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># latex_circuit_drawer</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span> <span class="nf">_latex_circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                          <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                          <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw a quantum circuit based on latex (Qcircuit package)</span>
+
+<span class="sd">    Requires version &gt;=2.6.0 of the qcircuit LaTeX package.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit (QuantumCircuit): a quantum circuit</span>
+<span class="sd">        scale (float): scaling factor</span>
+<span class="sd">        filename (str): file path to save image to</span>
+<span class="sd">        style (dict or str): dictionary of style or file name of style file</span>
+<span class="sd">        reverse_bits (bool): When set to True reverse the bit order inside</span>
+<span class="sd">            registers for the output visualization.</span>
+<span class="sd">        plot_barriers (bool): Enable/disable drawing barriers in the output</span>
+<span class="sd">            circuit. Defaults to True.</span>
+<span class="sd">        justify (str) : `left`, `right` or `none`. Defaults to `left`. Says how</span>
+<span class="sd">                        the circuit should be justified.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        PIL.Image: an in-memory representation of the circuit diagram</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        OSError: usually indicates that ```pdflatex``` or ```pdftocairo``` is</span>
+<span class="sd">                 missing.</span>
+<span class="sd">        CalledProcessError: usually points errors during diagram creation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tmpfilename</span> <span class="o">=</span> <span class="s1">&#39;circuit&#39;</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+        <span class="n">tmppath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">,</span> <span class="n">tmpfilename</span> <span class="o">+</span> <span class="s1">&#39;.tex&#39;</span><span class="p">)</span>
+        <span class="n">_generate_latex_source</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">tmppath</span><span class="p">,</span>
+                               <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                               <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                               <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;pdflatex&quot;</span><span class="p">,</span> <span class="s2">&quot;-halt-on-error&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;-output-directory=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">),</span>
+                            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmpfilename</span> <span class="o">+</span> <span class="s1">&#39;.tex&#39;</span><span class="p">)],</span>
+                           <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+                           <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ex</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;WARNING: Unable to compile latex. &#39;</span>
+                               <span class="s1">&#39;Is `pdflatex` installed? &#39;</span>
+                               <span class="s1">&#39;Skipping latex circuit drawing...&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;latex_error.log&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">error_file</span><span class="p">:</span>
+                <span class="n">error_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;WARNING Unable to compile latex. &#39;</span>
+                           <span class="s1">&#39;The output from the pdflatex command can &#39;</span>
+                           <span class="s1">&#39;be found in latex_error.log&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">,</span> <span class="n">tmpfilename</span><span class="p">)</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;pdftocairo&quot;</span><span class="p">,</span> <span class="s2">&quot;-singlefile&quot;</span><span class="p">,</span> <span class="s2">&quot;-png&quot;</span><span class="p">,</span> <span class="s2">&quot;-q&quot;</span><span class="p">,</span>
+                                <span class="n">base</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">,</span> <span class="n">base</span><span class="p">])</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">_trim</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+                    <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ex</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;WARNING: Unable to convert pdf to image. &#39;</span>
+                                   <span class="s1">&#39;Is `poppler` installed? &#39;</span>
+                                   <span class="s1">&#39;Skipping circuit drawing...&#39;</span><span class="p">)</span>
+                <span class="k">raise</span>
+        <span class="k">return</span> <span class="n">image</span>
+
+
+<span class="k">def</span> <span class="nf">_generate_latex_source</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert QuantumCircuit to LaTeX string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit (QuantumCircuit): input circuit</span>
+<span class="sd">        scale (float): image scaling</span>
+<span class="sd">        filename (str): optional filename to write latex</span>
+<span class="sd">        style (dict or str): dictionary of style or file name of style file</span>
+<span class="sd">        reverse_bits (bool): When set to True reverse the bit order inside</span>
+<span class="sd">            registers for the output visualization.</span>
+<span class="sd">        plot_barriers (bool): Enable/disable drawing barriers in the output</span>
+<span class="sd">            circuit. Defaults to True.</span>
+<span class="sd">        justify (str) : `left`, `right` or `none`. Defaults to `left`. Says how</span>
+<span class="sd">                        the circuit should be justified.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Latex string appropriate for writing to file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qregs</span><span class="p">,</span> <span class="n">cregs</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">_get_layered_instructions</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                                                        <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                                        <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+
+    <span class="n">qcimg</span> <span class="o">=</span> <span class="n">_latex</span><span class="o">.</span><span class="n">QCircuitImage</span><span class="p">(</span><span class="n">qregs</span><span class="p">,</span> <span class="n">cregs</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                                 <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                 <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">)</span>
+    <span class="n">latex</span> <span class="o">=</span> <span class="n">qcimg</span><span class="o">.</span><span class="n">latex</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">latex_file</span><span class="p">:</span>
+            <span class="n">latex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">latex</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">latex</span>
+
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># matplotlib_circuit_drawer</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span> <span class="nf">_matplotlib_circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                               <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                               <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw a quantum circuit based on matplotlib.</span>
+<span class="sd">    If `%matplotlib inline` is invoked in a Jupyter notebook, it visualizes a circuit inline.</span>
+<span class="sd">    We recommend `%config InlineBackend.figure_format = &#39;svg&#39;` for the inline visualization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit (QuantumCircuit): a quantum circuit</span>
+<span class="sd">        scale (float): scaling factor</span>
+<span class="sd">        filename (str): file path to save image to</span>
+<span class="sd">        style (dict or str): dictionary of style or file name of style file</span>
+<span class="sd">        reverse_bits (bool): When set to True reverse the bit order inside</span>
+<span class="sd">            registers for the output visualization.</span>
+<span class="sd">        plot_barriers (bool): Enable/disable drawing barriers in the output</span>
+<span class="sd">            circuit. Defaults to True.</span>
+<span class="sd">        justify (str) : `left`, `right` or `none`. Defaults to `left`. Says how</span>
+<span class="sd">            the circuit should be justified.</span>
+
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.figure: a matplotlib figure object for the circuit diagram</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">qregs</span><span class="p">,</span> <span class="n">cregs</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">_get_layered_instructions</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span>
+                                                        <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                                                        <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span>
+    <span class="n">qcd</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">MatplotlibDrawer</span><span class="p">(</span><span class="n">qregs</span><span class="p">,</span> <span class="n">cregs</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                                       <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                                       <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qcd</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+  </body>
+</html>
