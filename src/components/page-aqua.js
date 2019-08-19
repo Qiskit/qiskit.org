@@ -100,33 +100,16 @@ class PageAqua extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.aqua.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Applications domains</div>
+                <div class="title">Qiskit Aqua Translators</div>
                 <div class="subtitle">Chemistry, AI, Optimization, Finance</div>
-                <div class="stack-list aqua-applications-domains">
-                  <div class="element">
-                    <div class="title">Translators</div>
-                  </div>
-                  <div class="element">
-                    <div class="title">Quantum Algorithms</div>
-                    <div class="stack-list quantum-algorithms">
-                      <div class="element">
-                        <div class="title">Adaptive</div>
-                        <div class="subtitle">VQE, QAOA, Variational Quantum Classifier (VQC), QGAN</div>
-                      </div>
-                      <div class="element">
-                        <div class="title">Many-sample</div>
-                        <div class="subtitle">EOH, QSVM</div>
-                      </div>
-                      <div class="element">
-                        <div class="title">Single-sample</div>
-                        <div class="subtitle">QPE, IQPE, Grover's, HHL, Amplitude Estimation, Shor's, Simon's, Bernstein-Vazirani, Deutsch-Jozsa</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              </div>
+              <div class="element">
+                <div class="title">Quantum Algorithms</div>
+                <div class="subtitle">QPE, Grover, HHL, QSVM, VQE, QAOA, ...</div>
               </div>
               <div class="element">
                 <div class="title">Qiskit Terra</div>
+                <div class="subtitle">Compile circuits</div>
               </div>
               <div class="element dot">
                 <div class="title">Providers</div>
