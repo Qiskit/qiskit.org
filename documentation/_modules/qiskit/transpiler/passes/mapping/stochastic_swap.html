@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
@@ -202,7 +203,7 @@
 <span class="c1"># the circuit.</span>
 
 
-<div class="viewcode-block" id="StochasticSwap"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.StochasticSwap">[docs]</a><span class="k">class</span> <span class="nc">StochasticSwap</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
+<div class="viewcode-block" id="StochasticSwap"><a class="viewcode-back" href="../../../../../api/qiskit.transpiler.passes.StochasticSwap.html#qiskit.transpiler.passes.StochasticSwap">[docs]</a><span class="k">class</span> <span class="nc">StochasticSwap</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Maps a DAGCircuit onto a `coupling_map` adding swap gates.</span>
 
@@ -243,7 +244,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="StochasticSwap.run"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.StochasticSwap.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
+<div class="viewcode-block" id="StochasticSwap.run"><a class="viewcode-back" href="../../../../../api/qiskit.transpiler.passes.StochasticSwap.html#qiskit.transpiler.passes.StochasticSwap.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run the StochasticSwap pass on `dag`.</span>
 
@@ -613,7 +614,7 @@
     <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">best_circuit</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span> <span class="n">best_lay</span><span class="p">,</span> <span class="kc">False</span>
 
 
-<div class="viewcode-block" id="regtuple_to_numeric"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.regtuple_to_numeric">[docs]</a><span class="k">def</span> <span class="nf">regtuple_to_numeric</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">regtuple_to_numeric</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Takes (QuantumRegister, int) tuples and converts</span>
 <span class="sd">    them into an integer array.</span>
 
@@ -633,10 +634,10 @@
     <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
         <span class="n">out</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">out</span></div>
+    <span class="k">return</span> <span class="n">out</span>
 
 
-<div class="viewcode-block" id="gates_to_idx"><a class="viewcode-back" href="../../../../../autodoc/qiskit.transpiler.passes.mapping.stochastic_swap.html#qiskit.transpiler.passes.mapping.stochastic_swap.gates_to_idx">[docs]</a><span class="k">def</span> <span class="nf">gates_to_idx</span><span class="p">(</span><span class="n">gates</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">gates_to_idx</span><span class="p">(</span><span class="n">gates</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts gate tuples into a nested list of integers.</span>
 
 <span class="sd">    Args:</span>
@@ -656,7 +657,7 @@
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">gate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
         <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">out</span></div>
+    <span class="k">return</span> <span class="n">out</span>
 </pre></div>
 
         </div>

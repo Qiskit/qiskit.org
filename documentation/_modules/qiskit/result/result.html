@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -183,7 +184,7 @@
 <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">ResultSchema</span>
 
 
-<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ResultSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../../api/qiskit.result.Result.html#qiskit.result.Result">[docs]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">ResultSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Result</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for Results.</span>
 
@@ -212,7 +213,7 @@
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Result.data"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.data"><a class="viewcode-back" href="../../../api/qiskit.result.Result.html#qiskit.result.Result.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the raw data for an experiment.</span>
 
 <span class="sd">        Note this data will be a single classical and quantum register and in a</span>
@@ -265,7 +266,7 @@
         <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No data for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_memory"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_memory"><a class="viewcode-back" href="../../../api/qiskit.result.Result.html#qiskit.result.Result.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the sequence of memory states (readouts) for each shot</span>
 <span class="sd">        The data from the experiment is a list of format</span>
 <span class="sd">        [&#39;00000&#39;, &#39;01000&#39;, &#39;10100&#39;, &#39;10100&#39;, &#39;11101&#39;, &#39;11100&#39;, &#39;00101&#39;, ..., &#39;01010&#39;]</span>
@@ -313,7 +314,7 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No memory for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_counts">[docs]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_counts"><a class="viewcode-back" href="../../../api/qiskit.result.Result.html#qiskit.result.Result.get_counts">[docs]</a>    <span class="k">def</span> <span class="nf">get_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the histogram data of an experiment.</span>
 
 <span class="sd">        Args:</span>
@@ -341,7 +342,7 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No counts for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_statevector"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_statevector">[docs]</a>    <span class="k">def</span> <span class="nf">get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_statevector"><a class="viewcode-back" href="../../../api/qiskit.result.Result.html#qiskit.result.Result.get_statevector">[docs]</a>    <span class="k">def</span> <span class="nf">get_statevector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the final statevector of an experiment.</span>
 
 <span class="sd">        Args:</span>
@@ -362,7 +363,7 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;No statevector for experiment &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Result.get_unitary"><a class="viewcode-back" href="../../../autodoc/qiskit.result.result.html#qiskit.result.models.Result.get_unitary">[docs]</a>    <span class="k">def</span> <span class="nf">get_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_unitary"><a class="viewcode-back" href="../../../api/qiskit.result.Result.html#qiskit.result.Result.get_unitary">[docs]</a>    <span class="k">def</span> <span class="nf">get_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the final unitary of an experiment.</span>
 
 <span class="sd">        Args:</span>

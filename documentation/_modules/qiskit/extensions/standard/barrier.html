@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
@@ -182,19 +183,19 @@
 <span class="kn">from</span> <span class="nn">qiskit.circuit.decorators</span> <span class="k">import</span> <span class="n">_convert_to_bits</span>
 
 
-<div class="viewcode-block" id="Barrier"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.compositegate.Barrier">[docs]</a><span class="k">class</span> <span class="nc">Barrier</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+<div class="viewcode-block" id="Barrier"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.Barrier.html#qiskit.circuit.Barrier">[docs]</a><span class="k">class</span> <span class="nc">Barrier</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Barrier instruction.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new barrier instruction.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
 
-<div class="viewcode-block" id="Barrier.inverse"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.compositegate.Barrier.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Barrier.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.Barrier.html#qiskit.circuit.Barrier.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Special case. Return self.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Barrier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="barrier"><a class="viewcode-back" href="../../../../autodoc/qiskit.extensions.standard.barrier.html#qiskit.circuit.compositegate.barrier">[docs]</a><span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply barrier to circuit.</span>
 <span class="sd">    If qargs is None, applies to all the qbits.</span>
 <span class="sd">    Args is a list of QuantumRegister or single qubits.</span>
@@ -217,7 +218,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Barrier</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)),</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Barrier</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)),</span> <span class="n">qubits</span><span class="p">,</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">barrier</span> <span class="o">=</span> <span class="n">barrier</span>

@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
@@ -180,7 +181,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.circuit.quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 
 
-<div class="viewcode-block" id="Measure"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.measure.html#qiskit.circuit.measure.Measure">[docs]</a><span class="k">class</span> <span class="nc">Measure</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
+<div class="viewcode-block" id="Measure"><a class="viewcode-back" href="../../../api/qiskit.circuit.Measure.html#qiskit.circuit.Measure">[docs]</a><span class="k">class</span> <span class="nc">Measure</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Quantum measurement in the computational basis.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -188,7 +189,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[])</span></div>
 
 
-<div class="viewcode-block" id="measure"><a class="viewcode-back" href="../../../autodoc/qiskit.circuit.measure.html#qiskit.circuit.measure.measure">[docs]</a><span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="nd">@_op_expand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">broadcastable</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit</span><span class="p">,</span> <span class="n">cbit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Measure quantum bit into classical bit (tuples).</span>
@@ -204,7 +205,7 @@
 <span class="sd">        QiskitError: if qubit is not in this circuit or bad format;</span>
 <span class="sd">            if cbit is not in this circuit or not creg.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Measure</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[</span><span class="n">cbit</span><span class="p">])</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Measure</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit</span><span class="p">],</span> <span class="p">[</span><span class="n">cbit</span><span class="p">])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">measure</span> <span class="o">=</span> <span class="n">measure</span>

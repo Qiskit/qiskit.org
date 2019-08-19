@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
@@ -194,7 +195,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.transformations</span> <span class="k">import</span> <span class="n">_to_chi</span>
 
 
-<div class="viewcode-block" id="Chi"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi">[docs]</a><span class="k">class</span> <span class="nc">Chi</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi">[docs]</a><span class="k">class</span> <span class="nc">Chi</span><span class="p">(</span><span class="n">QuantumChannel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Pauli basis Chi-matrix representation of a quantum channel</span>
 
 <span class="sd">    The Chi-matrix is the Pauli-basis representation of the Chi-Matrix.</span>
@@ -279,21 +280,21 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Chi.conjugate"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.conjugate"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the conjugate of the QuantumChannel.&quot;&quot;&quot;</span>
         <span class="c1"># Since conjugation is basis dependent we transform</span>
         <span class="c1"># to the Choi representation to compute the</span>
         <span class="c1"># conjugate channel</span>
         <span class="k">return</span> <span class="n">Chi</span><span class="p">(</span><span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Chi.transpose"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.transpose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the transpose of the QuantumChannel.&quot;&quot;&quot;</span>
         <span class="c1"># Since conjugation is basis dependent we transform</span>
         <span class="c1"># to the Choi representation to compute the</span>
         <span class="c1"># conjugate channel</span>
         <span class="k">return</span> <span class="n">Chi</span><span class="p">(</span><span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Chi.compose"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.compose"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.compose">[docs]</a>    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the composition channel self∘other.</span>
 
 <span class="sd">        Args:</span>
@@ -328,7 +329,7 @@
         <span class="c1"># representation we convert to the Choi representation</span>
         <span class="k">return</span> <span class="n">Chi</span><span class="p">(</span><span class="n">Choi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="n">front</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Chi.power"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.power">[docs]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.power"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.power">[docs]</a>    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The matrix power of the channel.</span>
 
 <span class="sd">        Args:</span>
@@ -345,7 +346,7 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Chi</span><span class="p">(</span><span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Chi.tensor"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.tensor">[docs]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.tensor"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.tensor">[docs]</a>    <span class="k">def</span> <span class="nf">tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel self ⊗ other.</span>
 
 <span class="sd">        Args:</span>
@@ -359,7 +360,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Chi.expand"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.expand"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel other ⊗ self.</span>
 
 <span class="sd">        Args:</span>
@@ -373,7 +374,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Chi.add"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.add"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
 
 <span class="sd">        Args:</span>
@@ -393,7 +394,7 @@
         <span class="k">return</span> <span class="n">Chi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Chi.subtract"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.subtract">[docs]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.subtract"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.subtract">[docs]</a>    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self - other.</span>
 
 <span class="sd">        Args:</span>
@@ -413,7 +414,7 @@
         <span class="k">return</span> <span class="n">Chi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Chi.multiply"><a class="viewcode-back" href="../../../../../autodoc/qiskit.quantum_info.operators.channel.chi.html#qiskit.quantum_info.operators.channel.chi.Chi.multiply">[docs]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Chi.multiply"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.Chi.html#qiskit.quantum_info.Chi.multiply">[docs]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
 
 <span class="sd">        Args:</span>
