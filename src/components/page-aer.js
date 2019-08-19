@@ -107,13 +107,6 @@ class PageAer extends localize(i18next)(LitElement) {
             </div>
           </div>
           <div class="illustration">
-            <h3>${i18next.t('pages.aer.installTitle')}</h3>
-            <p class="note">${i18next.t('pages.aer.pythonIsRequired')}</p>
-            <code-sample type="bash">
-              <template>
-                [python3] $ pip install qiskit
-              </template>
-            </code-sample>
             <h3>${i18next.t('pages.aer.exampleTitle')}</h3>
             <code-sample
               type="python"
