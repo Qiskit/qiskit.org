@@ -89,20 +89,20 @@ class PageTerra extends localize(i18next)(LitElement) {
             <h3>${i18next.t('pages.terra.stackTitle')}</h3>
             <div class="stack-list">
               <div class="element">
-                <div class="title">Terra inputs</div>
-                <div class="subtitle">Quantum circuit, pulse schedule</div>
+                <div class="title">Qiskit Terra inputs</div>
+                <div class="subtitle">Quantum Circuit, Pulse Schedule</div>
               </div>
               <div class="element">
                 <div class="title">Transpiler</div>
-                <div class="subtitle">Pass manager, optimization passes</div>
+                <div class="subtitle">Optimization Passes, Third Party</div>
               </div>
               <div class="element">
                 <div class="title">Providers</div>
-                <div class="subtitle">Aer, IBM Q, third party</div>
+                <div class="subtitle">Qiskit Aer, IBM Q, Third Party</div>
               </div>
               <div class="element dot">
                 <div class="title">Visualization</div>
-                <div class="subtitle">Counts, Statevector, Unitary</div>
+                <div class="subtitle">Histogram, State, Unitary</div>
               </div>
             </div>
           </div>
