@@ -44,21 +44,11 @@ class PageIgnis extends localize(i18next)(LitElement) {
           --ibmq-button-secondary-focus-color: var(--qiskit-ignis-color);
         }
 
-        .stack-list.aqua-applications-domains::before {
-          height: 50px;
-        }
-
-        section .description .badges a {
-          text-decoration: none;
-        }
-
-        section .description .badges vaadin-button {
-          --ibmq-button-secondary-color: #000000;
-          --ibmq-button-secondary-focus-color: #ffffff;
-        }
-
-        section .description img + img {
-          margin-top: 1em;
+        .stack-list .element.dot::before {
+          width: 0.682em;
+          height: 0.682em;
+          border-radius: 50%;
+          left: -1.4em;
         }
       `,
     ];
@@ -101,8 +91,7 @@ class PageIgnis extends localize(i18next)(LitElement) {
             <div class="stack-list">
               <div class="element">
                 <div class="title">Qiskit Ingis Experiments</div>
-                <div class="subtitle">List of Quantum Circuits or Pulse Schedules
-                </div>
+                <div class="subtitle">List of Quantum Circuits or Pulse Schedules</div>
               </div>
               <div class="element">
                 <div class="title">Qiskit Terra</div>
@@ -115,7 +104,6 @@ class PageIgnis extends localize(i18next)(LitElement) {
               <div class="element dot">
                 <div class="title">Fitter/Filter</div>
                 <div class="subtitle">Fit to a Model/Plot Results</div>
-                <div class="subtitle">Apply Mitigation (if applicable)</div>
               </div>
             </div>
           </div>
