@@ -100,11 +100,8 @@ class PageAer extends localize(i18next)(LitElement) {
                 <div class="title">Backends</div>
                 <div class="subtitle">QasmSimulator, StatevectorSimulator, UnitarySimulator</div>
               </div>
-              <div class="element">
-                <div class="title">Job</div>
-              </div>
               <div class="element dot">
-                <div class="title">Result</div>
+                <div class="title">Job and Result</div>
                 <div class="subtitle">Counts, Memory, Statevector, Unitary, Snapshots</div>
               </div>
             </div>
