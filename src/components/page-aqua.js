@@ -128,7 +128,7 @@ class PageAqua extends localize(i18next)(LitElement) {
               <div class="element">
                 <div class="title">Qiskit Terra</div>
               </div>
-              <div class="element">
+              <div class="element dot">
                 <div class="title">Providers</div>
                 <div class="subtitle">Qiskit Aer, IBM Q, Third Party</div>
               </div>
