@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.aqua.translators.ising.docplex &#8212; Qiskit 0.11.1 documentation</title>
+
+    <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.aqua.translators.ising.docplex</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot; Automatically generate Ising Hamiltonians from general models of optimization problems.</span>
+<span class="sd">This program converts general models of optimization problems into Ising Hamiltonian.</span>
+<span class="sd">To write models of optimization problems, DOcplex (Python library for optimization problems) is used in the program.</span>
+<span class="sd">(https://cdn.rawgit.com/IBMDecisionOptimization/docplex-doc/master/docs/index.html)</span>
+
+<span class="sd">It supports models that consist of the following elements now.</span>
+<span class="sd">- Binary variables.</span>
+<span class="sd">- Linear or quadratic object function.</span>
+<span class="sd">- Equality constraints.</span>
+<span class="sd">  * Symbols in constrains have to be equal (==). Inequality constrains (e.g. x+y &lt;= 5) are not allowed.</span>
+
+
+<span class="sd">The following is an example of use.</span>
+<span class="sd">---</span>
+<span class="sd"># Create an instance of a model and variables with DOcplex.</span>
+<span class="sd">mdl = Model(name=&#39;tsp&#39;)</span>
+<span class="sd">x = {(i,p): mdl.binary_var(name=&#39;x_{0}_{1}&#39;.format(i,p)) for i in range(num_node) for p in range(num_node)}</span>
+
+<span class="sd"># Object function</span>
+<span class="sd">tsp_func = mdl.sum(ins.w[i,j] * x[(i,p)] * x[(j,(p+1)%num_node)] for i in range(num_node) for j in range(num_node) for p in range(num_node))</span>
+<span class="sd">mdl.minimize(tsp_func)</span>
+
+<span class="sd"># Constrains</span>
+<span class="sd">for i in range(num_node):</span>
+<span class="sd">    mdl.add_constraint(mdl.sum(x[(i,p)] for p in range(num_node)) == 1)</span>
+<span class="sd">for p in range(num_node):</span>
+<span class="sd">    mdl.add_constraint(mdl.sum(x[(i,p)] for i in range(num_node)) == 1)</span>
+
+<span class="sd"># Call the method to convert the model into Ising Hamiltonian.</span>
+<span class="sd">qubitOp, offset = get_qubitops(mdl)</span>
+
+<span class="sd"># Calculate with the generated Ising Hamiltonian.</span>
+<span class="sd">ee = ExactEigensolver(qubitOp, k=1)</span>
+<span class="sd">result = ee.run()</span>
+<span class="sd">print(&#39;get_qubitops&#39;)</span>
+<span class="sd">print(&#39;tsp objective:&#39;, result[&#39;energy&#39;] + offset)</span>
+<span class="sd">---</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">fsum</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">docplex.mp.constants</span> <span class="k">import</span> <span class="n">ComparisonType</span>
+<span class="kn">from</span> <span class="nn">docplex.mp.model</span> <span class="k">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="k">import</span> <span class="n">Pauli</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.aqua</span> <span class="k">import</span> <span class="n">Operator</span><span class="p">,</span> <span class="n">AquaError</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_qubitops"><a class="viewcode-back" href="../../../../../autodoc/qiskit.aqua.translators.ising.docplex.html#qiskit.aqua.translators.ising.docplex.get_qubitops">[docs]</a><span class="k">def</span> <span class="nf">get_qubitops</span><span class="p">(</span><span class="n">mdl</span><span class="p">,</span> <span class="n">auto_penalty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_penalty</span><span class="o">=</span><span class="mf">1e5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Generate Ising Hamiltonian from a model of DOcplex.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mdl (docplex.mp.model.Model): A model of DOcplex for a optimization problem.</span>
+<span class="sd">        auto_penalty (bool): If true, the penalty coefficient is automatically defined by &quot;_auto_define_penalty()&quot;.</span>
+<span class="sd">        default_penalty (float): The default value of the penalty coefficient for the constraints.</span>
+<span class="sd">            This value is used if &quot;auto_penalty&quot; is False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        operator.Operator, float: operator for the Hamiltonian and a</span>
+<span class="sd">        constant shift for the obj function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_validate_input_model</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+
+    <span class="c1"># set the penalty coefficient by _auto_define_penalty() or manually.</span>
+    <span class="k">if</span> <span class="n">auto_penalty</span><span class="p">:</span>
+        <span class="n">penalty</span> <span class="o">=</span> <span class="n">_auto_define_penalty</span><span class="p">(</span><span class="n">mdl</span><span class="p">,</span> <span class="n">default_penalty</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">penalty</span> <span class="o">=</span> <span class="n">default_penalty</span>
+
+    <span class="c1"># set a sign corresponding to a maximized or minimized problem.</span>
+    <span class="c1"># sign == 1 is for minimized problem. sign == -1 is for maximized problem.</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">mdl</span><span class="o">.</span><span class="n">is_maximized</span><span class="p">():</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="c1"># assign variables of the model to qubits.</span>
+    <span class="n">qd</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">iter_variables</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qd</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">qd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># initialize Hamiltonian.</span>
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qd</span><span class="p">)</span>
+    <span class="n">pauli_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+
+    <span class="c1"># convert linear parts of the object function into Hamiltonian.</span>
+    <span class="n">l_itr</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">get_objective_expr</span><span class="p">()</span><span class="o">.</span><span class="n">iter_terms</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">l_itr</span><span class="p">:</span>
+        <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">qd</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">sign</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">zp</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">weight</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+        <span class="n">shift</span> <span class="o">+=</span> <span class="n">weight</span>
+
+    <span class="c1"># convert quadratic parts of the object function into Hamiltonian.</span>
+    <span class="n">q_itr</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">get_objective_expr</span><span class="p">()</span><span class="o">.</span><span class="n">iter_quads</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">q_itr</span><span class="p">:</span>
+        <span class="n">index1</span> <span class="o">=</span> <span class="n">qd</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">index2</span> <span class="o">=</span> <span class="n">qd</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">sign</span> <span class="o">/</span> <span class="mi">4</span>
+
+        <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="n">zp</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">zp</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">weight</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+
+        <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="n">zp</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">weight</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+
+        <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="n">zp</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">weight</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+
+        <span class="n">shift</span> <span class="o">+=</span> <span class="n">weight</span>
+
+    <span class="c1"># convert constraints into penalty terms.</span>
+    <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">iter_constraints</span><span class="p">():</span>
+        <span class="n">constant</span> <span class="o">=</span> <span class="n">constraint</span><span class="o">.</span><span class="n">right_expr</span><span class="o">.</span><span class="n">get_constant</span><span class="p">()</span>
+
+        <span class="c1"># constant parts of penalty*(Constant-func)**2: penalty*(Constant**2)</span>
+        <span class="n">shift</span> <span class="o">+=</span> <span class="n">penalty</span> <span class="o">*</span> <span class="n">constant</span> <span class="o">**</span> <span class="mi">2</span>
+
+        <span class="c1"># linear parts of penalty*(Constant-func)**2: penalty*(-2*Constant*func)</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">constraint</span><span class="o">.</span><span class="n">left_expr</span><span class="o">.</span><span class="n">iter_terms</span><span class="p">():</span>
+            <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">qd</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">zp</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">penalty</span> <span class="o">*</span> <span class="n">constant</span> <span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+            <span class="n">shift</span> <span class="o">+=</span> <span class="o">-</span><span class="n">penalty</span> <span class="o">*</span> <span class="n">constant</span> <span class="o">*</span> <span class="n">weight</span>
+
+        <span class="c1"># quadratic parts of penalty*(Constant-func)**2: penalty*(func**2)</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">constraint</span><span class="o">.</span><span class="n">left_expr</span><span class="o">.</span><span class="n">iter_terms</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">l2</span> <span class="ow">in</span> <span class="n">constraint</span><span class="o">.</span><span class="n">left_expr</span><span class="o">.</span><span class="n">iter_terms</span><span class="p">():</span>
+                <span class="n">index1</span> <span class="o">=</span> <span class="n">qd</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">index2</span> <span class="o">=</span> <span class="n">qd</span><span class="p">[</span><span class="n">l2</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">weight1</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">weight2</span> <span class="o">=</span> <span class="n">l2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">penalty_weight1_weight2</span> <span class="o">=</span> <span class="n">penalty</span> <span class="o">*</span> <span class="n">weight1</span> <span class="o">*</span> <span class="n">weight2</span> <span class="o">/</span> <span class="mi">4</span>
+
+                <span class="k">if</span> <span class="n">index1</span> <span class="o">==</span> <span class="n">index2</span><span class="p">:</span>
+                    <span class="n">shift</span> <span class="o">+=</span> <span class="n">penalty_weight1_weight2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+                    <span class="n">zp</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">zp</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">penalty_weight1_weight2</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+
+                <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+                <span class="n">zp</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">penalty_weight1_weight2</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+
+                <span class="n">zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+                <span class="n">zp</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">pauli_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">penalty_weight1_weight2</span><span class="p">,</span> <span class="n">Pauli</span><span class="p">(</span><span class="n">zp</span><span class="p">,</span> <span class="n">zero</span><span class="p">)])</span>
+
+                <span class="n">shift</span> <span class="o">+=</span> <span class="n">penalty_weight1_weight2</span>
+
+    <span class="c1"># Remove paulis whose coefficients are zeros.</span>
+    <span class="n">qubitOp</span> <span class="o">=</span> <span class="n">Operator</span><span class="p">(</span><span class="n">paulis</span><span class="o">=</span><span class="n">pauli_list</span><span class="p">)</span>
+    <span class="n">qubitOp</span><span class="o">.</span><span class="n">zeros_coeff_elimination</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">qubitOp</span><span class="p">,</span> <span class="n">shift</span></div>
+
+
+<span class="k">def</span> <span class="nf">_validate_input_model</span><span class="p">(</span><span class="n">mdl</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Check whether an input model is valid. If not, raise an AquaError</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">         mdl (docplex.mp.model.Model): A model of DOcplex for a optimization problem.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">valid</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># validate an object type of the input.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mdl</span><span class="p">,</span> <span class="n">Model</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s1">&#39;An input model must be docplex.mp.model.Model.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># raise an error if the type of the variable is not a binary type.</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">iter_variables</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">var</span><span class="o">.</span><span class="n">is_binary</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;The type of Variable </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="s1">. It must be a binary variable. &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">vartype</span><span class="o">.</span><span class="n">short_name</span><span class="p">))</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># raise an error if the constraint type is not an equality constraint.</span>
+    <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">iter_constraints</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">constraint</span><span class="o">.</span><span class="n">sense</span> <span class="o">==</span> <span class="n">ComparisonType</span><span class="o">.</span><span class="n">EQ</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Constraint </span><span class="si">{}</span><span class="s1"> is not an equality constraint.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">constraint</span><span class="p">))</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s1">&#39;The input model has unsupported elements.&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_auto_define_penalty</span><span class="p">(</span><span class="n">mdl</span><span class="p">,</span> <span class="n">default_penalty</span><span class="o">=</span><span class="mf">1e5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Automatically define the penalty coefficient.</span>
+<span class="sd">    This returns object function&#39;s (upper bound - lower bound + 1).</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        mdl (docplex.mp.model.Model): A model of DOcplex for a optimization problem.</span>
+<span class="sd">        default_penalty (float): The default value of the penalty coefficient for the constraints.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The penalty coefficient for the Hamiltonian.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># if a constraint has float coefficient, return 1e5 for the penalty coefficient.</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">iter_constraints</span><span class="p">():</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">constraint</span><span class="o">.</span><span class="n">right_expr</span><span class="o">.</span><span class="n">get_constant</span><span class="p">())</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">term</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">constraint</span><span class="o">.</span><span class="n">left_expr</span><span class="o">.</span><span class="n">iter_terms</span><span class="p">())</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">term</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Using </span><span class="si">%f</span><span class="s1"> for the penalty coefficient because a float coefficient exists in constraints. </span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;The value could be too small. If so, set the penalty coefficient manually.&#39;</span><span class="p">,</span> <span class="n">default_penalty</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">default_penalty</span>
+
+    <span class="c1"># (upper bound - lower bound) can be calculate as the sum of absolute value of coefficients</span>
+    <span class="c1"># Firstly, add 1 to guarantee that infeasible answers will be greater than upper bound.</span>
+    <span class="n">penalties</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># add linear terms of the object function.</span>
+    <span class="n">penalties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">get_objective_expr</span><span class="p">()</span><span class="o">.</span><span class="n">iter_terms</span><span class="p">())</span>
+    <span class="c1"># add quadratic terms of the object function.</span>
+    <span class="n">penalties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">get_objective_expr</span><span class="p">()</span><span class="o">.</span><span class="n">iter_quads</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">fsum</span><span class="p">(</span><span class="n">penalties</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sample_most_likely"><a class="viewcode-back" href="../../../../../autodoc/qiskit.aqua.translators.ising.docplex.html#qiskit.aqua.translators.ising.docplex.sample_most_likely">[docs]</a><span class="k">def</span> <span class="nf">sample_most_likely</span><span class="p">(</span><span class="n">state_vector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the most likely binary string from state vector.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state_vector (numpy.ndarray or dict): state vector or counts.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: binary string as numpy.ndarray of ints.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_vector</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state_vector</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
+        <span class="c1"># get the binary string with the largest count</span>
+        <span class="n">binary_string</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">state_vector</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">binary_string</span><span class="p">))])</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">state_vector</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state_vector</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span>
+            <span class="n">k</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+  </body>
+</html>

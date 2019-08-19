@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>Release Notes &#8212; Qiskit 0.11.1 documentation</title>
+
+    <link rel="stylesheet" href="_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="Contributing to Qiskit" href="contributing_to_qiskit.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://nbviewer.jupyter.org/github/Qiskit/qiskit-tutorials/blob/master/qiskit/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#workflow-step-by-step">Workflow Step–by–Step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the_elements.html">The Qiskit Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#terra">Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#aer">Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#ignis">Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#aqua">Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development_strategy.html">Development Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-aqua">Qiskit Aqua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#versioning">Versioning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#meta-package-version">Meta-package Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#adding-new-elements">Adding New Elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#patch-version-increases">Patch Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#minor-version-increases">Minor Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#major-version-increases">Major Version Increases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#module-status">Module Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#providers">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#aer-provider">Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#ibm-q-provider">IBM Q Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#community-extensions">Community Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#id1">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#additional-providers">Additional providers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#transpiler">Transpiler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#additional-passes">Additional passes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#tools">Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#additional-tools">Additional Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_to_qiskit.html">Contributing to Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-11-1">Qiskit 0.11.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-8">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aer-0-2">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ignis-0-1">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aqua-0-5">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider-0-3">IBM Q Provider 0.3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-11">Qiskit 0.11</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#improvements">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">IBM Q Provider 0.3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#updating-to-the-new-ibm-q-experience-v2">Updating to the new IBM Q Experience v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-your-programs">Updating your programs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-10">Qiskit 0.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider-0-2">IBM Q Provider 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-9">Qiskit 0.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Terra 0.8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#highlights">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compatibility-considerations">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Ignis 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Aqua 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider-0-1">IBM Q Provider 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id24">New Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-8">Qiskit 0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-7">Terra 0.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aer-0-1">Aer 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Ignis 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-7">Qiskit 0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Terra 0.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">Aer 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id30">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#aqua-0-4">Aqua 0.4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id31">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-6">Qiskit 0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-6">Terra 0.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-5">Qiskit 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-5">Terra 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id35">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id36">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/qiskit.html">API References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.aqua.html">qiskit.aqua package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.assembler.html">qiskit.assembler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.assembler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.chemistry.html">qiskit.chemistry package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.compiler.html">qiskit.compiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.compiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.dagcircuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.extensions.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.mapper.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.pulse.html">qiskit.pulse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.pulse.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.pulse.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qasm.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qobj.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qobj.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.test.html">qiskit.test package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.test.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.test.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.transpiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.visualization.html">qiskit.visualization package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.visualization.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.visualization.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit._util.html">qiskit._util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.exceptions.html">qiskit.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.execute.html">qiskit.execute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.user_config.html">qiskit.user_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.util.html">qiskit.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.version.html">qiskit.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#access-ibm-q-systems">Access IBM Q Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#checking-which-version-is-installed">Checking Which Version is Installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#workflow-step-by-step">Workflow Step–by–Step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-1-import-packages">Step 1 : Import Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-2-initialize-variables">Step 2 : Initialize Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-3-add-gates">Step 3 : Add Gates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-4-visualize-the-circuit">Step 4 : Visualize the Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the_elements.html">The Qiskit Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#terra">Terra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#aer">Aer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#ignis">Ignis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the_elements.html#aqua">Aqua</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development_strategy.html">Development Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-terra">Qiskit Terra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-aer">Qiskit Aer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-ignis">Qiskit Ignis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-aqua">Qiskit Aqua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#versioning">Versioning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#meta-package-version">Meta-package Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#adding-new-elements">Adding New Elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#patch-version-increases">Patch Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#minor-version-increases">Minor Version Increases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#major-version-increases">Major Version Increases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#qiskit-element-requirement-tracking">Qiskit Element Requirement Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#module-status">Module Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#providers">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#basic-aer-provider">Basic Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#aer-provider">Aer Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#ibm-q-provider">IBM Q Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development_strategy.html#community-extensions">Community Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#id1">Providers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#additional-providers">Additional providers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#transpiler">Transpiler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#additional-passes">Additional passes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development_strategy.html#tools">Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="development_strategy.html#additional-tools">Additional Tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_to_qiskit.html">Contributing to Qiskit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#where-things-are">Where Things Are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#contributor-license-agreement">Contributor License Agreement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#writing-and-building-api-documentation">Writing and Building API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_to_qiskit.html#installing-from-source">Installing from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#set-up-the-virtual-development-environment">Set up the virtual development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-terra-from-source">Installing Terra from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aer-from-source">Installing Aer from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="contributing_to_qiskit.html#custom-options-during-wheel-builds">Custom options during wheel builds</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ignis-from-source">Installing Ignis from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-aqua-from-source">Installing Aqua from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing_to_qiskit.html#installing-ibmq-provider-from-source">Installing IBMQ Provider from Source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-11-1">Qiskit 0.11.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-8">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aer-0-2">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ignis-0-1">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aqua-0-5">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider-0-3">IBM Q Provider 0.3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-11">Qiskit 0.11</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#improvements">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">IBM Q Provider 0.3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#updating-to-the-new-ibm-q-experience-v2">Updating to the new IBM Q Experience v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-your-programs">Updating your programs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-10">Qiskit 0.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Terra 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Aer 0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Ignis 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Aqua 0.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider-0-2">IBM Q Provider 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-9">Qiskit 0.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Terra 0.8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#highlights">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compatibility-considerations">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Aer 0.2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Ignis 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Aqua 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Bug Fixes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ibm-q-provider-0-1">IBM Q Provider 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id24">New Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-8">Qiskit 0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-7">Terra 0.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aer-0-1">Aer 0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Ignis 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-7">Qiskit 0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Terra 0.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Compatibility Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">Aer 0.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id30">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#aqua-0-4">Aqua 0.4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id31">New Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-6">Qiskit 0.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-6">Terra 0.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qiskit-0-5">Qiskit 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terra-0-5">Terra 0.5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id35">Highlights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id36">Compatibility Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/qiskit.html">API References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.aqua.html">qiskit.aqua package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.aqua.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.aqua.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.assembler.html">qiskit.assembler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.assembler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.chemistry.html">qiskit.chemistry package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.chemistry.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.chemistry.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.circuit.html">qiskit.circuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.circuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.compiler.html">qiskit.compiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.compiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.converters.html">qiskit.converters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.converters.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.dagcircuit.html">qiskit.dagcircuit package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.dagcircuit.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.extensions.html">qiskit.extensions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.extensions.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.extensions.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.mapper.html">qiskit.mapper package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.mapper.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.providers.html">qiskit.providers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.providers.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.pulse.html">qiskit.pulse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.pulse.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.pulse.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qasm.html">qiskit.qasm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qasm.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qasm.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qobj.html">qiskit.qobj package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qobj.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.qobj.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.quantum_info.html">qiskit.quantum_info package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.quantum_info.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.result.html">qiskit.result package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.result.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.test.html">qiskit.test package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.test.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.test.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.tools.html">qiskit.tools package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.tools.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.transpiler.html">qiskit.transpiler package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.transpiler.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.transpiler.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.validation.html">qiskit.validation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.validation.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.visualization.html">qiskit.visualization package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.visualization.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/qiskit.visualization.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit._util.html">qiskit._util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.exceptions.html">qiskit.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.execute.html">qiskit.execute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.qiskiterror.html">qiskit.qiskiterror module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.user_config.html">qiskit.user_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.util.html">qiskit.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/qiskit.version.html">qiskit.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <div class="section" id="release-notes">
+<h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-history">
+<h2>Version History<a class="headerlink" href="#version-history" title="Permalink to this headline">¶</a></h2>
+<p>This table tracks the meta-package versions and the version of each Qiskit element installed:</p>
+<table border="1" class="docutils" id="id37">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text"><strong>Version History</strong></span><a class="headerlink" href="#id37" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Qiskit Metapackage Version</th>
+<th class="head">qiskit-terra</th>
+<th class="head">qiskit-aer</th>
+<th class="head">qiskit-ignis</th>
+<th class="head">qiskit-ibmq-provider</th>
+<th class="head">qiskit-aqua</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0.11.1</td>
+<td>0.8.2</td>
+<td>0.2.3</td>
+<td>0.1.1</td>
+<td>0.3.1</td>
+<td>0.5.3</td>
+</tr>
+<tr class="row-odd"><td>0.11.0</td>
+<td>0.8.2</td>
+<td>0.2.3</td>
+<td>0.1.1</td>
+<td>0.3.0</td>
+<td>0.5.2</td>
+</tr>
+<tr class="row-even"><td>0.10.5</td>
+<td>0.8.2</td>
+<td>0.2.1</td>
+<td>0.1.1</td>
+<td>0.2.2</td>
+<td>0.5.2</td>
+</tr>
+<tr class="row-odd"><td>0.10.4</td>
+<td>0.8.2</td>
+<td>0.2.1</td>
+<td>0.1.1</td>
+<td>0.2.2</td>
+<td>0.5.1</td>
+</tr>
+<tr class="row-even"><td>0.10.3</td>
+<td>0.8.1</td>
+<td>0.2.1</td>
+<td>0.1.1</td>
+<td>0.2.2</td>
+<td>0.5.1</td>
+</tr>
+<tr class="row-odd"><td>0.10.2</td>
+<td>0.8.0</td>
+<td>0.2.1</td>
+<td>0.1.1</td>
+<td>0.2.2</td>
+<td>0.5.1</td>
+</tr>
+<tr class="row-even"><td>0.10.1</td>
+<td>0.8.0</td>
+<td>0.2.0</td>
+<td>0.1.1</td>
+<td>0.2.2</td>
+<td>0.5.0</td>
+</tr>
+<tr class="row-odd"><td>0.10.0</td>
+<td>0.8.0</td>
+<td>0.2.0</td>
+<td>0.1.1</td>
+<td>0.2.1</td>
+<td>0.5.0</td>
+</tr>
+<tr class="row-even"><td>0.9.0</td>
+<td>0.8.0</td>
+<td>0.2.0</td>
+<td>0.1.1</td>
+<td>0.1.1</td>
+<td>0.5.0</td>
+</tr>
+<tr class="row-odd"><td>0.8.1</td>
+<td>0.7.2</td>
+<td>0.1.1</td>
+<td>0.1.0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>0.8.0</td>
+<td>0.7.1</td>
+<td>0.1.1</td>
+<td>0.1.0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0.7.3</td>
+<td>0.7.x</td>
+<td>0.1.x</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>0.7.2</td>
+<td>0.7.x</td>
+<td>0.1.x</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0.7.1</td>
+<td>0.7.x</td>
+<td>0.1.x</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>0.7.0</td>
+<td>0.7.x</td>
+<td>0.1.x</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">0.7.x</span></code> and <code class="docutils literal notranslate"><span class="pre">0.1.x</span></code> mean any patch version on that minor version. For,
+example <code class="docutils literal notranslate"><span class="pre">0.7.x</span></code> will install the latest <code class="docutils literal notranslate"><span class="pre">0.7</span></code> version found on pypi which
+would be <code class="docutils literal notranslate"><span class="pre">0.7.2</span></code>. For the <code class="docutils literal notranslate"><span class="pre">0.7.0</span></code>, <code class="docutils literal notranslate"><span class="pre">0.7.1</span></code>, and <code class="docutils literal notranslate"><span class="pre">0.7.2</span></code> meta-package
+releases the <a class="reference internal" href="development_strategy.html#versioning-strategy"><span class="std std-ref">Versioning</span></a> policy was formalized yet.</p>
+</div>
+</div>
+<div class="section" id="qiskit-0-11-1">
+<h2>Qiskit 0.11.1<a class="headerlink" href="#qiskit-0-11-1" title="Permalink to this headline">¶</a></h2>
+<p>We have bumped up Qiskit micro version to 0.11.1 because IBM Q Provider has
+bumped its micro version as well.</p>
+<div class="section" id="terra-0-8">
+<h3>Terra 0.8<a class="headerlink" href="#terra-0-8" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="aer-0-2">
+<h3>Aer 0.2<a class="headerlink" href="#aer-0-2" title="Permalink to this headline">¶</a></h3>
+<p>No change</p>
+</div>
+<div class="section" id="ignis-0-1">
+<h3>Ignis 0.1<a class="headerlink" href="#ignis-0-1" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="aqua-0-5">
+<h3>Aqua 0.5<a class="headerlink" href="#aqua-0-5" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">qiskit-aqua</span></code> has been updated to <code class="docutils literal notranslate"><span class="pre">0.5.3</span></code> to fix code related to
+changes in how gates inverses are done.</p>
+</div>
+<div class="section" id="ibm-q-provider-0-3">
+<h3>IBM Q Provider 0.3<a class="headerlink" href="#ibm-q-provider-0-3" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">IBMQProvider</span></code> has been updated to version <code class="docutils literal notranslate"><span class="pre">0.3.1</span></code> to fix
+backward compatibility issues and work with the default 10 job
+limit in single calls to the IBM Q API v2.</p>
+</div>
+</div>
+<div class="section" id="qiskit-0-11">
+<h2>Qiskit 0.11<a class="headerlink" href="#qiskit-0-11" title="Permalink to this headline">¶</a></h2>
+<p>We have bumped up Qiskit minor version to 0.11 because IBM Q Provider has bumped up
+its minor version too.
+On Aer, we have jumped from 0.2.1 to 0.2.3 because there was an issue detected
+right after releasing 0.2.2 and before Qiskit 0.11 went online.</p>
+<div class="section" id="id1">
+<h3>Terra 0.8<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id2">
+<h3>Aer 0.2<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="new-features">
+<h4>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added support for multi-controlled phase gates</li>
+<li>Added optimized anti-diagonal single-qubit gates</li>
+</ul>
+</div>
+<div class="section" id="improvements">
+<h4>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Introduced a technique called Fusion that increments performance of circuit execution
+Tuned threading strategy to gain performance in most common scenarios.</li>
+<li>Some of the already implemented error models have been polished.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Ignis 0.1<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id4">
+<h3>Aqua 0.5<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id5">
+<h3>IBM Q Provider 0.3<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">IBMQProvider</span></code> has been updated in order to default to using the new
+<a class="reference external" href="https://quantum-computing.ibm.com">IBM Q Experience v2</a>. Accessing the legacy IBM Q Experience v1 and QConsole
+will still be supported during the 0.3.x line until its final deprecation one
+month from the release. It is encouraged to update to the new IBM Q
+Experience to take advantage of the new functionality and features.</p>
+<div class="section" id="updating-to-the-new-ibm-q-experience-v2">
+<h4>Updating to the new IBM Q Experience v2<a class="headerlink" href="#updating-to-the-new-ibm-q-experience-v2" title="Permalink to this headline">¶</a></h4>
+<p>If you have credentials for the legacy IBM Q Experience stored on disk, you
+can make use of the interactive helper:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">update_account</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For more complex cases or fine tuning your configuration, the following methods
+are available:</p>
+<ul class="simple">
+<li>the <code class="docutils literal notranslate"><span class="pre">IBMQ.delete_accounts()</span></code> can be used for resetting your configuration
+file.</li>
+<li>the <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_TOKEN')</span></code> method can be used for saving your
+credentials, following the instructions in the <a class="reference external" href="https://quantum-computing.ibm.com">IBM Q Experience v2</a>
+account page.</li>
+</ul>
+</div>
+<div class="section" id="updating-your-programs">
+<h4>Updating your programs<a class="headerlink" href="#updating-your-programs" title="Permalink to this headline">¶</a></h4>
+<p>When using the new IBM Q Experience v2 through the provider, access to backends
+is done via individual <code class="docutils literal notranslate"><span class="pre">provider</span></code> instances (as opposed to accessing them
+directly through the <code class="docutils literal notranslate"><span class="pre">qiskit.IBMQ</span></code> object as in previous versions), which
+allows for more granular control over the project you are using.</p>
+<p>You can get a reference to the <code class="docutils literal notranslate"><span class="pre">providers</span></code> that you have access to using the
+<code class="docutils literal notranslate"><span class="pre">IBMQ.providers()</span></code> and <code class="docutils literal notranslate"><span class="pre">IBMQ.get_provider()</span></code> methods:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+
+<span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">my_providers</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">providers</span><span class="p">()</span>
+<span class="n">provider_2</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For convenience, <code class="docutils literal notranslate"><span class="pre">IBMQ.load_account()</span></code> and <code class="docutils literal notranslate"><span class="pre">IBMQ.enable_account()</span></code> will
+return a provider for the open access project, which is the default in the new
+IBM Q Experience v2.</p>
+<p>For example, the following program in previous versions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
+<span class="n">backend_2</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="s1">&#39;HUB2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Would be equivalent to the following program in the current version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+
+<span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
+<span class="n">provider_2</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="s1">&#39;HUB2&#39;</span><span class="p">)</span>
+<span class="n">backend_2</span> <span class="o">=</span> <span class="n">provider_2</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmq_qasm_simulator&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can find more information and details in the <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider">IBM Q Provider documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="qiskit-0-10">
+<h2>Qiskit 0.10<a class="headerlink" href="#qiskit-0-10" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Terra 0.8<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id7">
+<h3>Aer 0.2<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id8">
+<h3>Ignis 0.1<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id9">
+<h3>Aqua 0.5<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="ibm-q-provider-0-2">
+<h3>IBM Q Provider 0.2<a class="headerlink" href="#ibm-q-provider-0-2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id10">
+<h4>New Features<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">IBMQProvider</span></code> supports connecting to the new version of the IBM Q API.
+Please note support for this version is still experimental <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/78">#78</a>.</li>
+<li>Added support for Circuits through the new API <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/79">#79</a>.</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h4>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Fixed incorrect parsing of some API hub URLs <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/77">#77</a>.</li>
+<li>Fixed noise model handling for remote simulators <a class="reference external" href="https://github.com/Qiskit/qiskit-ibmq-provider/pull/84">#84</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="qiskit-0-9">
+<h2>Qiskit 0.9<a class="headerlink" href="#qiskit-0-9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>Terra 0.8<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="highlights">
+<h4>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Introduction of the Pulse module under <code class="docutils literal notranslate"><span class="pre">qiskit.pulse</span></code>, which includes
+tools for building pulse commands, scheduling them on pulse channels,
+visualization, and running them on IBM Q devices.</li>
+<li>Improved QuantumCircuit and Instruction classes, allowing for the
+composition of arbitrary sub-circuits into larger circuits, and also
+for creating parametrized circuits.</li>
+<li>A powerful Quantum Info module under <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_info</span></code>, providing
+tools to work with operators and channels and to use them inside circuits.</li>
+<li>New transpiler optimization passes and access to predefined transpiling
+routines.</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h4>New Features<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The core <code class="docutils literal notranslate"><span class="pre">StochasticSwap</span></code> routine is implemented in <a class="reference external" href="https://cython.org/">Cython</a>.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">QuantumChannel</span></code> classes for manipulating quantum channels and CPTP
+maps.</li>
+<li>Support for parameterized circuits.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">PassManager</span></code> interface has been improved and new functions added for
+easier interaction and usage with custom pass managers.</li>
+<li>Preset <code class="docutils literal notranslate"><span class="pre">PassManager</span></code>s are now included which offer a predetermined pipeline
+of transpiler passes.</li>
+<li>User configuration files to let local environments override default values
+for some functions.</li>
+<li>New transpiler passes: <code class="docutils literal notranslate"><span class="pre">EnlargeWithAncilla</span></code>, <code class="docutils literal notranslate"><span class="pre">Unroll2Q</span></code>,
+<code class="docutils literal notranslate"><span class="pre">NoiseAdaptiveLayout</span></code>, <code class="docutils literal notranslate"><span class="pre">OptimizeSwapBeforeMeasure</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RemoveDiagonalGatesBeforeMeasure</span></code>, <code class="docutils literal notranslate"><span class="pre">CommutativeCancellation</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Collect2qBlocks</span></code>, and <code class="docutils literal notranslate"><span class="pre">ConsolidateBlocks</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="compatibility-considerations">
+<h4>Compatibility Considerations<a class="headerlink" href="#compatibility-considerations" title="Permalink to this headline">¶</a></h4>
+<p>As part of the 0.8 release the following things have been deprecated and will
+either be removed or changed in a backwards incompatible manner in a future
+release. While not strictly necessary these are things to adjust for before the
+0.9 (unless otherwise noted) release to avoid a breaking change in the future.</p>
+<ul class="simple">
+<li>The methods prefixed by <code class="docutils literal notranslate"><span class="pre">_get</span></code> in the <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> object are being
+renamed without that prefix.</li>
+<li>Changed elements in <code class="docutils literal notranslate"><span class="pre">couplinglist</span></code> of <code class="docutils literal notranslate"><span class="pre">CouplingMap</span></code> from tuples to lists.</li>
+<li>Unroller bases must now be explicit, and violation raises an informative
+<code class="docutils literal notranslate"><span class="pre">QiskitError</span></code>.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">qiskit.tools.qcvv</span></code> package is deprecated and will be removed in the in
+the future. You should migrate to using the Qiskit Ignis which replaces this
+module.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">qiskit.compile()</span></code> function is now deprecated in favor of explicitly
+using the <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.transpile()</span></code> function to transform a circuit,
+followed by <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.assemble()</span></code> to make a Qobj out of
+it. Instead of <code class="docutils literal notranslate"><span class="pre">compile(...)</span></code>, use <code class="docutils literal notranslate"><span class="pre">assemble(transpile(...),</span> <span class="pre">...)</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">qiskit.converters.qobj_to_circuits()</span></code> has been deprecated and will be
+removed in a future release. Instead
+<code class="docutils literal notranslate"><span class="pre">qiskit.assembler.disassemble()</span></code> should be used to extract
+<code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> objects from a compiled Qobj.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">qiskit.mapper</span></code> namespace has been deprecated. The <code class="docutils literal notranslate"><span class="pre">Layout</span></code> and
+<code class="docutils literal notranslate"><span class="pre">CouplingMap</span></code> classes can be accessed via <code class="docutils literal notranslate"><span class="pre">qiskit.transpiler</span></code>.</li>
+<li>A few functions in <code class="docutils literal notranslate"><span class="pre">qiskit.tools.qi.qi</span></code> have been deprecated and
+moved to <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_info</span></code>.</li>
+</ul>
+<p>Please note that some backwards incompatible changes have been made during this
+release. The following notes contain information on how to adapt to these
+changes.</p>
+<div class="section" id="ibm-q-provider">
+<h5>IBM Q Provider<a class="headerlink" href="#ibm-q-provider" title="Permalink to this headline">¶</a></h5>
+<p>The IBM Q provider was previously included in Terra, but it has been split out
+into a separate package <code class="docutils literal notranslate"><span class="pre">qiskit-ibmq-provider</span></code>. This will need to be
+installed, either via pypi with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit-ibmq-provider</span></code> or from
+source in order to access <code class="docutils literal notranslate"><span class="pre">qiskit.IBMQ</span></code> or <code class="docutils literal notranslate"><span class="pre">qiskit.providers.ibmq</span></code>. If you
+install qiskit with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit</span></code>, that will automatically install
+all subpackages of the Qiskit project.</p>
+</div>
+<div class="section" id="cython-components">
+<h5>Cython Components<a class="headerlink" href="#cython-components" title="Permalink to this headline">¶</a></h5>
+<p>Starting in the 0.8 release the core stochastic swap routine is now implemented
+in <a class="reference external" href="https://cython.org/">Cython</a>. This was done to significantly improve the performance of the
+swapper, however if you build Terra from source or run on a non-x86 or other
+platform without prebuilt wheels and install from source distribution you’ll
+need to make sure that you have Cython installed prior to installing/building
+Qiskit Terra. This can easily be done with pip/pypi: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Cython</span></code>.</p>
+</div>
+<div class="section" id="compiler-workflow">
+<h5>Compiler Workflow<a class="headerlink" href="#compiler-workflow" title="Permalink to this headline">¶</a></h5>
+<p>The <code class="docutils literal notranslate"><span class="pre">qiskit.compile()</span></code> function has been deprecated and replaced by first
+calling <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.transpile()</span></code> to run optimization and mapping on a
+circuit, and then <code class="docutils literal notranslate"><span class="pre">qiskit.compiler.assemble()</span></code> to build a Qobj from that
+optimized circuit to send to a backend. While this is only a deprecation it
+will emit a warning if you use the old <code class="docutils literal notranslate"><span class="pre">qiskit.compile()</span></code> call.</p>
+<p><strong>transpile(), assemble(), execute() parameters</strong></p>
+<p>These functions are heavily overloaded and accept a wide range of inputs.
+They can handle circuit and pulse inputs. All kwargs except for <code class="docutils literal notranslate"><span class="pre">backend</span></code>
+for these functions now also accept lists of the previously accepted types.
+The <code class="docutils literal notranslate"><span class="pre">initial_layout</span></code> kwarg can now be supplied as a both a list and dictionary,
+e.g. to map a Bell experiment on qubits 13 and 14, you can supply:
+<code class="docutils literal notranslate"><span class="pre">initial_layout=[13,</span> <span class="pre">14]</span></code> or <code class="docutils literal notranslate"><span class="pre">initial_layout={qr[0]:</span> <span class="pre">13,</span> <span class="pre">qr[1]:</span> <span class="pre">14}</span></code></p>
+</div>
+<div class="section" id="qobj">
+<h5>Qobj<a class="headerlink" href="#qobj" title="Permalink to this headline">¶</a></h5>
+<p>The Qobj class has been split into two separate subclasses depending on the
+use case, either <code class="docutils literal notranslate"><span class="pre">PulseQobj</span></code> or <code class="docutils literal notranslate"><span class="pre">QasmQobj</span></code> for pulse and circuit jobs
+respectively. If you’re interacting with Qobj directly you may need to
+adjust your usage accordingly.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">qiskit.qobj.qobj_to_dict()</span></code> is removed. Instead use the <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code>
+method of a Qobj object.</p>
+</div>
+<div class="section" id="visualization">
+<h5>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h5>
+<p>The largest change to the visualization module is it has moved from
+<code class="docutils literal notranslate"><span class="pre">qiskit.tools.visualization</span></code> to <code class="docutils literal notranslate"><span class="pre">qiskit.visualization</span></code>. This was done to
+indicate that the visualization module is more than just a tool. However, since
+this interface was declared stable in the 0.7 release the public interface off
+of <code class="docutils literal notranslate"><span class="pre">qiskit.tools.visualization</span></code> will continue to work. That may change in a
+future release, but it will be deprecated prior to removal if that happens.</p>
+<p>The previously deprecated functions, <code class="docutils literal notranslate"><span class="pre">plot_circuit()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">latex_circuit_drawer()</span></code>, <code class="docutils literal notranslate"><span class="pre">generate_latex_source()</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">matplotlib_circuit_drawer()</span></code> from <code class="docutils literal notranslate"><span class="pre">qiskit.tools.visualization</span></code> have been
+removed. Instead of these functions, calling
+<code class="docutils literal notranslate"><span class="pre">qiskit.visualization.circuit_drawer()</span></code> with the appropriate arguments should
+be used.</p>
+<p>The previously deprecated <code class="docutils literal notranslate"><span class="pre">plot_barriers</span></code> and <code class="docutils literal notranslate"><span class="pre">reverse_bits</span></code> keys in
+the <code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg dictionary are deprecated, instead the
+<code class="docutils literal notranslate"><span class="pre">qiskit.visualization.circuit_drawer()</span></code> kwargs <code class="docutils literal notranslate"><span class="pre">plot_barriers</span></code> and
+<code class="docutils literal notranslate"><span class="pre">reverse_bits</span></code> should be used.</p>
+<p>The Wigner plotting functions <code class="docutils literal notranslate"><span class="pre">plot_wigner_function</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_wigner_curve</span></code>,
+<code class="docutils literal notranslate"><span class="pre">plot_wigner_plaquette</span></code>, and <code class="docutils literal notranslate"><span class="pre">plot_wigner_data</span></code> previously in the
+<code class="docutils literal notranslate"><span class="pre">qiskit.tools.visualization._state_visualization</span></code> module have been removed.
+They were never exposed through the public stable interface and were not well
+documented. The code to use this feature can still be accessed through the
+qiskit-tutorials repository.</p>
+</div>
+<div class="section" id="mapper">
+<h5>Mapper<a class="headerlink" href="#mapper" title="Permalink to this headline">¶</a></h5>
+<p>The public api from <code class="docutils literal notranslate"><span class="pre">qiskit.mapper</span></code> has been moved into <code class="docutils literal notranslate"><span class="pre">qiskit.transpiler</span></code>.
+While it has only been deprecated in this release, it will be removed in the
+0.9 release so updating your usage of <code class="docutils literal notranslate"><span class="pre">Layout</span></code> and <code class="docutils literal notranslate"><span class="pre">CouplingMap</span></code> to import
+from <code class="docutils literal notranslate"><span class="pre">qiskit.transpiler</span></code> instead of <code class="docutils literal notranslate"><span class="pre">qiskit.mapper</span></code> before that takes place
+will avoid any surprises in the future.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>Aer 0.2<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id14">
+<h4>New Features<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added multiplexer gate <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/192">#192</a></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">remap_noise_model</span></code> function to <code class="docutils literal notranslate"><span class="pre">noise.utils</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/181">#181</a></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> method to <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code>, <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code>, <code class="docutils literal notranslate"><span class="pre">ReadoutError</span></code>
+<a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/181">#181</a></li>
+<li>Added support for labelled gates in noise models <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/175">#175</a></li>
+<li>Added optimized <code class="docutils literal notranslate"><span class="pre">mcx</span></code>, <code class="docutils literal notranslate"><span class="pre">mcy</span></code>, <code class="docutils literal notranslate"><span class="pre">mcz</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu1</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu2</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu3</span></code>,
+gates to <code class="docutils literal notranslate"><span class="pre">QubitVector</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/124">#124</a></li>
+<li>Added optimized controlled-swap gate to <code class="docutils literal notranslate"><span class="pre">QubitVector</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/142">#142</a></li>
+<li>Added gate-fusion optimization for <code class="docutils literal notranslate"><span class="pre">QasmContoroller</span></code>, which is enabled by
+setting <code class="docutils literal notranslate"><span class="pre">fusion_enable=true</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/136">#136</a></li>
+<li>Added better management of failed simulations <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/167">#167</a></li>
+<li>Added qubits truncate optimization for unused qubits <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/164">#164</a></li>
+<li>Added ability to disable depolarizing error on device noise model
+<a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/131">#131</a></li>
+<li>Added initialize simulator instruction to <code class="docutils literal notranslate"><span class="pre">statevector_state</span></code>
+<a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/117">#117</a>, <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/137">#137</a></li>
+<li>Added coupling maps to simulators <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/93">#93</a></li>
+<li>Added circuit optimization framework <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/83">#83</a></li>
+<li>Added benchmarking <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/71">#71</a>, <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/177">#177</a></li>
+<li>Added wheels support for Debian-like distributions <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/69">#69</a></li>
+<li>Added autoconfiguration of threads for qasm simulator <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/61">#61</a></li>
+<li>Added Simulation method based on Stabilizer Rank Decompositions <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/51">#51</a></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">basis_gates</span></code> kwarg to <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> init <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/175">#175</a>.</li>
+<li>Added an optional parameter to <code class="docutils literal notranslate"><span class="pre">NoiseModel.as_dict()</span></code> for returning
+dictionaries that can be serialized using the standard json library directly
+<a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/165">#165</a></li>
+<li>Refactor thread management <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/50">#50</a></li>
+<li>Improve noise transformations <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/162">#162</a></li>
+<li>Improve error reporting <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/160">#160</a></li>
+<li>Improve efficiency of parallelization with <code class="docutils literal notranslate"><span class="pre">max_memory_mb</span></code> a new parameter
+of <code class="docutils literal notranslate"><span class="pre">backend_opts</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/61">#61</a></li>
+<li>Improve u1 performance in <code class="docutils literal notranslate"><span class="pre">statevector</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/123">#123</a></li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h4>Bug Fixes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Fixed OpenMP clashing problems on macOS for the Terra add-on <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/46">#46</a></li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h4>Compatibility Considerations<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Deprecated <code class="docutils literal notranslate"><span class="pre">&quot;initial_statevector&quot;</span></code> backend option for <code class="docutils literal notranslate"><span class="pre">QasmSimulator</span></code> and
+<code class="docutils literal notranslate"><span class="pre">StatevectorSimulator</span></code> <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/185">#185</a></li>
+<li>Renamed <code class="docutils literal notranslate"><span class="pre">&quot;chop_threshold&quot;</span></code> backend option to <code class="docutils literal notranslate"><span class="pre">&quot;zero_threshold&quot;</span></code> and
+changed default value to 1e-10 <a class="reference external" href="https://github.com/Qiskit/qiskit-aer/pull/185">#185</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id17">
+<h3>Ignis 0.1<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h4>New Features<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Quantum volume</li>
+<li>Measurement mitigation using tensored calibrations</li>
+<li>Simultaneous RB has the option to align Clifford gates across subsets</li>
+<li>Measurement correction can produce a new calibration for a subset of qubits</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h4>Compatibility Considerations<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>RB writes to the minimal set of classical registers (it used to be
+Q[i]-&gt;C[i]). This change enables measurement correction with RB.
+Unless users had external analysis code, this will not change outcomes.
+RB circuits from 0.1 are not compatible with 0.1.1 fitters.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id20">
+<h3>Aqua 0.5<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id21">
+<h4>New Features<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Implementation of the HHL algorithm supporting <code class="docutils literal notranslate"><span class="pre">LinearSystemInput</span></code></li>
+<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">Eigenvalues</span></code> with variant <code class="docutils literal notranslate"><span class="pre">EigQPE</span></code></li>
+<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">Reciprocal</span></code> with variants <code class="docutils literal notranslate"><span class="pre">LookupRotation</span></code> and
+<code class="docutils literal notranslate"><span class="pre">LongDivision</span></code></li>
+<li>Multiple-Controlled U1 and U3 operations <code class="docutils literal notranslate"><span class="pre">mcu1</span></code> and <code class="docutils literal notranslate"><span class="pre">mcu3</span></code></li>
+<li>Pluggable component <code class="docutils literal notranslate"><span class="pre">QFT</span></code> derived from component <code class="docutils literal notranslate"><span class="pre">IQFT</span></code></li>
+<li>Summarized the transpiled circuits at the DEBUG logging level</li>
+<li><code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> accepts <code class="docutils literal notranslate"><span class="pre">basis_gates</span></code> and <code class="docutils literal notranslate"><span class="pre">coupling_map</span></code> again.</li>
+<li>Support to use <code class="docutils literal notranslate"><span class="pre">cx</span></code> gate for the entanglement in <code class="docutils literal notranslate"><span class="pre">RY</span></code> and <code class="docutils literal notranslate"><span class="pre">RYRZ</span></code>
+variational form (<code class="docutils literal notranslate"><span class="pre">cz</span></code> is the default choice)</li>
+<li>Support to use arbitrary mixer Hamiltonian in QAOA, allowing use of QAOA
+in constrained optimization problems [arXiv:1709.03489]</li>
+<li>Added variational algorithm base class <code class="docutils literal notranslate"><span class="pre">VQAlgorithm</span></code>, implemented by
+<code class="docutils literal notranslate"><span class="pre">VQE</span></code> and <code class="docutils literal notranslate"><span class="pre">QSVMVariational</span></code></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">ising/docplex.py</span></code> for automatically generating Ising Hamiltonian
+from optimization models of DOcplex</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">'basic-dirty-ancilla</span></code>’ mode for <code class="docutils literal notranslate"><span class="pre">mct</span></code></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">mcmt</span></code> for Multi-Controlled, Multi-Target gate</li>
+<li>Exposed capabilities to generate circuits from logical AND, OR, DNF
+(disjunctive normal forms), and CNF (conjunctive normal forms) formulae</li>
+<li>Added the capability to generate circuits from ESOP (exclusive sum of
+products) formulae with optional optimization based on Quine-McCluskey and ExactCover</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code> for generating oracle circuits from
+arbitrary Boolean logic expressions (including DIMACS support) with optional
+optimization capability</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">TruthTableOracle</span></code> for generating oracle circuits from truth-tables
+with optional optimization capability</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">CustomCircuitOracle</span></code> for generating oracle from user specified
+circuits</li>
+<li>Added implementation of the Deutsch-Jozsa algorithm</li>
+<li>Added implementation of the Bernstein-Vazirani algorithm</li>
+<li>Added implementation of the Simon’s algorithm</li>
+<li>Added implementation of the Shor’s algorithm</li>
+<li>Added optional capability for Grover’s algorithm to take a custom
+initial state (as opposed to the default uniform superposition)</li>
+<li>Added capability to create a <code class="docutils literal notranslate"><span class="pre">Custom</span></code> initial state using existing
+circuit</li>
+<li>Added the ADAM (and AMSGRAD) optimization algorithm</li>
+<li>Multivariate distributions added, so uncertainty models now have univariate
+and multivariate distribution components</li>
+<li>Added option to include or skip the swaps operations for qft and iqft
+circuit constructions</li>
+<li>Added classical linear system solver <code class="docutils literal notranslate"><span class="pre">ExactLSsolver</span></code></li>
+<li>Added parameters <code class="docutils literal notranslate"><span class="pre">auto_hermitian</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_resize</span></code> to <code class="docutils literal notranslate"><span class="pre">HHL</span></code> algorithm
+to support non-Hermitian and non <span class="math notranslate nohighlight">\(2^n\)</span> sized matrices by default</li>
+<li>Added another feature map, <code class="docutils literal notranslate"><span class="pre">RawFeatureVector</span></code>, that directly maps feature
+vectors to qubits’ states for classification</li>
+<li><code class="docutils literal notranslate"><span class="pre">SVM_Classical</span></code> can now load models trained by <code class="docutils literal notranslate"><span class="pre">QSVM</span></code></li>
+</ul>
+</div>
+<div class="section" id="id22">
+<h4>Bug Fixes<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Fixed <code class="docutils literal notranslate"><span class="pre">ising/docplex.py</span></code> to correctly multiply constant values in constraints</li>
+<li>Fixed package setup to correctly identify namespace packages using
+<code class="docutils literal notranslate"><span class="pre">setuptools.find_namespace_packages</span></code></li>
+</ul>
+</div>
+<div class="section" id="id23">
+<h4>Compatibility Considerations<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> does not take <code class="docutils literal notranslate"><span class="pre">memory</span></code> anymore.</li>
+<li>Moved command line and GUI to separate repo
+(<code class="docutils literal notranslate"><span class="pre">qiskit_aqua_uis</span></code>)</li>
+<li>Removed the <code class="docutils literal notranslate"><span class="pre">SAT</span></code>-specific oracle (now supported by
+<code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code>)</li>
+<li>Changed <code class="docutils literal notranslate"><span class="pre">advanced</span></code> mode implementation of <code class="docutils literal notranslate"><span class="pre">mct</span></code>: using simple <code class="docutils literal notranslate"><span class="pre">h</span></code> gates
+instead of <code class="docutils literal notranslate"><span class="pre">ch</span></code>, and fixing the old recursion step in <code class="docutils literal notranslate"><span class="pre">_multicx</span></code></li>
+<li>Components <code class="docutils literal notranslate"><span class="pre">random_distributions</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">uncertainty_models</span></code></li>
+<li>Reorganized the constructions of various common gates (<code class="docutils literal notranslate"><span class="pre">ch</span></code>, <code class="docutils literal notranslate"><span class="pre">cry</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mcry</span></code>, <code class="docutils literal notranslate"><span class="pre">mct</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu1</span></code>, <code class="docutils literal notranslate"><span class="pre">mcu3</span></code>, <code class="docutils literal notranslate"><span class="pre">mcmt</span></code>, <code class="docutils literal notranslate"><span class="pre">logic_and</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">logic_or</span></code>) and circuits (<code class="docutils literal notranslate"><span class="pre">PhaseEstimationCircuit</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BooleanLogicCircuits</span></code>, <code class="docutils literal notranslate"><span class="pre">FourierTransformCircuits</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">StateVectorCircuits</span></code>) under the <code class="docutils literal notranslate"><span class="pre">circuits</span></code> directory</li>
+<li>Renamed the algorithm <code class="docutils literal notranslate"><span class="pre">QSVMVariational</span></code> to <code class="docutils literal notranslate"><span class="pre">VQC</span></code>, which stands for
+Variational Quantum Classifier</li>
+<li>Renamed the algorithm <code class="docutils literal notranslate"><span class="pre">QSVMKernel</span></code> to <code class="docutils literal notranslate"><span class="pre">QSVM</span></code></li>
+<li>Renamed the class <code class="docutils literal notranslate"><span class="pre">SVMInput</span></code> to <code class="docutils literal notranslate"><span class="pre">ClassificationInput</span></code></li>
+<li>Renamed problem type <code class="docutils literal notranslate"><span class="pre">'svm_classification'</span></code> to <code class="docutils literal notranslate"><span class="pre">'classification'</span></code></li>
+<li>Changed the type of <code class="docutils literal notranslate"><span class="pre">entangler_map</span></code> used in <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> and
+<code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> to list of lists</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ibm-q-provider-0-1">
+<h3>IBM Q Provider 0.1<a class="headerlink" href="#ibm-q-provider-0-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id24">
+<h4>New Features<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>This is the first release as a standalone package. If you
+are installing Terra standalone you’ll also need to install the
+<code class="docutils literal notranslate"><span class="pre">qiskit-ibmq-provider</span></code> package with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit-ibmq-provider</span></code> if
+you want to use the IBM Q backends.</li>
+<li>Support for non-Qobj format jobs has been removed from
+the provider. You’ll have to convert submissions in an older format to
+Qobj before you can submit.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="qiskit-0-8">
+<h2>Qiskit 0.8<a class="headerlink" href="#qiskit-0-8" title="Permalink to this headline">¶</a></h2>
+<p>In Qiskit 0.8 we introduced the Qiskit Ignis element. It also includes the
+Qiskit Terra element 0.7.1 release which contains a bug fix for the BasicAer
+Python simulator.</p>
+<div class="section" id="terra-0-7">
+<h3>Terra 0.7<a class="headerlink" href="#terra-0-7" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="aer-0-1">
+<h3>Aer 0.1<a class="headerlink" href="#aer-0-1" title="Permalink to this headline">¶</a></h3>
+<p>No Change</p>
+</div>
+<div class="section" id="id25">
+<h3>Ignis 0.1<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<p>This is the first release of Qiskit Ignis.</p>
+</div>
+</div>
+<div class="section" id="qiskit-0-7">
+<h2>Qiskit 0.7<a class="headerlink" href="#qiskit-0-7" title="Permalink to this headline">¶</a></h2>
+<p>In Qiskit 0.7 we introduced Qiskit Aer and combined it with Qiskit Terra.</p>
+<div class="section" id="id26">
+<h3>Terra 0.7<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id27">
+<h4>New Features<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<p>This release includes several new features and many bug fixes. With this release
+the interfaces for circuit diagram, histogram, bloch vectors, and state
+visualizations are declared stable. Additionally, this release includes a
+defined and standardized bit order/endianness throughout all aspects of Qiskit.
+These are all declared as stable interfaces in this release which won’t have
+breaking changes made moving forward, unless there is appropriate and lengthy
+deprecation periods warning of any coming changes.</p>
+<p>There is also the introduction of the following new features:</p>
+<ul class="simple">
+<li>A new ASCII art circuit drawing output mode</li>
+<li>A new circuit drawing interface off of <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> objects that
+enables calls of <code class="docutils literal notranslate"><span class="pre">circuit.draw()</span></code> or <code class="docutils literal notranslate"><span class="pre">print(circuit)</span></code> to render a drawing
+of circuits</li>
+<li>A visualizer for drawing the DAG representation of a circuit</li>
+<li>A new quantum state plot type for hinton diagrams in the local matplotlib
+based state plots</li>
+<li>2 new constructor methods off the <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> class
+<code class="docutils literal notranslate"><span class="pre">from_qasm_str()</span></code> and <code class="docutils literal notranslate"><span class="pre">from_qasm_file()</span></code> which let you easily create a
+circuit object from OpenQASM</li>
+<li>A new function <code class="docutils literal notranslate"><span class="pre">plot_bloch_multivector()</span></code> to plot Bloch vectors from a
+tensored state vector or density matrix</li>
+<li>Per-shot measurement results are available in simulators and select devices.
+These can be accessed by setting the <code class="docutils literal notranslate"><span class="pre">memory</span></code> kwarg to <code class="docutils literal notranslate"><span class="pre">True</span></code> when
+calling <code class="docutils literal notranslate"><span class="pre">compile()</span></code> or <code class="docutils literal notranslate"><span class="pre">execute()</span></code> and then accessed using the
+<code class="docutils literal notranslate"><span class="pre">get_memory()</span></code> method on the <code class="docutils literal notranslate"><span class="pre">Result</span></code> object.</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_info</span></code> module with revamped Pauli objects and methods for
+working with quantum states</li>
+<li>New transpile passes for circuit analysis and transformation:
+<code class="docutils literal notranslate"><span class="pre">CommutationAnalysis</span></code>, <code class="docutils literal notranslate"><span class="pre">CommutationTransformation</span></code>, <code class="docutils literal notranslate"><span class="pre">CXCancellation</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Decompose</span></code>, <code class="docutils literal notranslate"><span class="pre">Unroll</span></code>, <code class="docutils literal notranslate"><span class="pre">Optimize1QGates</span></code>, <code class="docutils literal notranslate"><span class="pre">CheckMap</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CXDirection</span></code>, <code class="docutils literal notranslate"><span class="pre">BarrierBeforeFinalMeasurements</span></code></li>
+<li>New alternative swap mapper passes in the transpiler:
+<code class="docutils literal notranslate"><span class="pre">BasicSwap</span></code>, <code class="docutils literal notranslate"><span class="pre">LookaheadSwap</span></code>, <code class="docutils literal notranslate"><span class="pre">StochasticSwap</span></code></li>
+<li>More advanced transpiler infrastructure with support for analysis passes,
+transformation passes, a global <code class="docutils literal notranslate"><span class="pre">property_set</span></code> for the pass manager, and
+repeat-until control of passes</li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h4>Compatibility Considerations<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
+<p>As part of the 0.7 release the following things have been deprecated and will
+either be removed or changed in a backwards incompatible manner in a future
+release. While not strictly necessary these are things to adjust for before the
+next release to avoid a breaking change.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">plot_circuit()</span></code>, <code class="docutils literal notranslate"><span class="pre">latex_circuit_drawer()</span></code>, <code class="docutils literal notranslate"><span class="pre">generate_latex_source()</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">matplotlib_circuit_drawer()</span></code> from qiskit.tools.visualization are
+deprecated. Instead the <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code> function from the same module
+should be used, there are kwarg options to mirror the functionality of all
+the deprecated functions.</li>
+<li>The current default output of <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code> (using latex and falling
+back on python) is deprecated and will be changed to just use the <code class="docutils literal notranslate"><span class="pre">text</span></code>
+output by default in future releases.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">qiskit.wrapper.load_qasm_string()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">qiskit.wrapper.load_qasm_file()</span></code> functions are deprecated and the
+<code class="docutils literal notranslate"><span class="pre">QuantumCircuit.from_qasm_str()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">QuantumCircuit.from_qasm_file()</span></code> constructor methods should be used
+instead.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">plot_barriers</span></code> and <code class="docutils literal notranslate"><span class="pre">reverse_bits</span></code> keys in the <code class="docutils literal notranslate"><span class="pre">style</span></code> kwarg
+dictionary are deprecated, instead the
+<code class="docutils literal notranslate"><span class="pre">qiskit.tools.visualization.circuit_drawer()</span></code> kwargs <code class="docutils literal notranslate"><span class="pre">plot_barriers</span></code> and
+<code class="docutils literal notranslate"><span class="pre">reverse_bits</span></code> should be used instead.</li>
+<li>The functions <code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">iplot_state()</span></code> have been depreciated.
+Instead the functions <code class="docutils literal notranslate"><span class="pre">plot_state_*()</span></code> and <code class="docutils literal notranslate"><span class="pre">iplot_state_*()</span></code> should be
+called for the visualization method required.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">skip_transpiler</span></code> argumentt has been deprecated from <code class="docutils literal notranslate"><span class="pre">compile()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">execute()</span></code>. Instead you can use the <code class="docutils literal notranslate"><span class="pre">PassManager</span></code> directly, just set
+the <code class="docutils literal notranslate"><span class="pre">pass_manager</span></code> to a blank <code class="docutils literal notranslate"><span class="pre">PassManager</span></code> object with <code class="docutils literal notranslate"><span class="pre">PassManager()</span></code></li>
+<li>The <code class="docutils literal notranslate"><span class="pre">transpile_dag()</span></code> function <code class="docutils literal notranslate"><span class="pre">format</span></code> kwarg for emitting different
+output formats is deprecated, instead you should convert the default output
+<code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> object to the desired format.</li>
+<li>The unrollers have been deprecated, moving forward only DAG to DAG unrolling
+will be supported.</li>
+</ul>
+<p>Please note that some backwards-incompatible changes have been made during this
+release. The following notes contain information on how to adapt to these
+changes.</p>
+<div class="section" id="changes-to-result-objects">
+<h5>Changes to Result objects<a class="headerlink" href="#changes-to-result-objects" title="Permalink to this headline">¶</a></h5>
+<p>As part of the rewrite of the Results object to be more consistent and a
+stable interface moving forward a few changes have been made to how you access
+the data stored in the result object. First the <code class="docutils literal notranslate"><span class="pre">get_data()</span></code> method has been
+renamed to just <code class="docutils literal notranslate"><span class="pre">data()</span></code>. Accompanying that change is a change in the data
+format returned by the function. It is now returning the raw data from the
+backends instead of doing any post-processing. For example, in previous
+versions you could call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">unitary</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unitary</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and that would return the unitary matrix like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">1</span><span class="o">+</span><span class="mi">0</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="o">+</span><span class="mf">0.5</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mf">0.5</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">0</span><span class="n">j</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>But now if you call (with the renamed method):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="p">()[</span><span class="s1">&#39;unitary&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>it will return something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]]</span>
+</pre></div>
+</div>
+<p>To get the post processed results in the same format as before the 0.7 release
+you must use the <code class="docutils literal notranslate"><span class="pre">get_counts()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_statevector()</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_unitary()</span></code>
+methods on the result object instead of <code class="docutils literal notranslate"><span class="pre">get_data()['counts']</span></code>,
+<code class="docutils literal notranslate"><span class="pre">get_data()['statevector']</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_data()['unitary']</span></code> respectively.</p>
+<p>Additionally, support for <code class="docutils literal notranslate"><span class="pre">len()</span></code> and indexing on a <code class="docutils literal notranslate"><span class="pre">Result</span></code> object has
+been removed. Instead you should deal with the output from the post processed
+methods on the Result objects.</p>
+<p>Also, the <code class="docutils literal notranslate"><span class="pre">get_snapshot()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_snapshots()</span></code> methods from the
+<code class="docutils literal notranslate"><span class="pre">Result</span></code> class have been removed. Instead you can access the snapshots
+using <code class="docutils literal notranslate"><span class="pre">Result.data()['snapshots']</span></code>.</p>
+</div>
+<div class="section" id="changes-to-visualization">
+<h5>Changes to Visualization<a class="headerlink" href="#changes-to-visualization" title="Permalink to this headline">¶</a></h5>
+<p>The largest change made to visualization in the 0.7 release is the removal of
+Matplotlib and other visualization dependencies from the project requirements.
+This was done to simplify the requirements and configuration required for
+installing Qiskit. If you plan to use any visualizations (including all the
+jupyter magics) except for the <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">latex</span></code>, and <code class="docutils literal notranslate"><span class="pre">latex_source</span></code>
+output for the circuit drawer you’ll you must manually ensure that
+the visualization dependencies are installed. You can leverage the optional
+requirements to the Qiskit Terra package to do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qiskit</span><span class="o">-</span><span class="n">terra</span><span class="p">[</span><span class="n">visualization</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Aside from this there have been changes made to several of the interfaces
+as part of the stabilization which may have an impact on existing code.
+The first is the the <code class="docutils literal notranslate"><span class="pre">basis</span></code> kwarg in the <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code> function
+is no longer accepted. If you were relying on the <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code> to
+adjust the basis gates used in drawing a circuit diagram you will have to
+do this priort to calling <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code>. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.tools</span> <span class="k">import</span> <span class="n">visualization</span>
+<span class="n">visualization</span><span class="o">.</span><span class="n">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="s1">&#39;x,U,CX&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will have to be adjust to be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">BasicAer</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">transpiler</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools</span> <span class="k">import</span> <span class="n">visualization</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">draw_circ</span> <span class="o">=</span> <span class="n">transpiler</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="s1">&#39;x,U,CX&#39;</span><span class="p">)</span>
+<span class="n">visualization</span><span class="o">.</span><span class="n">circuit_drawer</span><span class="p">(</span><span class="n">draw_circ</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Moving forward the <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code> function will be the sole interface
+for circuit drawing in the visualization module. Prior to the 0.7 release there
+were several other functions which either used different output backends or
+changed the output for drawing circuits. However, all those other functions
+have been deprecated and that functionality has been integrated as options
+on <code class="docutils literal notranslate"><span class="pre">circuit_drawer()</span></code>.</p>
+<p>For the other visualization functions, <code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> there are also a few changes to check when upgrading. First
+is the output from these functions has changed, in prior releases these would
+interactively show the output visualization. However that has changed to
+instead return a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> object. This provides much more
+flexibility and options to interact with the visualization prior to saving or
+showing it. This will require adjustment to how these functions are consumed.
+For example, prior to this release when calling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">plot_state</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>would open up new windows (depending on matplotlib backend) to display the
+visualization. However starting in the 0.7 you’ll have to call <code class="docutils literal notranslate"><span class="pre">show()</span></code> on
+the output to mirror this behavior. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plot_state</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist_fig</span> <span class="o">=</span> <span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">state_fig</span> <span class="o">=</span> <span class="n">plot_state</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+<span class="n">hist_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">state_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that this is only for when running outside of Jupyter. No adjustment is
+required inside a Jupyter environment because Jupyter notebooks natively
+understand how to render <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> objects.</p>
+<p>However, returning the Figure object provides additional flexibility for
+dealing with the output. For example instead of just showing the figure you
+can now directly save it to a file by leveraging the <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> method.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist_fig</span> <span class="o">=</span> <span class="n">plot_histogram</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">state_fig</span> <span class="o">=</span> <span class="n">plot_state</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+<span class="n">hist_fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;histogram.png&#39;</span><span class="p">)</span>
+<span class="n">state_fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;state_plot.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The other key aspect which has changed with these functions is when running
+under jupyter. In the 0.6 release <code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code>
+when running under jupyter the default behavior was to use the interactive
+Javascript plots if the externally hosted Javascript library for rendering
+the visualization was reachable over the network. If not it would just use
+the matplotlib version. However in the 0.7 release this no longer the case,
+and separate functions for the interactive plots, <code class="docutils literal notranslate"><span class="pre">iplot_state()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">iplot_histogram()</span></code> are to be used instead. <code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code> always use the matplotlib versions.</p>
+<p>Additionally, starting in this release the <code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> function is
+deprecated in favor of calling individual methods for each method of plotting
+a quantum state. While the <code class="docutils literal notranslate"><span class="pre">plot_state()</span></code> function will continue to work
+until the 0.9 release, it will emit a warning each time it is used. The</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Qiskit Terra 0.6</th>
+<th class="head">Qiskit Terra 0.7+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>plot_state(rho)</td>
+<td>plot_state_city(rho)</td>
+</tr>
+<tr class="row-odd"><td>plot_state(rho, method=’city’)</td>
+<td>plot_state_city(rho)</td>
+</tr>
+<tr class="row-even"><td>plot_state(rho, method=’paulivec’)</td>
+<td>plot_state_paulivec(rho)</td>
+</tr>
+<tr class="row-odd"><td>plot_state(rho, method=’qsphere’)</td>
+<td>plot_state_qsphere(rho)</td>
+</tr>
+<tr class="row-even"><td>plot_state(rho, method=’bloch’)</td>
+<td>plot_bloch_multivector(rho)</td>
+</tr>
+<tr class="row-odd"><td>plot_state(rho, method=’hinton’)</td>
+<td>plot_state_hinton(rho)</td>
+</tr>
+</tbody>
+</table>
+<p>The same is true for the interactive JS equivalent, <code class="docutils literal notranslate"><span class="pre">iplot_state()</span></code>. The
+function names are all the same, just with a prepended <cite>i</cite> for each function.
+For example, <code class="docutils literal notranslate"><span class="pre">iplot_state(rho,</span> <span class="pre">method='paulivec')</span></code> is
+<code class="docutils literal notranslate"><span class="pre">iplot_state_paulivec(rho)</span></code>.</p>
+</div>
+<div class="section" id="changes-to-backends">
+<h5>Changes to Backends<a class="headerlink" href="#changes-to-backends" title="Permalink to this headline">¶</a></h5>
+<p>With the improvements made in the 0.7 release there are a few things related
+to backends to keep in mind when upgrading. The biggest change is the
+restructuring of the provider instances in the root  <code class="docutils literal notranslate"><span class="pre">qiskit`</span></code> namespace.
+The <code class="docutils literal notranslate"><span class="pre">Aer</span></code> provider is not installed by default and requires the installation
+of the <code class="docutils literal notranslate"><span class="pre">qiskit-aer</span></code> package. This package contains the new high performance
+fully featured simulator. If you installed via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">qiskit</span></code> you’ll
+already have this installed. The python simulators are now available under
+<code class="docutils literal notranslate"><span class="pre">qiskit.BasicAer</span></code> and the old C++ simulators are available with
+<code class="docutils literal notranslate"><span class="pre">qiskit.LegacySimulators</span></code>. This also means that the implicit fallback to
+python based simulators when the C++ simulators are not found doesn’t exist
+anymore. If you ask for a local C++ based simulator backend, and it can’t be
+found an exception will be raised instead of just using the python simulator
+instead.</p>
+<p>Additionally the previously deprecation top level functions <code class="docutils literal notranslate"><span class="pre">register()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">available_backends()</span></code> have been removed. Also, the deprecated
+<code class="docutils literal notranslate"><span class="pre">backend.parameters()</span></code> and <code class="docutils literal notranslate"><span class="pre">backend.calibration()</span></code> methods have been
+removed in favor of <code class="docutils literal notranslate"><span class="pre">backend.properties()</span></code>. You can refer to the 0.6 release
+notes section <a class="reference internal" href="#backends"><span class="std std-ref">Working with backends</span></a> for more details on these changes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">backend.jobs()</span></code> and <code class="docutils literal notranslate"><span class="pre">backend.retrieve_jobs()</span></code> calls no longer return
+results from those jobs. Instead you must call the <code class="docutils literal notranslate"><span class="pre">result()</span></code> method on the
+returned jobs objects.</p>
+</div>
+<div class="section" id="changes-to-the-compiler-transpiler-and-unrollers">
+<h5>Changes to the compiler, transpiler, and unrollers<a class="headerlink" href="#changes-to-the-compiler-transpiler-and-unrollers" title="Permalink to this headline">¶</a></h5>
+<p>As part of an effort to stabilize the compiler interfaces there have been
+several changes to be aware of when leveraging the compiler functions.
+First it is important to note that the <code class="docutils literal notranslate"><span class="pre">qiskit.transpiler.transpile()</span></code>
+function now takes a QuantumCircuit object (or a list of them) and returns
+a QuantumCircuit object (or a list of them). The DAG processing is done
+internally now.</p>
+<p>You can also easily switch between circuits, DAGs, and Qobj now using the
+functions in <code class="docutils literal notranslate"><span class="pre">qiskit.converters</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id29">
+<h3>Aer 0.1<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id30">
+<h4>New Features<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<p>Aer provides three simulator backends:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">QasmSimulator</span></code>: simulate experiments and return measurement outcomes</li>
+<li><code class="docutils literal notranslate"><span class="pre">StatevectorSimulator</span></code>: return the final statevector for a quantum circuit
+acting on the all zero state</li>
+<li><code class="docutils literal notranslate"><span class="pre">UnitarySimulator</span></code>: return the unitary matrix for a quantum circuit</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">noise</span></code> module: contains advanced noise modeling features for the
+<code class="docutils literal notranslate"><span class="pre">QasmSimulator</span></code></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code>, <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code>, <code class="docutils literal notranslate"><span class="pre">ReadoutError</span></code> classes for simulating a
+Qiskit quantum circuit in the presence of errors</li>
+<li><code class="docutils literal notranslate"><span class="pre">errors</span></code> submodule including functions for generating <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code>
+objects for the following types of quantum errors: Kraus, mixed unitary,
+coherent unitary, Pauli, depolarizing, thermal relaxation, amplitude damping,
+phase damping, combined phase and amplitude damping</li>
+<li><code class="docutils literal notranslate"><span class="pre">device</span></code> submodule for automatically generating a noise model based on the
+<code class="docutils literal notranslate"><span class="pre">BackendProperties</span></code> of a device</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">utils</span></code> module:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">qobj_utils</span></code> provides functions for directly modifying a Qobj to insert
+special simulator instructions not yet supported through the Qiskit Terra API.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="aqua-0-4">
+<h3>Aqua 0.4<a class="headerlink" href="#aqua-0-4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id31">
+<h4>New Features<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Programmatic APIs for algorithms and components – each component can now be
+instantiated and initialized via a single (non-emptY) constructot call</li>
+<li><code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> API for algorithm/backend decoupling –
+<code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> encapsulates a backend and its settings</li>
+<li>Updated documentation and Jupyter Notebooks illustrating the new programmatic
+APIs</li>
+<li>Transparent parallelization for gradient-based optimizers</li>
+<li>Multiple-Controlled-NOT (cnx) operation</li>
+<li>Pluggable algorithmic component <code class="docutils literal notranslate"><span class="pre">RandomDistribution</span></code></li>
+<li>Concrete implementations of <code class="docutils literal notranslate"><span class="pre">RandomDistribution</span></code>:
+<code class="docutils literal notranslate"><span class="pre">BernoulliDistribution</span></code>, <code class="docutils literal notranslate"><span class="pre">LogNormalDistribution</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MultivariateDistribution</span></code>, <code class="docutils literal notranslate"><span class="pre">MultivariateNormalDistribution</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MultivariateUniformDistribution</span></code>, <code class="docutils literal notranslate"><span class="pre">NormalDistribution</span></code>,
+<code class="docutils literal notranslate"><span class="pre">UniformDistribution</span></code>, and <code class="docutils literal notranslate"><span class="pre">UnivariateDistribution</span></code></li>
+<li>Concrete implementations of <code class="docutils literal notranslate"><span class="pre">UncertaintyProblem</span></code>:
+<code class="docutils literal notranslate"><span class="pre">FixedIncomeExpectedValue</span></code>, <code class="docutils literal notranslate"><span class="pre">EuropeanCallExpectedValue</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">EuropeanCallDelta</span></code></li>
+<li>Amplitude Estimation algorithm</li>
+<li>Qiskit Optimization: New Ising models for optimization problems exact cover,
+set packing, vertex cover, clique, and graph partition</li>
+<li>Qiskit AI:<ul>
+<li>New feature maps extending the <code class="docutils literal notranslate"><span class="pre">FeatureMap</span></code> pluggable interface:
+<code class="docutils literal notranslate"><span class="pre">PauliExpansion</span></code> and <code class="docutils literal notranslate"><span class="pre">PauliZExpansion</span></code></li>
+<li>Training model serialization/deserialization mechanism</li>
+</ul>
+</li>
+<li>Qiskit Finance:<ul>
+<li>Amplitude estimation for Bernoulli random variable: illustration of
+amplitude estimation on a single qubit problem</li>
+<li>Loading of multiple univariate and multivariate random distributions</li>
+<li>European call option: expected value and delta (using univariate
+distributions)</li>
+<li>Fixed income asset pricing: expected value (using multivariate
+distributions)</li>
+</ul>
+</li>
+<li>The Pauli string in <code class="docutils literal notranslate"><span class="pre">Operator</span></code> class is aligned with Terra 0.7. Now the
+order of a n-qubit pauli string is <code class="docutils literal notranslate"><span class="pre">q_{n-1}...q{0}</span></code> Thus, the (de)serialier
+(<code class="docutils literal notranslate"><span class="pre">save_to_dict</span></code> and <code class="docutils literal notranslate"><span class="pre">load_from_dict</span></code>) in the <code class="docutils literal notranslate"><span class="pre">Operator</span></code> class are also
+changed to adopt the changes of <code class="docutils literal notranslate"><span class="pre">Pauli</span></code> class.</li>
+</ul>
+</div>
+<div class="section" id="id32">
+<h4>Compatibility Considerations<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">HartreeFock</span></code> component of pluggable type <code class="docutils literal notranslate"><span class="pre">InitialState</span></code> moved to Qiskit
+Chemistry</li>
+<li><code class="docutils literal notranslate"><span class="pre">UCCSD</span></code> component of pluggable type <code class="docutils literal notranslate"><span class="pre">VariationalForm</span></code> moved to Qiskit
+Chemistry</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="qiskit-0-6">
+<h2>Qiskit 0.6<a class="headerlink" href="#qiskit-0-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="terra-0-6">
+<h3>Terra 0.6<a class="headerlink" href="#terra-0-6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id33">
+<h4>Highlights<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<p>This release includes a redesign of internal components centered around a new,
+formal communication format (Qobj), along with long awaited features to
+improve the user experience as a whole. The highlights, compared to the 0.5
+release, are:</p>
+<ul class="simple">
+<li>Improvements for inter-operability (based on the Qobj specification) and
+extensibility (facilities for extending Qiskit with new backends in a
+seamless way)</li>
+<li>New options for handling credentials and authentication for the IBM Q
+backends, aimed at simplifying the process and supporting automatic loading
+of user credentials</li>
+<li>A revamp of the visualization utilities: stylish interactive visualizations
+are now available for Jupyter users, along with refinements for the circuit
+drawer (including a matplotlib-based version)</li>
+<li>Performance improvements centered around circuit transpilation: the basis for
+a more flexible and modular architecture have been set, including
+parallelization of the circuit compilation and numerous optimizations</li>
+</ul>
+</div>
+<div class="section" id="id34">
+<h4>Compatibility Considerations<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<p>Please note that some backwards-incompatible changes have been introduced
+during this release – the following notes contain information on how to adapt
+to the new changes.</p>
+<div class="section" id="removal-of-quantumprogram">
+<h5>Removal of <code class="docutils literal notranslate"><span class="pre">QuantumProgram</span></code><a class="headerlink" href="#removal-of-quantumprogram" title="Permalink to this headline">¶</a></h5>
+<p>As hinted during the 0.5 release, the deprecation of the  <code class="docutils literal notranslate"><span class="pre">QuantumProgram</span></code>
+class has now been completed and is no longer available, in favor of working
+with the individual components (<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseJob</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumRegister</span></code>,
+<a class="reference internal" href="autodoc/qiskit.html#module-qiskit" title="qiskit"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit</span></code></a>) directly.</p>
+<p>Please check the <a class="reference internal" href="#quantum-program-0-5"><span class="std std-ref">0.5 release notes</span></a> and the
+examples for details about the transition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span><span class="p">,</span> <span class="n">execute</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+
+<span class="n">job_sim</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<span class="n">sim_result</span> <span class="o">=</span> <span class="n">job_sim</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;simulation: &quot;</span><span class="p">,</span> <span class="n">sim_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sim_result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ibm-q-authentication-and-qconfig-py">
+<h5>IBM Q Authentication and <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code><a class="headerlink" href="#ibm-q-authentication-and-qconfig-py" title="Permalink to this headline">¶</a></h5>
+<p>The managing of credentials for authenticating when using the IBM Q backends has
+been expanded, and there are new options that can be used for convenience:</p>
+<ol class="arabic">
+<li><p class="first">save your credentials in disk once, and automatically load them in future
+sessions. This provides a one-off mechanism:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+<span class="n">IBQM</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">,</span> <span class="s1">&#39;MY_API_URL&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>afterwards, your credentials can be automatically loaded from disk by invoking
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">load_accounts()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or you can load only specific accounts if you only want to use those in a session:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IBMQ</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;MY_PROJECT&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">use environment variables. If <code class="docutils literal notranslate"><span class="pre">QE_TOKEN</span></code> and <code class="docutils literal notranslate"><span class="pre">QE_URL</span></code> is set, the
+<code class="docutils literal notranslate"><span class="pre">IBMQ.load_accounts()</span></code> call will automatically load the credentials from
+them.</p>
+</li>
+</ol>
+<p>Additionally, the previous method of having a <code class="docutils literal notranslate"><span class="pre">Qconfig.py</span></code> file in the
+program folder and passing the credentials explicitly is still supported.</p>
+</div>
+<div class="section" id="working-with-backends">
+<span id="backends"></span><h5>Working with backends<a class="headerlink" href="#working-with-backends" title="Permalink to this headline">¶</a></h5>
+<p>A new mechanism has been introduced in Terra 0.6 as the recommended way for
+obtaining a backend, allowing for more powerful and unified filtering and
+integrated with the new credentials system. The previous top-level methods
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code>,
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">available_backends()</span></code> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">get_backend()</span></code> are still supported, but will
+deprecated in upcoming versions in favor of using the <cite>qiskit.IBMQ</cite> and
+<cite>qiskit.Aer</cite> objects directly, which allow for more complex filtering.</p>
+<p>For example, to list and use a local backend:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">Aer</span>
+
+<span class="n">all_local_backends</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># returns a list of instances</span>
+<span class="n">qasm_simulator</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And for listing and using remote backends:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">IBMQ</span>
+
+<span class="n">IBMQ</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="s1">&#39;MY_API_TOKEN&#39;</span><span class="p">)</span>
+<span class="mi">5</span><span class="n">_qubit_devices</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">simulator</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_qubits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ibmqx4</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please note as well that the names of the local simulators have been
+simplified. The previous names can still be used, but it is encouraged to use
+the new, shorter names:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Qiskit Terra 0.5</th>
+<th class="head">Qiskit Terra 0.6</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>‘local_qasm_simulator’</td>
+<td>‘qasm_simulator’</td>
+</tr>
+<tr class="row-odd"><td>‘local_statevector_simulator’</td>
+<td>‘statevector_simulator’</td>
+</tr>
+<tr class="row-even"><td>‘local_unitary_simulator_py’</td>
+<td>‘unitary_simulator’</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="backend-and-job-api-changes">
+<h5>Backend and Job API changes<a class="headerlink" href="#backend-and-job-api-changes" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p class="first">Jobs submitted to IBM Q backends have improved capabilities. It is possible
+to cancel them and replenish credits (<code class="docutils literal notranslate"><span class="pre">job.cancel()</span></code>), and to retrieve
+previous jobs executed on a specific backend either by job id
+(<code class="docutils literal notranslate"><span class="pre">backend.retrieve_job(job_id)</span></code>) or in batch of latest jobs
+(<code class="docutils literal notranslate"><span class="pre">backend.jobs(limit)</span></code>)</p>
+</li>
+<li><p class="first">Properties for checking each individual job status (<code class="docutils literal notranslate"><span class="pre">queued</span></code>, <code class="docutils literal notranslate"><span class="pre">running</span></code>,
+<code class="docutils literal notranslate"><span class="pre">validating</span></code>, <code class="docutils literal notranslate"><span class="pre">done</span></code> and <code class="docutils literal notranslate"><span class="pre">cancelled</span></code>) no longer exist. If you
+want to check the job status, use the identity comparison against
+<code class="docutils literal notranslate"><span class="pre">job.status</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit.backends</span> <span class="k">import</span> <span class="n">JobStatus</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="ow">is</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+    <span class="n">handle_job</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Please consult the new documentation of the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">IBMQJob</span></code> class to get further insight
+in how to use the simplified API.</p>
+<ul class="simple">
+<li>A number of members of <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseBackend</span></code>
+and <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseJob</span></code> are no longer properties,
+but methods, and as a result they need to be invoked as functions.</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Qiskit Terra 0.5</th>
+<th class="head">Qiskit Terra 0.6</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>backend.name</td>
+<td>backend.name()</td>
+</tr>
+<tr class="row-odd"><td>backend.status</td>
+<td>backend.status()</td>
+</tr>
+<tr class="row-even"><td>backend.configuration</td>
+<td>backend.configuration()</td>
+</tr>
+<tr class="row-odd"><td>backend.calibration</td>
+<td>backend.properties()</td>
+</tr>
+<tr class="row-even"><td>backend.parameters</td>
+<td>backend.jobs()
+backend.retrieve_job(job_id)</td>
+</tr>
+<tr class="row-odd"><td>job.status</td>
+<td>job.status()</td>
+</tr>
+<tr class="row-even"><td>job.cancelled</td>
+<td>job.queue_position()</td>
+</tr>
+<tr class="row-odd"><td>job.running</td>
+<td>job.cancel()</td>
+</tr>
+<tr class="row-even"><td>job.queued</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>job.done</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="better-jupyter-tools">
+<h5>Better Jupyter tools<a class="headerlink" href="#better-jupyter-tools" title="Permalink to this headline">¶</a></h5>
+<p>The new release contains improvements to the user experience while using
+Jupyter notebooks.</p>
+<p>First, new interactive visualizations of counts histograms and quantum states
+are provided:
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_histogram()</span></code> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_state()</span></code>.
+These methods will default to the new interactive kind when the environment
+is Jupyter and internet connection exists.</p>
+<p>Secondly, the new release provides Jupyter cell magics for keeping track of
+the progress of your code. Use <code class="docutils literal notranslate"><span class="pre">%%qiskit_job_status</span></code> to keep track of the
+status of submitted jobs to IBM Q backends. Use <code class="docutils literal notranslate"><span class="pre">%%qiskit_progress_bar</span></code> to
+keep track of the progress of compilation/execution.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="qiskit-0-5">
+<h2>Qiskit 0.5<a class="headerlink" href="#qiskit-0-5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="terra-0-5">
+<h3>Terra 0.5<a class="headerlink" href="#terra-0-5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id35">
+<h4>Highlights<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
+<p>This release brings a number of improvements to Qiskit, both for the user
+experience and under the hood. Please refer to the full changelog for a
+detailed description of the changes - the highlights are:</p>
+<ul class="simple">
+<li>new <code class="docutils literal notranslate"><span class="pre">statevector</span></code> <code class="xref py py-mod docutils literal notranslate"><span class="pre">simulators</span></code> and feature and
+performance improvements to the existing ones (in particular to the C++
+simulator), along with a reorganization of how to work with backends focused
+on extensibility and flexibility (using aliases and backend providers)</li>
+<li>reorganization of the asynchronous features, providing a friendlier interface
+for running jobs asynchronously via <code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code> instances</li>
+<li>numerous improvements and fixes throughout the Terra as a whole, both for
+convenience of the users (such as allowing anonymous registers) and for
+enhanced functionality (such as improved plotting of circuits)</li>
+</ul>
+</div>
+<div class="section" id="id36">
+<h4>Compatibility Considerations<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h4>
+<p>Please note that several backwards-incompatible changes have been introduced
+during this release as a result of the ongoing development. While some of these
+features will continue to be supported during a period of time before being
+fully deprecated, it is recommended to update your programs in order to prepare
+for the new versions and take advantage of the new functionality.</p>
+<div class="section" id="quantumprogram-changes">
+<span id="quantum-program-0-5"></span><h5><code class="docutils literal notranslate"><span class="pre">QuantumProgram</span></code> changes<a class="headerlink" href="#quantumprogram-changes" title="Permalink to this headline">¶</a></h5>
+<p>Several methods of the <code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumProgram</span></code> class are on their way
+to being deprecated:</p>
+<ul>
+<li><p class="first">methods for interacting <strong>with the backends and the API</strong>:</p>
+<p>The recommended way for opening a connection to the IBM Q API and for using
+the backends is through the
+top-level functions directly instead of
+the <code class="docutils literal notranslate"><span class="pre">QuantumProgram</span></code> methods. In particular, the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.register()</span></code> method provides the equivalent of the previous
+<code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.QuantumProgram.set_api()</span></code> call. In a similar vein, there is a new
+<code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.available_backends()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.get_backend()</span></code> and related
+functions for querying the available backends directly. For example, the
+following snippet for version 0.4:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumProgram</span>
+
+<span class="n">quantum_program</span> <span class="o">=</span> <span class="n">QuantumProgram</span><span class="p">()</span>
+<span class="n">quantum_program</span><span class="o">.</span><span class="n">set_api</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">backends</span> <span class="o">=</span> <span class="n">quantum_program</span><span class="o">.</span><span class="n">available_backends</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">quantum_program</span><span class="o">.</span><span class="n">get_backend_status</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>would be equivalent to the following snippet for version 0.5:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">register</span><span class="p">,</span> <span class="n">available_backends</span><span class="p">,</span> <span class="n">get_backend</span>
+
+<span class="n">register</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="n">backends</span> <span class="o">=</span> <span class="n">available_backends</span><span class="p">()</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;ibmqx4&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">methods for <strong>compiling and executing programs</strong>:</p>
+<p>The <span class="xref std std-ref">top-level functions</span> now also provide
+equivalents for the <code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.QuantumProgram.compile()</span></code> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.QuantumProgram.execute()</span></code> methods. For example, the following
+snippet from version 0.4:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">quantum_program</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>would be equivalent to the following snippet for version 0.5:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">execute</span>
+
+<span class="n">execute</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>In general, from version 0.5 onwards we encourage to try to make use of the
+individual objects and classes directly instead of relying on
+<code class="docutils literal notranslate"><span class="pre">QuantumProgram</span></code>. For example, a <code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> can be
+instantiated and constructed by appending <code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumRegister</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClassicalRegister</span></code>, and gates directly. Please check the
+update example in the Quickstart section, or the
+<code class="docutils literal notranslate"><span class="pre">using_qiskit_core_level_0.py</span></code> and <code class="docutils literal notranslate"><span class="pre">using_qiskit_core_level_1.py</span></code>
+examples on the main repository.</p>
+</div>
+<div class="section" id="backend-name-changes">
+<h5>Backend name changes<a class="headerlink" href="#backend-name-changes" title="Permalink to this headline">¶</a></h5>
+<p>In order to provide a more extensible framework for backends, there have been
+some design changes accordingly:</p>
+<ul>
+<li><p class="first"><strong>local simulator names</strong></p>
+<p>The names of the local simulators have been homogenized in order to follow
+the same pattern: <code class="docutils literal notranslate"><span class="pre">PROVIDERNAME_TYPE_simulator_LANGUAGEORPROJECT</span></code> -
+for example, the C++ simulator previously named <code class="docutils literal notranslate"><span class="pre">local_qiskit_simulator</span></code>
+is now <code class="docutils literal notranslate"><span class="pre">local_qasm_simulator_cpp</span></code>. An overview of the current
+simulators:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">QASM</span></code> simulator is supposed to be like an experiment. You apply a
+circuit on some qubits, and observe measurement results - and you repeat
+for many shots to get a histogram of counts via <code class="docutils literal notranslate"><span class="pre">result.get_counts()</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Statevector</span></code> simulator is to get the full statevector (<span class="math notranslate nohighlight">\(2^n\)</span>
+amplitudes) after evolving the zero state through the circuit, and can be
+obtained via <code class="docutils literal notranslate"><span class="pre">result.get_statevector()</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Unitary</span></code> simulator is to get the unitary matrix equivalent of the
+circuit, returned via <code class="docutils literal notranslate"><span class="pre">result.get_unitary()</span></code>.</li>
+<li>In addition, you can get intermediate states from a simulator by applying
+a <code class="docutils literal notranslate"><span class="pre">snapshot(slot)</span></code> instruction at various spots in the circuit. This will
+save the current state of the simulator in a given slot, which can later
+be retrieved via <code class="docutils literal notranslate"><span class="pre">result.get_snapshot(slot)</span></code>.</li>
+</ul>
+</li>
+<li><p class="first"><strong>backend aliases</strong>:</p>
+<p>The SDK now provides an “alias” system that allows for automatically using
+the most performant simulator of a specific type, if it is available in your
+system. For example, with the following snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">get_backend</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;local_statevector_simulator&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>the backend will be the C++ statevector simulator if available, falling
+back to the Python statevector simulator if not present.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="more-flexible-names-and-parameters">
+<h5>More flexible names and parameters<a class="headerlink" href="#more-flexible-names-and-parameters" title="Permalink to this headline">¶</a></h5>
+<p>Several functions of the SDK have been made more flexible and user-friendly:</p>
+<ul>
+<li><p class="first"><strong>automatic circuit and register names</strong></p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ClassicalRegister</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.QuantumRegister</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.QuantumCircuit</span></code> can now be instantiated without explicitly
+giving them a name - a new autonaming feature will automatically assign them
+an identifier:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please note as well that the order of the parameters have been swapped
+<code class="docutils literal notranslate"><span class="pre">QuantumRegister(size,</span> <span class="pre">name)</span></code>.</p>
+</li>
+<li><p class="first"><strong>methods accepting names or instances</strong></p>
+<p>In combination with the autonaming changes, several methods such as
+<code class="xref py py-func docutils literal notranslate"><span class="pre">qiskit.Result.get_data()</span></code> now accept both names and instances for
+convenience. For example, when retrieving the results for a job that has a
+single circuit such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_circuit&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following calls are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;my_circuit&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="contributing_to_qiskit.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Contributing to Qiskit</div>
+         </div>
+     </a>
+     <a id="button-next" href="faq.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Frequently Asked Questions</div>
+        </div>
+     </a>
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+  </body>
+</html>
