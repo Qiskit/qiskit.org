@@ -44,22 +44,11 @@ class PageAqua extends localize(i18next)(LitElement) {
           --ibmq-button-secondary-focus-color: var(--qiskit-aqua-color);
         }
 
-        .stack-list.aqua-applications-domains::before {
-          height: 50px;
-        }
-
-        section .description .badges a {
-          text-decoration: none;
-        }
-
-        section .description .badges vaadin-button {
-          --ibmq-button-secondary-color: #000000;
-          --ibmq-button-secondary-focus-color: #ffffff;
-          margin-bottom: 1em;
-        }
-
-        section .description img + img {
-          margin-top: 1em;
+        .stack-list .element.dot::before {
+          width: 0.682em;
+          height: 0.682em;
+          border-radius: 50%;
+          left: -1.4em;
         }
       `,
     ];
