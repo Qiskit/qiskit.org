@@ -13096,7 +13096,7 @@ div#notebook {
     }
   }
   window._analytics = {
-    segment_key = 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
+    segment_key: 'zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H'
   }
 }());
 </script>
@@ -13135,7 +13135,7 @@ $$
 H = |+\rangle\langle0|~+~ |-\rangle\langle1| = |0\rangle\langle+|~+~ |1\rangle\langle+|.
 $$<p>This gate is expressed above using outer products, as desribed in the last section. When expressed in this form, its famous effect becomes obvious: it takes $|0\rangle$, and rotates it to $|+\rangle$. More generally, we can say it rotates the basis states of the z measurement, $\{ |0\rangle,|1\rangle \}$, to the basis states of the x measurement, $\{ |+\rangle,|-\rangle \}$, and vice versa.</p>
 <p>This effect of the Hadamard is to move information around a qubit. It swaps any information that would previously be accessed by an x measurement with that accessed by a z measurement. Indeed, one of the most important jobs of the Hadamard is to do exactly this. We use it when wanting to make an x measurement, given that we can only physically make z measurements.</p>
-<div class="highlight"><pre><span></span><span class="c1">// x measurement of qubit 0</span>
+<div class="highlight"><pre><span></span><span class="c1">// qasm for x measurement of qubit 0</span>
 <span class="n">h</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="n">measure</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </pre></div>
@@ -13143,21 +13143,21 @@ $$<p>This gate is expressed above using outer products, as desribed in the last 
 $$
 H X H = Z,\\\\
 H Z H = X.
-$$<p>By doing a Hadamard before and after an $X$, we cause the action it previously applied to the z basis states to be transferred to the z basis states instead. The combined effect is then identical to that of a $Z$. Similarly, the Hadamards cause a $Z$ to behave as an $X$.</p>
+$$<p>By doing a Hadamard before and after an $X$, we cause the action it previously applied to the x basis states to be transferred to the z basis states instead. The combined effect is then identical to that of a $Z$. Similarly, the Hadamards cause a $Z$ to behave as an $X$.</p>
 <p>Similar behavior can be seen for the $S$ gate and its Hermitian conjugate,</p>
 $$
 S X S^{\dagger} = Y,\\\\
 S Y S^{\dagger} = -X,\\\\
 S Z S^{\dagger} = Z.
 $$<p>This has a similar effect to the Hadamard, except that it swaps $X$ and $Y$ instead of $X$ and $Z$. In combination with the Hadamard, we could then make a composite gate that shifts information between y and z. This therefore gives us full control over single-qubit Paulis.</p>
-<p>The property of transforming Paulis into other Paulis is the defining feature of Clifford gates. Stated explicitly for the single-qubit case: if $U$ is a Clifford and $P$ is a Pauli, $U P U^{\dagger}$ will also be a Pauli. For Hermitian gates, like the Hadamard, we can simply use $U P U$.</p>
+<p><strong>The property of transforming Paulis into other Paulis is the defining feature of Clifford gates.</strong> Stated explicitly for the single-qubit case: if $U$ is a Clifford and $P$ is a Pauli, $U P U^{\dagger}$ will also be a Pauli. For Hermitian gates, like the Hadamard, we can simply use $U P U$.</p>
 <p>Further examples of single-qubit Clifford gates are the Paulis themselves. These do not transform the Pauli they act on. Instead, they simply assign a phase of $-1$ to the two that they anticommute with. For example,</p>
 $$
 Z X Z = -Y,\\\\
 Z Y Z = -X,\\\\
 Z Z Z= ~~~~Z.
 $$<p>You may have noticed that a similar phase also arose in the effect of the $S$ gate. By combining this with a Pauli, we could make a composite gate that would cancel this phase, and swap $X$ and $Y$ in a way more similar to the Hadamard's swap of $X$ and $Z$.</p>
-<p>For multiple-qubit Clifford gates, the defining property is that they transform tensor products of Paulis to other tensor products of Paulis. For example, the most prominent two-qubit Clifford gate is the CNOT. The property of this that we will make use of in this chapter is</p>
+<p><strong>For multiple-qubit Clifford gates, the defining property is that they transform tensor products of Paulis to other tensor products of Paulis.</strong> For example, the most prominent two-qubit Clifford gate is the CNOT. The property of this that we will make use of in this chapter is</p>
 $$
 { CX}_{j,k}~ (X \otimes 1)~{ CX}_{j,k} = X \otimes X.
 $$<p>This effectively 'copies' an $X$ from the control qubit over to the target.</p>
