@@ -277,7 +277,7 @@ class PageHome extends localize(i18next)(LitElement) {
           <div class="column">
             <div class="description">
               <h3>${i18next.t('pages.home.newsBox1Title')}</h3>
-              <p>${i18next.t('pages.home.newsBox1Description2')}</p>
+              <p>${i18next.t('pages.home.newsBox1Description')}</p>
               <div class="actions">
                 <a
                   href="https://qiskit.org/documentation/release_notes.html#qiskit-0-11"
