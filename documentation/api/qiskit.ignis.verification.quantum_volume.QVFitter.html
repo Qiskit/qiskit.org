@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>BaseGateFitter &#8212; Qiskit 0.11.2 documentation</title>
+    <title>QVFitter &#8212; Qiskit 0.11.2 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -52,8 +52,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.ignis.characterization.coherence" href="../apidoc/ignis/characterization/coherence/coherence.html" />
-    <link rel="prev" title="BaseCoherenceFitter" href="qiskit.ignis.characterization.BaseCoherenceFitter.html" /> 
+    <link rel="next" title="qiskit.ignis.verification.randomized_benchmarking" href="../apidoc/ignis/verification/randomized_benchmarking/randomized_benchmarking.html" />
+    <link rel="prev" title="qv_circuits" href="qiskit.ignis.verification.quantum_volume.qv_circuits.html" /> 
   </head>
 <body>
   <header>
@@ -412,9 +412,9 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../apidoc/ignis/ignis.html">qiskit.ignis</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/ignis/ignis.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../apidoc/ignis/characterization/characterization.html">qiskit.ignis.characterization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidoc/ignis/characterization/characterization.html">qiskit.ignis.characterization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../apidoc/ignis/mitigation/mitigation.html">qiskit.ignis.mitigation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../apidoc/ignis/verification/verification.html">qiskit.ignis.verification</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../apidoc/ignis/verification/verification.html">qiskit.ignis.verification</a></li>
 </ul>
 </li>
 </ul>
@@ -958,9 +958,9 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../apidoc/ignis/ignis.html">qiskit.ignis</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../apidoc/ignis/ignis.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../apidoc/ignis/characterization/characterization.html">qiskit.ignis.characterization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidoc/ignis/characterization/characterization.html">qiskit.ignis.characterization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../apidoc/ignis/mitigation/mitigation.html">qiskit.ignis.mitigation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../apidoc/ignis/verification/verification.html">qiskit.ignis.verification</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../apidoc/ignis/verification/verification.html">qiskit.ignis.verification</a></li>
 </ul>
 </li>
 </ul>
@@ -1168,13 +1168,13 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="basegatefitter">
-<h1>BaseGateFitter<a class="headerlink" href="#basegatefitter" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="qvfitter">
+<h1>QVFitter<a class="headerlink" href="#qvfitter" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="qiskit.ignis.characterization.BaseGateFitter">
-<em class="property">class </em><code class="descname">BaseGateFitter</code><span class="sig-paren">(</span><em>description</em>, <em>backend_result</em>, <em>xdata</em>, <em>qubits</em>, <em>fit_fun</em>, <em>fit_p0</em>, <em>fit_bounds</em>, <em>circuit_names</em>, <em>series=None</em>, <em>expected_state='0'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/fitters.html#BaseGateFitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ignis.characterization.fitters.BaseFitter</span></code></p>
-<p>Base class for fitters of gate errors</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter">
+<em class="property">class </em><code class="descname">QVFitter</code><span class="sig-paren">(</span><em>backend_result=None</em>, <em>statevector_result=None</em>, <em>qubit_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for fitters for quantum volume</p>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -1182,32 +1182,26 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.backend_result" title="qiskit.ignis.characterization.BaseGateFitter.backend_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_result</span></code></a></td>
-<td>Return the execution results (qiskit.Result)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.depths" title="qiskit.ignis.verification.quantum_volume.QVFitter.depths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depths</span></code></a></td>
+<td>Return depth list.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.description" title="qiskit.ignis.characterization.BaseGateFitter.description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">description</span></code></a></td>
-<td>Return the fitter’s purpose, e.g.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_counts" title="qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heavy_output_counts</span></code></a></td>
+<td>Return the number of heavy output counts as measured.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.fit_fun" title="qiskit.ignis.characterization.BaseGateFitter.fit_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_fun</span></code></a></td>
-<td>Return the function used in the fit, e.g.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_prob_ideal" title="qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_prob_ideal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heavy_output_prob_ideal</span></code></a></td>
+<td>Return the heavy output probability ideally.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.measured_qubits" title="qiskit.ignis.characterization.BaseGateFitter.measured_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measured_qubits</span></code></a></td>
-<td>Return the indices of the qubits whose characteristic time is measured</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.heavy_outputs" title="qiskit.ignis.verification.quantum_volume.QVFitter.heavy_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heavy_outputs</span></code></a></td>
+<td>Return the ideal heavy outputs dictionary.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.params" title="qiskit.ignis.characterization.BaseGateFitter.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></td>
-<td>Return the fit function parameters that were calculated by curve_fit</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.qubit_lists" title="qiskit.ignis.verification.quantum_volume.QVFitter.qubit_lists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qubit_lists</span></code></a></td>
+<td>Return depth list.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.params_err" title="qiskit.ignis.characterization.BaseGateFitter.params_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params_err</span></code></a></td>
-<td>Return the error of the fit function parameters</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.results" title="qiskit.ignis.verification.quantum_volume.QVFitter.results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results</span></code></a></td>
+<td>Return all the results.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.series" title="qiskit.ignis.characterization.BaseGateFitter.series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">series</span></code></a></td>
-<td>Return the list of series for the data</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.xdata" title="qiskit.ignis.characterization.BaseGateFitter.xdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xdata</span></code></a></td>
-<td>Return the data points on the x-axis (a list of floats)</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.ydata" title="qiskit.ignis.characterization.BaseGateFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></td>
-<td>Return the data points on the y-axis In the form of a list of dictionaries: - ydata[i][‘mean’] is a list, where item     no.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.ydata" title="qiskit.ignis.verification.quantum_volume.QVFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></td>
+<td>Return the average and std of the output probability.</td>
 </tr>
 </tbody>
 </table>
@@ -1218,99 +1212,148 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.add_data" title="qiskit.ignis.characterization.BaseGateFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(results[,&nbsp;recalc,&nbsp;refit])</td>
-<td>Adds more data</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.add_data" title="qiskit.ignis.verification.quantum_volume.QVFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(new_backend_result[,&nbsp;rerun_fit])</td>
+<td>Add a new result.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.fit_data" title="qiskit.ignis.characterization.BaseGateFitter.fit_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data</span></code></a>([qid,&nbsp;p0,&nbsp;bounds,&nbsp;series])</td>
-<td>Fit the curve.</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.add_statevectors" title="qiskit.ignis.verification.quantum_volume.QVFitter.add_statevectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_statevectors</span></code></a>(new_statevector_result)</td>
+<td>Add the ideal results and convert to the heavy outputs Assume the result is from ‘statevector_simulator’</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.plot" title="qiskit.ignis.characterization.BaseGateFitter.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(qind[,&nbsp;series,&nbsp;ax,&nbsp;show_plot])</td>
-<td>Plot err data.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.calc_data" title="qiskit.ignis.verification.quantum_volume.QVFitter.calc_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_data</span></code></a>()</td>
+<td>Make a count dictionary for each unique circuit from all the results.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.calc_statistics" title="qiskit.ignis.verification.quantum_volume.QVFitter.calc_statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_statistics</span></code></a>()</td>
+<td>Convert the heavy outputs in the different trials into mean and error for plotting</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.plot_qv_data" title="qiskit.ignis.verification.quantum_volume.QVFitter.plot_qv_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_qv_data</span></code></a>([ax,&nbsp;show_plt])</td>
+<td>Plot the qv data as a function of depth</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.quantum_volume" title="qiskit.ignis.verification.quantum_volume.QVFitter.quantum_volume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantum_volume</span></code></a>()</td>
+<td>Return the volume for each depth.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.verification.quantum_volume.QVFitter.qv_success" title="qiskit.ignis.verification.quantum_volume.QVFitter.qv_success"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qv_success</span></code></a>()</td>
+<td>Return whether each depth was successful (&gt;2/3 with confidence greater than 97.5) and the confidence</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.backend_result">
-<code class="descname">backend_result</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.backend_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the execution results (qiskit.Result)</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.depths">
+<code class="descname">depths</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.depths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return depth list.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.description">
-<code class="descname">description</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.description" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the fitter’s purpose, e.g. ‘T1’</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_counts">
+<code class="descname">heavy_output_counts</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of heavy output counts as measured.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.fit_fun">
-<code class="descname">fit_fun</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.fit_fun" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the function used in the fit,
-e.g. BaseFitter._exp_fit_fun</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_prob_ideal">
+<code class="descname">heavy_output_prob_ideal</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.heavy_output_prob_ideal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the heavy output probability ideally.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.measured_qubits">
-<code class="descname">measured_qubits</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.measured_qubits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the indices of the qubits whose characteristic time is measured</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.heavy_outputs">
+<code class="descname">heavy_outputs</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.heavy_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ideal heavy outputs dictionary.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.params">
-<code class="descname">params</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the fit function parameters that were calculated by curve_fit</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.qubit_lists">
+<code class="descname">qubit_lists</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.qubit_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return depth list.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.params_err">
-<code class="descname">params_err</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.params_err" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the error of the fit function parameters</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.results">
+<code class="descname">results</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all the results.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.series">
-<code class="descname">series</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.series" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the list of series for the data</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.xdata">
-<code class="descname">xdata</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.xdata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the data points on the x-axis (a list of floats)</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.ydata">
-<code class="descname">ydata</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.ydata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the data points on the y-axis
-In the form of a list of dictionaries:
-- ydata[i][‘mean’] is a list, where item</p>
-<blockquote>
-<div>no. j is the probability of success
-of qubit i for a circuit that lasts xdata[j].</div></blockquote>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>ydata[i][‘std’] is a list, where ydata[‘std’][j] is the</dt>
-<dd>standard deviation of the success of qubit i.</dd>
-</dl>
-</li>
-</ul>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.ydata">
+<code class="descname">ydata</code><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.ydata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the average and std of the output probability.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.add_data">
-<code class="descname">add_data</code><span class="sig-paren">(</span><em>results</em>, <em>recalc=True</em>, <em>refit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.add_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds more data</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.add_data">
+<code class="descname">add_data</code><span class="sig-paren">(</span><em>new_backend_result</em>, <em>rerun_fit=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.add_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.add_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new result. Re calculate fit</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>results</strong> – a result (qiskit.result) or list of results</li>
-<li><strong>recalc</strong> – Recalculate the data</li>
-<li><strong>refit</strong> – Refit the data</li>
+<li><strong>new_backend_result</strong> – list of qv results</li>
+<li><strong>rerun_fit</strong> – re caculate the means and fit the result</li>
 </ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Additional information:</dt>
+<dd>Assumes that ‘result’ was executed is
+the output of circuits generated by qv_circuits,</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.add_statevectors">
+<code class="descname">add_statevectors</code><span class="sig-paren">(</span><em>new_statevector_result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.add_statevectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.add_statevectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the ideal results and convert to the heavy outputs
+Assume the result is from ‘statevector_simulator’</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>new_statevector_result</strong> – ideal results</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.calc_data">
+<code class="descname">calc_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.calc_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.calc_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a count dictionary for each unique circuit from all the
+results.</p>
+<p>Calculate the heavy output probability</p>
+<dl class="docutils">
+<dt>Additional information:</dt>
+<dd>Assumes that ‘result’ was executed is
+the output of circuits generated by qv_ciruits,</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.calc_statistics">
+<code class="descname">calc_statistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.calc_statistics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.calc_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the heavy outputs in the different trials into mean and error
+for plotting</p>
+<p>Here we assume the error is due to a binomial distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.plot_qv_data">
+<code class="descname">plot_qv_data</code><span class="sig-paren">(</span><em>ax=None</em>, <em>show_plt=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.plot_qv_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.plot_qv_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the qv data as a function of depth</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ax</strong> (<em>Axes</em><em> or </em><em>None</em>) – plot axis (if passed in).</li>
+<li><strong>add_label</strong> (<em>bool</em>) – Add an EPC label</li>
+<li><strong>show_plt</strong> (<em>bool</em>) – display the plot.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code> – If matplotlib is not installed.</p>
 </td>
 </tr>
 </tbody>
@@ -1318,34 +1361,34 @@ of qubit i for a circuit that lasts xdata[j].</div></blockquote>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.fit_data">
-<code class="descname">fit_data</code><span class="sig-paren">(</span><em>qid=-1</em>, <em>p0=None</em>, <em>bounds=None</em>, <em>series=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.fit_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit the curve.
-Computes self._params and self._params_err:
-:param qid: Qubit data to fit. If -1 fit all the data
-:param p0: initial guess
-:param bounds: bounds
-:param series: series to fit (if None fit all)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.plot">
-<code class="descname">plot</code><span class="sig-paren">(</span><em>qind</em>, <em>series='0'</em>, <em>ax=None</em>, <em>show_plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/fitters.html#BaseGateFitter.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot err data.</p>
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.quantum_volume">
+<code class="descname">quantum_volume</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.quantum_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.quantum_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the volume for each depth.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qind</strong> – qubit index to plot</li>
-<li><strong>ax</strong> – plot axes</li>
-<li><strong>show_plot</strong> – call plt.show()</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of quantum volumes</td>
 </tr>
 </tbody>
 </table>
-<p>return the axes object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.verification.quantum_volume.QVFitter.qv_success">
+<code class="descname">qv_success</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/verification/quantum_volume/fitters.html#QVFitter.qv_success"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.verification.quantum_volume.QVFitter.qv_success" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether each depth was successful (&gt;2/3 with confidence
+greater than 97.5) and the confidence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of lenth depth with eact element a 3 list with
+- success True/False
+- confidence</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -1357,16 +1400,16 @@ Computes self._params and self._params_err:
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.ignis.characterization.BaseCoherenceFitter.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.ignis.verification.quantum_volume.qv_circuits.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>BaseCoherenceFitter</div>
+            <div>qv_circuits</div>
          </div>
      </a>
-     <a id="button-next" href="../apidoc/ignis/characterization/coherence/coherence.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="../apidoc/ignis/verification/randomized_benchmarking/randomized_benchmarking.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.ignis.characterization.coherence</div>
+            <div>qiskit.ignis.verification.randomized_benchmarking</div>
         </div>
      </a>
         
