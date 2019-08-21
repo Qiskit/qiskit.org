@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>BaseGateFitter &#8212; Qiskit 0.11.2 documentation</title>
+    <title>T2StarFitter &#8212; Qiskit 0.11.2 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -52,8 +52,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.ignis.characterization.coherence" href="../apidoc/ignis/characterization/coherence/coherence.html" />
-    <link rel="prev" title="BaseCoherenceFitter" href="qiskit.ignis.characterization.BaseCoherenceFitter.html" /> 
+    <link rel="next" title="qiskit.ignis.characterization.gates" href="../apidoc/ignis/characterization/gates/gates.html" />
+    <link rel="prev" title="T2Fitter" href="qiskit.ignis.characterization.coherence.T2Fitter.html" /> 
   </head>
 <body>
   <header>
@@ -1168,13 +1168,13 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="basegatefitter">
-<h1>BaseGateFitter<a class="headerlink" href="#basegatefitter" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="t2starfitter">
+<h1>T2StarFitter<a class="headerlink" href="#t2starfitter" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="qiskit.ignis.characterization.BaseGateFitter">
-<em class="property">class </em><code class="descname">BaseGateFitter</code><span class="sig-paren">(</span><em>description</em>, <em>backend_result</em>, <em>xdata</em>, <em>qubits</em>, <em>fit_fun</em>, <em>fit_p0</em>, <em>fit_bounds</em>, <em>circuit_names</em>, <em>series=None</em>, <em>expected_state='0'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/fitters.html#BaseGateFitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ignis.characterization.fitters.BaseFitter</span></code></p>
-<p>Base class for fitters of gate errors</p>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter">
+<em class="property">class </em><code class="descname">T2StarFitter</code><span class="sig-paren">(</span><em>backend_result</em>, <em>xdata</em>, <em>qubits</em>, <em>fit_p0</em>, <em>fit_bounds</em>, <em>time_unit='micro-seconds'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/coherence/fitters.html#T2StarFitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ignis.characterization.fitters.BaseCoherenceFitter</span></code></p>
+<p>T2* fitter</p>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -1182,31 +1182,31 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.backend_result" title="qiskit.ignis.characterization.BaseGateFitter.backend_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_result</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.backend_result" title="qiskit.ignis.characterization.coherence.T2StarFitter.backend_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_result</span></code></a></td>
 <td>Return the execution results (qiskit.Result)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.description" title="qiskit.ignis.characterization.BaseGateFitter.description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">description</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.description" title="qiskit.ignis.characterization.coherence.T2StarFitter.description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">description</span></code></a></td>
 <td>Return the fitter’s purpose, e.g.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.fit_fun" title="qiskit.ignis.characterization.BaseGateFitter.fit_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_fun</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.fit_fun" title="qiskit.ignis.characterization.coherence.T2StarFitter.fit_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_fun</span></code></a></td>
 <td>Return the function used in the fit, e.g.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.measured_qubits" title="qiskit.ignis.characterization.BaseGateFitter.measured_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measured_qubits</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.measured_qubits" title="qiskit.ignis.characterization.coherence.T2StarFitter.measured_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measured_qubits</span></code></a></td>
 <td>Return the indices of the qubits whose characteristic time is measured</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.params" title="qiskit.ignis.characterization.BaseGateFitter.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.params" title="qiskit.ignis.characterization.coherence.T2StarFitter.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></td>
 <td>Return the fit function parameters that were calculated by curve_fit</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.params_err" title="qiskit.ignis.characterization.BaseGateFitter.params_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params_err</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.params_err" title="qiskit.ignis.characterization.coherence.T2StarFitter.params_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params_err</span></code></a></td>
 <td>Return the error of the fit function parameters</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.series" title="qiskit.ignis.characterization.BaseGateFitter.series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">series</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.series" title="qiskit.ignis.characterization.coherence.T2StarFitter.series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">series</span></code></a></td>
 <td>Return the list of series for the data</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.xdata" title="qiskit.ignis.characterization.BaseGateFitter.xdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xdata</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.xdata" title="qiskit.ignis.characterization.coherence.T2StarFitter.xdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xdata</span></code></a></td>
 <td>Return the data points on the x-axis (a list of floats)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.ydata" title="qiskit.ignis.characterization.BaseGateFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.ydata" title="qiskit.ignis.characterization.coherence.T2StarFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></td>
 <td>Return the data points on the y-axis In the form of a list of dictionaries: - ydata[i][‘mean’] is a list, where item     no.</td>
 </tr>
 </tbody>
@@ -1218,70 +1218,76 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.add_data" title="qiskit.ignis.characterization.BaseGateFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(results[,&nbsp;recalc,&nbsp;refit])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.add_data" title="qiskit.ignis.characterization.coherence.T2StarFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(results[,&nbsp;recalc,&nbsp;refit])</td>
 <td>Adds more data</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.fit_data" title="qiskit.ignis.characterization.BaseGateFitter.fit_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data</span></code></a>([qid,&nbsp;p0,&nbsp;bounds,&nbsp;series])</td>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.fit_data" title="qiskit.ignis.characterization.coherence.T2StarFitter.fit_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data</span></code></a>([qid,&nbsp;p0,&nbsp;bounds,&nbsp;series])</td>
 <td>Fit the curve.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.plot" title="qiskit.ignis.characterization.BaseGateFitter.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(qind[,&nbsp;series,&nbsp;ax,&nbsp;show_plot])</td>
-<td>Plot err data.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.plot" title="qiskit.ignis.characterization.coherence.T2StarFitter.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(qind[,&nbsp;series,&nbsp;ax,&nbsp;show_plot])</td>
+<td>Plot coherence data.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.time" title="qiskit.ignis.characterization.coherence.T2StarFitter.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time</span></code></a>([qid,&nbsp;series])</td>
+<td>Return the characteristic time for qid and series If qid==-1 return all the qubit data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.coherence.T2StarFitter.time_err" title="qiskit.ignis.characterization.coherence.T2StarFitter.time_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_err</span></code></a>([qid,&nbsp;series])</td>
+<td>Return the error of the characteristic time</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.backend_result">
-<code class="descname">backend_result</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.backend_result" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.backend_result">
+<code class="descname">backend_result</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.backend_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the execution results (qiskit.Result)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.description">
-<code class="descname">description</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.description" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.description">
+<code class="descname">description</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.description" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the fitter’s purpose, e.g. ‘T1’</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.fit_fun">
-<code class="descname">fit_fun</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.fit_fun" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.fit_fun">
+<code class="descname">fit_fun</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.fit_fun" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the function used in the fit,
 e.g. BaseFitter._exp_fit_fun</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.measured_qubits">
-<code class="descname">measured_qubits</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.measured_qubits" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.measured_qubits">
+<code class="descname">measured_qubits</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.measured_qubits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the indices of the qubits whose characteristic time is measured</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.params">
-<code class="descname">params</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.params" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.params">
+<code class="descname">params</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the fit function parameters that were calculated by curve_fit</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.params_err">
-<code class="descname">params_err</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.params_err" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.params_err">
+<code class="descname">params_err</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.params_err" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the error of the fit function parameters</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.series">
-<code class="descname">series</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.series" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.series">
+<code class="descname">series</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.series" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the list of series for the data</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.xdata">
-<code class="descname">xdata</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.xdata" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.xdata">
+<code class="descname">xdata</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.xdata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the data points on the x-axis (a list of floats)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.ydata">
-<code class="descname">ydata</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.ydata" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.ydata">
+<code class="descname">ydata</code><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.ydata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the data points on the y-axis
 In the form of a list of dictionaries:
 - ydata[i][‘mean’] is a list, where item</p>
@@ -1299,8 +1305,8 @@ of qubit i for a circuit that lasts xdata[j].</div></blockquote>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.add_data">
-<code class="descname">add_data</code><span class="sig-paren">(</span><em>results</em>, <em>recalc=True</em>, <em>refit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.add_data" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.add_data">
+<code class="descname">add_data</code><span class="sig-paren">(</span><em>results</em>, <em>recalc=True</em>, <em>refit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.add_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds more data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1318,8 +1324,8 @@ of qubit i for a circuit that lasts xdata[j].</div></blockquote>
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.fit_data">
-<code class="descname">fit_data</code><span class="sig-paren">(</span><em>qid=-1</em>, <em>p0=None</em>, <em>bounds=None</em>, <em>series=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.fit_data" title="Permalink to this definition">¶</a></dt>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.fit_data">
+<code class="descname">fit_data</code><span class="sig-paren">(</span><em>qid=-1</em>, <em>p0=None</em>, <em>bounds=None</em>, <em>series=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.fit_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the curve.
 Computes self._params and self._params_err:
 :param qid: Qubit data to fit. If -1 fit all the data
@@ -1329,15 +1335,16 @@ Computes self._params and self._params_err:
 </dd></dl>
 
 <dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.plot">
-<code class="descname">plot</code><span class="sig-paren">(</span><em>qind</em>, <em>series='0'</em>, <em>ax=None</em>, <em>show_plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/fitters.html#BaseGateFitter.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot err data.</p>
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>qind</em>, <em>series='0'</em>, <em>ax=None</em>, <em>show_plot=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/coherence/fitters.html#T2StarFitter.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot coherence data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>qind</strong> – qubit index to plot</li>
+<li><strong>series</strong> – which series to plot (if list plots multiple)</li>
 <li><strong>ax</strong> – plot axes</li>
 <li><strong>show_plot</strong> – call plt.show()</li>
 </ul>
@@ -1346,6 +1353,19 @@ Computes self._params and self._params_err:
 </tbody>
 </table>
 <p>return the axes object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.time">
+<code class="descname">time</code><span class="sig-paren">(</span><em>qid=-1</em>, <em>series='0'</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the characteristic time for qid and series
+If qid==-1 return all the qubit data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qiskit.ignis.characterization.coherence.T2StarFitter.time_err">
+<code class="descname">time_err</code><span class="sig-paren">(</span><em>qid=-1</em>, <em>series='0'</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.coherence.T2StarFitter.time_err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the error of the characteristic time</p>
 </dd></dl>
 
 </dd></dl>
@@ -1357,16 +1377,16 @@ Computes self._params and self._params_err:
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.ignis.characterization.BaseCoherenceFitter.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.ignis.characterization.coherence.T2Fitter.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>BaseCoherenceFitter</div>
+            <div>T2Fitter</div>
          </div>
      </a>
-     <a id="button-next" href="../apidoc/ignis/characterization/coherence/coherence.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="../apidoc/ignis/characterization/gates/gates.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.ignis.characterization.coherence</div>
+            <div>qiskit.ignis.characterization.gates</div>
         </div>
      </a>
         
