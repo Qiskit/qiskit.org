@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>BaseGateFitter &#8212; Qiskit 0.11.2 documentation</title>
+    <title>anglecal_cx_circuits &#8212; Qiskit 0.11.2 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -52,8 +52,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="qiskit.ignis.characterization.coherence" href="../apidoc/ignis/characterization/coherence/coherence.html" />
-    <link rel="prev" title="BaseCoherenceFitter" href="qiskit.ignis.characterization.BaseCoherenceFitter.html" /> 
+    <link rel="next" title="AmpCalCXFitter" href="qiskit.ignis.characterization.gates.AmpCalCXFitter.html" />
+    <link rel="prev" title="anglecal_1Q_circuits" href="qiskit.ignis.characterization.gates.anglecal_1Q_circuits.html" /> 
   </head>
 <body>
   <header>
@@ -1168,186 +1168,39 @@
     <div class="document">
         <div class="page-content">
         
-  <div class="section" id="basegatefitter">
-<h1>BaseGateFitter<a class="headerlink" href="#basegatefitter" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="qiskit.ignis.characterization.BaseGateFitter">
-<em class="property">class </em><code class="descname">BaseGateFitter</code><span class="sig-paren">(</span><em>description</em>, <em>backend_result</em>, <em>xdata</em>, <em>qubits</em>, <em>fit_fun</em>, <em>fit_p0</em>, <em>fit_bounds</em>, <em>circuit_names</em>, <em>series=None</em>, <em>expected_state='0'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/fitters.html#BaseGateFitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit.ignis.characterization.fitters.BaseFitter</span></code></p>
-<p>Base class for fitters of gate errors</p>
-<p class="rubric">Attributes Summary</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.backend_result" title="qiskit.ignis.characterization.BaseGateFitter.backend_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backend_result</span></code></a></td>
-<td>Return the execution results (qiskit.Result)</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.description" title="qiskit.ignis.characterization.BaseGateFitter.description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">description</span></code></a></td>
-<td>Return the fitter’s purpose, e.g.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.fit_fun" title="qiskit.ignis.characterization.BaseGateFitter.fit_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_fun</span></code></a></td>
-<td>Return the function used in the fit, e.g.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.measured_qubits" title="qiskit.ignis.characterization.BaseGateFitter.measured_qubits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">measured_qubits</span></code></a></td>
-<td>Return the indices of the qubits whose characteristic time is measured</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.params" title="qiskit.ignis.characterization.BaseGateFitter.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></td>
-<td>Return the fit function parameters that were calculated by curve_fit</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.params_err" title="qiskit.ignis.characterization.BaseGateFitter.params_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params_err</span></code></a></td>
-<td>Return the error of the fit function parameters</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.series" title="qiskit.ignis.characterization.BaseGateFitter.series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">series</span></code></a></td>
-<td>Return the list of series for the data</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.xdata" title="qiskit.ignis.characterization.BaseGateFitter.xdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xdata</span></code></a></td>
-<td>Return the data points on the x-axis (a list of floats)</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.ydata" title="qiskit.ignis.characterization.BaseGateFitter.ydata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ydata</span></code></a></td>
-<td>Return the data points on the y-axis In the form of a list of dictionaries: - ydata[i][‘mean’] is a list, where item     no.</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Methods Summary</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.add_data" title="qiskit.ignis.characterization.BaseGateFitter.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(results[,&nbsp;recalc,&nbsp;refit])</td>
-<td>Adds more data</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.fit_data" title="qiskit.ignis.characterization.BaseGateFitter.fit_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_data</span></code></a>([qid,&nbsp;p0,&nbsp;bounds,&nbsp;series])</td>
-<td>Fit the curve.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#qiskit.ignis.characterization.BaseGateFitter.plot" title="qiskit.ignis.characterization.BaseGateFitter.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(qind[,&nbsp;series,&nbsp;ax,&nbsp;show_plot])</td>
-<td>Plot err data.</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes Documentation</p>
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.backend_result">
-<code class="descname">backend_result</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.backend_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the execution results (qiskit.Result)</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.description">
-<code class="descname">description</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.description" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the fitter’s purpose, e.g. ‘T1’</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.fit_fun">
-<code class="descname">fit_fun</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.fit_fun" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the function used in the fit,
-e.g. BaseFitter._exp_fit_fun</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.measured_qubits">
-<code class="descname">measured_qubits</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.measured_qubits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the indices of the qubits whose characteristic time is measured</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.params">
-<code class="descname">params</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the fit function parameters that were calculated by curve_fit</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.params_err">
-<code class="descname">params_err</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.params_err" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the error of the fit function parameters</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.series">
-<code class="descname">series</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.series" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the list of series for the data</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.xdata">
-<code class="descname">xdata</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.xdata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the data points on the x-axis (a list of floats)</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.ydata">
-<code class="descname">ydata</code><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.ydata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the data points on the y-axis
-In the form of a list of dictionaries:
-- ydata[i][‘mean’] is a list, where item</p>
-<blockquote>
-<div>no. j is the probability of success
-of qubit i for a circuit that lasts xdata[j].</div></blockquote>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>ydata[i][‘std’] is a list, where ydata[‘std’][j] is the</dt>
-<dd>standard deviation of the success of qubit i.</dd>
-</dl>
-</li>
-</ul>
-</dd></dl>
-
-<p class="rubric">Methods Documentation</p>
-<dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.add_data">
-<code class="descname">add_data</code><span class="sig-paren">(</span><em>results</em>, <em>recalc=True</em>, <em>refit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.add_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds more data</p>
+  <div class="section" id="anglecal-cx-circuits">
+<h1>anglecal_cx_circuits<a class="headerlink" href="#anglecal-cx-circuits" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="qiskit.ignis.characterization.gates.anglecal_cx_circuits">
+<code class="descname">anglecal_cx_circuits</code><span class="sig-paren">(</span><em>max_reps</em>, <em>qubits</em>, <em>control_qubits</em>, <em>angleerr=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/gates/circuits.html#anglecal_cx_circuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.gates.anglecal_cx_circuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates circuit for measuring the angle error of
+the cx gate</p>
+<p>The cx gate is repeatedly applied
+and we look at the population of the target
+qubit in the xy axis (amplitude erorr amplification sequence)</p>
+<p>X(control)-Y90(target)-(CX - Yp(target))^n - X90(target)</p>
+<p>Note: the circuit may not behave as intended if the
+target-control pairs are not in the coupling map</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>results</strong> – a result (qiskit.result) or list of results</li>
-<li><strong>recalc</strong> – Recalculate the data</li>
-<li><strong>refit</strong> – Refit the data</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>max_reps</strong> – the maximum number of repetitions. Circuits will increment</li>
+<li><strong>1 rep up to max_rep</strong> (<em>by</em>) – </li>
+<li><strong>qubits</strong> (<em>list of integers</em>) – indices of the target qubits</li>
+<li><strong>perform the calibration on</strong> (<em>to</em>) – </li>
+<li><strong>perform the calibration on</strong> – </li>
+<li><strong>angleerr</strong> – Injected angle error for testing</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of QuantumCircuit
+xdata: a list of gate repetitions</p>
 </td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.fit_data">
-<code class="descname">fit_data</code><span class="sig-paren">(</span><em>qid=-1</em>, <em>p0=None</em>, <em>bounds=None</em>, <em>series=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.fit_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit the curve.
-Computes self._params and self._params_err:
-:param qid: Qubit data to fit. If -1 fit all the data
-:param p0: initial guess
-:param bounds: bounds
-:param series: series to fit (if None fit all)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="qiskit.ignis.characterization.BaseGateFitter.plot">
-<code class="descname">plot</code><span class="sig-paren">(</span><em>qind</em>, <em>series='0'</em>, <em>ax=None</em>, <em>show_plot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/ignis/characterization/fitters.html#BaseGateFitter.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qiskit.ignis.characterization.BaseGateFitter.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot err data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>qind</strong> – qubit index to plot</li>
-<li><strong>ax</strong> – plot axes</li>
-<li><strong>show_plot</strong> – call plt.show()</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>return the axes object</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -1357,16 +1210,16 @@ Computes self._params and self._params_err:
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="qiskit.ignis.characterization.BaseCoherenceFitter.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="qiskit.ignis.characterization.gates.anglecal_1Q_circuits.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>BaseCoherenceFitter</div>
+            <div>anglecal_1Q_circuits</div>
          </div>
      </a>
-     <a id="button-next" href="../apidoc/ignis/characterization/coherence/coherence.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="qiskit.ignis.characterization.gates.AmpCalCXFitter.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>qiskit.ignis.characterization.coherence</div>
+            <div>AmpCalCXFitter</div>
         </div>
      </a>
         
