@@ -22,7 +22,7 @@ md.use(miAnchor, {
 })
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Headers of the page
@@ -141,6 +141,7 @@ export default {
   },
 
   generate: {
+    dir: 'public',
     routes: (function () {
       const events = fs.readdirSync(path.resolve(__dirname, 'content', 'events'))
         .filter(filename => path.extname(filename) === '.md')
