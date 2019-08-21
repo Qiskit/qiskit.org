@@ -175,56 +175,6 @@ class PageHome extends localize(i18next)(LitElement) {
 
   render() {
     // prettier-ignore
-    const supportersListTemplate = html`
-      <ul class="supporters-list">
-        ${this.organizations.map(organization => html`
-          <li>
-            ${organization.url ? html`
-              <a
-                href="${organization.url}"
-                target="_blank"
-                rel="noopener"
-                @click=${() => trackClickEvent({
-                    action: organization.name,
-                    objectType: 'Link'
-                })}
-              >
-                <span class="name">${organization.name}</span>
-              </a>
-            ` : html`
-              ${organization.name}
-            `}
-          </li>
-        `)}
-        ${this.collaborators.map(collaborator => html`
-          <li>
-            ${collaborator.url ? html`
-              <a
-                href="${collaborator.url}"
-                target="_blank"
-                rel="noopener"
-                @click=${() => trackClickEvent({
-                  action: collaborator.name,
-                  objectType: 'Link'
-                })}
-              >
-                <div class="supporter">
-                  <span class="name">${collaborator.name}</span>
-                  <span class="institution">${collaborator.institution}</span>
-                </div>
-              </a>
-            ` : html`
-              <div class="supporter">
-                <span class="name">${collaborator.name}</span>
-                <span class="institution">${collaborator.institution}</span>
-              </div>
-            `}
-          </li>
-        `)}
-      </ul>
-    `;
-
-    // prettier-ignore
     return html`
       <header>
         <img src="images/qiskit-logo.png" .alt=${i18next.t('pages.home.altLogo')}>
@@ -483,16 +433,6 @@ class PageHome extends localize(i18next)(LitElement) {
               </a>
             </p>
           </div>
-        </div>
-      </section>
-
-      <section class="supporting">
-        <div class="limited-width">
-          <div class="description">
-            <h3>${i18next.t('pages.home.supportingTitle')}</h3>
-            <p>${i18next.t('pages.home.supportingDescription')}</p>
-          </div>
-          ${supportersListTemplate}
         </div>
       </section>
     `;
