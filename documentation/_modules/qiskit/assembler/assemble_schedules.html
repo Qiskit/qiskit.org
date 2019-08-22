@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -173,16 +185,13 @@
 <span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Assemble function for converting a list of circuits into a qobj&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
-<span class="kn">from</span> <span class="nn">qiskit.pulse.commands</span> <span class="k">import</span> <span class="n">PulseInstruction</span><span class="p">,</span> <span class="n">AcquireInstruction</span><span class="p">,</span> <span class="n">SamplePulse</span>
+<span class="kn">from</span> <span class="nn">qiskit.pulse.commands</span> <span class="k">import</span> <span class="p">(</span><span class="n">PulseInstruction</span><span class="p">,</span> <span class="n">AcquireInstruction</span><span class="p">,</span>
+                                   <span class="n">DelayInstruction</span><span class="p">,</span> <span class="n">SamplePulse</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="p">(</span><span class="n">PulseQobj</span><span class="p">,</span> <span class="n">QobjExperimentHeader</span><span class="p">,</span>
                          <span class="n">PulseQobjInstruction</span><span class="p">,</span> <span class="n">PulseQobjExperimentConfig</span><span class="p">,</span>
                          <span class="n">PulseQobjExperiment</span><span class="p">,</span> <span class="n">PulseQobjConfig</span><span class="p">,</span> <span class="n">PulseLibraryItem</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">qiskit.qobj.converters</span> <span class="k">import</span> <span class="n">InstructionToQobjConverter</span><span class="p">,</span> <span class="n">LoConfigConverter</span>
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="assemble_schedules"><a class="viewcode-back" href="../../../api/qiskit.assembler.assemble_schedules.html#qiskit.assembler.assemble_schedules">[docs]</a><span class="k">def</span> <span class="nf">assemble_schedules</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">qobj_header</span><span class="p">,</span> <span class="n">run_config</span><span class="p">):</span>
@@ -203,13 +212,27 @@
         <span class="n">instruction_converter</span> <span class="o">=</span> <span class="n">InstructionToQobjConverter</span>
 
     <span class="n">qobj_config</span> <span class="o">=</span> <span class="n">run_config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">qubit_lo_range</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;qubit_lo_range&#39;</span><span class="p">)</span>
-    <span class="n">meas_lo_range</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;meas_lo_range&#39;</span><span class="p">)</span>
+
+    <span class="n">qubit_lo_freq</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;qubit_lo_freq&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">qubit_lo_freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;qubit_lo_freq must be supplied.&#39;</span><span class="p">)</span>
+
+    <span class="n">meas_lo_freq</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;meas_lo_freq&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">meas_lo_freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;meas_lo_freq must be supplied.&#39;</span><span class="p">)</span>
+
+    <span class="n">qubit_lo_range</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;qubit_lo_range&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">meas_lo_range</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;meas_lo_range&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">meas_map</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;meas_map&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">max_memory_slot</span> <span class="o">=</span> <span class="mi">0</span>
+
     <span class="n">instruction_converter</span> <span class="o">=</span> <span class="n">instruction_converter</span><span class="p">(</span><span class="n">PulseQobjInstruction</span><span class="p">,</span> <span class="o">**</span><span class="n">qobj_config</span><span class="p">)</span>
 
-    <span class="n">lo_converter</span> <span class="o">=</span> <span class="n">LoConfigConverter</span><span class="p">(</span><span class="n">PulseQobjExperimentConfig</span><span class="p">,</span> <span class="n">qubit_lo_range</span><span class="o">=</span><span class="n">qubit_lo_range</span><span class="p">,</span>
-                                     <span class="n">meas_lo_range</span><span class="o">=</span><span class="n">meas_lo_range</span><span class="p">,</span> <span class="o">**</span><span class="n">qobj_config</span><span class="p">)</span>
+    <span class="n">lo_converter</span> <span class="o">=</span> <span class="n">LoConfigConverter</span><span class="p">(</span><span class="n">PulseQobjExperimentConfig</span><span class="p">,</span>
+                                     <span class="n">qubit_lo_range</span><span class="o">=</span><span class="n">qubit_lo_range</span><span class="p">,</span>
+                                     <span class="n">meas_lo_range</span><span class="o">=</span><span class="n">meas_lo_range</span><span class="p">,</span>
+                                     <span class="o">**</span><span class="n">qobj_config</span><span class="p">)</span>
 
     <span class="c1"># Pack everything into the Qobj</span>
     <span class="n">qobj_schedules</span> <span class="o">=</span> <span class="p">[]</span>
@@ -220,7 +243,12 @@
         <span class="c1"># Instructions are returned as tuple of shifted time and instruction</span>
         <span class="k">for</span> <span class="n">shift</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">schedule</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
             <span class="c1"># TODO: support conditional gate</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">PulseInstruction</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">DelayInstruction</span><span class="p">):</span>
+                <span class="c1"># delay instructions are ignored as timing is explicit within qobj</span>
+                <span class="k">continue</span>
+
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">PulseInstruction</span><span class="p">):</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">name</span>
                 <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">user_pulselib</span> <span class="ow">and</span> <span class="n">instruction</span><span class="o">.</span><span class="n">command</span> <span class="o">!=</span> <span class="n">user_pulselib</span><span class="p">[</span><span class="n">name</span><span class="p">]:</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">-</span><span class="si">{1:x}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">samples</span><span class="o">.</span><span class="n">tostring</span><span class="p">()))</span>
@@ -230,11 +258,16 @@
                         <span class="n">channel</span><span class="o">=</span><span class="n">instruction</span><span class="o">.</span><span class="n">timeslots</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="c1"># add samples to pulse library</span>
                 <span class="n">user_pulselib</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">command</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">AcquireInstruction</span><span class="p">):</span>
+
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">AcquireInstruction</span><span class="p">):</span>
+                <span class="n">max_memory_slot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_memory_slot</span><span class="p">,</span>
+                                      <span class="o">*</span><span class="p">[</span><span class="n">slot</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="n">instruction</span><span class="o">.</span><span class="n">mem_slots</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">meas_map</span><span class="p">:</span>
                     <span class="c1"># verify all acquires satisfy meas_map</span>
                     <span class="n">_validate_meas_map</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">meas_map</span><span class="p">)</span>
-            <span class="n">qobj_instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction_converter</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span> <span class="n">instruction</span><span class="p">))</span>
+
+            <span class="n">converted_instruction</span> <span class="o">=</span> <span class="n">instruction_converter</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span> <span class="n">instruction</span><span class="p">)</span>
+            <span class="n">qobj_instructions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">converted_instruction</span><span class="p">)</span>
 
         <span class="c1"># experiment header</span>
         <span class="n">qobj_experiment_header</span> <span class="o">=</span> <span class="n">QobjExperimentHeader</span><span class="p">(</span>
@@ -246,11 +279,14 @@
             <span class="s1">&#39;instructions&#39;</span><span class="p">:</span> <span class="n">qobj_instructions</span>
         <span class="p">})</span>
 
+    <span class="c1"># set number of memoryslots</span>
+    <span class="n">qobj_config</span><span class="p">[</span><span class="s1">&#39;memory_slots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_memory_slot</span> <span class="o">+</span> <span class="mi">1</span>
+
     <span class="c1"># setup pulse_library</span>
     <span class="n">qobj_config</span><span class="p">[</span><span class="s1">&#39;pulse_library&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">PulseLibraryItem</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">samples</span><span class="p">)</span>
                                     <span class="k">for</span> <span class="n">pulse</span> <span class="ow">in</span> <span class="n">user_pulselib</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
 
-    <span class="c1"># create qob experiment field</span>
+    <span class="c1"># create qobj experiment field</span>
     <span class="n">experiments</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">schedule_los</span> <span class="o">=</span> <span class="n">qobj_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;schedule_los&#39;</span><span class="p">,</span> <span class="p">[])</span>
 
@@ -308,7 +344,7 @@
     <span class="sd">&quot;&quot;&quot;Validate all qubits tied in meas_map are to be acquired.&quot;&quot;&quot;</span>
     <span class="n">meas_map_set</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">meas_map</span><span class="p">]</span>
     <span class="c1"># Verify that each qubit is listed once in measurement map</span>
-    <span class="n">measured_qubits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">acq_ch</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">acq_ch</span> <span class="ow">in</span> <span class="n">acquire</span><span class="o">.</span><span class="n">acquires</span><span class="p">)</span>
+    <span class="n">measured_qubits</span> <span class="o">=</span> <span class="p">{</span><span class="n">acq_ch</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">acq_ch</span> <span class="ow">in</span> <span class="n">acquire</span><span class="o">.</span><span class="n">acquires</span><span class="p">}</span>
     <span class="n">tied_qubits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">meas_qubit</span> <span class="ow">in</span> <span class="n">measured_qubits</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">map_inst</span> <span class="ow">in</span> <span class="n">meas_map_set</span><span class="p">:</span>
@@ -357,6 +393,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

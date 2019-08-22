@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -173,20 +185,16 @@
 <span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;Assemble function for converting a list of circuits into a qobj&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-
 <span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="k">import</span> <span class="p">(</span><span class="n">QasmQobj</span><span class="p">,</span> <span class="n">QobjExperimentHeader</span><span class="p">,</span>
                          <span class="n">QasmQobjInstruction</span><span class="p">,</span> <span class="n">QasmQobjExperimentConfig</span><span class="p">,</span> <span class="n">QasmQobjExperiment</span><span class="p">,</span>
                          <span class="n">QasmQobjConfig</span><span class="p">)</span>
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="assemble_circuits"><a class="viewcode-back" href="../../../api/qiskit.assembler.assemble_circuits.html#qiskit.assembler.assemble_circuits">[docs]</a><span class="k">def</span> <span class="nf">assemble_circuits</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">run_config</span><span class="p">,</span> <span class="n">qobj_id</span><span class="p">,</span> <span class="n">qobj_header</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Assembles a list of circuits into a qobj which can be run on the backend.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        circuits (list[QuantumCircuits]): circuit(s) to assemble</span>
+<span class="sd">        circuits (list[QuantumCircuit]): circuit(s) to assemble</span>
 <span class="sd">        qobj_id (int): identifier for the generated qobj</span>
 <span class="sd">        qobj_header (QobjHeader): header to pass to the results</span>
 <span class="sd">        run_config (RunConfig): configuration of the runtime environment</span>
@@ -251,11 +259,11 @@
             <span class="n">qargs</span> <span class="o">=</span> <span class="n">op_context</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">cargs</span> <span class="o">=</span> <span class="n">op_context</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">qargs</span><span class="p">:</span>
-                <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">qubit_labels</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                <span class="n">qubit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">qubit_labels</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
                                  <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">]</span>
                 <span class="n">instruction</span><span class="o">.</span><span class="n">qubits</span> <span class="o">=</span> <span class="n">qubit_indices</span>
             <span class="k">if</span> <span class="n">cargs</span><span class="p">:</span>
-                <span class="n">clbit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">clbit_labels</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="n">clbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">clbit</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                <span class="n">clbit_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">clbit_labels</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="n">clbit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">clbit</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
                                  <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">]</span>
                 <span class="n">instruction</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">clbit_indices</span>
                 <span class="c1"># If the experiment has conditional instructions, assume every</span>
@@ -342,6 +350,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

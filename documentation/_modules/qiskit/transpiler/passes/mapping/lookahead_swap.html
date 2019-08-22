@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -173,12 +185,12 @@
 <span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Implementation of Sven Jandura&#39;s swap mapper submission for the 2018 QISKit</span>
+<span class="sd">Implementation of Sven Jandura&#39;s swap mapper submission for the 2018 Qiskit</span>
 <span class="sd">Developer Challenge, adapted to integrate into the transpiler architecture.</span>
 
-<span class="sd">The role of the mapper pass is to modify the starting circuit to be compatible</span>
+<span class="sd">The role of the swapper pass is to modify the starting circuit to be compatible</span>
 <span class="sd">with the target device&#39;s topology (the set of two-qubit gates available on the</span>
-<span class="sd">hardware.) To do this, the mapper will insert SWAP gates to relocate the virtual</span>
+<span class="sd">hardware.) To do this, the pass will insert SWAP gates to relocate the virtual</span>
 <span class="sd">qubits for each upcoming gate onto a set of coupled physical qubits. However, as</span>
 <span class="sd">SWAP gates are particularly lossy, the goal is to accomplish this remapping while</span>
 <span class="sd">introducing the fewest possible additional SWAPs.</span>
@@ -209,12 +221,12 @@
 
 <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 
-<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">SwapGate</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">Layout</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.layout</span> <span class="k">import</span> <span class="n">Layout</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGNode</span>
 
 
@@ -225,17 +237,15 @@
 <div class="viewcode-block" id="LookaheadSwap"><a class="viewcode-back" href="../../../../../api/qiskit.transpiler.passes.LookaheadSwap.html#qiskit.transpiler.passes.LookaheadSwap">[docs]</a><span class="k">class</span> <span class="nc">LookaheadSwap</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Map input circuit onto a backend topology via insertion of SWAPs.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize a LookaheadSwap instance.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            coupling_map (CouplingMap): CouplingMap of the target backend.</span>
-<span class="sd">            initial_layout (Layout): The initial layout of the DAG to analyze.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span>
 
 <div class="viewcode-block" id="LookaheadSwap.run"><a class="viewcode-back" href="../../../../../api/qiskit.transpiler.passes.LookaheadSwap.html#qiskit.transpiler.passes.LookaheadSwap.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run one pass of the lookahead mapper on the provided DAG.</span>
@@ -249,31 +259,27 @@
 <span class="sd">            TranspilerError: if the coupling map or the layout are not</span>
 <span class="sd">            compatible with the DAG</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">coupling_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coupling_map</span>
-        <span class="n">ordered_virtual_gates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">serial_layers</span><span class="p">())</span>
+        <span class="n">coupling_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="o">*</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;Lookahead swap runs on physical circuits only&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;The layout does not match the amount of qubits in the DAG&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span>
-                <span class="s2">&quot;Mappers require to have the layout to be the same size as the coupling map&quot;</span><span class="p">)</span>
+        <span class="n">canonical_register</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+        <span class="n">trivial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="n">canonical_register</span><span class="p">)</span>
+        <span class="n">current_layout</span> <span class="o">=</span> <span class="n">trivial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="n">mapped_gates</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">ordered_virtual_gates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">serial_layers</span><span class="p">())</span>
         <span class="n">gates_remaining</span> <span class="o">=</span> <span class="n">ordered_virtual_gates</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="k">while</span> <span class="n">gates_remaining</span><span class="p">:</span>
-            <span class="n">best_step</span> <span class="o">=</span> <span class="n">_search_forward_n_swaps</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">gates_remaining</span><span class="p">,</span>
+            <span class="n">best_step</span> <span class="o">=</span> <span class="n">_search_forward_n_swaps</span><span class="p">(</span><span class="n">current_layout</span><span class="p">,</span> <span class="n">gates_remaining</span><span class="p">,</span>
                                                 <span class="n">coupling_map</span><span class="p">)</span>
 
-            <span class="n">layout</span> <span class="o">=</span> <span class="n">best_step</span><span class="p">[</span><span class="s1">&#39;layout&#39;</span><span class="p">]</span>
+            <span class="n">current_layout</span> <span class="o">=</span> <span class="n">best_step</span><span class="p">[</span><span class="s1">&#39;layout&#39;</span><span class="p">]</span>
             <span class="n">gates_mapped</span> <span class="o">=</span> <span class="n">best_step</span><span class="p">[</span><span class="s1">&#39;gates_mapped&#39;</span><span class="p">]</span>
             <span class="n">gates_remaining</span> <span class="o">=</span> <span class="n">best_step</span><span class="p">[</span><span class="s1">&#39;gates_remaining&#39;</span><span class="p">]</span>
 
@@ -446,7 +452,7 @@
 
     <span class="c1"># Workaround until #1816, apply mapped to qargs to both DAGNode and op</span>
     <span class="n">device_qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">get_physical_bits</span><span class="p">()),</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
-    <span class="n">mapped_qargs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">device_qreg</span><span class="p">,</span> <span class="n">layout</span><span class="p">[</span><span class="n">a</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">qargs</span><span class="p">]</span>
+    <span class="n">mapped_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">device_qreg</span><span class="p">[</span><span class="n">layout</span><span class="p">[</span><span class="n">a</span><span class="p">]]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">qargs</span><span class="p">]</span>
     <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">qargs</span> <span class="o">=</span> <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">qargs</span> <span class="o">=</span> <span class="n">mapped_qargs</span>
 
     <span class="n">mapped_op_node</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
@@ -458,7 +464,7 @@
     <span class="sd">&quot;&quot;&quot;Generate list of ops to implement a SWAP gate along a coupling edge.&quot;&quot;&quot;</span>
 
     <span class="n">device_qreg</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">get_physical_bits</span><span class="p">()),</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
-    <span class="n">qreg_edge</span> <span class="o">=</span> <span class="p">[(</span><span class="n">device_qreg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">]</span>
+    <span class="n">qreg_edge</span> <span class="o">=</span> <span class="p">[</span><span class="n">device_qreg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">]</span>
 
     <span class="c1"># TODO shouldn&#39;t be making other nodes not by the DAG!!</span>
     <span class="k">return</span> <span class="p">[</span>
@@ -502,6 +508,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

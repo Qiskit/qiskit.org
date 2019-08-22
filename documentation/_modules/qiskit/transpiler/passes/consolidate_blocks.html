@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -182,8 +194,10 @@
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators</span> <span class="k">import</span> <span class="n">Operator</span>
-<span class="kn">from</span> <span class="nn">qiskit.extensions</span> <span class="k">import</span> <span class="n">UnitaryGate</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.synthesis</span> <span class="k">import</span> <span class="n">TwoQubitBasisDecomposer</span>
+<span class="kn">from</span> <span class="nn">qiskit.extensions</span> <span class="k">import</span> <span class="n">UnitaryGate</span><span class="p">,</span> <span class="n">CnotGate</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
 
 
 <div class="viewcode-block" id="ConsolidateBlocks"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.ConsolidateBlocks.html#qiskit.transpiler.passes.ConsolidateBlocks">[docs]</a><span class="k">class</span> <span class="nc">ConsolidateBlocks</span><span class="p">(</span><span class="n">TransformationPass</span><span class="p">):</span>
@@ -194,6 +208,16 @@
 <span class="sd">    Important note: this pass assumes that the &#39;blocks_list&#39; property that</span>
 <span class="sd">    it reads is given such that blocks are in topological order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kak_basis_gate</span><span class="o">=</span><span class="n">CnotGate</span><span class="p">(),</span> <span class="n">force_consolidate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            kak_basis_gate (Gate): Basis gate for KAK decomposition.</span>
+<span class="sd">            force_consolidate (bool): Force block consolidation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_consolidate</span> <span class="o">=</span> <span class="n">force_consolidate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decomposer</span> <span class="o">=</span> <span class="n">TwoQubitBasisDecomposer</span><span class="p">(</span><span class="n">kak_basis_gate</span><span class="p">)</span>
+
 <div class="viewcode-block" id="ConsolidateBlocks.run"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.passes.ConsolidateBlocks.html#qiskit.transpiler.passes.ConsolidateBlocks.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;iterate over each block and replace it with an equivalent Unitary</span>
 <span class="sd">        on the same wires.</span>
@@ -205,23 +229,46 @@
             <span class="n">new_dag</span><span class="o">.</span><span class="n">add_creg</span><span class="p">(</span><span class="n">creg</span><span class="p">)</span>
 
         <span class="c1"># compute ordered indices for the global circuit wires</span>
-        <span class="n">global_index_map</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">wires</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">QuantumRegister</span><span class="p">):</span>
-                <span class="k">continue</span>
-            <span class="n">global_qregs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-            <span class="n">global_index_map</span><span class="p">[</span><span class="n">wire</span><span class="p">]</span> <span class="o">=</span> <span class="n">global_qregs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">global_index_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">wire</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">wire</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())}</span>
 
         <span class="n">blocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s1">&#39;block_list&#39;</span><span class="p">]</span>
-        <span class="n">nodes_seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="c1"># just to make checking if a node is in any block easier</span>
+        <span class="n">all_block_nodes</span> <span class="o">=</span> <span class="p">{</span><span class="n">nd</span> <span class="k">for</span> <span class="n">bl</span> <span class="ow">in</span> <span class="n">blocks</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">bl</span><span class="p">}</span>
 
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">topological_op_nodes</span><span class="p">():</span>
-            <span class="c1"># skip already-visited nodes or input/output nodes</span>
-            <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes_seen</span> <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;in&#39;</span> <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;out&#39;</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="c1"># check if the node belongs to the next block</span>
-            <span class="k">if</span> <span class="n">blocks</span> <span class="ow">and</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-                <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_block_nodes</span><span class="p">:</span>
+                <span class="c1"># need to add this node to find out where in the list it goes</span>
+                <span class="n">preds</span> <span class="o">=</span> <span class="p">[</span><span class="n">nd</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">if</span> <span class="n">nd</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span><span class="p">]</span>
+
+                <span class="n">block_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">while</span> <span class="n">preds</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">block_count</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">):</span>
+                        <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block_count</span><span class="p">]</span>
+
+                        <span class="c1"># if any of the predecessors are in the block, remove them</span>
+                        <span class="n">preds</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">preds</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">block</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># should never occur as this would mean not all</span>
+                        <span class="c1"># nodes before this one topologically had been added</span>
+                        <span class="c1"># so not all predecessors were removed</span>
+                        <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Not all predecessors removed due to error&quot;</span>
+                                              <span class="s2">&quot; in topological order&quot;</span><span class="p">)</span>
+
+                    <span class="n">block_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="c1"># we have now seen all predecessors</span>
+                <span class="c1"># so update the blocks list to include this block</span>
+                <span class="n">blocks</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[:</span><span class="n">block_count</span><span class="p">]</span> <span class="o">+</span> <span class="p">[[</span><span class="n">node</span><span class="p">]]</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block_count</span><span class="p">:]</span>
+
+        <span class="c1"># create the dag from the updated list of blocks</span>
+        <span class="n">basis_gate_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decomposer</span><span class="o">.</span><span class="n">gate</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">block</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;cx&#39;</span><span class="p">:</span>
+                <span class="c1"># an intermediate node that was added into the overall list</span>
+                <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">block</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">block</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span>
+                                             <span class="n">block</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cargs</span><span class="p">,</span> <span class="n">block</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">condition</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># find the qubits involved in this block</span>
                 <span class="n">block_qargs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
@@ -232,24 +279,20 @@
                 <span class="n">subcirc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
                 <span class="n">block_index_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_block_qargs_to_indices</span><span class="p">(</span><span class="n">block_qargs</span><span class="p">,</span>
                                                                <span class="n">global_index_map</span><span class="p">)</span>
+                <span class="n">basis_count</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
-                    <span class="n">nodes_seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nd</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">nd</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">basis_gate_name</span><span class="p">:</span>
+                        <span class="n">basis_count</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="n">subcirc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nd</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">block_index_map</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nd</span><span class="o">.</span><span class="n">qargs</span><span class="p">])</span>
                 <span class="n">unitary</span> <span class="o">=</span> <span class="n">UnitaryGate</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">subcirc</span><span class="p">))</span>  <span class="c1"># simulates the circuit</span>
-                <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
-                    <span class="n">unitary</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">block_qargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">block_index_map</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
-                <span class="k">del</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># the node could belong to some future block, but in that case</span>
-                <span class="c1"># we simply skip it. It is guaranteed that we will revisit that</span>
-                <span class="c1"># future block, via its other nodes</span>
-                <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-                    <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
-                        <span class="k">break</span>
-                <span class="c1"># freestanding nodes can just be added</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_consolidate</span> <span class="ow">or</span> <span class="n">unitary</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">or</span> \
+                        <span class="bp">self</span><span class="o">.</span><span class="n">decomposer</span><span class="o">.</span><span class="n">num_basis_gates</span><span class="p">(</span><span class="n">unitary</span><span class="p">)</span> <span class="o">!=</span> <span class="n">basis_count</span><span class="p">:</span>
+
+                    <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
+                        <span class="n">unitary</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">block_qargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">block_index_map</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">nodes_seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-                    <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">cargs</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
+                        <span class="n">new_dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">nd</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">nd</span><span class="o">.</span><span class="n">qargs</span><span class="p">,</span> <span class="n">nd</span><span class="o">.</span><span class="n">cargs</span><span class="p">,</span> <span class="n">nd</span><span class="o">.</span><span class="n">condition</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">new_dag</span></div>
 
@@ -306,6 +349,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

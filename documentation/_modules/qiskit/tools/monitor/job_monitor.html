@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -177,13 +189,6 @@
 
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
-
-<span class="n">_NOTEBOOK_ENV</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ipykernel&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;spyder&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">):</span>
-    <span class="n">_NOTEBOOK_ENV</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>    <span class="c1"># pylint: disable=import-error</span>
 
 
 <span class="k">def</span> <span class="nf">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
@@ -231,53 +236,24 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="job_monitor"><a class="viewcode-back" href="../../../../api/qiskit.tools.monitor.job_monitor.html#qiskit.tools.monitor.job_monitor">[docs]</a><span class="k">def</span> <span class="nf">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">monitor_async</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
+<div class="viewcode-block" id="job_monitor"><a class="viewcode-back" href="../../../../api/qiskit.tools.monitor.job_monitor.html#qiskit.tools.monitor.job_monitor">[docs]</a><span class="k">def</span> <span class="nf">job_monitor</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Monitor the status of a IBMQJob instance.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        job (BaseJob): Job to monitor.</span>
 <span class="sd">        interval (int): Time interval between status queries.</span>
-<span class="sd">        monitor_async (bool): Monitor asyncronously (in Jupyter only).</span>
 <span class="sd">        quiet (bool): If True, do not print status messages.</span>
 <span class="sd">        output (file): The file like object to write status messages to.</span>
 <span class="sd">        By default this is sys.stdout.</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        QiskitError: When trying to run async outside of Jupyter</span>
-<span class="sd">        ImportError: ipywidgets not available for notebook.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_interval_set</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">interval</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">_interval_set</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">_NOTEBOOK_ENV</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">monitor_async</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>  <span class="c1"># pylint: disable=import-error</span>
-            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;These functions  need ipywidgets. &#39;</span>
-                                  <span class="s1">&#39;Run &quot;pip install ipywidgets&quot; before.&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">qiskit.tools.jupyter.jupyter_magics</span> <span class="k">import</span> <span class="n">_html_checker</span>  <span class="c1"># pylint: disable=C0412</span>
 
-            <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;font-size:16px;&quot;</span>
-            <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&lt;p style=&#39;</span><span class="si">{style}</span><span class="s2">&#39;&gt;Job Status: </span><span class="si">%s</span><span class="s2"> &lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
-            <span class="n">status</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">header</span> <span class="o">%</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-            <span class="n">display</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
-
-            <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_html_checker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span>
-                                                                  <span class="n">status</span><span class="p">,</span> <span class="n">header</span><span class="p">))</span>
-            <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="p">,</span>
-                          <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">monitor_async</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
-                <span class="s1">&#39;monitor_async only available in Jupyter notebooks.&#39;</span><span class="p">)</span>
-        <span class="n">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span></div>
+    <span class="n">_text_checker</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">_interval_set</span><span class="p">,</span>
+                  <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span></div>
 </pre></div>
 
         </div>
@@ -316,6 +292,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

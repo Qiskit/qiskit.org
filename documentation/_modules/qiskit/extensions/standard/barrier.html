@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -176,10 +188,9 @@
 <span class="sd">Barrier instruction.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Instruction</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit.decorators</span> <span class="k">import</span> <span class="n">_convert_to_bits</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
 
 <div class="viewcode-block" id="Barrier"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.Barrier.html#qiskit.circuit.Barrier">[docs]</a><span class="k">class</span> <span class="nc">Barrier</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
@@ -191,7 +202,13 @@
 
 <div class="viewcode-block" id="Barrier.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.Barrier.html#qiskit.circuit.Barrier.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Special case. Return self.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Barrier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">Barrier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Barrier.broadcast_arguments"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.Barrier.html#qiskit.circuit.Barrier.broadcast_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">[</span><span class="n">qarg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">],</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="Barrier.c_if"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.Barrier.html#qiskit.circuit.Barrier.c_if">[docs]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Barriers are compiler directives and cannot be conditional.&#39;</span><span class="p">)</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">barrier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">qargs</span><span class="p">):</span>
@@ -201,19 +218,20 @@
 <span class="sd">    For QuantumRegister, applies barrier to all the qubits in that register.&quot;&quot;&quot;</span>
     <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="n">qargs</span> <span class="o">=</span> <span class="n">_convert_to_bits</span><span class="p">(</span><span class="n">qargs</span><span class="p">,</span> <span class="p">[</span><span class="n">qbit</span> <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="k">for</span> <span class="n">qbit</span> <span class="ow">in</span> <span class="n">qreg</span><span class="p">])</span>
-
     <span class="k">if</span> <span class="ow">not</span> <span class="n">qargs</span><span class="p">:</span>  <span class="c1"># None</span>
         <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qreg</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">qreg</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qreg</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 
     <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumRegister</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
-                <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qarg</span><span class="o">.</span><span class="n">size</span><span class="p">)])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
+            <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">qarg</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qarg</span><span class="o">.</span><span class="n">size</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="nb">range</span><span class="p">):</span>
+            <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qarg</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="n">qubits</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="n">qarg</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span>
 
@@ -221,7 +239,6 @@
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">barrier</span> <span class="o">=</span> <span class="n">barrier</span>
-<span class="n">CompositeGate</span><span class="o">.</span><span class="n">barrier</span> <span class="o">=</span> <span class="n">barrier</span>
 </pre></div>
 
         </div>
@@ -260,6 +277,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>
