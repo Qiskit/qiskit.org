@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -179,16 +191,18 @@
 <span class="kn">from</span> <span class="nn">logging</span> <span class="k">import</span> <span class="n">getLogger</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pformat</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">inf</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">SwapGate</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">Layout</span>
-<span class="c1"># pylint: disable=no-name-in-module, import-error</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.layout</span> <span class="k">import</span> <span class="n">Layout</span>
+<span class="c1"># pylint: disable=no-name-in-module</span>
 <span class="kn">from</span> <span class="nn">.cython.stochastic_swap.utils</span> <span class="k">import</span> <span class="n">nlayout_from_layout</span>
-<span class="c1"># pylint: disable=no-name-in-module, import-error</span>
+<span class="c1"># pylint: disable=no-name-in-module</span>
 <span class="kn">from</span> <span class="nn">.cython.stochastic_swap.swap_trial</span> <span class="k">import</span> <span class="n">swap_trial</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -209,39 +223,27 @@
 <span class="sd">    Uses a randomized algorithm.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Map a DAGCircuit onto a `coupling_map` using swap gates.</span>
 
-<span class="sd">        If initial_layout is not None, we assume the input circuit</span>
-<span class="sd">        has been layed out before running this pass, and that</span>
-<span class="sd">        the layout process yields a DAG, coupling map, and layout</span>
-<span class="sd">        with the following properties:</span>
-
-<span class="sd">        1. All three have the same number of qubits</span>
-<span class="sd">        2. The layout a bijection from the DAG qubits to the coupling map</span>
-
-<span class="sd">        For this mapping pass, it may also be necessary that</span>
-
-<span class="sd">        3. The coupling map is a connected graph</span>
+<span class="sd">        The coupling map is a connected graph</span>
 
 <span class="sd">        If these are not satisfied, the behavior is undefined.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            coupling_map (CouplingMap): Directed graph representing a coupling</span>
 <span class="sd">                map.</span>
-<span class="sd">            initial_layout (Layout): initial layout of qubits in mapping</span>
 <span class="sd">            trials (int): maximum number of iterations to attempt</span>
 <span class="sd">            seed (int): seed for random number generator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trials</span> <span class="o">=</span> <span class="n">trials</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="StochasticSwap.run"><a class="viewcode-back" href="../../../../../api/qiskit.transpiler.passes.StochasticSwap.html#qiskit.transpiler.passes.StochasticSwap.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -258,18 +260,14 @@
 <span class="sd">            compatible with the DAG</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="o">*</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;Basic swap runs on physical circuits only&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;The layout does not match the amount of qubits in the DAG&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span>
-                <span class="s2">&quot;Mappers require to have the layout to be the same size as the coupling map&quot;</span><span class="p">)</span>
+        <span class="n">canonical_register</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="n">canonical_register</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -314,10 +312,9 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            TranspilerError: if anything went wrong.</span>
 <span class="sd">     &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">,</span>
+        <span class="k">return</span> <span class="n">_layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span>
                                   <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
-                                  <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span>
-                                  <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="p">)</span>
+                                  <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_layer_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">best_layout</span><span class="p">,</span> <span class="n">best_depth</span><span class="p">,</span>
                       <span class="n">best_circuit</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
@@ -336,11 +333,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="n">best_layout</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: self.initial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: self.trivial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span><span class="p">))</span>
         <span class="n">dagcircuit_output</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">qubit</span><span class="o">.</span><span class="n">register</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="p">)</span>
 
         <span class="c1"># Output any swaps</span>
         <span class="k">if</span> <span class="n">best_depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -350,7 +347,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_update: there are no swaps in this layer&quot;</span><span class="p">)</span>
         <span class="c1"># Make qubit edge map and extend by classical bits</span>
-        <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
+        <span class="n">edge_map</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">dagcircuit_output</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
             <span class="n">edge_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
         <span class="c1"># Output this layer</span>
@@ -361,7 +358,7 @@
     <span class="k">def</span> <span class="nf">_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circuit_graph</span><span class="p">,</span> <span class="n">coupling_graph</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Map a DAGCircuit onto a CouplingMap using swap gates.</span>
 
-<span class="sd">        Use self.initial_layout for the initial layout.</span>
+<span class="sd">        Use self.trivial_layout for the initial layout.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            circuit_graph (DAGCircuit): input DAG circuit</span>
@@ -371,12 +368,6 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            DAGCircuit: object containing a circuit equivalent to</span>
 <span class="sd">                circuit_graph that respects couplings in coupling_graph</span>
-<span class="sd">            Layout: a layout object mapping qubits of circuit_graph into</span>
-<span class="sd">                qubits of coupling_graph. The layout may differ from the</span>
-<span class="sd">                initial_layout if the first layer of gates cannot be</span>
-<span class="sd">                executed on the initial_layout, since in this case</span>
-<span class="sd">                it is more efficient to modify the layout instead of swapping</span>
-<span class="sd">            Dict: a final-layer qubit permutation</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            TranspilerError: if there was any error during the mapping</span>
@@ -388,10 +379,10 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;partition&quot;</span><span class="p">])</span>
 
-        <span class="n">qubit_subset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">qubit_subset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
         <span class="c1"># Find swap circuit to precede each layer of input circuit</span>
-        <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="c1"># Construct an empty DAGCircuit with the same set of</span>
         <span class="c1"># qregs and cregs as the input circuit</span>
@@ -410,7 +401,7 @@
         <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">circuit_graph</span><span class="o">.</span><span class="n">clbits</span><span class="p">():</span>
             <span class="n">identity_wire_map</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="n">bit</span>
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;initial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;trivial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
 
         <span class="c1"># Iterate over layers</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layerlist</span><span class="p">):</span>
@@ -483,22 +474,21 @@
 
         <span class="c1"># This is the final edgemap. We might use it to correctly replace</span>
         <span class="c1"># any measurements that needed to be removed earlier.</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: self.initial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: self.trivial_layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
-        <span class="n">last_edgemap</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
+        <span class="n">last_edgemap</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trivial_layout</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;mapper: last_edgemap = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">last_edgemap</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">dagcircuit_output</span></div>
 
 
-<span class="k">def</span> <span class="nf">_layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
-                       <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">qregs</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_layer_permutation</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">qubit_subset</span><span class="p">,</span>
+                       <span class="n">coupling</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find a swap circuit that implements a permutation for this layer.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        layer_partition (list): The layer_partition is a list of (qu)bit</span>
 <span class="sd">            lists and each qubit is a tuple (qreg, index).</span>
-<span class="sd">        initial_layout (Layout): The initial layout passed.</span>
 <span class="sd">        layout (Layout): The layout is a Layout object mapping virtual</span>
 <span class="sd">            qubits in the input circuit to physical qubits in the coupling</span>
 <span class="sd">            graph. It reflects the current positions of the data.</span>
@@ -509,7 +499,6 @@
 <span class="sd">            This coupling map should be one that was provided to the</span>
 <span class="sd">            stochastic mapper.</span>
 <span class="sd">        trials (int): Number of attempts the randomized algorithm makes.</span>
-<span class="sd">        qregs (OrderedDict): Ordered dict of registers from input DAG.</span>
 <span class="sd">        rng (RandomState): Random number generator.</span>
 
 <span class="sd">    Returns:</span>
@@ -517,7 +506,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        TranspilerError: if anything went wrong.</span>
-<span class="sd">     &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layer_partition = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
                  <span class="n">pformat</span><span class="p">(</span><span class="n">layer_partition</span><span class="p">))</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: layout = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -526,11 +515,16 @@
                  <span class="n">pformat</span><span class="p">(</span><span class="n">qubit_subset</span><span class="p">))</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: trials = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">trials</span><span class="p">)</span>
 
+    <span class="c1"># The input dag is on a flat canonical register</span>
+    <span class="c1"># TODO: cleanup the code that is general for multiple qregs below</span>
+    <span class="n">canonical_register</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layout</span><span class="p">),</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+    <span class="n">qregs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="n">canonical_register</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">canonical_register</span><span class="p">})</span>
+
     <span class="n">gates</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of lists of tuples [[(register, index), ...], ...]</span>
     <span class="k">for</span> <span class="n">gate_args</span> <span class="ow">in</span> <span class="n">layer_partition</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Layer contains &gt; 2-qubit gates&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gate_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">gates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">gate_args</span><span class="p">))</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: gates = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
 
@@ -541,9 +535,7 @@
     <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;layer_permutation: nothing to do&quot;</span><span class="p">)</span>
         <span class="n">circ</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">circ</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                <span class="n">circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">canonical_register</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">gates</span><span class="p">))</span>
 
     <span class="c1"># Begin loop over trials of randomized algorithm</span>
@@ -562,14 +554,14 @@
     <span class="n">int_layout</span> <span class="o">=</span> <span class="n">nlayout_from_layout</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">qregs</span><span class="p">,</span> <span class="n">coupling</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 
     <span class="n">trial_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>  <span class="c1"># SWAP circuit for this trial</span>
-    <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trial_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">qubit</span><span class="o">.</span><span class="n">register</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trial_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">trial_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="p">)</span>
 
     <span class="n">slice_circuit</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>  <span class="c1"># circuit for this swap slice</span>
-    <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">slice_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">slice_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">register</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">qubit</span><span class="o">.</span><span class="n">register</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">slice_circuit</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">slice_circuit</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="p">)</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coupling</span><span class="o">.</span><span class="n">get_edges</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="n">cdist</span> <span class="o">=</span> <span class="n">coupling</span><span class="o">.</span><span class="n">_dist_matrix</span>
     <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
@@ -601,9 +593,10 @@
         <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
 
     <span class="n">edgs</span> <span class="o">=</span> <span class="n">best_edges</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+    <span class="n">trivial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="n">canonical_register</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">best_edges</span><span class="o">.</span><span class="n">size</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
         <span class="n">slice_circuit</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span>
-            <span class="n">SwapGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">initial_layout</span><span class="p">[</span><span class="n">edgs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]],</span> <span class="n">initial_layout</span><span class="p">[</span><span class="n">edgs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]]],</span> <span class="p">[])</span>
+            <span class="n">SwapGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">trivial_layout</span><span class="p">[</span><span class="n">edgs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]],</span> <span class="n">trivial_layout</span><span class="p">[</span><span class="n">edgs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]]],</span> <span class="p">[])</span>
     <span class="n">trial_circuit</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">slice_circuit</span><span class="p">)</span>
     <span class="n">best_circuit</span> <span class="o">=</span> <span class="n">trial_circuit</span>
 
@@ -614,13 +607,11 @@
 
 
 <span class="k">def</span> <span class="nf">regtuple_to_numeric</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">qregs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Takes (QuantumRegister, int) tuples and converts</span>
-<span class="sd">    them into an integer array.</span>
+    <span class="sd">&quot;&quot;&quot;Takes Qubit instances and converts them into an integer array.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        items (list): List of tuples of (QuantumRegister, int)</span>
-<span class="sd">                      to convert.</span>
-<span class="sd">        qregs (dict): List of )QuantumRegister, int) tuples.</span>
+<span class="sd">        items (list): List of Qubit instances to convert.</span>
+<span class="sd">        qregs (dict): List of Qubit instances.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        ndarray: Array of integers.</span>
 
@@ -632,7 +623,7 @@
         <span class="n">regint</span><span class="p">[</span><span class="n">qreg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-        <span class="n">out</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">register</span><span class="p">]]</span><span class="o">+</span><span class="n">val</span><span class="o">.</span><span class="n">index</span>
     <span class="k">return</span> <span class="n">out</span>
 
 
@@ -640,9 +631,8 @@
     <span class="sd">&quot;&quot;&quot;Converts gate tuples into a nested list of integers.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        gates (list): List of (QuantumRegister, int) pairs</span>
-<span class="sd">                      representing gates.</span>
-<span class="sd">        qregs (dict): List of )QuantumRegister, int) tuples.</span>
+<span class="sd">        gates (list): List of Qubit instances representing gates.</span>
+<span class="sd">        qregs (dict): List of Qubit instances.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list: Nested list of integers for gates.</span>
@@ -654,8 +644,8 @@
         <span class="n">regint</span><span class="p">[</span><span class="n">qreg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">gates</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">gate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gates</span><span class="p">):</span>
-        <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">register</span><span class="p">]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_idx</span><span class="p">[</span><span class="n">regint</span><span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">register</span><span class="p">]]</span><span class="o">+</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
     <span class="k">return</span> <span class="n">out</span>
 </pre></div>
 
@@ -695,6 +685,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

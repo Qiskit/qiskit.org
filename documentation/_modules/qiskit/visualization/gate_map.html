@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -171,14 +183,23 @@
 <span class="c1"># Any modifications or derivative works of this code must retain this</span>
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
+<span class="c1"># pylint: disable=invalid-name</span>
 
 <span class="sd">&quot;&quot;&quot;A module for visualizing device coupling maps&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">.matplotlib</span> <span class="k">import</span> <span class="n">HAS_MATPLOTLIB</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">VisualizationError</span>
+
 <span class="k">if</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">matplotlib</span>
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  <span class="c1"># pylint: disable=import-error</span>
     <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">ticker</span>
 
 
 <span class="k">class</span> <span class="nc">_GraphDist</span><span class="p">():</span>
@@ -224,8 +245,10 @@
                   <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                   <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                   <span class="n">qubit_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">qubit_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">line_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                  <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
+                  <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                  <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plots the gate map of a device.</span>
 
 <span class="sd">    Args:</span>
@@ -237,8 +260,10 @@
 <span class="sd">        line_width (float): Width of lines.</span>
 <span class="sd">        font_size (int): Font size of qubit labels.</span>
 <span class="sd">        qubit_color (list): A list of colors for the qubits</span>
+<span class="sd">        qubit_labels (list): A list of qubit labels</span>
 <span class="sd">        line_color (list): A list of colors for each line from coupling_map.</span>
 <span class="sd">        font_color (str): The font color for the qubit labels.</span>
+<span class="sd">        ax (Axes): A Matplotlib axes instance.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Figure: A Matplotlib figure instance.</span>
@@ -252,6 +277,10 @@
 
     <span class="k">if</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Requires a device backend, not simulator.&#39;</span><span class="p">)</span>
+
+    <span class="n">input_axes</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">ax</span><span class="p">:</span>
+        <span class="n">input_axes</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">mpl_data</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -274,12 +303,21 @@
     <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
     <span class="n">cmap</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">coupling_map</span>
 
+    <span class="k">if</span> <span class="n">qubit_labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">qubit_labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubit_labels</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_qubits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Length of qubit labels &#39;</span>
+                              <span class="s1">&#39;does not equal number &#39;</span>
+                              <span class="s1">&#39;of qubits.&#39;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">n_qubits</span> <span class="ow">in</span> <span class="n">mpl_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">grid_data</span> <span class="o">=</span> <span class="n">mpl_data</span><span class="p">[</span><span class="n">n_qubits</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># pylint: disable=invalid-name</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">fig</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">input_axes</span><span class="p">:</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># pylint: disable=invalid-name</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">fig</span>
 
     <span class="n">x_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">grid_data</span><span class="p">])</span>
     <span class="n">y_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">grid_data</span><span class="p">])</span>
@@ -291,9 +329,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>  <span class="c1"># pylint: disable=invalid-name</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
     <span class="c1"># set coloring</span>
     <span class="k">if</span> <span class="n">qubit_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -358,12 +397,230 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Ellipse</span><span class="p">(</span>
             <span class="n">_idx</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">qubit_color</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">label_qubits</span><span class="p">:</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">*</span><span class="n">_idx</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">),</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">*</span><span class="n">_idx</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">qubit_labels</span><span class="p">[</span><span class="n">var</span><span class="p">],</span>
                     <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
                     <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
                     <span class="n">color</span><span class="o">=</span><span class="n">font_color</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">font_size</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_max</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="p">(</span><span class="n">y_max</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_axes</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="plot_circuit_layout"><a class="viewcode-back" href="../../../api/qiskit.visualization.plot_circuit_layout.html#qiskit.visualization.plot_circuit_layout">[docs]</a><span class="k">def</span> <span class="nf">plot_circuit_layout</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="s1">&#39;virtual&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot the layout of a circuit transpiled for a given</span>
+<span class="sd">    target backend.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit (QuantumCircuit): Input quantum circuit.</span>
+<span class="sd">        backend (BaseBackend): Target backend.</span>
+<span class="sd">        view (str): Layout view: either &#39;virtual&#39; or &#39;physical&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Figure: A matplotlib figure showing layout.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: Invalid view type given.</span>
+<span class="sd">        VisualizationError: Circuit has no layout attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">circuit</span><span class="o">.</span><span class="n">_layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Circuit has no layout. &#39;</span>
+                          <span class="s1">&#39;Perhaps it has not been transpiled.&#39;</span><span class="p">)</span>
+
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span>
+
+    <span class="n">qubits</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">qubit_labels</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">n_qubits</span>
+
+    <span class="k">if</span> <span class="n">view</span> <span class="o">==</span> <span class="s1">&#39;virtual&#39;</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">_layout</span><span class="o">.</span><span class="n">get_virtual_bits</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;ancilla&#39;</span><span class="p">:</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">qubit_labels</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">elif</span> <span class="n">view</span> <span class="o">==</span> <span class="s1">&#39;physical&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">_layout</span><span class="o">.</span><span class="n">get_physical_bits</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;ancilla&#39;</span><span class="p">:</span>
+                <span class="n">qubits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                <span class="n">qubit_labels</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VisualizationError</span><span class="p">(</span><span class="s2">&quot;Layout view must be &#39;virtual&#39; or &#39;physical&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">qcolors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#648fff&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">n_qubits</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
+        <span class="n">qcolors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span>
+
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">coupling_map</span>
+
+    <span class="n">lcolors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#648fff&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cmap</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">qubits</span> <span class="ow">and</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">qubits</span><span class="p">:</span>
+            <span class="n">lcolors</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_gate_map</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span>
+                        <span class="n">qubit_color</span><span class="o">=</span><span class="n">qcolors</span><span class="p">,</span>
+                        <span class="n">qubit_labels</span><span class="o">=</span><span class="n">qubit_labels</span><span class="p">,</span>
+                        <span class="n">line_color</span><span class="o">=</span><span class="n">lcolors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="plot_error_map"><a class="viewcode-back" href="../../../api/qiskit.visualization.plot_error_map.html#qiskit.visualization.plot_error_map">[docs]</a><span class="k">def</span> <span class="nf">plot_error_map</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">show_title</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the error map of a given backend.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        backend (IBMQBackend): Given backend.</span>
+<span class="sd">        figsize (tuple): Figure size in inches.</span>
+<span class="sd">        show_title (bool): Show the title or not.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Figure: A matplotlib figure showing error map.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        VisualizationError: Input is not IBMQ backend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">color_map</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span>
+
+    <span class="n">props</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_qubits&#39;</span><span class="p">]</span>
+
+    <span class="c1"># U2 error rates</span>
+    <span class="n">single_gate_errors</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+                          <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">props</span><span class="p">[</span><span class="s1">&#39;gates&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="o">*</span><span class="n">n_qubits</span><span class="p">:</span><span class="mi">3</span><span class="p">]]</span>
+
+    <span class="c1"># Convert to percent</span>
+    <span class="n">single_gate_errors</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">single_gate_errors</span><span class="p">)</span>
+    <span class="n">avg_1q_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">single_gate_errors</span><span class="p">)</span>
+
+    <span class="n">single_norm</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span>
+        <span class="n">vmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">single_gate_errors</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">single_gate_errors</span><span class="p">))</span>
+    <span class="n">q_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">color_map</span><span class="p">(</span><span class="n">single_norm</span><span class="p">(</span><span class="n">err</span><span class="p">))</span> <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">single_gate_errors</span><span class="p">]</span>
+
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;coupling_map&#39;</span><span class="p">]</span>
+
+    <span class="n">directed</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">cmap</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="ow">in</span> <span class="n">cmap</span><span class="p">:</span>
+                <span class="n">directed</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+    <span class="n">cx_errors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">cmap</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">props</span><span class="p">[</span><span class="s1">&#39;gates&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">cx_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="c1"># Convert to percent</span>
+    <span class="n">cx_errors</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cx_errors</span><span class="p">)</span>
+    <span class="n">avg_cx_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cx_errors</span><span class="p">)</span>
+
+    <span class="n">cx_norm</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span>
+        <span class="n">vmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">cx_errors</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">cx_errors</span><span class="p">))</span>
+    <span class="n">line_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">color_map</span><span class="p">(</span><span class="n">cx_norm</span><span class="p">(</span><span class="n">err</span><span class="p">))</span> <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">cx_errors</span><span class="p">]</span>
+
+    <span class="c1"># Measurement errors</span>
+
+    <span class="n">read_err</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">props</span><span class="p">[</span><span class="s1">&#39;qubits&#39;</span><span class="p">][</span><span class="n">qubit</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;readout_error&#39;</span><span class="p">:</span>
+                <span class="n">read_err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+
+    <span class="n">read_err</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">read_err</span><span class="p">)</span>
+    <span class="n">avg_read_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">read_err</span><span class="p">)</span>
+    <span class="n">max_read_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">read_err</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">11</span><span class="o">+</span><span class="p">[</span><span class="mf">0.5</span><span class="p">],</span>
+                           <span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">left_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">main_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[:</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">11</span><span class="p">])</span>
+    <span class="n">right_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">:])</span>
+    <span class="n">bleft_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">bright_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">:])</span>
+
+    <span class="n">plot_gate_map</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">qubit_color</span><span class="o">=</span><span class="n">q_colors</span><span class="p">,</span>
+                  <span class="n">line_color</span><span class="o">=</span><span class="n">line_colors</span><span class="p">,</span>
+                  <span class="n">qubit_size</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span>
+                  <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                  <span class="n">plot_directed</span><span class="o">=</span><span class="n">directed</span><span class="p">,</span>
+                  <span class="n">ax</span><span class="o">=</span><span class="n">main_ax</span><span class="p">)</span>
+    <span class="n">main_ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">main_ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">single_cb</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">ColorbarBase</span><span class="p">(</span><span class="n">bleft_ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">color_map</span><span class="p">,</span>
+                                                 <span class="n">norm</span><span class="o">=</span><span class="n">single_norm</span><span class="p">,</span>
+                                                 <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+    <span class="n">tick_locator</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">nbins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">single_cb</span><span class="o">.</span><span class="n">locator</span> <span class="o">=</span> <span class="n">tick_locator</span>
+    <span class="n">single_cb</span><span class="o">.</span><span class="n">update_ticks</span><span class="p">()</span>
+    <span class="n">single_cb</span><span class="o">.</span><span class="n">update_ticks</span><span class="p">()</span>
+    <span class="n">bleft_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;H error rate (%) [Avg. = </span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">avg_1q_err</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="n">cx_cb</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">ColorbarBase</span><span class="p">(</span><span class="n">bright_ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">color_map</span><span class="p">,</span>
+                                             <span class="n">norm</span><span class="o">=</span><span class="n">cx_norm</span><span class="p">,</span>
+                                             <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+    <span class="n">tick_locator</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">nbins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">cx_cb</span><span class="o">.</span><span class="n">locator</span> <span class="o">=</span> <span class="n">tick_locator</span>
+    <span class="n">cx_cb</span><span class="o">.</span><span class="n">update_ticks</span><span class="p">()</span>
+    <span class="n">bright_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CNOT error rate (%) [Avg. = </span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">avg_cx_err</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">num_left</span> <span class="o">=</span> <span class="n">n_qubits</span>
+        <span class="n">num_right</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">num_left</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n_qubits</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">num_right</span> <span class="o">=</span> <span class="n">n_qubits</span><span class="o">-</span><span class="n">num_left</span>
+
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_left</span><span class="p">),</span> <span class="n">read_err</span><span class="p">[:</span><span class="n">num_left</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#007d79&#39;</span><span class="p">)</span>
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">avg_read_err</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#212121&#39;</span><span class="p">)</span>
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_left</span><span class="p">))</span>
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">avg_read_err</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">max_read_err</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">kk</span><span class="p">)</span> <span class="k">for</span> <span class="n">kk</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_left</span><span class="p">)],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">left_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Readout Error (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">left_ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">num_right</span><span class="p">:</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_left</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">),</span> <span class="n">read_err</span><span class="p">[</span><span class="n">num_left</span><span class="p">:],</span>
+                      <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#007d79&#39;</span><span class="p">)</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">avg_read_err</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#212121&#39;</span><span class="p">)</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_left</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">))</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">avg_read_err</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">max_read_err</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">kk</span><span class="p">)</span> <span class="k">for</span> <span class="n">kk</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_left</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">)],</span>
+                                 <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_right</span><span class="p">()</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Readout Error (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">right_ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">right_ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">show_title</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1"> Error Map&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">name</span><span class="p">()),</span>
+                     <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fig</span></div>
 </pre></div>
@@ -404,6 +661,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

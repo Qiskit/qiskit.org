@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -172,9 +184,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Unitary gate.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Unitary gate.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
@@ -198,12 +208,15 @@
 <div class="viewcode-block" id="Gate.to_matrix"><a class="viewcode-back" href="../../../api/qiskit.circuit.Gate.html#qiskit.circuit.Gate.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the gate unitary matrix.</span>
 
-<span class="sd">        Additional Information</span>
-<span class="sd">        ----------------------</span>
-<span class="sd">        If a Gate subclass does not implement this method an exception</span>
-<span class="sd">        will be raised when this base class method is called.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: If a Gate subclass does not implement this method an</span>
+<span class="sd">                exception will be raised when this base class method is called.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;to_matrix not defined for this </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span></div>
+
+    <span class="k">def</span> <span class="nf">_return_repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Gate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">exponent</span><span class="p">),</span> <span class="n">num_qubits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span>
+                    <span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Gate.assemble"><a class="viewcode-back" href="../../../api/qiskit.circuit.Gate.html#qiskit.circuit.Gate.assemble">[docs]</a>    <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assemble a QasmQobjInstruction&quot;&quot;&quot;</span>
@@ -230,7 +243,101 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;label expects a string or None&#39;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;label expects a string or None&#39;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_broadcast_single_argument</span><span class="p">(</span><span class="n">qarg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Expands a single argument.</span>
+
+<span class="sd">        For example: [q[0], q[1]] -&gt; [q[0]], [q[1]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># [q[0], q[1]] -&gt; [q[0]]</span>
+        <span class="c1">#              -&gt; [q[1]]</span>
+        <span class="k">for</span> <span class="n">arg0</span> <span class="ow">in</span> <span class="n">qarg</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">[</span><span class="n">arg0</span><span class="p">],</span> <span class="p">[]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_broadcast_2_arguments</span><span class="p">(</span><span class="n">qarg0</span><span class="p">,</span> <span class="n">qarg1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qarg0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">qarg1</span><span class="p">):</span>
+            <span class="c1"># [[q[0], q[1]], [r[0], r[1]]] -&gt; [q[0], r[0]]</span>
+            <span class="c1">#                              -&gt; [q[1], r[1]]</span>
+            <span class="k">for</span> <span class="n">arg0</span><span class="p">,</span> <span class="n">arg1</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">qarg0</span><span class="p">,</span> <span class="n">qarg1</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="p">[</span><span class="n">arg0</span><span class="p">,</span> <span class="n">arg1</span><span class="p">],</span> <span class="p">[]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">qarg0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># [[q[0]], [r[0], r[1]]] -&gt; [q[0], r[0]]</span>
+            <span class="c1">#                        -&gt; [q[0], r[1]]</span>
+            <span class="k">for</span> <span class="n">arg1</span> <span class="ow">in</span> <span class="n">qarg1</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="p">[</span><span class="n">qarg0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arg1</span><span class="p">],</span> <span class="p">[]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">qarg1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># [[q[0], q[1]], [r[0]]] -&gt; [q[0], r[0]]</span>
+            <span class="c1">#                        -&gt; [q[1], r[0]]</span>
+            <span class="k">for</span> <span class="n">arg0</span> <span class="ow">in</span> <span class="n">qarg0</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="p">[</span><span class="n">arg0</span><span class="p">,</span> <span class="n">qarg1</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Not sure how to combine these two qubit arguments:</span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
+                              <span class="p">(</span><span class="n">qarg0</span><span class="p">,</span> <span class="n">qarg1</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_broadcast_3_or_more_args</span><span class="p">(</span><span class="n">qargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">qargs</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="nb">list</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s1">&#39;Not sure how to combine these qubit arguments:</span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Gate.broadcast_arguments"><a class="viewcode-back" href="../../../api/qiskit.circuit.Gate.html#qiskit.circuit.Gate.broadcast_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Validation and handling of the arguments and its relationship.</span>
+
+<span class="sd">        For example:</span>
+<span class="sd">        `cx([q[0],q[1]], q[2])` means `cx(q[0], q[2]); cx(q[1], q[2])`. This method</span>
+<span class="sd">        yields the arguments in the right grouping. In the given example::</span>
+
+<span class="sd">            in: [[q[0],q[1]], q[2]],[]</span>
+<span class="sd">            outs: [q[0], q[2]], []</span>
+<span class="sd">                  [q[1], q[2]], []</span>
+
+<span class="sd">        The general broadcasting rules are:</span>
+<span class="sd">         * If len(qargs) == 1::</span>
+
+<span class="sd">                [q[0], q[1]] -&gt; [q[0]],[q[1]]</span>
+
+<span class="sd">         * If len(qargs) == 2::</span>
+
+<span class="sd">                [[q[0], q[1]], [r[0], r[1]]] -&gt; [q[0], r[0]], [q[1], r[1]]</span>
+<span class="sd">                [[q[0]], [r[0], r[1]]]       -&gt; [q[0], r[0]], [q[0], r[1]]</span>
+<span class="sd">                [[q[0], q[1]], [r[0]]]       -&gt; [q[0], r[0]], [q[1], r[0]]</span>
+
+<span class="sd">         * If len(qargs) &gt;= 3::</span>
+
+<span class="sd">                [q[0], q[1]], [r[0], r[1]],  ...] -&gt; [q[0], r[0], ...], [q[1], r[1], ...]</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qargs (List): List of quantum bit arguments.</span>
+<span class="sd">            cargs (List): List of classical bit arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple(List, List): A tuple with single arguments.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: If the input is not valid. For example, the number of</span>
+<span class="sd">                arguments does not match the gate expectation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="ow">or</span> <span class="n">cargs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s1">&#39;The amount of qubit/clbit arguments does not match the gate expectation.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="ow">not</span> <span class="n">qarg</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;One or more of the arguments are empty&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Gate</span><span class="o">.</span><span class="n">_broadcast_single_argument</span><span class="p">(</span><span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Gate</span><span class="o">.</span><span class="n">_broadcast_2_arguments</span><span class="p">(</span><span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">qargs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Gate</span><span class="o">.</span><span class="n">_broadcast_3_or_more_args</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;This gate cannot handle </span><span class="si">%i</span><span class="s1"> arguments&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">))</span></div></div>
 </pre></div>
 
         </div>
@@ -269,6 +376,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

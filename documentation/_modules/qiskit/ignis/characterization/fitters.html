@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -430,7 +442,7 @@
             <span class="n">series</span> <span class="o">=</span> <span class="p">[</span><span class="n">series</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">qid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">qfit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qubits</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">qfit</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubits</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">qfit</span> <span class="o">=</span> <span class="p">[</span><span class="n">qid</span><span class="p">]</span>
 
@@ -441,7 +453,7 @@
             <span class="n">p0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_defaultp0</span>
 
         <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">serieslbl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">qind</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qfit</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">qind</span> <span class="ow">in</span> <span class="n">qfit</span><span class="p">:</span>
                 <span class="n">tmp_params</span><span class="p">,</span> <span class="n">fcov</span> <span class="o">=</span> \
                      <span class="n">curve_fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_fun</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xdata</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">_ydata</span><span class="p">[</span><span class="n">serieslbl</span><span class="p">][</span><span class="n">qind</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span>
@@ -684,6 +696,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>
