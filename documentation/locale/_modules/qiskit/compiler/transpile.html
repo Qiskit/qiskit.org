@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.compiler.transpile &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.compiler.transpile のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;Circuit transpile function&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">CouplingMap</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.parallel</span> <span class="k">import</span> <span class="n">parallel_map</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.transpile_config</span> <span class="k">import</span> <span class="n">TranspileConfig</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.transpile_circuit</span> <span class="k">import</span> <span class="n">transpile_circuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.pulse</span> <span class="k">import</span> <span class="n">Schedule</span>
+
+
+<div class="viewcode-block" id="transpile"><a class="viewcode-back" href="../../../api/qiskit.compiler.transpile.html#qiskit.compiler.transpile">[ドキュメント]</a><span class="k">def</span> <span class="nf">transpile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span>
+              <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">basis_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coupling_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend_properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed_transpiler</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">optimization_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">pass_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">seed_mapper</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># deprecated</span>
+    <span class="sd">&quot;&quot;&quot;transpile one or more circuits, according to some desired</span>
+<span class="sd">    transpilation targets.</span>
+
+<span class="sd">    All arguments may be given as either singleton or list. In case of list,</span>
+<span class="sd">    the length must be equal to the number of circuits being transpiled.</span>
+
+<span class="sd">    Transpilation is done in parallel using multiprocessing.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuits (QuantumCircuit or list[QuantumCircuit]):</span>
+<span class="sd">            Circuit(s) to transpile</span>
+
+<span class="sd">        backend (BaseBackend):</span>
+<span class="sd">            If set, transpiler options are automatically grabbed from</span>
+<span class="sd">            backend.configuration() and backend.properties().</span>
+<span class="sd">            If any other option is explicitly set (e.g. coupling_map), it</span>
+<span class="sd">            will override the backend&#39;s.</span>
+<span class="sd">            Note: the backend arg is purely for convenience. The resulting</span>
+<span class="sd">                circuit may be run on any backend as long as it is compatible.</span>
+
+<span class="sd">        basis_gates (list[str]):</span>
+<span class="sd">            List of basis gate names to unroll to.</span>
+<span class="sd">            e.g:</span>
+<span class="sd">                [&#39;u1&#39;, &#39;u2&#39;, &#39;u3&#39;, &#39;cx&#39;]</span>
+<span class="sd">            If None, do not unroll.</span>
+
+<span class="sd">        coupling_map (CouplingMap or list):</span>
+<span class="sd">            Coupling map (perhaps custom) to target in mapping.</span>
+<span class="sd">            Multiple formats are supported:</span>
+<span class="sd">            a. CouplingMap instance</span>
+
+<span class="sd">            b. list</span>
+<span class="sd">                Must be given as an adjacency matrix, where each entry</span>
+<span class="sd">                specifies all two-qubit interactions supported by backend</span>
+<span class="sd">                e.g:</span>
+<span class="sd">                    [[0, 1], [0, 3], [1, 2], [1, 5], [2, 5], [4, 1], [5, 3]]</span>
+
+<span class="sd">        backend_properties (BackendProperties):</span>
+<span class="sd">            properties returned by a backend, including information on gate</span>
+<span class="sd">            errors, readout errors, qubit coherence times, etc. For a backend</span>
+<span class="sd">            that provides this information, it can be obtained with:</span>
+<span class="sd">            ``backend.properties()``</span>
+
+<span class="sd">        initial_layout (Layout or dict or list):</span>
+<span class="sd">            Initial position of virtual qubits on physical qubits.</span>
+<span class="sd">            If this layout makes the circuit compatible with the coupling_map</span>
+<span class="sd">            constraints, it will be used.</span>
+<span class="sd">            The final layout is not guaranteed to be the same, as the transpiler</span>
+<span class="sd">            may permute qubits through swaps or other means.</span>
+
+<span class="sd">            Multiple formats are supported:</span>
+<span class="sd">            a. Layout instance</span>
+
+<span class="sd">            b. dict</span>
+<span class="sd">                virtual to physical:</span>
+<span class="sd">                    {qr[0]: 0,</span>
+<span class="sd">                     qr[1]: 3,</span>
+<span class="sd">                     qr[2]: 5}</span>
+
+<span class="sd">                physical to virtual:</span>
+<span class="sd">                    {0: qr[0],</span>
+<span class="sd">                     3: qr[1],</span>
+<span class="sd">                     5: qr[2]}</span>
+
+<span class="sd">            c. list</span>
+<span class="sd">                virtual to physical:</span>
+<span class="sd">                    [0, 3, 5]  # virtual qubits are ordered (in addition to named)</span>
+
+<span class="sd">                physical to virtual:</span>
+<span class="sd">                    [qr[0], None, None, qr[1], None, qr[2]]</span>
+
+<span class="sd">        seed_transpiler (int):</span>
+<span class="sd">            sets random seed for the stochastic parts of the transpiler</span>
+
+<span class="sd">        optimization_level (int):</span>
+<span class="sd">            How much optimization to perform on the circuits.</span>
+<span class="sd">            Higher levels generate more optimized circuits,</span>
+<span class="sd">            at the expense of longer transpilation time.</span>
+<span class="sd">                0: no optimization</span>
+<span class="sd">                1: light optimization</span>
+<span class="sd">                2: heavy optimization</span>
+<span class="sd">                3: even heavier optimization</span>
+
+<span class="sd">        pass_manager (PassManager):</span>
+<span class="sd">            The pass manager to use for a custom pipeline of transpiler passes.</span>
+<span class="sd">            If this arg is present, all other args will be ignored and the</span>
+<span class="sd">            pass manager will be used directly (Qiskit will not attempt to</span>
+<span class="sd">            auto-select a pass manager based on transpile options).</span>
+
+<span class="sd">        seed_mapper (int):</span>
+<span class="sd">            DEPRECATED in 0.8: use ``seed_transpiler`` kwarg instead</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit or list[QuantumCircuit]: transpiled circuit(s).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TranspilerError: in case of bad inputs to transpiler or errors in passes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Deprecation matter</span>
+    <span class="k">if</span> <span class="n">seed_mapper</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;seed_mapper has been deprecated and will be removed in the &quot;</span>
+                      <span class="s2">&quot;0.9 release. Instead use seed_transpiler to set the seed &quot;</span>
+                      <span class="s2">&quot;for all stochastic parts of the.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">seed_transpiler</span> <span class="o">=</span> <span class="n">seed_mapper</span>
+
+    <span class="c1"># transpiling schedules is not supported yet.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">Schedule</span><span class="p">)</span> <span class="ow">or</span> \
+       <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">Schedule</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">circuits</span>
+
+    <span class="c1"># Get TranspileConfig(s) to configure the circuit transpilation job(s)</span>
+    <span class="n">circuits</span> <span class="o">=</span> <span class="n">circuits</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">circuits</span><span class="p">]</span>
+    <span class="n">transpile_configs</span> <span class="o">=</span> <span class="n">_parse_transpile_args</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span>
+                                              <span class="n">backend_properties</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
+                                              <span class="n">seed_transpiler</span><span class="p">,</span> <span class="n">optimization_level</span><span class="p">,</span>
+                                              <span class="n">pass_manager</span><span class="p">)</span>
+
+    <span class="c1"># Transpile circuits in parallel</span>
+    <span class="n">circuits</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">_transpile_circuit</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">transpile_configs</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">circuits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">circuits</span></div>
+
+
+<span class="c1"># FIXME: This is a helper function because of parallel tools.</span>
+<span class="k">def</span> <span class="nf">_transpile_circuit</span><span class="p">(</span><span class="n">circuit_config_tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Select a PassManager and run a single circuit through it.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit_config_tuple (tuple):</span>
+<span class="sd">            circuit (QuantumCircuit): circuit to transpile</span>
+<span class="sd">            transpile_config (TranspileConfig): configuration dictating how to transpile</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: transpiled circuit</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">circuit</span><span class="p">,</span> <span class="n">transpile_config</span> <span class="o">=</span> <span class="n">circuit_config_tuple</span>
+
+    <span class="k">return</span> <span class="n">transpile_circuit</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">transpile_config</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_transpile_args</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+                          <span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">backend_properties</span><span class="p">,</span>
+                          <span class="n">initial_layout</span><span class="p">,</span> <span class="n">seed_transpiler</span><span class="p">,</span> <span class="n">optimization_level</span><span class="p">,</span>
+                          <span class="n">pass_manager</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Resolve the various types of args allowed to the transpile() function through</span>
+<span class="sd">    duck typing, overriding args, etc. Refer to the transpile() docstring for details on</span>
+<span class="sd">    what types of inputs are allowed.</span>
+
+<span class="sd">    Here the args are resolved by converting them to standard instances, and prioritizing</span>
+<span class="sd">    them in case a transpile option is passed through multiple args (explicitly setting an</span>
+<span class="sd">    arg has more priority than the arg set by backend)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[TranspileConfig]: a transpile config for each circuit, which is a standardized</span>
+<span class="sd">            object that configures the transpiler and determines the pass manager to use.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Each arg could be single or a list. If list, it must be the same size as</span>
+    <span class="c1"># number of circuits. If single, duplicate to create a list of that size.</span>
+    <span class="n">num_circuits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span>
+
+    <span class="n">basis_gates</span> <span class="o">=</span> <span class="n">_parse_basis_gates</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">circuits</span><span class="p">)</span>
+
+    <span class="n">coupling_map</span> <span class="o">=</span> <span class="n">_parse_coupling_map</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">)</span>
+
+    <span class="n">backend_properties</span> <span class="o">=</span> <span class="n">_parse_backend_properties</span><span class="p">(</span><span class="n">backend_properties</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">)</span>
+
+    <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">_parse_initial_layout</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">circuits</span><span class="p">)</span>
+
+    <span class="n">seed_transpiler</span> <span class="o">=</span> <span class="n">_parse_seed_transpiler</span><span class="p">(</span><span class="n">seed_transpiler</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">)</span>
+
+    <span class="n">optimization_level</span> <span class="o">=</span> <span class="n">_parse_optimization_level</span><span class="p">(</span><span class="n">optimization_level</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">)</span>
+
+    <span class="n">pass_manager</span> <span class="o">=</span> <span class="n">_parse_pass_manager</span><span class="p">(</span><span class="n">pass_manager</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">)</span>
+
+    <span class="n">transpile_configs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">,</span> <span class="n">backend_properties</span><span class="p">,</span> <span class="n">initial_layout</span><span class="p">,</span>
+                    <span class="n">seed_transpiler</span><span class="p">,</span> <span class="n">optimization_level</span><span class="p">,</span> <span class="n">pass_manager</span><span class="p">):</span>
+        <span class="n">transpile_config</span> <span class="o">=</span> <span class="n">TranspileConfig</span><span class="p">(</span><span class="n">basis_gates</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                           <span class="n">coupling_map</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                           <span class="n">backend_properties</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                           <span class="n">initial_layout</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                           <span class="n">seed_transpiler</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                           <span class="n">optimization_level</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                           <span class="n">pass_manager</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+        <span class="n">transpile_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transpile_config</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">transpile_configs</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_basis_gates</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">circuits</span><span class="p">):</span>
+    <span class="c1"># try getting basis_gates from user, else backend</span>
+    <span class="k">if</span> <span class="n">basis_gates</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;configuration&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">basis_gates</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">(),</span> <span class="s1">&#39;basis_gates&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># basis_gates could be None, or a list of basis, e.g. [&#39;u3&#39;, &#39;cx&#39;]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The parameter basis_gates is now a list of strings. &quot;</span>
+                      <span class="s2">&quot;For example, this basis [&#39;u1&#39;,&#39;u2&#39;,&#39;u3&#39;,&#39;cx&#39;] should be used &quot;</span>
+                      <span class="s2">&quot;instead of &#39;u1,u2,u3,cx&#39;. The string format will be &quot;</span>
+                      <span class="s2">&quot;removed after 0.9&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">basis_gates</span> <span class="o">=</span> <span class="n">basis_gates</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">basis_gates</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span>
+                               <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">basis_gates</span><span class="p">)):</span>
+        <span class="n">basis_gates</span> <span class="o">=</span> <span class="p">[</span><span class="n">basis_gates</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span>
+
+    <span class="c1"># no basis means don&#39;t unroll (all circuit gates are valid basis)</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">circuit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">circuits</span><span class="p">):</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="n">basis_gates</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">basis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gates_in_circuit</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">inst</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="c1"># Other passes might add new gates that need to be supported</span>
+            <span class="n">basis_gates</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gates_in_circuit</span><span class="o">.</span><span class="n">union</span><span class="p">([</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">basis_gates</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_coupling_map</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">):</span>
+    <span class="c1"># try getting coupling_map from user, else backend</span>
+    <span class="k">if</span> <span class="n">coupling_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;configuration&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">coupling_map</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">(),</span> <span class="s1">&#39;coupling_map&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># coupling_map could be None, or a list of lists, e.g. [[0, 1], [2, 1]]</span>
+    <span class="k">if</span> <span class="n">coupling_map</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">CouplingMap</span><span class="p">):</span>
+        <span class="n">coupling_map</span> <span class="o">=</span> <span class="p">[</span><span class="n">coupling_map</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_circuits</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+                                                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">coupling_map</span><span class="p">):</span>
+        <span class="n">coupling_map</span> <span class="o">=</span> <span class="p">[</span><span class="n">coupling_map</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_circuits</span>
+    <span class="n">coupling_map</span> <span class="o">=</span> <span class="p">[</span><span class="n">CouplingMap</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">cm</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">coupling_map</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">coupling_map</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_backend_properties</span><span class="p">(</span><span class="n">backend_properties</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">):</span>
+    <span class="c1"># try getting backend_properties from user, else backend</span>
+    <span class="k">if</span> <span class="n">backend_properties</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">backend_properties</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">properties</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backend_properties</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">backend_properties</span> <span class="o">=</span> <span class="p">[</span><span class="n">backend_properties</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_circuits</span>
+    <span class="k">return</span> <span class="n">backend_properties</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_initial_layout</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">circuits</span><span class="p">):</span>
+    <span class="c1"># initial_layout could be None, or a list of ints, e.g. [0, 5, 14]</span>
+    <span class="c1"># or a list of tuples/None e.g. [qr[0], None, qr[1]] or a dict e.g. {qr[0]: 0}</span>
+    <span class="k">def</span> <span class="nf">_layout_from_raw</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">circuit</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="p">):</span>
+                <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_intlist</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="o">*</span><span class="n">circuit</span><span class="o">.</span><span class="n">qregs</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">elem</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="p">):</span>
+                <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_tuplelist</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">initial_layout</span>
+    <span class="c1"># multiple layouts?</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> \
+       <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">initial_layout</span><span class="p">):</span>
+        <span class="n">initial_layout</span> <span class="o">=</span> <span class="p">[</span><span class="n">_layout_from_raw</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">))</span> <span class="k">else</span> <span class="n">lo</span>
+                          <span class="k">for</span> <span class="n">lo</span><span class="p">,</span> <span class="n">circ</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">circuits</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># even if one layout, but multiple circuits, the layout needs to be adapted for each</span>
+        <span class="n">initial_layout</span> <span class="o">=</span> <span class="p">[</span><span class="n">_layout_from_raw</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="n">circ</span><span class="p">)</span> <span class="k">for</span> <span class="n">circ</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_layout</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">initial_layout</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_layout</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">initial_layout</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_seed_transpiler</span><span class="p">(</span><span class="n">seed_transpiler</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed_transpiler</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">seed_transpiler</span> <span class="o">=</span> <span class="p">[</span><span class="n">seed_transpiler</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_circuits</span>
+    <span class="k">return</span> <span class="n">seed_transpiler</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_optimization_level</span><span class="p">(</span><span class="n">optimization_level</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">optimization_level</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">optimization_level</span> <span class="o">=</span> <span class="p">[</span><span class="n">optimization_level</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_circuits</span>
+    <span class="k">return</span> <span class="n">optimization_level</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_pass_manager</span><span class="p">(</span><span class="n">pass_manager</span><span class="p">,</span> <span class="n">num_circuits</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pass_manager</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">pass_manager</span> <span class="o">=</span> <span class="p">[</span><span class="n">pass_manager</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_circuits</span>
+    <span class="k">return</span> <span class="n">pass_manager</span>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+               getDefaultLanguage() : match[2];
+      }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>

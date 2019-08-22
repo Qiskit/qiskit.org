@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.tools.qcvv.fitters &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.tools.qcvv.fitters のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Basic plotting methods using matplotlib.</span>
+
+<span class="sd">These include methods to plot Bloch vectors, histograms, and quantum spheres.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+    <span class="n">HAS_MATPLOTLIB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAS_MATPLOTLIB</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="exp_fit_fun"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.exp_fit_fun">[ドキュメント]</a><span class="k">def</span> <span class="nf">exp_fit_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function used to fit the exponential decay.&quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span></div>
+
+
+<div class="viewcode-block" id="osc_fit_fun"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.osc_fit_fun">[ドキュメント]</a><span class="k">def</span> <span class="nf">osc_fit_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function used to fit the decay cosine.&quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">phi</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span></div>
+
+
+<div class="viewcode-block" id="rb_fit_fun"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.rb_fit_fun">[ドキュメント]</a><span class="k">def</span> <span class="nf">rb_fit_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function used to fit rb.&quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">**</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span></div>
+
+
+<span class="c1"># Functions used by randomized benchmarking.</span>
+<div class="viewcode-block" id="plot_coherence"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.plot_coherence">[ドキュメント]</a><span class="k">def</span> <span class="nf">plot_coherence</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">std_error</span><span class="p">,</span> <span class="n">fit</span><span class="p">,</span> <span class="n">fit_function</span><span class="p">,</span> <span class="n">xunit</span><span class="p">,</span> <span class="n">exp_str</span><span class="p">,</span>
+                   <span class="n">qubit_label</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot coherence data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xdata</span>
+<span class="sd">        ydata</span>
+<span class="sd">        std_error</span>
+<span class="sd">        fit</span>
+<span class="sd">        fit_function</span>
+<span class="sd">        xunit</span>
+<span class="sd">        exp_str</span>
+<span class="sd">        qubit_label</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ImportError: If matplotlib is not installed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_coherence needs matplotlib. &#39;</span>
+                          <span class="s1">&#39;Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">std_error</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">fit_function</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">*</span><span class="n">fit</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="n">exp_str</span> <span class="o">+</span> <span class="s1">&#39;= </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">xunit</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xunit</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;P(1)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">exp_str</span> <span class="o">+</span> <span class="s1">&#39; measurement of Q$_{</span><span class="si">%s</span><span class="s1">}$&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">qubit_label</span><span class="p">)),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="shape_rb_data"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.shape_rb_data">[ドキュメント]</a><span class="k">def</span> <span class="nf">shape_rb_data</span><span class="p">(</span><span class="n">raw_rb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Take the raw rb data and convert it into averages and std dev</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        raw_rb (numpy.array): m x n x l list where m is the number of seeds, n</span>
+<span class="sd">            is the number of Clifford sequences and l is the number of qubits</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        numpy_array: 2 x n x l list where index 0 is the mean over seeds, 1 is</span>
+<span class="sd">            the std dev overseeds</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rb_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">rb_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">raw_rb</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">rb_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">raw_rb</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">rb_data</span></div>
+
+
+<div class="viewcode-block" id="rb_epc"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.rb_epc">[ドキュメント]</a><span class="k">def</span> <span class="nf">rb_epc</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">rb_pattern</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Take the rb fit data and convert it into EPC (error per Clifford)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fit (dict): dictionary of the fit quantities (A, alpha, B) with the</span>
+<span class="sd">            keys &#39;qn&#39; where n is  the qubit and subkeys &#39;fit&#39;, e.g.</span>
+<span class="sd">            {&#39;q0&#39;:{&#39;fit&#39;: [1, 0, 0.9], &#39;fiterr&#39;: [0, 0, 0]}}}</span>
+<span class="sd">        rb_pattern (list): (see randomized benchmarking functions). Pattern</span>
+<span class="sd">            which specifies which qubits performing RB with which qubits. E.g.</span>
+<span class="sd">            [[1],[0,2]] is Q1  doing 1Q RB simultaneously with Q0/Q2 doing</span>
+<span class="sd">            2Q RB</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        dict: updates the passed in fit dictionary with the epc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">patterns</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
+            <span class="n">fitalpha</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;q</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qubit</span><span class="p">][</span><span class="s1">&#39;fit&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fitalphaerr</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;q</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qubit</span><span class="p">][</span><span class="s1">&#39;fiterr&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">nrb</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="nb">len</span><span class="p">(</span><span class="n">patterns</span><span class="p">)</span>
+
+            <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;q</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qubit</span><span class="p">][</span><span class="s1">&#39;fit_calcs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;q</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qubit</span><span class="p">][</span><span class="s1">&#39;fit_calcs&#39;</span><span class="p">][</span><span class="s1">&#39;epc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">nrb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">nrb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">fitalpha</span><span class="p">),</span>
+                                                      <span class="n">fitalphaerr</span> <span class="o">/</span> <span class="n">fitalpha</span><span class="p">]</span>
+            <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;q</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qubit</span><span class="p">][</span><span class="s1">&#39;fit_calcs&#39;</span><span class="p">][</span><span class="s1">&#39;epc&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="n">fit</span><span class="p">[</span><span class="s1">&#39;q</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">qubit</span><span class="p">][</span><span class="s1">&#39;fit_calcs&#39;</span><span class="p">][</span><span class="s1">&#39;epc&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">fit</span></div>
+
+
+<div class="viewcode-block" id="plot_rb_data"><a class="viewcode-back" href="../../../../api/qiskit.tools.qcvv.fitters.html#qiskit.tools.qcvv.fitters.plot_rb_data">[ドキュメント]</a><span class="k">def</span> <span class="nf">plot_rb_data</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydatas</span><span class="p">,</span> <span class="n">yavg</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">fit</span><span class="p">,</span> <span class="n">survival_prob</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">show_plt</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot randomized benchmarking data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xdata (list): list of subsequence lengths</span>
+<span class="sd">        ydatas (list): list of lists of survival probabilities for each</span>
+<span class="sd">            sequence</span>
+<span class="sd">        yavg (list): mean of the survival probabilities at each sequence</span>
+<span class="sd">            length</span>
+<span class="sd">        yerr (list): error of the survival</span>
+<span class="sd">        fit (list): fit parameters</span>
+<span class="sd">        survival_prob (callable): function that computes survival probability</span>
+<span class="sd">        ax (Axes or None): plot axis (if passed in)</span>
+<span class="sd">        show_plt (bool): display the plot.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ImportError: If matplotlib is not installed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=invalid-name</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_rb_data needs matplotlib. &#39;</span>
+                          <span class="s1">&#39;Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="c1"># Plot the result for each sequence</span>
+    <span class="k">for</span> <span class="n">ydata</span> <span class="ow">in</span> <span class="n">ydatas</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="c1"># Plot the mean with error bars</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">yavg</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Plot the fit</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">survival_prob</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="o">*</span><span class="n">fit</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="c1"># ax.tick_params(axis=&#39;x&#39;,labelrotation=70)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Clifford Length&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">show_plt</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+               getDefaultLanguage() : match[2];
+      }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>

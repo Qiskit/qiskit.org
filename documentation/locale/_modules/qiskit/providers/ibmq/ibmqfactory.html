@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.providers.ibmq.ibmqfactory &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.providers.ibmq.ibmqfactory のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;Factory and credentials manager for IBM Q Experience.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.providers.exceptions</span> <span class="k">import</span> <span class="n">QiskitBackendNotFoundError</span>
+
+<span class="kn">from</span> <span class="nn">.accountprovider</span> <span class="k">import</span> <span class="n">AccountProvider</span>
+<span class="kn">from</span> <span class="nn">.api_v2.clients</span> <span class="k">import</span> <span class="n">AuthClient</span><span class="p">,</span> <span class="n">VersionClient</span>
+<span class="kn">from</span> <span class="nn">.credentials</span> <span class="k">import</span> <span class="n">Credentials</span><span class="p">,</span> <span class="n">discover_credentials</span>
+<span class="kn">from</span> <span class="nn">.credentials.configrc</span> <span class="k">import</span> <span class="p">(</span><span class="n">read_credentials_from_qiskitrc</span><span class="p">,</span>
+                                   <span class="n">remove_credentials</span><span class="p">,</span>
+                                   <span class="n">store_credentials</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.credentials.updater</span> <span class="k">import</span> <span class="n">update_credentials</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">IBMQAccountError</span><span class="p">,</span> <span class="n">IBMQApiUrlError</span><span class="p">,</span> <span class="n">IBMQProviderError</span>
+<span class="kn">from</span> <span class="nn">.ibmqprovider</span> <span class="k">import</span> <span class="n">IBMQProvider</span>
+<span class="kn">from</span> <span class="nn">.utils.deprecation</span> <span class="k">import</span> <span class="n">deprecated</span><span class="p">,</span> <span class="n">UPDATE_ACCOUNT_TEXT</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">QX_AUTH_URL</span> <span class="o">=</span> <span class="s1">&#39;https://auth.quantum-computing.ibm.com/api&#39;</span>
+
+
+<div class="viewcode-block" id="IBMQFactory"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory">[ドキュメント]</a><span class="k">class</span> <span class="nc">IBMQFactory</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Factory and credentials manager for IBM Q Experience.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_providers</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span> <span class="o">=</span> <span class="n">IBMQProvider</span><span class="p">()</span>
+
+    <span class="c1"># Account management functions.</span>
+
+<div class="viewcode-block" id="IBMQFactory.enable_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.enable_account">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">enable_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">QX_AUTH_URL</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Authenticate against IBM Q Experience for use during this session.</span>
+
+<span class="sd">        Note: with version 0.3 of this qiskit-ibmq-provider package, use of</span>
+<span class="sd">            the legacy Quantum Experience and Qconsole (also known</span>
+<span class="sd">            as the IBM Q Experience v1) credentials is deprecated. The new</span>
+<span class="sd">            default is to use the IBM Q Experience v2 credentials.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            token (str): IBM Q Experience API token.</span>
+<span class="sd">            url (str): URL for the IBM Q Experience authentication server.</span>
+<span class="sd">            **kwargs (dict): additional settings for the connection:</span>
+<span class="sd">                * proxies (dict): proxy configuration.</span>
+<span class="sd">                * verify (bool): verify the server&#39;s TLS certificate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AccountProvider: the provider for the default open access project.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if an IBM Q Experience v2 account is already in</span>
+<span class="sd">                use, or if attempting using both IBM Q Experience v1 and v2</span>
+<span class="sd">                accounts.</span>
+<span class="sd">            IBMQApiUrlError: if the input token and url are for an IBM Q</span>
+<span class="sd">                Experience v2 account, but the url is not a valid</span>
+<span class="sd">                authentication URL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if an IBM Q Experience 2 account is already in use.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;An IBM Q Experience v2 account is already &#39;</span>
+                                   <span class="s1">&#39;enabled.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Check the version used by these credentials.</span>
+        <span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">version_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_api_version</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+
+        <span class="c1"># For API 1, delegate onto the IBMQProvider.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">version_info</span><span class="p">[</span><span class="s1">&#39;new_api&#39;</span><span class="p">]:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s1">&#39;Using IBM Q Experience v1 credentials is being deprecated. &#39;</span>
+                <span class="s1">&#39;Please use IBM Q Experience v2 credentials instead. &#39;</span>
+                <span class="s1">&#39;You can find the instructions to make the updates here:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;https://github.com/Qiskit/qiskit-ibmq-provider#&#39;</span>
+                <span class="s1">&#39;updating-to-the-new-ibm-q-experience&#39;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">enable_account</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span>
+
+        <span class="c1"># Prevent using credentials not from the auth server.</span>
+        <span class="k">if</span> <span class="s1">&#39;api-auth&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">version_info</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQApiUrlError</span><span class="p">(</span>
+                <span class="s1">&#39;The URL specified (</span><span class="si">{}</span><span class="s1">) is not an IBM Q Experience &#39;</span>
+                <span class="s1">&#39;authentication URL&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Prevent mixing API 1 and API 2 credentials.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">active_accounts</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;An IBM Q Experience v1 account is &#39;</span>
+                                   <span class="s1">&#39;already enabled.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize the API 2 providers.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_providers</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+
+        <span class="c1"># Prevent edge case where no hubs are available.</span>
+        <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">providers</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;No Hub/Group/Projects could be found for this &#39;</span>
+                          <span class="s1">&#39;account.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.disable_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.disable_account">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">disable_account</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Disable the account in the current session.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if IBM Q Experience API v1 credentials are found,</span>
+<span class="sd">                or if no account is in use in the session.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">active_accounts</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span>
+                <span class="s1">&#39;IBM Q Experience v1 accounts are enabled. Please use &#39;</span>
+                <span class="s1">&#39;IBMQ.disable_accounts() to disable them.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;No account is in use for this session.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_providers</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.load_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.load_account">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">load_account</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Authenticate against IBM Q Experience from stored credentials.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AccountProvider: the provider for the default open access project.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if an IBM Q Experience v1 account is already in</span>
+<span class="sd">                use, or no IBM Q Experience v2 accounts can be found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Prevent mixing API 1 and API 2 credentials.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">active_accounts</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;An IBM Q Experience v1 account is &#39;</span>
+                                   <span class="s1">&#39;already enabled.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Check for valid credentials.</span>
+        <span class="n">credentials_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">discover_credentials</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">credentials_list</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span>
+                <span class="s1">&#39;No IBM Q Experience credentials found on disk.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">credentials_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;Multiple IBM Q Experience credentials &#39;</span>
+                                   <span class="s1">&#39;found. &#39;</span> <span class="o">+</span> <span class="n">UPDATE_ACCOUNT_TEXT</span><span class="p">)</span>
+
+        <span class="n">credentials</span> <span class="o">=</span> <span class="n">credentials_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Explicitly check via an API call, to allow environment auth URLs.</span>
+        <span class="c1"># contain API 2 URL (but not auth) slipping through.</span>
+        <span class="n">version_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_api_version</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+
+        <span class="c1"># For API 1, delegate onto the IBMQProvider.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">version_info</span><span class="p">[</span><span class="s1">&#39;new_api&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;IBM Q Experience v1 credentials found. &#39;</span> <span class="o">+</span>
+                                   <span class="n">UPDATE_ACCOUNT_TEXT</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;api-auth&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">version_info</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;Invalid IBM Q Experience v2 credentials &#39;</span>
+                                   <span class="s1">&#39;found. &#39;</span> <span class="o">+</span> <span class="n">UPDATE_ACCOUNT_TEXT</span><span class="p">)</span>
+
+        <span class="c1"># Initialize the API 2 providers.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="p">:</span>
+            <span class="c1"># For convention, emit a warning instead of raising.</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Credentials are already in use. The existing &#39;</span>
+                          <span class="s1">&#39;account in the session will be replaced.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">disable_account</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_providers</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+
+        <span class="c1"># Prevent edge case where no hubs are available.</span>
+        <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">providers</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;No Hub/Group/Projects could be found for this &#39;</span>
+                          <span class="s1">&#39;account.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.save_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.save_account">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">save_account</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">QX_AUTH_URL</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save the account to disk for future use.</span>
+
+<span class="sd">        Note: IBM Q Experience v1 credentials are being deprecated. Please</span>
+<span class="sd">            use IBM Q Experience v2 credentials instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            token (str): IBM Q Experience API token.</span>
+<span class="sd">            url (str): URL for the IBM Q Experience authentication server.</span>
+<span class="sd">            overwrite (bool): overwrite existing credentials.</span>
+<span class="sd">            **kwargs (dict):</span>
+<span class="sd">                * proxies (dict): Proxy configuration for the API.</span>
+<span class="sd">                * verify (bool): If False, ignores SSL certificates errors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">url</span> <span class="o">!=</span> <span class="n">QX_AUTH_URL</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s1">&#39;IBM Q Experience v1 credentials are being deprecated. Please &#39;</span>
+                <span class="s1">&#39;use IBM Q Experience v2 credentials instead. &#39;</span>
+                <span class="s1">&#39;You can find the instructions to make the updates here:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;https://github.com/Qiskit/qiskit-ibmq-provider#&#39;</span>
+                <span class="s1">&#39;updating-to-the-new-ibm-q-experience&#39;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">store_credentials</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.delete_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.delete_account">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">delete_account</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Delete the saved account from disk.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if no valid IBM Q Experience v2 credentials found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stored_credentials</span> <span class="o">=</span> <span class="n">read_credentials_from_qiskitrc</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stored_credentials</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;No credentials found.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stored_credentials</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;Multiple credentials found. &#39;</span> <span class="o">+</span>
+                                   <span class="n">UPDATE_ACCOUNT_TEXT</span><span class="p">)</span>
+
+        <span class="n">credentials</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">stored_credentials</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span> <span class="o">!=</span> <span class="n">QX_AUTH_URL</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;IBM Q Experience v1 credentials found. &#39;</span> <span class="o">+</span>
+                                   <span class="n">UPDATE_ACCOUNT_TEXT</span><span class="p">)</span>
+
+        <span class="n">remove_credentials</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.stored_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.stored_account">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">stored_account</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;List the account stored on disk.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: dictionary with information about the account stored on disk.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if no valid IBM Q Experience v2 credentials found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stored_credentials</span> <span class="o">=</span> <span class="n">read_credentials_from_qiskitrc</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stored_credentials</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stored_credentials</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span>
+                <span class="nb">list</span><span class="p">(</span><span class="n">stored_credentials</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="o">!=</span> <span class="n">QX_AUTH_URL</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;IBM Q Experience v1 credentials found. &#39;</span> <span class="o">+</span>
+                                   <span class="n">UPDATE_ACCOUNT_TEXT</span><span class="p">)</span>
+
+        <span class="n">credentials</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">stored_credentials</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">credentials</span><span class="o">.</span><span class="n">url</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.active_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.active_account">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">active_account</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List the IBM Q Experience v2 account currently in the session.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: information about the account currently in the session.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if an IBM Q Experience v1 account is already in</span>
+<span class="sd">                use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">active_accounts</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span>
+                <span class="s1">&#39;IBM Q Experience v1 accounts are enabled. Please use &#39;</span>
+                <span class="s1">&#39;IBMQ.active_accounts() to retrieve information about them.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="p">:</span>
+            <span class="c1"># Return None instead of raising, for compatibility with the</span>
+            <span class="c1"># previous active_accounts() behavior.</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.update_account"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.update_account">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">update_account</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Interactive helper from migrating stored credentials to IBM Q Experience v2.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            force (bool): if `True`, disable interactive prompts and perform</span>
+<span class="sd">                the changes.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Credentials: if the updating is possible, credentials for the API</span>
+<span class="sd">            version 2; and `None` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">update_credentials</span><span class="p">(</span><span class="n">force</span><span class="p">)</span></div>
+
+    <span class="c1"># Provider management functions.</span>
+
+<div class="viewcode-block" id="IBMQFactory.providers"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.providers">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">providers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of providers with optional filtering.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hub (str): name of the hub.</span>
+<span class="sd">            group (str): name of the group.</span>
+<span class="sd">            project (str): name of the project.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[AccountProvider]: list of providers that match the specified</span>
+<span class="sd">                criteria.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">hub</span><span class="p">:</span>
+            <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">lambda</span> <span class="n">hgp</span><span class="p">:</span> <span class="n">hgp</span><span class="o">.</span><span class="n">hub</span> <span class="o">==</span> <span class="n">hub</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+            <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">lambda</span> <span class="n">hgp</span><span class="p">:</span> <span class="n">hgp</span><span class="o">.</span><span class="n">group</span> <span class="o">==</span> <span class="n">group</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">project</span><span class="p">:</span>
+            <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">lambda</span> <span class="n">hgp</span><span class="p">:</span> <span class="n">hgp</span><span class="o">.</span><span class="n">project</span> <span class="o">==</span> <span class="n">project</span><span class="p">)</span>
+
+        <span class="n">providers</span> <span class="o">=</span> <span class="p">[</span><span class="n">provider</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">provider</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_providers</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                     <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">providers</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.get_provider"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.get_provider">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_provider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a provider for a single hub/group/project combination.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AccountProvider: provider that match the specified criteria.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQProviderError: if no provider matches the specified criteria,</span>
+<span class="sd">                or more than one provider match the specified criteria.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">providers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQProviderError</span><span class="p">(</span><span class="s1">&#39;No provider matching the criteria&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">providers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IBMQProviderError</span><span class="p">(</span><span class="s1">&#39;More than one provider matching the &#39;</span>
+                                    <span class="s1">&#39;criteria&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="c1"># Private functions.</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_check_api_version</span><span class="p">(</span><span class="n">credentials</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check the version of the API in a set of credentials.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: dictionary with version information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">version_finder</span> <span class="o">=</span> <span class="n">VersionClient</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                       <span class="o">**</span><span class="n">credentials</span><span class="o">.</span><span class="n">connection_parameters</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">version_finder</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_initialize_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Authenticate against IBM Q Experience and populate the providers.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            credentials (Credentials): credentials for IBM Q Experience.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQApiUrlError: if the credentials do not belong to a IBM Q</span>
+<span class="sd">                Experience authentication URL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auth_client</span> <span class="o">=</span> <span class="n">AuthClient</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+                                 <span class="n">credentials</span><span class="o">.</span><span class="n">base_url</span><span class="p">)</span>
+        <span class="n">service_urls</span> <span class="o">=</span> <span class="n">auth_client</span><span class="o">.</span><span class="n">current_service_urls</span><span class="p">()</span>
+        <span class="n">user_hubs</span> <span class="o">=</span> <span class="n">auth_client</span><span class="o">.</span><span class="n">user_hubs</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="o">=</span> <span class="n">credentials</span>
+        <span class="k">for</span> <span class="n">hub_info</span> <span class="ow">in</span> <span class="n">user_hubs</span><span class="p">:</span>
+            <span class="c1"># Build credentials.</span>
+            <span class="n">provider_credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span>
+                <span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+                <span class="n">url</span><span class="o">=</span><span class="n">service_urls</span><span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">],</span>
+                <span class="n">websockets_url</span><span class="o">=</span><span class="n">service_urls</span><span class="p">[</span><span class="s1">&#39;ws&#39;</span><span class="p">],</span>
+                <span class="n">proxies</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">proxies</span><span class="p">,</span>
+                <span class="n">verify</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">hub_info</span><span class="p">,)</span>
+
+            <span class="c1"># Build the provider.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">provider</span> <span class="o">=</span> <span class="n">AccountProvider</span><span class="p">(</span><span class="n">provider_credentials</span><span class="p">,</span>
+                                           <span class="n">auth_client</span><span class="o">.</span><span class="n">current_access_token</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_providers</span><span class="p">[</span><span class="n">provider_credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">()]</span> <span class="o">=</span> <span class="n">provider</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+                <span class="c1"># Catch-all for errors instantiating the provider.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Unable to instantiate provider for </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="n">hub_info</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+
+    <span class="c1"># Deprecated account management functions for backward compatibility.</span>
+
+<div class="viewcode-block" id="IBMQFactory.active_accounts"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.active_accounts">[ドキュメント]</a>    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">active_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List all IBM Q Experience v1 accounts currently in the session.</span>
+
+<span class="sd">        Note: this method is being deprecated, and is only available when using</span>
+<span class="sd">            v1 accounts.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[dict]: a list with information about the accounts currently</span>
+<span class="sd">                in the session.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if the method is used with an IBM Q Experience</span>
+<span class="sd">                v2 account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">active_accounts</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.disable_accounts"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.disable_accounts">[ドキュメント]</a>    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">disable_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Disable IBM Q Experience v1 accounts in the current session.</span>
+
+<span class="sd">        Note: this method is being deprecated, and only available when using</span>
+<span class="sd">            v1 accounts.</span>
+
+<span class="sd">        The filter kwargs can be `token`, `url`, `hub`, `group`, `project`.</span>
+<span class="sd">        If no filter is passed, all accounts in the current session will be disabled.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if the method is used with an IBM Q Experience v2</span>
+<span class="sd">                account, or if no account matched the filter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">disable_accounts</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.load_accounts"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.load_accounts">[ドキュメント]</a>    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">load_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load IBM Q Experience v1 accounts found in the system into current session.</span>
+
+<span class="sd">        Will also load v2 accounts for backward compatibility, but can lead to</span>
+<span class="sd">        issues if mixing v1 and v2 credentials in other method calls.</span>
+
+<span class="sd">        Note: this method is being deprecated, and only available when using</span>
+<span class="sd">            v1 accounts.</span>
+
+<span class="sd">        Automatically load the accounts found in the system. This method</span>
+<span class="sd">        looks for credentials in the following locations, in order, and</span>
+<span class="sd">        returns as soon as credentials are found:</span>
+
+<span class="sd">        1. in the `Qconfig.py` file in the current working directory.</span>
+<span class="sd">        2. in the environment variables.</span>
+<span class="sd">        3. in the `qiskitrc` configuration file</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: If mixing v1 and v2 account credentials</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">version_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">credentials</span> <span class="ow">in</span> <span class="n">discover_credentials</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="c1"># Explicitly check via an API call, to prevent credentials that</span>
+            <span class="c1"># contain API 2 URL (but not auth) slipping through.</span>
+            <span class="n">version_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_api_version</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+            <span class="n">version_counter</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">version_info</span><span class="p">[</span><span class="s1">&#39;new_api&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Check if mixing v1 and v2 credentials</span>
+        <span class="k">if</span> <span class="n">version_counter</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">version_counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">discover_credentials</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="n">IBMQAccountError</span><span class="p">(</span><span class="s1">&#39;Can not mix API v1 and v2&#39;</span>
+                                   <span class="s1">&#39;credentials.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># If calling using API v2 credentials</span>
+        <span class="k">if</span> <span class="n">version_counter</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s1">&#39;Calling IBMQ.load_accounts() with v2 credentials. &#39;</span>
+                <span class="s1">&#39;This is provided for backwards compatibility &#39;</span>
+                <span class="s1">&#39;and may lead to unexpected behaviour when mixing &#39;</span>
+                <span class="s1">&#39;v1 and v2 account credentials.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Old API v1 call</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">load_accounts</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.delete_accounts"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.delete_accounts">[ドキュメント]</a>    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">delete_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete saved IBM Q Experience v1 accounts from disk, subject to optional filtering.</span>
+
+<span class="sd">        Note: this method is being deprecated, and only available when using</span>
+<span class="sd">            v1 accounts.</span>
+
+<span class="sd">        The filter kwargs can be `token`, `url`, `hub`, `group`, `project`.</span>
+<span class="sd">        If no filter is passed, all accounts will be deleted from disk.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if the method is used with an IBM Q Experience v2</span>
+<span class="sd">                account, or if no account matched the filter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">delete_accounts</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.stored_accounts"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.stored_accounts">[ドキュメント]</a>    <span class="nd">@deprecated</span>
+    <span class="k">def</span> <span class="nf">stored_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List all IBM Q Experience v1 accounts stored to disk.</span>
+
+<span class="sd">        Note: this method is being deprecated, and only available when using</span>
+<span class="sd">            v1 accounts.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[dict]: a list with information about the accounts stored</span>
+<span class="sd">                on disk.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IBMQAccountError: if the method is used with an IBM Q Experience v2 account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">stored_accounts</span><span class="p">()</span></div>
+
+    <span class="c1"># Deprecated backend-related functionality.</span>
+
+<div class="viewcode-block" id="IBMQFactory.backends"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.backends">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all backends accessible via IBMQ provider, subject to optional filtering.</span>
+
+<span class="sd">        Note: this method is being deprecated. Please use an IBM Q Experience v2</span>
+<span class="sd">            account, and::</span>
+
+<span class="sd">            provider = IBMQ.get_provider(...)</span>
+<span class="sd">            provider.backends()</span>
+
+<span class="sd">            instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): backend name to filter by</span>
+<span class="sd">            filters (callable): more complex filters, such as lambda functions</span>
+<span class="sd">                e.g. IBMQ.backends(filters=lambda b: b.configuration[&#39;n_qubits&#39;] &gt; 5)</span>
+<span class="sd">            kwargs: simple filters specifying a true/false criteria in the</span>
+<span class="sd">                backend configuration or backend status or provider credentials</span>
+<span class="sd">                e.g. IBMQ.backends(n_qubits=5, operational=True, hub=&#39;internal&#39;)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[IBMQBackend]: list of backends available that match the filter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;IBMQ.backends() is being deprecated. &#39;</span>
+                      <span class="s1">&#39;Please use IBMQ.get_provider() to retrieve a provider &#39;</span>
+                      <span class="s1">&#39;and AccountProvider.backends() to find its backends.&#39;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span><span class="p">:</span>
+            <span class="n">hgp_filter</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="c1"># First filter providers by h/g/p</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;hub&#39;</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;project&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                    <span class="n">hgp_filter</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">(</span><span class="o">**</span><span class="n">hgp_filter</span><span class="p">)</span>
+
+            <span class="c1"># Aggregate the list of filtered backends.</span>
+            <span class="n">backends</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">provider</span> <span class="ow">in</span> <span class="n">providers</span><span class="p">:</span>
+                <span class="n">backends</span> <span class="o">=</span> <span class="n">backends</span> <span class="o">+</span> <span class="n">provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">backends</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1_provider</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IBMQFactory.get_backend"><a class="viewcode-back" href="../../../../api/qiskit.providers.ibmq.ibmqfactory.html#qiskit.providers.ibmq.ibmqfactory.IBMQFactory.get_backend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a single backend matching the specified filtering.</span>
+
+<span class="sd">        Note: this method is being deprecated. Please use an IBM Q Experience v2</span>
+<span class="sd">            account, and::</span>
+
+<span class="sd">            provider = IBMQ.get_provider(...)</span>
+<span class="sd">            provider.get_backend(&#39;name&#39;)</span>
+
+<span class="sd">            instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): name of the backend.</span>
+<span class="sd">            **kwargs (dict): dict used for filtering.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            BaseBackend: a backend matching the filtering.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitBackendNotFoundError: if no backend could be found or</span>
+<span class="sd">                more than one backend matches the filtering criteria.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;IBMQ.get_backend() is being deprecated. &#39;</span>
+                      <span class="s1">&#39;Please use IBMQ.get_provider() to retrieve a provider &#39;</span>
+                      <span class="s1">&#39;and AccountProvider.get_backend(&quot;name&quot;) to retrieve a &#39;</span>
+                      <span class="s1">&#39;backend.&#39;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="c1"># Don&#39;t issue duplicate warnings</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">backends</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitBackendNotFoundError</span><span class="p">(</span><span class="s1">&#39;More than one backend matches the criteria&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">backends</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitBackendNotFoundError</span><span class="p">(</span><span class="s1">&#39;No backend matches the criteria&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">backends</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+               getDefaultLanguage() : match[2];
+      }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>
