@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.visualization.gate_map &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.visualization.gate_map のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2018.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;A module for visualizing device coupling maps&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">.matplotlib</span> <span class="k">import</span> <span class="n">HAS_MATPLOTLIB</span>
+<span class="k">if</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  <span class="c1"># pylint: disable=import-error</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+
+
+<span class="k">class</span> <span class="nc">_GraphDist</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Transform the circles properly for non-square axes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dist_real</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute distance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>  <span class="c1"># pylint: disable=invalid-name</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>  <span class="c1"># pylint: disable=invalid-name</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="k">else</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">y0</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dist_abs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Distance abs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_real</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_abs</span>
+
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">obj</span>
+
+
+<div class="viewcode-block" id="plot_gate_map"><a class="viewcode-back" href="../../../api/qiskit.visualization.plot_gate_map.html#qiskit.visualization.gate_map.plot_gate_map">[ドキュメント]</a><span class="k">def</span> <span class="nf">plot_gate_map</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">plot_directed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">label_qubits</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">qubit_size</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+                  <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                  <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                  <span class="n">qubit_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">line_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the gate map of a device.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        backend (BaseBackend): A backend instance,</span>
+<span class="sd">        figsize (tuple): Output figure size (wxh) in inches.</span>
+<span class="sd">        plot_directed (bool): Plot directed coupling map.</span>
+<span class="sd">        label_qubits (bool): Label the qubits.</span>
+<span class="sd">        qubit_size (float): Size of qubit marker.</span>
+<span class="sd">        line_width (float): Width of lines.</span>
+<span class="sd">        font_size (int): Font size of qubit labels.</span>
+<span class="sd">        qubit_color (list): A list of colors for the qubits</span>
+<span class="sd">        line_color (list): A list of colors for each line from coupling_map.</span>
+<span class="sd">        font_color (str): The font color for the qubit labels.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Figure: A Matplotlib figure instance.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: if tried to pass a simulator.</span>
+<span class="sd">        ImportError: if matplotlib not installed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;Must have Matplotlib installed.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">simulator</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Requires a device backend, not simulator.&#39;</span><span class="p">)</span>
+
+    <span class="n">mpl_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">mpl_data</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+
+    <span class="n">mpl_data</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+    <span class="n">mpl_data</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+    <span class="n">mpl_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">coupling_map</span>
+
+    <span class="k">if</span> <span class="n">n_qubits</span> <span class="ow">in</span> <span class="n">mpl_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">grid_data</span> <span class="o">=</span> <span class="n">mpl_data</span><span class="p">[</span><span class="n">n_qubits</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># pylint: disable=invalid-name</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="n">x_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">grid_data</span><span class="p">])</span>
+    <span class="n">y_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">grid_data</span><span class="p">])</span>
+    <span class="n">max_dim</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_max</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">figsize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x_max</span><span class="o">/</span><span class="n">max_dim</span> <span class="o">&gt;</span> <span class="mf">0.33</span> <span class="ow">and</span> <span class="n">y_max</span><span class="o">/</span><span class="n">max_dim</span> <span class="o">&gt;</span> <span class="mf">0.33</span><span class="p">:</span>
+            <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>  <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># set coloring</span>
+    <span class="k">if</span> <span class="n">qubit_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">qubit_color</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#648fff&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
+    <span class="k">if</span> <span class="n">line_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">line_color</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#648fff&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+
+    <span class="c1"># Add lines for couplings</span>
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cmap</span><span class="p">):</span>
+        <span class="n">is_symmetric</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">edge</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cmap</span><span class="p">:</span>
+            <span class="n">is_symmetric</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">y_start</span> <span class="o">=</span> <span class="n">grid_data</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x_start</span> <span class="o">=</span> <span class="n">grid_data</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y_end</span> <span class="o">=</span> <span class="n">grid_data</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x_end</span> <span class="o">=</span> <span class="n">grid_data</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">is_symmetric</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">y_start</span> <span class="o">==</span> <span class="n">y_end</span><span class="p">:</span>
+                <span class="n">x_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_end</span> <span class="o">-</span> <span class="n">x_start</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">x_start</span>
+
+            <span class="k">elif</span> <span class="n">x_start</span> <span class="o">==</span> <span class="n">x_end</span><span class="p">:</span>
+                <span class="n">y_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_end</span> <span class="o">-</span> <span class="n">y_start</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">y_start</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_end</span> <span class="o">-</span> <span class="n">x_start</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">x_start</span>
+                <span class="n">y_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_end</span> <span class="o">-</span> <span class="n">y_start</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">y_start</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="n">x_start</span><span class="p">,</span> <span class="n">x_end</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">y_start</span><span class="p">,</span> <span class="o">-</span><span class="n">y_end</span><span class="p">],</span>
+                                 <span class="n">color</span><span class="o">=</span><span class="n">line_color</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_width</span><span class="p">,</span>
+                                 <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">plot_directed</span><span class="p">:</span>
+            <span class="n">dx</span> <span class="o">=</span> <span class="n">x_end</span><span class="o">-</span><span class="n">x_start</span>  <span class="c1"># pylint: disable=invalid-name</span>
+            <span class="n">dy</span> <span class="o">=</span> <span class="n">y_end</span><span class="o">-</span><span class="n">y_start</span>  <span class="c1"># pylint: disable=invalid-name</span>
+            <span class="k">if</span> <span class="n">is_symmetric</span><span class="p">:</span>
+                <span class="n">x_arrow</span> <span class="o">=</span> <span class="n">x_start</span><span class="o">+</span><span class="n">dx</span><span class="o">*</span><span class="mf">0.95</span>
+                <span class="n">y_arrow</span> <span class="o">=</span> <span class="o">-</span><span class="n">y_start</span><span class="o">-</span><span class="n">dy</span><span class="o">*</span><span class="mf">0.95</span>
+                <span class="n">dx_arrow</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="mf">0.01</span>
+                <span class="n">dy_arrow</span> <span class="o">=</span> <span class="o">-</span><span class="n">dy</span><span class="o">*</span><span class="mf">0.01</span>
+                <span class="n">head_width</span> <span class="o">=</span> <span class="mf">0.15</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x_arrow</span> <span class="o">=</span> <span class="n">x_start</span><span class="o">+</span><span class="n">dx</span><span class="o">*</span><span class="mf">0.5</span>
+                <span class="n">y_arrow</span> <span class="o">=</span> <span class="o">-</span><span class="n">y_start</span><span class="o">-</span><span class="n">dy</span><span class="o">*</span><span class="mf">0.5</span>
+                <span class="n">dx_arrow</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="mf">0.2</span>
+                <span class="n">dy_arrow</span> <span class="o">=</span> <span class="o">-</span><span class="n">dy</span><span class="o">*</span><span class="mf">0.2</span>
+                <span class="n">head_width</span> <span class="o">=</span> <span class="mf">0.2</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">FancyArrow</span><span class="p">(</span><span class="n">x_arrow</span><span class="p">,</span>
+                                             <span class="n">y_arrow</span><span class="p">,</span>
+                                             <span class="n">dx_arrow</span><span class="p">,</span>
+                                             <span class="n">dy_arrow</span><span class="p">,</span>
+                                             <span class="n">head_width</span><span class="o">=</span><span class="n">head_width</span><span class="p">,</span>
+                                             <span class="n">length_includes_head</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                             <span class="n">edgecolor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                             <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                             <span class="n">facecolor</span><span class="o">=</span><span class="n">line_color</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span>
+                                             <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Add circles for qubits</span>
+    <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grid_data</span><span class="p">):</span>
+        <span class="n">_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">_GraphDist</span><span class="p">(</span><span class="n">qubit_size</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">_GraphDist</span><span class="p">(</span><span class="n">qubit_size</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Ellipse</span><span class="p">(</span>
+            <span class="n">_idx</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">qubit_color</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">label_qubits</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">*</span><span class="n">_idx</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">),</span>
+                    <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                    <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">font_color</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">font_size</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_max</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="p">(</span><span class="n">y_max</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+               getDefaultLanguage() : match[2];
+      }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>

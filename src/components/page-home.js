@@ -230,8 +230,8 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsBox1Description')}</p>
               <div class="actions">
                 <a
-                  href="https://qiskit.org/documentation/release_notes.html#qiskit-0-11"
-                  target="_blank"
+                  href="https://qiskit.org/documentation/release_notes.html#notable-changes"
+                  target="_blank"		
                   rel="noopener"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
@@ -244,7 +244,7 @@ class PageHome extends localize(i18next)(LitElement) {
               </div>
             </div>
           </div>
-          <div class="column video">
+          <div class="column">
             <div class="description">
               <h3>${i18next.t('pages.home.newsBox2Title')}</h3>
               <p>${i18next.t('pages.home.newsBox2Description')}</p>
