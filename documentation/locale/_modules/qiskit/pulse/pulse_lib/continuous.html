@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.pulse.pulse_lib.continuous &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.pulse.pulse_lib.continuous のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
+<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+
+<span class="c1"># pylint: disable=missing-return-doc, invalid-unary-operand-type</span>
+
+<span class="sd">&quot;&quot;&quot;Module for builtin continuous pulse functions.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="constant"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.constant">[ドキュメント]</a><span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous constant pulse.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output pulse for.</span>
+<span class="sd">        amp: Complex pulse amplitude.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="n">amp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zero"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.zero">[ドキュメント]</a><span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous zero pulse.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output pulse for.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">constant</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="square"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.square">[ドキュメント]</a><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous square wave.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output wave for.</span>
+<span class="sd">        amp: Pulse amplitude. Wave range is [-amp, amp].</span>
+<span class="sd">        period: Pulse period, units of dt.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">times</span><span class="o">/</span><span class="n">period</span><span class="o">+</span><span class="n">phase</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">amp</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="sawtooth"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.sawtooth">[ドキュメント]</a><span class="k">def</span> <span class="nf">sawtooth</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous sawtooth wave.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output wave for.</span>
+<span class="sd">        amp: Pulse amplitude. Wave range is [-amp, amp].</span>
+<span class="sd">        period: Pulse period, units of dt.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">times</span><span class="o">/</span><span class="n">period</span><span class="o">+</span><span class="n">phase</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">amp</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="triangle"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.triangle">[ドキュメント]</a><span class="k">def</span> <span class="nf">triangle</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous triangle wave.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output wave for.</span>
+<span class="sd">        amp: Pulse amplitude. Wave range is [-amp, amp].</span>
+<span class="sd">        period: Pulse period, units of dt.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">amp</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="p">(</span><span class="n">phase</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="cos"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.cos">[ドキュメント]</a><span class="k">def</span> <span class="nf">cos</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous cosine wave.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output wave for.</span>
+<span class="sd">        amp: Pulse amplitude.</span>
+<span class="sd">        freq: Pulse frequency, units of 1/dt.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">amp</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">times</span><span class="o">+</span><span class="n">phase</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="sin"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.sin">[ドキュメント]</a><span class="k">def</span> <span class="nf">sin</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous cosine wave.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output wave for.</span>
+<span class="sd">        amp: Pulse amplitude.</span>
+<span class="sd">        freq: Pulse frequency, units of 1/dt.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">amp</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">times</span><span class="o">+</span><span class="n">phase</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_fix_gaussian_width</span><span class="p">(</span><span class="n">gaussian_samples</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                        <span class="n">zeroed_width</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="n">ret_scale_factor</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Enforce that the supplied gaussian pulse is zeroed at a specific width.</span>
+
+<span class="sd">    This is acheived by subtracting $\Omega_g(center \pm zeroed_width/2)$ from all samples.</span>
+
+<span class="sd">    amp: Pulse amplitude at `2\times center+1`.</span>
+<span class="sd">    center: Center (mean) of pulse.</span>
+<span class="sd">    sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">    zeroed_width: Subtract baseline to gaussian pulses to make sure</span>
+<span class="sd">             $\Omega_g(center \pm zeroed_width/2)=0$ is satisfied. This is used to avoid</span>
+<span class="sd">             large discontinuities at the start of a gaussian pulse. If unsupplied,</span>
+<span class="sd">             defaults to $2*(center+1)$ such that the samples are zero at $\Omega_g(-1)$.</span>
+<span class="sd">    rescale_amp: If `zeroed_width` is not `None` and `rescale_amp=True` the pulse will</span>
+<span class="sd">                 be rescaled so that $\Omega_g(center)-\Omega_g(center\pm zeroed_width/2)=amp$.</span>
+<span class="sd">    ret_scale_factor: Return amplitude scale factor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">zeroed_width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">zeroed_width</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">center</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">zero_offset</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">zeroed_width</span><span class="o">/</span><span class="mi">2</span><span class="p">]),</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="n">gaussian_samples</span> <span class="o">-=</span> <span class="n">zero_offset</span>
+    <span class="n">amp_scale_factor</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="k">if</span> <span class="n">rescale_amp</span><span class="p">:</span>
+        <span class="n">amp_scale_factor</span> <span class="o">=</span> <span class="n">amp</span><span class="o">/</span><span class="p">(</span><span class="n">amp</span><span class="o">-</span><span class="n">zero_offset</span><span class="p">)</span> <span class="k">if</span> <span class="n">amp</span><span class="o">-</span><span class="n">zero_offset</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">1.</span>
+        <span class="n">gaussian_samples</span> <span class="o">*=</span> <span class="n">amp_scale_factor</span>
+
+    <span class="k">if</span> <span class="n">ret_scale_factor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gaussian_samples</span><span class="p">,</span> <span class="n">amp_scale_factor</span>
+    <span class="k">return</span> <span class="n">gaussian_samples</span>
+
+
+<div class="viewcode-block" id="gaussian"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.gaussian">[ドキュメント]</a><span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+             <span class="n">zeroed_width</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+             <span class="n">ret_x</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Continuous unnormalized gaussian pulse.</span>
+
+<span class="sd">    Integrated area under curve is $\Omega_g(amp, sigma) = amp \times np.sqrt(2\pi \sigma^2)$</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output pulse for.</span>
+<span class="sd">        amp: Pulse amplitude at `center`. If `zeroed_width` is set pulse amplitude at center</span>
+<span class="sd">            will be $amp-\Omega_g(center\pm zeroed_width/2)$ unless `rescale_amp` is set,</span>
+<span class="sd">            in which case all samples will be rescaled such that the center</span>
+<span class="sd">            amplitude will be `amp`.</span>
+<span class="sd">        center: Center (mean) of pulse.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        zeroed_width: Subtract baseline to gaussian pulses to make sure</span>
+<span class="sd">                 $\Omega_g(center \pm zeroed_width/2)=0$ is satisfied. This is used to avoid</span>
+<span class="sd">                 large discontinuities at the start of a gaussian pulse.</span>
+<span class="sd">        rescale_amp: If `zeroed_width` is not `None` and `rescale_amp=True` the pulse will</span>
+<span class="sd">                     be rescaled so that $\Omega_g(center)-\Omega_g(center\pm zeroed_width/2)=amp$.</span>
+<span class="sd">        ret_x: Return centered and standard deviation normalized pulse location.</span>
+<span class="sd">               $x=(times-center)/sigma.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">times</span><span class="o">-</span><span class="n">center</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">amp</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">zeroed_width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gauss</span> <span class="o">=</span> <span class="n">_fix_gaussian_width</span><span class="p">(</span><span class="n">gauss</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+                                    <span class="n">zeroed_width</span><span class="o">=</span><span class="n">zeroed_width</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="o">=</span><span class="n">rescale_amp</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ret_x</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gauss</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">gauss</span></div>
+
+
+<div class="viewcode-block" id="gaussian_deriv"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.gaussian_deriv">[ドキュメント]</a><span class="k">def</span> <span class="nf">gaussian_deriv</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">ret_gaussian</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Continuous unnormalized gaussian derivative pulse.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output pulse for.</span>
+<span class="sd">        amp: Pulse amplitude at `center`.</span>
+<span class="sd">        center: Center (mean) of pulse.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        ret_gaussian: Return gaussian with which derivative was taken with.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gauss</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">ret_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">gauss_deriv</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">sigma</span><span class="o">*</span><span class="n">gauss</span>
+    <span class="k">if</span> <span class="n">ret_gaussian</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gauss_deriv</span><span class="p">,</span> <span class="n">gauss</span>
+    <span class="k">return</span> <span class="n">gauss_deriv</span></div>
+
+
+<div class="viewcode-block" id="gaussian_square"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.gaussian_square">[ドキュメント]</a><span class="k">def</span> <span class="nf">gaussian_square</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                    <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">zeroed_width</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Continuous gaussian square pulse.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output pulse for.</span>
+<span class="sd">        amp: Pulse amplitude.</span>
+<span class="sd">        center: Center of the square pulse component.</span>
+<span class="sd">        width: Width of the square pulse component.</span>
+<span class="sd">        sigma: Width (standard deviation) of gaussian rise/fall portion of the pulse.</span>
+<span class="sd">        zeroed_width: Subtract baseline of gaussian square pulse</span>
+<span class="sd">                      to enforce $\OmegaSquare(center \pm zeroed_width/2)=0$.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">square_start</span> <span class="o">=</span> <span class="n">center</span><span class="o">-</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">square_stop</span> <span class="o">=</span> <span class="n">center</span><span class="o">+</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">if</span> <span class="n">zeroed_width</span><span class="p">:</span>
+        <span class="n">zeroed_width</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">zeroed_width</span><span class="p">)</span>
+        <span class="n">gauss_zeroed_width</span> <span class="o">=</span> <span class="n">zeroed_width</span><span class="o">-</span><span class="n">width</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gauss_zeroed_width</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">funclist</span> <span class="o">=</span> <span class="p">[</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">square_start</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+                                  <span class="n">zeroed_width</span><span class="o">=</span><span class="n">gauss_zeroed_width</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">square_stop</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+                                  <span class="n">zeroed_width</span><span class="o">=</span><span class="n">gauss_zeroed_width</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">constant</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">)]</span>
+    <span class="n">condlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">times</span> <span class="o">&lt;=</span> <span class="n">square_start</span><span class="p">,</span> <span class="n">times</span> <span class="o">&gt;=</span> <span class="n">square_stop</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">),</span> <span class="n">condlist</span><span class="p">,</span> <span class="n">funclist</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="drag"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.continuous.html#qiskit.pulse.pulse_lib.continuous.drag">[ドキュメント]</a><span class="k">def</span> <span class="nf">drag</span><span class="p">(</span><span class="n">times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+         <span class="n">zeroed_width</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Continuous Y-only correction DRAG pulse for standard nonlinear oscillator (SNO) [1].</span>
+
+<span class="sd">    [1] Gambetta, J. M., Motzoi, F., Merkel, S. T. &amp; Wilhelm, F. K.</span>
+<span class="sd">        Analytic control methods for high-fidelity unitary operations</span>
+<span class="sd">        in a weakly nonlinear oscillator. Phys. Rev. A 83, 012308 (2011).</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        times: Times to output pulse for.</span>
+<span class="sd">        amp: Pulse amplitude at `center`.</span>
+<span class="sd">        center: Center (mean) of pulse.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        beta: Y correction amplitude. For the SNO this is $\beta=-\frac{\lambda_1^2}{4\Delta_2}$.</span>
+<span class="sd">            Where $\lambds_1$ is the relative coupling strength between the first excited and second</span>
+<span class="sd">            excited states and $\Delta_2$ is the detuning between the resepective excited states.</span>
+<span class="sd">        zeroed_width: Subtract baseline to gaussian pulses to make sure</span>
+<span class="sd">                 $\Omega_g(center \pm zeroed_width/2)=0$ is satisfied. This is used to avoid</span>
+<span class="sd">                 large discontinuities at the start of a gaussian pulse.</span>
+<span class="sd">        rescale_amp: If `zeroed_width` is not `None` and `rescale_amp=True` the pulse will</span>
+<span class="sd">                     be rescaled so that $\Omega_g(center)-\Omega_g(center\pm zeroed_width/2)=amp$.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gauss_deriv</span><span class="p">,</span> <span class="n">gauss</span> <span class="o">=</span> <span class="n">gaussian_deriv</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+                                        <span class="n">ret_gaussian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">zeroed_width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gauss</span><span class="p">,</span> <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">_fix_gaussian_width</span><span class="p">(</span><span class="n">gauss</span><span class="p">,</span> <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+                                                  <span class="n">zeroed_width</span><span class="o">=</span><span class="n">zeroed_width</span><span class="p">,</span>
+                                                  <span class="n">rescale_amp</span><span class="o">=</span><span class="n">rescale_amp</span><span class="p">,</span>
+                                                  <span class="n">ret_scale_factor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">gauss_deriv</span> <span class="o">*=</span> <span class="n">scale_factor</span>
+
+    <span class="k">return</span> <span class="n">gauss</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">gauss_deriv</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+               getDefaultLanguage() : match[2];
+      }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>
