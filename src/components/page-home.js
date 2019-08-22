@@ -230,7 +230,7 @@ class PageHome extends localize(i18next)(LitElement) {
               <p>${i18next.t('pages.home.newsBox1Description')}</p>
               <div class="actions">
                 <a
-                  href="https://qiskit.org/documentation/release_notes.html#notable-changes"
+                  href="https://qiskit.org/documentation/release_notes.html##notable-changes"
                   tabindex="-1"
                   @click=${() => trackClickEvent({
                     action: 'Qiskit 0.11 Release Notes',
