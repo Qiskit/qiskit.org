@@ -34,7 +34,7 @@
        </script>
         <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
     
-    <title>qiskit.aqua.circuits.gates.multi_control_rotation_gates &#8212; Qiskit 0.11.2 documentation</title>
+    <title>qiskit.aqua.circuits.gates.multi_control_rotation_gates &#8212; Qiskit 0.12.0 documentation</title>
 
     <link rel="stylesheet" href="../../../../../_static/material-icons.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -241,7 +241,7 @@
         <span class="n">last_pattern</span> <span class="o">=</span> <span class="n">pattern</span>
 
 
-<span class="k">def</span> <span class="nf">mcrx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="mcrx"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.circuits.gates.mcrx.html#qiskit.aqua.circuits.gates.mcrx">[docs]</a><span class="k">def</span> <span class="nf">mcrx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply Multiple-Controlled X rotation gate</span>
 
@@ -279,10 +279,10 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">theta_step</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n_c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
         <span class="n">_apply_mcu3_graycode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta_step</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">control_qubits</span><span class="p">,</span>
-                             <span class="n">target_qubit</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="n">use_basis_gates</span><span class="p">)</span>
+                             <span class="n">target_qubit</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="n">use_basis_gates</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">mcry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">q_ancillae</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="mcry"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.circuits.gates.mcry.html#qiskit.aqua.circuits.gates.mcry">[docs]</a><span class="k">def</span> <span class="nf">mcry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">q_ancillae</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">,</span>
          <span class="n">use_basis_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply Multiple-Controlled Y rotation gate</span>
@@ -340,10 +340,10 @@
             <span class="n">_apply_mcu3_graycode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta_step</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">control_qubits</span><span class="p">,</span>
                                  <span class="n">target_qubit</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="n">use_basis_gates</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s1">&#39;Unrecognized mode for building MCRY circuit: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">AquaError</span><span class="p">(</span><span class="s1">&#39;Unrecognized mode for building MCRY circuit: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span></div>
 
 
-<span class="k">def</span> <span class="nf">mcrz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="mcrz"><a class="viewcode-back" href="../../../../../api/qiskit.aqua.circuits.gates.mcrz.html#qiskit.aqua.circuits.gates.mcrz">[docs]</a><span class="k">def</span> <span class="nf">mcrz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">q_controls</span><span class="p">,</span> <span class="n">q_target</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply Multiple-Controlled Z rotation gate</span>
 
@@ -381,7 +381,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">lam_step</span> <span class="o">=</span> <span class="n">lam</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n_c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
         <span class="n">_apply_mcu3_graycode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lam_step</span><span class="p">,</span> <span class="n">control_qubits</span><span class="p">,</span>
-                             <span class="n">target_qubit</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="n">use_basis_gates</span><span class="p">)</span>
+                             <span class="n">target_qubit</span><span class="p">,</span> <span class="n">use_basis_gates</span><span class="o">=</span><span class="n">use_basis_gates</span><span class="p">)</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">mcrx</span> <span class="o">=</span> <span class="n">mcrx</span>
@@ -428,7 +428,7 @@
     </script>
     <script>
 	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-	    var prefix = '';
+	    var prefix = '/documentation';
 	    function getDefaultLanguage() {
 	      return 'en';
 	    }

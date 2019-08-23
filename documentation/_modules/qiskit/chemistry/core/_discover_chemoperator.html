@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.chemistry.core._discover_chemoperator &#8212; Qiskit 0.12.0 documentation</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>Source code for qiskit.chemistry.core._discover_chemoperator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2018, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Methods for chemistry operators objects discovery, registration, information</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pkgutil</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">.chemistry_operator</span> <span class="k">import</span> <span class="n">ChemistryOperator</span>
+<span class="kn">from</span> <span class="nn">qiskit.chemistry</span> <span class="k">import</span> <span class="n">QiskitChemistryError</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">OPERATORS_ENTRY_POINT</span> <span class="o">=</span> <span class="s1">&#39;qiskit.chemistry.operators&#39;</span>
+
+<span class="n">_NAMES_TO_EXCLUDE</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)]</span>
+
+<span class="n">_FOLDERS_TO_EXCLUDE</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__pycache__&#39;</span><span class="p">]</span>
+
+<span class="n">RegisteredChemOp</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;RegisteredChemOp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;cls&#39;</span><span class="p">,</span> <span class="s1">&#39;configuration&#39;</span><span class="p">])</span>
+
+<span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">_DISCOVERED</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="refresh_operators"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.core.refresh_operators.html#qiskit.chemistry.core.refresh_operators">[docs]</a><span class="k">def</span> <span class="nf">refresh_operators</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to rediscover all operator modules</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span>
+    <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">global</span> <span class="n">_DISCOVERED</span>
+    <span class="n">_DISCOVERED</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">_discover_local_chemistry_operators</span><span class="p">()</span>
+    <span class="n">_discover_entry_point_chemistry_operators</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found: chemistry operators </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">local_chemistry_operators</span><span class="p">()))</span></div>
+
+
+<span class="k">def</span> <span class="nf">_discover_on_demand</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to discover operator modules, if not already discovered</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_DISCOVERED</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_DISCOVERED</span><span class="p">:</span>
+        <span class="n">_DISCOVERED</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">global</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span>
+        <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">_discover_local_chemistry_operators</span><span class="p">()</span>
+        <span class="n">_discover_entry_point_chemistry_operators</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found: chemistry operators </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">local_chemistry_operators</span><span class="p">()))</span>
+
+
+<span class="k">def</span> <span class="nf">_discover_entry_point_chemistry_operators</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discovers the chemistry operators modules defined by entry_points in setup</span>
+<span class="sd">    and attempts to register them. Chem.Operator modules should subclass ChemistryOperator Base class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">entry_point</span> <span class="ow">in</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">iter_entry_points</span><span class="p">(</span><span class="n">OPERATORS_ENTRY_POINT</span><span class="p">):</span>
+        <span class="c1"># first calls require and log any errors returned due to dependencies mismatches</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">entry_point</span><span class="o">.</span><span class="n">require</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Entry point &#39;</span><span class="si">{}</span><span class="s2">&#39; requirements issue: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry_point</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span>
+
+        <span class="c1"># now  call resolve and try to load entry point</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ep</span> <span class="o">=</span> <span class="n">entry_point</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+            <span class="n">_registered</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isabstract</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="n">ChemistryOperator</span><span class="p">):</span>
+                <span class="n">register_chemistry_operator</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span>
+                <span class="n">_registered</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="c1"># print(&quot;Registered entry point chemistry operator &#39;{}&#39; class &#39;{}&#39;&quot;.format(entry_point, ep))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Registered entry point chemistry operator &#39;</span><span class="si">{}</span><span class="s2">&#39; class &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry_point</span><span class="p">,</span> <span class="n">ep</span><span class="p">))</span>
+                <span class="k">break</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_registered</span><span class="p">:</span>
+                <span class="c1"># print(&quot;Unknown entry point chemistry operator &#39;{}&#39; class &#39;{}&#39;&quot;.format(entry_point, ep))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Unknown entry point chemistry operator &#39;</span><span class="si">{}</span><span class="s2">&#39; class &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry_point</span><span class="p">,</span> <span class="n">ep</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+            <span class="c1"># Ignore entry point that could not be initialized.</span>
+            <span class="c1"># print(&quot;Failed to load entry point &#39;{}&#39; error {}&quot;.format(entry_point, str(e)))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to load entry point &#39;</span><span class="si">{}</span><span class="s2">&#39; error </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry_point</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">_discover_local_chemistry_operators</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span>
+                                        <span class="n">parentname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                                        <span class="n">names_to_exclude</span><span class="o">=</span><span class="n">_NAMES_TO_EXCLUDE</span><span class="p">,</span>
+                                        <span class="n">folders_to_exclude</span><span class="o">=</span><span class="n">_FOLDERS_TO_EXCLUDE</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discovers the chemistry operators modules on the directory and subdirectories of the current module</span>
+<span class="sd">    and attempts to register them. Chem.Operator modules should subclass ChemistryOperator Base class.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        directory (str, optional): Directory to search for input modules. Defaults</span>
+<span class="sd">            to the directory of this module.</span>
+<span class="sd">        parentname (str, optional): Module parent name. Defaults to current directory name</span>
+<span class="sd">        names_to_exclude (str, optional): File names to exclude. Defaults to _NAMES_TO_EXCLUDE</span>
+<span class="sd">        folders_to_exclude (str, optional): Folders to exclude. Defaults to _FOLDERS_TO_EXCLUDE</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ispackage</span> <span class="ow">in</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">iter_modules</span><span class="p">([</span><span class="n">directory</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">ispackage</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Iterate through the modules</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">names_to_exclude</span><span class="p">:</span>  <span class="c1"># skip those modules</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fullname</span> <span class="o">=</span> <span class="n">parentname</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">name</span>
+                <span class="n">modspec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
+                <span class="n">mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">modspec</span><span class="p">)</span>
+                <span class="n">modspec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">):</span>
+                    <span class="c1"># Iterate through the classes defined on the module.</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="n">modspec</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> \
+                           <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isabstract</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="ow">and</span> \
+                           <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ChemistryOperator</span><span class="p">):</span>
+                            <span class="n">_register_chemistry_operator</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+                            <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+                        <span class="c1"># Ignore operator that could not be initialized.</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                            <span class="s1">&#39;Failed to load </span><span class="si">{}</span><span class="s1"> error </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+                <span class="c1"># Ignore operator that could not be initialized.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s1">&#39;Failed to load </span><span class="si">{}</span><span class="s1"> error </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">folders_to_exclude</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">item</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;dSYM&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+            <span class="n">_discover_local_chemistry_operators</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="n">parentname</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">item</span><span class="p">,</span> <span class="n">names_to_exclude</span><span class="p">,</span> <span class="n">folders_to_exclude</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="register_chemistry_operator"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.core.register_chemistry_operator.html#qiskit.chemistry.core.register_chemistry_operator">[docs]</a><span class="k">def</span> <span class="nf">register_chemistry_operator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Registers a chemistry operator class</span>
+<span class="sd">    Args:</span>
+<span class="sd">        cls (object): chemistry operator class.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        name: input name</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitChemistryError: if the class is already registered or could not be registered</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_discover_on_demand</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ChemistryOperator</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;Could not register class </span><span class="si">{}</span><span class="s1"> is not subclass of ChemistryOperator&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">_register_chemistry_operator</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_register_chemistry_operator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="c1"># Verify that the pluggable is not already registered</span>
+    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">input</span><span class="o">.</span><span class="n">cls</span> <span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="o">.</span><span class="n">values</span><span class="p">()]:</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;Could not register class </span><span class="si">{}</span><span class="s1"> is already registered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">))</span>
+
+    <span class="c1"># Verify that it has a minimal valid configuration.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">chemistry_operator_name</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">CONFIGURATION</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">LookupError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;Could not register chemistry operator: invalid configuration&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">chemistry_operator_name</span> <span class="ow">in</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;Could not register class </span><span class="si">{}</span><span class="s1">. Name </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> is already registered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                                                                                                          <span class="n">chemistry_operator_name</span><span class="p">,</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">[</span><span class="n">chemistry_operator_name</span><span class="p">]</span><span class="o">.</span><span class="n">cls</span><span class="p">))</span>
+
+    <span class="c1"># Append the pluggable to the `registered_classes` dict.</span>
+    <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">[</span><span class="n">chemistry_operator_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">RegisteredChemOp</span><span class="p">(</span>
+        <span class="n">chemistry_operator_name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">CONFIGURATION</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">chemistry_operator_name</span>
+
+
+<div class="viewcode-block" id="deregister_chemistry_operator"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.core.deregister_chemistry_operator.html#qiskit.chemistry.core.deregister_chemistry_operator">[docs]</a><span class="k">def</span> <span class="nf">deregister_chemistry_operator</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deregisters a chemistry operator class</span>
+<span class="sd">    Args:</span>
+<span class="sd">        chemistry_operator_name(str): The chemistry operator name</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitChemistryError: if the class is not registered</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_discover_on_demand</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chemistry_operator_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span>
+            <span class="s1">&#39;Could not deregister </span><span class="si">{}</span><span class="s1"> not registered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">))</span>
+
+    <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_chemistry_operator_class"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.core.get_chemistry_operator_class.html#qiskit.chemistry.core.get_chemistry_operator_class">[docs]</a><span class="k">def</span> <span class="nf">get_chemistry_operator_class</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Accesses chemistry operator class</span>
+<span class="sd">    Args:</span>
+<span class="sd">        chemistry_operator_name (str): The chemistry operator name</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        cls: chemistry operator class</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitChemistryError: if the class is not registered</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_discover_on_demand</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chemistry_operator_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span>
+            <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not registered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">[</span><span class="n">chemistry_operator_name</span><span class="p">]</span><span class="o">.</span><span class="n">cls</span></div>
+
+
+<div class="viewcode-block" id="get_chemistry_operator_configuration"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.core.get_chemistry_operator_configuration.html#qiskit.chemistry.core.get_chemistry_operator_configuration">[docs]</a><span class="k">def</span> <span class="nf">get_chemistry_operator_configuration</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Accesses chemistry operator configuration</span>
+<span class="sd">    Args:</span>
+<span class="sd">        chemistry_operator_name (str): The chemistry operator name</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        configuration: chemistry operator configuration</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitChemistryError: if the class is not registered</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_discover_on_demand</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">chemistry_operator_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QiskitChemistryError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not registered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chemistry_operator_name</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="p">[</span><span class="n">chemistry_operator_name</span><span class="p">]</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="local_chemistry_operators"><a class="viewcode-back" href="../../../../api/qiskit.chemistry.core.local_chemistry_operators.html#qiskit.chemistry.core.local_chemistry_operators">[docs]</a><span class="k">def</span> <span class="nf">local_chemistry_operators</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Accesses chemistry operator names</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        names: chemistry operator names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_discover_on_demand</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">input</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">_REGISTERED_CHEMISTRY_OPERATORS</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>

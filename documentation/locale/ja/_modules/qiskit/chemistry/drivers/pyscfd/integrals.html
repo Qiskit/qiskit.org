@@ -74,7 +74,6 @@
         <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
         <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
         <a class="external" href="/documentation" selected>API Documentation</a>
-        <a class="external" href="/vscode">Tools</a>
       </nav>
     </div>
   </header>
@@ -91,10 +90,10 @@
     
 
 <div class="languages" >
-    <select id="language" name="languages">
-        <option value="en">English</option>
-        <option value="ja">Japanese</option>
-    </select>
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -136,10 +135,10 @@
     
 
 <div class="languages" >
-    <select id="language" name="languages">
-        <option value="en">English</option>
-        <option value="ja">Japanese</option>
-    </select>
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
 </div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
@@ -491,7 +490,7 @@
     </script>
     <script>
       var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
-      var prefix = '';
+      var prefix = '/documentation';
       function getDefaultLanguage() {
         return 'en';
       }
@@ -512,8 +511,8 @@
       function extractLanguageFromUrl(pathname) {
         const match = pathname.slice(prefix.length).match(localeRegExp);
         return typeof match[2] === 'undefined' ?
-               getDefaultLanguage() : match[2];
-      }
+                getDefaultLanguage() : match[2];
+	    }
       function changeSelect(select) {
         const optionToSelect = extractLanguageFromUrl(window.location.pathname);
         for (var i = 0; i < select.options.length; i++) {
