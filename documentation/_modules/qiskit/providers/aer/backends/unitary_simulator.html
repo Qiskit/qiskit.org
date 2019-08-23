@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -177,10 +189,9 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log2</span><span class="p">,</span> <span class="n">sqrt</span>
 <span class="kn">from</span> <span class="nn">qiskit.util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">QasmBackendConfiguration</span>
 
 <span class="kn">from</span> <span class="nn">.aerbackend</span> <span class="k">import</span> <span class="n">AerBackend</span>
 <span class="kn">from</span> <span class="nn">..aererror</span> <span class="k">import</span> <span class="n">AerError</span>
@@ -203,6 +214,10 @@
 
 <span class="sd">        * &quot;initial_unitary&quot; (matrix_like): Sets a custom initial unitary</span>
 <span class="sd">            matrix for the simulation instead of identity (Default: None).</span>
+
+<span class="sd">        * &quot;validation_threshold&quot; (double): Sets the threshold for checking</span>
+<span class="sd">            if initial unitary and target unitary are unitary matrices.</span>
+<span class="sd">            (Default: 1e-8).</span>
 
 <span class="sd">        * &quot;zero_threshold&quot; (double): Sets the threshold for truncating</span>
 <span class="sd">            small values to zero in the result data (Default: 1e-10).</span>
@@ -257,15 +272,12 @@
                 <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[],</span>
                 <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;TODO&#39;</span>
             <span class="p">}</span>
-        <span class="p">],</span>
-        <span class="c1"># Location where we put external libraries that will be loaded at runtime</span>
-        <span class="c1"># by the simulator extension</span>
-        <span class="s1">&#39;library_dir&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="p">]</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unitary_controller_execute</span><span class="p">,</span>
-                         <span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">),</span>
+                         <span class="n">QasmBackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">),</span>
                          <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="p">,</span> <span class="n">noise_model</span><span class="p">):</span>
@@ -339,6 +351,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -172,23 +184,16 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=redundant-returns-doc,missing-raises-doc</span>
-
 <span class="sd">&quot;&quot;&quot;Base class for a backend provider.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">QiskitBackendNotFoundError</span>
 
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-
 <div class="viewcode-block" id="BaseProvider"><a class="viewcode-back" href="../../../api/qiskit.providers.BaseProvider.html#qiskit.providers.BaseProvider">[docs]</a><span class="k">class</span> <span class="nc">BaseProvider</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base class for a backend provider.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for a Backend Provider.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">pass</span>
 
@@ -197,19 +202,19 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): name of the backend.</span>
-<span class="sd">            **kwargs (dict): dict used for filtering.</span>
+<span class="sd">            **kwargs: dict used for filtering.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            BaseBackend: a backend matching the filtering.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitBackendNotFoundError: if no backend could be found or</span>
-<span class="sd">                more than one backend matches.</span>
+<span class="sd">                more than one backend matches the filtering criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">backends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">backends</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitBackendNotFoundError</span><span class="p">(</span><span class="s1">&#39;More than one backend matches the criteria&#39;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">backends</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">backends</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitBackendNotFoundError</span><span class="p">(</span><span class="s1">&#39;No backend matches the criteria&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">backends</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
@@ -220,10 +225,10 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): name of the backend.</span>
-<span class="sd">            **kwargs (dict): dict used for filtering.</span>
+<span class="sd">            **kwargs: dict used for filtering.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[BaseBackend]: a list of backends matching the filtering</span>
+<span class="sd">            list[BaseBackend]: a list of Backends that match the filtering</span>
 <span class="sd">                criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
@@ -273,6 +278,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -160,10 +172,17 @@
   <h1>Source code for qiskit.pulse.commands.meas_opts</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="c1"># pylint: disable=missing-param-doc,useless-super-delegation</span>
 
@@ -171,15 +190,17 @@
 <span class="sd">Measurement options.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
+
 
 <span class="k">class</span> <span class="nc">MeasOpts</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Measurement options.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new measurement options.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            name (str): Name of measurement option to be used.</span>
+<span class="sd">            name: Name of measurement option to be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">params</span>
@@ -194,34 +215,35 @@
         <span class="sd">&quot;&quot;&quot;Return parameter dict.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;MeasOpts&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Two measurement options are the same if they are of the same type</span>
 <span class="sd">        and have the same name and params.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            other (MeasOpts): Other Discriminator/Kernel.</span>
+<span class="sd">            other: Other Discriminator/Kernel</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            bool: are self and other equal.</span>
+<span class="sd">            bool: are self and other equal</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_name</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_params</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Discriminator"><a class="viewcode-back" href="../../../../api/qiskit.pulse.Discriminator.html#qiskit.pulse.Discriminator">[docs]</a><span class="k">class</span> <span class="nc">Discriminator</span><span class="p">(</span><span class="n">MeasOpts</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Discriminator.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new discriminator.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            name (str): Name of discriminator to be used.</span>
+<span class="sd">            name: Name of discriminator to be used</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
@@ -229,11 +251,11 @@
 <div class="viewcode-block" id="Kernel"><a class="viewcode-back" href="../../../../api/qiskit.pulse.Kernel.html#qiskit.pulse.Kernel">[docs]</a><span class="k">class</span> <span class="nc">Kernel</span><span class="p">(</span><span class="n">MeasOpts</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Kernel.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new kernel.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            name (str): Name of kernel to be used.</span>
+<span class="sd">            name: Name of kernel to be used</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 </pre></div>
@@ -274,6 +296,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

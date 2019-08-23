@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -160,24 +172,30 @@
   <h1>Source code for qiskit.pulse.channels.device_specification</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Specification of the device.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.validation.exceptions</span> <span class="k">import</span> <span class="n">ModelValidationError</span>
 
+<span class="kn">from</span> <span class="nn">qiskit.pulse.exceptions</span> <span class="k">import</span> <span class="n">PulseError</span>
 <span class="kn">from</span> <span class="nn">.pulse_channels</span> <span class="k">import</span> <span class="n">DriveChannel</span><span class="p">,</span> <span class="n">ControlChannel</span><span class="p">,</span> <span class="n">MeasureChannel</span>
 <span class="kn">from</span> <span class="nn">.channels</span> <span class="k">import</span> <span class="n">AcquireChannel</span><span class="p">,</span> <span class="n">MemorySlot</span><span class="p">,</span> <span class="n">RegisterSlot</span>
 <span class="kn">from</span> <span class="nn">.qubit</span> <span class="k">import</span> <span class="n">Qubit</span>
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="DeviceSpecification"><a class="viewcode-back" href="../../../../api/qiskit.pulse.DeviceSpecification.html#qiskit.pulse.DeviceSpecification">[docs]</a><span class="k">class</span> <span class="nc">DeviceSpecification</span><span class="p">:</span>
@@ -196,6 +214,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_reg_slots</span> <span class="o">=</span> <span class="n">registers</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mem_slots</span> <span class="o">=</span> <span class="n">mem_slots</span>
 
+        <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;DeviceSpecification is deprecated.&#39;</span>
+             <span class="s1">&#39;Instead of DeviceSpecification, use PulseChannelSpec.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
 <div class="viewcode-block" id="DeviceSpecification.create_from"><a class="viewcode-back" href="../../../../api/qiskit.pulse.DeviceSpecification.html#qiskit.pulse.DeviceSpecification.create_from">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">create_from</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -208,6 +229,9 @@
 <span class="sd">            PulseError: when an invalid backend is specified</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">backend_config</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">backend_config</span><span class="o">.</span><span class="n">open_pulse</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PulseError</span><span class="p">(</span><span class="n">backend_config</span><span class="o">.</span><span class="n">backend_name</span> <span class="o">+</span> <span class="s1">&#39; does not support OpenPulse.&#39;</span><span class="p">)</span>
 
         <span class="c1"># TODO : Remove usage of config.defaults when backend.defaults() is updated.</span>
         <span class="k">try</span><span class="p">:</span>
@@ -265,7 +289,6 @@
         <span class="sd">&quot;&quot;&quot;Return qubits in this device.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qubits</span>
 
-    <span class="c1"># pylint: disable=invalid-name</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">c</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Return register slots in this device.&quot;&quot;&quot;</span>
@@ -313,6 +336,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

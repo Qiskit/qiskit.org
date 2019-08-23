@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -187,20 +199,26 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">clifford_utils</span> <span class="k">as</span> <span class="n">clutils</span>
 
 
-<span class="k">def</span> <span class="nf">handle_length_multiplier</span><span class="p">(</span><span class="n">length_multiplier</span><span class="p">,</span> <span class="n">len_pattern</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">handle_length_multiplier</span><span class="p">(</span><span class="n">length_multiplier</span><span class="p">,</span> <span class="n">len_pattern</span><span class="p">,</span>
+                             <span class="n">is_purity</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check validity of length_multiplier.</span>
 <span class="sd">    In addition, transform it into a vector if it is a constant.</span>
+<span class="sd">    In case of purity rb the length multiplier should be None.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        length_multiplier: length of the multiplier</span>
 <span class="sd">        len_pattern: length of the RB pattern</span>
+<span class="sd">        is_purity: True only for purity rb (default is False)</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        length_multiplier</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">length_multiplier</span><span class="p">,</span> <span class="s2">&quot;__len__&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_purity</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;In case of Purity RB the length multiplier should be None&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">length_multiplier</span><span class="p">)</span> <span class="o">!=</span> <span class="n">len_pattern</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Length mulitiplier must be the same length as the pattern&quot;</span><span class="p">)</span>
@@ -213,14 +231,20 @@
     <span class="k">return</span> <span class="n">length_multiplier</span>
 
 
-<span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">is_purity</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Verifies that the input pattern is valid</span>
 <span class="sd">    i.e., that each qubit appears at most once</span>
 
+<span class="sd">    In case of purity rb, checkes that all</span>
+<span class="sd">    simultaneous sequences have the same dimension</span>
+<span class="sd">    (e.g. only 1-qubit squences, or only 2-qubits</span>
+<span class="sd">    sequences etc.)</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        pattern: RB pattern</span>
 <span class="sd">        n_qubits: number of qubits</span>
+<span class="sd">        is_purity: True only for purity rb (default is False)</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: if the pattern is not valid</span>
@@ -228,17 +252,28 @@
 <span class="sd">    Return:</span>
 <span class="sd">        qlist: flat list of all the qubits in the pattern</span>
 <span class="sd">        maxqubit: the maximum qubit number</span>
+<span class="sd">        maxdim: the maximal dimension (maximal number of qubits</span>
+<span class="sd">        in all sequences)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">pattern_flat</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pattern_dim</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">pat</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
         <span class="n">pattern_flat</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span>
+        <span class="n">pattern_dim</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pat</span><span class="p">))</span>
 
     <span class="n">_</span><span class="p">,</span> <span class="n">uni_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pattern_flat</span><span class="p">),</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">uni_counts</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid pattern. Duplicate qubit index.&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">pattern_flat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pattern_flat</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">dim_distinct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pattern_dim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_purity</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dim_distinct</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid pattern for purity RB. </span><span class="se">\</span>
+<span class="s2">            All simultaneous sequences should have the </span><span class="se">\</span>
+<span class="s2">            same dimension.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pattern_flat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pattern_flat</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pattern_dim</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">calc_xdata</span><span class="p">(</span><span class="n">length_vector</span><span class="p">,</span> <span class="n">length_multiplier</span><span class="p">):</span>
@@ -303,7 +338,9 @@
 <div class="viewcode-block" id="randomized_benchmarking_seq"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.verification.randomized_benchmarking.randomized_benchmarking_seq.html#qiskit.ignis.verification.randomized_benchmarking.randomized_benchmarking_seq">[docs]</a><span class="k">def</span> <span class="nf">randomized_benchmarking_seq</span><span class="p">(</span><span class="n">nseeds</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">length_vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">rb_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">length_multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                <span class="n">align_cliffs</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                <span class="n">align_cliffs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">interleaved_gates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">is_purity</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get a generic randomized benchmarking sequence</span>
 
@@ -328,46 +365,69 @@
 <span class="sd">        of cliffords including the length multiplier so if the multiplier</span>
 <span class="sd">        is [1,3] it will barrier after 1 clifford for the first pattern</span>
 <span class="sd">        and 3 for the second)</span>
+<span class="sd">        interleaved_gates: A list of gates of Clifford elements that</span>
+<span class="sd">        will be interleaved (for interleaved randomized benchmarking)</span>
+<span class="sd">        The length of the list would equal the length of the rb_pattern.</span>
+<span class="sd">        is_purity: True only for purity rb (default is False)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        rb_circs: list of lists of circuits for the rb sequences (separate list</span>
+<span class="sd">        circuits: list of lists of circuits for the rb sequences (separate list</span>
 <span class="sd">        for each seed)</span>
 <span class="sd">        xdata: the Clifford lengths (with multiplier if applicable)</span>
 <span class="sd">        rb_opts_dict: option dictionary back out with default options appended</span>
+<span class="sd">        circuits_interleaved: list of lists of circuits for the interleaved</span>
+<span class="sd">        rb sequences (separate list for each seed)</span>
+<span class="sd">        circuits_purity: list of lists of lists of circuits for purity rb</span>
+<span class="sd">        (separate list for each seed and each of the 3^n circuits)</span>
+<span class="sd">        npurity: the number of purity rb circuits (per seed)</span>
+<span class="sd">        which equals to 3^n, where n is the dimension</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">rb_pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">rb_pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="k">if</span> <span class="n">length_vector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">length_vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
 
-    <span class="n">qlist_flat</span><span class="p">,</span> <span class="n">n_q_max</span> <span class="o">=</span> <span class="n">check_pattern</span><span class="p">(</span><span class="n">rb_pattern</span><span class="p">)</span>
+    <span class="n">qlist_flat</span><span class="p">,</span> <span class="n">n_q_max</span><span class="p">,</span> <span class="n">max_dim</span> <span class="o">=</span> <span class="n">check_pattern</span><span class="p">(</span><span class="n">rb_pattern</span><span class="p">,</span> <span class="n">is_purity</span><span class="p">)</span>
     <span class="n">length_multiplier</span> <span class="o">=</span> <span class="n">handle_length_multiplier</span><span class="p">(</span><span class="n">length_multiplier</span><span class="p">,</span>
-                                                 <span class="nb">len</span><span class="p">(</span><span class="n">rb_pattern</span><span class="p">))</span>
+                                                 <span class="nb">len</span><span class="p">(</span><span class="n">rb_pattern</span><span class="p">),</span>
+                                                 <span class="n">is_purity</span><span class="p">)</span>
+    <span class="c1"># number of purity rb circuits per seed</span>
+    <span class="n">npurity</span> <span class="o">=</span> <span class="mi">3</span><span class="o">**</span><span class="n">max_dim</span>
 
     <span class="n">xdata</span> <span class="o">=</span> <span class="n">calc_xdata</span><span class="p">(</span><span class="n">length_vector</span><span class="p">,</span> <span class="n">length_multiplier</span><span class="p">)</span>
 
     <span class="n">pattern_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span> <span class="k">for</span> <span class="n">pat</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">]</span>
     <span class="n">clifford_tables</span> <span class="o">=</span> <span class="n">load_tables</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pattern_sizes</span><span class="p">))</span>
 
+    <span class="c1"># initialization: rb sequences</span>
     <span class="n">circuits</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nseeds</span><span class="p">)]</span>
+    <span class="c1"># initialization: interleaved rb sequences</span>
+    <span class="n">circuits_interleaved</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nseeds</span><span class="p">)]</span>
+    <span class="c1"># initialization: purity rb sequences</span>
+    <span class="n">circuits_purity</span> <span class="o">=</span> <span class="p">[[[]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npurity</span><span class="p">)]</span>
+                       <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nseeds</span><span class="p">)]</span>
+
     <span class="c1"># go through for each seed</span>
     <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nseeds</span><span class="p">):</span>
         <span class="n">qr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumRegister</span><span class="p">(</span><span class="n">n_q_max</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;qr&#39;</span><span class="p">)</span>
         <span class="n">cr</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">ClassicalRegister</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qlist_flat</span><span class="p">),</span> <span class="s1">&#39;cr&#39;</span><span class="p">)</span>
         <span class="n">general_circ</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+        <span class="n">interleaved_circ</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
 
         <span class="c1"># make Clifford sequences for each of the separate sequences in</span>
         <span class="c1"># rb_pattern</span>
         <span class="n">Cliffs</span> <span class="o">=</span> <span class="p">[]</span>
-
         <span class="k">for</span> <span class="n">rb_q_num</span> <span class="ow">in</span> <span class="n">pattern_sizes</span><span class="p">:</span>
             <span class="n">Cliffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Clifford</span><span class="p">(</span><span class="n">rb_q_num</span><span class="p">))</span>
+        <span class="c1"># Clifford sequences for interleaved rb sequences</span>
+        <span class="n">Cliffs_interleaved</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">rb_q_num</span> <span class="ow">in</span> <span class="n">pattern_sizes</span><span class="p">:</span>
+            <span class="n">Cliffs_interleaved</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Clifford</span><span class="p">(</span><span class="n">rb_q_num</span><span class="p">))</span>
 
         <span class="c1"># go through and add Cliffords</span>
         <span class="n">length_index</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">cliff_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length_vector</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
             <span class="k">for</span> <span class="p">(</span><span class="n">rb_pattern_index</span><span class="p">,</span> <span class="n">rb_q_num</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pattern_sizes</span><span class="p">):</span>
-
                 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length_multiplier</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]):</span>
 
                     <span class="n">new_cliff_gatelist</span> <span class="o">=</span> <span class="n">clutils</span><span class="o">.</span><span class="n">random_clifford_gates</span><span class="p">(</span>
@@ -378,21 +438,55 @@
                         <span class="n">clutils</span><span class="o">.</span><span class="n">get_quantum_circuit</span><span class="p">(</span><span class="n">new_cliff_gatelist</span><span class="p">,</span>
                                                     <span class="n">rb_q_num</span><span class="p">),</span>
                         <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span> <span class="n">qr</span><span class="p">)</span>
+
                     <span class="c1"># add a barrier</span>
                     <span class="n">general_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span>
                         <span class="o">*</span><span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]])</span>
+
+                    <span class="c1"># interleaved rb sequences</span>
+                    <span class="k">if</span> <span class="n">interleaved_gates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">Cliffs_interleaved</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]</span> <span class="o">=</span> \
+                            <span class="n">clutils</span><span class="o">.</span><span class="n">compose_gates</span><span class="p">(</span>
+                                <span class="n">Cliffs_interleaved</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span>
+                                <span class="n">new_cliff_gatelist</span><span class="p">)</span>
+                        <span class="n">Cliffs_interleaved</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]</span> <span class="o">=</span> \
+                            <span class="n">clutils</span><span class="o">.</span><span class="n">compose_gates</span><span class="p">(</span>
+                                <span class="n">Cliffs_interleaved</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span>
+                                <span class="n">interleaved_gates</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">])</span>
+                        <span class="n">interleaved_circ</span> <span class="o">+=</span> <span class="n">replace_q_indices</span><span class="p">(</span>
+                            <span class="n">clutils</span><span class="o">.</span><span class="n">get_quantum_circuit</span><span class="p">(</span><span class="n">new_cliff_gatelist</span><span class="p">,</span>
+                                                        <span class="n">rb_q_num</span><span class="p">),</span>
+                            <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span> <span class="n">qr</span><span class="p">)</span>
+                        <span class="c1"># add a barrier - interleaved rb</span>
+                        <span class="n">interleaved_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span>
+                            <span class="o">*</span><span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]])</span>
+                        <span class="n">interleaved_circ</span> <span class="o">+=</span> <span class="n">replace_q_indices</span><span class="p">(</span>
+                            <span class="n">clutils</span><span class="o">.</span><span class="n">get_quantum_circuit</span><span class="p">(</span><span class="n">interleaved_gates</span>
+                                                        <span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span>
+                                                        <span class="n">rb_q_num</span><span class="p">),</span>
+                            <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span> <span class="n">qr</span><span class="p">)</span>
+                        <span class="c1"># add a barrier - interleaved rb</span>
+                        <span class="n">interleaved_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span>
+                            <span class="o">*</span><span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]])</span>
 
             <span class="k">if</span> <span class="n">align_cliffs</span><span class="p">:</span>
                 <span class="c1"># if align cliffords at a barrier across all patterns</span>
                 <span class="n">general_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span>
                     <span class="o">*</span><span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qlist_flat</span><span class="p">])</span>
+                <span class="c1"># align for interleaved rb</span>
+                <span class="k">if</span> <span class="n">interleaved_gates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">interleaved_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span>
+                        <span class="o">*</span><span class="p">[</span><span class="n">qr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qlist_flat</span><span class="p">])</span>
 
             <span class="c1"># if the number of cliffords matches one of the sequence lengths</span>
             <span class="c1"># then calculate the inverse and produce the circuit</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">cliff_index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">length_vector</span><span class="p">[</span><span class="n">length_index</span><span class="p">]:</span>
-
+                <span class="c1"># circ for rb:</span>
                 <span class="n">circ</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
                 <span class="n">circ</span> <span class="o">+=</span> <span class="n">general_circ</span>
+                <span class="c1"># circ_interleaved for interleaved rb:</span>
+                <span class="n">circ_interleaved</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+                <span class="n">circ_interleaved</span> <span class="o">+=</span> <span class="n">interleaved_circ</span>
 
                 <span class="k">for</span> <span class="p">(</span><span class="n">rb_pattern_index</span><span class="p">,</span> <span class="n">rb_q_num</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pattern_sizes</span><span class="p">):</span>
                     <span class="n">inv_key</span> <span class="o">=</span> <span class="n">Cliffs</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">()</span>
@@ -402,19 +496,86 @@
                     <span class="n">circ</span> <span class="o">+=</span> <span class="n">replace_q_indices</span><span class="p">(</span>
                         <span class="n">clutils</span><span class="o">.</span><span class="n">get_quantum_circuit</span><span class="p">(</span><span class="n">inv_circuit</span><span class="p">,</span> <span class="n">rb_q_num</span><span class="p">),</span>
                         <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span> <span class="n">qr</span><span class="p">)</span>
+                    <span class="c1"># calculate the inverse and produce the circuit</span>
+                    <span class="c1"># for interleaved rb</span>
+                    <span class="k">if</span> <span class="n">interleaved_gates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">inv_key</span> <span class="o">=</span> <span class="n">Cliffs_interleaved</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">()</span>
+                        <span class="n">inv_circuit</span> <span class="o">=</span> <span class="n">clutils</span><span class="o">.</span><span class="n">find_inverse_clifford_gates</span><span class="p">(</span>
+                            <span class="n">rb_q_num</span><span class="p">,</span>
+                            <span class="n">clifford_tables</span><span class="p">[</span><span class="n">rb_q_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">inv_key</span><span class="p">])</span>
+                        <span class="n">circ_interleaved</span> <span class="o">+=</span> <span class="n">replace_q_indices</span><span class="p">(</span>
+                            <span class="n">clutils</span><span class="o">.</span><span class="n">get_quantum_circuit</span><span class="p">(</span><span class="n">inv_circuit</span><span class="p">,</span> <span class="n">rb_q_num</span><span class="p">),</span>
+                            <span class="n">rb_pattern</span><span class="p">[</span><span class="n">rb_pattern_index</span><span class="p">],</span> <span class="n">qr</span><span class="p">)</span>
 
-                <span class="c1"># add measurement</span>
+                <span class="c1"># Circuits for purity rb</span>
+                <span class="k">if</span> <span class="n">is_purity</span><span class="p">:</span>
+                    <span class="n">circ_purity</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npurity</span><span class="p">)]</span>
+                    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npurity</span><span class="p">):</span>
+                        <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">cr</span><span class="p">)</span>
+                        <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">+=</span> <span class="n">circ</span>
+                        <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rb_purity_&#39;</span>
+                        <span class="n">ind_d</span> <span class="o">=</span> <span class="n">d</span>
+                        <span class="n">purity_qubit_num</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="c1"># Per each qubit:</span>
+                            <span class="c1"># do nothing or rx(pi/2) or ry(pi/2)</span>
+                            <span class="n">purity_qubit_rot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">ind_d</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+                            <span class="n">ind_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">ind_d</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">purity_qubit_rot</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># do nothing</span>
+                                <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;Z&#39;</span>
+                            <span class="k">if</span> <span class="n">purity_qubit_rot</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># add rx(pi/2)</span>
+                                <span class="k">for</span> <span class="n">pat</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">:</span>
+                                    <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                                      <span class="n">qr</span><span class="p">[</span><span class="n">pat</span><span class="p">[</span>
+                                                          <span class="n">purity_qubit_num</span><span class="p">]])</span>
+                                <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;X&#39;</span>
+                            <span class="k">if</span> <span class="n">purity_qubit_rot</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># add ry(pi/2)</span>
+                                <span class="k">for</span> <span class="n">pat</span> <span class="ow">in</span> <span class="n">rb_pattern</span><span class="p">:</span>
+                                    <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                                      <span class="n">qr</span><span class="p">[</span><span class="n">pat</span><span class="p">[</span>
+                                                          <span class="n">purity_qubit_num</span><span class="p">]])</span>
+                                <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;Y&#39;</span>
+                            <span class="n">purity_qubit_num</span> <span class="o">=</span> <span class="n">purity_qubit_num</span> <span class="o">+</span> <span class="mi">1</span>
+                            <span class="k">if</span> <span class="n">ind_d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="k">break</span>
+                        <span class="c1"># padding the circuit name with Z&#39;s so that</span>
+                        <span class="c1"># all circuits will have names of the same length</span>
+                        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_dim</span> <span class="o">-</span> <span class="n">purity_qubit_num</span><span class="p">):</span>
+                            <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;Z&#39;</span>
+                        <span class="c1"># add measurement for purity rb</span>
+                        <span class="k">for</span> <span class="n">qind</span><span class="p">,</span> <span class="n">qb</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qlist_flat</span><span class="p">):</span>
+                            <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">qb</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="n">qind</span><span class="p">])</span>
+                        <span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> \
+                                               <span class="o">%</span> <span class="p">(</span><span class="n">length_index</span><span class="p">,</span>
+                                                  <span class="n">seed</span> <span class="o">+</span> <span class="n">seed_offset</span><span class="p">)</span>
+
+                <span class="c1"># add measurement for standard rb</span>
                 <span class="c1"># qubits measure to the c registers as</span>
                 <span class="c1"># they appear in the pattern</span>
                 <span class="k">for</span> <span class="n">qind</span><span class="p">,</span> <span class="n">qb</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qlist_flat</span><span class="p">):</span>
                     <span class="n">circ</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">qb</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="n">qind</span><span class="p">])</span>
+                    <span class="c1"># add measurement for interleaved rb</span>
+                    <span class="n">circ_interleaved</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">qb</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="n">qind</span><span class="p">])</span>
 
                 <span class="n">circ</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rb_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">length_index</span><span class="p">,</span>
                                                       <span class="n">seed</span> <span class="o">+</span> <span class="n">seed_offset</span><span class="p">)</span>
+                <span class="n">circ_interleaved</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rb_interleaved_length_</span><span class="si">%d</span><span class="s1">_seed_</span><span class="si">%d</span><span class="s1">&#39;</span> \
+                                        <span class="o">%</span> <span class="p">(</span><span class="n">length_index</span><span class="p">,</span> <span class="n">seed</span> <span class="o">+</span> <span class="n">seed_offset</span><span class="p">)</span>
 
                 <span class="n">circuits</span><span class="p">[</span><span class="n">seed</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+                <span class="n">circuits_interleaved</span><span class="p">[</span><span class="n">seed</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circ_interleaved</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">is_purity</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npurity</span><span class="p">):</span>
+                        <span class="n">circuits_purity</span><span class="p">[</span><span class="n">seed</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circ_purity</span><span class="p">[</span><span class="n">d</span><span class="p">])</span>
                 <span class="n">length_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
+    <span class="c1"># output of interleaved rb</span>
+    <span class="k">if</span> <span class="n">interleaved_gates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">circuits_interleaved</span>
+    <span class="c1"># output of purity rb</span>
+    <span class="k">if</span> <span class="n">is_purity</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">circuits_purity</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">npurity</span>
+    <span class="c1"># output of standard (simultaneous) rb</span>
     <span class="k">return</span> <span class="n">circuits</span><span class="p">,</span> <span class="n">xdata</span></div>
 
 
@@ -434,7 +595,7 @@
     <span class="n">new_circuit</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
         <span class="n">new_qargs</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="n">q_nums</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">]]</span>
+            <span class="n">qr</span><span class="p">[</span><span class="n">q_nums</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">arg</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">]]</span>
         <span class="n">new_op</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">((</span><span class="n">instr</span><span class="p">,</span> <span class="n">new_qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
         <span class="n">new_circuit</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_op</span><span class="p">)</span>
 
@@ -477,6 +638,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

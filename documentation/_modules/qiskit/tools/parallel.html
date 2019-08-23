@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -224,8 +236,8 @@
 <span class="n">CPU_COUNT</span> <span class="o">=</span> <span class="n">local_hardware_info</span><span class="p">()[</span><span class="s1">&#39;cpus&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="parallel_map"><a class="viewcode-back" href="../../../api/qiskit.tools.parallel_map.html#qiskit.tools.parallel_map">[docs]</a><span class="k">def</span> <span class="nf">parallel_map</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">task_args</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(),</span> <span class="n">task_kwargs</span><span class="o">=</span><span class="p">{},</span>  <span class="c1"># pylint: disable=W0102</span>
-                 <span class="n">num_processes</span><span class="o">=</span><span class="n">CPU_COUNT</span><span class="p">):</span>
+<div class="viewcode-block" id="parallel_map"><a class="viewcode-back" href="../../../api/qiskit.tools.parallel_map.html#qiskit.tools.parallel_map">[docs]</a><span class="k">def</span> <span class="nf">parallel_map</span><span class="p">(</span>  <span class="c1"># pylint: disable=dangerous-default-value</span>
+        <span class="n">task</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">task_args</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(),</span> <span class="n">task_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">num_processes</span><span class="o">=</span><span class="n">CPU_COUNT</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parallel execution of a mapping of `values` to the function `task`. This</span>
 <span class="sd">    is functionally equivalent to::</span>
@@ -283,11 +295,16 @@
             <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
             <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 
-        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-            <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-            <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-            <span class="n">Publisher</span><span class="p">()</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;terra.parallel.finish&quot;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Keyboard interrupt in parallel_map.&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">):</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                <span class="n">Publisher</span><span class="p">()</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;terra.parallel.finish&quot;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;QISKIT_IN_PARALLEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;False&#39;</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Keyboard interrupt in parallel_map.&#39;</span><span class="p">)</span>
+            <span class="c1"># Otherwise just reset parallel flag and error</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;QISKIT_IN_PARALLEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;False&#39;</span>
+            <span class="k">raise</span> <span class="n">error</span>
 
         <span class="n">Publisher</span><span class="p">()</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;terra.parallel.finish&quot;</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;QISKIT_IN_PARALLEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FALSE&#39;</span>
@@ -340,6 +357,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

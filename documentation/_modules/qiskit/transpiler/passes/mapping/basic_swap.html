@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -173,17 +185,17 @@
 <span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">A pass implementing a basic mapper.</span>
+<span class="sd">A pass implementing a basic swapper.</span>
 
-<span class="sd">The basic mapper is a minimum effort to insert swap gates to map the DAG into a coupling map. When</span>
-<span class="sd">a cx is not in the coupling map possibilities, it inserts one or more swaps in front to make it</span>
-<span class="sd">compatible.</span>
+<span class="sd">The basic mapper is a minimum effort to insert swap gates to map the DAG onto</span>
+<span class="sd">a coupling map. When a cx is not in the coupling map possibilities, it inserts</span>
+<span class="sd">one or more swaps in front to make it compatible.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="k">import</span> <span class="n">TransformationPass</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="k">import</span> <span class="n">Layout</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.layout</span> <span class="k">import</span> <span class="n">Layout</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">SwapGate</span>
 
 
@@ -192,22 +204,20 @@
 <span class="sd">    Maps (with minimum effort) a DAGCircuit onto a `coupling_map` adding swap gates.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">coupling_map</span><span class="p">,</span>
-                 <span class="n">initial_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coupling_map</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Maps a DAGCircuit onto a `coupling_map` using swap gates.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            coupling_map (CouplingMap): Directed graph represented a coupling map.</span>
-<span class="sd">            initial_layout (Layout): initial layout of qubits in mapping</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span> <span class="o">=</span> <span class="n">coupling_map</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">initial_layout</span>
 
 <div class="viewcode-block" id="BasicSwap.run"><a class="viewcode-back" href="../../../../../api/qiskit.transpiler.passes.BasicSwap.html#qiskit.transpiler.passes.BasicSwap.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs the BasicSwap pass on `dag`.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            dag (DAGCircuit): DAG to map.</span>
 
@@ -220,20 +230,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_dag</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="o">*</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;Basic swap runs on physical circuits only&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dag</span><span class="o">.</span><span class="n">qubits</span><span class="p">())</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s1">&#39;The layout does not match the amount of qubits in the DAG&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">physical_qubits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span>
-                <span class="s2">&quot;Mappers require to have the layout to be the same size as the coupling map&quot;</span><span class="p">)</span>
-
-        <span class="n">current_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">canonical_register</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+        <span class="n">trivial_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">generate_trivial_layout</span><span class="p">(</span><span class="n">canonical_register</span><span class="p">)</span>
+        <span class="n">current_layout</span> <span class="o">=</span> <span class="n">trivial_layout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">dag</span><span class="o">.</span><span class="n">serial_layers</span><span class="p">():</span>
             <span class="n">subdag</span> <span class="o">=</span> <span class="n">layer</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span>
@@ -244,6 +249,7 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">physical_q0</span><span class="p">,</span> <span class="n">physical_q1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="c1"># Insert a new layer with the SWAP(s).</span>
                     <span class="n">swap_layer</span> <span class="o">=</span> <span class="n">DAGCircuit</span><span class="p">()</span>
+                    <span class="n">swap_layer</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">canonical_register</span><span class="p">)</span>
 
                     <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coupling_map</span><span class="o">.</span><span class="n">shortest_undirected_path</span><span class="p">(</span><span class="n">physical_q0</span><span class="p">,</span> <span class="n">physical_q1</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">swap</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
@@ -253,25 +259,20 @@
                         <span class="n">qubit_1</span> <span class="o">=</span> <span class="n">current_layout</span><span class="p">[</span><span class="n">connected_wire_1</span><span class="p">]</span>
                         <span class="n">qubit_2</span> <span class="o">=</span> <span class="n">current_layout</span><span class="p">[</span><span class="n">connected_wire_2</span><span class="p">]</span>
 
-                        <span class="c1"># create qregs</span>
-                        <span class="k">for</span> <span class="n">qreg</span> <span class="ow">in</span> <span class="n">current_layout</span><span class="o">.</span><span class="n">get_registers</span><span class="p">():</span>
-                            <span class="k">if</span> <span class="n">qreg</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">swap_layer</span><span class="o">.</span><span class="n">qregs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                                <span class="n">swap_layer</span><span class="o">.</span><span class="n">add_qreg</span><span class="p">(</span><span class="n">qreg</span><span class="p">)</span>
-
                         <span class="c1"># create the swap operation</span>
                         <span class="n">swap_layer</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">SwapGate</span><span class="p">(),</span>
                                                         <span class="n">qargs</span><span class="o">=</span><span class="p">[</span><span class="n">qubit_1</span><span class="p">,</span> <span class="n">qubit_2</span><span class="p">],</span>
                                                         <span class="n">cargs</span><span class="o">=</span><span class="p">[])</span>
 
                     <span class="c1"># layer insertion</span>
-                    <span class="n">edge_map</span> <span class="o">=</span> <span class="n">current_layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
+                    <span class="n">edge_map</span> <span class="o">=</span> <span class="n">current_layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="n">trivial_layout</span><span class="p">)</span>
                     <span class="n">new_dag</span><span class="o">.</span><span class="n">compose_back</span><span class="p">(</span><span class="n">swap_layer</span><span class="p">,</span> <span class="n">edge_map</span><span class="p">)</span>
 
                     <span class="c1"># update current_layout</span>
                     <span class="k">for</span> <span class="n">swap</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
                         <span class="n">current_layout</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="n">swap</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">swap</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
 
-            <span class="n">edge_map</span> <span class="o">=</span> <span class="n">current_layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_layout</span><span class="p">)</span>
+            <span class="n">edge_map</span> <span class="o">=</span> <span class="n">current_layout</span><span class="o">.</span><span class="n">combine_into_edge_map</span><span class="p">(</span><span class="n">trivial_layout</span><span class="p">)</span>
             <span class="n">new_dag</span><span class="o">.</span><span class="n">extend_back</span><span class="p">(</span><span class="n">subdag</span><span class="p">,</span> <span class="n">edge_map</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">new_dag</span></div></div>
@@ -313,6 +314,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

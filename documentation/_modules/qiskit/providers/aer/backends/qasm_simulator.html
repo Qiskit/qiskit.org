@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -174,14 +186,12 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log2</span>
 <span class="kn">from</span> <span class="nn">qiskit.util</span> <span class="k">import</span> <span class="n">local_hardware_info</span>
-<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">BackendConfiguration</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="k">import</span> <span class="n">QasmBackendConfiguration</span>
 <span class="kn">from</span> <span class="nn">.aerbackend</span> <span class="k">import</span> <span class="n">AerBackend</span>
 <span class="c1"># pylint: disable=import-error</span>
 <span class="kn">from</span> <span class="nn">.qasm_controller_wrapper</span> <span class="k">import</span> <span class="n">qasm_controller_execute</span>
-<span class="kn">from</span> <span class="nn">..aererror</span> <span class="k">import</span> <span class="n">AerError</span>
 <span class="kn">from</span> <span class="nn">..version</span> <span class="k">import</span> <span class="n">__version__</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -200,12 +210,13 @@
 <span class="sd">        ------------------------</span>
 <span class="sd">        * &quot;method&quot; (str): Set the simulation method. Allowed values are:</span>
 <span class="sd">            * &quot;statevector&quot;: Uses a dense statevector simulation.</span>
-<span class="sd">            * &quot;stabilizer&quot;: uses a Clifford stabilizer state simulator that</span>
+<span class="sd">            * &quot;stabilizer&quot;: Uses a Clifford stabilizer state simulator that</span>
 <span class="sd">            is only valid for Clifford circuits and noise models.</span>
 <span class="sd">            * &quot;extended_stabilizer&quot;: Uses an approximate simulator that</span>
 <span class="sd">            decomposes circuits into stabilizer state terms, the number of</span>
 <span class="sd">            which grows with the number of non-Clifford gates.</span>
-<span class="sd">            * &quot;automatic&quot;: automatically run on stabilizer simulator if</span>
+<span class="sd">            * &quot;matrix_product_state&quot;: Uses a Matrix Product State (MPS) simulator.</span>
+<span class="sd">            * &quot;automatic&quot;: Automatically run on stabilizer simulator if</span>
 <span class="sd">            the circuit and noise model supports it. If there is enough</span>
 <span class="sd">            available memory, uses the statevector method. Otherwise, uses</span>
 <span class="sd">            the extended_stabilizer method (Default: &quot;automatic&quot;).</span>
@@ -215,6 +226,9 @@
 
 <span class="sd">        * &quot;zero_threshold&quot; (double): Sets the threshold for truncating</span>
 <span class="sd">            small values to zero in the result data (Default: 1e-10).</span>
+
+<span class="sd">        * &quot;validation_threshold&quot; (double): Sets the threshold for checking</span>
+<span class="sd">            if initial states are valid (Default: 1e-8).</span>
 
 <span class="sd">        * &quot;max_parallel_threads&quot; (int): Sets the maximum number of CPU</span>
 <span class="sd">            cores used by OpenMP for parallelization. If set to 0 the</span>
@@ -325,16 +339,13 @@
             <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;TODO&#39;</span><span class="p">,</span>
             <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;TODO&#39;</span>
-        <span class="p">}],</span>
-        <span class="c1"># Location where we put external libraries that will be loaded at runtime</span>
-        <span class="c1"># by the simulator extension</span>
-        <span class="s1">&#39;library_dir&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="p">}]</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">qasm_controller_execute</span><span class="p">,</span>
-            <span class="n">BackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">),</span>
+            <span class="n">QasmBackendConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CONFIGURATION</span><span class="p">),</span>
             <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="p">,</span> <span class="n">noise_model</span><span class="p">):</span>
@@ -390,33 +401,7 @@
             <span class="k">if</span> <span class="n">no_measure</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
                     <span class="s1">&#39;No measurements in circuit &quot;</span><span class="si">%s</span><span class="s1">&quot;: &#39;</span>
-                    <span class="s1">&#39;count data will return all zeros.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-            <span class="c1"># Check qubits for statevector simulation</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">clifford</span> <span class="ow">and</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;extended_stabilizer&quot;</span><span class="p">:</span>
-                <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_qubits</span>
-                <span class="n">max_qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span>
-                <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="n">max_qubits</span><span class="p">:</span>
-                    <span class="n">system_memory</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">local_hardware_info</span><span class="p">()[</span><span class="s1">&#39;memory&#39;</span><span class="p">])</span>
-                    <span class="n">err_string</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Number of qubits (</span><span class="si">{}</span><span class="s1">) is greater than &#39;</span>
-                                  <span class="s1">&#39;maximum (</span><span class="si">{}</span><span class="s1">) for &quot;</span><span class="si">{}</span><span class="s1">&quot; (method=statevector) &#39;</span>
-                                  <span class="s1">&#39;with </span><span class="si">{}</span><span class="s1"> GB system memory&#39;</span><span class="p">)</span>
-                    <span class="n">err_string</span> <span class="o">=</span> <span class="n">err_string</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">max_qubits</span><span class="p">,</span>
-                                                   <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">system_memory</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;automatic&quot;</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="n">err_string</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
-
-                    <span class="k">if</span> <span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">63</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, and has too many qubits to fall &#39;</span>
-                                       <span class="s1">&#39;back to the extended_stabilizer &#39;</span>
-                                       <span class="s1">&#39;method.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err_string</span><span class="p">))</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">ch_supported</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="n">AerError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">, and contains instructions &#39;</span>
-                                       <span class="s1">&#39;not supported by the extended_etabilizer &#39;</span>
-                                       <span class="s1">&#39;method.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err_string</span><span class="p">))</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                        <span class="s1">&#39;The QasmSimulator will automatically &#39;</span>
-                        <span class="s1">&#39;switch to the Extended Stabilizer backend, based on &#39;</span>
-                        <span class="s1">&#39;the memory requirements.&#39;</span><span class="p">)</span></div>
+                    <span class="s1">&#39;count data will return all zeros.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
 </pre></div>
 
         </div>
@@ -455,6 +440,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

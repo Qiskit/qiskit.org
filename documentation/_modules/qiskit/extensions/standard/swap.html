@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -172,19 +184,15 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">SWAP gate.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Gate</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit.decorators</span> <span class="k">import</span> <span class="n">_op_expand</span><span class="p">,</span> <span class="n">_to_bits</span>
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
 
 
@@ -222,15 +230,12 @@
                             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="nd">@_op_expand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">broadcastable</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply SWAP from qubit1 to qubit2.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SwapGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">qubit1</span><span class="p">,</span> <span class="n">qubit2</span><span class="p">],</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">swap</span> <span class="o">=</span> <span class="n">swap</span>
-<span class="n">CompositeGate</span><span class="o">.</span><span class="n">swap</span> <span class="o">=</span> <span class="n">swap</span>
 </pre></div>
 
         </div>
@@ -269,6 +274,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -177,7 +189,20 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">.register</span> <span class="k">import</span> <span class="n">Register</span>
+<span class="kn">from</span> <span class="nn">.bit</span> <span class="k">import</span> <span class="n">Bit</span>
+
+
+<div class="viewcode-block" id="Clbit"><a class="viewcode-back" href="../../../api/qiskit.circuit.Clbit.html#qiskit.circuit.Clbit">[docs]</a><span class="k">class</span> <span class="nc">Clbit</span><span class="p">(</span><span class="n">Bit</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implement a classical bit.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Clbit needs a ClassicalRegister and </span><span class="si">%s</span><span class="s1"> was provided&#39;</span> <span class="o">%</span>
+                              <span class="nb">type</span><span class="p">(</span><span class="n">register</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ClassicalRegister"><a class="viewcode-back" href="../../../api/qiskit.circuit.ClassicalRegister.html#qiskit.circuit.ClassicalRegister">[docs]</a><span class="k">class</span> <span class="nc">ClassicalRegister</span><span class="p">(</span><span class="n">Register</span><span class="p">):</span>
@@ -187,6 +212,7 @@
     <span class="n">instances_counter</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
     <span class="c1"># Prefix to use for auto naming.</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span>
+    <span class="n">bit_type</span> <span class="o">=</span> <span class="n">Clbit</span>
 
 <div class="viewcode-block" id="ClassicalRegister.qasm"><a class="viewcode-back" href="../../../api/qiskit.circuit.ClassicalRegister.html#qiskit.circuit.ClassicalRegister.qasm">[docs]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return OPENQASM string for this register.&quot;&quot;&quot;</span>
@@ -229,6 +255,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

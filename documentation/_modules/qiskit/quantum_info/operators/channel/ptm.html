@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -160,10 +172,18 @@
   <h1>Source code for qiskit.quantum_info.operators.channel.ptm</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Pauli Transfer Matrix (PTM) representation of a Quantum Channel.</span>
 
@@ -193,7 +213,7 @@
 
 <span class="kn">from</span> <span class="nn">qiskit.circuit.quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.quantum_channel</span> <span class="k">import</span> <span class="n">QuantumChannel</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.superop</span> <span class="k">import</span> <span class="n">SuperOp</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.transformations</span> <span class="k">import</span> <span class="n">_to_ptm</span>
@@ -247,9 +267,9 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">)):</span>
                 <span class="c1"># If the input is a Terra QuantumCircuit or Instruction we</span>
                 <span class="c1"># convert it to a SuperOp</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="o">.</span><span class="n">_instruction_to_superop</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="o">.</span><span class="n">_init_instruction</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># We use the QuantumChannel init transform to intialize</span>
+                <span class="c1"># We use the QuantumChannel init transform to initialize</span>
                 <span class="c1"># other objects into a QuantumChannel or Operator object.</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_transformer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dim</span>
@@ -358,7 +378,12 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if other cannot be converted to a channel.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PTM</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">PTM</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">input_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+        <span class="n">output_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PTM.expand"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel other ⊗ self.</span>
@@ -372,7 +397,12 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if other cannot be converted to a channel.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor_product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PTM</span><span class="p">):</span>
+            <span class="n">other</span> <span class="o">=</span> <span class="n">PTM</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">input_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
+        <span class="n">output_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PTM.add"><a class="viewcode-back" href="../../../../../api/qiskit.quantum_info.PTM.html#qiskit.quantum_info.PTM.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QuantumChannel self + other.</span>
@@ -431,42 +461,21 @@
         <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">other</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dims</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_evolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evolve a quantum state by the QuantumChannel.</span>
+        <span class="sd">&quot;&quot;&quot;Evolve a quantum state by the quantum channel.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            state (QuantumState): The input statevector or density matrix.</span>
-<span class="sd">            qargs (list): a list of QuantumState subsystem positions to apply</span>
-<span class="sd">                           the operator on.</span>
+<span class="sd">            state (DensityMatrix or Statevector): The input state.</span>
+<span class="sd">            qargs (list): a list of quantum state subsystem positions to apply</span>
+<span class="sd">                           the quantum channel on.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            DensityMatrix: the output quantum state as a density matrix.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_evolve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_tensor_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the tensor product channel.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            other (QuantumChannel): a quantum channel.</span>
-<span class="sd">            reverse (bool): If False return self ⊗ other, if True return</span>
-<span class="sd">                            if True return (other ⊗ self) [Default: False</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            PTM: the tensor product channel as a PTM object.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if other cannot be converted to a channel.</span>
+<span class="sd">            QiskitError: if the quantum channel dimension does not match the</span>
+<span class="sd">            specified quantum state subsystem dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PTM</span><span class="p">):</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="n">PTM</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
-            <span class="n">input_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
-            <span class="n">output_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">input_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dims</span><span class="p">()</span>
-            <span class="n">output_dims</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">()</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">PTM</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">input_dims</span><span class="p">,</span> <span class="n">output_dims</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_evolve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="p">)</span></div>
 </pre></div>
 
         </div>
@@ -505,6 +514,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

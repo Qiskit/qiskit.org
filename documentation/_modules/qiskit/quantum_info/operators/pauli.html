@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -187,14 +199,19 @@
 
 
 <span class="k">def</span> <span class="nf">_make_np_bool</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">arr</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">:</span>
-        <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">arr</span><span class="p">]</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">arr</span>
+
+
+<span class="k">def</span> <span class="nf">_count_set_bits</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of set bits in a uint (or a numpy array of uints).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x55555555</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mh">0x33333333</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x33333333</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(((</span><span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xF0F0F0F</span><span class="p">)</span> <span class="o">*</span> <span class="mh">0x1010101</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span>
 
 
 <div class="viewcode-block" id="Pauli"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli">[docs]</a><span class="k">class</span> <span class="nc">Pauli</span><span class="p">:</span>
@@ -445,21 +462,18 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            scipy.sparse.csr_matrix: a sparse matrix with CSR format that</span>
-<span class="sd">            represnets the pauli.</span>
+<span class="sd">            represents the pauli.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">z</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="p">:</span>  <span class="c1"># I</span>
-                <span class="n">mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">bmat</span><span class="p">([[</span><span class="n">mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">mat</span><span class="p">]],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;coo&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">z</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="p">:</span>  <span class="c1"># Z</span>
-                <span class="n">mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">bmat</span><span class="p">([[</span><span class="n">mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="n">mat</span><span class="p">]],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;coo&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="ow">not</span> <span class="n">z</span> <span class="ow">and</span> <span class="n">x</span><span class="p">:</span>  <span class="c1"># X</span>
-                <span class="n">mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">bmat</span><span class="p">([[</span><span class="kc">None</span><span class="p">,</span> <span class="n">mat</span><span class="p">],</span> <span class="p">[</span><span class="n">mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;coo&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Y</span>
-                <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
-                <span class="n">mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">bmat</span><span class="p">([[</span><span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="n">mat</span><span class="p">],</span> <span class="p">[</span><span class="n">mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;coo&#39;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">mat</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
+        <span class="n">_x</span><span class="p">,</span> <span class="n">_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">_x</span><span class="p">)</span>
+        <span class="n">twos_array</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_x</span><span class="p">))</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_x</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">twos_array</span><span class="p">)</span>
+        <span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_z</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">twos_array</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint</span><span class="p">)</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">^</span> <span class="n">xs</span>
+        <span class="n">global_factor</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint</span><span class="p">),</span> <span class="n">_z</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">global_factor</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">_count_set_bits</span><span class="p">(</span><span class="n">zs</span> <span class="o">&amp;</span> <span class="n">rows</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">rows</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Pauli.to_operator"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli.to_operator">[docs]</a>    <span class="k">def</span> <span class="nf">to_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert to Operator object.&quot;&quot;&quot;</span>
@@ -548,7 +562,7 @@
 <span class="sd">            pauli_labels (list[str]): the to-be-inserted or appended pauli label</span>
 
 <span class="sd">        Note:</span>
-<span class="sd">            the indices refers to the localion of original paulis,</span>
+<span class="sd">            the indices refers to the location of original paulis,</span>
 <span class="sd">            e.g. if indices = [0, 2], pauli_labels = [&#39;Z&#39;, &#39;I&#39;] and original pauli = &#39;ZYXI&#39;</span>
 <span class="sd">            the pauli will be updated to ZY&#39;I&#39;XI&#39;Z&#39;</span>
 <span class="sd">            &#39;Z&#39; and &#39;I&#39; are inserted before the qubit at 0 and 2.</span>
@@ -632,7 +646,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            num_qubits (int): the length of pauli</span>
-<span class="sd">            index (int): the qubit index to insert the single qubii</span>
+<span class="sd">            index (int): the qubit index to insert the single qubit</span>
 <span class="sd">            pauli_label (str): pauli</span>
 
 <span class="sd">        Returns:</span>
@@ -648,7 +662,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Pauli.kron"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.Pauli.html#qiskit.quantum_info.Pauli.kron">[docs]</a>    <span class="k">def</span> <span class="nf">kron</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Kron product of two paulis.</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Kronecker product of two paulis.</span>
 
 <span class="sd">        Order is $P_2 (other) \otimes P_1 (self)$</span>
 
@@ -769,6 +783,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

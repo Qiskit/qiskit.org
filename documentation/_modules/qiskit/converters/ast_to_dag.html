@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -178,8 +190,7 @@
 <span class="sd">Acts as an OpenQASM interpreter.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">Gate</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 
@@ -238,6 +249,34 @@
 <span class="k">class</span> <span class="nc">AstInterpreter</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Interprets an OpenQASM by expanding subroutines and unrolling loops.&quot;&quot;&quot;</span>
 
+    <span class="n">standard_extension</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;u0&quot;</span><span class="p">:</span> <span class="n">U0Gate</span><span class="p">,</span>
+                          <span class="s2">&quot;u1&quot;</span><span class="p">:</span> <span class="n">U1Gate</span><span class="p">,</span>
+                          <span class="s2">&quot;u2&quot;</span><span class="p">:</span> <span class="n">U2Gate</span><span class="p">,</span>
+                          <span class="s2">&quot;u3&quot;</span><span class="p">:</span> <span class="n">U3Gate</span><span class="p">,</span>
+                          <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">XGate</span><span class="p">,</span>
+                          <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">YGate</span><span class="p">,</span>
+                          <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="n">ZGate</span><span class="p">,</span>
+                          <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">TGate</span><span class="p">,</span>
+                          <span class="s2">&quot;tdg&quot;</span><span class="p">:</span> <span class="n">TdgGate</span><span class="p">,</span>
+                          <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="n">SGate</span><span class="p">,</span>
+                          <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">SdgGate</span><span class="p">,</span>
+                          <span class="s2">&quot;swap&quot;</span><span class="p">:</span> <span class="n">SwapGate</span><span class="p">,</span>
+                          <span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="n">RXGate</span><span class="p">,</span>
+                          <span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="n">RYGate</span><span class="p">,</span>
+                          <span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="n">RZGate</span><span class="p">,</span>
+                          <span class="s2">&quot;rzz&quot;</span><span class="p">:</span> <span class="n">RZZGate</span><span class="p">,</span>
+                          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">IdGate</span><span class="p">,</span>
+                          <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">HGate</span><span class="p">,</span>
+                          <span class="s2">&quot;cx&quot;</span><span class="p">:</span> <span class="n">CnotGate</span><span class="p">,</span>
+                          <span class="s2">&quot;cy&quot;</span><span class="p">:</span> <span class="n">CyGate</span><span class="p">,</span>
+                          <span class="s2">&quot;cz&quot;</span><span class="p">:</span> <span class="n">CzGate</span><span class="p">,</span>
+                          <span class="s2">&quot;ch&quot;</span><span class="p">:</span> <span class="n">CHGate</span><span class="p">,</span>
+                          <span class="s2">&quot;crz&quot;</span><span class="p">:</span> <span class="n">CrzGate</span><span class="p">,</span>
+                          <span class="s2">&quot;cu1&quot;</span><span class="p">:</span> <span class="n">Cu1Gate</span><span class="p">,</span>
+                          <span class="s2">&quot;cu3&quot;</span><span class="p">:</span> <span class="n">Cu3Gate</span><span class="p">,</span>
+                          <span class="s2">&quot;ccx&quot;</span><span class="p">:</span> <span class="n">ToffoliGate</span><span class="p">,</span>
+                          <span class="s2">&quot;cswap&quot;</span><span class="p">:</span> <span class="n">FredkinGate</span><span class="p">}</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize interpreter&#39;s data.&quot;&quot;&quot;</span>
         <span class="c1"># DAG object to populate</span>
@@ -258,8 +297,8 @@
 
 <span class="sd">        Return a list of tuples (Register,index).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># pylint: disable=inconsistent-return-statements</span>
         <span class="n">reg</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
             <span class="n">reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dag</span><span class="o">.</span><span class="n">qregs</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dag</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
@@ -271,12 +310,12 @@
 
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;indexed_id&quot;</span><span class="p">:</span>
             <span class="c1"># An indexed bit or qubit</span>
-            <span class="k">return</span> <span class="p">[(</span><span class="n">reg</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">index</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">reg</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">index</span><span class="p">]]</span>
         <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span>
             <span class="c1"># A qubit or qreg or creg</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">bit_stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="c1"># Global scope</span>
-                <span class="k">return</span> <span class="p">[(</span><span class="n">reg</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">bit</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">reg</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># local scope</span>
                 <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bit_stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
@@ -304,7 +343,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">arg_stack</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">gargs</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">args</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
                                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gargs</span><span class="p">))})</span>
                 <span class="c1"># Only index into register arguments.</span>
-                <span class="n">element</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
+                <span class="n">element</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
                            <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">bits</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bits</span><span class="p">))]]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">bit_stack</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">gbits</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">bits</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">element</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
                                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gbits</span><span class="p">))})</span>
@@ -333,6 +372,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">de_gate</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">de_gate</span><span class="p">[</span><span class="s2">&quot;bits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">bitlist</span><span class="o">.</span><span class="n">children</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">standard_extension</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="k">if</span> <span class="n">opaque</span><span class="p">:</span>
             <span class="n">de_gate</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
@@ -342,7 +383,7 @@
         <span class="sd">&quot;&quot;&quot;Process a CNOT gate node.&quot;&quot;&quot;</span>
         <span class="n">id0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_bit_id</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">id1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_bit_id</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">id0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">id0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">id0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">id0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;internal error: qreg size mismatch&quot;</span><span class="p">,</span>
                               <span class="s2">&quot;line=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">line</span><span class="p">,</span> <span class="s2">&quot;file=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
         <span class="n">maxidx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">id0</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">id1</span><span class="p">)])</span>
@@ -477,69 +518,23 @@
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): operation name to apply to the dag.</span>
 <span class="sd">            params (list): op parameters</span>
-<span class="sd">            qargs (list(QuantumRegister, int)): qubits to attach to</span>
+<span class="sd">            qargs (list(Qubit)): qubits to attach to</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if encountering a non-basis opaque gate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;u0&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">U0Gate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;u1&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">U1Gate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;u2&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">U2Gate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;u3&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">U3Gate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">XGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">YGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;z&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">ZGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">TGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;tdg&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">TdgGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">SGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">SdgGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;swap&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">SwapGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;rx&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">RXGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ry&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">RYGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;rz&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">RZGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;rzz&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">RZZGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">IdGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">HGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cx&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">CnotGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cy&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">CyGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cz&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">CzGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ch&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">CHGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;crz&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">CrzGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cu1&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">Cu1Gate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cu3&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">Cu3Gate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ccx&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">ToffoliGate</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cswap&quot;</span><span class="p">:</span>
-            <span class="n">op_class</span> <span class="o">=</span> <span class="n">FredkinGate</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">standard_extension</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">standard_extension</span><span class="p">[</span><span class="n">name</span><span class="p">](</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;opaque&#39;</span><span class="p">]:</span>
+                <span class="c1"># call an opaque gate</span>
+                <span class="n">op</span> <span class="o">=</span> <span class="n">Gate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">num_qubits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gates</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;n_bits&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># call a custom gate</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Custom non-opaque gates are not supported by as_to_dag module&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;unknown operation for ast node name </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-
-        <span class="n">op</span> <span class="o">=</span> <span class="n">op_class</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dag</span><span class="o">.</span><span class="n">apply_operation_back</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="p">[],</span> <span class="n">condition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">)</span>
 </pre></div>
@@ -580,6 +575,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

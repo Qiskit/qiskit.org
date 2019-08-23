@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -203,6 +215,8 @@
 <span class="sd">        Initialize a measurement calibration matrix from the results of running</span>
 <span class="sd">        the circuits returned by `measurement_calibration_circuits`</span>
 
+<span class="sd">        A wrapper for the tensored fitter</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            results: the results of running the measurement calibration</span>
 <span class="sd">            circuits. If this is None the user will set a calibrarion matrix</span>
@@ -218,31 +232,29 @@
 <span class="sd">            circlabel: if the qubits were labeled</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="n">results</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span> <span class="o">=</span> <span class="n">state_labels</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circlabel</span> <span class="o">=</span> <span class="n">circlabel</span>
         <span class="k">if</span> <span class="n">qubit_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">qubit_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_list</span> <span class="o">=</span> <span class="n">qubit_list</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_build_calibration_matrix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span> <span class="o">=</span> <span class="n">TensoredMeasFitter</span><span class="p">(</span><span class="n">results</span><span class="p">,</span>
+                                             <span class="p">[</span><span class="n">qubit_list</span><span class="p">],</span>
+                                             <span class="p">[</span><span class="n">state_labels</span><span class="p">],</span>
+                                             <span class="n">circlabel</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cal_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return cal_matrix.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">cal_matrices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@cal_matrix</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">cal_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_cal_matrix</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;set cal_matrix.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span> <span class="o">=</span> <span class="n">new_cal_matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">cal_matrices</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">new_cal_matrix</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">state_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return state_labels.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">substate_labels_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">qubit_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -252,12 +264,23 @@
     <span class="nd">@state_labels</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">state_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_state_labels</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;set state label.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span> <span class="o">=</span> <span class="n">new_state_labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">substate_labels_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_state_labels</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return a measurement filter using the cal matrix&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">MeasurementFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MeasurementFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cal_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_labels</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CompleteMeasFitter.add_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.CompleteMeasFitter.html#qiskit.ignis.mitigation.measurement.CompleteMeasFitter.add_data">[docs]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_results</span><span class="p">,</span> <span class="n">rebuild_cal_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add measurement calibration data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_results: a single result or list of results</span>
+<span class="sd">            rebuild_cal_matrix: rebuild the calibration matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">new_results</span><span class="p">,</span> <span class="n">rebuild_cal_matrix</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CompleteMeasFitter.subset_fitter"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.CompleteMeasFitter.html#qiskit.ignis.mitigation.measurement.CompleteMeasFitter.subset_fitter">[docs]</a>    <span class="k">def</span> <span class="nf">subset_fitter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit_sublist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -272,7 +295,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">cal_matrices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Calibration matrix is not initialized&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">qubit_sublist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -297,7 +320,7 @@
         <span class="c1"># to the reduced labels</span>
         <span class="n">q_q_mapping</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">state_labels_reduced</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_labels</span><span class="p">:</span>
             <span class="n">tmplabel</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">qubit_sublist_ind</span><span class="p">]</span>
             <span class="n">state_labels_reduced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmplabel</span><span class="p">))</span>
 
@@ -320,7 +343,7 @@
 
                 <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">q_q_mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">q_q_mapping</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                        <span class="n">new_cal_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                        <span class="n">new_cal_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_matrix</span><span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
 
                 <span class="n">new_cal_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_q_mapping</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
@@ -347,58 +370,7 @@
 <span class="sd">            probabilities of measuring state &#39;x&#39; given preparation of state</span>
 <span class="sd">            &#39;x&#39; and so the normalized trace is the average assignment fidelity</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Cal matrix has not been set&quot;</span><span class="p">)</span>
-
-        <span class="n">fidelity_label_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">label_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">fidelity_label_list</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span><span class="p">))]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">fid_sublist</span> <span class="ow">in</span> <span class="n">label_list</span><span class="p">:</span>
-                <span class="n">fidelity_label_list</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
-                <span class="k">for</span> <span class="n">fid_statelabl</span> <span class="ow">in</span> <span class="n">fid_sublist</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">label_idx</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">fid_statelabl</span> <span class="o">==</span> <span class="n">label</span><span class="p">:</span>
-                            <span class="n">fidelity_label_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_idx</span><span class="p">)</span>
-                            <span class="k">continue</span>
-
-        <span class="c1"># fidelity_label_list is a 2D list of indices in the</span>
-        <span class="c1"># cal_matrix, we find the assignment fidelity of each</span>
-        <span class="c1"># row and average over the list</span>
-        <span class="n">assign_fid_list</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">fid_label_sublist</span> <span class="ow">in</span> <span class="n">fidelity_label_list</span><span class="p">:</span>
-            <span class="n">assign_fid_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">state_idx_i</span> <span class="ow">in</span> <span class="n">fid_label_sublist</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">state_idx_j</span> <span class="ow">in</span> <span class="n">fid_label_sublist</span><span class="p">:</span>
-                    <span class="n">assign_fid_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> \
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span><span class="p">[</span><span class="n">state_idx_i</span><span class="p">][</span><span class="n">state_idx_j</span><span class="p">]</span>
-            <span class="n">assign_fid_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fid_label_sublist</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">assign_fid_list</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_build_calibration_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Build the measurement calibration matrix from the results of running</span>
-<span class="sd">        the circuits returned by `measurement_calibration`</span>
-
-<span class="sd">        Creates a 2**n x 2**n matrix that can be used to correct measurement</span>
-<span class="sd">        errors</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">cal_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
-            <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">stateidx</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">):</span>
-            <span class="n">state_cnts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">cal_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
-                                                  <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circlabel</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
-            <span class="n">shots</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">state_cnts</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-            <span class="k">for</span> <span class="n">stateidx2</span><span class="p">,</span> <span class="n">state2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">):</span>
-                <span class="n">cal_matrix</span><span class="p">[</span><span class="n">stateidx</span><span class="p">,</span> <span class="n">stateidx2</span><span class="p">]</span> <span class="o">=</span> <span class="n">state_cnts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                    <span class="n">state2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">shots</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span> <span class="o">=</span> <span class="n">cal_matrix</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">readout_fidelity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">label_list</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CompleteMeasFitter.plot_calibration"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.CompleteMeasFitter.html#qiskit.ignis.mitigation.measurement.CompleteMeasFitter.plot_calibration">[docs]</a>    <span class="k">def</span> <span class="nf">plot_calibration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -409,29 +381,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Cal matrix has not been set&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_rb_data needs matplotlib. &#39;</span>
-                              <span class="s1">&#39;Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-
-        <span class="n">axim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">axim</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Prepared State&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Measured State&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">)))</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">)))</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state_labels</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">show_plot</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tens_fitt</span><span class="o">.</span><span class="n">plot_calibration</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">show_plot</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="TensoredMeasFitter"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.TensoredMeasFitter.html#qiskit.ignis.mitigation.measurement.TensoredMeasFitter">[docs]</a><span class="k">class</span> <span class="nc">TensoredMeasFitter</span><span class="p">():</span>
@@ -458,7 +408,7 @@
 <span class="sd">            If None then the labels are ordered lexicographically</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="n">results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_circlabel</span> <span class="o">=</span> <span class="n">circlabel</span>
 
@@ -481,8 +431,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span><span class="n">lab</span><span class="p">:</span> <span class="n">ind</span> <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">lab</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sub_labels</span><span class="p">)})</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_build_calibration_matrices</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cal_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -508,6 +457,27 @@
     <span class="k">def</span> <span class="nf">nqubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return _qubit_list_sizes&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qubit_list_sizes</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TensoredMeasFitter.add_data"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.TensoredMeasFitter.html#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.add_data">[docs]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_results</span><span class="p">,</span> <span class="n">rebuild_cal_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add measurement calibration data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_results: a single result or list of results</span>
+<span class="sd">            rebuild_cal_matrix: rebuild the calibration matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">new_results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_results</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">new_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_results</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">new_results</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rebuild_cal_matrix</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_build_calibration_matrices</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="TensoredMeasFitter.readout_fidelity"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.TensoredMeasFitter.html#qiskit.ignis.mitigation.measurement.TensoredMeasFitter.readout_fidelity">[docs]</a>    <span class="k">def</span> <span class="nf">readout_fidelity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cal_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">label_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -538,11 +508,33 @@
             <span class="n">label_list</span> <span class="o">=</span> <span class="p">[[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span>
                           <span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">]]</span>
 
-        <span class="n">tmp_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">],</span>
-                                        <span class="n">circlabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="n">tmp_fitter</span><span class="o">.</span><span class="n">cal_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_matrices</span><span class="p">[</span><span class="n">cal_index</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">tmp_fitter</span><span class="o">.</span><span class="n">readout_fidelity</span><span class="p">(</span><span class="n">label_list</span><span class="p">)</span></div>
+        <span class="n">state_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">]</span>
+        <span class="n">fidelity_label_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">label_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fidelity_label_list</span> <span class="o">=</span> <span class="p">[[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">state_labels</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">fid_sublist</span> <span class="ow">in</span> <span class="n">label_list</span><span class="p">:</span>
+                <span class="n">fidelity_label_list</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                <span class="k">for</span> <span class="n">fid_statelabl</span> <span class="ow">in</span> <span class="n">fid_sublist</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">label_idx</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_labels</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">fid_statelabl</span> <span class="o">==</span> <span class="n">label</span><span class="p">:</span>
+                            <span class="n">fidelity_label_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_idx</span><span class="p">)</span>
+                            <span class="k">continue</span>
+
+        <span class="c1"># fidelity_label_list is a 2D list of indices in the</span>
+        <span class="c1"># cal_matrix, we find the assignment fidelity of each</span>
+        <span class="c1"># row and average over the list</span>
+        <span class="n">assign_fid_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">fid_label_sublist</span> <span class="ow">in</span> <span class="n">fidelity_label_list</span><span class="p">:</span>
+            <span class="n">assign_fid_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">state_idx_i</span> <span class="ow">in</span> <span class="n">fid_label_sublist</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">state_idx_j</span> <span class="ow">in</span> <span class="n">fid_label_sublist</span><span class="p">:</span>
+                    <span class="n">assign_fid_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> \
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span><span class="p">[</span><span class="n">cal_index</span><span class="p">][</span><span class="n">state_idx_i</span><span class="p">][</span><span class="n">state_idx_j</span><span class="p">]</span>
+            <span class="n">assign_fid_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fid_label_sublist</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">assign_fid_list</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_build_calibration_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -557,31 +549,38 @@
                                                <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
         <span class="c1"># go through for each calibration experiment</span>
-        <span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
-            <span class="n">circ_name</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span>
-            <span class="c1"># extract the state from the circuit name</span>
-            <span class="c1"># this was the prepared state</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;(?&lt;=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circlabel</span> <span class="o">+</span> <span class="s1">&#39;cal_)</span><span class="se">\\</span><span class="s1">w+&#39;</span><span class="p">,</span>
-                              <span class="n">circ_name</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+                <span class="n">circ_name</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">name</span>
+                <span class="c1"># extract the state from the circuit name</span>
+                <span class="c1"># this was the prepared state</span>
+                <span class="n">circ_search</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;(?&lt;=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circlabel</span> <span class="o">+</span> <span class="s1">&#39;cal_)</span><span class="se">\\</span><span class="s1">w+&#39;</span><span class="p">,</span>
+                                        <span class="n">circ_name</span><span class="p">)</span>
 
-            <span class="c1"># get the counts from the result</span>
-            <span class="n">state_cnts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ_name</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">measured_state</span><span class="p">,</span> <span class="n">counts</span> <span class="ow">in</span> <span class="n">state_cnts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">end_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nqubits</span>
-                <span class="k">for</span> <span class="n">cal_ind</span><span class="p">,</span> <span class="n">cal_mat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span><span class="p">):</span>
+                <span class="c1"># this experiment is not one of the calcs so skip</span>
+                <span class="k">if</span> <span class="n">circ_search</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
 
-                    <span class="n">start_index</span> <span class="o">=</span> <span class="n">end_index</span> <span class="o">-</span> \
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_list_sizes</span><span class="p">[</span><span class="n">cal_ind</span><span class="p">]</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="n">circ_search</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-                    <span class="n">substate_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">[</span><span class="n">cal_ind</span><span class="p">][</span>
-                        <span class="n">state</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]]</span>
-                    <span class="n">measured_substate_index</span> <span class="o">=</span> \
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">[</span><span class="n">cal_ind</span><span class="p">][</span>
-                            <span class="n">measured_state</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]]</span>
-                    <span class="n">end_index</span> <span class="o">=</span> <span class="n">start_index</span>
+                <span class="c1"># get the counts from the result</span>
+                <span class="n">state_cnts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">circ_name</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">measured_state</span><span class="p">,</span> <span class="n">counts</span> <span class="ow">in</span> <span class="n">state_cnts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">end_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nqubits</span>
+                    <span class="k">for</span> <span class="n">cal_ind</span><span class="p">,</span> <span class="n">cal_mat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span><span class="p">):</span>
 
-                    <span class="n">cal_mat</span><span class="p">[</span><span class="n">measured_substate_index</span><span class="p">][</span><span class="n">substate_index</span><span class="p">]</span> <span class="o">+=</span> \
-                        <span class="n">counts</span>
+                        <span class="n">start_index</span> <span class="o">=</span> <span class="n">end_index</span> <span class="o">-</span> \
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_qubit_list_sizes</span><span class="p">[</span><span class="n">cal_ind</span><span class="p">]</span>
+
+                        <span class="n">substate_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">[</span><span class="n">cal_ind</span><span class="p">][</span>
+                            <span class="n">state</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]]</span>
+                        <span class="n">measured_substate_index</span> <span class="o">=</span> \
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">[</span><span class="n">cal_ind</span><span class="p">][</span>
+                                <span class="n">measured_state</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]]</span>
+                        <span class="n">end_index</span> <span class="o">=</span> <span class="n">start_index</span>
+
+                        <span class="n">cal_mat</span><span class="p">[</span><span class="n">measured_substate_index</span><span class="p">][</span><span class="n">substate_index</span><span class="p">]</span> <span class="o">+=</span> \
+                            <span class="n">counts</span>
 
         <span class="k">for</span> <span class="n">mat_index</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span><span class="p">):</span>
             <span class="n">sums_of_columns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span><span class="p">[</span><span class="n">mat_index</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -601,11 +600,31 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">tmp_fitter</span> <span class="o">=</span> <span class="n">CompleteMeasFitter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">],</span>
-                                        <span class="n">circlabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="n">tmp_fitter</span><span class="o">.</span><span class="n">cal_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cal_matrices</span><span class="p">[</span><span class="n">cal_index</span><span class="p">]</span>
-        <span class="n">tmp_fitter</span><span class="o">.</span><span class="n">plot_calibration</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">show_plot</span><span class="p">)</span></div></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_matrices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Cal matrix has not been set&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">HAS_MATPLOTLIB</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;The function plot_rb_data needs matplotlib. &#39;</span>
+                              <span class="s1">&#39;Run &quot;pip install matplotlib&quot; before.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="n">axim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cal_matrices</span><span class="p">[</span><span class="n">cal_index</span><span class="p">],</span>
+                          <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span>
+                          <span class="n">clim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">axim</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Prepared State&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Measured State&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">])))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">])))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_substate_labels_list</span><span class="p">[</span><span class="n">cal_index</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">show_plot</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
 </pre></div>
 
         </div>
@@ -644,6 +663,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

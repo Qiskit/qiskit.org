@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -172,22 +184,22 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Element of SU(2).</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">CompositeGate</span>
+
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">Gate</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit.decorators</span> <span class="k">import</span> <span class="n">_op_expand</span><span class="p">,</span> <span class="n">_to_bits</span>
 
 
-<div class="viewcode-block" id="UBase"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase">[docs]</a><span class="k">class</span> <span class="nc">UBase</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+<div class="viewcode-block" id="UBase"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase">[docs]</a><span class="k">class</span> <span class="nc">UBase</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Element of SU(2).&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;UBase is deprecated and it will be removed after 0.9. &#39;</span>
+                      <span class="s1">&#39;Use U3Gate instead.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">])</span>
 
 <div class="viewcode-block" id="UBase.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -195,10 +207,17 @@
 
 <span class="sd">        U(theta,phi,lambda)^dagger = U(-theta,-lambda,-phi)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;UBase.inverse is deprecated and it will be removed after 0.9. &#39;</span>
+                      <span class="s1">&#39;Use U3Gate.inverse instead.&#39;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">UBase</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="UBase.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase.to_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the U3 gate.&quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;UBase.to_matrix is deprecated and it will be removed after 0.9.&#39;</span>
+                      <span class="s1">&#39;Use U3Gate.to_matrix instead.&#39;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
         <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="p">[[</span>
@@ -212,15 +231,12 @@
             <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<span class="nd">@_to_bits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nd">@_op_expand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">u_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply U to q.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UBase</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">u_base</span> <span class="o">=</span> <span class="n">u_base</span>
-<span class="n">CompositeGate</span><span class="o">.</span><span class="n">u_base</span> <span class="o">=</span> <span class="n">u_base</span>
 </pre></div>
 
         </div>
@@ -259,6 +275,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

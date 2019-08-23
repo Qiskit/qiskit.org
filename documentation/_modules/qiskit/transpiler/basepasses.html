@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -172,7 +184,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="sd">&quot;&quot;&quot;This module implements the base pass.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Base transpiler passes.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Hashable</span>
@@ -181,9 +193,10 @@
 
 
 <span class="k">class</span> <span class="nc">MetaPass</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Enforces the creation of some fields in the pass</span>
-<span class="sd">    while allowing passes to override __init__</span>
+    <span class="sd">&quot;&quot;&quot;Metaclass for transpiler passes.</span>
+
+<span class="sd">    Enforces the creation of some fields in the pass while allowing passes to</span>
+<span class="sd">    override ``__init__``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -223,13 +236,13 @@
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">hash</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The name of the pass. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the name of the pass.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Run a pass on the DAGCircuit. This is implemented by the pass developer.</span>
+        <span class="sd">&quot;&quot;&quot;Run a pass on the DAGCircuit. This is implemented by the pass developer.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            dag (DAGCircuit): the dag on which the pass is run.</span>
 <span class="sd">        Raises:</span>
@@ -239,25 +252,31 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_transformation_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; If the pass is a TransformationPass, that means that the pass can manipulate the DAG,</span>
-<span class="sd">        but cannot modify the property set (but it can be read). &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Check if the pass is a transformation pass.</span>
+
+<span class="sd">        If the pass is a TransformationPass, that means that the pass can manipulate the DAG,</span>
+<span class="sd">        but cannot modify the property set (but it can be read).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">TransformationPass</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_analysis_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; If the pass is an AnalysisPass, that means that the pass can analyze the DAG and write</span>
+        <span class="sd">&quot;&quot;&quot;Check if the pass is an analysis pass.</span>
+
+<span class="sd">        If the pass is an AnalysisPass, that means that the pass can analyze the DAG and write</span>
 <span class="sd">        the results of that analysis in the property set. Modifications on the DAG are not allowed</span>
-<span class="sd">        by this kind of pass. &quot;&quot;&quot;</span>
+<span class="sd">        by this kind of pass.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">AnalysisPass</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="AnalysisPass"><a class="viewcode-back" href="../../../api/qiskit.transpiler.AnalysisPass.html#qiskit.transpiler.AnalysisPass">[docs]</a><span class="k">class</span> <span class="nc">AnalysisPass</span><span class="p">(</span><span class="n">BasePass</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
-    <span class="sd">&quot;&quot;&quot; An analysis pass: change property set, not DAG. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;An analysis pass: change property set, not DAG.&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="TransformationPass"><a class="viewcode-back" href="../../../api/qiskit.transpiler.TransformationPass.html#qiskit.transpiler.TransformationPass">[docs]</a><span class="k">class</span> <span class="nc">TransformationPass</span><span class="p">(</span><span class="n">BasePass</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
-    <span class="sd">&quot;&quot;&quot; A transformation pass: change DAG, not property set. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A transformation pass: change DAG, not property set.&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 </pre></div>
 
@@ -297,6 +316,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

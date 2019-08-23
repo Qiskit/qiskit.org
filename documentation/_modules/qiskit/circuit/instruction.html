@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -172,7 +184,6 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=too-many-boolean-expressions</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A generic quantum instruction.</span>
 
@@ -188,7 +199,7 @@
 
 <span class="sd">    num_qubits, num_clbits: dimensions of the instruction</span>
 
-<span class="sd">    params: List of parameters to specialize a specific intruction instance.</span>
+<span class="sd">    params: List of parameters to specialize a specific instruction instance.</span>
 
 <span class="sd">Instructions do not have any context about where they are in a circuit (which qubits/clbits).</span>
 <span class="sd">The circuit itself keeps this context.</span>
@@ -200,9 +211,10 @@
 
 <span class="kn">from</span> <span class="nn">qiskit.qasm.node</span> <span class="k">import</span> <span class="n">node</span>
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit.classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit.parameter</span> <span class="k">import</span> <span class="n">Parameter</span>
 <span class="kn">from</span> <span class="nn">qiskit.qobj.models.qasm</span> <span class="k">import</span> <span class="n">QasmQobjInstruction</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.parameter</span> <span class="k">import</span> <span class="n">ParameterExpression</span>
 
 <span class="n">_CUTOFF_PRECISION</span> <span class="o">=</span> <span class="mf">1E-10</span>
 
@@ -215,7 +227,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): instruction name</span>
 <span class="sd">            num_qubits (int): instruction&#39;s qubit width</span>
-<span class="sd">            num_clbits (int): instructions&#39;s clbit width</span>
+<span class="sd">            num_clbits (int): instruction&#39;s clbit width</span>
 <span class="sd">            params (list[sympy.Basic|qasm.Node|int|float|complex|str|ndarray]): list of parameters</span>
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: when the register is not in the correct format.</span>
@@ -257,8 +269,19 @@
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="k">for</span> <span class="n">self_param</span><span class="p">,</span> <span class="n">other_param</span> <span class="ow">in</span> <span class="n">zip_longest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">params</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">self_param</span> <span class="o">==</span> <span class="n">other_param</span><span class="p">:</span>
-                <span class="k">continue</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">self_param</span> <span class="o">==</span> <span class="n">other_param</span><span class="p">:</span>
+                    <span class="k">continue</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">self_param</span><span class="p">)</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">other_param</span><span class="p">)</span> \
+                   <span class="ow">and</span> <span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">self_param</span><span class="p">,</span> <span class="n">other_param</span><span class="p">,</span>
+                                      <span class="n">atol</span><span class="o">=</span><span class="n">_CUTOFF_PRECISION</span><span class="p">):</span>
+                    <span class="k">continue</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">pass</span>
 
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">self_param</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">other_param</span><span class="p">),</span>
@@ -285,7 +308,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">single_param</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
             <span class="c1"># example: u2(pi/2, sin(pi/4))</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="p">(</span><span class="n">Parameter</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Basic</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="p">(</span><span class="n">ParameterExpression</span><span class="p">,</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Basic</span><span class="p">)):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_param</span><span class="p">)</span>
             <span class="c1"># example: OpenQASM parsed instruction</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">single_param</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
@@ -436,7 +459,59 @@
             <span class="n">name_param</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name_param</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">]))</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="n">name_param</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="n">name_param</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Instruction.broadcast_arguments"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.broadcast_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validation of the arguments.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qargs (List): List of quantum bit arguments.</span>
+<span class="sd">            cargs (List): List of classical bit arguments.</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Tuple(List, List): A tuple with single arguments.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: If the input is not valid. For example, the number of</span>
+<span class="sd">                arguments does not match the gate expectation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                <span class="s1">&#39;The amount of qubit arguments does not match the instruction expectation.&#39;</span><span class="p">)</span>
+
+        <span class="c1">#  [[q[0], q[1]], [c[0], c[1]]] -&gt; [q[0], c[0]], [q[1], c[1]]</span>
+        <span class="n">flat_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qarg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+        <span class="n">flat_cargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">carg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">cargs</span> <span class="k">for</span> <span class="n">carg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="n">flat_cargs</span></div>
+
+    <span class="k">def</span> <span class="nf">_return_repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Instruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">exponent</span><span class="p">),</span> <span class="n">num_qubits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span>
+                           <span class="n">num_clbits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Instruction.repeat"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.repeat">[docs]</a>    <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates an instruction with `gate` repeated `n` amount of times.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n (int): Number of times to repeat the instruction</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Instruction: Containing the definition.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            QiskitError: If n &lt; 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;Repeat can only be called with strictly positive integer.&quot;</span><span class="p">)</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="n">instruction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_repeat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">qargs</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+        <span class="n">cargs</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+        <span class="n">instruction</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">[:],</span> <span class="n">cargs</span><span class="p">[:])]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">instruction</span></div></div>
 </pre></div>
 
         </div>
@@ -475,6 +550,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

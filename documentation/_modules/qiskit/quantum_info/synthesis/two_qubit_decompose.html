@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -160,13 +172,19 @@
   <h1>Source code for qiskit.quantum_info.synthesis.two_qubit_decompose</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name,invalid-sequence-index</span>
-<span class="c1"># pylint: disable=unsupported-assignment-operation</span>
+<span class="c1"># pylint: disable=invalid-name</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Expand 2-qubit Unitary operators into an equivalent</span>
@@ -191,6 +209,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard.cx</span> <span class="k">import</span> <span class="n">CnotGate</span>
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">is_unitary_matrix</span>
+<span class="kn">from</span> <span class="nn">qiskit.quantum_info.synthesis.weyl</span> <span class="k">import</span> <span class="n">weyl_coordinates</span>
 
 <span class="n">_CUTOFF_PRECISION</span> <span class="o">=</span> <span class="mf">1e-12</span>
 
@@ -257,7 +276,7 @@
 
     <span class="c1"># extract the left component</span>
     <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span>
-    <span class="n">special_unitary_matrix</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">special_unitary_matrix</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
     <span class="n">L</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">detL</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">detL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">:</span>
@@ -351,35 +370,35 @@
         <span class="c1"># Flip into Weyl chamber</span>
         <span class="k">if</span> <span class="n">cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi2</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">3</span><span class="o">*</span><span class="n">pi2</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipy</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipy</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipy</span><span class="p">)</span>
+            <span class="n">K1r</span> <span class="o">=</span> <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi2</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">3</span><span class="o">*</span><span class="n">pi2</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipx</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipx</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipx</span><span class="p">)</span>
+            <span class="n">K1r</span> <span class="o">=</span> <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipx</span><span class="p">)</span>
         <span class="n">conjs</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi4</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi2</span><span class="o">-</span><span class="n">cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipy</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">_ipy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K2r</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K2r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipy</span><span class="p">)</span>
+            <span class="n">K2r</span> <span class="o">=</span> <span class="n">_ipy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K2r</span><span class="p">)</span>
             <span class="n">conjs</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi4</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi2</span><span class="o">-</span><span class="n">cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipx</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">_ipx</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K2r</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K2r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipx</span><span class="p">)</span>
+            <span class="n">K2r</span> <span class="o">=</span> <span class="n">_ipx</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K2r</span><span class="p">)</span>
             <span class="n">conjs</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi2</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">3</span><span class="o">*</span><span class="n">pi2</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">)</span>
+            <span class="n">K1r</span> <span class="o">=</span> <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">conjs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi2</span><span class="o">-</span><span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">_ipz</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K2r</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K2r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">)</span>
+            <span class="n">K2r</span> <span class="o">=</span> <span class="n">_ipz</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K2r</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi4</span><span class="p">:</span>
             <span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">pi2</span>
-            <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1l</span><span class="p">)</span>
-            <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">K1r</span><span class="p">)</span>
+            <span class="n">K1l</span> <span class="o">=</span> <span class="n">K1l</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">)</span>
+            <span class="n">K1r</span> <span class="o">=</span> <span class="n">K1r</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_ipz</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -540,7 +559,7 @@
 <span class="sd">        |Tr(Ur.Utarget^dag)| = 4cos(z)</span>
 <span class="sd">        which is the optimal approximation for basis of CNOT-class ~Ud(pi/4, 0, 0)</span>
 <span class="sd">        or DCNOT-class ~Ud(pi/4, pi/4, 0) and any target.</span>
-<span class="sd">        May be sub-optimal for b!=0 (eg there exists exact decomposition for any target using B</span>
+<span class="sd">        May be sub-optimal for b!=0 (e.g. there exists exact decomposition for any target using B</span>
 <span class="sd">                B~Ud(pi/4, pi/8, 0), but not this decomposition.)</span>
 <span class="sd">        This is an exact decomposition for supercontrolled basis and target ~Ud(x, y, 0).</span>
 <span class="sd">        No guarantees for non-supercontrolled basis.&quot;&quot;&quot;</span>
@@ -605,11 +624,28 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">best_nbasis</span><span class="p">):</span>
             <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="o">*</span><span class="n">decomposition_angles</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
             <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="o">*</span><span class="n">decomposition_angles</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-            <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">(),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gate</span><span class="p">,</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
         <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="o">*</span><span class="n">decomposition_angles</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">best_nbasis</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
         <span class="n">return_circuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U3Gate</span><span class="p">(</span><span class="o">*</span><span class="n">decomposition_angles</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">best_nbasis</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
-        <span class="k">return</span> <span class="n">return_circuit</span></div></div>
+        <span class="k">return</span> <span class="n">return_circuit</span></div>
+
+<div class="viewcode-block" id="TwoQubitBasisDecomposer.num_basis_gates"><a class="viewcode-back" href="../../../../api/qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.html#qiskit.quantum_info.synthesis.TwoQubitBasisDecomposer.num_basis_gates">[docs]</a>    <span class="k">def</span> <span class="nf">num_basis_gates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unitary</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Computes the number of basis gates needed in</span>
+<span class="sd">        a decomposition of input unitary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">unitary</span><span class="p">,</span> <span class="s1">&#39;to_operator&#39;</span><span class="p">):</span>
+            <span class="n">unitary</span> <span class="o">=</span> <span class="n">unitary</span><span class="o">.</span><span class="n">to_operator</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">unitary</span><span class="p">,</span> <span class="s1">&#39;to_matrix&#39;</span><span class="p">):</span>
+            <span class="n">unitary</span> <span class="o">=</span> <span class="n">unitary</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">()</span>
+        <span class="n">unitary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">unitary</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">weyl_coordinates</span><span class="p">(</span><span class="n">unitary</span><span class="p">)[:]</span>
+        <span class="n">traces</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">c</span><span class="p">)),</span>
+                  <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">b</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span>
+                     <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">b</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">c</span><span class="p">)),</span>
+                  <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">c</span><span class="p">),</span>
+                  <span class="mi">4</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">trace_to_fid</span><span class="p">(</span><span class="n">traces</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_fidelity</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span></div></div>
 
 
 <span class="n">two_qubit_cnot_decompose</span> <span class="o">=</span> <span class="n">TwoQubitBasisDecomposer</span><span class="p">(</span><span class="n">CnotGate</span><span class="p">())</span>
@@ -651,6 +687,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

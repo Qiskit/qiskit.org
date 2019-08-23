@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -175,12 +187,13 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Sample pulse.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.pulse.channels</span> <span class="k">import</span> <span class="n">PulseChannel</span>
 <span class="kn">from</span> <span class="nn">qiskit.pulse.exceptions</span> <span class="k">import</span> <span class="n">PulseError</span>
+
 <span class="kn">from</span> <span class="nn">.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
 <span class="kn">from</span> <span class="nn">.command</span> <span class="k">import</span> <span class="n">Command</span>
 
@@ -188,83 +201,117 @@
 <div class="viewcode-block" id="SamplePulse"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse">[docs]</a><span class="k">class</span> <span class="nc">SamplePulse</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Container for functional pulse.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">complex</span><span class="p">]],</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new sample pulse command.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            samples (Union[np.ndarray, List[Complex]]): Complex array of pulse envelope.</span>
-<span class="sd">            name (str): Unique name to identify the pulse.</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            PulseError: when pulse envelope amplitude exceeds 1.</span>
+<span class="sd">            samples: Complex array of pulse envelope</span>
+<span class="sd">            name: Unique name to identify the pulse</span>
+<span class="sd">            epsilon: Pulse sample norm tolerance for clipping.</span>
+<span class="sd">                If any sample&#39;s norm exceeds unity by less than or equal to epsilon</span>
+<span class="sd">                it will be clipped to unit norm. If the sample</span>
+<span class="sd">                norm is greater than 1+epsilon an error will be raised</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">PulseError</span><span class="p">(</span><span class="s1">&#39;Absolute value of pulse envelope amplitude exceeds 1.&#39;</span><span class="p">)</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clip</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">SamplePulse</span><span class="o">.</span><span class="n">create_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return sample values.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samples</span>
 
-<div class="viewcode-block" id="SamplePulse.draw"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse.draw">[docs]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-             <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">interp_method</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_clip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If samples are within epsilon of unit norm, clip sample by reducing norm by (1-epsilon).</span>
+
+<span class="sd">        If difference is greater than epsilon error is raised.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            samples: Complex array of pulse envelope</span>
+<span class="sd">            epsilon: Pulse sample norm tolerance for clipping.</span>
+<span class="sd">                If any sample&#39;s norm exceeds unity by less than or equal to epsilon</span>
+<span class="sd">                it will be clipped to unit norm. If the sample</span>
+<span class="sd">                norm is greater than 1+epsilon an error will be raised</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: Clipped pulse samples</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            PulseError: If there exists a pulse sample with a norm greater than 1+epsilon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">samples_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+        <span class="n">to_clip</span> <span class="o">=</span> <span class="p">(</span><span class="n">samples_norm</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">samples_norm</span> <span class="o">&lt;=</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">to_clip</span><span class="p">):</span>
+            <span class="n">clip_where</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">to_clip</span><span class="p">)</span>
+            <span class="n">clipped_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">clip_where</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+            <span class="n">samples</span><span class="p">[</span><span class="n">clip_where</span><span class="p">]</span> <span class="o">=</span> <span class="n">clipped_samples</span>
+            <span class="n">samples_norm</span><span class="p">[</span><span class="n">clip_where</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">clipped_samples</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">samples_norm</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PulseError</span><span class="p">(</span><span class="s1">&#39;Pulse contains sample with norm greater than 1+epsilon.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">samples</span>
+
+<div class="viewcode-block" id="SamplePulse.draw"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse.draw">[docs]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PulseStyle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">interp_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">scaling</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">interactive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot the interpolated envelope of pulse.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            dt: Time interval of samples.</span>
-<span class="sd">            style (OPStylePulse): A style sheet to configure plot appearance</span>
+<span class="sd">            style: A style sheet to configure plot appearance</span>
 <span class="sd">            filename: Name required to save pulse image</span>
 <span class="sd">            interp_method: A function for interpolation</span>
-<span class="sd">            scaling (float): Relative visual scaling of waveform amplitudes</span>
+<span class="sd">            scaling: Relative visual scaling of waveform amplitudes</span>
 <span class="sd">            interactive: When set true show the circuit in a new window</span>
 <span class="sd">                (this depends on the matplotlib backend being used supporting this)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            matplotlib.figure: A matplotlib figure object of the pulse envelope.</span>
+<span class="sd">            matplotlib.figure: A matplotlib figure object of the pulse envelope</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=invalid-name, cyclic-import</span>
 
-        <span class="kn">from</span> <span class="nn">qiskit.tools</span> <span class="k">import</span> <span class="n">visualization</span>
+        <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">visualization</span>
 
         <span class="k">return</span> <span class="n">visualization</span><span class="o">.</span><span class="n">pulse_drawer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
                                           <span class="n">interp_method</span><span class="o">=</span><span class="n">interp_method</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="n">scaling</span><span class="p">,</span>
                                           <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;SamplePulse&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Two SamplePulses are the same if they are of the same type</span>
 <span class="sd">        and have the same name and samples.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            other (SamplePulse): other SamplePulse</span>
+<span class="sd">            other: other SamplePulse</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            bool: are self and other equal.</span>
+<span class="sd">            bool: are self and other equal</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> \
-                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_samples</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_samples</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">samples</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samples</span><span class="o">.</span><span class="n">tostring</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="o">.</span><span class="n">tostring</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">, duration=</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
 
     <span class="c1"># pylint: disable=arguments-differ</span>
-<div class="viewcode-block" id="SamplePulse.to_instruction"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse.to_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">PulseChannel</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulseInstruction&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="SamplePulse.to_instruction"><a class="viewcode-back" href="../../../../api/qiskit.pulse.SamplePulse.html#qiskit.pulse.SamplePulse.to_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">PulseChannel</span><span class="p">,</span>
+                       <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulseInstruction&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">PulseInstruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div></div>
     <span class="c1"># pylint: enable=arguments-differ</span>
 
 
 <span class="k">class</span> <span class="nc">PulseInstruction</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Instruction to drive a pulse to an `PulseChannel`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Instruction to drive a pulse to an `PulseChannel`.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">SamplePulse</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">PulseChannel</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">SamplePulse</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">PulseChannel</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 
@@ -304,6 +351,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

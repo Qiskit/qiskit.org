@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -186,6 +198,7 @@
 <span class="kn">import</span> <span class="nn">qiskit</span>
 <span class="kn">from</span> <span class="nn">qiskit.validation.base</span> <span class="k">import</span> <span class="n">Obj</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools</span> <span class="k">import</span> <span class="n">parallel_map</span>
 <span class="kn">from</span> <span class="nn">...verification.tomography</span> <span class="k">import</span> <span class="n">count_keys</span>
 
 
@@ -302,12 +315,14 @@
             <span class="c1"># counts and push back into the new result</span>
             <span class="n">new_result</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
 
-            <span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_data</span><span class="o">.</span><span class="n">results</span><span class="p">):</span>
-                <span class="n">new_counts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-                    <span class="n">raw_data</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">resultidx</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="n">new_counts_list</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_apply_correction</span><span class="p">,</span>
+                <span class="p">[</span><span class="n">resultidx</span> <span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_data</span><span class="o">.</span><span class="n">results</span><span class="p">)],</span>
+                <span class="n">task_args</span><span class="o">=</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">new_counts</span> <span class="ow">in</span> <span class="n">new_counts_list</span><span class="p">:</span>
                 <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">counts</span> <span class="o">=</span> \
-                    <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span> \
-                    <span class="n">data</span><span class="o">.</span><span class="n">counts</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">new_counts</span><span class="p">)</span>
+                    <span class="n">Obj</span><span class="p">(</span><span class="o">**</span><span class="n">new_counts</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">new_result</span>
 
@@ -357,7 +372,16 @@
             <span class="c1"># TODO: should probably change to:</span>
             <span class="c1"># raw_data2 = raw_data2[0].tolist()</span>
             <span class="n">raw_data2</span> <span class="o">=</span> <span class="n">raw_data2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">raw_data2</span></div></div>
+        <span class="k">return</span> <span class="n">raw_data2</span></div>
+
+    <span class="k">def</span> <span class="nf">_apply_correction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">raw_data</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper to call apply with a counts dictionary</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_counts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="n">raw_data</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">resultidx</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">new_counts</span></div>
 
 
 <div class="viewcode-block" id="TensoredFilter"><a class="viewcode-back" href="../../../../../api/qiskit.ignis.mitigation.measurement.TensoredFilter.html#qiskit.ignis.mitigation.measurement.TensoredFilter">[docs]</a><span class="k">class</span> <span class="nc">TensoredFilter</span><span class="p">():</span>
@@ -466,9 +490,12 @@
             <span class="c1"># counts and push back into the new result</span>
             <span class="n">new_result</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
 
-            <span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_data</span><span class="o">.</span><span class="n">results</span><span class="p">):</span>
-                <span class="n">new_counts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-                    <span class="n">raw_data</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">resultidx</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="n">new_counts_list</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_apply_correction</span><span class="p">,</span>
+                <span class="p">[</span><span class="n">resultidx</span> <span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_data</span><span class="o">.</span><span class="n">results</span><span class="p">)],</span>
+                <span class="n">task_args</span><span class="o">=</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">new_counts</span> <span class="ow">in</span> <span class="n">new_counts_list</span><span class="p">:</span>
                 <span class="n">new_result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">resultidx</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">counts</span> <span class="o">=</span> \
                     <span class="n">Obj</span><span class="p">(</span><span class="o">**</span><span class="n">new_counts</span><span class="p">)</span>
 
@@ -568,7 +595,16 @@
             <span class="k">if</span> <span class="n">raw_data2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">state_idx</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">new_count_dict</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_data2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">state_idx</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="n">new_count_dict</span></div></div>
+        <span class="k">return</span> <span class="n">new_count_dict</span></div>
+
+    <span class="k">def</span> <span class="nf">_apply_correction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">raw_data</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper to call apply with a counts dictionary</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_counts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="n">raw_data</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">resultidx</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resultidx</span><span class="p">,</span> <span class="n">new_counts</span></div>
 </pre></div>
 
         </div>
@@ -607,6 +643,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -216,7 +228,7 @@
         <span class="sd">&quot;&quot;&quot;Get the raw data for an experiment.</span>
 
 <span class="sd">        Note this data will be a single classical and quantum register and in a</span>
-<span class="sd">        format required by the results schema. We recomened that most users use</span>
+<span class="sd">        format required by the results schema. We recommend that most users use</span>
 <span class="sd">        the get_xxx method, and the data will be post-processed for the data type.</span>
 
 <span class="sd">        Args:</span>
@@ -278,13 +290,15 @@
 <span class="sd">            List[str] or np.ndarray: Either the list of each outcome, formatted according to</span>
 <span class="sd">                registers in circuit or a complex numpy np.darray with shape:</span>
 
-<span class="sd">                | `meas_level` | `meas_return` | shape                                             |</span>
-<span class="sd">                |--------------|---------------|---------------------------------------------------|</span>
-<span class="sd">                | 0            | `single`      | np.ndarray[shots, memory_slots, memory_slot_size] |</span>
-<span class="sd">                | 0            | `avg`         | np.ndarray[memory_slots, memory_slot_size]        |</span>
-<span class="sd">                | 1            | `single`      | np.ndarray[shots, memory_slots]                   |</span>
-<span class="sd">                | 1            | `avg`         | np.ndarray[memory_slots]                          |</span>
-<span class="sd">                | 2            | `memory=True` | list                                              |</span>
+<span class="sd">                ============  =============  =====</span>
+<span class="sd">                `meas_level`  `meas_return`  shape</span>
+<span class="sd">                ============  =============  =====</span>
+<span class="sd">                0             `single`       np.ndarray[shots, memory_slots, memory_slot_size]</span>
+<span class="sd">                0             `avg`          np.ndarray[memory_slots, memory_slot_size]</span>
+<span class="sd">                1             `single`       np.ndarray[shots, memory_slots]</span>
+<span class="sd">                1             `avg`          np.ndarray[memory_slots]</span>
+<span class="sd">                2             `memory=True`  list</span>
+<span class="sd">                ============  =============  =====</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if there is no memory data for the circuit.</span>
@@ -465,6 +479,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '/documentation';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>
