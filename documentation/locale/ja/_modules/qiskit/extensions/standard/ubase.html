@@ -195,7 +195,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 
 
-<div class="viewcode-block" id="UBase"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase">[ドキュメント]</a><span class="k">class</span> <span class="nc">UBase</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
+<div class="viewcode-block" id="UBase"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.ubase.html#qiskit.circuit.UBase">[ドキュメント]</a><span class="k">class</span> <span class="nc">UBase</span><span class="p">(</span><span class="n">Gate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Element of SU(2).&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
@@ -203,7 +203,7 @@
                       <span class="s1">&#39;Use U3Gate instead.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">])</span>
 
-<div class="viewcode-block" id="UBase.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UBase.inverse"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.ubase.html#qiskit.circuit.UBase.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this gate.</span>
 
 <span class="sd">        U(theta,phi,lambda)^dagger = U(-theta,-lambda,-phi)</span>
@@ -213,7 +213,7 @@
                       <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">UBase</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="UBase.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.UBase.html#qiskit.circuit.UBase.to_matrix">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UBase.to_matrix"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.ubase.html#qiskit.circuit.UBase.to_matrix">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a Numpy.array for the U3 gate.&quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;UBase.to_matrix is deprecated and it will be removed after 0.9.&#39;</span>
                       <span class="s1">&#39;Use U3Gate.to_matrix instead.&#39;</span><span class="p">,</span>
@@ -232,9 +232,9 @@
             <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span></div></div>
 
 
-<span class="k">def</span> <span class="nf">u_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<div class="viewcode-block" id="u_base"><a class="viewcode-back" href="../../../../api/qiskit.extensions.standard.ubase.html#qiskit.circuit.u_base">[ドキュメント]</a><span class="k">def</span> <span class="nf">u_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Apply U to q.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UBase</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UBase</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lam</span><span class="p">),</span> <span class="p">[</span><span class="n">q</span><span class="p">],</span> <span class="p">[])</span></div>
 
 
 <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">u_base</span> <span class="o">=</span> <span class="n">u_base</span>

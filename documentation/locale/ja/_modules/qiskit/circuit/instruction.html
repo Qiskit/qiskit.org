@@ -220,7 +220,7 @@
 <span class="n">_CUTOFF_PRECISION</span> <span class="o">=</span> <span class="mf">1E-10</span>
 
 
-<div class="viewcode-block" id="Instruction"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction">[ドキュメント]</a><span class="k">class</span> <span class="nc">Instruction</span><span class="p">:</span>
+<div class="viewcode-block" id="Instruction"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction">[ドキュメント]</a><span class="k">class</span> <span class="nc">Instruction</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Generic quantum instruction.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
@@ -350,7 +350,7 @@
         <span class="sd">&quot;&quot;&quot;Set matrix representation&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_definition</span> <span class="o">=</span> <span class="n">array</span>
 
-<div class="viewcode-block" id="Instruction.assemble"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.assemble">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.assemble"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.assemble">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assemble a QasmQobjInstruction&quot;&quot;&quot;</span>
         <span class="n">instruction</span> <span class="o">=</span> <span class="n">QasmQobjInstruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="c1"># Evaluate parameters</span>
@@ -375,7 +375,7 @@
             <span class="n">instruction</span><span class="o">.</span><span class="n">_control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span>
         <span class="k">return</span> <span class="n">instruction</span></div>
 
-<div class="viewcode-block" id="Instruction.mirror"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.mirror">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.mirror"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.mirror">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;For a composite instruction, reverse the order of sub-gates.</span>
 
 <span class="sd">        This is done by recursively mirroring all sub-instructions.</span>
@@ -393,7 +393,7 @@
             <span class="n">reverse_inst</span><span class="o">.</span><span class="n">_definition</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">mirror</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">reverse_inst</span></div>
 
-<div class="viewcode-block" id="Instruction.inverse"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.inverse"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.inverse">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Invert this instruction.</span>
 
 <span class="sd">        If the instruction is composite (i.e. has a definition),</span>
@@ -417,7 +417,7 @@
             <span class="n">inverse_gate</span><span class="o">.</span><span class="n">_definition</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">inverse</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">inverse_gate</span></div>
 
-<div class="viewcode-block" id="Instruction.c_if"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.c_if">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.c_if"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.c_if">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">c_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add classical control on register classical and value val.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">ClassicalRegister</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;c_if must be used with a classical register&quot;</span><span class="p">)</span>
@@ -426,7 +426,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">control</span> <span class="o">=</span> <span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="Instruction.copy"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.copy">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.copy"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.copy">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shallow copy of the instruction.</span>
 
@@ -449,7 +449,7 @@
             <span class="k">return</span> <span class="n">string</span>
         <span class="k">return</span> <span class="s2">&quot;if(</span><span class="si">%s</span><span class="s2">==</span><span class="si">%d</span><span class="s2">) &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">string</span>
 
-<div class="viewcode-block" id="Instruction.qasm"><a class="viewcode-back" href="../../../api/qiskit.circuit.Instruction.html#qiskit.circuit.Instruction.qasm">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.qasm"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.qasm">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">qasm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a default OpenQASM string for the instruction.</span>
 
 <span class="sd">        Derived instructions may override this to print in a</span>
@@ -462,7 +462,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qasmif</span><span class="p">(</span><span class="n">name_param</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.broadcast_arguments"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.broadcast_arguments">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">broadcast_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Validation of the arguments.</span>
 
@@ -484,13 +484,13 @@
         <span class="c1">#  [[q[0], q[1]], [c[0], c[1]]] -&gt; [q[0], c[0]], [q[1], c[1]]</span>
         <span class="n">flat_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qarg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
         <span class="n">flat_cargs</span> <span class="o">=</span> <span class="p">[</span><span class="n">carg</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">cargs</span> <span class="k">for</span> <span class="n">carg</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
-        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="n">flat_cargs</span>
+        <span class="k">yield</span> <span class="n">flat_qargs</span><span class="p">,</span> <span class="n">flat_cargs</span></div>
 
     <span class="k">def</span> <span class="nf">_return_repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Instruction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">exponent</span><span class="p">),</span> <span class="n">num_qubits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span>
                            <span class="n">num_clbits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="Instruction.repeat"><a class="viewcode-back" href="../../../api/qiskit.circuit.instruction.html#qiskit.circuit.Instruction.repeat">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates an instruction with `gate` repeated `n` amount of times.</span>
 
 <span class="sd">        Args:</span>
@@ -512,7 +512,7 @@
         <span class="n">cargs</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
 
         <span class="n">instruction</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">[:],</span> <span class="n">cargs</span><span class="p">[:])]</span> <span class="o">*</span> <span class="n">n</span>
-        <span class="k">return</span> <span class="n">instruction</span></div>
+        <span class="k">return</span> <span class="n">instruction</span></div></div>
 </pre></div>
 
         </div>

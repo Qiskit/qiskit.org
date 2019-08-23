@@ -207,7 +207,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<span class="k">class</span> <span class="nc">QobjSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="QobjSchema"><a class="viewcode-back" href="../../../api/qiskit.qobj.qobj.html#qiskit.qobj.QobjSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">QobjSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for Qobj.&quot;&quot;&quot;</span>
     <span class="c1"># Required properties.</span>
     <span class="n">qobj_id</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -217,10 +217,10 @@
     <span class="n">config</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QobjConfigSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">experiments</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QobjExperimentSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">header</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QobjHeaderSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">,</span> <span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">)))</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">OneOf</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">,</span> <span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">)))</span></div>
 
 
-<span class="k">class</span> <span class="nc">QasmQobjSchema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="QasmQobjSchema"><a class="viewcode-back" href="../../../api/qiskit.qobj.qobj.html#qiskit.qobj.QasmQobjSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">QasmQobjSchema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for QasmQobj.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required properties.</span>
@@ -228,10 +228,10 @@
     <span class="n">experiments</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">QasmQobjExperimentSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Equal</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">),</span>
-                  <span class="n">missing</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">)</span>
+                  <span class="n">missing</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">QASM</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">PulseQobjSchema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="PulseQobjSchema"><a class="viewcode-back" href="../../../api/qiskit.qobj.qobj.html#qiskit.qobj.PulseQobjSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">PulseQobjSchema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for PulseQobj.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required properties.</span>
@@ -239,10 +239,10 @@
     <span class="n">experiments</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">PulseQobjExperimentSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">Equal</span><span class="p">(</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">),</span>
-                  <span class="n">missing</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">)</span>
+                  <span class="n">missing</span><span class="o">=</span><span class="n">QobjType</span><span class="o">.</span><span class="n">PULSE</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Qobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.Qobj.html#qiskit.qobj.Qobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="Qobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.qobj.html#qiskit.qobj.Qobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">QobjSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Qobj</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for Qobj.</span>
 
@@ -268,7 +268,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="QasmQobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.QasmQobj.html#qiskit.qobj.QasmQobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">QasmQobjSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="QasmQobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.qobj.html#qiskit.qobj.QasmQobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">QasmQobjSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">QasmQobj</span><span class="p">(</span><span class="n">Qobj</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for QasmQobj inherit from Qobj.</span>
 
@@ -294,7 +294,7 @@
                          <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="PulseQobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.PulseQobj.html#qiskit.qobj.PulseQobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">PulseQobjSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="PulseQobj"><a class="viewcode-back" href="../../../api/qiskit.qobj.qobj.html#qiskit.qobj.PulseQobj">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">PulseQobjSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">PulseQobj</span><span class="p">(</span><span class="n">Qobj</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for PulseQobj inherit from Qobj.</span>
 
