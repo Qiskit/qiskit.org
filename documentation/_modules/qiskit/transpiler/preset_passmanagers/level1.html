@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -172,8 +184,6 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=unused-variable</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Level 1 pass manager:</span>
 <span class="sd">mapping in addition to light optimization via adjacent gate collapse</span>
@@ -183,21 +193,23 @@
 <span class="kn">from</span> <span class="nn">qiskit.extensions.standard</span> <span class="k">import</span> <span class="n">SwapGate</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">Unroller</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">Unroll3qOrMore</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">CXCancellation</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">Decompose</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">CheckMap</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">CXDirection</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">SetLayout</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">TrivialLayout</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">DenseLayout</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">BarrierBeforeFinalMeasurements</span>
-<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">LegacySwap</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">StochasticSwap</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">FullAncillaAllocation</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">EnlargeWithAncilla</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">FixedPoint</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">Depth</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">RemoveResetInZeroState</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">Optimize1qGates</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">ApplyLayout</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler.passes</span> <span class="k">import</span> <span class="n">CheckCXDirection</span>
 
 
 <div class="viewcode-block" id="level_1_pass_manager"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.preset_passmanagers.level_1_pass_manager.html#qiskit.transpiler.preset_passmanagers.level_1_pass_manager">[docs]</a><span class="k">def</span> <span class="nf">level_1_pass_manager</span><span class="p">(</span><span class="n">transpile_config</span><span class="p">):</span>
@@ -236,38 +248,35 @@
     <span class="c1"># 2. Use a better layout on densely connected qubits, if circuit needs swaps</span>
     <span class="n">_layout_check</span> <span class="o">=</span> <span class="n">CheckMap</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_improve_layout_condition</span><span class="p">(</span><span class="n">property_set</span><span class="p">):</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="n">property_set</span><span class="p">[</span><span class="s1">&#39;is_swap_mapped&#39;</span><span class="p">]</span>
+    <span class="c1"># 3. Extend dag/layout with ancillas using the full coupling map</span>
+    <span class="n">_embed</span> <span class="o">=</span> <span class="p">[</span><span class="n">FullAncillaAllocation</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">),</span> <span class="n">EnlargeWithAncilla</span><span class="p">(),</span> <span class="n">ApplyLayout</span><span class="p">()]</span>
 
-    <span class="n">_improve_layout</span> <span class="o">=</span> <span class="n">DenseLayout</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
-
-    <span class="c1"># 2. Extend dag/layout with ancillas using the full coupling map</span>
-    <span class="n">_embed</span> <span class="o">=</span> <span class="p">[</span><span class="n">FullAncillaAllocation</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">),</span> <span class="n">EnlargeWithAncilla</span><span class="p">()]</span>
-
-    <span class="c1"># 3. Unroll to the basis</span>
+    <span class="c1"># 4. Unroll to the basis</span>
     <span class="n">_unroll</span> <span class="o">=</span> <span class="n">Unroller</span><span class="p">(</span><span class="n">basis_gates</span><span class="p">)</span>
 
-    <span class="c1"># 4. Swap to fit the coupling map</span>
+    <span class="c1"># 5. Swap to fit the coupling map</span>
     <span class="n">_swap_check</span> <span class="o">=</span> <span class="n">CheckMap</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_swap_condition</span><span class="p">(</span><span class="n">property_set</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">property_set</span><span class="p">[</span><span class="s1">&#39;is_swap_mapped&#39;</span><span class="p">]</span>
 
     <span class="n">_swap</span> <span class="o">=</span> <span class="p">[</span><span class="n">BarrierBeforeFinalMeasurements</span><span class="p">(),</span>
-             <span class="n">LegacySwap</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed_transpiler</span><span class="p">),</span>
+             <span class="n">Unroll3qOrMore</span><span class="p">(),</span>
+             <span class="n">StochasticSwap</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed_transpiler</span><span class="p">),</span>
              <span class="n">Decompose</span><span class="p">(</span><span class="n">SwapGate</span><span class="p">)]</span>
 
-    <span class="c1"># 5. Fix any bad CX directions</span>
-    <span class="c1"># _direction_check = CheckCXDirection(coupling_map)  # TODO</span>
+    <span class="c1"># 6. Fix any bad CX directions</span>
+    <span class="n">_direction_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">CheckCXDirection</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)]</span>
+
     <span class="k">def</span> <span class="nf">_direction_condition</span><span class="p">(</span><span class="n">property_set</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">property_set</span><span class="p">[</span><span class="s1">&#39;is_direction_mapped&#39;</span><span class="p">]</span>
 
     <span class="n">_direction</span> <span class="o">=</span> <span class="p">[</span><span class="n">CXDirection</span><span class="p">(</span><span class="n">coupling_map</span><span class="p">)]</span>
 
-    <span class="c1"># 6. Remove zero-state reset</span>
+    <span class="c1"># 7. Remove zero-state reset</span>
     <span class="n">_reset</span> <span class="o">=</span> <span class="n">RemoveResetInZeroState</span><span class="p">()</span>
 
-    <span class="c1"># 7. Merge 1q rotations and cancel CNOT gates iteratively until no more change in depth</span>
+    <span class="c1"># 8. Merge 1q rotations and cancel CNOT gates iteratively until no more change in depth</span>
     <span class="n">_depth_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">Depth</span><span class="p">(),</span> <span class="n">FixedPoint</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="nf">_opt_control</span><span class="p">(</span><span class="n">property_set</span><span class="p">):</span>
@@ -280,14 +289,14 @@
         <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_given_layout</span><span class="p">)</span>
         <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_choose_layout</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">_choose_layout_condition</span><span class="p">)</span>
         <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_layout_check</span><span class="p">)</span>
-        <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_improve_layout</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">_improve_layout_condition</span><span class="p">)</span>
         <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_embed</span><span class="p">)</span>
     <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_unroll</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">coupling_map</span><span class="p">:</span>
         <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_swap_check</span><span class="p">)</span>
         <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_swap</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">_swap_condition</span><span class="p">)</span>
-        <span class="c1"># pm1.append(_direction_check)  # TODO</span>
-        <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_direction</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">_direction_condition</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">coupling_map</span><span class="o">.</span><span class="n">is_symmetric</span><span class="p">:</span>
+            <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_direction_check</span><span class="p">)</span>
+            <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_direction</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">_direction_condition</span><span class="p">)</span>
     <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_reset</span><span class="p">)</span>
     <span class="n">pm1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_depth_check</span> <span class="o">+</span> <span class="n">_opt</span><span class="p">,</span> <span class="n">do_while</span><span class="o">=</span><span class="n">_opt_control</span><span class="p">)</span>
 
@@ -330,6 +339,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

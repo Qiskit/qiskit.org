@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.pulse.pulse_lib.discrete &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+        <a class="external" href="/vscode">Tools</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+    <select id="language" name="languages">
+        <option value="en">English</option>
+        <option value="ja">Japanese</option>
+    </select>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+    <select id="language" name="languages">
+        <option value="en">English</option>
+        <option value="ja">Japanese</option>
+    </select>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.pulse.pulse_lib.discrete のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="c1"># pylint: disable=missing-return-doc, invalid-name</span>
+
+<span class="sd">&quot;&quot;&quot;Module for builtin discrete pulses.</span>
+
+<span class="sd">Note the sampling strategy use for all discrete pulses is `left`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">qiskit.pulse.commands</span> <span class="k">import</span> <span class="n">SamplePulse</span>
+<span class="kn">from</span> <span class="nn">qiskit.pulse.pulse_lib</span> <span class="k">import</span> <span class="n">continuous</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">samplers</span>
+
+
+<span class="n">_sampled_constant_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">constant</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="constant"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.constant">[ドキュメント]</a><span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates constant-sampled `SamplePulse`.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Complex pulse amplitude.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_sampled_constant_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_zero_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="zero"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.zero">[ドキュメント]</a><span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates zero-sampled `SamplePulse`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_sampled_zero_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_square_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">square</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="square"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.square">[ドキュメント]</a><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+           <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates square wave `SamplePulse`.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude. Wave range is [-amp, amp].</span>
+<span class="sd">        period: Pulse period, units of dt. If `None` defaults to single cycle.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="n">duration</span>
+
+    <span class="k">return</span> <span class="n">_sampled_square_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_sawtooth_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">sawtooth</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sawtooth"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.sawtooth">[ドキュメント]</a><span class="k">def</span> <span class="nf">sawtooth</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates sawtooth wave `SamplePulse`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude. Wave range is [-amp, amp].</span>
+<span class="sd">        period: Pulse period, units of dt. If `None` defaults to single cycle.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="n">duration</span>
+
+    <span class="k">return</span> <span class="n">_sampled_sawtooth_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_triangle_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">triangle</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="triangle"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.triangle">[ドキュメント]</a><span class="k">def</span> <span class="nf">triangle</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates triangle wave `SamplePulse`.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude. Wave range is [-amp, amp].</span>
+<span class="sd">        period: Pulse period, units of dt. If `None` defaults to single cycle.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="n">duration</span>
+
+    <span class="k">return</span> <span class="n">_sampled_triangle_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_cos_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">cos</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="cos"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.cos">[ドキュメント]</a><span class="k">def</span> <span class="nf">cos</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates cosine wave `SamplePulse`.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude.</span>
+<span class="sd">        freq: Pulse frequency, units of 1/dt. If `None` defaults to single cycle.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">duration</span>
+
+    <span class="k">return</span> <span class="n">_sampled_cos_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_sin_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">sin</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sin"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.sin">[ドキュメント]</a><span class="k">def</span> <span class="nf">sin</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates sine wave `SamplePulse`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude.</span>
+<span class="sd">        freq: Pulse frequency, units of 1/dt. If `None` defaults to single cycle.</span>
+<span class="sd">        phase: Pulse phase.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">duration</span>
+
+    <span class="k">return</span> <span class="n">_sampled_sin_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_gaussian_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">gaussian</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="gaussian"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.gaussian">[ドキュメント]</a><span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates unnormalized gaussian `SamplePulse`.</span>
+
+<span class="sd">    Centered at `duration/2` and zeroed at `t=-1` to prevent large initial discontinuity.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Integrated area under curve is $\Omega_g(amp, sigma) = amp \times np.sqrt(2\pi \sigma^2)$</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude at `duration/2`.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">zeroed_width</span> <span class="o">=</span> <span class="n">duration</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">_sampled_gaussian_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span>
+                                   <span class="n">zeroed_width</span><span class="o">=</span><span class="n">zeroed_width</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_gaussian_deriv_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">gaussian_deriv</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="gaussian_deriv"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.gaussian_deriv">[ドキュメント]</a><span class="k">def</span> <span class="nf">gaussian_deriv</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates unnormalized gaussian derivative `SamplePulse`.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude at `center`.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">_sampled_gaussian_deriv_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_sech_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">sech</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sech"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.sech">[ドキュメント]</a><span class="k">def</span> <span class="nf">sech</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates unnormalized sech `SamplePulse`.</span>
+
+<span class="sd">    Centered at `duration/2` and zeroed at `t=-1` to prevent large initial discontinuity.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude at `duration/2`.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">_sampled_sech_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span>
+                               <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_sech_deriv_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">sech_deriv</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="sech_deriv"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.sech_deriv">[ドキュメント]</a><span class="k">def</span> <span class="nf">sech_deriv</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates unnormalized sech derivative `SamplePulse`.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude at `center`.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">_sampled_sech_deriv_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_gaussian_square_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">gaussian_square</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="gaussian_square"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.gaussian_square">[ドキュメント]</a><span class="k">def</span> <span class="nf">gaussian_square</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                    <span class="n">risefall</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates gaussian square `SamplePulse`.</span>
+
+<span class="sd">    Centered at `duration/2` and zeroed at `t=-1` and `t=duration+1` to prevent</span>
+<span class="sd">    large initial/final discontinuities.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude.</span>
+<span class="sd">        sigma: Width (standard deviation) of gaussian rise/fall portion of the pulse.</span>
+<span class="sd">        risefall: Number of samples over which pulse rise and fall happen. Width of</span>
+<span class="sd">            square portion of pulse will be `duration-2*risefall`.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">duration</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">risefall</span>
+    <span class="n">zeroed_width</span> <span class="o">=</span> <span class="n">duration</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">_sampled_gaussian_square_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span>
+                                          <span class="n">zeroed_width</span><span class="o">=</span><span class="n">zeroed_width</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="n">_sampled_drag_pulse</span> <span class="o">=</span> <span class="n">samplers</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">continuous</span><span class="o">.</span><span class="n">drag</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="drag"><a class="viewcode-back" href="../../../../api/qiskit.pulse.pulse_lib.discrete.html#qiskit.pulse.pulse_lib.discrete.drag">[ドキュメント]</a><span class="k">def</span> <span class="nf">drag</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplePulse</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates Y-only correction DRAG `SamplePulse` for standard nonlinear oscillator (SNO) [1].</span>
+
+<span class="sd">    Centered at `duration/2` and zeroed at `t=-1` to prevent large initial discontinuity.</span>
+
+<span class="sd">    Applies `left` sampling strategy to generate discrete pulse from continuous function.</span>
+
+<span class="sd">    [1] Gambetta, J. M., Motzoi, F., Merkel, S. T. &amp; Wilhelm, F. K.</span>
+<span class="sd">        Analytic control methods for high-fidelity unitary operations</span>
+<span class="sd">        in a weakly nonlinear oscillator. Phys. Rev. A 83, 012308 (2011).</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        duration: Duration of pulse. Must be greater than zero.</span>
+<span class="sd">        amp: Pulse amplitude at `center`.</span>
+<span class="sd">        sigma: Width (standard deviation) of pulse.</span>
+<span class="sd">        beta: Y correction amplitude. For the SNO this is $\beta=-\frac{\lambda_1^2}{4\Delta_2}$.</span>
+<span class="sd">            Where $\lambds_1$ is the relative coupling strength between the first excited and second</span>
+<span class="sd">            excited states and $\Delta_2$ is the detuning between the respective excited states.</span>
+<span class="sd">        name: Name of pulse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">zeroed_width</span> <span class="o">=</span> <span class="n">duration</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">_sampled_drag_pulse</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span>
+                               <span class="n">zeroed_width</span><span class="o">=</span><span class="n">zeroed_width</span><span class="p">,</span> <span class="n">rescale_amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+               getDefaultLanguage() : match[2];
+      }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>
