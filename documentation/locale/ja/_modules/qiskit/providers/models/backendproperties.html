@@ -193,17 +193,17 @@
 <span class="kn">from</span> <span class="nn">qiskit.validation.fields</span> <span class="k">import</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Nested</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Integer</span>
 
 
-<span class="k">class</span> <span class="nc">NduvSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="NduvSchema"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.backendproperties.html#qiskit.providers.models.NduvSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">NduvSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for name-date-unit-value.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required properties.</span>
     <span class="n">date</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">unit</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">Number</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">Number</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">GateSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="GateSchema"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.backendproperties.html#qiskit.providers.models.GateSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">GateSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for Gate.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required properties.</span>
@@ -211,10 +211,10 @@
                   <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">gate</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">parameters</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">NduvSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                        <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
 
 
-<span class="k">class</span> <span class="nc">BackendPropertiesSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
+<div class="viewcode-block" id="BackendPropertiesSchema"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.backendproperties.html#qiskit.providers.models.BackendPropertiesSchema">[ドキュメント]</a><span class="k">class</span> <span class="nc">BackendPropertiesSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Schema for BackendProperties.&quot;&quot;&quot;</span>
 
     <span class="c1"># Required properties.</span>
@@ -227,10 +227,10 @@
                   <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">gates</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">GateSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                    <span class="n">validate</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">general</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">NduvSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">general</span> <span class="o">=</span> <span class="n">Nested</span><span class="p">(</span><span class="n">NduvSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<span class="nd">@bind_schema</span><span class="p">(</span><span class="n">NduvSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="Nduv"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.backendproperties.html#qiskit.providers.models.Nduv">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">NduvSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Nduv</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for name-date-unit-value.</span>
 
@@ -250,10 +250,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<span class="nd">@bind_schema</span><span class="p">(</span><span class="n">GateSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="Gate"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.backendproperties.html#qiskit.providers.models.Gate">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">GateSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Gate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for Gate.</span>
 
@@ -271,10 +271,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gate</span> <span class="o">=</span> <span class="n">gate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="BackendProperties"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">BackendPropertiesSchema</span><span class="p">)</span>
+<div class="viewcode-block" id="BackendProperties"><a class="viewcode-back" href="../../../../api/qiskit.providers.models.backendproperties.html#qiskit.providers.models.BackendProperties">[ドキュメント]</a><span class="nd">@bind_schema</span><span class="p">(</span><span class="n">BackendPropertiesSchema</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">BackendProperties</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model for BackendProperties.</span>
 

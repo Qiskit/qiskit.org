@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif" rel="stylesheet">
+    <script>
+          /* Define digital data object based on _appInfo object */
+          window.digitalData = {
+            page: {
+              pageInfo: {
+                productTitle: 'IBM Q Experience',
+                analytics: {
+                  category: 'Qiskit.org',
+                },
+              },
+            },
+          };
+          window._analytics = {
+            segment_key: 'ffdYLviQze3kzomaINXNk6NwpY9LlXcw',
+            coremetrics: false,
+            optimizely: false,
+            googleAddServices: false,
+            fullStory: false,
+            autoPageEventSpa: true,
+            autoFormEvents: false,
+            autoPageView: true,
+            preventPageEvent: true,
+          };
+       </script>
+        <script src="https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js"></script>
+    
+    <title>qiskit.transpiler.synthesis.graysynth &#8212; Qiskit 0.11.2 ドキュメント</title>
+
+    <link rel="stylesheet" href="../../../../_static/material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_tabs/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/material-design-lite-1.3.0/material.blue-indigo.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_materialdesign_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/sphinx_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../../../../_static/js/themeExt.js"></script>
+    <script type="text/javascript" src="../../../../_static/translations.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../search.html" /> 
+  </head>
+<body>
+  <header>
+    <div class="toolbar limited-width">
+      <a href="/" class="home">Qiskit ™</a>
+      <nav class="first">
+        <a href="/terra">Terra</a>
+        <a href="/aer">Aer</a>
+        <a href="/aqua">Aqua</a>
+        <a href="/ignis">Ignis</a>
+      </nav>
+      <nav class="second">
+        <a class="external" id="educationLink" href="https://community.qiskit.org/education" target="_blank">Education</a>
+        <a class="external" id="tutorialsLink" href="https://quantum-computing.ibm.com/jupyter/tutorial/1_start_here.ipynb" target="_blank">Tutorials</a>
+        <a class="external" href="/documentation" selected>API Documentation</a>
+      </nav>
+    </div>
+  </header>
+    <div class="mdl-layout mdl-js-layout  mdl-layout--fixed-drawer"><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../../../../index.html">
+              <span class="title-text">
+                  Qiskit
+              </span>
+          </a>
+      </span>
+    
+
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
+<div id="searchbox" role="search">
+    <div class="searchformwrapper">
+    <form class="search-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" class="search-input" placeholder="Search docs..."/>
+        <button type="submit" class="search-button">
+            <svg height="20" width="20" fill="#6F6F6F" viewBox="0 0 32 32" class="search-button-icon">
+                <title>search</title>
+                <g>
+                    <path d="M30 28.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L28.586 30zM5 14a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"></path>
+                </g>
+            </svg>
+        </button>
+    </form>
+    </div>
+</div>
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+  
+  <!-- Local TOC -->
+  <nav class="mdl-navigation"></nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <h1>qiskit.transpiler.synthesis.graysynth のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># This code is part of Qiskit.</span>
+<span class="c1">#</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Implementation of the GraySynth algorithm for synthesizing CNOT-Phase</span>
+<span class="sd">circuits with efficient CNOT cost, and the Patel-Hayes-Markov algorithm</span>
+<span class="sd">for optimal synthesis of linear (CNOT-only) reversible circuits.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
+
+
+<div class="viewcode-block" id="graysynth"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.synthesis.graysynth.html#qiskit.transpiler.synthesis.graysynth.graysynth">[ドキュメント]</a><span class="k">def</span> <span class="nf">graysynth</span><span class="p">(</span><span class="n">cnots</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">section_size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function is an implementation of the GraySynth algorithm.</span>
+
+<span class="sd">    GraySynth is a heuristic algorithm for synthesizing small parity networks.</span>
+<span class="sd">    It is inspired by Gray codes. Given a set of binary strings S</span>
+<span class="sd">    (called &quot;cnots&quot; bellow), the algorithm synthesizes a parity network for S by</span>
+<span class="sd">    repeatedly choosing an index i to expand and then effectively recursing on</span>
+<span class="sd">    the co-factors S_0 and S_1, consisting of the strings y in S,</span>
+<span class="sd">    with y_i = 0 or 1 respectively. As a subset S is recursively expanded,</span>
+<span class="sd">    CNOT gates are applied so that a designated target bit contains the</span>
+<span class="sd">    (partial) parity ksi_y(x) where y_i = 1 if and only if y&#39;_i = 1 for for all</span>
+<span class="sd">    y&#39; in S. If S is a singleton {y&#39;}, then y = y&#39;, hence the target bit contains</span>
+<span class="sd">    the value ksi_y&#39;(x) as desired.</span>
+
+<span class="sd">    Notably, rather than uncomputing this sequence of CNOT gates when a subset S</span>
+<span class="sd">    is finished being synthesized, the algorithm maintains the invariant</span>
+<span class="sd">    that the remaining parities to be computed are expressed over the current state</span>
+<span class="sd">    of bits. This allows the algorithm to avoid the &#39;backtracking&#39; inherent in</span>
+<span class="sd">    uncomputing-based methods.</span>
+
+<span class="sd">    The algorithm is described in detail in the following paper in section 4:</span>
+<span class="sd">    &quot;On the controlled-NOT complexity of controlled-NOT–phase circuits.&quot;</span>
+<span class="sd">    Amy, Matthew, Parsiad Azimzadeh, and Michele Mosca.</span>
+<span class="sd">    Quantum Science and Technology 4.1 (2018): 015002.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cnots (list[list]): a matrix whose columns are the parities to be synthesized</span>
+<span class="sd">            e.g.::</span>
+
+<span class="sd">                [[0, 1, 1, 1, 1, 1],</span>
+<span class="sd">                 [1, 0, 0, 1, 1, 1],</span>
+<span class="sd">                 [1, 0, 0, 1, 0, 0],</span>
+<span class="sd">                 [0, 0, 1, 0, 1, 0]]</span>
+
+<span class="sd">            corresponds to::</span>
+
+<span class="sd">                 x1^x2 + x0 + x0^x3 + x0^x1^x2 + x0^x1^x3 + x0^x1</span>
+
+<span class="sd">        angles (list): a list containing all the phase-shift gates which are</span>
+<span class="sd">            to be applied, in the same order as in &quot;cnots&quot;. A number is</span>
+<span class="sd">            interpreted as the angle of u1(angle), otherwise the elements</span>
+<span class="sd">            have to be &#39;t&#39;, &#39;tdg&#39;, &#39;s&#39;, &#39;sdg&#39; or &#39;z&#39;.</span>
+
+<span class="sd">        section_size (int): the size of every section, used in _lwr_cnot_synth(), in the</span>
+<span class="sd">            Patel–Markov–Hayes algorithm. section_size must be a factor of n_qubits.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: the quantum circuit</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: when dimensions of cnots and angles don&#39;t align</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots</span><span class="p">)</span>
+
+    <span class="c1"># Create a quantum circuit on n_qubits</span>
+    <span class="n">qcir</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Size of &quot;cnots&quot; and &quot;angles&quot; do not match.&#39;</span><span class="p">)</span>
+
+    <span class="n">range_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">))</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">n_qubits</span>
+    <span class="n">sta</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cnots_copy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">cnots</span><span class="p">)))</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>  <span class="c1"># This matrix keeps track of the state in the algorithm</span>
+
+    <span class="c1"># Check if some phase-shift gates can be applied, before adding any C-NOT gates</span>
+    <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">icnots</span> <span class="ow">in</span> <span class="n">cnots_copy</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">icnots</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="n">qubit</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
+                    <span class="n">qcir</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tdg&#39;</span><span class="p">:</span>
+                    <span class="n">qcir</span><span class="o">.</span><span class="n">tdg</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+                    <span class="n">qcir</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sdg&#39;</span><span class="p">:</span>
+                    <span class="n">qcir</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span>
+                    <span class="n">qcir</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">qcir</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+                <span class="n">cnots_copy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cnots_copy</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots_copy</span><span class="p">):</span>
+                    <span class="k">break</span>
+                <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Implementation of the pseudo-code (Algorithm 1) in the aforementioned paper</span>
+    <span class="n">sta</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">cnots</span><span class="p">,</span> <span class="n">range_list</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">sta</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="p">[</span><span class="n">cnots</span><span class="p">,</span> <span class="n">ilist</span><span class="p">,</span> <span class="n">qubit</span><span class="p">]</span> <span class="o">=</span> <span class="n">sta</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">cnots</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">qubit</span> <span class="o">&lt;</span> <span class="n">n_qubits</span><span class="p">:</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">while</span> <span class="n">condition</span><span class="p">:</span>
+                <span class="n">condition</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">qubit</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">cnots</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots</span><span class="p">[</span><span class="n">j</span><span class="p">])):</span>
+                        <span class="n">condition</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">qcir</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+                        <span class="n">state</span><span class="p">[</span><span class="n">qubit</span><span class="p">]</span> <span class="o">^=</span> <span class="n">state</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">for</span> <span class="n">icnots</span> <span class="ow">in</span> <span class="n">cnots_copy</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">icnots</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="n">qubit</span><span class="p">]):</span>
+                                <span class="k">if</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
+                                    <span class="n">qcir</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tdg&#39;</span><span class="p">:</span>
+                                    <span class="n">qcir</span><span class="o">.</span><span class="n">tdg</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+                                    <span class="n">qcir</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sdg&#39;</span><span class="p">:</span>
+                                    <span class="n">qcir</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                                <span class="k">elif</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span>
+                                    <span class="n">qcir</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">qcir</span><span class="o">.</span><span class="n">u1</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+                                <span class="k">del</span> <span class="n">angles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+                                <span class="n">cnots_copy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cnots_copy</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnots_copy</span><span class="p">):</span>
+                                    <span class="k">break</span>
+                                <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>
+                            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_remove_duplicates</span><span class="p">(</span><span class="n">sta</span> <span class="o">+</span> <span class="p">[[</span><span class="n">cnots</span><span class="p">,</span> <span class="n">ilist</span><span class="p">,</span> <span class="n">qubit</span><span class="p">]]):</span>
+                            <span class="p">[</span><span class="n">cnotsp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+                            <span class="k">if</span> <span class="n">cnotsp</span> <span class="o">==</span> <span class="p">[]:</span>
+                                <span class="k">continue</span>
+                            <span class="k">for</span> <span class="n">ttt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cnotsp</span><span class="p">[</span><span class="n">j</span><span class="p">])):</span>
+                                <span class="n">cnotsp</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ttt</span><span class="p">]</span> <span class="o">^=</span> <span class="n">cnotsp</span><span class="p">[</span><span class="n">qubit</span><span class="p">][</span><span class="n">ttt</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ilist</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">continue</span>
+        <span class="c1"># See line 18 in pseudo-code of Algorithm 1 in the aforementioned paper</span>
+        <span class="c1"># this choice of j maximizes the size of the largest subset (S_0 or S_1)</span>
+        <span class="c1"># and the larger a subset, the closer it gets to the ideal in the</span>
+        <span class="c1"># Gray code of one CNOT per string.</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">ilist</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([[</span><span class="nb">max</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">row</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cnots</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ilist</span><span class="p">])]</span>
+        <span class="n">cnots0</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cnots1</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">cnots</span><span class="p">))):</span>
+            <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">cnots0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">cnots1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">cnots0</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">cnots0</span><span class="p">)))</span>
+        <span class="n">cnots1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">cnots1</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">qubit</span> <span class="o">==</span> <span class="n">epsilon</span><span class="p">:</span>
+            <span class="n">sta</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">cnots1</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ilist</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">([</span><span class="n">j</span><span class="p">])),</span> <span class="n">j</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sta</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">cnots1</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ilist</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">([</span><span class="n">j</span><span class="p">])),</span> <span class="n">qubit</span><span class="p">])</span>
+        <span class="n">sta</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">cnots0</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ilist</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">([</span><span class="n">j</span><span class="p">])),</span> <span class="n">qubit</span><span class="p">])</span>
+    <span class="n">qcir</span> <span class="o">+=</span> <span class="n">cnot_synth</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">section_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qcir</span></div>
+
+
+<div class="viewcode-block" id="cnot_synth"><a class="viewcode-back" href="../../../../api/qiskit.transpiler.synthesis.graysynth.html#qiskit.transpiler.synthesis.graysynth.cnot_synth">[ドキュメント]</a><span class="k">def</span> <span class="nf">cnot_synth</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">section_size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function is an implementation of the Patel–Markov–Hayes algorithm</span>
+<span class="sd">    for optimal synthesis of linear reversible circuits, as specified by an</span>
+<span class="sd">    n x n matrix.</span>
+
+<span class="sd">    The algorithm is described in detail in the following paper:</span>
+<span class="sd">    &quot;Optimal synthesis of linear reversible circuits.&quot;</span>
+<span class="sd">    Patel, Ketan N., Igor L. Markov, and John P. Hayes.</span>
+<span class="sd">    Quantum Information &amp; Computation 8.3 (2008): 282-294.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (list[list] or ndarray): n x n matrix, describing the state</span>
+<span class="sd">            of the input circuit</span>
+<span class="sd">        section_size (int): the size of each section, used in _lwr_cnot_synth(), in the</span>
+<span class="sd">            Patel–Markov–Hayes algorithm. section_size must be a factor of n_qubits.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        QuantumCircuit: a CNOT-only circuit implementing the</span>
+<span class="sd">            desired linear transformation</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        QiskitError: when variable &quot;state&quot; isn&#39;t of type numpy.matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;state should be of type list or numpy.ndarray, &#39;</span>
+                          <span class="s1">&#39;but was of the type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">state</span><span class="p">)))</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="c1"># Synthesize lower triangular part</span>
+    <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">circuit_l</span><span class="p">]</span> <span class="o">=</span> <span class="n">_lwr_cnot_synth</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">section_size</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="c1"># Synthesize upper triangular part</span>
+    <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">circuit_u</span><span class="p">]</span> <span class="o">=</span> <span class="n">_lwr_cnot_synth</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">section_size</span><span class="p">)</span>
+    <span class="n">circuit_l</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">circuit_u</span><span class="p">:</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="c1"># Convert the list into a circuit of C-NOT gates</span>
+    <span class="n">circ</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">circuit_u</span> <span class="o">+</span> <span class="n">circuit_l</span><span class="p">:</span>
+        <span class="n">circ</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">circ</span></div>
+
+
+<span class="k">def</span> <span class="nf">_lwr_cnot_synth</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">section_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function is a helper function of the algorithm for optimal synthesis</span>
+<span class="sd">    of linear reversible circuits (the Patel–Markov–Hayes algorithm). It works</span>
+<span class="sd">    like gaussian elimination, except that it works a lot faster, and requires</span>
+<span class="sd">    fewer steps (and therefore fewer CNOTs). It takes the matrix &quot;state&quot; and</span>
+<span class="sd">    splits it into sections of size section_size. Then it eliminates all non-zero</span>
+<span class="sd">    sub-rows within each section, which are the same as a non-zero sub-row</span>
+<span class="sd">    above. Once this has been done, it continues with normal gaussian elimination.</span>
+<span class="sd">    The benefit is that with small section sizes (m), most of the sub-rows will</span>
+<span class="sd">    be cleared in the first step, resulting in a factor m fewer row row operations</span>
+<span class="sd">    during Gaussian elimination.</span>
+
+<span class="sd">    The algorithm is described in detail in the following paper</span>
+<span class="sd">    &quot;Optimal synthesis of linear reversible circuits.&quot;</span>
+<span class="sd">    Patel, Ketan N., Igor L. Markov, and John P. Hayes.</span>
+<span class="sd">    Quantum Information &amp; Computation 8.3 (2008): 282-294.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (ndarray): n x n matrix, describing a linear quantum circuit</span>
+<span class="sd">        section_size (int): the section size the matrix columns are divided into</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.matrix: n by n matrix, describing the state of the output circuit</span>
+<span class="sd">        list: a k by 2 list of C-NOT operations that need to be applied</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># If the matrix is already an upper triangular one,</span>
+    <span class="c1"># there is no need for any transformations</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">state</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">circuit</span><span class="p">]</span>
+    <span class="c1"># Iterate over column sections</span>
+    <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n_qubits</span><span class="o">/</span><span class="n">section_size</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+        <span class="c1"># Remove duplicate sub-rows in section sec</span>
+        <span class="n">patt</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">sec</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">section_size</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">):</span>
+            <span class="n">sub_row_patt</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="n">sec</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">section_size</span><span class="p">:</span><span class="n">sec</span><span class="o">*</span><span class="n">section_size</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sub_row_patt</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">sub_row_patt</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">patt</span><span class="p">:</span>
+                <span class="n">patt</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">sub_row_patt</span><span class="p">)]</span> <span class="o">=</span> <span class="n">row</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">state</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">^=</span> <span class="n">state</span><span class="p">[</span><span class="n">patt</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">sub_row_patt</span><span class="p">)],</span> <span class="p">:]</span>
+                <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">patt</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">sub_row_patt</span><span class="p">)],</span> <span class="n">row</span><span class="p">])</span>
+        <span class="c1"># Use gaussian elimination for remaining entries in column section</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">sec</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">section_size</span><span class="p">,</span> <span class="n">sec</span><span class="o">*</span><span class="n">section_size</span><span class="p">):</span>
+            <span class="c1"># Check if 1 on diagonal</span>
+            <span class="n">diag_one</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="n">col</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">diag_one</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># Remove ones in rows below column col</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">diag_one</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">state</span><span class="p">[</span><span class="n">col</span><span class="p">,</span> <span class="p">:]</span> <span class="o">^=</span> <span class="n">state</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span>
+                        <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">])</span>
+                        <span class="n">diag_one</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="n">state</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">^=</span> <span class="n">state</span><span class="p">[</span><span class="n">col</span><span class="p">,</span> <span class="p">:]</span>
+                    <span class="n">circuit</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">circuit</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_remove_duplicates</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove duplicates in list</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lists (list): a list which may contain duplicate elements.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: a list which contains only unique elements.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">unique_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_list</span><span class="p">:</span>
+            <span class="n">unique_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">unique_list</span>
+</pre></div>
+
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+        
+        </main>
+    </div>
+    <script>
+        function trackClickEvent (data) {
+            if (window.bluemixAnalytics && window.digitalData) {
+                var segmentEvent = {
+                    productTitle: window.digitalData.page.pageInfo.productTitle,
+                    category: window.digitalData.page.pageInfo.analytics.category,
+                    url: window.location.href,
+                    action: window.location.href + ' - Clicked: ' + data.action,
+                    objectType: data.objectType,
+                    successFlag: true
+                };
+
+                if(data.milestoneName) {
+                    segmentEvent = Object.assign(segmentEvent, { milestoneName: data.milestoneName });
+                }
+                window.bluemixAnalytics.trackEvent('Custom Event', segmentEvent);
+            }
+        };
+
+        function clickExternalLink() {
+            trackClickEvent({
+                action: "Tutorials Link in Navbar",
+                objectType: "Link",
+                milestoneName: "Looked at tutorials"
+            });
+        };
+
+        var link = document.getElementById('tutorialsLink');
+        link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+      var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+      var prefix = '/documentation';
+      function getDefaultLanguage() {
+        return 'en';
+      }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
+    </script>
+  </body>
+</html>

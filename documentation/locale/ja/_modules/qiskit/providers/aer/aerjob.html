@@ -197,7 +197,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">requires_submit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="requires_submit"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.requires_submit">[ドキュメント]</a><span class="k">def</span> <span class="nf">requires_submit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorator to ensure that a submit has been performed before</span>
 <span class="sd">    calling the method.</span>
@@ -213,10 +213,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s2">&quot;Job not submitted yet!. You have to .submit() first!&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_wrapper</span>
+    <span class="k">return</span> <span class="n">_wrapper</span></div>
 
 
-<div class="viewcode-block" id="AerJob"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob">[ドキュメント]</a><span class="k">class</span> <span class="nc">AerJob</span><span class="p">(</span><span class="n">BaseJob</span><span class="p">):</span>
+<div class="viewcode-block" id="AerJob"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob">[ドキュメント]</a><span class="k">class</span> <span class="nc">AerJob</span><span class="p">(</span><span class="n">BaseJob</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;AerJob class.</span>
 
 <span class="sd">    Attributes:</span>
@@ -232,7 +232,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span> <span class="n">args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="AerJob.submit"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob.submit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AerJob.submit"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob.submit">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Submit the job to the backend for execution.</span>
 
 <span class="sd">        Raises:</span>
@@ -248,7 +248,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qobj</span><span class="p">,</span>
                                              <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AerJob.result"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob.result">[ドキュメント]</a>    <span class="nd">@requires_submit</span>
+<div class="viewcode-block" id="AerJob.result"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob.result">[ドキュメント]</a>    <span class="nd">@requires_submit</span>
     <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># pylint: disable=arguments-differ</span>
         <span class="sd">&quot;&quot;&quot;Get job result. The behavior is the same as the underlying</span>
@@ -268,11 +268,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AerJob.cancel"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob.cancel">[ドキュメント]</a>    <span class="nd">@requires_submit</span>
+<div class="viewcode-block" id="AerJob.cancel"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob.cancel">[ドキュメント]</a>    <span class="nd">@requires_submit</span>
     <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="AerJob.status"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob.status">[ドキュメント]</a>    <span class="nd">@requires_submit</span>
+<div class="viewcode-block" id="AerJob.status"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob.status">[ドキュメント]</a>    <span class="nd">@requires_submit</span>
     <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Gets the status of the job by querying the Python&#39;s future</span>
 
@@ -298,11 +298,11 @@
             <span class="n">_status</span> <span class="o">=</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">INITIALIZING</span>
         <span class="k">return</span> <span class="n">_status</span></div>
 
-<div class="viewcode-block" id="AerJob.backend"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob.backend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">backend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AerJob.backend"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob.backend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">backend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the instance of the backend used for this job.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span></div>
 
-<div class="viewcode-block" id="AerJob.qobj"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob.qobj">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">qobj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AerJob.qobj"><a class="viewcode-back" href="../../../../api/qiskit.providers.aer.aerjob.html#qiskit.providers.aer.AerJob.qobj">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">qobj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the Qobj submitted for this job.</span>
 
 <span class="sd">        Returns:</span>
