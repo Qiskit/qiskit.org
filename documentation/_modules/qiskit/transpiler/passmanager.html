@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -159,6 +171,7 @@
         
   <h1>Source code for qiskit.transpiler.passmanager</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
 <span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
 <span class="c1"># (C) Copyright IBM 2017, 2018.</span>
@@ -175,34 +188,63 @@
 
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit</span> <span class="k">import</span> <span class="n">DAGCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="k">import</span> <span class="n">circuit_to_dag</span><span class="p">,</span> <span class="n">dag_to_circuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">pass_manager_drawer</span>
 <span class="kn">from</span> <span class="nn">.propertyset</span> <span class="k">import</span> <span class="n">PropertySet</span>
 <span class="kn">from</span> <span class="nn">.basepasses</span> <span class="k">import</span> <span class="n">BasePass</span>
 <span class="kn">from</span> <span class="nn">.fencedobjs</span> <span class="k">import</span> <span class="n">FencedPropertySet</span><span class="p">,</span> <span class="n">FencedDAGCircuit</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">TranspilerError</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="PassManager"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager">[docs]</a><span class="k">class</span> <span class="nc">PassManager</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;A PassManager schedules the passes&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">ignore_requires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">ignore_preserves</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">max_iteration</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize an empty PassManager object (with no passes scheduled).</span>
+                 <span class="n">max_iteration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize an empty PassManager object (with no passes scheduled).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            passes (list[BasePass] or BasePass): pass(es) to be added to schedule. The default is</span>
 <span class="sd">                None.</span>
-<span class="sd">            ignore_requires (bool): The schedule ignores the requires field in the passes. The</span>
-<span class="sd">                default setting in the pass is False.</span>
-<span class="sd">            ignore_preserves (bool): The schedule ignores the preserves field in the passes. The</span>
-<span class="sd">                default setting in the pass is False.</span>
 <span class="sd">            max_iteration (int): The schedule looping iterates until the condition is met or until</span>
 <span class="sd">                max_iteration is reached.</span>
+<span class="sd">            callback (func): A callback function that will be called after each</span>
+<span class="sd">                pass execution. The function will be called with 5 keyword</span>
+<span class="sd">                arguments:</span>
+<span class="sd">                    pass_ (Pass): the pass being run</span>
+<span class="sd">                    dag (DAGCircuit): the dag output of the pass</span>
+<span class="sd">                    time (float): the time to execute the pass</span>
+<span class="sd">                    property_set (PropertySet): the property set</span>
+<span class="sd">                    count (int): the index for the pass execution</span>
+
+<span class="sd">                The exact arguments pass expose the internals of the pass</span>
+<span class="sd">                manager and are subject to change as the pass manager internals</span>
+<span class="sd">                change. If you intend to reuse a callback function over</span>
+<span class="sd">                multiple releases be sure to check that the arguments being</span>
+<span class="sd">                passed are the same.</span>
+
+<span class="sd">                To use the callback feature you define a function that will</span>
+<span class="sd">                take in kwargs dict and access the variables. For example::</span>
+
+<span class="sd">                    def callback_func(**kwargs):</span>
+<span class="sd">                        pass_ = kwargs[&#39;pass_&#39;]</span>
+<span class="sd">                        dag = kwargs[&#39;dag&#39;]</span>
+<span class="sd">                        time = kwargs[&#39;time&#39;]</span>
+<span class="sd">                        property_set = kwargs[&#39;property_set&#39;]</span>
+<span class="sd">                        count = kwargs[&#39;count&#39;]</span>
+<span class="sd">                        ...</span>
+
+<span class="sd">                    PassManager(callback=callback_func)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
         <span class="c1"># the pass manager&#39;s schedule of passes, including any control-flow.</span>
         <span class="c1"># Populated via PassManager.append().</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">working_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -217,33 +259,31 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
         <span class="c1"># pass manager&#39;s overriding options for the passes it runs (for debugging)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">passmanager_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ignore_requires&#39;</span><span class="p">:</span> <span class="n">ignore_requires</span><span class="p">,</span>
-                                    <span class="s1">&#39;ignore_preserves&#39;</span><span class="p">:</span> <span class="n">ignore_preserves</span><span class="p">,</span>
-                                    <span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">passmanager_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
         <span class="k">if</span> <span class="n">passes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">passes</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_join_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passset_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the options of each passset, based on precedence rules:</span>
-<span class="sd">        passset options (set via ``PassManager.append()``) override</span>
-<span class="sd">        passmanager options (set via ``PassManager.__init__()``), which override Default.</span>
-<span class="sd">        .</span>
+        <span class="sd">&quot;&quot;&quot;Set the options of each passset, based on precedence rules.</span>
+
+<span class="sd">        Precedence rules:</span>
+<span class="sd">            * passset options (set via ``PassManager.append()``) override</span>
+<span class="sd">            * passmanager options (set via ``PassManager.__init__()``), which override Default.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">default</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ignore_preserves&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Ignore preserves for this pass</span>
-                   <span class="s1">&#39;ignore_requires&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Ignore requires for this pass</span>
-                   <span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>  <span class="c1"># Maximum allowed iteration on this pass</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>  <span class="c1"># Maximum allowed iteration on this pass</span>
 
         <span class="n">passmanager_level</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">passmanager_options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
         <span class="n">passset_level</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">passset_options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
         <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">default</span><span class="p">,</span> <span class="o">**</span><span class="n">passmanager_level</span><span class="p">,</span> <span class="o">**</span><span class="n">passset_level</span><span class="p">}</span>
 
-<div class="viewcode-block" id="PassManager.append"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passes</span><span class="p">,</span> <span class="n">ignore_requires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_preserves</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_iteration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PassManager.append"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passes</span><span class="p">,</span> <span class="n">max_iteration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Append a Pass to the schedule of passes.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            passes (list[BasePass] or BasePass): pass(es) to be added to schedule</span>
-<span class="sd">            ignore_preserves (bool): ignore the preserves claim of passes. Default: False</span>
-<span class="sd">            ignore_requires (bool): ignore the requires need of passes. Default: False</span>
 <span class="sd">            max_iteration (int): max number of iterations of passes. Default: 1000</span>
 <span class="sd">            flow_controller_conditions (kwargs): See add_flow_controller(): Dictionary of</span>
 <span class="sd">            control flow plugins. Default:</span>
@@ -259,10 +299,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            TranspilerError: if a pass in passes is not a proper pass.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">passset_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ignore_requires&#39;</span><span class="p">:</span> <span class="n">ignore_requires</span><span class="p">,</span>
-                           <span class="s1">&#39;ignore_preserves&#39;</span><span class="p">:</span> <span class="n">ignore_preserves</span><span class="p">,</span>
-                           <span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">}</span>
+        <span class="n">passset_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_iteration&#39;</span><span class="p">:</span> <span class="n">max_iteration</span><span class="p">}</span>
 
         <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_options</span><span class="p">(</span><span class="n">passset_options</span><span class="p">)</span>
 
@@ -283,7 +320,7 @@
             <span class="n">FlowController</span><span class="o">.</span><span class="n">controller_factory</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">flow_controller_conditions</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PassManager.reset"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; &quot;Resets the pass manager instance &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Reset the pass manager instance&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
@@ -301,13 +338,39 @@
         <span class="k">del</span> <span class="n">circuit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>  <span class="c1"># Reset passmanager instance before starting</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">passset</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_list</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">pass_</span> <span class="ow">in</span> <span class="n">passset</span><span class="p">:</span>
                 <span class="n">dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_pass</span><span class="p">(</span><span class="n">pass_</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">passset</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
 
         <span class="n">circuit</span> <span class="o">=</span> <span class="n">dag_to_circuit</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
         <span class="n">circuit</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">[</span><span class="s1">&#39;layout&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">circuit</span></div>
+
+<div class="viewcode-block" id="PassManager.draw"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.draw">[docs]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws the pass manager.</span>
+
+<span class="sd">        This function needs `pydot &lt;https://github.com/erocarrera/pydot&gt;`, which in turn needs</span>
+<span class="sd">        Graphviz &lt;https://www.graphviz.org/&gt;` to be installed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str or None): file path to save image to</span>
+<span class="sd">            style (dict or OrderedDict): keys are the pass classes and the values are</span>
+<span class="sd">                the colors to make them. An example can be seen in the DEFAULT_STYLE. An ordered</span>
+<span class="sd">                dict can be used to ensure a priority coloring when pass falls into multiple</span>
+<span class="sd">                categories. Any values not included in the provided dict will be filled in from</span>
+<span class="sd">                the default dict</span>
+<span class="sd">            raw (Bool) : True if you want to save the raw Dot output not an image. The</span>
+<span class="sd">                default is False.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            PIL.Image or None: an in-memory representation of the pass manager. Or None if</span>
+<span class="sd">                               no image was generated or PIL is not installed.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ImportError: when nxpd or pydot not installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pass_manager_drawer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="n">raw</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_do_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Do a pass and its &quot;requires&quot;.</span>
@@ -324,42 +387,70 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># First, do the requires of pass_</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;ignore_requires&quot;</span><span class="p">]:</span>
-            <span class="k">for</span> <span class="n">required_pass</span> <span class="ow">in</span> <span class="n">pass_</span><span class="o">.</span><span class="n">requires</span><span class="p">:</span>
-                <span class="n">dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_pass</span><span class="p">(</span><span class="n">required_pass</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">required_pass</span> <span class="ow">in</span> <span class="n">pass_</span><span class="o">.</span><span class="n">requires</span><span class="p">:</span>
+            <span class="n">dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_pass</span><span class="p">(</span><span class="n">required_pass</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
         <span class="c1"># Run the pass itself, if not already run</span>
         <span class="k">if</span> <span class="n">pass_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">pass_</span><span class="o">.</span><span class="n">is_transformation_pass</span><span class="p">:</span>
-                <span class="n">pass_</span><span class="o">.</span><span class="n">property_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fenced_property_set</span>
-                <span class="n">new_dag</span> <span class="o">=</span> <span class="n">pass_</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_dag</span><span class="p">,</span> <span class="n">DAGCircuit</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Transformation passes should return a transformed dag.&quot;</span>
-                                          <span class="s2">&quot;The pass </span><span class="si">%s</span><span class="s2"> is returning a </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                                                             <span class="nb">type</span><span class="p">(</span><span class="n">new_dag</span><span class="p">)))</span>
-                <span class="n">dag</span> <span class="o">=</span> <span class="n">new_dag</span>
-            <span class="k">elif</span> <span class="n">pass_</span><span class="o">.</span><span class="n">is_analysis_pass</span><span class="p">:</span>
-                <span class="n">pass_</span><span class="o">.</span><span class="n">property_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span>
-                <span class="n">pass_</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">FencedDAGCircuit</span><span class="p">(</span><span class="n">dag</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;I dont know how to handle this type of pass&quot;</span><span class="p">)</span>
+            <span class="n">dag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_this_pass</span><span class="p">(</span><span class="n">pass_</span><span class="p">,</span> <span class="n">dag</span><span class="p">)</span>
 
             <span class="c1"># update the valid_passes property</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_update_valid_passes</span><span class="p">(</span><span class="n">pass_</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;ignore_preserves&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_valid_passes</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">dag</span>
 
-    <span class="k">def</span> <span class="nf">_update_valid_passes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_</span><span class="p">,</span> <span class="n">ignore_preserves</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_run_this_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_</span><span class="p">,</span> <span class="n">dag</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pass_</span><span class="o">.</span><span class="n">is_transformation_pass</span><span class="p">:</span>
+            <span class="n">pass_</span><span class="o">.</span><span class="n">property_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fenced_property_set</span>
+            <span class="c1"># Measure time if we have a callback or logging set</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">new_dag</span> <span class="o">=</span> <span class="n">pass_</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">run_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="c1"># Execute the callback function if one is set</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">pass_</span><span class="o">=</span><span class="n">pass_</span><span class="p">,</span> <span class="n">dag</span><span class="o">=</span><span class="n">new_dag</span><span class="p">,</span>
+                              <span class="n">time</span><span class="o">=</span><span class="n">run_time</span><span class="p">,</span>
+                              <span class="n">property_set</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">,</span>
+                              <span class="n">count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_pass</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">pass_</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_dag</span><span class="p">,</span> <span class="n">DAGCircuit</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;Transformation passes should return a transformed dag.&quot;</span>
+                                      <span class="s2">&quot;The pass </span><span class="si">%s</span><span class="s2"> is returning a </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                                                         <span class="nb">type</span><span class="p">(</span><span class="n">new_dag</span><span class="p">)))</span>
+            <span class="n">dag</span> <span class="o">=</span> <span class="n">new_dag</span>
+        <span class="k">elif</span> <span class="n">pass_</span><span class="o">.</span><span class="n">is_analysis_pass</span><span class="p">:</span>
+            <span class="n">pass_</span><span class="o">.</span><span class="n">property_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_set</span>
+            <span class="c1"># Measure time if we have a callback or logging set</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">pass_</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">FencedDAGCircuit</span><span class="p">(</span><span class="n">dag</span><span class="p">))</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">run_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="c1"># Execute the callback function if one is set</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">pass_</span><span class="o">=</span><span class="n">pass_</span><span class="p">,</span> <span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span>
+                              <span class="n">time</span><span class="o">=</span><span class="n">run_time</span><span class="p">,</span>
+                              <span class="n">property_set</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">property_set</span><span class="p">,</span>
+                              <span class="n">count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_pass</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">pass_</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;I dont know how to handle this type of pass&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dag</span>
+
+    <span class="k">def</span> <span class="nf">_log_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">log_msg</span> <span class="o">=</span> <span class="s2">&quot;Pass: </span><span class="si">%s</span><span class="s2"> - </span><span class="si">%.5f</span><span class="s2"> (ms)&quot;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">log_msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_update_valid_passes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pass_</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">pass_</span><span class="o">.</span><span class="n">is_analysis_pass</span><span class="p">:</span>  <span class="c1"># Analysis passes preserve all</span>
-            <span class="k">if</span> <span class="n">ignore_preserves</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span><span class="o">.</span><span class="n">intersection_update</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pass_</span><span class="o">.</span><span class="n">preserves</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valid_passes</span><span class="o">.</span><span class="n">intersection_update</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pass_</span><span class="o">.</span><span class="n">preserves</span><span class="p">))</span>
 
 <div class="viewcode-block" id="PassManager.passes"><a class="viewcode-back" href="../../../api/qiskit.transpiler.PassManager.html#qiskit.transpiler.PassManager.passes">[docs]</a>    <span class="k">def</span> <span class="nf">passes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns a list structure of the appended passes and its options.</span>
+        <span class="sd">&quot;&quot;&quot;Return a list structure of the appended passes and its options.</span>
 
 <span class="sd">        Returns (list): The appended passes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -370,8 +461,11 @@
 
 
 <div class="viewcode-block" id="FlowController"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FlowController.html#qiskit.transpiler.FlowController">[docs]</a><span class="k">class</span> <span class="nc">FlowController</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;This class is a base class for multiple types of working list. When you iterate on it, it</span>
-<span class="sd">    returns the next pass to run. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for multiple types of working list.</span>
+
+<span class="sd">    This class is a base class for multiple types of working list. When you iterate on it, it</span>
+<span class="sd">    returns the next pass to run.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">registered_controllers</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
@@ -385,10 +479,10 @@
             <span class="k">yield</span> <span class="n">pass_</span>
 
 <div class="viewcode-block" id="FlowController.dump_passes"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FlowController.html#qiskit.transpiler.FlowController.dump_passes">[docs]</a>    <span class="k">def</span> <span class="nf">dump_passes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Fetches the passes added to this flow controller.</span>
+        <span class="sd">&quot;&quot;&quot;Fetches the passes added to this flow controller.</span>
 
-<span class="sd">        Returns (dict): {&#39;options&#39;: self.options, &#39;passes&#39;: [passes], &#39;type&#39;: type(self)}</span>
+<span class="sd">        Returns:</span>
+<span class="sd">             dict: {&#39;options&#39;: self.options, &#39;passes&#39;: [passes], &#39;type&#39;: type(self)}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="s1">&#39;passes&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)}</span>
         <span class="k">for</span> <span class="n">pass_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_passes</span><span class="p">:</span>
@@ -400,8 +494,8 @@
 
 <div class="viewcode-block" id="FlowController.add_flow_controller"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FlowController.html#qiskit.transpiler.FlowController.add_flow_controller">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">add_flow_controller</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Adds a flow controller.</span>
+        <span class="sd">&quot;&quot;&quot;Adds a flow controller.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            name (string): Name of the controller to add.</span>
 <span class="sd">            controller (type(FlowController)): The class implementing a flow controller.</span>
@@ -410,8 +504,8 @@
 
 <div class="viewcode-block" id="FlowController.remove_flow_controller"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FlowController.html#qiskit.transpiler.FlowController.remove_flow_controller">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">remove_flow_controller</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Removes a flow controller.</span>
+        <span class="sd">&quot;&quot;&quot;Removes a flow controller.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            name (string): Name of the controller to remove.</span>
 <span class="sd">        Raises:</span>
@@ -423,8 +517,7 @@
 
 <div class="viewcode-block" id="FlowController.controller_factory"><a class="viewcode-back" href="../../../api/qiskit.transpiler.FlowController.html#qiskit.transpiler.FlowController.controller_factory">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">controller_factory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">partial_controller</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Constructs a flow controller based on the partially evaluated controller arguments.</span>
+        <span class="sd">&quot;&quot;&quot;Constructs a flow controller based on the partially evaluated controller arguments.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            passes (list[BasePass]): passes to add to the flow controller.</span>
@@ -447,8 +540,8 @@
                     <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">registered_controllers</span><span class="p">[</span><span class="n">registered_controller</span><span class="p">](</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span>
                                                                              <span class="o">**</span><span class="n">partial_controller</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">TranspilerError</span><span class="p">(</span><span class="s2">&quot;The controllers for </span><span class="si">%s</span><span class="s2"> are not registered&quot;</span> <span class="o">%</span> <span class="n">partial_controller</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">FlowControllerLinear</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span></div></div>
+
+        <span class="k">return</span> <span class="n">FlowControllerLinear</span><span class="p">(</span><span class="n">passes</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">FlowControllerLinear</span><span class="p">(</span><span class="n">FlowController</span><span class="p">):</span>
@@ -534,6 +627,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

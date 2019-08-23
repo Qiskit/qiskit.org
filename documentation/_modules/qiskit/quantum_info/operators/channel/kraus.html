@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../../search.html" method="get">
@@ -160,17 +172,25 @@
   <h1>Source code for qiskit.quantum_info.operators.channel.kraus</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="c1"># pylint: disable=len-as-condition</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Kraus representation of a Quantum Channel.</span>
 
 
-<span class="sd">The Kraus representation for a quantum channel E is given by a set of matrics [A_i] such that</span>
+<span class="sd">The Kraus representation for a quantum channel E is given by a set of matrices [A_i] such that</span>
 
 <span class="sd">    E(ρ) = sum_i A_i.ρ.A_i^dagger</span>
 
@@ -192,7 +212,7 @@
 
 <span class="kn">from</span> <span class="nn">qiskit.circuit.quantumcircuit</span> <span class="k">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
-<span class="kn">from</span> <span class="nn">qiskit.qiskiterror</span> <span class="k">import</span> <span class="n">QiskitError</span>
+<span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.predicates</span> <span class="k">import</span> <span class="n">is_identity_matrix</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.quantum_channel</span> <span class="k">import</span> <span class="n">QuantumChannel</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info.operators.channel.choi</span> <span class="k">import</span> <span class="n">Choi</span>
@@ -226,7 +246,7 @@
 <span class="sd">        automatically determined from the input data. If the input data is</span>
 <span class="sd">        a list of Numpy arrays of shape (2**N, 2**N) qubit systems will be used. If</span>
 <span class="sd">        the input does not correspond to an N-qubit channel, it will assign a</span>
-<span class="sd">        single subsystem with dimension specifed by the shape of the input.</span>
+<span class="sd">        single subsystem with dimension specified by the shape of the input.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># If the input is a list or tuple we assume it is a list of Kraus</span>
         <span class="c1"># matrices, if it is a numpy array we assume that it is a single Kraus</span>
@@ -286,9 +306,9 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">)):</span>
                 <span class="c1"># If the input is a Terra QuantumCircuit or Instruction we</span>
                 <span class="c1"># convert it to a SuperOp</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="o">.</span><span class="n">_instruction_to_superop</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">SuperOp</span><span class="o">.</span><span class="n">_init_instruction</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># We use the QuantumChannel init transform to intialize</span>
+                <span class="c1"># We use the QuantumChannel init transform to initialize</span>
                 <span class="c1"># other objects into a QuantumChannel or Operator object.</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_transformer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dim</span>
@@ -519,42 +539,21 @@
         <span class="k">return</span> <span class="n">Kraus</span><span class="p">((</span><span class="n">kraus_l</span><span class="p">,</span> <span class="n">kraus_r</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dim</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_evolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evolve a quantum state by the QuantumChannel.</span>
+        <span class="sd">&quot;&quot;&quot;Evolve a quantum state by the quantum channel.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            state (QuantumState): The input statevector or density matrix.</span>
-<span class="sd">            qargs (list): a list of QuantumState subsystem positions to apply</span>
-<span class="sd">                           the operator on.</span>
+<span class="sd">            state (DensityMatrix or Statevector): The input state.</span>
+<span class="sd">            qargs (list): a list of quantum state subsystem positions to apply</span>
+<span class="sd">                           the quantum channel on.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            QuantumState: the output quantum state.</span>
+<span class="sd">            DensityMatrix: the output quantum state as a density matrix.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            QiskitError: if the operator dimension does not match the</span>
-<span class="sd">            specified QuantumState subsystem dimensions.</span>
+<span class="sd">            QiskitError: if the quantum channel dimension does not match the</span>
+<span class="sd">            specified quantum state subsystem dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># If subsystem evolution we use the SuperOp representation</span>
-        <span class="k">if</span> <span class="n">qargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_evolve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="p">)</span>
-
-        <span class="c1"># Otherwise we compute full evolution directly</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_dim</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
-                <span class="s2">&quot;QuantumChannel input dimension is not equal to state dimension.&quot;</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c1"># If we only have a single Kraus operator we can implement unitary-type</span>
-            <span class="c1"># evolution of a state vector psi -&gt; K[0].psi</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">)</span>
-        <span class="c1"># Otherwise we always return a density matrix</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">density_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">kraus_l</span><span class="p">,</span> <span class="n">kraus_r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
-        <span class="k">if</span> <span class="n">kraus_r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">kraus_r</span> <span class="o">=</span> <span class="n">kraus_l</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;AiB,BC,AjC-&gt;ij&#39;</span><span class="p">,</span> <span class="n">kraus_l</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span>
-                         <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">kraus_r</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">SuperOp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_evolve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">qargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_tensor_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the tensor product channel.</span>
@@ -635,6 +634,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

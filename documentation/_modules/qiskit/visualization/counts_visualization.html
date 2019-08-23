@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -172,7 +184,7 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=invalid-name,missing-docstring,import-error</span>
+<span class="c1"># pylint: disable=invalid-name,import-error</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Visualization functions for measurement counts.</span>
@@ -243,7 +255,7 @@
         <span class="k">raise</span> <span class="n">VisualizationError</span><span class="p">(</span><span class="s2">&quot;Value of sort option, </span><span class="si">%s</span><span class="s2">, isn&#39;t a &quot;</span>
                                  <span class="s2">&quot;valid choice. Must be &#39;asc&#39;, &quot;</span>
                                  <span class="s2">&quot;&#39;desc&#39;, or &#39;hamming&#39;&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">sort</span> <span class="ow">in</span> <span class="n">DIST_MEAS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">target_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">sort</span> <span class="ow">in</span> <span class="n">DIST_MEAS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">target_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Must define target_string when using distance measure.&#39;</span>
         <span class="k">raise</span> <span class="n">VisualizationError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
 
@@ -387,6 +399,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

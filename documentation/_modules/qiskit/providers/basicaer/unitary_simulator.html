@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -228,7 +240,7 @@
         <span class="s1">&#39;max_shots&#39;</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
         <span class="s1">&#39;coupling_map&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A python simulator for unitary matrix corresponding to a circuit&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;unitary&#39;</span><span class="p">],</span>
         <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span>
@@ -254,6 +266,11 @@
                 <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
                 <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;gate id a { U(0,0,0) a; }&#39;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;unitary&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;matrix&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;qasm_def&#39;</span><span class="p">:</span> <span class="s1">&#39;unitary(matrix) q1, q2,...&#39;</span>
             <span class="p">}</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -274,36 +291,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_initial_unitary</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_chop_threshold</span> <span class="o">=</span> <span class="mf">1e-15</span>
 
-    <span class="k">def</span> <span class="nf">_add_unitary_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply an arbitrary 1-qubit unitary matrix.</span>
+    <span class="k">def</span> <span class="nf">_add_unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply an N-qubit unitary matrix.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            gate (matrix_like): a single qubit gate matrix</span>
-<span class="sd">            qubit (int): the qubit to apply gate to</span>
+<span class="sd">            gate (matrix_like): an N-qubit unitary matrix</span>
+<span class="sd">            qubits (list): the list of N-qubits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Convert to complex rank-2 tensor</span>
-        <span class="n">gate_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="c1"># Get the number of qubits</span>
+        <span class="n">num_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qubits</span><span class="p">)</span>
         <span class="c1"># Compute einsum index string for 1-qubit matrix multiplication</span>
-        <span class="n">indexes</span> <span class="o">=</span> <span class="n">einsum_matmul_index</span><span class="p">([</span><span class="n">qubit</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
-        <span class="c1"># Apply matrix multiplication</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unitary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">gate_tensor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unitary</span><span class="p">,</span>
-                                  <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">,</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_add_unitary_two</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply a two-qubit unitary matrix.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            gate (matrix_like): a the two-qubit gate matrix</span>
-<span class="sd">            qubit0 (int): gate qubit-0</span>
-<span class="sd">            qubit1 (int): gate qubit-1</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1"># Convert to complex rank-4 tensor</span>
-        <span class="n">gate_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">),</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-
-        <span class="c1"># Compute einsum index string for 2-qubit matrix multiplication</span>
-        <span class="n">indexes</span> <span class="o">=</span> <span class="n">einsum_matmul_index</span><span class="p">([</span><span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
-
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">einsum_matmul_index</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_qubits</span><span class="p">)</span>
+        <span class="c1"># Convert to complex rank-2N tensor</span>
+        <span class="n">gate_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">),</span>
+                                 <span class="n">num_qubits</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
         <span class="c1"># Apply matrix multiplication</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_unitary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">gate_tensor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unitary</span><span class="p">,</span>
                                   <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">,</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
@@ -400,7 +401,7 @@
 <span class="sd">            matrix. This size of this matrix must be correct for the number</span>
 <span class="sd">            of qubits inall experiments in the qobj.</span>
 
-<span class="sd">            The &quot;chop_threshold&quot; option specifies a trunctation value for</span>
+<span class="sd">            The &quot;chop_threshold&quot; option specifies a truncation value for</span>
 <span class="sd">            setting small values to zero in the output unitary. The default</span>
 <span class="sd">            value is 1e-15.</span>
 
@@ -445,7 +446,7 @@
                   <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                   <span class="s1">&#39;time_taken&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span>
-                  <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()}</span>
+                  <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">qobj</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
 
         <span class="k">return</span> <span class="n">Result</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
@@ -484,12 +485,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_unitary</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">experiment</span><span class="o">.</span><span class="n">instructions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;unitary&#39;</span><span class="p">:</span>
+                <span class="n">qubits</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span>
+                <span class="n">gate</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">qubits</span><span class="p">)</span>
             <span class="c1"># Check if single  gate</span>
-            <span class="k">if</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">):</span>
                 <span class="n">params</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
                 <span class="n">qubit</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">gate</span> <span class="o">=</span> <span class="n">single_gate_matrix</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_single</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">qubit</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="p">[</span><span class="n">qubit</span><span class="p">])</span>
             <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;u0&#39;</span><span class="p">):</span>
                 <span class="k">pass</span>
             <span class="c1"># Check if CX gate</span>
@@ -497,7 +502,7 @@
                 <span class="n">qubit0</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">qubit1</span> <span class="o">=</span> <span class="n">operation</span><span class="o">.</span><span class="n">qubits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">gate</span> <span class="o">=</span> <span class="n">cx_gate_matrix</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary_two</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_unitary</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="p">[</span><span class="n">qubit0</span><span class="p">,</span> <span class="n">qubit1</span><span class="p">])</span>
             <span class="c1"># Check if barrier</span>
             <span class="k">elif</span> <span class="n">operation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;barrier&#39;</span><span class="p">:</span>
                 <span class="k">pass</span>
@@ -514,7 +519,7 @@
                 <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;DONE&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="s1">&#39;time_taken&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span>
-                <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()}</span></div>
+                <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">experiment</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span></div>
 
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qobj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Semantic validations of the qobj which cannot be done via schemas.</span>
@@ -582,6 +587,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

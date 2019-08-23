@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../../search.html" method="get">
@@ -160,15 +172,22 @@
   <h1>Source code for qiskit.pulse.commands.acquire</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># Copyright 2019, IBM.</span>
+<span class="c1"># This code is part of Qiskit.</span>
 <span class="c1">#</span>
-<span class="c1"># This source code is licensed under the Apache License, Version 2.0 found in</span>
-<span class="c1"># the LICENSE.txt file in the root directory of this source tree.</span>
+<span class="c1"># (C) Copyright IBM 2017, 2019.</span>
+<span class="c1">#</span>
+<span class="c1"># This code is licensed under the Apache License, Version 2.0. You may</span>
+<span class="c1"># obtain a copy of this license in the LICENSE.txt file in the root directory</span>
+<span class="c1"># of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.</span>
+<span class="c1">#</span>
+<span class="c1"># Any modifications or derivative works of this code must retain this</span>
+<span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
+<span class="c1"># that they have been altered from the originals.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Acquire.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.pulse.channels</span> <span class="k">import</span> <span class="n">Qubit</span><span class="p">,</span> <span class="n">MemorySlot</span><span class="p">,</span> <span class="n">RegisterSlot</span><span class="p">,</span> <span class="n">AcquireChannel</span>
 <span class="kn">from</span> <span class="nn">qiskit.pulse.exceptions</span> <span class="k">import</span> <span class="n">PulseError</span>
@@ -181,22 +200,27 @@
     <span class="sd">&quot;&quot;&quot;Acquire.&quot;&quot;&quot;</span>
 
     <span class="n">ALIAS</span> <span class="o">=</span> <span class="s1">&#39;acquire&#39;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;acq&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">discriminator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">discriminator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Discriminator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">kernel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Kernel</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create new acquire command.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            duration (int): Duration of acquisition.</span>
-<span class="sd">            discriminator (Discriminator): Discriminators to be used</span>
-<span class="sd">                (from the list of available discriminator) if the measurement level is 2.</span>
-<span class="sd">            kernel (Kernel): The data structures defining the measurement kernels</span>
+<span class="sd">            duration: Duration of acquisition</span>
+<span class="sd">            discriminator: Discriminators to be used (from the list of available discriminator)</span>
+<span class="sd">                if the measurement level is 2</span>
+<span class="sd">            kernel: The data structures defining the measurement kernels</span>
 <span class="sd">                to be used (from the list of available kernels) and set of parameters</span>
 <span class="sd">                (if applicable) if the measurement level is 1 or 2.</span>
+<span class="sd">            name: Name of this command.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            PulseError: when invalid discriminator or kernel object is input.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">Acquire</span><span class="o">.</span><span class="n">create_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">discriminator</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">discriminator</span><span class="p">,</span> <span class="n">Discriminator</span><span class="p">):</span>
@@ -224,21 +248,22 @@
         <span class="sd">&quot;&quot;&quot;Return discrimination settings.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_discriminator</span>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;Acquire&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Two Acquires are the same if they are of the same type</span>
 <span class="sd">        and have the same kernel and discriminator.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            other (Acquire): Other Acquire</span>
+<span class="sd">            other: Other Acquire</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: are self and other equal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">kernel</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">discriminator</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">discriminator</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">kernel</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">discriminator</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">discriminator</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">discriminator</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">, duration=</span><span class="si">%d</span><span class="s1">, kernel=</span><span class="si">%s</span><span class="s1">, discriminator=</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> \
@@ -248,22 +273,22 @@
     <span class="c1"># pylint: disable=arguments-differ</span>
 <div class="viewcode-block" id="Acquire.to_instruction"><a class="viewcode-back" href="../../../../api/qiskit.pulse.Acquire.html#qiskit.pulse.Acquire.to_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                        <span class="n">qubits</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Qubit</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Qubit</span><span class="p">]],</span>
-                       <span class="n">mem_slots</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MemorySlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MemorySlot</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">reg_slots</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                       <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AcquireInstruction&#39;</span><span class="p">:</span>
+                       <span class="n">mem_slots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">MemorySlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MemorySlot</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">reg_slots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AcquireInstruction&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">AcquireInstruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubits</span><span class="p">,</span> <span class="n">mem_slots</span><span class="p">,</span> <span class="n">reg_slots</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div></div>
     <span class="c1"># pylint: enable=arguments-differ</span>
 
 
 <span class="k">class</span> <span class="nc">AcquireInstruction</span><span class="p">(</span><span class="n">Instruction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Pulse to acquire measurement result. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Pulse to acquire measurement result.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">command</span><span class="p">:</span> <span class="n">Acquire</span><span class="p">,</span>
                  <span class="n">qubits</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Qubit</span><span class="p">,</span> <span class="n">AcquireChannel</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Qubit</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">AcquireChannel</span><span class="p">]],</span>
                  <span class="n">mem_slots</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MemorySlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MemorySlot</span><span class="p">]],</span>
-                 <span class="n">reg_slots</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">reg_slots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RegisterSlot</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="p">(</span><span class="n">Qubit</span><span class="p">,</span> <span class="n">AcquireChannel</span><span class="p">)):</span>
             <span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qubits</span><span class="p">]</span>
@@ -300,17 +325,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">acquires</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Acquire channels to be acquired on. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Acquire channels to be acquired on.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquires</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mem_slots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;MemorySlots. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;MemorySlots.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mem_slots</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">reg_slots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;RegisterSlots. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;RegisterSlots.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reg_slots</span>
 </pre></div>
 
@@ -350,6 +375,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>

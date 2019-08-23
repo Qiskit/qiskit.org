@@ -88,6 +88,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -127,6 +133,12 @@
       </span>
     
 
+<div class="languages" >
+	    <select id="language" name="languages">
+	        <option value="en">English</option>
+	        <option value="ja">Japanese</option>
+	    </select>
+</div>
 <div id="searchbox" role="search">
     <div class="searchformwrapper">
     <form class="search-form" action="../../../search.html" method="get">
@@ -172,21 +184,36 @@
 <span class="c1"># copyright notice, and modified files need to carry a notice indicating</span>
 <span class="c1"># that they have been altered from the originals.</span>
 
-<span class="c1"># pylint: disable=cyclic-import</span>
 <span class="sd">&quot;&quot;&quot;Quantum circuit object.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit.instruction</span> <span class="k">import</span> <span class="n">Instruction</span>
 <span class="kn">from</span> <span class="nn">qiskit.qasm.qasm</span> <span class="k">import</span> <span class="n">Qasm</span>
 <span class="kn">from</span> <span class="nn">qiskit.exceptions</span> <span class="k">import</span> <span class="n">QiskitError</span>
-<span class="kn">from</span> <span class="nn">qiskit.circuit.parameter</span> <span class="k">import</span> <span class="n">Parameter</span>
-<span class="kn">from</span> <span class="nn">.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span>
-<span class="kn">from</span> <span class="nn">.classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span>
+<span class="kn">from</span> <span class="nn">.parameterexpression</span> <span class="k">import</span> <span class="n">ParameterExpression</span>
+<span class="kn">from</span> <span class="nn">.quantumregister</span> <span class="k">import</span> <span class="n">QuantumRegister</span><span class="p">,</span> <span class="n">Qubit</span>
+<span class="kn">from</span> <span class="nn">.classicalregister</span> <span class="k">import</span> <span class="n">ClassicalRegister</span><span class="p">,</span> <span class="n">Clbit</span>
 <span class="kn">from</span> <span class="nn">.parametertable</span> <span class="k">import</span> <span class="n">ParameterTable</span>
+<span class="kn">from</span> <span class="nn">.parametervector</span> <span class="k">import</span> <span class="n">ParameterVector</span>
+<span class="kn">from</span> <span class="nn">.instructionset</span> <span class="k">import</span> <span class="n">InstructionSet</span>
+<span class="kn">from</span> <span class="nn">.register</span> <span class="k">import</span> <span class="n">Register</span>
+<span class="kn">from</span> <span class="nn">.bit</span> <span class="k">import</span> <span class="n">Bit</span>
+
+
+<span class="k">def</span> <span class="nf">_is_bit</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Determine if obj is a bit&quot;&quot;&quot;</span>
+    <span class="c1"># If there is a bit type this could be replaced by isinstance.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Register</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">obj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Referring to a bit as a tuple is being deprecated. &#39;</span>
+                 <span class="s1">&#39;Instead go of (qr, 0), use qr[0].&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
 
 
 <div class="viewcode-block" id="QuantumCircuit"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit">[docs]</a><span class="k">class</span> <span class="nc">QuantumCircuit</span><span class="p">:</span>
@@ -222,8 +249,7 @@
             <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cls_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cls_instances</span><span class="p">())</span>
             <span class="c1"># pylint: disable=not-callable</span>
             <span class="c1"># (known pylint bug: https://github.com/PyCQA/pylint/issues/1699)</span>
-            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s2">&quot;win32&quot;</span> <span class="ow">and</span> \
-               <span class="nb">isinstance</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">mp</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ForkProcess</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s2">&quot;win32&quot;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">mp</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ForkProcess</span><span class="p">):</span>
                 <span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_increment_instances</span><span class="p">()</span>
 
@@ -244,6 +270,8 @@
 
         <span class="c1"># Parameter table tracks instructions with variable parameters.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span> <span class="o">=</span> <span class="n">ParameterTable</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_layout</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">))</span>
@@ -296,7 +324,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            QuantumCircuit: the mirrored circuit</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">reverse_circ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_mirror&#39;</span><span class="p">)</span>
+        <span class="n">reverse_circ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_mirror&#39;</span><span class="p">)</span>
         <span class="n">reverse_circ</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
             <span class="n">reverse_circ</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">mirror</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
@@ -313,7 +341,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            QiskitError: if the circuit cannot be inverted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">inverse_circ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_dg&#39;</span><span class="p">)</span>
+        <span class="n">inverse_circ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_dg&#39;</span><span class="p">)</span>
         <span class="n">inverse_circ</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
             <span class="n">inverse_circ</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">inst</span><span class="o">.</span><span class="n">inverse</span><span class="p">(),</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">))</span>
@@ -405,7 +433,121 @@
         <span class="sd">&quot;&quot;&quot;Return indexed operation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
 
+<div class="viewcode-block" id="QuantumCircuit.cast"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.cast">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cast</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Best effort to cast value to type. Otherwise, returns the value.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">value</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_bit_argument_conversion</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="n">in_array</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="n">Bit</span><span class="p">):</span>
+                <span class="c1"># circuit.h(qr[0]) -&gt; circuit.h([qr[0]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">bit_representation</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="n">Register</span><span class="p">):</span>
+                <span class="c1"># circuit.h(qr) -&gt; circuit.h([qr[0], qr[1]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">bit_representation</span><span class="p">[:]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="c1"># circuit.h(0) -&gt; circuit.h([qr[0]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_array</span><span class="p">[</span><span class="n">bit_representation</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+                <span class="c1"># circuit.h(slice(0,2)) -&gt; circuit.h([qr[0], qr[1]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">in_array</span><span class="p">[</span><span class="n">bit_representation</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">_is_bit</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">):</span>
+                <span class="c1"># circuit.h((qr, 0)) -&gt; circuit.h([qr[0]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">bit_representation</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">bit_representation</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="nb">all</span><span class="p">(</span><span class="n">_is_bit</span><span class="p">(</span><span class="n">bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bit_representation</span><span class="p">):</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">bit</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">bit</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bit_representation</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">bit</span><span class="p">,</span> <span class="n">Bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bit_representation</span><span class="p">):</span>
+                <span class="c1"># circuit.h([qr[0], qr[1]]) -&gt; circuit.h([qr[0], qr[1]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">bit_representation</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="c1"># circuit.h([0, 1])     -&gt; circuit.h([qr[0], qr[1]])</span>
+                <span class="c1"># circuit.h(range(0,2)) -&gt; circuit.h([qr[0], qr[1]])</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_array</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">bit_representation</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Not able to expand a </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span>
+                                                                    <span class="nb">type</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Index out of range.&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Type error handling </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">bit_representation</span><span class="p">,</span>
+                                                               <span class="nb">type</span><span class="p">(</span><span class="n">bit_representation</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+<div class="viewcode-block" id="QuantumCircuit.qbit_argument_conversion"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.qbit_argument_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">qbit_argument_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubit_representation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts several qubit representations (such as indexes, range, etc)</span>
+<span class="sd">        into a list of qubits.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qubit_representation (Object): representation to expand</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List(tuple): Where each tuple is a qubit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">_bit_argument_conversion</span><span class="p">(</span><span class="n">qubit_representation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">qubits</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuantumCircuit.cbit_argument_conversion"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.cbit_argument_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">cbit_argument_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clbit_representation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts several classical bit representations (such as indexes, range, etc)</span>
+<span class="sd">        into a list of classical bits.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            clbit_representation (Object): representation to expand</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List(tuple): Where each tuple is a classical bit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">QuantumCircuit</span><span class="o">.</span><span class="n">_bit_argument_conversion</span><span class="p">(</span><span class="n">clbit_representation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clbits</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="QuantumCircuit.append"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Append one or more instructions to the end of the circuit, modifying</span>
+<span class="sd">        the circuit in place. Expands qargs and cargs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            instruction (Instruction or Operation): Instruction instance to append</span>
+<span class="sd">            qargs (list(argument)): qubits to attach instruction to</span>
+<span class="sd">            cargs (list(argument)): clbits to attach instruction to</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Instruction: a handle to the instruction that was just added</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert input to instruction</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="s1">&#39;to_instruction&#39;</span><span class="p">):</span>
+            <span class="n">instruction</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
+
+        <span class="n">expanded_qargs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">qbit_argument_conversion</span><span class="p">(</span><span class="n">qarg</span><span class="p">)</span> <span class="k">for</span> <span class="n">qarg</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="ow">or</span> <span class="p">[]]</span>
+        <span class="n">expanded_cargs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cbit_argument_conversion</span><span class="p">(</span><span class="n">carg</span><span class="p">)</span> <span class="k">for</span> <span class="n">carg</span> <span class="ow">in</span> <span class="n">cargs</span> <span class="ow">or</span> <span class="p">[]]</span>
+
+        <span class="n">instructions</span> <span class="o">=</span> <span class="n">InstructionSet</span><span class="p">()</span>
+
+        <span class="c1"># When broadcasting was handled by decorators (prior to #2282), append</span>
+        <span class="c1"># received multiple distinct instruction instances, one for each expanded</span>
+        <span class="c1"># arg. With broadcasting as part of QuantumCircuit.append, the</span>
+        <span class="c1"># instruction instance is constructed before append is called. However,</span>
+        <span class="c1"># (at least) ParameterTable expects instruction instances to be unique</span>
+        <span class="c1"># within a circuit, so make instruction deepcopies for expanded_args[1:].</span>
+
+        <span class="n">first_instruction</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span> <span class="ow">in</span> <span class="n">instruction</span><span class="o">.</span><span class="n">broadcast_arguments</span><span class="p">(</span><span class="n">expanded_qargs</span><span class="p">,</span> <span class="n">expanded_cargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">first_instruction</span><span class="p">:</span>
+                <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span>
+                <span class="n">first_instruction</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">instructions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">instruction</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">),</span> <span class="n">qarg</span><span class="p">,</span> <span class="n">carg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">instructions</span></div>
+
+    <span class="k">def</span> <span class="nf">_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Append an instruction to the end of the circuit, modifying</span>
 <span class="sd">        the circuit in place.</span>
 
@@ -421,12 +563,6 @@
 <span class="sd">            QiskitError: if the gate is of a different shape than the wires</span>
 <span class="sd">                it is being attached to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">qargs</span> <span class="o">=</span> <span class="n">qargs</span> <span class="ow">or</span> <span class="p">[]</span>
-        <span class="n">cargs</span> <span class="o">=</span> <span class="n">cargs</span> <span class="ow">or</span> <span class="p">[]</span>
-
-        <span class="c1"># Convert input to instruction</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="s1">&#39;to_instruction&#39;</span><span class="p">):</span>
-            <span class="n">instruction</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">Instruction</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;object is not an Instruction.&#39;</span><span class="p">)</span>
 
@@ -434,13 +570,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_dups</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_qargs</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_cargs</span><span class="p">(</span><span class="n">cargs</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">instruction</span><span class="o">.</span><span class="n">num_qubits</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="ow">or</span> \
-                <span class="n">instruction</span><span class="o">.</span><span class="n">num_clbits</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cargs</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;instruction </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%d</span><span class="s2"> qubits and </span><span class="si">%d</span><span class="s2"> clbits &quot;</span>
-                              <span class="s2">&quot;cannot be appended onto </span><span class="si">%d</span><span class="s2"> qubits and </span><span class="si">%d</span><span class="s2"> clbits.&quot;</span> <span class="o">%</span>
-                              <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                               <span class="n">instruction</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">instruction</span><span class="o">.</span><span class="n">num_clbits</span><span class="p">,</span>
-                               <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">cargs</span><span class="p">)))</span>
 
         <span class="c1"># add the instruction onto the given wires</span>
         <span class="n">instruction_context</span> <span class="o">=</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span>
@@ -448,22 +577,19 @@
 
         <span class="c1"># track variable parameters in instruction</span>
         <span class="k">for</span> <span class="n">param_index</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">params</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">):</span>
-                <span class="n">current_symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">ParameterExpression</span><span class="p">):</span>
+                <span class="n">current_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
 
-                <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">current_symbols</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">))</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">current_symbols</span><span class="p">):</span>
-                        <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
-                            <span class="s1">&#39;Name conflict on adding parameter: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">)]</span>
+                <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">param</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">current_parameters</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">parameter</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">current_parameters</span><span class="p">}:</span>
+                            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
+                                <span class="s1">&#39;Name conflict on adding parameter: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">param_index</span><span class="p">)]</span>
 
-        <span class="k">return</span> <span class="n">instruction</span></div>
-
-    <span class="k">def</span> <span class="nf">_attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;DEPRECATED after 0.8&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instruction</span>
 
 <div class="viewcode-block" id="QuantumCircuit.add_register"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.add_register">[docs]</a>    <span class="k">def</span> <span class="nf">add_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">regs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add registers.&quot;&quot;&quot;</span>
@@ -484,7 +610,7 @@
                                   <span class="s2">&quot; with </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">regs</span><span class="p">,))</span>
 
         <span class="k">for</span> <span class="n">register</span> <span class="ow">in</span> <span class="n">regs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="ow">or</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">register</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;register name </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> already exists&quot;</span>
                                   <span class="o">%</span> <span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">QuantumRegister</span><span class="p">):</span>
@@ -502,25 +628,17 @@
 
     <span class="k">def</span> <span class="nf">_check_qargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Raise exception if a qarg is not in this circuit or bad format.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span>
-                   <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">QuantumRegister</span><span class="p">)</span> <span class="ow">and</span>
-                   <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;qarg not (QuantumRegister, int) tuple&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Qubit</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;qarg is not a Qubit&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">register</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;register not in this circuit&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">:</span>
-            <span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_check_cargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Raise exception if clbit is not in this circuit or bad format.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span>
-                   <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ClassicalRegister</span><span class="p">)</span> <span class="ow">and</span>
-                   <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;carg not (ClassicalRegister, int) tuple&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Clbit</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;carg is not a Clbit&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_register</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">register</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s2">&quot;register not in this circuit&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">clbit</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">:</span>
-            <span class="n">clbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="n">clbit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 <div class="viewcode-block" id="QuantumCircuit.to_instruction"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.to_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">to_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an Instruction out of this circuit.</span>
@@ -575,17 +693,18 @@
                 <span class="n">qubit</span> <span class="o">=</span> <span class="n">qargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">clbit</span> <span class="o">=</span> <span class="n">cargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">string_temp</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">] -&gt; </span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">];</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">qasm</span><span class="p">(),</span>
-                                                           <span class="n">qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                                                           <span class="n">clbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">clbit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                                                           <span class="n">qubit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">qubit</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+                                                           <span class="n">clbit</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">clbit</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">string_temp</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">instruction</span><span class="o">.</span><span class="n">qasm</span><span class="p">(),</span>
-                                             <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                                             <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%d</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
                                                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">qargs</span> <span class="o">+</span> <span class="n">cargs</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">string_temp</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.draw"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.draw">[docs]</a>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_barriers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-             <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+             <span class="n">reverse_bits</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vertical_compression</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="n">idle_wires</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">with_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draw the quantum circuit</span>
 
 <span class="sd">        Using the output parameter you can specify the format. The choices are:</span>
@@ -622,7 +741,12 @@
 <span class="sd">                gates should be placed in the output circuit if there is an option.</span>
 <span class="sd">                `none` results in each gate being placed in its own column. Currently</span>
 <span class="sd">                only supported by text drawer.</span>
-
+<span class="sd">            vertical_compression (string): `high`, `medium` or `low`. It merges the</span>
+<span class="sd">                lines generated by `text` so the drawing will take less vertical room.</span>
+<span class="sd">                Default is `medium`. It is ignored if output is not `text`.</span>
+<span class="sd">            idle_wires (bool): Include idle wires. Default is True.</span>
+<span class="sd">            with_layout (bool): Include layout information, with labels on the physical</span>
+<span class="sd">                layout. Default is True.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            PIL.Image or matplotlib.figure or str or TextDrawing:</span>
 <span class="sd">                * PIL.Image: (output `latex`) an in-memory representation of the</span>
@@ -636,15 +760,19 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            VisualizationError: when an invalid output method is selected</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">qiskit.tools</span> <span class="k">import</span> <span class="n">visualization</span>
-        <span class="k">return</span> <span class="n">visualization</span><span class="o">.</span><span class="n">circuit_drawer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-                                            <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
-                                            <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
-                                            <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">,</span>
-                                            <span class="n">line_length</span><span class="o">=</span><span class="n">line_length</span><span class="p">,</span>
-                                            <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
-                                            <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
-                                            <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">)</span></div>
+        <span class="c1"># pylint: disable=cyclic-import</span>
+        <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">circuit_drawer</span>
+        <span class="k">return</span> <span class="n">circuit_drawer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                              <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                              <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+                              <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">,</span>
+                              <span class="n">line_length</span><span class="o">=</span><span class="n">line_length</span><span class="p">,</span>
+                              <span class="n">plot_barriers</span><span class="o">=</span><span class="n">plot_barriers</span><span class="p">,</span>
+                              <span class="n">reverse_bits</span><span class="o">=</span><span class="n">reverse_bits</span><span class="p">,</span>
+                              <span class="n">justify</span><span class="o">=</span><span class="n">justify</span><span class="p">,</span>
+                              <span class="n">vertical_compression</span><span class="o">=</span><span class="n">vertical_compression</span><span class="p">,</span>
+                              <span class="n">idle_wires</span><span class="o">=</span><span class="n">idle_wires</span><span class="p">,</span>
+                              <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.size"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns total number of gate operations in circuit.</span>
@@ -675,13 +803,13 @@
         <span class="c1"># a register is given by reg_int+qubit_num</span>
         <span class="n">reg_offset</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">reg_map</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">:</span>
             <span class="n">reg_map</span><span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_offset</span>
             <span class="n">reg_offset</span> <span class="o">+=</span> <span class="n">reg</span><span class="o">.</span><span class="n">size</span>
 
         <span class="c1"># A list that holds the height of each qubit</span>
         <span class="c1"># and classical bit.</span>
-        <span class="n">op_stack</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">reg_offset</span>
+        <span class="n">op_stack</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">reg_offset</span>
         <span class="c1"># Here we are playing a modified version of</span>
         <span class="c1"># Tetris where we stack gates, but multi-qubit</span>
         <span class="c1"># gates, or measurements have a block for each</span>
@@ -689,30 +817,39 @@
         <span class="c1"># line so that they all stacked at the same depth.</span>
         <span class="c1"># Conditional gates act on all cbits in the register</span>
         <span class="c1"># they are conditioned on.</span>
-        <span class="c1"># We do not consider barriers or snapshots as</span>
+        <span class="c1"># We treat barriers or snapshots different as</span>
         <span class="c1"># They are transpiler and simulator directives.</span>
         <span class="c1"># The max stack height is the circuit depth.</span>
         <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">cargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">]:</span>
-                <span class="n">levels</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">reg_ints</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">reg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qargs</span><span class="o">+</span><span class="n">cargs</span><span class="p">):</span>
-                    <span class="c1"># Add to the stacks of the qubits and</span>
-                    <span class="c1"># cbits used in the gate.</span>
-                    <span class="n">reg_ints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reg_map</span><span class="p">[</span><span class="n">reg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">+</span><span class="n">reg</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">levels</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">reg_ints</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># If count then add one to stack heights</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">]:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">reg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qargs</span> <span class="o">+</span> <span class="n">cargs</span><span class="p">):</span>
+                <span class="c1"># Add to the stacks of the qubits and</span>
+                <span class="c1"># cbits used in the gate.</span>
+                <span class="n">reg_ints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reg_map</span><span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">reg</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">count</span><span class="p">:</span>
                     <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">reg_ints</span><span class="p">[</span><span class="n">ind</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">:</span>
-                    <span class="c1"># Controls operate over all bits in the</span>
-                    <span class="c1"># classical register they use.</span>
-                    <span class="n">cint</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
-                    <span class="k">for</span> <span class="n">off</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">cint</span><span class="o">+</span><span class="n">off</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reg_ints</span><span class="p">:</span>
-                            <span class="n">reg_ints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cint</span><span class="o">+</span><span class="n">off</span><span class="p">)</span>
-                            <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">cint</span><span class="o">+</span><span class="n">off</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">reg_ints</span><span class="p">[</span><span class="n">ind</span><span class="p">]])</span>
+            <span class="c1"># Assuming here that there is no controlled</span>
+            <span class="c1"># snapshots or barriers ever.</span>
+            <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">:</span>
+                <span class="c1"># Controls operate over all bits in the</span>
+                <span class="c1"># classical register they use.</span>
+                <span class="n">cint</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">off</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">cint</span> <span class="o">+</span> <span class="n">off</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reg_ints</span><span class="p">:</span>
+                        <span class="n">reg_ints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cint</span> <span class="o">+</span> <span class="n">off</span><span class="p">)</span>
+                        <span class="n">levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op_stack</span><span class="p">[</span><span class="n">cint</span> <span class="o">+</span> <span class="n">off</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-                <span class="n">max_level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">levels</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">reg_ints</span><span class="p">:</span>
-                    <span class="n">op_stack</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_level</span>
+            <span class="n">max_level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">levels</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">reg_ints</span><span class="p">:</span>
+                <span class="n">op_stack</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_level</span>
+
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">op_stack</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.width"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.width">[docs]</a>    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -722,13 +859,23 @@
 <span class="sd">            int: Width of circuit.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_qubits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return number of qubits.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="p">:</span>
+            <span class="n">qubits</span> <span class="o">+=</span> <span class="n">reg</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">return</span> <span class="n">qubits</span>
 
 <div class="viewcode-block" id="QuantumCircuit.count_ops"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.count_ops">[docs]</a>    <span class="k">def</span> <span class="nf">count_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Count each operation kind in the circuit.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            dict: a breakdown of how many operations of each kind.</span>
+<span class="sd">            OrderedDict: a breakdown of how many operations of each kind, sorted by amount.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">count_ops</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">instr</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
@@ -736,7 +883,7 @@
                 <span class="n">count_ops</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">count_ops</span><span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">count_ops</span></div>
+        <span class="k">return</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">count_ops</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="QuantumCircuit.num_connected_components"><a class="viewcode-back" href="../../../api/qiskit.circuit.QuantumCircuit.html#qiskit.circuit.QuantumCircuit.num_connected_components">[docs]</a>    <span class="k">def</span> <span class="nf">num_connected_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unitary_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;How many non-entangled subcircuits can the circuit be factored to.</span>
@@ -754,7 +901,7 @@
         <span class="k">if</span> <span class="n">unitary_only</span><span class="p">:</span>
             <span class="n">regs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">regs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">cregs</span>
+            <span class="n">regs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qregs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cregs</span>
 
         <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">regs</span><span class="p">:</span>
             <span class="n">reg_map</span><span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_offset</span>
@@ -771,7 +918,7 @@
                 <span class="n">args</span> <span class="o">=</span> <span class="n">qargs</span>
                 <span class="n">num_qargs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">args</span> <span class="o">=</span> <span class="n">qargs</span><span class="o">+</span><span class="n">cargs</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">qargs</span> <span class="o">+</span> <span class="n">cargs</span>
                 <span class="n">num_qargs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">num_qargs</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">instr</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;barrier&#39;</span><span class="p">,</span> <span class="s1">&#39;snapshot&#39;</span><span class="p">]:</span>
@@ -783,7 +930,7 @@
                     <span class="n">creg</span> <span class="o">=</span> <span class="n">instr</span><span class="o">.</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="n">creg_int</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">creg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
                     <span class="k">for</span> <span class="n">coff</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">creg</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                        <span class="n">temp_int</span> <span class="o">=</span> <span class="n">creg_int</span><span class="o">+</span><span class="n">coff</span>
+                        <span class="n">temp_int</span> <span class="o">=</span> <span class="n">creg_int</span> <span class="o">+</span> <span class="n">coff</span>
                         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_sub_graphs</span><span class="p">):</span>
                             <span class="k">if</span> <span class="n">temp_int</span> <span class="ow">in</span> <span class="n">sub_graphs</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
                                 <span class="n">graphs_touched</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
@@ -791,7 +938,7 @@
                                 <span class="k">break</span>
 
                 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-                    <span class="n">reg_int</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">+</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">reg_int</span> <span class="o">=</span> <span class="n">reg_map</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">register</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span>
                     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_sub_graphs</span><span class="p">):</span>
                         <span class="k">if</span> <span class="n">reg_int</span> <span class="ow">in</span> <span class="n">sub_graphs</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
                             <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graphs_touched</span><span class="p">:</span>
@@ -812,7 +959,7 @@
                             <span class="n">_sub_graphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_graphs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
                     <span class="n">_sub_graphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
                     <span class="n">sub_graphs</span> <span class="o">=</span> <span class="n">_sub_graphs</span>
-                    <span class="n">num_sub_graphs</span> <span class="o">-=</span> <span class="p">(</span><span class="n">num_touched</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">num_sub_graphs</span> <span class="o">-=</span> <span class="p">(</span><span class="n">num_touched</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
             <span class="c1"># Cannot go lower than one so break</span>
             <span class="k">if</span> <span class="n">num_sub_graphs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">break</span>
@@ -890,22 +1037,36 @@
 <span class="sd">            QuantumCircuit: copy of self with assignment substitution.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">unrolled_value_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unroll_param_dict</span><span class="p">(</span><span class="n">value_dict</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">value_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">unrolled_value_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;Cannot bind parameters (</span><span class="si">{}</span><span class="s1">) not present in the circuit.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">value_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">]))</span>
 
-        <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">value_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">unrolled_value_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">new_circuit</span><span class="o">.</span><span class="n">_bind_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="c1"># clear evaluated expressions</span>
-        <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">value_dict</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">unrolled_value_dict</span><span class="p">:</span>
             <span class="k">del</span> <span class="n">new_circuit</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">new_circuit</span></div>
+
+    <span class="k">def</span> <span class="nf">_unroll_param_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_dict</span><span class="p">):</span>
+        <span class="n">unrolled_value_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">value_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">ParameterExpression</span><span class="p">):</span>
+                <span class="n">unrolled_value_dict</span><span class="p">[</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">ParameterVector</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="s1">&#39;ParameterVector </span><span class="si">{}</span><span class="s1"> has length </span><span class="si">{}</span><span class="s1">, which &#39;</span>
+                                      <span class="s1">&#39;differs from value list </span><span class="si">{}</span><span class="s1"> of &#39;</span>
+                                      <span class="s1">&#39;len </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">),</span> <span class="n">value</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+                <span class="n">unrolled_value_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">unrolled_value_dict</span>
 
     <span class="k">def</span> <span class="nf">_bind_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assigns a parameter value to matching instructions in-place.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">instr</span><span class="p">,</span> <span class="n">param_index</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">parameter</span><span class="p">]:</span>
-            <span class="n">instr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">param_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">instr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">param_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">instr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">param_index</span><span class="p">]</span><span class="o">.</span><span class="n">bind</span><span class="p">({</span><span class="n">parameter</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
 
     <span class="k">def</span> <span class="nf">_substitute_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_map</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;For every {existing_parameter: replacement_parameter} pair in</span>
@@ -913,7 +1074,9 @@
 <span class="sd">        circuit instructions and the parameter table.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">old_parameter</span><span class="p">,</span> <span class="n">new_parameter</span> <span class="ow">in</span> <span class="n">parameter_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_bind_parameter</span><span class="p">(</span><span class="n">old_parameter</span><span class="p">,</span> <span class="n">new_parameter</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">instr</span><span class="p">,</span> <span class="n">param_index</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">old_parameter</span><span class="p">]:</span>
+                <span class="n">new_param</span> <span class="o">=</span> <span class="n">instr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">param_index</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">old_parameter</span><span class="p">:</span> <span class="n">new_parameter</span><span class="p">})</span>
+                <span class="n">instr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">param_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_param</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="p">[</span><span class="n">new_parameter</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_table</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">old_parameter</span><span class="p">)</span></div>
 
 
@@ -962,6 +1125,42 @@
 
         var link = document.getElementById('tutorialsLink');
         link.addEventListener('click', clickExternalLink);
+    </script>
+    <script>
+	    var localeRegExp = /\/(locale\/([a-z-]+)\/)?/i;
+	    var prefix = '';
+	    function getDefaultLanguage() {
+	      return 'en';
+	    }
+      var el = document.getElementById('language');
+      var optionsToSelect = ['en', 'ja']
+      function changeLoc(evt) {
+        var language = evt.target.options[el.selectedIndex].value;
+        var pathname = window.location.pathname.slice(prefix.length);
+        if (language === getDefaultLanguage()) {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, '/')}`;
+        } else {
+          window.location.pathname =
+            `${prefix}${pathname.replace(localeRegExp, `/locale/${language}/`)}`;
+        }
+      };
+      el.addEventListener('change', changeLoc);
+      function extractLanguageFromUrl(pathname) {
+        const match = pathname.slice(prefix.length).match(localeRegExp);
+        return typeof match[2] === 'undefined' ?
+                getDefaultLanguage() : match[2];
+	    }
+      function changeSelect(select) {
+        const optionToSelect = extractLanguageFromUrl(window.location.pathname);
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          if (optionToSelect == o.value) {
+            o.selected = true;
+          }
+        }
+      };
+      changeSelect(el);
     </script>
   </body>
 </html>
