@@ -1,26 +1,26 @@
 ---
 title: Qiskit Advocates
-tagline: A global program that provides support to the individuals who actively work on assisting and growing the Qiskit Community.
+tagline: A global program that provides support to the individuals who actively work on assisting and contributing to the Qiskit Community.
 ---
 <section class="join">
 
 ## Why Join
 
-* ![](/images/icons/funding.svg)
-  ### Funding your projects and work
-  Advocates can request funding or events and projects.
-
 * ![](/images/icons/network.svg)
   ### Network with experts and enthusiasts
-  Advocates will be added to a group of quantum experts and will receive ??.
-
-* ![](/images/icons/access.svg)
-  ### Prioritized access to hardware
-  Advocates will receive prioritized access to publicly available hardware.
+  Advocates will be added to a group of quantum experts and will be apart of regular information sharing sessions. 
 
 * ![](/images/icons/visibility.svg)
   ### Increased visibility for your work
-  All advocates will have the opportunity to have their work supported by IBM.
+  All advocates will have the opportunity to have their work supported and highlighted by IBM. Qiskit advocates will also have a public presence on the advocates landing page. 
+
+* ![](/images/icons/access.svg)
+  ### Access to Qiskit core members and projects
+  Advocates will receive prioritized access to publicly available hardware.
+
+* ![](/images/icons/visibility.svg)
+  ### Invitation to events
+  Active Qiskit Advocates will be invited to attend global events created for the quantum computing community. 
 
 </section>
 
