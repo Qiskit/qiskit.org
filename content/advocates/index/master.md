@@ -12,11 +12,11 @@ tagline: A global program that provides support to the individuals who actively 
 
 * ![](/images/icons/visibility.svg)
   ### Increased visibility for your work
-  All advocates will have the opportunity to have their work supported and highlighted by IBM. Qiskit advocates will also have a public presence on the advocates landing page. 
+  All advocates will have the opportunity to have their work supported and highlighted by IBM. Qiskit advocates will also have   a public presence on the advocates landing page. 
 
 * ![](/images/icons/access.svg)
   ### Access to Qiskit core members and projects
-  Advocates will receive prioritized access to publicly available hardware.
+  Advocates will receive special access to core members of the Qiskit team for questions and brainstorming ideas. They will     also have the opportunity to work on new Qiskit projects. 
 
 * ![](/images/icons/visibility.svg)
   ### Invitation to events
@@ -28,9 +28,9 @@ tagline: A global program that provides support to the individuals who actively 
 
 ## Steps to apply
 
-1. Fill the form below
-2. Click the link to attend test
-3. Learn, do the test and get certified
+1. Click on the "Apply now" button below
+2. Complete the test attached to the application form
+3. Upload the test results to the application form and hit submit
 
 <Button href="#">Apply now</Button>
 
